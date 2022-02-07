@@ -3,12 +3,15 @@ import { ThemeProvider } from 'styled-components';
 import Theme from 'styles/theme';
 import GlobalStyles from 'styles/globalStyle';
 import RouteSet from 'RouteSet';
+import Layout from 'components/Layout';
 
 function App() {
   return (
     <ThemeProvider theme={Theme}>
       <GlobalStyles />
-      <RouteSet />
+      <Layout>
+        <RouteSet />
+      </Layout>
     </ThemeProvider>
   );
 }

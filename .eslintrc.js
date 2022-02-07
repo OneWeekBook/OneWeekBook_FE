@@ -26,6 +26,10 @@ module.exports = {
     'import/no-unresolved': 0,
     'react/react-in-jsx-scope': 0,
     'import/no-extraneous-dependencies': 0,
+    'react/jsx-props-no-spreading': 0,
+    'react/require-default-props': 0,
+    'react/jsx-no-useless-fragment': 0,
+    'no-nested-ternary': 0,
     'no-shadow': 0,
     'react/prop-types': 0,
     'react/jsx-filename-extension': [
