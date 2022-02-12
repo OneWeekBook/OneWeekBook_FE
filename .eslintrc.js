@@ -30,6 +30,8 @@ module.exports = {
     'react/require-default-props': 0,
     'react/jsx-no-useless-fragment': 0,
     'no-nested-ternary': 0,
+    'default-param-last': 0,
+    'consistent-return': 0,
     'no-shadow': 0,
     'react/prop-types': 0,
     'react/jsx-filename-extension': [

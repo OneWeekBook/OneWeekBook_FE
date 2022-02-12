@@ -2,6 +2,7 @@ import React, { ChangeEvent, FormEvent, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ErrorForm from 'components/Form/ErrorForm';
 import { passwordRegex } from 'lib/Regex';
+import AuthEmailForm from 'components/Form/AuthEmailForm';
 
 function SignUpForm() {
   const [authDone, setAuthDone] = useState<boolean>(false);
@@ -44,6 +45,11 @@ function SignUpForm() {
   return (
     <SignUpFormWrapper>
       <Title>이메일로 회원가입</Title>
+      <AuthEmailForm
+        authDone={authDone}
+        setAuthDone={setAuthDone}
+        setRegisterEmail={setEmail}
+      />
       <FormWrapper>
         {authDone && (
           <form onSubmit={handleSubmit}>
