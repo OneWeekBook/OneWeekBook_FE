@@ -1,10 +1,15 @@
 import React, { ChangeEvent, FormEvent, useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import ErrorForm from 'components/Form/ErrorForm';
 import { passwordRegex } from 'lib/Regex';
 import AuthEmailForm from 'components/Form/AuthEmailForm';
+import { SignUpRequest } from 'redux/reducers/SignUp';
 
 function SignUpForm() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [authDone, setAuthDone] = useState<boolean>(false);
   const [email, setEmail] = useState<string>('');
   const [username, setUserName] = useState<string>('');
@@ -16,18 +21,23 @@ function SignUpForm() {
   const [registerDone, setRegisterDone] = useState<boolean>(true);
   const [signUpError, setSignUpError] = useState<boolean>(false);
 
+  const { signUpErrorStatus } = useSelector((state: any) => state.signUp);
+
   useEffect(() => {
     if (password && !passwordRegex.test(password)) {
       setPassError(true);
     } else if (password && passwordRegex.test(password)) {
       setPassError(false);
     }
+  }, [password]);
+
+  useEffect(() => {
     if (!passError && confirmPassword && password !== confirmPassword) {
       setPassCompareError(true);
     } else if (!passError && confirmPassword && password === confirmPassword) {
       setPassCompareError(false);
     }
-  }, [password, confirmPassword]);
+  }, [confirmPassword]);
 
   useEffect(() => {
     if (username && nick && !passError && !passCompareError)
@@ -35,11 +45,28 @@ function SignUpForm() {
     else setRegisterDone(true);
   }, [username, nick, password]);
 
+  useEffect(() => {
+    switch (signUpErrorStatus) {
+      case 200:
+        alert('회원가입 완료, 로그인을 진행해주세요.');
+        navigate('/sign-in');
+        setSignUpError(false);
+        break;
+      case 400:
+      case 500:
+      case 501:
+        setSignUpError(true);
+        break;
+      default:
+        break;
+    }
+  }, [signUpErrorStatus]);
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(email, username, nick, password);
     const formData = { email, username, nick, password };
-    console.log(formData);
+    dispatch(SignUpRequest(formData));
   };
 
   return (
