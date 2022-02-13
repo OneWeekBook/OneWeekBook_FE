@@ -7,18 +7,43 @@ import React, {
 } from 'react';
 import styled from 'styled-components';
 import ErrorForm from 'components/Form/ErrorForm';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { SignInRequest } from 'redux/reducers/SignIn';
 
 function SignInForm() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [signInError, setSignInError] = useState<boolean>(false);
+
+  const { signInErrorStatus, signInErrorMsg } = useSelector(
+    (state: any) => state.signIn,
+  );
+
+  useEffect(() => {
+    switch (signInErrorStatus) {
+      case 200:
+        setSignInError(false);
+        navigate('/');
+        break;
+      case 400:
+      case 401:
+      case 500:
+      case 501:
+        setSignInError(true);
+        break;
+      default:
+        break;
+    }
+  }, [signInErrorStatus]);
 
   const handleSubmit = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       const user = { email, password };
-      console.log(user);
+      dispatch(SignInRequest(user));
     },
     [email, password],
   );
@@ -44,12 +69,7 @@ function SignInForm() {
             setPassword(event.target.value)
           }
         />
-        {signInError && (
-          <ErrorForm
-            error="이메일, 비밀번호를 정확히 입력해주세요"
-            align="left"
-          />
-        )}
+        {signInError && <ErrorForm error={signInErrorMsg} align="left" />}
         <button type="submit">로그인</button>
       </form>
       <Link to="/sign-up">
