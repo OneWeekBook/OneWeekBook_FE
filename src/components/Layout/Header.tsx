@@ -6,6 +6,10 @@ import Container from '../Container';
 function Header() {
   const location = useLocation();
 
+  const logoutClick = () => {
+    sessionStorage.removeItem('accessToken');
+  };
+
   return (
     <>
       {location.pathname === '/sign-up' || location.pathname === '/sign-in' ? (
@@ -18,14 +22,27 @@ function Header() {
         <Container as="header">
           <Top>
             <Link to="/">ONEWEEKBOOK</Link>
-            <ButtonWrapper>
-              <Link to="/sign-up">
-                <button type="button">회원가입</button>
-              </Link>
-              <Link to="/sign-in">
-                <button type="button">로그인</button>
-              </Link>
-            </ButtonWrapper>
+            {sessionStorage.getItem('accessToken') ? (
+              <ButtonWrapper>
+                <Link to="/book">
+                  <button type="button">내서재</button>
+                </Link>
+                <Link to="/">
+                  <button type="button" onClick={logoutClick}>
+                    로그아웃
+                  </button>
+                </Link>
+              </ButtonWrapper>
+            ) : (
+              <ButtonWrapper>
+                <Link to="/sign-up">
+                  <button type="button">회원가입</button>
+                </Link>
+                <Link to="/sign-in">
+                  <button type="button">로그인</button>
+                </Link>
+              </ButtonWrapper>
+            )}
           </Top>
         </Container>
       )}
@@ -63,24 +80,20 @@ const SignTop = styled.div`
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   button {
+    width: 100px;
+    margin-left: 10px;
     background-color: #1e90ff;
     border: solid 2px white;
     border-radius: 7px;
     color: white;
     font-size: 18px;
-    height: 48px;
+    height: 40px;
     :hover {
       background-color: white;
       color: #1e90ff;
       font-weight: 800;
-    }
-    :first-child {
-      width: 120px;
-    }
-    :last-child {
-      margin-left: 10px;
-      width: 100px;
     }
   }
 `;
