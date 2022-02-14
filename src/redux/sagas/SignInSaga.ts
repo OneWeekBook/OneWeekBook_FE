@@ -4,7 +4,7 @@ import { SignInTypes } from 'types/api';
 import { SignInFail, SignInSuccess, SIGN_IN_REQUEST } from '../reducers/SignIn';
 
 function SignInAPI(data: SignInTypes) {
-  return axios.post(`${process.env.NEXT_PUBLIC_APP_URL}/user/login`, data);
+  return axios.post(`${process.env.REACT_APP_BASIC_URL}/user/login`, data);
 }
 
 function* fetchSignInSaga(action: any): any {

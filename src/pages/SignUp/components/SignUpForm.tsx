@@ -46,6 +46,12 @@ function SignUpForm() {
   }, [username, nick, password]);
 
   useEffect(() => {
+    return () => {
+      setSignUpError(false);
+    };
+  }, []);
+
+  useEffect(() => {
     switch (signUpErrorStatus) {
       case 200:
         alert('회원가입 완료, 로그인을 진행해주세요.');
@@ -64,7 +70,6 @@ function SignUpForm() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(email, username, nick, password);
     const formData = { email, username, nick, password };
     dispatch(SignUpRequest(formData));
   };
