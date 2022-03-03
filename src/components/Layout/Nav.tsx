@@ -33,9 +33,10 @@ function Nav() {
   const [toggle, setToggle] = useState<boolean>(false);
 
   const handleClick = (link: string) => {
-    if (sessionStorage.getItem('accessToken')) {
+    if (link === '/myPage' && sessionStorage.getItem('accessToken')) {
       navigate(link);
     } else if (
+      link === '/myPage' &&
       confirm(
         '마이페이지로 가시려면 로그인을 하셔야합니다.\n로그인 하시겠습니까?',
       )

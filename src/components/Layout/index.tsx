@@ -37,6 +37,7 @@ const LayoutWrapper = styled.section`
   flex-direction: column;
   margin: auto;
   main {
+    align-items: center;
     flex-grow: 1;
   }
 `;
