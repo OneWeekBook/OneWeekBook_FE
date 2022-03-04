@@ -1,3 +1,4 @@
+import { useInterval } from 'hooks/useInterval';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
@@ -17,6 +18,11 @@ function Index() {
   const handleSwipe = (num: number) => {
     setCurIndex((curIndex) => curIndex + num);
   };
+
+  useInterval(() => {
+    setCurIndex((curIndex) => curIndex + 1);
+  }, 2000);
+
   return (
     <Wrapper>
       <Slider>
