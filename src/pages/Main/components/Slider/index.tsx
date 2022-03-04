@@ -1,6 +1,7 @@
 import { useInterval } from 'hooks/useInterval';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import SlideButton from './SlideButton';
 
 const SlideItems = [
   { id: 1, color: '#33a' },
@@ -14,29 +15,85 @@ type SlideItemsType = {
 };
 
 function Index() {
-  const [curIndex, setCurIndex] = useState<number>(0);
-  const handleSwipe = (num: number) => {
-    setCurIndex((curIndex) => curIndex + num);
+  const itemSize = SlideItems.length;
+  const addItemSize = 2;
+  const [curIndex, setCurIndex] = useState<number>(addItemSize);
+  const transitionStyle = `transform 500ms ease 0s`;
+  const [transition, setTransition] = useState<string>(transitionStyle);
+
+  const setSlides = () => {
+    const addedStart = [];
+    const addedEnd = [];
+    let index = 0;
+    while (index < addItemSize) {
+      addedEnd.push(SlideItems[index % SlideItems.length]);
+      addedStart.unshift(
+        SlideItems[SlideItems.length - 1 - (index % SlideItems.length)],
+      );
+      index += 1;
+    }
+    return [...addedStart, ...SlideItems, ...addedEnd];
   };
 
+  const slides = setSlides();
+
   useInterval(() => {
-    setCurIndex((curIndex) => curIndex + 1);
+    handleSlide(curIndex + 1);
   }, 2000);
+
+  const replaceSlide = (index: number) => {
+    setTimeout(() => {
+      setTransition('');
+      setCurIndex(index);
+    }, 500);
+  };
+
+  const handleSlide = (idx: number) => {
+    let index = idx;
+    setCurIndex(index);
+    if (index - addItemSize < 0) {
+      index += itemSize;
+      replaceSlide(index);
+    } else if (index - addItemSize >= itemSize) {
+      index -= itemSize;
+      replaceSlide(index);
+    }
+    setTransition(transitionStyle);
+  };
+
+  const handleSwipe = (num: number) => {
+    handleSlide(curIndex + num);
+  };
+
+  const getItemIndex = (idx: number) => {
+    let index = idx;
+    index -= addItemSize;
+    if (index < 0) {
+      index += itemSize;
+    } else if (index >= itemSize) {
+      index -= itemSize;
+    }
+    return index;
+  };
 
   return (
     <Wrapper>
       <Slider>
-        <button type="button" onClick={() => handleSwipe(-1)}>
-          prev
-        </button>
-        <button type="button" onClick={() => handleSwipe(1)}>
-          next
-        </button>
+        <SlideButton onClick={handleSwipe} />
         <SlideListWrapper>
-          <SlideWrapper index={curIndex} len={SlideItems.length}>
-            {SlideItems.map((item: SlideItemsType) => (
-              <SlideItem key={item.id} color={item.color} />
-            ))}
+          <SlideWrapper
+            index={curIndex}
+            len={slides.length}
+            transition={transition}
+          >
+            {slides.map((item: SlideItemsType, index: number) => {
+              const itemIndex = getItemIndex(index);
+              return (
+                <SlideItem key={index} color={SlideItems[itemIndex].color}>
+                  {itemIndex}({index})
+                </SlideItem>
+              );
+            })}
           </SlideWrapper>
         </SlideListWrapper>
       </Slider>
@@ -75,8 +132,11 @@ const SlideListWrapper = styled.div`
   margin: 0;
 `;
 
-const SlideWrapper = styled.div<{ index: number; len: number }>`
-  position: relative;
+const SlideWrapper = styled.div<{
+  index: number;
+  len: number;
+  transition: string;
+}>`
   position: relative;
   left: 50%;
   top: 0;
@@ -86,13 +146,14 @@ const SlideWrapper = styled.div<{ index: number; len: number }>`
   width: fit-content;
   transform: ${({ index, len }) =>
     `translateX(${(-100 / len) * (0.5 + index)}%)`};
-  transition: -webkit-transform 500ms ease 0s;
-  transition: transform 500ms ease 0s;
+  transition: -webkit-${({ transition }) => transition};
+  transition: ${({ transition }) => transition};
 `;
 
 const SlideItem = styled.div<{ color: string }>`
-  width: 500px;
-  height: 200px;
+  position: relative;
+  width: 1024px;
+  height: 400px;
   margin: 0 10px;
   background-color: ${({ color }) => color};
   border: 3px solid blue;
