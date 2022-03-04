@@ -1,5 +1,6 @@
 import { useInterval } from 'hooks/useInterval';
-import React, { useState } from 'react';
+import { useWindowSize } from 'hooks/useWindowSize';
+import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import SlideButton from './SlideButton';
 
@@ -17,9 +18,12 @@ type SlideItemsType = {
 function Index() {
   const itemSize = SlideItems.length;
   const addItemSize = 2;
+  const [windowWidth, windowHeight] = useWindowSize();
   const [curIndex, setCurIndex] = useState<number>(addItemSize);
   const transitionStyle = `transform 500ms ease 0s`;
   const [transition, setTransition] = useState<string>(transitionStyle);
+  const [isSwiping, setIsSwiping] = useState<boolean>(false);
+  const isResizing = useRef<boolean>(false);
 
   const setSlides = () => {
     const addedStart = [];
@@ -37,9 +41,30 @@ function Index() {
 
   const slides = setSlides();
 
-  useInterval(() => {
-    handleSlide(curIndex + 1);
-  }, 2000);
+  const getNewItemWidth = () => {
+    let itemWidth = windowWidth * 0.9 - 10 * 2;
+    itemWidth = itemWidth > 1024 ? 1024 : itemWidth;
+    return itemWidth;
+  };
+
+  const newItemWidth = getNewItemWidth();
+
+  useEffect(() => {
+    isResizing.current = true;
+    setIsSwiping(true);
+    setTransition('');
+    setTimeout(() => {
+      isResizing.current = false;
+      if (!isResizing.current) setIsSwiping(false);
+    }, 1000);
+  }, [windowWidth]);
+
+  useInterval(
+    () => {
+      handleSlide(curIndex + 1);
+    },
+    !isSwiping ? 2000 : null,
+  );
 
   const replaceSlide = (index: number) => {
     setTimeout(() => {
@@ -48,7 +73,7 @@ function Index() {
     }, 500);
   };
 
-  const handleSlide = (idx: number) => {
+  const handleSlide = async (idx: number) => {
     let index = idx;
     setCurIndex(index);
     if (index - addItemSize < 0) {
@@ -62,6 +87,7 @@ function Index() {
   };
 
   const handleSwipe = (num: number) => {
+    setIsSwiping(true);
     handleSlide(curIndex + num);
   };
 
@@ -85,11 +111,17 @@ function Index() {
             index={curIndex}
             len={slides.length}
             transition={transition}
+            onMouseOver={() => setIsSwiping(true)}
+            onMouseOut={() => setIsSwiping(false)}
           >
             {slides.map((item: SlideItemsType, index: number) => {
               const itemIndex = getItemIndex(index);
               return (
-                <SlideItem key={index} color={SlideItems[itemIndex].color}>
+                <SlideItem
+                  key={index}
+                  color={SlideItems[itemIndex].color}
+                  style={{ width: newItemWidth || 'auto' }}
+                >
                   {itemIndex}({index})
                 </SlideItem>
               );
@@ -152,7 +184,7 @@ const SlideWrapper = styled.div<{
 
 const SlideItem = styled.div<{ color: string }>`
   position: relative;
-  width: 1024px;
+  width: 100%;
   height: 400px;
   margin: 0 10px;
   background-color: ${({ color }) => color};
