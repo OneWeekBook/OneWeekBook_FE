@@ -49,11 +49,11 @@ function Index() {
   return (
     <Wrapper>
       <BestListTitle>사람들의 관심을 한 몸에 받은 책</BestListTitle>
-      <BestListGrid>
+      <BestListGridWrapper>
         {BestListItems.map((item: BestItemTypes) => (
           <BestItem key={item.id} {...item} />
         ))}
-      </BestListGrid>
+      </BestListGridWrapper>
     </Wrapper>
   );
 }
@@ -71,7 +71,7 @@ const BestListTitle = styled.p`
   margin-bottom: 32px;
 `;
 
-const BestListGrid = styled.div`
+const BestListGridWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
