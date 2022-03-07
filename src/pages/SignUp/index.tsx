@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import Container from 'components/Container';
 import { Link } from 'react-router-dom';
 import SignUpForm from './components/SignUpForm';
 
 function SignUpPage() {
+  const FormStyle = useMemo(
+    () => ({ height: '100%', display: 'flex', alignItems: 'center' }),
+    [],
+  );
+
   return (
-    <Container>
+    <Container style={FormStyle}>
       <Wrapper>
         <SignUpForm />
         <Link to="/sign-in">

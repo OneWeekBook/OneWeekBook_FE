@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import Container from 'components/Container';
 import SignInForm from './components/SignInForm';
 
 function Index() {
+  const FormStyle = useMemo(
+    () => ({ height: '100%', display: 'flex', alignItems: 'center' }),
+    [],
+  );
+
   return (
-    <Container>
+    <Container style={FormStyle}>
       <Wrapper>
         <ImgWrapper />
         <SignInWrapper>
