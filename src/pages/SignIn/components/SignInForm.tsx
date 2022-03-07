@@ -1,16 +1,11 @@
-import React, {
-  useEffect,
-  ChangeEvent,
-  FormEvent,
-  useState,
-  useCallback,
-} from 'react';
+import React, { useEffect, FormEvent, useState, useCallback } from 'react';
 import styled from 'styled-components';
 import ErrorForm from 'components/Form/ErrorForm';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { SignInRequest } from 'redux/reducers/SignIn';
+import { SignInInit, SignInRequest } from 'redux/reducers/SignIn';
 import { useInput } from 'hooks/useInput';
+import OnboardInputForm from 'components/Form/OnboardInputForm';
 
 function SignInForm() {
   const navigate = useNavigate();
@@ -22,6 +17,13 @@ function SignInForm() {
   const { signInErrorStatus, signInErrorMsg } = useSelector(
     (state: any) => state.signIn,
   );
+
+  useEffect(() => {
+    return () => {
+      setSignInError(false);
+      dispatch(SignInInit());
+    };
+  });
 
   useEffect(() => {
     switch (signInErrorStatus) {
@@ -53,18 +55,17 @@ function SignInForm() {
     <SignInFormWrapper>
       <Title>로그인</Title>
       <form onSubmit={handleSubmit}>
-        <input
-          id="email"
+        <OnboardInputForm
+          type="email"
           placeholder="이메일"
-          defaultValue={email}
-          onBlur={changeEmail}
+          state={email}
+          onChange={changeEmail}
         />
-        <input
-          id="password"
-          placeholder="비밀번호"
-          defaultValue={password}
+        <OnboardInputForm
           type="password"
-          onBlur={changePassword}
+          placeholder="비밀번호"
+          state={password}
+          onChange={changePassword}
         />
         {signInError && <ErrorForm error={signInErrorMsg} align="left" />}
         <button type="submit">로그인</button>
@@ -85,18 +86,6 @@ const SignInFormWrapper = styled.div`
   form {
     display: flex;
     flex-direction: column;
-  }
-  input {
-    box-sizing: border-box;
-    width: 100%;
-    height: 45px;
-    border: 1px solid #e6e6e6;
-    margin: 5px auto;
-    padding-left: 5px;
-  }
-  input:focus {
-    outline: none !important;
-    border: 1px solid lightblue;
   }
   button {
     width: 100%;

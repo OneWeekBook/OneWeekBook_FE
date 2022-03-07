@@ -1,17 +1,17 @@
-import React, { ChangeEvent, FormEvent, useState, useEffect } from 'react';
+import React, { FormEvent, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import ErrorForm from 'components/Form/ErrorForm';
 import { passwordRegex } from 'lib/Regex';
 import AuthEmailForm from 'components/Form/AuthEmailForm';
-import { SignUpRequest } from 'redux/reducers/SignUp';
+import { SignUpInit, SignUpRequest } from 'redux/reducers/SignUp';
 import { useInput } from 'hooks/useInput';
+import OnboardInputForm from 'components/Form/OnboardInputForm';
 
 function SignUpForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [authDone, setAuthDone] = useState<boolean>(false);
   const [email, setEmail] = useState<string>('');
   const [password, changePassword] = useInput('');
   const [confirmPassword, changeConfirmPassword] = useInput('');
@@ -19,8 +19,9 @@ function SignUpForm() {
   const [nick, changeNick] = useInput('');
   const [passError, setPassError] = useState<boolean>(false);
   const [passCompareError, setPassCompareError] = useState<boolean>(false);
-  const [registerDone, setRegisterDone] = useState<boolean>(true);
   const [signUpError, setSignUpError] = useState<boolean>(false);
+  const [authDone, setAuthDone] = useState<boolean>(false);
+  const [registerDone, setRegisterDone] = useState<boolean>(true);
 
   const { signUpErrorStatus } = useSelector((state: any) => state.signUp);
 
@@ -49,6 +50,9 @@ function SignUpForm() {
   useEffect(() => {
     return () => {
       setSignUpError(false);
+      setAuthDone(false);
+      setRegisterDone(false);
+      dispatch(SignUpInit());
     };
   }, []);
 
@@ -86,46 +90,36 @@ function SignUpForm() {
       <FormWrapper>
         {authDone && (
           <form onSubmit={handleSubmit}>
-            <InputWrapper>
-              <input
-                type="password"
-                placeholder="비밀번호"
-                defaultValue={password}
-                onBlur={changePassword}
-              />
-              <span />
-            </InputWrapper>
+            <OnboardInputForm
+              type="password"
+              placeholder="비밀번호"
+              state={password}
+              onChange={changePassword}
+            />
             {passError && (
               <ErrorForm error="비밀번호 형식이 올바르지 않습니다." />
             )}
-            <InputWrapper>
-              <input
-                type="password"
-                placeholder="비밀번호 확인"
-                defaultValue={confirmPassword}
-                onBlur={changeConfirmPassword}
-              />
-              <span />
-            </InputWrapper>
+            <OnboardInputForm
+              type="password"
+              placeholder="비밀번호 확인"
+              state={confirmPassword}
+              onChange={changeConfirmPassword}
+            />
             {passCompareError && (
               <ErrorForm error="비밀번호가 같지 않습니다." />
             )}
-            <InputWrapper>
-              <input
-                placeholder="이름"
-                defaultValue={username}
-                onBlur={changeUserName}
-              />
-              <span />
-            </InputWrapper>
-            <InputWrapper>
-              <input
-                placeholder="닉네임"
-                defaultValue={nick}
-                onBlur={changeNick}
-              />
-              <span />
-            </InputWrapper>
+            <OnboardInputForm
+              type="text"
+              placeholder="이름"
+              state={username}
+              onChange={changeUserName}
+            />
+            <OnboardInputForm
+              type="text"
+              placeholder="닉네임"
+              state={nick}
+              onChange={changeNick}
+            />
             {signUpError && <ErrorForm error="회원가입 실패" align="left" />}
             <button type="submit" disabled={registerDone}>
               회원가입
@@ -175,35 +169,5 @@ const FormWrapper = styled.div`
     border-bottom: solid 1px black;
     padding: 5px 5px;
     margin-top: 10px;
-  }
-`;
-
-const InputWrapper = styled.div`
-  position: relative;
-  width: 100%;
-  input {
-    :focus {
-      outline: none;
-    }
-    box-sizing: border-box;
-    padding: 0 5px;
-    height: 30px;
-    border: none;
-    width: 100%;
-    border-bottom: solid 1px black;
-  }
-  input ~ span {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background-color: #1e90ff;
-    transition: 0.4s;
-  }
-  input:focus ~ span {
-    width: 100%;
-    transition: 0.4s;
-    left: 0;
   }
 `;
