@@ -6,16 +6,17 @@ import ErrorForm from 'components/Form/ErrorForm';
 import { passwordRegex } from 'lib/Regex';
 import AuthEmailForm from 'components/Form/AuthEmailForm';
 import { SignUpRequest } from 'redux/reducers/SignUp';
+import { useInput } from 'hooks/useInput';
 
 function SignUpForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [authDone, setAuthDone] = useState<boolean>(false);
   const [email, setEmail] = useState<string>('');
-  const [username, setUserName] = useState<string>('');
-  const [nick, setNick] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [password, changePassword] = useInput('');
+  const [confirmPassword, changeConfirmPassword] = useInput('');
+  const [username, changeUserName] = useInput('');
+  const [nick, changeNick] = useInput('');
   const [passError, setPassError] = useState<boolean>(false);
   const [passCompareError, setPassCompareError] = useState<boolean>(false);
   const [registerDone, setRegisterDone] = useState<boolean>(true);
@@ -90,9 +91,7 @@ function SignUpForm() {
                 type="password"
                 placeholder="비밀번호"
                 defaultValue={password}
-                onBlur={(event: ChangeEvent<HTMLInputElement>) =>
-                  setPassword(event.target.value)
-                }
+                onBlur={changePassword}
               />
               <span />
             </InputWrapper>
@@ -104,9 +103,7 @@ function SignUpForm() {
                 type="password"
                 placeholder="비밀번호 확인"
                 defaultValue={confirmPassword}
-                onBlur={(event: ChangeEvent<HTMLInputElement>) =>
-                  setConfirmPassword(event.target.value)
-                }
+                onBlur={changeConfirmPassword}
               />
               <span />
             </InputWrapper>
@@ -117,9 +114,7 @@ function SignUpForm() {
               <input
                 placeholder="이름"
                 defaultValue={username}
-                onBlur={(event: ChangeEvent<HTMLInputElement>) =>
-                  setUserName(event.target.value)
-                }
+                onBlur={changeUserName}
               />
               <span />
             </InputWrapper>
@@ -127,9 +122,7 @@ function SignUpForm() {
               <input
                 placeholder="닉네임"
                 defaultValue={nick}
-                onBlur={(event: ChangeEvent<HTMLInputElement>) =>
-                  setNick(event.target.value)
-                }
+                onBlur={changeNick}
               />
               <span />
             </InputWrapper>

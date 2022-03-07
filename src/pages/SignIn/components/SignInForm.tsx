@@ -10,12 +10,13 @@ import ErrorForm from 'components/Form/ErrorForm';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { SignInRequest } from 'redux/reducers/SignIn';
+import { useInput } from 'hooks/useInput';
 
 function SignInForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [email, changeEmail] = useInput('');
+  const [password, changePassword] = useInput('');
   const [signInError, setSignInError] = useState<boolean>(false);
 
   const { signInErrorStatus, signInErrorMsg } = useSelector(
@@ -56,18 +57,14 @@ function SignInForm() {
           id="email"
           placeholder="이메일"
           defaultValue={email}
-          onBlur={(event: ChangeEvent<HTMLInputElement>) =>
-            setEmail(event.target.value)
-          }
+          onBlur={changeEmail}
         />
         <input
           id="password"
           placeholder="비밀번호"
           defaultValue={password}
           type="password"
-          onBlur={(event: ChangeEvent<HTMLInputElement>) =>
-            setPassword(event.target.value)
-          }
+          onBlur={changePassword}
         />
         {signInError && <ErrorForm error={signInErrorMsg} align="left" />}
         <button type="submit">로그인</button>
