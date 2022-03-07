@@ -20,7 +20,7 @@ export default Index;
 
 const Wrapper = styled.div`
   display: flex;
-  margin: 150px auto 0;
+  margin: auto;
   background-color: lightblue;
   border: solid 2px lightblue;
   width: 70%;

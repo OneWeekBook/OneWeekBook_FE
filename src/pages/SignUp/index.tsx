@@ -24,7 +24,7 @@ const Wrapper = styled.div`
   background-color: white;
   border: solid 2px lightblue;
   width: 375px;
-  margin: 100px auto 0;
+  margin: auto;
   padding: 50px 50px;
   height: 500px;
   a {

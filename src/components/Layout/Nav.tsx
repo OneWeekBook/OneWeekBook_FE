@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Container from '../Container';
 
@@ -28,9 +28,23 @@ const NavItems = [
 ];
 
 function Nav() {
-  const [toggle, setToggle] = useState<boolean>(false);
+  const navigate = useNavigate();
   const location = useLocation();
-  console.log(location.pathname);
+  const [toggle, setToggle] = useState<boolean>(false);
+
+  const handleClick = (link: string) => {
+    if (link === '/myPage' && sessionStorage.getItem('accessToken')) {
+      navigate(link);
+    } else if (
+      link === '/myPage' &&
+      confirm(
+        '마이페이지로 가시려면 로그인을 하셔야합니다.\n로그인 하시겠습니까?',
+      )
+    ) {
+      navigate('/sign-in');
+    }
+    setToggle(!toggle);
+  };
 
   return (
     <>
@@ -38,26 +52,19 @@ function Nav() {
         <Container as="nav">
           <NavWrapper>
             {NavItems.map((item) => (
-              <Link to={item.link} key={item.id}>
-                <NavItem onClick={() => setToggle(!toggle)}>
-                  {item.link === location.pathname ? (
-                    <img
-                      src={item.clickImg}
-                      alt={item.title}
-                      width={35}
-                      height={35}
-                    />
-                  ) : (
-                    <img
-                      src={item.img}
-                      alt={item.title}
-                      width={35}
-                      height={35}
-                    />
-                  )}
-                  <p>{item.title}</p>
-                </NavItem>
-              </Link>
+              <NavItem key={item.id} onClick={() => handleClick(item.link)}>
+                {item.link === location.pathname ? (
+                  <img
+                    src={item.clickImg}
+                    alt={item.title}
+                    width={35}
+                    height={35}
+                  />
+                ) : (
+                  <img src={item.img} alt={item.title} width={35} height={35} />
+                )}
+                {item.title}
+              </NavItem>
             ))}
           </NavWrapper>
         </Container>
@@ -76,14 +83,14 @@ const NavWrapper = styled.div`
   }
 `;
 
-const NavItem = styled.div`
+const NavItem = styled.button`
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
   display: flex;
   align-items: center;
   text-decoration: none;
   line-height: 35px;
-  p {
-    font-size: 18px;
-    margin: 0 10px 0 0;
-    color: white;
-  }
+  font-size: 18px;
+  margin: 0 10px 0 0;
+  color: white;
 `;
