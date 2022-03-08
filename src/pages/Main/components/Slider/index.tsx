@@ -57,6 +57,9 @@ function Index() {
       isResizing.current = false;
       if (!isResizing.current) setIsSwiping(false);
     }, 1000);
+    return () => {
+      setIsSwiping(false);
+    };
   }, [windowWidth]);
 
   useInterval(
