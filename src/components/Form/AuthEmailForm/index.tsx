@@ -1,7 +1,6 @@
 import React, { useEffect, useState, Dispatch, SetStateAction } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { codeRegex, emailRegex } from 'lib/Regex';
 import { AuthEmailRequest } from 'redux/reducers/AuthEmail';
 import { AuthCodeRequest } from 'redux/reducers/AuthCode';
 import { useInput } from 'hooks/useInput';
@@ -9,6 +8,8 @@ import TimerForm from '../TimerForm';
 import EmailErrorForm from './components/EmailErrorForm';
 import CodeErrorForm from './components/CodeErrorForm';
 import OnboardInputForm from '../OnboardInputForm';
+import { useRegexCheck } from './func/RegCheck';
+import { useAuthErrorCheck } from './func/AuthErrorCheck';
 
 type AuthMailTypes = {
   authDone: boolean;
@@ -31,6 +32,9 @@ function AuthEmailForm({
   const [emailDone, setEmailDone] = useState<boolean>(false);
   const [toggle, setToggle] = useState<boolean>(false);
 
+  const { handleRegex } = useRegexCheck();
+  const { handleEmailCheck, handleCodeCheck } = useAuthErrorCheck();
+
   const { emailErrorStatus, emailErrorMsg } = useSelector(
     (state: any) => state.authEmail,
   );
@@ -40,49 +44,18 @@ function AuthEmailForm({
   );
 
   useEffect(() => {
-    if (email && !emailRegex.test(email)) {
-      setEmailReg(false);
-    } else if (email && emailRegex.test(email)) {
-      setEmailReg(true);
-    }
-  }, [email]);
+    handleRegex({ email, code }, { setEmailReg, setCodeReg });
+  }, [email, code]);
 
   useEffect(() => {
-    if (code && !codeRegex.test(code)) {
-      setCodeReg(false);
-    } else if (code && codeRegex.test(code)) {
-      setCodeReg(true);
-    }
-  }, [code]);
-
-  useEffect(() => {
-    switch (emailErrorStatus) {
-      case 200:
-        setEmailDone(true);
-        setToggle(true);
-        break;
-      case 400:
-      default:
-        break;
-    }
-  }, [emailErrorStatus]);
-
-  useEffect(() => {
-    switch (codeErrorStatus) {
-      case 200:
-        setRegisterEmail(email);
-        setCodeReg(false);
-        setAuthDone(true);
-        break;
-      case 400:
-      case 408:
-        setCodeReg(true);
-        setAuthDone(false);
-        break;
-      default:
-        break;
-    }
-  }, [codeErrorStatus]);
+    handleEmailCheck(emailErrorStatus, { setEmailDone, setToggle });
+    handleCodeCheck(codeErrorStatus, {
+      email,
+      setRegisterEmail,
+      setCodeReg,
+      setAuthDone,
+    });
+  }, [emailErrorStatus, codeErrorStatus]);
 
   const authEmailClick = () => {
     dispatch(AuthEmailRequest({ email }));
