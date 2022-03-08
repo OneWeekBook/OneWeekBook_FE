@@ -1,18 +1,20 @@
 import React, { useEffect, FormEvent, useState, useCallback } from 'react';
 import styled from 'styled-components';
 import ErrorForm from 'components/Form/ErrorForm';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { SignInInit, SignInRequest } from 'redux/reducers/SignIn';
 import { useInput } from 'hooks/useInput';
 import OnboardInputForm from 'components/Form/OnboardInputForm';
+import { useSignInErrorCheck } from '../func/SignInErrorCheck';
 
 function SignInForm() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [email, changeEmail] = useInput('');
   const [password, changePassword] = useInput('');
   const [signInError, setSignInError] = useState<boolean>(false);
+
+  const { handleSignInError } = useSignInErrorCheck();
 
   const { signInErrorStatus, signInErrorMsg } = useSelector(
     (state: any) => state.signIn,
@@ -23,23 +25,10 @@ function SignInForm() {
       setSignInError(false);
       dispatch(SignInInit());
     };
-  });
+  }, []);
 
   useEffect(() => {
-    switch (signInErrorStatus) {
-      case 200:
-        setSignInError(false);
-        navigate('/');
-        break;
-      case 400:
-      case 401:
-      case 500:
-      case 501:
-        setSignInError(true);
-        break;
-      default:
-        break;
-    }
+    handleSignInError(signInErrorStatus, setSignInError);
   }, [signInErrorStatus]);
 
   const handleSubmit = useCallback(

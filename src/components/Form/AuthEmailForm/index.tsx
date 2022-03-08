@@ -1,8 +1,8 @@
 import React, { useEffect, useState, Dispatch, SetStateAction } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { AuthEmailRequest } from 'redux/reducers/AuthEmail';
-import { AuthCodeRequest } from 'redux/reducers/AuthCode';
+import { AuthEmailInit, AuthEmailRequest } from 'redux/reducers/AuthEmail';
+import { AuthCodeInit, AuthCodeRequest } from 'redux/reducers/AuthCode';
 import { useInput } from 'hooks/useInput';
 import TimerForm from '../TimerForm';
 import EmailErrorForm from './components/EmailErrorForm';
@@ -42,6 +42,13 @@ function AuthEmailForm({
   const { codeErrorStatus, codeErrorMsg } = useSelector(
     (state: any) => state.authCode,
   );
+
+  useEffect(() => {
+    return () => {
+      dispatch(AuthCodeInit());
+      dispatch(AuthEmailInit());
+    };
+  }, []);
 
   useEffect(() => {
     handleRegex({ email, code }, { setEmailReg, setCodeReg });

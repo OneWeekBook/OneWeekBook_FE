@@ -1,16 +1,15 @@
 import React, { FormEvent, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import ErrorForm from 'components/Form/ErrorForm';
-import { passwordRegex } from 'lib/Regex';
 import AuthEmailForm from 'components/Form/AuthEmailForm';
 import { SignUpInit, SignUpRequest } from 'redux/reducers/SignUp';
 import { useInput } from 'hooks/useInput';
 import OnboardInputForm from 'components/Form/OnboardInputForm';
+import { useErrorCheck } from '../func/ErrorCheck';
+import { useSignUpErrorCheck } from '../func/SignUpErrorCheck';
 
 function SignUpForm() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [email, setEmail] = useState<string>('');
   const [password, changePassword] = useInput('');
@@ -23,59 +22,41 @@ function SignUpForm() {
   const [authDone, setAuthDone] = useState<boolean>(false);
   const [registerDone, setRegisterDone] = useState<boolean>(true);
 
+  const { handleError } = useErrorCheck();
+  const { handleSignUpError } = useSignUpErrorCheck();
+
   const { signUpErrorStatus } = useSelector((state: any) => state.signUp);
 
   useEffect(() => {
-    if (password && !passwordRegex.test(password)) {
-      setPassError(true);
-    } else if (password && passwordRegex.test(password)) {
-      setPassError(false);
-    }
-  }, [password]);
+    handleError(
+      { username, nick, password, confirmPassword },
+      {
+        passError,
+        setPassError,
+        passCompareError,
+        setPassCompareError,
+        registerDone,
+        setRegisterDone,
+      },
+    );
+  }, [username, nick, password, confirmPassword]);
 
   useEffect(() => {
-    if (!passError && confirmPassword && password !== confirmPassword) {
-      setPassCompareError(true);
-    } else if (!passError && confirmPassword && password === confirmPassword) {
-      setPassCompareError(false);
-    }
-  }, [confirmPassword]);
-
-  useEffect(() => {
-    if (username && nick && !passError && !passCompareError)
-      setRegisterDone(false);
-    else setRegisterDone(true);
-  }, [username, nick, password]);
+    handleSignUpError(signUpErrorStatus, setSignUpError);
+  }, [signUpErrorStatus]);
 
   useEffect(() => {
     return () => {
       setSignUpError(false);
       setAuthDone(false);
-      setRegisterDone(false);
+      setRegisterDone(true);
       dispatch(SignUpInit());
     };
   }, []);
 
-  useEffect(() => {
-    switch (signUpErrorStatus) {
-      case 200:
-        alert('회원가입 완료, 로그인을 진행해주세요.');
-        navigate('/sign-in');
-        setSignUpError(false);
-        break;
-      case 400:
-      case 500:
-      case 501:
-        setSignUpError(true);
-        break;
-      default:
-        break;
-    }
-  }, [signUpErrorStatus]);
-
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = { email, username, nick, password };
+    const formData = { email, username, nick, password, confirmPassword };
     dispatch(SignUpRequest(formData));
   };
 
