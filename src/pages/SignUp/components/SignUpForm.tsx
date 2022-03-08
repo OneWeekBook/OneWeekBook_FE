@@ -35,11 +35,15 @@ function SignUpForm() {
         setPassError,
         passCompareError,
         setPassCompareError,
-        registerDone,
-        setRegisterDone,
       },
     );
   }, [username, nick, password, confirmPassword]);
+
+  useEffect(() => {
+    if (username && nick && !passError && !passCompareError)
+      setRegisterDone(false);
+    else setRegisterDone(true);
+  }, [username, nick, passError, passCompareError]);
 
   useEffect(() => {
     handleSignUpError(signUpErrorStatus, setSignUpError);

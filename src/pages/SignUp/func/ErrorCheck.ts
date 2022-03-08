@@ -12,8 +12,6 @@ type ErrorType = {
   setPassError: React.Dispatch<React.SetStateAction<boolean>>;
   passCompareError: boolean;
   setPassCompareError: React.Dispatch<React.SetStateAction<boolean>>;
-  registerDone: boolean;
-  setRegisterDone: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export function useErrorCheck(): {
@@ -39,15 +37,6 @@ export function useErrorCheck(): {
     ) {
       error.setPassCompareError(false);
     }
-
-    if (
-      values.username &&
-      values.nick &&
-      !error.passError &&
-      !error.passCompareError
-    )
-      error.setRegisterDone(false);
-    else error.setRegisterDone(true);
   };
 
   return { handleError };
