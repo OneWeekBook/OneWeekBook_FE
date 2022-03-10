@@ -4,6 +4,8 @@ export const SIGN_IN_REQUEST = 'SIGN_IN_REQUEST';
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
 export const SIGN_IN_FAIL = 'SIGN_IN_FAIL';
 
+export const SIGN_IN_INIT = 'SIGN_IN_INIT';
+
 const initialState = {
   isLoading: false,
   isSuccess: false,
@@ -37,6 +39,8 @@ export default function SignIn(state = initialState, action: any) {
         signInErrorStatus: action.error.status,
         signInErrorMsg: action.error.data.message,
       };
+    case SIGN_IN_INIT:
+      return initialState;
     default:
       return state;
   }
@@ -60,5 +64,11 @@ export const SignInFail = (error: any) => {
   return {
     type: SIGN_IN_FAIL,
     error: error.response,
+  };
+};
+
+export const SignInInit = () => {
+  return {
+    type: SIGN_IN_INIT,
   };
 };

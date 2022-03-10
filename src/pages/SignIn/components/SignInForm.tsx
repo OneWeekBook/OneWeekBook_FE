@@ -1,42 +1,34 @@
-import React, {
-  useEffect,
-  ChangeEvent,
-  FormEvent,
-  useState,
-  useCallback,
-} from 'react';
+import React, { useEffect, FormEvent, useState, useCallback } from 'react';
 import styled from 'styled-components';
 import ErrorForm from 'components/Form/ErrorForm';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { SignInRequest } from 'redux/reducers/SignIn';
+import { SignInInit, SignInRequest } from 'redux/reducers/SignIn';
+import { useInput } from 'hooks/useInput';
+import OnboardInputForm from 'components/Form/OnboardInputForm';
+import { useSignInErrorCheck } from '../func/SignInErrorCheck';
 
 function SignInForm() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [email, changeEmail] = useInput('');
+  const [password, changePassword] = useInput('');
   const [signInError, setSignInError] = useState<boolean>(false);
+
+  const { handleSignInError } = useSignInErrorCheck();
 
   const { signInErrorStatus, signInErrorMsg } = useSelector(
     (state: any) => state.signIn,
   );
 
   useEffect(() => {
-    switch (signInErrorStatus) {
-      case 200:
-        setSignInError(false);
-        navigate('/');
-        break;
-      case 400:
-      case 401:
-      case 500:
-      case 501:
-        setSignInError(true);
-        break;
-      default:
-        break;
-    }
+    return () => {
+      setSignInError(false);
+      dispatch(SignInInit());
+    };
+  }, []);
+
+  useEffect(() => {
+    handleSignInError(signInErrorStatus, setSignInError);
   }, [signInErrorStatus]);
 
   const handleSubmit = useCallback(
@@ -52,22 +44,17 @@ function SignInForm() {
     <SignInFormWrapper>
       <Title>로그인</Title>
       <form onSubmit={handleSubmit}>
-        <input
-          id="email"
+        <OnboardInputForm
+          type="email"
           placeholder="이메일"
-          defaultValue={email}
-          onBlur={(event: ChangeEvent<HTMLInputElement>) =>
-            setEmail(event.target.value)
-          }
+          state={email}
+          onChange={changeEmail}
         />
-        <input
-          id="password"
-          placeholder="비밀번호"
-          defaultValue={password}
+        <OnboardInputForm
           type="password"
-          onBlur={(event: ChangeEvent<HTMLInputElement>) =>
-            setPassword(event.target.value)
-          }
+          placeholder="비밀번호"
+          state={password}
+          onChange={changePassword}
         />
         {signInError && <ErrorForm error={signInErrorMsg} align="left" />}
         <button type="submit">로그인</button>
@@ -88,18 +75,6 @@ const SignInFormWrapper = styled.div`
   form {
     display: flex;
     flex-direction: column;
-  }
-  input {
-    box-sizing: border-box;
-    width: 100%;
-    height: 45px;
-    border: 1px solid #e6e6e6;
-    margin: 5px auto;
-    padding-left: 5px;
-  }
-  input:focus {
-    outline: none !important;
-    border: 1px solid lightblue;
   }
   button {
     width: 100%;
