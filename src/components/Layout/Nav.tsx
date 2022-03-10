@@ -25,6 +25,13 @@ const NavItems = [
     img: `${process.env.PUBLIC_URL}/assets/nav-none-myPage.png`,
     clickImg: `${process.env.PUBLIC_URL}/assets/nav-done-myPage.png`,
   },
+  {
+    id: 4,
+    title: '카테고리',
+    link: '/category',
+    img: `${process.env.PUBLIC_URL}/assets/nav-none-category.png`,
+    clickImg: `${process.env.PUBLIC_URL}/assets/nav-done-category.png`,
+  },
 ];
 
 function Nav() {
@@ -35,13 +42,17 @@ function Nav() {
   const handleClick = (link: string) => {
     if (link === '/myPage' && sessionStorage.getItem('accessToken')) {
       navigate(link);
-    } else if (
-      link === '/myPage' &&
-      confirm(
-        '마이페이지로 가시려면 로그인을 하셔야합니다.\n로그인 하시겠습니까?',
-      )
-    ) {
-      navigate('/sign-in');
+    } else if (link === '/myPage' && !sessionStorage.getItem('accessToken')) {
+      if (
+        link === '/myPage' &&
+        confirm(
+          '마이페이지로 가시려면 로그인을 하셔야합니다.\n로그인 하시겠습니까?',
+        )
+      ) {
+        navigate('/sign-in');
+      }
+    } else {
+      navigate(link);
     }
     setToggle(!toggle);
   };
