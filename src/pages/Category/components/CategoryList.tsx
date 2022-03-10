@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import CategoryBoxItem from './CategoryBoxItem';
+import SubCategoryBoxItem from './SubCategoryBoxItem';
 
 const CategoryItems = [
   { parentId: null, categoryId: 100, categoryTitle: '소설' },
@@ -50,23 +51,43 @@ export type CategoryItemTypes = {
 
 function CategoryList() {
   const [parentCategory, setParentCategory] = useState<CategoryItemTypes[]>([]);
+  const [subCatgory, setSubCategory] = useState<CategoryItemTypes[]>([]);
 
-  const getFilterCategories = useCallback(() => {
+  const getFilterParentCategories = useCallback(() => {
     const parent = CategoryItems.filter((item) => item.parentId === null);
     setParentCategory(parent);
   }, []);
 
+  const getFilterSubCategories = useCallback((id: number) => {
+    const sub = CategoryItems.filter((item) => item.parentId === id);
+    setSubCategory(sub);
+  }, []);
+
   useEffect(() => {
-    getFilterCategories();
+    getFilterParentCategories();
   }, []);
 
   return (
     <Wrapper>
       <CategoryGridWrapper>
         {parentCategory.map((item: CategoryItemTypes) => (
-          <CategoryBoxItem key={item.categoryId} {...item} />
+          <CategoryBoxItem
+            key={item.categoryId}
+            handleClick={getFilterSubCategories}
+            {...item}
+          />
         ))}
       </CategoryGridWrapper>
+      {subCatgory.length > 0 && (
+        <SubCategoryWrapper>
+          <p className="subTitle">하위 카테고리</p>
+          <SubCategoryList>
+            {subCatgory.map((item: CategoryItemTypes) => (
+              <SubCategoryBoxItem key={item.categoryId} {...item} />
+            ))}
+          </SubCategoryList>
+        </SubCategoryWrapper>
+      )}
     </Wrapper>
   );
 }
@@ -78,6 +99,21 @@ const Wrapper = styled.div`
 `;
 
 const CategoryGridWrapper = styled.div`
+  margin-top: 10px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+`;
+
+const SubCategoryWrapper = styled.div`
+  margin: 20px auto;
+  .subTitle {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+`;
+
+const SubCategoryList = styled.div`
+  display: flex;
+  border-top: 2px solid #e6e6e6;
 `;
