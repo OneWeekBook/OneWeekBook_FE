@@ -8,13 +8,13 @@ type ClickType = {
 
 function CategoryBoxItem({
   categoryId,
-  categoryTitle,
+  categoryName,
   handleClick,
 }: React.PropsWithChildren<CategoryItemTypes> & ClickType) {
   return (
     <Wrapper>
       <button type="button" onClick={() => handleClick(categoryId)}>
-        {categoryTitle}
+        {categoryName}
       </button>
     </Wrapper>
   );

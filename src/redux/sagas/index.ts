@@ -4,6 +4,7 @@ import watchAuthCode from './AuthCodeSaga';
 import watchAuthUser from './AuthUserSaga';
 import watchSignUp from './SignUpSaga';
 import watchSignIn from './SignInSaga';
+import watchCategory from './CategorySaga';
 
 export default function* rootSaga() {
   yield all([
@@ -12,5 +13,6 @@ export default function* rootSaga() {
     call(watchAuthUser),
     call(watchSignUp),
     call(watchSignIn),
+    call(watchCategory),
   ]);
 }

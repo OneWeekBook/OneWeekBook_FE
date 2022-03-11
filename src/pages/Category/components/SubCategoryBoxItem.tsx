@@ -4,9 +4,9 @@ import { CategoryItemTypes } from './CategoryList';
 
 function SubCategoryBoxItem({
   categoryId,
-  categoryTitle,
+  categoryName,
 }: React.PropsWithChildren<CategoryItemTypes>) {
-  return <SubCategoryItem>{categoryTitle}</SubCategoryItem>;
+  return <SubCategoryItem>{categoryName}</SubCategoryItem>;
 }
 
 export default SubCategoryBoxItem;

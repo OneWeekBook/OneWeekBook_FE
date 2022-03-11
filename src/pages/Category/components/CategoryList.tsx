@@ -1,4 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { CategoryRequest } from 'redux/reducers/Category';
 import styled from 'styled-components';
 import CategoryBoxItem from './CategoryBoxItem';
 import SubCategoryBoxItem from './SubCategoryBoxItem';
@@ -44,27 +46,41 @@ const CategoryItems = [
 ];
 
 export type CategoryItemTypes = {
+  id: number;
   parentId: number | null;
   categoryId: number;
-  categoryTitle: string;
+  categoryName: string;
+  depth: number;
 };
 
 function CategoryList() {
+  const dispatch = useDispatch();
   const [parentCategory, setParentCategory] = useState<CategoryItemTypes[]>([]);
   const [subCatgory, setSubCategory] = useState<CategoryItemTypes[]>([]);
+  const { categories } = useSelector((state: any) => state.category);
+  console.log(categories);
 
   const getFilterParentCategories = useCallback(() => {
-    const parent = CategoryItems.filter((item) => item.parentId === null);
+    const parent = categories.filter(
+      (item: CategoryItemTypes) => item.parentId === null,
+    );
     setParentCategory(parent);
   }, []);
 
   const getFilterSubCategories = useCallback((id: number) => {
-    const sub = CategoryItems.filter((item) => item.parentId === id);
+    const sub = categories.filter(
+      (item: CategoryItemTypes) => item.parentId === id,
+    );
     setSubCategory(sub);
   }, []);
 
+  const handleFetch = useCallback(async () => {
+    await dispatch(CategoryRequest());
+    await getFilterParentCategories();
+  }, []);
+
   useEffect(() => {
-    getFilterParentCategories();
+    handleFetch();
   }, []);
 
   return (
