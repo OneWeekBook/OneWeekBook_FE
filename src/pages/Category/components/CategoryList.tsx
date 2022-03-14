@@ -2,48 +2,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CategoryRequest } from 'redux/reducers/Category';
 import styled from 'styled-components';
-import CategoryBoxItem from './CategoryBoxItem';
-import SubCategoryBoxItem from './SubCategoryBoxItem';
-
-const CategoryItems = [
-  { parentId: null, categoryId: 100, categoryTitle: '소설' },
-  { parentId: 100, categoryId: 100010, categoryTitle: '나라별 소설' },
-  { parentId: 100, categoryId: 100020, categoryTitle: '고전/문학' },
-  { parentId: 100, categoryId: 100030, categoryTitle: '장르소설' },
-  { parentId: null, categoryId: 110, categoryTitle: '시/에세이' },
-  { parentId: 110, categoryId: 110010, categoryTitle: '한국시' },
-  { parentId: 110, categoryId: 110020, categoryTitle: '외국시' },
-  { parentId: null, categoryId: 120, categoryTitle: '인문' },
-  { parentId: 120, categoryId: 120010, categoryTitle: '인문일반' },
-  { parentId: null, categoryId: 200, categoryTitle: '소설' },
-  { parentId: 200, categoryId: 100040, categoryTitle: '테마소설' },
-  { parentId: null, categoryId: 210, categoryTitle: '시/에세이' },
-  { parentId: 210, categoryId: 110030, categoryTitle: '인물 에세이' },
-  { parentId: 210, categoryId: 110040, categoryTitle: '여행 에세이' },
-  { parentId: 210, categoryId: 110050, categoryTitle: '성공 에세이' },
-  { parentId: 210, categoryId: 110060, categoryTitle: '독서 에세이' },
-  { parentId: null, categoryId: 220, categoryTitle: '인문' },
-  { parentId: 220, categoryId: 120020, categoryTitle: '심리' },
-  { parentId: 220, categoryId: 120030, categoryTitle: '교육학' },
-  { parentId: null, categoryId: 300, categoryTitle: '소설' },
-  { parentId: null, categoryId: 310, categoryTitle: '시/에세이' },
-  { parentId: null, categoryId: 320, categoryTitle: '인문' },
-  { parentId: null, categoryId: 400, categoryTitle: '소설' },
-  { parentId: null, categoryId: 410, categoryTitle: '시/에세이' },
-  { parentId: null, categoryId: 420, categoryTitle: '인문' },
-  { parentId: null, categoryId: 500, categoryTitle: '소설' },
-  { parentId: null, categoryId: 510, categoryTitle: '시/에세이' },
-  { parentId: null, categoryId: 520, categoryTitle: '인문' },
-  { parentId: null, categoryId: 600, categoryTitle: '소설' },
-  { parentId: null, categoryId: 610, categoryTitle: '시/에세이' },
-  { parentId: null, categoryId: 620, categoryTitle: '인문' },
-  { parentId: null, categoryId: 700, categoryTitle: '소설' },
-  { parentId: null, categoryId: 710, categoryTitle: '시/에세이' },
-  { parentId: null, categoryId: 720, categoryTitle: '인문' },
-  { parentId: null, categoryId: 800, categoryTitle: '소설' },
-  { parentId: null, categoryId: 810, categoryTitle: '시/에세이' },
-  { parentId: null, categoryId: 820, categoryTitle: '인문' },
-];
+import CategoryBoxItem from './_item/CategoryBoxItem';
+import SubCategoryBoxItem from './_item/SubCategoryBoxItem';
 
 export type CategoryItemTypes = {
   id: number;
@@ -56,32 +16,55 @@ export type CategoryItemTypes = {
 function CategoryList() {
   const dispatch = useDispatch();
   const [parentCategory, setParentCategory] = useState<CategoryItemTypes[]>([]);
+  const [curParentCategory, setCurParentCategory] = useState<
+    CategoryItemTypes[]
+  >([]);
   const [subCatgory, setSubCategory] = useState<CategoryItemTypes[]>([]);
+  const [curSubCategory, setCurSubCategory] = useState<CategoryItemTypes[]>([]);
+  const [search, setSearch] = useState<string>('');
   const { categories } = useSelector((state: any) => state.category);
-  console.log(categories);
 
-  const getFilterParentCategories = useCallback(() => {
-    const parent = categories.filter(
-      (item: CategoryItemTypes) => item.parentId === null,
-    );
-    setParentCategory(parent);
-  }, []);
+  const getFilterParentCategories = useCallback(
+    (categories: CategoryItemTypes[]) => {
+      const parent = categories.filter(
+        (item: CategoryItemTypes) => item.parentId === null,
+      );
+      setParentCategory(parent);
+    },
+    [categories],
+  );
 
-  const getFilterSubCategories = useCallback((id: number) => {
-    const sub = categories.filter(
-      (item: CategoryItemTypes) => item.parentId === id,
-    );
-    setSubCategory(sub);
-  }, []);
+  const getFilterSubCategories = useCallback(
+    (categoriesData: CategoryItemTypes[], id: number) => {
+      const parent = categoriesData.filter(
+        (item: CategoryItemTypes) => item.categoryId === id,
+      );
+      const sub = categoriesData.filter(
+        (item: CategoryItemTypes) => item.parentId === id,
+      );
+      setCurParentCategory(parent);
+      setSubCategory(sub);
+    },
+    [],
+  );
 
-  const handleFetch = useCallback(async () => {
-    await dispatch(CategoryRequest());
-    await getFilterParentCategories();
+  const getPeekCategory = useCallback(
+    (categoriesData: CategoryItemTypes[], id: number) => {
+      const result = categoriesData.filter(
+        (item: CategoryItemTypes) => item.categoryId === id,
+      );
+      setCurSubCategory(result);
+    },
+    [],
+  );
+
+  useEffect(() => {
+    dispatch(CategoryRequest());
   }, []);
 
   useEffect(() => {
-    handleFetch();
-  }, []);
+    getFilterParentCategories(categories);
+  }, [categories]);
 
   return (
     <Wrapper>
@@ -89,17 +72,27 @@ function CategoryList() {
         {parentCategory.map((item: CategoryItemTypes) => (
           <CategoryBoxItem
             key={item.categoryId}
-            handleClick={getFilterSubCategories}
+            handleClick={(id: number) => {
+              getFilterSubCategories(categories, id);
+            }}
             {...item}
           />
         ))}
       </CategoryGridWrapper>
       {subCatgory.length > 0 && (
         <SubCategoryWrapper>
-          <p className="subTitle">하위 카테고리</p>
+          <p className="subTitle">
+            {curParentCategory[0]?.categoryName} 하위 카테고리
+          </p>
           <SubCategoryList>
             {subCatgory.map((item: CategoryItemTypes) => (
-              <SubCategoryBoxItem key={item.categoryId} {...item} />
+              <SubCategoryBoxItem
+                key={item.categoryId}
+                handleClick={(id: number) => {
+                  getPeekCategory(categories, id);
+                }}
+                {...item}
+              />
             ))}
           </SubCategoryList>
         </SubCategoryWrapper>

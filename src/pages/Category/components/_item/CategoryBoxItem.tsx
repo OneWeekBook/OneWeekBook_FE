@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CategoryItemTypes } from './CategoryList';
+import { CategoryItemTypes } from '../CategoryList';
 
 type ClickType = {
   handleClick: (id: number) => void;
