@@ -1,14 +1,13 @@
-import Container from 'components/Container';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import Container from 'components/Container';
 import CategoryList from './components/CategoryList';
+import SearchList from './components/SearchList';
 
 function index() {
-  const { books } = useSelector((state: any) => state.search);
-  console.log(books);
   return (
     <Container>
       <CategoryList />
+      <SearchList />
     </Container>
   );
 }
