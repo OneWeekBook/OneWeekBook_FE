@@ -1,10 +1,13 @@
-import Container from 'components/Container';
 import React from 'react';
+import Container from 'components/Container';
+import CategoryList from './components/CategoryList';
+import SearchList from './components/SearchList';
 
 function index() {
   return (
     <Container>
-      <div>Category</div>
+      <CategoryList />
+      <SearchList />
     </Container>
   );
 }
