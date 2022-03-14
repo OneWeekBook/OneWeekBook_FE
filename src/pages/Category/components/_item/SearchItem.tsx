@@ -31,13 +31,13 @@ export default SearchItem;
 
 const Wrapper = styled.div`
   display: flex;
+  height: 200px;
 `;
 
 const ImgWrapper = styled.div`
   background-color: blue;
   flex-shrink: 0;
   width: 150px;
-  height: 200px;
   object-fit: contain;
   img {
     width: 100%;

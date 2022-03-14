@@ -119,12 +119,15 @@ function CategoryList() {
           </SubCategoryList>
         </SubCategoryWrapper>
       )}
-      <Input
-        type="text"
-        placeholder="검색어를 입력해주세요."
-        defaultValue={search}
-        onBlur={(e) => setSearch(e.target.value)}
-      />
+      <InputWrapper>
+        <p>통합 검색</p>
+        <Input
+          type="text"
+          placeholder="검색어를 입력해주세요."
+          defaultValue={search}
+          onBlur={(e) => setSearch(e.target.value)}
+        />
+      </InputWrapper>
     </Wrapper>
   );
 }
@@ -136,13 +139,13 @@ const Wrapper = styled.div`
 `;
 
 const CategoryGridWrapper = styled.div`
-  margin-top: 10px;
+  margin: 10px auto 20px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 `;
 
 const SubCategoryWrapper = styled.div`
-  margin: 20px auto;
+  margin-bottom: 20px;
   .subTitle {
     font-size: 24px;
     font-weight: 700;
@@ -155,7 +158,25 @@ const SubCategoryList = styled.div`
   border-top: 2px solid #e6e6e6;
 `;
 
+const InputWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  p {
+    font-size: 20px;
+    font-weight: 600;
+    margin-right: 10px;
+  }
+`;
+
 const Input = styled.input`
-  width: 100px;
-  height: 20px;
+  width: 200px;
+  height: 40px;
+  font-size: 18px;
+  padding: 0 10px;
+  border-radius: 10px;
+  border: 1px solid #e6e6e6;
+  :focus {
+    outline: none;
+    border: 1px solid #08c1e9;
+  }
 `;
