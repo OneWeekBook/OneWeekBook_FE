@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CategoryRequest } from 'redux/reducers/Category';
+import { SearchRequest } from 'redux/reducers/Search';
 import styled from 'styled-components';
 import CategoryBoxItem from './_item/CategoryBoxItem';
 import SubCategoryBoxItem from './_item/SubCategoryBoxItem';
@@ -66,6 +67,27 @@ function CategoryList() {
     getFilterParentCategories(categories);
   }, [categories]);
 
+  useEffect(() => {
+    if (curSubCategory[0] && search) {
+      dispatch(
+        SearchRequest({
+          d_categ: curSubCategory[0].categoryId,
+          title: search,
+          start: 1,
+          display: 10,
+        }),
+      );
+    } else if (search) {
+      dispatch(
+        SearchRequest({
+          title: search,
+          start: 1,
+          display: 10,
+        }),
+      );
+    }
+  }, [search, curSubCategory]);
+
   return (
     <Wrapper>
       <CategoryGridWrapper>
@@ -97,6 +119,12 @@ function CategoryList() {
           </SubCategoryList>
         </SubCategoryWrapper>
       )}
+      <Input
+        type="text"
+        placeholder="검색어를 입력해주세요."
+        defaultValue={search}
+        onBlur={(e) => setSearch(e.target.value)}
+      />
     </Wrapper>
   );
 }
@@ -125,4 +153,9 @@ const SubCategoryWrapper = styled.div`
 const SubCategoryList = styled.div`
   display: flex;
   border-top: 2px solid #e6e6e6;
+`;
+
+const Input = styled.input`
+  width: 100px;
+  height: 20px;
 `;

@@ -5,6 +5,7 @@ import authUser from './AuthUser';
 import signUp from './SignUp';
 import signIn from './SignIn';
 import category from './Category';
+import search from './Search';
 
 const rootReducer = combineReducers({
   authEmail,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   signUp,
   signIn,
   category,
+  search,
 });
 
 export default rootReducer;
