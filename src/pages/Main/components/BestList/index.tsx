@@ -64,15 +64,30 @@ const Wrapper = styled.div`
   margin: 50px auto;
   width: 100%;
   height: auto;
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+    width: 95%;
+  }
 `;
 
 const BestListTitle = styled.p`
   font-size: 25px;
   margin-bottom: 32px;
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+    font-size: 20px;
+  }
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    font-size: 18px;
+  }
 `;
 
 const BestListGridWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    grid-template-columns: 1fr;
+  }
 `;

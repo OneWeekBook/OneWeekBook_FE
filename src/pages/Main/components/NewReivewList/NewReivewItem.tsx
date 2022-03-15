@@ -27,20 +27,20 @@ function NewReivewListItem({
         <p className="overall">{overall}</p>
       </InfoWrapper>
       <CountInfoWrapper>
-        <img
-          src={`${process.env.PUBLIC_URL}/assets/main-bestlist-comment.png`}
-          alt="comment"
-          width={25}
-          height={25}
-        />
-        <p>{review}</p>
-        <img
-          src={`${process.env.PUBLIC_URL}/assets/main-bestlist-recommend.png`}
-          alt="recommend"
-          width={25}
-          height={25}
-        />
-        <p>{recommend}</p>
+        <div className="countItem">
+          <img
+            src={`${process.env.PUBLIC_URL}/assets/main-bestlist-comment.png`}
+            alt="comment"
+          />
+          <p>{review}</p>
+        </div>
+        <div className="countItem">
+          <img
+            src={`${process.env.PUBLIC_URL}/assets/main-bestlist-recommend.png`}
+            alt="recommend"
+          />
+          <p>{recommend}</p>
+        </div>
       </CountInfoWrapper>
     </ItemWrapper>
   );
@@ -61,6 +61,35 @@ const ItemWrapper = styled.div`
 
 const BookImage = styled.img`
   width: 120px;
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    width: 90px;
+  }
+`;
+
+const BookTitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  p:first-child {
+    font-size: 18px;
+    font-weight: 700;
+    margin-right: 10px;
+  }
+  p:last-child {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    p:first-child {
+      font-size: 16px;
+      font-weight: 600;
+      margin-right: 10px;
+    }
+    p:last-child {
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
 `;
 
 const InfoWrapper = styled.div`
@@ -82,35 +111,65 @@ const InfoWrapper = styled.div`
   }
   .overall {
     font-size: 16px;
+    display: -webkit-box;
+    word-wrap: break-word;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
-`;
-
-const BookTitleWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  p:first-child {
-    font-size: 20px;
-    font-weight: 700;
-    margin-right: 10px;
-  }
-  p:last-child {
-    font-size: 16px;
-    font-weight: 500;
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    .subtitle {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .reviewer {
+      font-size: 12px;
+      margin-bottom: 15px;
+    }
+    .overall {
+      font-size: 14px;
+    }
   }
 `;
 
 const CountInfoWrapper = styled.div`
-  width: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
-  img {
-    padding-right: 5px;
+  margin: 0 10px;
+  .countItem {
+    display: flex;
+    align-items: center;
+    img {
+      padding-right: 5px;
+      width: 25px;
+      height: 25px;
+    }
+    p {
+      padding-right: 15px;
+    }
   }
-  p {
-    padding-right: 15px;
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    font-size: 12px;
+    display: block;
+    margin: 0 5px;
+    .countItem {
+      display: flex;
+      align-items: center;
+      img {
+        padding-right: 5px;
+        width: 20px;
+        height: 20px;
+      }
+      p {
+        padding-right: 0;
+      }
+    }
   }
 `;
