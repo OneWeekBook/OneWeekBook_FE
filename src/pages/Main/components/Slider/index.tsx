@@ -143,6 +143,7 @@ const Wrapper = styled.div`
   overflow: hidden;
   height: auto;
   border-radius: 10px;
+  margin-top: 10px;
 `;
 
 const Slider = styled.div`

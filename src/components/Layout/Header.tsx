@@ -12,15 +12,14 @@ function Header() {
   };
 
   return (
-    <>
-      {location.pathname === '/sign-up' || location.pathname === '/sign-in' ? (
-        <Container as="header">
+    <Container as="header">
+      <Wrapper>
+        {location.pathname === '/sign-up' ||
+        location.pathname === '/sign-in' ? (
           <SignTop>
             <Link to="/">ONEWEEKBOOK</Link>
           </SignTop>
-        </Container>
-      ) : (
-        <Container as="header">
+        ) : (
           <Top>
             <Link to="/">ONEWEEKBOOK</Link>
             {sessionStorage.getItem('accessToken') ? (
@@ -45,56 +44,75 @@ function Header() {
               </ButtonWrapper>
             )}
           </Top>
-        </Container>
-      )}
-    </>
+        )}
+      </Wrapper>
+    </Container>
   );
 }
 
 export default Header;
 
+const Wrapper = styled.div`
+  width: 100%;
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+    margin: auto;
+    width: 90%;
+  }
+`;
+
 const Top = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
   margin: 10px 0;
   a {
     color: white;
     font-size: 28px;
     font-weight: 800;
-    line-height: 48px;
     text-decoration: none;
+    @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+      font-size: 24px;
+    }
   }
 `;
 
 const SignTop = styled.div`
   display: flex;
+  align-items: center;
   justify-content: center;
+  margin: 10px 0;
   a {
     color: white;
     font-size: 28px;
     font-weight: 800;
-    line-height: 48px;
     text-decoration: none;
+    @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+      font-size: 24px;
+    }
   }
 `;
 
 const ButtonWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   button {
-    width: 100px;
+    width: 90px;
     margin-left: 10px;
     background-color: #1e90ff;
     border: solid 2px white;
     border-radius: 7px;
     color: white;
-    font-size: 18px;
-    height: 40px;
+    font-size: 14px;
+    font-weight: 600;
+    height: 35px;
     :hover {
       background-color: white;
       color: #1e90ff;
       font-weight: 800;
     }
+  }
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    display: none;
   }
 `;

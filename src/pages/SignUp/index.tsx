@@ -35,6 +35,9 @@ const Wrapper = styled.div`
   a {
     text-decoration: none;
   }
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    width: 355px;
+  }
 `;
 
 const LoginButton = styled.div`

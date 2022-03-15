@@ -68,11 +68,11 @@ function Nav() {
                   <img
                     src={item.clickImg}
                     alt={item.title}
-                    width={35}
-                    height={35}
+                    width={30}
+                    height={30}
                   />
                 ) : (
-                  <img src={item.img} alt={item.title} width={35} height={35} />
+                  <img src={item.img} alt={item.title} width={30} height={30} />
                 )}
                 {item.title}
               </NavItem>
@@ -89,8 +89,16 @@ export default Nav;
 const NavWrapper = styled.div`
   display: flex;
   margin-bottom: 5px;
+  width: 100%;
   a {
     text-decoration: none;
+  }
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+    margin: auto;
+    width: 90%;
+  }
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    display: none;
   }
 `;
 
@@ -101,7 +109,10 @@ const NavItem = styled.button`
   align-items: center;
   text-decoration: none;
   line-height: 35px;
-  font-size: 18px;
+  font-size: 16px;
   margin: 0 10px 0 0;
   color: white;
+  img {
+    margin-right: 2px;
+  }
 `;
