@@ -43,7 +43,7 @@ function Index() {
 
   const getNewItemWidth = () => {
     let itemWidth = windowWidth * 0.9 - 10 * 2;
-    itemWidth = itemWidth > 1024 ? 1024 : itemWidth;
+    itemWidth = itemWidth > 850 ? 850 : itemWidth;
     return itemWidth;
   };
 
@@ -125,7 +125,7 @@ function Index() {
                   color={SlideItems[itemIndex].color}
                   style={{ width: newItemWidth || 'auto' }}
                 >
-                  {itemIndex}({index})
+                  {itemIndex}({item.id})
                 </SlideItem>
               );
             })}
@@ -142,6 +142,7 @@ const Wrapper = styled.div`
   position: relative;
   overflow: hidden;
   height: auto;
+  border-radius: 10px;
 `;
 
 const Slider = styled.div`
@@ -151,7 +152,6 @@ const Slider = styled.div`
   -moz-box-sizing: border-box;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
-  -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
@@ -188,8 +188,11 @@ const SlideWrapper = styled.div<{
 const SlideItem = styled.div<{ color: string }>`
   position: relative;
   width: 100%;
-  height: 400px;
+  height: 350px;
   margin: 0 10px;
   background-color: ${({ color }) => color};
-  border: 3px solid blue;
+  border-radius: 10px;
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    margin: 0 5px;
+  }
 `;
