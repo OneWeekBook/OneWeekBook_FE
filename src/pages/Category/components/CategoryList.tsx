@@ -3,16 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CategoryRequest } from 'redux/reducers/Category';
 import { SearchRequest } from 'redux/reducers/Search';
 import styled from 'styled-components';
+import { CategoryItemTypes } from 'types/book';
 import CategoryBoxItem from './_item/CategoryBoxItem';
 import SubCategoryBoxItem from './_item/SubCategoryBoxItem';
-
-export type CategoryItemTypes = {
-  id: number;
-  parentId: number | null;
-  categoryId: number;
-  categoryName: string;
-  depth: number;
-};
 
 function CategoryList() {
   const dispatch = useDispatch();

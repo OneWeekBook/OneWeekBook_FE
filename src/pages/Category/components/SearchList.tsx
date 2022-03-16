@@ -1,20 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { BooksTypes } from 'types/book';
 import SearchItem from './_item/SearchItem';
-
-export type BooksTypes = {
-  author: string;
-  description: string;
-  discount: string;
-  image: string;
-  isbn: string;
-  link: string;
-  price: string;
-  pubdate: string;
-  publisher: string;
-  title: string;
-};
 
 function SearchList() {
   const { books } = useSelector((state: any) => state.search);

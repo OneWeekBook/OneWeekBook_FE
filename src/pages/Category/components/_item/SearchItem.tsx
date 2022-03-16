@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react';
 import { SetDate } from 'lib/SetDate';
 import styled from 'styled-components';
-import { BooksTypes } from '../SearchList';
+import { BooksTypes } from 'types/book';
 
 function SearchItem({
   image,
