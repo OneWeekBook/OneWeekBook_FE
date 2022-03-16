@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Container from '../Container';
 
-const NavItems = [
+export const NavItems = [
   {
     id: 1,
     title: '홈',

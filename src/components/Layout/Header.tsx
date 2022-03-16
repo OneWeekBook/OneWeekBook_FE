@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import Container from '../Container';
 
-function Header() {
+type PropsType = {
+  toggleIsOn?: () => void;
+};
+
+function Header({ toggleIsOn }: PropsType) {
   const location = useLocation();
+  const [isSign, setIsSign] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (location.pathname === '/sign-up' || location.pathname === '/sign-in') {
+      setIsSign(true);
+    } else {
+      setIsSign(false);
+    }
+    return () => {
+      setIsSign(false);
+    };
+  }, [location.pathname]);
 
   const logoutClick = () => {
     sessionStorage.removeItem('accessToken');
@@ -13,38 +29,37 @@ function Header() {
 
   return (
     <Container as="header">
-      <Wrapper>
-        {location.pathname === '/sign-up' ||
-        location.pathname === '/sign-in' ? (
-          <SignTop>
-            <Link to="/">ONEWEEKBOOK</Link>
-          </SignTop>
-        ) : (
-          <Top>
-            <Link to="/">ONEWEEKBOOK</Link>
-            {sessionStorage.getItem('accessToken') ? (
-              <ButtonWrapper>
-                <Link to="/book">
-                  <button type="button">내서재</button>
-                </Link>
-                <Link to="/">
-                  <button type="button" onClick={logoutClick}>
-                    로그아웃
-                  </button>
-                </Link>
-              </ButtonWrapper>
-            ) : (
-              <ButtonWrapper>
-                <Link to="/sign-up">
-                  <button type="button">회원가입</button>
-                </Link>
-                <Link to="/sign-in">
-                  <button type="button">로그인</button>
-                </Link>
-              </ButtonWrapper>
-            )}
-          </Top>
-        )}
+      <Wrapper isSign={isSign}>
+        <Link to="/">ONEWEEKBOOK</Link>
+        <ButtonWrapper isSign={isSign}>
+          {sessionStorage.getItem('accessToken') ? (
+            <>
+              <Link to="/book">
+                <button type="button">내서재</button>
+              </Link>
+              <Link to="/">
+                <button type="button" onClick={logoutClick}>
+                  로그아웃
+                </button>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link to="/sign-up">
+                <button type="button">회원가입</button>
+              </Link>
+              <Link to="/sign-in">
+                <button type="button">로그인</button>
+              </Link>
+            </>
+          )}
+        </ButtonWrapper>
+        <MobileButton isSign={isSign} onClick={toggleIsOn}>
+          <img
+            src={`${process.env.PUBLIC_URL}/assets/header-menu-burger.png`}
+            alt="sidebar button"
+          />
+        </MobileButton>
       </Wrapper>
     </Container>
   );
@@ -52,48 +67,29 @@ function Header() {
 
 export default Header;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ isSign: boolean }>`
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: ${({ isSign }) => (isSign ? 'center' : 'space-between')};
+  margin: 10px 0;
+  a {
+    color: white;
+    font-size: 28px;
+    font-weight: 800;
+    text-decoration: none;
+  }
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
-    margin: auto;
+    margin: 10px auto;
     width: 90%;
-  }
-`;
-
-const Top = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 10px 0;
-  a {
-    color: white;
-    font-size: 28px;
-    font-weight: 800;
-    text-decoration: none;
-    @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+    a {
       font-size: 24px;
     }
   }
 `;
 
-const SignTop = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 10px 0;
-  a {
-    color: white;
-    font-size: 28px;
-    font-weight: 800;
-    text-decoration: none;
-    @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
-      font-size: 24px;
-    }
-  }
-`;
-
-const ButtonWrapper = styled.div`
-  display: flex;
+const ButtonWrapper = styled.div<{ isSign: boolean }>`
+  display: ${({ isSign }) => (isSign ? 'none' : 'flex')};
   align-items: center;
   justify-content: space-between;
   button {
@@ -114,5 +110,14 @@ const ButtonWrapper = styled.div`
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     display: none;
+  }
+`;
+
+const MobileButton = styled.button<{ isSign: boolean }>`
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  display: none;
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    display: ${({ isSign }) => (isSign ? 'none' : 'block')};
   }
 `;
