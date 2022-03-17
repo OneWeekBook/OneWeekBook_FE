@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-
+import React from 'react';
 import styled from 'styled-components';
 import { CategoryItemTypes } from 'types/book';
 import { BoxItemType } from 'types/func';

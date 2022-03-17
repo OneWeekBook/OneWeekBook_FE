@@ -76,7 +76,8 @@ const Wrapper = styled.div<{ isToggle: boolean }>`
   width: 100vw;
   height: 100vh;
   right: ${({ isToggle }) => (isToggle ? 0 : -100)}%;
-  @media (min-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+  @media (min-width: ${({ theme: { device } }) =>
+      device.mobile.maxWidth + 1}px) {
     display: none;
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {

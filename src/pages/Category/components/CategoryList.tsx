@@ -132,13 +132,16 @@ function CategoryList() {
         </SubCategoryWrapper>
       )}
       <InputWrapper>
-        <p>통합 검색</p>
-        <Input
-          type="text"
-          placeholder="검색어를 입력해주세요."
-          defaultValue={search}
-          onBlur={(e) => setSearch(e.target.value)}
-        />
+        <div className="search">
+          <p>통합 검색</p>
+          <Input
+            type="text"
+            placeholder="검색어를 입력해주세요."
+            defaultValue={search}
+            onBlur={(e) => setSearch(e.target.value)}
+          />
+        </div>
+        {search && <p>모두보기</p>}
       </InputWrapper>
     </Wrapper>
   );
@@ -156,6 +159,9 @@ const Wrapper = styled.div`
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
     margin: auto;
     width: 95%;
+    .mainTitle {
+      font-size: 20px;
+    }
   }
 `;
 
@@ -171,6 +177,9 @@ const SubCategoryWrapper = styled.div`
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 10px;
+    @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+      font-size: 18px;
+    }
   }
 `;
 
@@ -184,16 +193,24 @@ const SubCategoryList = styled.div`
 const InputWrapper = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  .search {
+    display: flex;
+    align-items: center;
+  }
   p {
     font-size: 20px;
     font-weight: 600;
     margin-right: 10px;
+    @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+      font-size: 16px;
+    }
   }
 `;
 
 const Input = styled.input`
   width: 200px;
-  height: 40px;
+  height: 35px;
   font-size: 18px;
   padding: 0 10px;
   border-radius: 10px;
@@ -201,5 +218,9 @@ const Input = styled.input`
   :focus {
     outline: none;
     border: 1px solid #08c1e9;
+  }
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    width: 150px;
+    height: 35px;
   }
 `;
