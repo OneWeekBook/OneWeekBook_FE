@@ -26,15 +26,15 @@ function BestItem({
             <img
               src={`${process.env.PUBLIC_URL}/assets/main-bestlist-comment.png`}
               alt="comment"
-              width={25}
-              height={25}
+              width={20}
+              height={20}
             />
             <p>{review}</p>
             <img
               src={`${process.env.PUBLIC_URL}/assets/main-bestlist-recommend.png`}
               alt="recommend"
-              width={25}
-              height={25}
+              width={20}
+              height={20}
             />
             <p>{recommend}</p>
           </CountInfoWrapper>
@@ -50,24 +50,25 @@ const ItemWrapper = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  height: 200px;
+  height: 150px;
 `;
 
 const BookImage = styled.img`
-  width: 150px;
+  width: 100px;
+  background-color: lightblue;
 `;
 
 const InfoWrapper = styled.div`
   display: flex;
   align-items: center;
-  border-bottom: 2px solid #e6e6e6;
   margin-left: 10px;
   width: 100%;
   height: 100%;
   .item-id {
-    width: 40px;
-    font-size: 25px;
-    font-weight: 600;
+    text-align: center;
+    width: 50px;
+    font-size: 20px;
+    font-weight: 500;
   }
 `;
 
@@ -77,26 +78,27 @@ const BookInfoWrapper = styled.div`
   padding-bottom: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   height: 100%;
 `;
 
 const TitleWrapepr = styled.div`
   .item-title {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
   .item-auth {
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 500;
+    margin-bottom: 5px;
   }
 `;
 
 const CountInfoWrapper = styled.div`
   display: flex;
   align-items: center;
-  font-size: 15px;
+  font-size: 12px;
   font-weight: 500;
   img {
     padding-right: 5px;

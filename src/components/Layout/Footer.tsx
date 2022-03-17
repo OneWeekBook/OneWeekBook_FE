@@ -5,13 +5,23 @@ import Container from '../Container';
 function Footer() {
   return (
     <Container as="footer">
-      <LOGO>ONEWEEKBOOK</LOGO>
-      <DESC>Create by leejy001 leejh96</DESC>
+      <Wrapper>
+        <LOGO>ONEWEEKBOOK</LOGO>
+        <DESC>Create by leejy001 leejh96</DESC>
+      </Wrapper>
     </Container>
   );
 }
 
 export default Footer;
+
+const Wrapper = styled.div`
+  width: 100%;
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+    margin: auto;
+    width: 90%;
+  }
+`;
 
 const LOGO = styled.p`
   color: #fffafa;

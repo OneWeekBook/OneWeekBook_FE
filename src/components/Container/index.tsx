@@ -50,7 +50,7 @@ const Component = styled.section`
 `;
 
 const ContentsWrapper = styled.section`
-  max-width: 1220px;
+  max-width: 1000px;
   width: 100%;
   min-width: 375px;
 `;

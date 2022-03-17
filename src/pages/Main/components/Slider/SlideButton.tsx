@@ -8,54 +8,45 @@ type PropsType = {
 function SlideButton({ onClick }: PropsType) {
   return (
     <>
-      <PrevButton type="button" onClick={() => onClick(-1)}>
+      <Button type="button" onClick={() => onClick(-1)} direct="prev">
         <img
           src={`${process.env.PUBLIC_URL}/assets/slide-left-arrow.svg`}
           alt="left-arrow"
           width={20}
           height={20}
         />
-      </PrevButton>
-      <NextButton type="button" onClick={() => onClick(1)}>
+      </Button>
+      <Button type="button" onClick={() => onClick(1)} direct="next">
         <img
           src={`${process.env.PUBLIC_URL}/assets/slide-right-arrow.svg`}
           alt="right-arrow"
           width={20}
           height={20}
         />
-      </NextButton>
+      </Button>
     </>
   );
 }
 
 export default SlideButton;
 
-const PrevButton = styled.button`
-  box-sizing: border-box;
+const Button = styled.button<{ direct: string }>`
+  box-shadow: 0px 0px 5px #000;
   border-radius: 25px;
   border: none;
   background-color: white;
-  padding: 10px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  left: 10px;
+  left: ${({ direct }) => direct === 'prev' && 10}px;
+  right: ${({ direct }) => direct === 'next' && 10}px;
   z-index: 1;
-  width: 40px;
-  height: 40px;
-`;
-
-const NextButton = styled.button`
-  box-sizing: border-box;
-  border-radius: 25px;
-  border: none;
-  background-color: white;
-  padding: 10px 10px;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 10px;
-  z-index: 1;
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
+  img {
+    margin: auto;
+  }
 `;

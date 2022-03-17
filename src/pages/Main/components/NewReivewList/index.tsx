@@ -73,6 +73,9 @@ const Wrapper = styled.div`
   margin: 50px auto;
   width: 100%;
   height: auto;
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+    width: 95%;
+  }
 `;
 
 const NewReviewTitleWrapper = styled.div`
@@ -89,6 +92,12 @@ const NewReviewTitleWrapper = styled.div`
 
 const NewReviewTitle = styled.p`
   font-size: 25px;
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+    font-size: 20px;
+  }
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    font-size: 18px;
+  }
 `;
 
 const NewReviewListWrapper = styled.div``;
