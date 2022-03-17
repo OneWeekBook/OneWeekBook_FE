@@ -12,9 +12,25 @@ function CategoryList() {
   const [parentCategory, setParentCategory] = useState<CategoryItemTypes[]>([]);
   const [curParentCategory, setCurParentCategory] = useState<
     CategoryItemTypes[]
-  >([]);
+  >([
+    {
+      id: 0,
+      parentId: null,
+      categoryId: 0,
+      categoryName: 'example',
+      depth: 1,
+    },
+  ]);
   const [subCatgory, setSubCategory] = useState<CategoryItemTypes[]>([]);
-  const [curSubCategory, setCurSubCategory] = useState<CategoryItemTypes[]>([]);
+  const [curSubCategory, setCurSubCategory] = useState<CategoryItemTypes[]>([
+    {
+      id: 0,
+      parentId: 0,
+      categoryId: 0,
+      categoryName: 'example',
+      depth: 2,
+    },
+  ]);
   const [search, setSearch] = useState<string>('');
   const { categories } = useSelector((state: any) => state.category);
 
@@ -83,10 +99,12 @@ function CategoryList() {
 
   return (
     <Wrapper>
+      <p className="mainTitle">전체 카테고리</p>
       <CategoryGridWrapper>
         {parentCategory.map((item: CategoryItemTypes) => (
           <CategoryBoxItem
             key={item.categoryId}
+            curCategory={curParentCategory}
             handleClick={(id: number) => {
               getFilterSubCategories(categories, id);
             }}
@@ -103,6 +121,7 @@ function CategoryList() {
             {subCatgory.map((item: CategoryItemTypes) => (
               <SubCategoryBoxItem
                 key={item.categoryId}
+                curCategory={curSubCategory}
                 handleClick={(id: number) => {
                   getPeekCategory(categories, id);
                 }}
@@ -129,12 +148,21 @@ export default CategoryList;
 
 const Wrapper = styled.div`
   width: 100%;
+  .mainTitle {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 10px auto;
+  }
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+    margin: auto;
+    width: 95%;
+  }
 `;
 
 const CategoryGridWrapper = styled.div`
   margin: 10px auto 20px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
 `;
 
 const SubCategoryWrapper = styled.div`
@@ -148,6 +176,8 @@ const SubCategoryWrapper = styled.div`
 
 const SubCategoryList = styled.div`
   display: flex;
+  display: flex;
+  flex-wrap: wrap;
   border-top: 2px solid #e6e6e6;
 `;
 

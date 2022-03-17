@@ -23,4 +23,8 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px 10px;
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+    margin: auto;
+    width: 95%;
+  }
 `;

@@ -1,36 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { CategoryItemTypes } from 'types/book';
-import { ClickType } from 'types/func';
+import { BoxItemType } from 'types/func';
 
 function CategoryBoxItem({
   categoryId,
   categoryName,
+  curCategory,
   handleClick,
-}: React.PropsWithChildren<CategoryItemTypes> & ClickType) {
+}: React.PropsWithChildren<CategoryItemTypes> & BoxItemType) {
   return (
-    <Wrapper>
-      <button type="button" onClick={() => handleClick(categoryId)}>
-        {categoryName}
-      </button>
-    </Wrapper>
+    <MainCategoryButton
+      type="button"
+      onClick={() => handleClick(categoryId)}
+      isSelected={categoryId === curCategory[0].categoryId}
+    >
+      {categoryName}
+    </MainCategoryButton>
   );
 }
 
 export default CategoryBoxItem;
 
-const Wrapper = styled.div`
-  height: 150px;
-  margin-top: -1px;
-  margin-right: -1px;
-  button {
-    width: 100%;
-    height: 100%;
-    font-size: 20px;
-    background-color: white;
-    border: 1px solid #08c1e9;
-    :hover {
-      background-color: #e6e6e6;
-    }
+const MainCategoryButton = styled.button<{ isSelected: boolean }>`
+  box-sizing: border-box;
+  box-shadow: 3px 3px 3px #000;
+  background-color: ${({ isSelected }) => (isSelected ? '#1e90ff' : '#08c1e9')};
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  height: 40px;
+  padding: 0 20px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border: none;
+  :hover {
+    background-color: #1e90ff;
+  }
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {\
+    font-size: 14px;
+    padding: 0 10px;
+    height: 35px;
   }
 `;
