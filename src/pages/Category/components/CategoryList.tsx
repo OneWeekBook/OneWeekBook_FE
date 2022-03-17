@@ -167,6 +167,7 @@ const Wrapper = styled.div`
 
 const CategoryGridWrapper = styled.div`
   margin: 10px auto 20px;
+  min-height: 150px;
   display: flex;
   flex-wrap: wrap;
 `;
@@ -211,7 +212,7 @@ const InputWrapper = styled.div`
 const Input = styled.input`
   width: 200px;
   height: 35px;
-  font-size: 18px;
+  font-size: 14px;
   padding: 0 10px;
   border-radius: 10px;
   border: 1px solid #e6e6e6;

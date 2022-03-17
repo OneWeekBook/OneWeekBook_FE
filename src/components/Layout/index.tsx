@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import { useToggle } from 'hooks/useToggle';
+import TopScroll from 'lib/TopScroll';
 import React, { PropsWithChildren } from 'react';
 import { useLocation } from 'react-router';
 import styled from 'styled-components';
@@ -14,6 +15,7 @@ function Index({ children }: PropsWithChildren<any>) {
 
   return (
     <LayoutWrapper>
+      <TopScroll />
       {location.pathname === '/sign-up' || location.pathname === '/sign-in' ? (
         <TopWrapper>
           <Header />

@@ -6,13 +6,14 @@ import { BooksTypes } from 'types/book';
 function SearchItem({
   image,
   title,
+  link,
   author,
   pubdate,
   publisher,
   description,
 }: PropsWithChildren<BooksTypes>) {
   return (
-    <Wrapper>
+    <Wrapper onClick={() => window.open(link)}>
       <ImgWrapper>
         <img src={image} alt="book cover" />
       </ImgWrapper>
