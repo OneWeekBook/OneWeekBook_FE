@@ -56,7 +56,7 @@ function NewReviewList() {
     <Wrapper>
       <NewReviewTitleWrapper>
         <NewReviewTitle>따끈따끈한 새 리뷰</NewReviewTitle>
-        <Link to="/">More</Link>
+        <Link to="/review">모두 보기</Link>
       </NewReviewTitleWrapper>
       <NewReviewListWrapper>
         {NewReivewListItems.map((item: NewReviewItemTypes) => (

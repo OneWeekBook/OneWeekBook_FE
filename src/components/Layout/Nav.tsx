@@ -20,10 +20,10 @@ export const NavItems = [
   },
   {
     id: 3,
-    title: '마이페이지',
-    link: '/myPage',
-    img: `${process.env.PUBLIC_URL}/assets/nav-none-myPage.png`,
-    clickImg: `${process.env.PUBLIC_URL}/assets/nav-done-myPage.png`,
+    title: '내 서재',
+    link: '/my-library',
+    img: `${process.env.PUBLIC_URL}/assets/nav-none-my-library.png`,
+    clickImg: `${process.env.PUBLIC_URL}/assets/nav-done-my-library.png`,
   },
   {
     id: 4,
@@ -31,6 +31,13 @@ export const NavItems = [
     link: '/category',
     img: `${process.env.PUBLIC_URL}/assets/nav-none-category.png`,
     clickImg: `${process.env.PUBLIC_URL}/assets/nav-done-category.png`,
+  },
+  {
+    id: 5,
+    title: '리뷰',
+    link: '/review',
+    img: `${process.env.PUBLIC_URL}/assets/nav-none-review.png`,
+    clickImg: `${process.env.PUBLIC_URL}/assets/nav-done-review.png`,
   },
 ];
 
@@ -40,13 +47,16 @@ function Nav() {
   const [toggle, setToggle] = useState<boolean>(false);
 
   const handleClick = (link: string) => {
-    if (link === '/myPage' && sessionStorage.getItem('accessToken')) {
+    if (link === '/my-library' && sessionStorage.getItem('accessToken')) {
       navigate(link);
-    } else if (link === '/myPage' && !sessionStorage.getItem('accessToken')) {
+    } else if (
+      link === '/my-library' &&
+      !sessionStorage.getItem('accessToken')
+    ) {
       if (
-        link === '/myPage' &&
+        link === '/my-library' &&
         confirm(
-          '마이페이지로 가시려면 로그인을 하셔야합니다.\n로그인 하시겠습니까?',
+          '내 서재로 가시려면 로그인을 하셔야합니다.\n로그인 하시겠습니까?',
         )
       ) {
         navigate('/sign-in');
