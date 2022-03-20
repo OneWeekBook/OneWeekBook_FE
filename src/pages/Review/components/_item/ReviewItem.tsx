@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReviewItemType } from '../ReviewList';
 
@@ -11,21 +12,28 @@ function ReivewItem({
 }: React.PropsWithChildren<ReviewItemType>) {
   return (
     <ItemWrapper>
-      <ImgWrapper>
-        <img src={img} alt="book img" />
-      </ImgWrapper>
-      <p>{title}</p>
-      <p>{author}</p>
-      <p>
-        {rating} ({total})
-      </p>
+      <Link to={`/review/${title}`}>
+        <ImgWrapper>
+          <img src={img} alt="book img" />
+        </ImgWrapper>
+        <p>{title}</p>
+        <p>{author}</p>
+        <p>
+          {rating} ({total})
+        </p>
+      </Link>
     </ItemWrapper>
   );
 }
 
 export default ReivewItem;
 
-const ItemWrapper = styled.div``;
+const ItemWrapper = styled.div`
+  a {
+    text-decoration: none;
+    color: black;
+  }
+`;
 
 const ImgWrapper = styled.div`
   background-color: lightcoral;

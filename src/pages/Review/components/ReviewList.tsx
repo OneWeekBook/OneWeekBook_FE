@@ -19,12 +19,9 @@ function ReviewList() {
   const [end, setEnd] = useState<number>(12);
 
   const handleChangeClick = (index: number) => {
-    console.log(index);
     setEnd(index * 12);
     setStart(index * 12 - 11);
   };
-
-  console.log(start, end);
 
   useEffect(() => {
     handleChangeClick(curIdx);

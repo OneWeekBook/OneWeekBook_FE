@@ -7,3 +7,5 @@ export { default as SignUpPage } from './SignUp';
 export { default as CategoryPage } from './Category';
 
 export { default as ReviewPage } from './Review';
+
+export { default as ReviewDetailPage } from './ReviewDetail';
