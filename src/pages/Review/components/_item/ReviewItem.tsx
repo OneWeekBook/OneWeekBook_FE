@@ -37,7 +37,7 @@ const ItemWrapper = styled.div`
 
 const ImgWrapper = styled.div`
   background-color: lightcoral;
-  width: 160px;
+  width: 100%;
   height: 200px;
   object-fit: cover;
   img {

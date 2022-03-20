@@ -1,10 +1,11 @@
 import React from 'react';
 import Container from 'components/Container';
+import BookInfo from './components/BookInfo';
 
 function Index() {
   return (
     <Container>
-      <p>Review Detail</p>
+      <BookInfo />
     </Container>
   );
 }

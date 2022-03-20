@@ -62,6 +62,14 @@ const ReviewTitle = styled.p`
 
 const ReviewListWrapper = styled.div`
   display: grid;
+  margin-top: 30px;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   gap: 10px;
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  @media (max-width: ${({ theme: { device } }) =>
+      device.mobile.maxWidth - 1}px) {
+    grid-template-columns: 1fr 1fr;
+  }
 `;
