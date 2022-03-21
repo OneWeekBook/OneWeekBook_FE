@@ -3,24 +3,25 @@ import { PieChart } from 'react-minimal-pie-chart';
 import styled from 'styled-components';
 
 type PropsType = {
+  title: string;
   rate: number;
 };
 
-function ProgressForm({ rate }: PropsType) {
+function ProgressForm({ title, rate }: PropsType) {
   return (
     <ProgressWrapper>
-      <p className="title">전체 평점</p>
+      <p className="title">{title}</p>
       <CircleWrapper>
         <PieChart
-          data={[{ value: 20, color: 'black', name: 'name1' }]}
-          reveal={20}
-          lineWidth={20}
+          data={[{ value: rate, color: 'black', name: 'name1' }]}
+          reveal={rate * 10}
+          lineWidth={30}
           background="white"
           lengthAngle={360}
           rounded
           animate
-          label={({ dataEntry }) => `${dataEntry.value}%`}
-          labelStyle={{ fontSize: '26px', fill: '#333' }}
+          label={({ dataEntry }) => `${dataEntry.value}`}
+          labelStyle={{ fontSize: '26px', fill: '#333', fontWeight: '600' }}
           labelPosition={0}
         />
       </CircleWrapper>

@@ -3,92 +3,55 @@ export const ReviewDetailItem = {
   img: `${process.env.PUBLIC_URL}/assets/main-bestlist-book.png`,
   title: '책이름 1',
   author: '김땡땡',
-  rating: 0.98,
+  rating: 7.8,
+  recommendRate: 6,
   total: 3,
+  totalRecommend: ['시간가는 줄 모르는', '재미있는'],
   recommendReviews: [
     {
       id: 3,
-      reviewr: 'lee**',
+      reviewer: 'lee**',
       age: 20,
-      recommend: true,
-      peroidStart: '2022.01.30',
-      peroidEnd: '2022.01.31',
+      isRecommend: true,
       reviewDate: '2022.02.01',
+      summary: 'ㅋㅋㄹㅃㅃ',
       overall:
         '루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕',
-      athorRecommend: 23,
+      recommends: 23,
     },
     {
       id: 2,
-      reviewr: 'kee**',
+      reviewer: 'kee**',
       age: 30,
-      recommend: true,
-      peroidStart: '2022.01.27',
-      peroidEnd: '2022.01.30',
+      isRecommend: false,
       reviewDate: '2022.01.31',
+      summary: 'ㅋㅋㄹㅃㅃ',
       overall:
         '루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕',
-      athorRecommend: 21,
+      recommends: 21,
     },
     {
       id: 1,
-      reviewr: 'lee**',
+      reviewer: 'lee**',
       age: 20,
-      recommend: true,
-      peroidStart: '2022.02.20',
-      peroidEnd: '2022.02.25',
+      isRecommend: true,
       reviewDate: '2022.02.27',
+      summary: 'ㅋㅋㄹㅃㅃ',
       overall:
         '루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕',
-      athorRecommend: 19,
-    },
-  ],
-  newReviews: [
-    {
-      id: 1,
-      reviewr: 'lee**',
-      recommend: true,
-      peroidStart: '2022.02.20',
-      peroidEnd: '2022.02.25',
-      reviewDate: '2022.02.27',
-      overall:
-        '루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕',
-      athorRecommend: 19,
-    },
-    {
-      id: 2,
-      reviewr: 'lee**',
-      recommend: true,
-      peroidStart: '2022.01.30',
-      peroidEnd: '2022.01.31',
-      reviewDate: '2022.02.01',
-      overall:
-        '루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕',
-      athorRecommend: 23,
-    },
-    {
-      id: 3,
-      reviewr: 'kee**',
-      recommend: true,
-      peroidStart: '2022.01.27',
-      peroidEnd: '2022.01.30',
-      reviewDate: '2022.01.31',
-      overall:
-        '루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕루삥뽕',
-      athorRecommend: 21,
+      recommends: 19,
     },
   ],
 };
 
 export type ReviewDetailItemTypes = {
   id: number;
-  reviewr: string;
-  recommend: boolean;
-  peroidStart: string;
-  peroidEnd: string;
+  reviewer: string;
+  isRecommend: boolean;
   reviewDate: string;
   overall: string;
-  athorRecommend: number;
+  summary: string;
+  recommends: number;
 };
 
 export type ReivewDetailTypes = {

@@ -1,3 +1,4 @@
+import { ReviewDetailItem } from 'db/reviewdetail';
 import React from 'react';
 import styled from 'styled-components';
 import BookInfoWrapper from './_items/BookInfoWrapper';
@@ -8,7 +9,7 @@ function BookInfo() {
       <BookInfoWrapper />
       <ReviewInfoWrapper>
         <p>
-          종합 평가: <span />
+          종합 평가: {ReviewDetailItem.totalRecommend.join(', ')} <span />
         </p>
       </ReviewInfoWrapper>
     </Wrapper>
@@ -32,5 +33,6 @@ const ReviewInfoWrapper = styled.div`
   border: 2px solid #1e90ff;
   line-height: 100px;
   font-size: 30px;
+  font-weight: 600;
   padding-left: 20px;
 `;

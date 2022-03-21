@@ -24,8 +24,8 @@ function BookInfoWrapper() {
         </InfoWrapper>
       </BookInfoBox>
       <ProgressWrapper>
-        <ProgressForm rate={ReviewDetailItem.rating} />
-        <ProgressForm rate={ReviewDetailItem.rating} />
+        <ProgressForm title="추천 비율" rate={ReviewDetailItem.recommendRate} />
+        <ProgressForm title="전체 평점" rate={ReviewDetailItem.rating} />
       </ProgressWrapper>
     </Wrapper>
   );
