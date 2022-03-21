@@ -74,7 +74,7 @@ function Nav() {
           <NavWrapper>
             {NavItems.map((item) => (
               <NavItem key={item.id} onClick={() => handleClick(item.link)}>
-                {item.link === location.pathname ? (
+                {item.link === `/${location.pathname.split('/')[1]}` ? (
                   <img
                     src={item.clickImg}
                     alt={item.title}
