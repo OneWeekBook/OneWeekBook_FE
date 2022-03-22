@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { CategoryRequest } from 'redux/reducers/Category';
 import { SearchRequest } from 'redux/reducers/Search';
 import styled from 'styled-components';
@@ -141,7 +142,13 @@ function CategoryList() {
             onBlur={(e) => setSearch(e.target.value)}
           />
         </div>
-        {search && <p>모두보기</p>}
+        {search && (
+          <Link
+            to={`/category/result?categoryId=${curParentCategory[0].categoryId}&search=${search}`}
+          >
+            모두보기
+          </Link>
+        )}
       </InputWrapper>
     </Wrapper>
   );
@@ -198,6 +205,12 @@ const InputWrapper = styled.div`
   .search {
     display: flex;
     align-items: center;
+  }
+  a {
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
   }
   p {
     font-size: 20px;
