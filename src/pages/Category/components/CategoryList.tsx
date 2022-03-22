@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { CategoryRequest } from 'redux/reducers/Category';
-import { SearchRequest } from 'redux/reducers/Search';
+import { SearchInit, SearchRequest } from 'redux/reducers/Search';
 import styled from 'styled-components';
 import { CategoryItemTypes } from 'types/book';
 import CategoryBoxItem from './_item/CategoryBoxItem';
@@ -10,6 +10,7 @@ import SubCategoryBoxItem from './_item/SubCategoryBoxItem';
 
 function CategoryList() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [parentCategory, setParentCategory] = useState<CategoryItemTypes[]>([]);
   const [curParentCategory, setCurParentCategory] = useState<
     CategoryItemTypes[]
@@ -69,8 +70,25 @@ function CategoryList() {
     [],
   );
 
+  const handleClick = () => {
+    if (curSubCategory[0].categoryId !== 0) {
+      navigate(
+        `/category/result?${curParentCategory[0].categoryName}=${curParentCategory[0].categoryId}&${curSubCategory[0].categoryName}=${curSubCategory[0].categoryId}&search=${search}`,
+      );
+    } else if (curParentCategory[0].categoryId !== 0) {
+      navigate(
+        `/category/result?${curParentCategory[0].categoryName}=${curParentCategory[0].categoryId}&search=${search}`,
+      );
+    } else {
+      navigate(`/category/result?&search=${search}`);
+    }
+  };
+
   useEffect(() => {
     dispatch(CategoryRequest());
+    return () => {
+      dispatch(SearchInit());
+    };
   }, []);
 
   useEffect(() => {
@@ -143,11 +161,9 @@ function CategoryList() {
           />
         </div>
         {search && (
-          <Link
-            to={`/category/result?categoryId=${curParentCategory[0].categoryId}&search=${search}`}
-          >
+          <button type="button" onClick={handleClick}>
             모두보기
-          </Link>
+          </button>
         )}
       </InputWrapper>
     </Wrapper>

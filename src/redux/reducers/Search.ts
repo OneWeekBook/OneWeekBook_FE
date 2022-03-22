@@ -2,6 +2,8 @@ export const SEARCH_REQUEST = 'SEARCH_REQUEST';
 export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
 export const SEARCH_FAIL = 'SEARCH_FAIL';
 
+export const SEARCH_INIT = 'SEARCH_INIT';
+
 const initialState = {
   isLoading: false,
   isSuccess: false,
@@ -30,6 +32,8 @@ export default function SignIn(state = initialState, action: any) {
         isLoading: false,
         isSuccess: false,
       };
+    case SEARCH_INIT:
+      return initialState;
     default:
       return state;
   }
@@ -53,5 +57,11 @@ export const SearchFail = (error: any) => {
   return {
     type: SEARCH_FAIL,
     error: error.response,
+  };
+};
+
+export const SearchInit = () => {
+  return {
+    type: SEARCH_INIT,
   };
 };
