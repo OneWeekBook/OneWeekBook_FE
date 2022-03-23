@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { CategoryRequest } from 'redux/reducers/Category';
 import { SearchInit, SearchRequest } from 'redux/reducers/Search';
 import styled from 'styled-components';
@@ -70,6 +70,30 @@ function CategoryList() {
     [],
   );
 
+  const handleFetch = useCallback(() => {
+    const options: {
+      start: number;
+      display: number;
+      d_categ?: string | number;
+      title?: string;
+    } = {
+      start: 1,
+      display: 8,
+    };
+
+    if (curSubCategory[0] && search) {
+      options.d_categ = curSubCategory[0].categoryId;
+      options.title = search;
+    } else if (curParentCategory[0] && search) {
+      options.d_categ = curParentCategory[0].categoryId;
+      options.title = search;
+    } else {
+      options.title = search;
+    }
+
+    dispatch(SearchRequest({ ...options }));
+  }, [search, curSubCategory, curParentCategory]);
+
   const handleClick = () => {
     if (curSubCategory[0].categoryId !== 0) {
       navigate(
@@ -96,25 +120,8 @@ function CategoryList() {
   }, [categories]);
 
   useEffect(() => {
-    if (curSubCategory[0] && search) {
-      dispatch(
-        SearchRequest({
-          d_categ: curSubCategory[0].categoryId,
-          title: search,
-          start: 1,
-          display: 10,
-        }),
-      );
-    } else if (search) {
-      dispatch(
-        SearchRequest({
-          title: search,
-          start: 1,
-          display: 10,
-        }),
-      );
-    }
-  }, [search, curSubCategory]);
+    handleFetch();
+  }, [search, curSubCategory, curParentCategory]);
 
   return (
     <Wrapper>
