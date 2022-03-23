@@ -7,7 +7,6 @@ import {
 } from '../reducers/Search';
 
 function AddSearchAPI(params: any) {
-  console.log(params);
   if (params.d_categ) {
     return axios.get(
       `${process.env.REACT_APP_BASIC_URL}/book/search?d_catg=${params.d_categ}&d_titl=${params.title}&start=${params.start}&display=${params.display}`,

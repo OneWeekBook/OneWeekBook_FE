@@ -243,6 +243,13 @@ const InputWrapper = styled.div`
       font-size: 16px;
     }
   }
+  button {
+    border: none;
+    background-color: white;
+    color: #1e90ff;
+    font-size: 18px;
+    font-weight: 600;
+  }
 `;
 
 const Input = styled.input`

@@ -8,6 +8,8 @@ import {
   SearchRequest,
 } from 'redux/reducers/Search';
 import styled from 'styled-components';
+import LoadingForm from 'components/Form/LoadingForm';
+import LoadingErrorForm from 'components/Form/LoadingErrorForm';
 import TitleWrapper from './components/TitleWrapper';
 import BooksList from './components/BooksList';
 
@@ -18,7 +20,7 @@ function index() {
   const searchArr: string[] = [];
   const tagArr: string[] = [];
   const [startIdx, setStartIdx] = useState<number>(1);
-  const { isLoading } = useSelector((state: any) => state.search);
+  const { isLoading, isSuccess } = useSelector((state: any) => state.search);
 
   for (let i = 1; i < pathArr.length - 2; i += 1) {
     if (i % 2 === 1) {
@@ -92,9 +94,15 @@ function index() {
     <Container>
       <TitleWrapper tags={tagArr} />
       <BooksList />
-      <MoreButton type="button" onClick={handleAddFetch}>
-        더 보기
-      </MoreButton>
+      {isLoading ? (
+        <LoadingForm />
+      ) : !isSuccess ? (
+        <LoadingErrorForm />
+      ) : (
+        <MoreButton type="button" onClick={handleAddFetch}>
+          더 보기
+        </MoreButton>
+      )}
     </Container>
   );
 }

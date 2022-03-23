@@ -87,6 +87,7 @@ const InfoWrapper = styled.div`
     font-weight: 600;
   }
   .infoDesc {
+    min-height: 90px;
     font-size: 14px;
     display: -webkit-box;
     word-wrap: break-word;

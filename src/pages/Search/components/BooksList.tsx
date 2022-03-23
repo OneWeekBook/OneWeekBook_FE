@@ -26,5 +26,6 @@ const Wrapper = styled.div`
   gap: 20px;
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
     width: 95%;
+    grid-template-columns: 1fr;
   }
 `;

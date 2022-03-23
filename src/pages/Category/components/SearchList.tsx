@@ -1,3 +1,5 @@
+import LoadingErrorForm from 'components/Form/LoadingErrorForm';
+import LoadingForm from 'components/Form/LoadingForm';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -5,7 +7,18 @@ import { BooksTypes } from 'types/book';
 import SearchItem from './_item/SearchItem';
 
 function SearchList() {
-  const { books } = useSelector((state: any) => state.search);
+  const { books, isLoading, isSuccess } = useSelector(
+    (state: any) => state.search,
+  );
+
+  if (isLoading) {
+    return <LoadingForm />;
+  }
+
+  if (isLoading && !isSuccess) {
+    return <LoadingErrorForm />;
+  }
+
   return (
     <Wrapper>
       {books.map((item: BooksTypes, index: number) => (

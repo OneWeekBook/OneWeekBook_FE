@@ -21,12 +21,18 @@ export default TitleWrapper;
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 20px;
+  margin: 20px auto 0;
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+    width: 95%;
+  }
 `;
 
 const ResultPageTitle = styled.p`
   font-size: 24px;
   font-weight: 600;
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+    font-size: 18px;
+  }
 `;
 
 const Tag = styled.p`
@@ -37,4 +43,8 @@ const Tag = styled.p`
   font-weight: 600;
   padding: 5px 10px;
   margin-left: 10px;
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+    font-size: 12px;
+    margin-left: 5px;
+  }
 `;
