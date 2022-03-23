@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { CategoryRequest } from 'redux/reducers/Category';
-import { SearchRequest } from 'redux/reducers/Search';
+import { SearchInit, SearchRequest } from 'redux/reducers/Search';
 import styled from 'styled-components';
 import { CategoryItemTypes } from 'types/book';
 import CategoryBoxItem from './_item/CategoryBoxItem';
@@ -9,6 +10,7 @@ import SubCategoryBoxItem from './_item/SubCategoryBoxItem';
 
 function CategoryList() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [parentCategory, setParentCategory] = useState<CategoryItemTypes[]>([]);
   const [curParentCategory, setCurParentCategory] = useState<
     CategoryItemTypes[]
@@ -68,8 +70,49 @@ function CategoryList() {
     [],
   );
 
+  const handleFetch = useCallback(() => {
+    const options: {
+      start: number;
+      display: number;
+      d_categ?: string | number;
+      title?: string;
+    } = {
+      start: 1,
+      display: 8,
+    };
+
+    if (curSubCategory[0] && search) {
+      options.d_categ = curSubCategory[0].categoryId;
+      options.title = search;
+    } else if (curParentCategory[0] && search) {
+      options.d_categ = curParentCategory[0].categoryId;
+      options.title = search;
+    } else {
+      options.title = search;
+    }
+
+    dispatch(SearchRequest({ ...options }));
+  }, [search, curSubCategory, curParentCategory]);
+
+  const handleClick = () => {
+    if (curSubCategory[0].categoryId !== 0) {
+      navigate(
+        `/category/result?${curParentCategory[0].categoryName}=${curParentCategory[0].categoryId}&${curSubCategory[0].categoryName}=${curSubCategory[0].categoryId}&search=${search}`,
+      );
+    } else if (curParentCategory[0].categoryId !== 0) {
+      navigate(
+        `/category/result?${curParentCategory[0].categoryName}=${curParentCategory[0].categoryId}&search=${search}`,
+      );
+    } else {
+      navigate(`/category/result?&search=${search}`);
+    }
+  };
+
   useEffect(() => {
     dispatch(CategoryRequest());
+    return () => {
+      dispatch(SearchInit());
+    };
   }, []);
 
   useEffect(() => {
@@ -77,25 +120,8 @@ function CategoryList() {
   }, [categories]);
 
   useEffect(() => {
-    if (curSubCategory[0] && search) {
-      dispatch(
-        SearchRequest({
-          d_categ: curSubCategory[0].categoryId,
-          title: search,
-          start: 1,
-          display: 10,
-        }),
-      );
-    } else if (search) {
-      dispatch(
-        SearchRequest({
-          title: search,
-          start: 1,
-          display: 10,
-        }),
-      );
-    }
-  }, [search, curSubCategory]);
+    handleFetch();
+  }, [search, curSubCategory, curParentCategory]);
 
   return (
     <Wrapper>
@@ -141,7 +167,11 @@ function CategoryList() {
             onBlur={(e) => setSearch(e.target.value)}
           />
         </div>
-        {search && <p>모두보기</p>}
+        {search && (
+          <button type="button" onClick={handleClick}>
+            모두보기
+          </button>
+        )}
       </InputWrapper>
     </Wrapper>
   );
@@ -199,6 +229,12 @@ const InputWrapper = styled.div`
     display: flex;
     align-items: center;
   }
+  a {
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+  }
   p {
     font-size: 20px;
     font-weight: 600;
@@ -206,6 +242,13 @@ const InputWrapper = styled.div`
     @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
       font-size: 16px;
     }
+  }
+  button {
+    border: none;
+    background-color: white;
+    color: #1e90ff;
+    font-size: 18px;
+    font-weight: 600;
   }
 `;
 

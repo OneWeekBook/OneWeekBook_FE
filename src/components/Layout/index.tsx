@@ -54,5 +54,5 @@ const TopWrapper = styled.section`
 
 const BottomWrapper = styled.section`
   background-color: #303538;
-  min-height: 240px;
+  min-height: 200px;
 `;
