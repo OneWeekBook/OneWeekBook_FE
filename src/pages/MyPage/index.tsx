@@ -1,10 +1,11 @@
-import Container from 'components/Container';
 import React from 'react';
+import Container from 'components/Container';
+import UserInfo from './components/UserInfo';
 
 function Index() {
   return (
     <Container>
-      <div>MyPage</div>
+      <UserInfo />
     </Container>
   );
 }

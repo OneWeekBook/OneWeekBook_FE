@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import ProgressForm from 'components/Form/ProgressForm';
+import PieChart from 'components/Form/PieChartForm';
 import { ReviewDetailItem } from 'db/reviewdetail';
 
 function BookInfoWrapper() {
@@ -24,8 +24,8 @@ function BookInfoWrapper() {
         </InfoWrapper>
       </BookInfoBox>
       <ProgressWrapper>
-        <ProgressForm title="추천 비율" rate={ReviewDetailItem.recommendRate} />
-        <ProgressForm title="전체 평점" rate={ReviewDetailItem.rating} />
+        <PieChart title="추천 비율" rate={ReviewDetailItem.recommendRate} />
+        <PieChart title="전체 평점" rate={ReviewDetailItem.rating} />
       </ProgressWrapper>
     </Wrapper>
   );
