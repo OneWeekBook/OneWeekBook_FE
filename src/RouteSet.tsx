@@ -8,6 +8,7 @@ import {
   ReviewPage,
   ReviewDetailPage,
   SearchPage,
+  Mypage,
 } from './pages';
 
 function RouteSet() {
@@ -20,6 +21,7 @@ function RouteSet() {
       <Route path="/category/result" element={<SearchPage />} />
       <Route path="/review" element={<ReviewPage />} />
       <Route path="/review/:id" element={<ReviewDetailPage />} />
+      <Route path="/mypage" element={<Mypage />} />
     </Routes>
   );
 }
