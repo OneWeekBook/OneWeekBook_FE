@@ -27,6 +27,9 @@ const Wrapper = styled.div<{ width: number }>`
   border-radius: 5px;
   width: ${({ width }) => width}px;
   height: 30px;
+  @media (max-width: 425px) {
+    display: none;
+  }
 `;
 
 const ProgressWrapper = styled.div<{ value: number }>`

@@ -4,6 +4,8 @@ export const CHANGE_NICK_REQUEST = 'CHANGE_NICK_REQUEST';
 export const CHANGE_NICK_SUCCESS = 'CHANGE_NICK_SUCCESS';
 export const CHANGE_NICK_FAIL = 'CHANGE_NICK_FAIL';
 
+export const CHANGE_NICK_INIT = 'CHANGE_NICK_INIT';
+
 const initialState = {
   isLoading: false,
   isSuccess: false,
@@ -37,6 +39,8 @@ export default function SignIn(state = initialState, action: any) {
         changeErrorStatus: action.error.status,
         changeErrorMsg: action.error.data.message,
       };
+    case CHANGE_NICK_INIT:
+      return initialState;
     default:
       return state;
   }
@@ -60,5 +64,11 @@ export const ChangeNickFail = (error: any) => {
   return {
     type: CHANGE_NICK_FAIL,
     error: error.response,
+  };
+};
+
+export const ChangeNickInit = () => {
+  return {
+    type: CHANGE_NICK_INIT,
   };
 };

@@ -2,7 +2,7 @@ import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import ChangeModal from 'components/Modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { ChangeNickRequest } from 'redux/reducers/ChangeNick';
+import { ChangeNickInit, ChangeNickRequest } from 'redux/reducers/ChangeNick';
 import { useInput } from 'hooks/useInput';
 import { userToggle } from 'redux/reducers/FuncToggle';
 
@@ -29,6 +29,9 @@ function ChangeNickModal({ nickToggleIsOn }: PropsType) {
 
   useEffect(() => {
     handleChangeNick();
+    return () => {
+      dispatch(ChangeNickInit());
+    };
   }, [changeErrorStatus]);
 
   return (

@@ -33,6 +33,9 @@ export default NameButton;
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  @media (max-width: 425px) {
+    display: block;
+  }
 `;
 
 const NickName = styled.p`
@@ -45,7 +48,6 @@ const ButtonWrapper = styled.div`
   button {
     width: 100px;
     height: 40px;
-    margin-left: 10px;
     font-size: 14px;
     font-weight: 600;
     background-color: #1e90ff;
@@ -55,5 +57,11 @@ const ButtonWrapper = styled.div`
     :hover {
       background-color: #08c1e9;
     }
+    :last-child {
+      margin-left: 10px;
+    }
+  }
+  @media (max-width: 425px) {
+    margin-top: 10px;
   }
 `;

@@ -46,6 +46,9 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: flex-start;
   margin-top: 20px;
+  @media (max-width: 670px) {
+    display: block;
+  }
 `;
 
 const RankWrapper = styled.div`
@@ -70,9 +73,16 @@ const InfoWrapper = styled.div`
   p {
     font-size: 20px;
     font-weight: 600;
-    margin-right: 10px;
+    :first-child {
+      margin-right: 10px;
+    }
     :last-child {
       margin-left: 10px;
+    }
+  }
+  @media (max-width: 425px) {
+    p:first-child {
+      margin-right: 0;
     }
   }
 `;

@@ -29,5 +29,6 @@ const Wrapper = styled.div`
   padding: 20px;
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
     width: 95%;
+    height: auto;
   }
 `;
