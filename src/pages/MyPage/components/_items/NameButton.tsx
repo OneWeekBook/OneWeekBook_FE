@@ -1,18 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useToggle } from 'hooks/useToggle';
+import ChangeNickModal from '../modal/ChangeNickModal';
+import ChangePassModal from '../modal/ChangePassModal';
 
 type PropsType = {
   nickName: string;
 };
 
 function NameButton({ nickName }: PropsType) {
+  const [nickToggle, nickToggleIsOn] = useToggle(false);
+  const [passToggle, passToggleIsOn] = useToggle(false);
   return (
     <Wrapper>
       <NickName>닉네임: {nickName}</NickName>
       <ButtonWrapper>
-        <button type="button">닉네임 변경</button>
-        <button type="button">비밀번호 변경</button>
+        <button onClick={nickToggleIsOn} type="button">
+          닉네임 변경
+        </button>
+        <button onClick={passToggleIsOn} type="button">
+          비밀번호 변경
+        </button>
       </ButtonWrapper>
+      {nickToggle && <ChangeNickModal nickToggleIsOn={nickToggleIsOn} />}
+      {passToggle && <ChangePassModal passToggleIsOn={passToggleIsOn} />}
     </Wrapper>
   );
 }

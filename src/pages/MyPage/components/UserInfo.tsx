@@ -8,8 +8,6 @@ import OutButton from './_items/OutButton';
 function UserInfo() {
   const { user } = useSelector((state: any) => state.authUser);
 
-  console.log(user);
-
   return (
     <Wrapper>
       <NameButton nickName={user.nick} />
