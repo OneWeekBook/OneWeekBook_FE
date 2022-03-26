@@ -1,21 +1,23 @@
-import ProgressBarForm from 'components/Form/ProgressBarForm';
-import { User } from 'db/user';
-import React, { useState, useEffect } from 'react';
-
+import React, { useState, useLayoutEffect } from 'react';
 import styled from 'styled-components';
+import ProgressBarForm from 'components/Form/ProgressBarForm';
 
-function Rank() {
+type PropsType = {
+  role: number;
+};
+
+function Rank({ role }: PropsType) {
   const [rank, setRank] = useState<string>('');
 
-  useEffect(() => {
-    if (User.role === 3) {
+  useLayoutEffect(() => {
+    if (role === 3) {
       setRank('독서 천재');
-    } else if (User.role === 2) {
+    } else if (role === 2) {
       setRank('독서 중급자');
-    } else if (User.role === 1) {
+    } else if (role === 1) {
       setRank('독서 입문자');
     }
-  }, []);
+  }, [role]);
 
   return (
     <Wrapper>

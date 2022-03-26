@@ -1,14 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import Rank from './_items/Rank';
 import NameButton from './_items/NameButton';
 import OutButton from './_items/OutButton';
 
 function UserInfo() {
+  const { user } = useSelector((state: any) => state.authUser);
+
+  console.log(user);
+
   return (
     <Wrapper>
-      <NameButton />
-      <Rank />
+      <NameButton nickName={user.nick} />
+      <Rank role={user.role} />
       <OutButton />
     </Wrapper>
   );

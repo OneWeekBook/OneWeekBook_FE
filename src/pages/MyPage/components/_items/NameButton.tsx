@@ -1,11 +1,14 @@
-import { User } from 'db/user';
 import React from 'react';
 import styled from 'styled-components';
 
-function NameButton() {
+type PropsType = {
+  nickName: string;
+};
+
+function NameButton({ nickName }: PropsType) {
   return (
     <Wrapper>
-      <NickName>닉네임: {User.nickname}</NickName>
+      <NickName>닉네임: {nickName}</NickName>
       <ButtonWrapper>
         <button type="button">닉네임 변경</button>
         <button type="button">비밀번호 변경</button>
