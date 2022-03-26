@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import { useToggle } from 'hooks/useToggle';
 import TopScroll from 'lib/TopScroll';
-import React, { PropsWithChildren, useLayoutEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { PropsWithChildren, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
 import { AuthUserRequest } from 'redux/reducers/AuthUser';
 import styled from 'styled-components';
@@ -15,10 +15,11 @@ function Index({ children }: PropsWithChildren<any>) {
   const location = useLocation();
   const dispatch = useDispatch();
   const [toggle, toggleIsOn] = useToggle(false);
+  const { userToggle } = useSelector((state: any) => state.funcToggle);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     dispatch(AuthUserRequest());
-  }, []);
+  }, [userToggle]);
 
   return (
     <LayoutWrapper>

@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 type PropsType = {
-  width: number[];
-  height: number[];
+  width: number;
+  height: number;
   close: boolean;
   title: string;
   titleSize: number;
@@ -12,6 +12,8 @@ type PropsType = {
   isCancelBtn: boolean;
   cancelBtnTitle: string;
   handleToggle: () => void;
+  handleOkClick: () => void;
+  handleCanCelClick: () => void;
 };
 
 function Index({
@@ -25,6 +27,8 @@ function Index({
   isCancelBtn,
   cancelBtnTitle,
   handleToggle,
+  handleOkClick,
+  handleCanCelClick,
   children,
 }: React.PropsWithChildren<PropsType>) {
   return (
@@ -47,8 +51,16 @@ function Index({
         </ModalHeaderWrapper>
         <ModalBodyWrapper>{children}</ModalBodyWrapper>
         <ButtonWrapper>
-          {isOkBtn && <button type="button">{okBtnTitle}</button>}
-          {isCancelBtn && <button type="button">{cancelBtnTitle}</button>}
+          {isOkBtn && (
+            <button onClick={handleOkClick} type="button">
+              {okBtnTitle}
+            </button>
+          )}
+          {isCancelBtn && (
+            <button onClick={handleCanCelClick} type="button">
+              {cancelBtnTitle}
+            </button>
+          )}
         </ButtonWrapper>
       </ModalWrapper>
     </BodyWrapper>
@@ -70,17 +82,18 @@ const BodyWrapper = styled.div`
   z-index: 1000;
 `;
 
-const ModalWrapper = styled.div<{ width: number[]; height: number[] }>`
+const ModalWrapper = styled.div<{ width: number; height: number }>`
   background-color: white;
   box-sizing: border-box;
-  width: ${({ width }) => width[0]}px;
-  height: ${({ height }) => height[0]}px;
+  width: ${({ width }) => width}px;
+  height: ${({ height }) => height}px;
   padding: 30px 30px;
   z-index: 1100;
   margin: 0 auto;
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    width: ${({ width }) => width[1]}px;
-    height: ${({ height }) => height[1]}px;
+    width: auto;
+    height: auto;
+    padding: 20px 20px;
   }
 `;
 
@@ -99,10 +112,8 @@ const CloseButtonWrapper = styled.div`
 `;
 
 const ModalBodyWrapper = styled.div`
-  height: 250px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 `;
 
 const ModalHeaderWrapper = styled.div<{ titleSize: number }>`
@@ -115,8 +126,7 @@ const ModalHeaderWrapper = styled.div<{ titleSize: number }>`
 `;
 
 const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: center;
+  text-align: center;
   button {
     font-size: 18px;
     font-weight: 600;

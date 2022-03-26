@@ -9,3 +9,8 @@ export type SignUpTypes = {
   password: string;
   nick: string;
 };
+
+export type ChangeNickTypes = {
+  nick: string;
+  id: number;
+};
