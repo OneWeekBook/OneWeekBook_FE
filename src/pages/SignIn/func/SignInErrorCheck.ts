@@ -20,6 +20,7 @@ export function useSignInErrorCheck(): {
         break;
       case 400:
       case 401:
+      case 404:
       case 500:
       case 501:
         error(true);
