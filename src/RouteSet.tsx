@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ProtectedRoute, { ProtectedRouteProps } from 'PrivateRoute';
 import { Routes, Route } from 'react-router-dom';
 import {
@@ -14,7 +14,6 @@ import {
 
 function RouteSet() {
   const defaultProtectedRouteProps: Omit<ProtectedRouteProps, 'outlet'> = {
-    isAuthenticated: !!sessionStorage.getItem('accessToken'),
     authenticationPath: '/sign-in',
   };
 
