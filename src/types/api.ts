@@ -19,3 +19,8 @@ export type ChangePasswordTypes = {
   email: string;
   password: string;
 };
+
+export type RemoveUserTypes = {
+  id: number;
+  password: string;
+};

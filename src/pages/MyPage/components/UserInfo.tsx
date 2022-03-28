@@ -2,12 +2,15 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { userToggle } from 'redux/reducers/FuncToggle';
+import { useToggle } from 'hooks/useToggle';
 import Rank from './_items/Rank';
 import NameButton from './_items/NameButton';
 import OutButton from './_items/OutButton';
+import RemoveUserModal from './modal/RemoveUserModal';
 
 function UserInfo() {
   const dispatch = useDispatch();
+  const [removeToggle, removeToggleIsOn] = useToggle(false);
   const { user } = useSelector((state: any) => state.authUser);
 
   useEffect(() => {
@@ -18,7 +21,10 @@ function UserInfo() {
     <Wrapper>
       <NameButton nickName={user.nick} />
       <Rank role={user.role} />
-      <OutButton />
+      <OutButton removeToggleIsOn={removeToggleIsOn} />
+      {removeToggle && (
+        <RemoveUserModal removeToggleIsOn={removeToggleIsOn} id={user.id} />
+      )}
     </Wrapper>
   );
 }

@@ -1,10 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function OutButton() {
+type PropsType = {
+  removeToggleIsOn: () => void;
+};
+
+function OutButton({ removeToggleIsOn }: PropsType) {
   return (
     <Wrapper>
-      <button type="button">회원 탈퇴</button>
+      <button onClick={removeToggleIsOn} type="button">
+        회원 탈퇴
+      </button>
     </Wrapper>
   );
 }

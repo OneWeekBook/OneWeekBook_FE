@@ -9,6 +9,7 @@ import search from './Search';
 import changeNick from './ChangeNick';
 import changePassword from './ChangePassword';
 import funcToggle from './FuncToggle';
+import removeUser from './RemoveUser';
 
 const rootReducer = combineReducers({
   authEmail,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   changeNick,
   changePassword,
   funcToggle,
+  removeUser,
 });
 
 export default rootReducer;
