@@ -70,7 +70,6 @@ const InputWrapper = styled.div`
   justify-content: center;
   font-size: 18px;
   font-weight: 600;
-  margin: 40px auto;
   width: 100%;
   p {
     flex-shrink: 0;
@@ -85,5 +84,6 @@ const InputWrapper = styled.div`
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     margin: 20px auto;
+    font-size: 14px;
   }
 `;

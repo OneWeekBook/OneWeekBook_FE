@@ -14,3 +14,8 @@ export type ChangeNickTypes = {
   nick: string;
   id: number;
 };
+
+export type ChangePasswordTypes = {
+  email: string;
+  password: string;
+};

@@ -46,22 +46,24 @@ function Index({
             </button>
           )}
         </CloseButtonWrapper>
-        <ModalHeaderWrapper titleSize={titleSize}>
-          {title && <p>{title}</p>}
-        </ModalHeaderWrapper>
-        <ModalBodyWrapper>{children}</ModalBodyWrapper>
-        <ButtonWrapper>
-          {isOkBtn && (
-            <button onClick={handleOkClick} type="button">
-              {okBtnTitle}
-            </button>
-          )}
-          {isCancelBtn && (
-            <button onClick={handleCanCelClick} type="button">
-              {cancelBtnTitle}
-            </button>
-          )}
-        </ButtonWrapper>
+        <ModalBodyWrapper>
+          <ModalTitleWrapper titleSize={titleSize}>
+            {title && <p>{title}</p>}
+          </ModalTitleWrapper>
+          <div>{children}</div>
+          <ButtonWrapper>
+            {isOkBtn && (
+              <button onClick={handleOkClick} type="button">
+                {okBtnTitle}
+              </button>
+            )}
+            {isCancelBtn && (
+              <button onClick={handleCanCelClick} type="button">
+                {cancelBtnTitle}
+              </button>
+            )}
+          </ButtonWrapper>
+        </ModalBodyWrapper>
       </ModalWrapper>
     </BodyWrapper>
   );
@@ -111,18 +113,20 @@ const CloseButtonWrapper = styled.div`
   }
 `;
 
-const ModalBodyWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const ModalHeaderWrapper = styled.div<{ titleSize: number }>`
+const ModalTitleWrapper = styled.div<{ titleSize: number }>`
   width: 100%;
   text-align: center;
   p {
     font-size: ${({ titleSize }) => titleSize}px;
     font-weight: 700;
   }
+`;
+
+const ModalBodyWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 90%;
 `;
 
 const ButtonWrapper = styled.div`
