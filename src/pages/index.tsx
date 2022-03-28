@@ -11,3 +11,5 @@ export { default as SearchPage } from './Search';
 export { default as ReviewPage } from './Review';
 
 export { default as ReviewDetailPage } from './ReviewDetail';
+
+export { default as Mypage } from './MyPage';

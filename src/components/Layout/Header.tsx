@@ -34,8 +34,8 @@ function Header({ toggleIsOn }: PropsType) {
         <ButtonWrapper isSign={isSign}>
           {sessionStorage.getItem('accessToken') ? (
             <>
-              <Link to="/book">
-                <button type="button">내서재</button>
+              <Link to="/myPage">
+                <button type="button">마이페이지</button>
               </Link>
               <Link to="/">
                 <button type="button" onClick={logoutClick}>

@@ -21,7 +21,7 @@ export default function AuthEmail(state = initialState, action: any) {
         ...state,
         isLoading: false,
         isSuccess: true,
-        user: action.payload,
+        user: action.payload.data.user,
       };
     case AUTH_USER_FAIL:
       return {

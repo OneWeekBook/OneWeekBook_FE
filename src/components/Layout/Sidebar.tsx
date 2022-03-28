@@ -73,7 +73,7 @@ const Wrapper = styled.div<{ isToggle: boolean }>`
   background-color: white;
   position: fixed;
   z-index: 100;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   right: ${({ isToggle }) => (isToggle ? 0 : -100)}%;
   @media (min-width: ${({ theme: { device } }) =>
