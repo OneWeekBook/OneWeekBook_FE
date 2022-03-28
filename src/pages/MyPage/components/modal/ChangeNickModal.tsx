@@ -71,10 +71,15 @@ const InputWrapper = styled.div`
   font-size: 18px;
   font-weight: 600;
   margin: 40px auto;
+  width: 100%;
+  p {
+    flex-shrink: 0;
+  }
   input {
     box-sizing: border-box;
     padding-left: 10px;
-    width: 300px;
+    max-width: 300px;
+    width: 100%;
     height: 40px;
     margin-left: 10px;
   }

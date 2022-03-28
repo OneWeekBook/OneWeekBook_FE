@@ -91,7 +91,7 @@ const ModalWrapper = styled.div<{ width: number; height: number }>`
   z-index: 1100;
   margin: 0 auto;
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    width: auto;
+    width: 90%;
     height: auto;
     padding: 20px 20px;
   }
