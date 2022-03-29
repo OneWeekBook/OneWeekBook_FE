@@ -12,4 +12,6 @@ export { default as ReviewPage } from './Review';
 
 export { default as ReviewDetailPage } from './ReviewDetail';
 
-export { default as Mypage } from './MyPage';
+export { default as MyPage } from './MyPage';
+
+export { default as MyLibraryPage } from './MyLibrary';

@@ -9,7 +9,8 @@ import {
   ReviewPage,
   ReviewDetailPage,
   SearchPage,
-  Mypage,
+  MyPage,
+  MyLibraryPage,
 } from './pages';
 
 function RouteSet() {
@@ -29,9 +30,10 @@ function RouteSet() {
       <Route
         path="/mypage"
         element={
-          <ProtectedRoute {...defaultProtectedRouteProps} outlet={<Mypage />} />
+          <ProtectedRoute {...defaultProtectedRouteProps} outlet={<MyPage />} />
         }
       />
+      <Route path="/my-library" element={<MyLibraryPage />} />
     </Routes>
   );
 }
