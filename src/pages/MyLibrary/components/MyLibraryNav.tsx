@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import Nav from './Nav';
 
 const NavItems = [
   {
@@ -37,6 +38,7 @@ function MyLibraryNav() {
           </NavItem>
         ))}
       </Wrapper>
+      <Nav id={navId} />
     </>
   );
 }
