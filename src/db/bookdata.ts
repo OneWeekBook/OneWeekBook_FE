@@ -36,7 +36,7 @@ export const BookItems = [
     title: '책이름 17',
     author: '유땡땡',
     publish: '잼나책방',
-    startDate: null,
+    startDate: '2022.03.27',
     endDate: null,
   },
   {
@@ -46,7 +46,7 @@ export const BookItems = [
     title: '책이름',
     author: '미땡땡',
     publish: '잼나책방',
-    startDate: null,
+    startDate: '2022.03.30',
     endDate: null,
   },
   {
@@ -56,7 +56,7 @@ export const BookItems = [
     title: '책이름 100',
     author: '박땡땡',
     publish: '잼나책방',
-    startDate: null,
-    endDate: null,
+    startDate: '2022.03.21',
+    endDate: '2022.03.28',
   },
 ];

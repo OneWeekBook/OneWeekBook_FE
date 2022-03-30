@@ -11,16 +11,37 @@ export type BooksType = {
   endDate: null | string;
 };
 
-function BookItem({ id, img, title, author, startDate, endDate }: BooksType) {
+type ClickType = {
+  handleToggle: () => void;
+  onClick: (id: number) => void;
+};
+
+function BookItem({
+  id,
+  img,
+  title,
+  author,
+  startDate,
+  endDate,
+  handleToggle,
+  onClick,
+}: BooksType & ClickType) {
   return (
-    <Wrapper>
+    <Wrapper
+      onClick={() => {
+        handleToggle();
+        onClick(id);
+      }}
+    >
       <ImgWrapper>
         <img src={img} alt="book" />
       </ImgWrapper>
       <p className="bookTitle">{title}</p>
       <p className="bookAuthor">{author}</p>
-      {startDate && <p>{startDate}</p>}
-      {endDate && <p>{endDate}</p>}
+      <Date>
+        {startDate && <p>{startDate}&nbsp;~&nbsp;</p>}
+        {endDate && <p>{endDate}</p>}
+      </Date>
     </Wrapper>
   );
 }
@@ -46,4 +67,11 @@ const ImgWrapper = styled.div`
     width: 100%;
     height: 100%;
   }
+`;
+
+const Date = styled.div`
+  display: flex;
+  letter-spacing: -0.5px;
+  font-size: 12px;
+  font-weight: 600;
 `;
