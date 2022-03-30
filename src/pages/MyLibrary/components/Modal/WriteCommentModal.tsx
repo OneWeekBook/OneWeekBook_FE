@@ -5,7 +5,7 @@ import { useInput } from 'hooks/useInput';
 import { BooksType } from '../_item/BookItem';
 
 type PropsType = {
-  readToggleIsOn: () => void;
+  toggleIsOn: () => void;
 };
 
 function WriteCommentModal({
@@ -13,7 +13,7 @@ function WriteCommentModal({
   title,
   author,
   startDate,
-  readToggleIsOn,
+  toggleIsOn,
 }: BooksType & PropsType) {
   const [comment, changeComment] = useInput('');
   return (
@@ -23,12 +23,12 @@ function WriteCommentModal({
       titleSize={[24, 18]}
       width={768}
       height={400}
-      handleToggle={readToggleIsOn}
+      handleToggle={toggleIsOn}
       close
       isOkBtn={false}
       isCancelBtn
       cancelBtnTitle="나중에..."
-      handleCanCelClick={readToggleIsOn}
+      handleCanCelClick={toggleIsOn}
     >
       <BodyWrapper>
         <InfoWrapper>

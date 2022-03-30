@@ -37,7 +37,7 @@ function ReadBookList() {
         )}
       </Wrapper>
       {readToggle && bookData && (
-        <WriteCommentModal {...bookData} readToggleIsOn={readToggleIsOn} />
+        <WriteCommentModal {...bookData} toggleIsOn={readToggleIsOn} />
       )}
     </>
   );

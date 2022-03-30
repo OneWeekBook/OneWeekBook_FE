@@ -4,6 +4,7 @@ import { BookItems } from 'db/bookdata';
 import { useToggle } from 'hooks/useToggle';
 import BookItem, { BooksType } from '../_item/BookItem';
 import WriteCommentModal from '../Modal/WriteCommentModal';
+import WriteReviewModal from '../Modal/WriteReviewModal';
 
 function DoneBookList() {
   const [id, setId] = useState<number>(-1);
@@ -38,10 +39,10 @@ function DoneBookList() {
         )}
       </Wrapper>
       {commentToggle && bookData && (
-        <WriteCommentModal {...bookData} readToggleIsOn={commentToggleIsOn} />
+        <WriteCommentModal {...bookData} toggleIsOn={commentToggleIsOn} />
       )}
       {reivewToggle && bookData && (
-        <WriteCommentModal {...bookData} readToggleIsOn={commentToggleIsOn} />
+        <WriteReviewModal {...bookData} toggleIsOn={reviewToggleIsOn} />
       )}
     </>
   );
