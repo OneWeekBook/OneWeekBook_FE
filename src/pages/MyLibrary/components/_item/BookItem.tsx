@@ -13,35 +13,70 @@ export type BooksType = {
 
 type ClickType = {
   handleToggle: () => void;
+  handleReviewToggle: () => void;
   onClick: (id: number) => void;
 };
 
 function BookItem({
   id,
   img,
+  role,
   title,
   author,
   startDate,
   endDate,
   handleToggle,
+  handleReviewToggle,
   onClick,
 }: BooksType & ClickType) {
   return (
-    <Wrapper
-      onClick={() => {
-        handleToggle();
-        onClick(id);
-      }}
-    >
+    <Wrapper>
       <ImgWrapper>
         <img src={img} alt="book" />
       </ImgWrapper>
-      <p className="bookTitle">{title}</p>
-      <p className="bookAuthor">{author}</p>
-      <Date>
-        {startDate && <p>{startDate}&nbsp;~&nbsp;</p>}
-        {endDate && <p>{endDate}</p>}
-      </Date>
+      <InfoWrapper>
+        <div>
+          <p className="bookTitle">{title}</p>
+          <p className="bookAuthor">{author}</p>
+          {startDate && <p>독서 시작: {startDate}</p>}
+          {endDate && <p>독서 완료: {endDate}</p>}
+        </div>
+        <ButtonWrapper>
+          {role === 'like' && (
+            <button
+              onClick={() => {
+                handleToggle();
+                onClick(id);
+              }}
+              type="button"
+            >
+              시작하기
+            </button>
+          )}
+          {(role === 'read' || role === 'done') && (
+            <button
+              onClick={() => {
+                handleToggle();
+                onClick(id);
+              }}
+              type="button"
+            >
+              기록하기
+            </button>
+          )}
+          {role === 'done' && (
+            <button
+              onClick={() => {
+                handleReviewToggle();
+                onClick(id);
+              }}
+              type="button"
+            >
+              리뷰하기
+            </button>
+          )}
+        </ButtonWrapper>
+      </InfoWrapper>
     </Wrapper>
   );
 }
@@ -50,6 +85,14 @@ export default BookItem;
 
 const Wrapper = styled.div`
   margin-top: 10px;
+  display: flex;
+`;
+
+const InfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
   .bookTitle {
     font-size: 18px;
     font-weight: 600;
@@ -62,16 +105,19 @@ const Wrapper = styled.div`
 `;
 
 const ImgWrapper = styled.div`
-  width: 100%;
+  flex-shrink: 0;
+  width: 120px;
+  height: 150px;
   img {
     width: 100%;
     height: 100%;
   }
 `;
 
-const Date = styled.div`
+const ButtonWrapper = styled.div`
+  width: 100%;
   display: flex;
-  letter-spacing: -0.5px;
-  font-size: 12px;
-  font-weight: 600;
+  button {
+    width: 100%;
+  }
 `;

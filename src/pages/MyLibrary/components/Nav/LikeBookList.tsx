@@ -23,6 +23,7 @@ function LikeBookList() {
                 key={item.id}
                 {...item}
                 handleToggle={likeToggleIsOn}
+                handleReviewToggle={likeToggleIsOn}
                 onClick={() => setId(item.id)}
               />
             ),
@@ -31,7 +32,7 @@ function LikeBookList() {
       {likeToggle && (
         <MoveReadModal
           title="시작해볼까요?"
-          titleSize={24}
+          titleSize={[24, 20]}
           width={500}
           height={250}
           handleToggle={likeToggleIsOn}
@@ -52,11 +53,13 @@ export default LikeBookList;
 
 const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
   margin: auto;
-  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
     width: 95%;
+  }
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     grid-template-columns: 1fr 1fr 1fr;
   }
 `;

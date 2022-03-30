@@ -56,7 +56,7 @@ function ChangePassModal({ passToggleIsOn }: PropsType) {
   return (
     <ChangeModal
       title="비밀번호 변경"
-      titleSize={24}
+      titleSize={[24, 20]}
       width={500}
       height={350}
       handleToggle={passToggleIsOn}

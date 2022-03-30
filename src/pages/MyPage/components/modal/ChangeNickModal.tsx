@@ -37,7 +37,7 @@ function ChangeNickModal({ nickToggleIsOn }: PropsType) {
   return (
     <ChangeModal
       title="닉네임 변경"
-      titleSize={24}
+      titleSize={[24, 20]}
       width={500}
       height={300}
       handleToggle={nickToggleIsOn}
