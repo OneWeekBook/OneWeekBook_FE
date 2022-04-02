@@ -1,5 +1,5 @@
+import { instance } from 'api/axios';
 import { call, put, takeEvery } from 'redux-saga/effects';
-import axios from 'axios';
 import {
   AuthUserFail,
   AuthUserSuccess,
@@ -7,13 +7,7 @@ import {
 } from '../reducers/AuthUser';
 
 function AuthUserAPI() {
-  const config = {
-    headers: {
-      Authorization: sessionStorage.getItem('accessToken'),
-    },
-  };
-
-  return axios.get(`${process.env.REACT_APP_BASIC_URL}/user`, config);
+  return instance.get("/user");
 }
 
 function* fetchAuthUserSaga(): any {

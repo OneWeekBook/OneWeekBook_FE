@@ -1,5 +1,5 @@
+import { instance } from 'api/axios';
 import { call, put, takeEvery } from 'redux-saga/effects';
-import axios from 'axios';
 import { ChangeNickTypes } from 'types/api';
 import {
   ChangeNickFail,
@@ -8,16 +8,7 @@ import {
 } from '../reducers/ChangeNick';
 
 function ChangeNickAPI(data: ChangeNickTypes) {
-  const config = {
-    headers: {
-      Authorization: sessionStorage.getItem('accessToken'),
-    },
-  };
-  return axios.put(
-    `${process.env.REACT_APP_BASIC_URL}/user/nick`,
-    data,
-    config,
-  );
+  return instance.get("/user");
 }
 
 function* fetchChangeNickSaga(action: any): any {
