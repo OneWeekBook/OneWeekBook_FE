@@ -10,6 +10,7 @@ import changeNick from './ChangeNick';
 import changePassword from './ChangePassword';
 import funcToggle from './FuncToggle';
 import removeUser from './RemoveUser';
+import myLibrary from './MyLibrary';
 
 const rootReducer = combineReducers({
   authEmail,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   changePassword,
   funcToggle,
   removeUser,
+  myLibrary,
 });
 
 export default rootReducer;

@@ -10,6 +10,8 @@ import watchAddSearch from './AddSearchSaga';
 import watchChangeNick from './ChangeNickSaga';
 import watchChangePassword from './ChangePasswordSaga';
 import watchRemoveUser from './RemoveUserSaga';
+import watchMyLibrary from './MyLibrarySaga';
+import watchMyLibraryAdd from './MyLibraryAddSaga';
 
 export default function* rootSaga() {
   yield all([
@@ -24,5 +26,7 @@ export default function* rootSaga() {
     call(watchChangeNick),
     call(watchChangePassword),
     call(watchRemoveUser),
+    call(watchMyLibrary),
+    call(watchMyLibraryAdd),
   ]);
 }

@@ -24,3 +24,27 @@ export type RemoveUserTypes = {
   id: number;
   password: string;
 };
+
+export type MyLibraryTypes = {
+  userId: number;
+  progress: number;
+};
+
+export type MyLibraryAddTypes = {
+  userId: number;
+  isbn: string;
+  title: string;
+  author: string;
+  publisher: string;
+  img: string;
+};
+
+export type MyLibraryModifyTypes = {
+  progress: number;
+  isbn: number;
+  userid: number;
+};
+
+export type MyLibraryDeleteType = {
+  id: number;
+};

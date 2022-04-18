@@ -1,28 +1,50 @@
 import React, { PropsWithChildren } from 'react';
 import { SetDate } from 'lib/SetDate';
 import styled from 'styled-components';
-import { BooksTypes } from 'types/book';
+import { LikeAddTypes } from 'types/book';
 
 function SearchItem({
   image,
   title,
   link,
+  isbn,
   author,
   pubdate,
   publisher,
   description,
-}: PropsWithChildren<BooksTypes>) {
+  userId,
+  handleAddClick,
+}: PropsWithChildren<LikeAddTypes>) {
   return (
-    <Wrapper onClick={() => window.open(link)}>
+    <Wrapper>
       <ImgWrapper>
+        {userId && (
+          <button
+            type="button"
+            onClick={() =>
+              handleAddClick({
+                title,
+                isbn,
+                author,
+                publisher,
+                userId,
+                img: image,
+              })
+            }
+          >
+            찜
+          </button>
+        )}
         <img src={image} alt="book cover" />
       </ImgWrapper>
       <InfoWrapper>
         <div>
-          <p
-            className="infoTitle"
-            dangerouslySetInnerHTML={{ __html: title }}
-          />
+          <a href={link} target="_blank" rel="noreferrer">
+            <p
+              className="infoTitle"
+              dangerouslySetInnerHTML={{ __html: title }}
+            />
+          </a>
           <p
             className="infoAuth"
             dangerouslySetInnerHTML={{
@@ -60,6 +82,9 @@ const ImgWrapper = styled.div`
     width: 100%;
     height: 100%;
   }
+  button {
+    position: absolute;
+  }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     width: 100px;
   }
@@ -71,6 +96,10 @@ const InfoWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   margin-left: 10px;
+  a {
+    text-decoration: none;
+    color: black;
+  }
   .infoTitle {
     font-size: 18px;
     font-weight: 700;

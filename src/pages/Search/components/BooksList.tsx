@@ -1,15 +1,38 @@
 import React from 'react';
 import SearchItem from 'pages/Category/components/_item/SearchItem';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { BooksTypes } from 'types/book';
+import { MyLibraryAddTypes } from 'types/api';
+import { MyLibraryAddRequest } from 'redux/reducers/MyLibrary';
 
 function BooksList() {
+  const dispatch = useDispatch();
   const { books } = useSelector((state: any) => state.search);
+  const { user } = useSelector((state: any) => state.authUser);
+
+  const handleAddClick = ({
+    title,
+    author,
+    publisher,
+    isbn,
+    img,
+    userId,
+  }: MyLibraryAddTypes) => {
+    dispatch(
+      MyLibraryAddRequest({ title, author, publisher, isbn, img, userId }),
+    );
+  };
+
   return (
     <Wrapper>
       {books.map((item: BooksTypes, index: number) => (
-        <SearchItem key={index} {...item} />
+        <SearchItem
+          key={index}
+          {...item}
+          userId={user.id}
+          handleAddClick={handleAddClick}
+        />
       ))}
     </Wrapper>
   );
