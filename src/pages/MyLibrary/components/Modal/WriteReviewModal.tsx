@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import WriteModal from 'components/Modal';
 import styled from 'styled-components';
 import { useInput } from 'hooks/useInput';
-import { BooksType } from '../_item/BookItem';
+import { LibraryItemTypes } from 'types/book';
 
 const RecommendItem = [
   {
@@ -36,13 +36,13 @@ type PropsType = {
 };
 
 function WriteReviewModal({
-  role,
+  progress,
   title,
   author,
-  startDate,
-  endDate,
+  startTime,
+  endTime,
   toggleIsOn,
-}: BooksType & PropsType) {
+}: LibraryItemTypes & PropsType) {
   const [recommend, setRecommend] = useState<string>('');
   const [review, changeReview] = useInput('');
 
@@ -71,10 +71,10 @@ function WriteReviewModal({
           <div className="bookInfo">
             <p>{title}</p>
             <p>
-              {author} {startDate} ~ {endDate}
+              {author} {startTime} ~ {endTime}
             </p>
           </div>
-          {role === 'read' && <button type="button">독서 완료</button>}
+          {progress === 1 && <button type="button">독서 완료</button>}
         </InfoWrapper>
         <RecommendWrapper>
           <p>책이 어떻나요?</p>

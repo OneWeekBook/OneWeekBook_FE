@@ -1,4 +1,4 @@
-import { instance } from 'api/axios';
+import instance from 'api/axios';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import {
   AuthUserFail,
@@ -7,7 +7,7 @@ import {
 } from '../reducers/AuthUser';
 
 function AuthUserAPI() {
-  return instance.get("/user");
+  return instance.get('/user');
 }
 
 function* fetchAuthUserSaga(): any {

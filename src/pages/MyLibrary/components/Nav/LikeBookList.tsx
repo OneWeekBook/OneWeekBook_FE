@@ -1,33 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { BookItems } from 'db/bookdata';
 import { useToggle } from 'hooks/useToggle';
 import MoveReadModal from 'components/Modal';
-import BookItem, { BooksType } from '../_item/BookItem';
+import { useDispatch, useSelector } from 'react-redux';
+import { MyLibraryRequest } from 'redux/reducers/MyLibrary';
+import { LibraryItemTypes } from 'types/book';
+import BookItem from '../_item/BookItem';
 
-function LikeBookList() {
+type PropsType = {
+  userId: number;
+};
+
+function LikeBookList({ userId }: PropsType) {
+  const dispatch = useDispatch();
   const [id, setId] = useState<number>(-1);
   const [likeToggle, likeToggleIsOn] = useToggle(false);
+  const { userBookList } = useSelector((state: any) => state.myLibrary);
 
   const moveReadClick = () => {
     likeToggleIsOn();
   };
 
+  useEffect(() => {
+    if (userId) dispatch(MyLibraryRequest({ userId, progress: 0 }));
+  }, [userId]);
+
   return (
     <>
       <Wrapper>
-        {BookItems.map(
-          (item: BooksType) =>
-            item.role === 'like' && (
-              <BookItem
-                key={item.id}
-                {...item}
-                handleToggle={likeToggleIsOn}
-                handleReviewToggle={likeToggleIsOn}
-                onClick={() => setId(item.id)}
-              />
-            ),
-        )}
+        {userBookList.length > 0 &&
+          userBookList.map((item: LibraryItemTypes) => (
+            <BookItem
+              key={item.id}
+              {...item}
+              handleToggle={likeToggleIsOn}
+              handleReviewToggle={likeToggleIsOn}
+              onClick={() => setId(item.id)}
+            />
+          ))}
       </Wrapper>
       {likeToggle && (
         <MoveReadModal

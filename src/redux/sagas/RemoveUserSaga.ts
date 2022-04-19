@@ -1,4 +1,4 @@
-import { instance } from 'api/axios';
+import instance from 'api/axios';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { RemoveUserTypes } from 'types/api';
 import {
@@ -8,7 +8,7 @@ import {
 } from '../reducers/RemoveUser';
 
 function RemoveUserAPI(data: RemoveUserTypes) {
-  return instance.get("/user");
+  return instance.get('/user');
 }
 
 function* fetchRemoveUserSaga(action: any): any {

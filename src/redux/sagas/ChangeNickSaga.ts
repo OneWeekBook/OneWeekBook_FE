@@ -1,4 +1,4 @@
-import { instance } from 'api/axios';
+import instance from 'api/axios';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { ChangeNickTypes } from 'types/api';
 import {
@@ -8,7 +8,7 @@ import {
 } from '../reducers/ChangeNick';
 
 function ChangeNickAPI(data: ChangeNickTypes) {
-  return instance.get("/user");
+  return instance.get('/user');
 }
 
 function* fetchChangeNickSaga(action: any): any {

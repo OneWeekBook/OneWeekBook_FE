@@ -2,30 +2,31 @@ import React, { useState, useLayoutEffect } from 'react';
 import styled from 'styled-components';
 import { BookItems } from 'db/bookdata';
 import { useToggle } from 'hooks/useToggle';
-import BookItem, { BooksType } from '../_item/BookItem';
+import { LibraryItemTypes } from 'types/book';
+import BookItem from '../_item/BookItem';
 import WriteCommentModal from '../Modal/WriteCommentModal';
 
 function ReadBookList() {
   const [id, setId] = useState<number>(-1);
   const [readToggle, readToggleIsOn] = useToggle(false);
-  const [bookData, setBookData] = useState<BooksType>();
+  const [bookData, setBookData] = useState<LibraryItemTypes>();
 
-  useLayoutEffect(() => {
-    if (id !== -1)
-      setBookData({
-        ...BookItems.filter((item: BooksType) => item.id === id)[0],
-      });
-    return () => {
-      setId(-1);
-    };
-  }, [id]);
+  // useLayoutEffect(() => {
+  //   if (id !== -1)
+  //     setBookData({
+  //       ...BookItems.filter((item: LibraryItemTypes) => item.id === id)[0],
+  //     });
+  //   return () => {
+  //     setId(-1);
+  //   };
+  // }, [id]);
 
   return (
     <>
       <Wrapper>
-        {BookItems.map(
-          (item: BooksType) =>
-            item.role === 'read' && (
+        {/* {BookItems.map(
+          (item: LibraryItemTypes) =>
+            item.progress === 1 && (
               <BookItem
                 key={item.id}
                 {...item}
@@ -34,7 +35,7 @@ function ReadBookList() {
                 onClick={() => setId(item.id)}
               />
             ),
-        )}
+        )} */}
       </Wrapper>
       {readToggle && bookData && (
         <WriteCommentModal {...bookData} toggleIsOn={readToggleIsOn} />

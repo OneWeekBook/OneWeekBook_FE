@@ -2,19 +2,19 @@ import React from 'react';
 import WriteModal from 'components/Modal';
 import styled from 'styled-components';
 import { useInput } from 'hooks/useInput';
-import { BooksType } from '../_item/BookItem';
+import { LibraryItemTypes } from 'types/book';
 
 type PropsType = {
   toggleIsOn: () => void;
 };
 
 function WriteCommentModal({
-  role,
+  progress,
   title,
   author,
-  startDate,
+  startTime,
   toggleIsOn,
-}: BooksType & PropsType) {
+}: LibraryItemTypes & PropsType) {
   const [comment, changeComment] = useInput('');
   return (
     <WriteModal
@@ -35,10 +35,10 @@ function WriteCommentModal({
           <div className="bookInfo">
             <p>{title}</p>
             <p>
-              {author} {startDate}
+              {author} {startTime}
             </p>
           </div>
-          {role === 'read' && <button type="button">독서 완료</button>}
+          {progress === 1 && <button type="button">독서 완료</button>}
         </InfoWrapper>
         <InputWrapper>
           <Input>

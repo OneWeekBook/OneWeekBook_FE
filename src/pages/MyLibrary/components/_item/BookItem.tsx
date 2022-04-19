@@ -1,15 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
-export type BooksType = {
-  id: number;
-  img: string;
-  role: string;
-  title: string;
-  author: string;
-  startDate: null | string;
-  endDate: null | string;
-};
+import { LibraryItemTypes } from 'types/book';
 
 type ClickType = {
   handleToggle: () => void;
@@ -20,15 +11,16 @@ type ClickType = {
 function BookItem({
   id,
   img,
-  role,
+  progress,
   title,
   author,
-  startDate,
-  endDate,
+  publisher,
+  startTime,
+  endTime,
   handleToggle,
   handleReviewToggle,
   onClick,
-}: BooksType & ClickType) {
+}: LibraryItemTypes & ClickType) {
   return (
     <Wrapper>
       <ImgWrapper>
@@ -36,13 +28,16 @@ function BookItem({
       </ImgWrapper>
       <InfoWrapper>
         <div>
-          <p className="bookTitle">{title}</p>
+          <p className="bookTitle">
+            {title.replaceAll('<b>', '').replaceAll('</b>', '')}
+          </p>
           <p className="bookAuthor">{author}</p>
-          {startDate && <p>독서 시작: {startDate}</p>}
-          {endDate && <p>독서 완료: {endDate}</p>}
+          <p className="bookPublisher">{publisher}</p>
+          {startTime && <p>독서 시작: {startTime}</p>}
+          {endTime && <p>독서 완료: {endTime}</p>}
         </div>
         <ButtonWrapper>
-          {role === 'like' && (
+          {progress === 0 && (
             <button
               onClick={() => {
                 handleToggle();
@@ -53,7 +48,7 @@ function BookItem({
               시작하기
             </button>
           )}
-          {(role === 'read' || role === 'done') && (
+          {(progress === 1 || progress === 2) && (
             <button
               onClick={() => {
                 handleToggle();
@@ -64,7 +59,7 @@ function BookItem({
               기록하기
             </button>
           )}
-          {role === 'done' && (
+          {progress === 2 && (
             <button
               onClick={() => {
                 handleReviewToggle();
@@ -92,15 +87,20 @@ const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-left: 5px;
   width: 100%;
   .bookTitle {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
   }
   .bookAuthor {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     color: gray;
+  }
+  .bookPublisher {
+    font-size: 14px;
+    font-weight: 600;
   }
 `;
 

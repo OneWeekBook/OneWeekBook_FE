@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { userToggle } from 'redux/reducers/FuncToggle';
 import styled from 'styled-components';
 import Nav from './Nav';
 
@@ -21,8 +23,13 @@ const NavItems = [
 ];
 
 function MyLibraryNav() {
+  const dispatch = useDispatch();
   const [navId, setNavId] = useState<number>(0);
   const handleClick = (id: number) => setNavId(id);
+
+  useEffect(() => {
+    dispatch(userToggle());
+  }, []);
 
   return (
     <>
