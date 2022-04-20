@@ -8,7 +8,7 @@ import category from './Category';
 import search from './Search';
 import changeNick from './ChangeNick';
 import changePassword from './ChangePassword';
-import funcToggle from './FuncToggle';
+import func from './Func';
 import removeUser from './RemoveUser';
 import myLibrary from './MyLibrary';
 
@@ -22,7 +22,7 @@ const rootReducer = combineReducers({
   search,
   changeNick,
   changePassword,
-  funcToggle,
+  func,
   removeUser,
   myLibrary,
 });

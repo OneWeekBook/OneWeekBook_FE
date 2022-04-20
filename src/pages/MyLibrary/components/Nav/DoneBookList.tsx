@@ -1,8 +1,8 @@
 import React, { useState, useLayoutEffect } from 'react';
 import styled from 'styled-components';
-import { BookItems } from 'db/bookdata';
 import { useToggle } from 'hooks/useToggle';
 import { LibraryItemTypes } from 'types/book';
+import { useSelector } from 'react-redux';
 import BookItem from '../_item/BookItem';
 import WriteCommentModal from '../Modal/WriteCommentModal';
 import WriteReviewModal from '../Modal/WriteReviewModal';
@@ -12,21 +12,24 @@ function DoneBookList() {
   const [commentToggle, commentToggleIsOn] = useToggle(false);
   const [reivewToggle, reviewToggleIsOn] = useToggle(false);
   const [bookData, setBookData] = useState<LibraryItemTypes>();
+  const { userBookList } = useSelector((state: any) => state.myLibrary);
 
   return (
     <>
       <Wrapper>
-        {/* {BookItems.map((item: LibraryItemTypes) => {
-          item.progress === 2 && (
-            <BookItem
-              key={item.id}
-              {...item}
-              handleToggle={commentToggleIsOn}
-              handleReviewToggle={reviewToggleIsOn}
-              onClick={() => setId(item.id)}
-            />
-          );
-        })} */}
+        {userBookList.length > 0 &&
+          userBookList.map(
+            (item: LibraryItemTypes) =>
+              item.progress === 2 && (
+                <BookItem
+                  key={item.id}
+                  {...item}
+                  handleToggle={commentToggleIsOn}
+                  handleReviewToggle={reviewToggleIsOn}
+                  onClick={() => setId(item.id)}
+                />
+              ),
+          )}
       </Wrapper>
       {commentToggle && bookData && (
         <WriteCommentModal {...bookData} toggleIsOn={commentToggleIsOn} />

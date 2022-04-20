@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { SetStartDate } from 'lib/SetDate';
 import { LibraryItemTypes } from 'types/book';
 
 type ClickType = {
@@ -31,10 +32,12 @@ function BookItem({
           <p className="bookTitle">
             {title.replaceAll('<b>', '').replaceAll('</b>', '')}
           </p>
-          <p className="bookAuthor">{author}</p>
+          <p className="bookAuthor">
+            {author.replaceAll('<b>', '').replaceAll('</b>', '')}
+          </p>
           <p className="bookPublisher">{publisher}</p>
-          {startTime && <p>독서 시작: {startTime}</p>}
-          {endTime && <p>독서 완료: {endTime}</p>}
+          {startTime && <p>독서 시작: {SetStartDate(startTime)}</p>}
+          {endTime && <p>독서 완료: {SetStartDate(endTime)}</p>}
         </div>
         <ButtonWrapper>
           {progress === 0 && (
@@ -87,7 +90,7 @@ const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-left: 5px;
+  margin-left: 10px;
   width: 100%;
   .bookTitle {
     font-size: 16px;

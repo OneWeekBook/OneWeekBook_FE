@@ -1,6 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { userToggle } from 'redux/reducers/FuncToggle';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  navDone,
+  navInit,
+  navLike,
+  navRead,
+  userToggle,
+} from 'redux/reducers/Func';
+import { MyLibraryInit, MyLibraryRequest } from 'redux/reducers/MyLibrary';
 import styled from 'styled-components';
 import Nav from './Nav';
 
@@ -24,28 +31,47 @@ const NavItems = [
 
 function MyLibraryNav() {
   const dispatch = useDispatch();
-  const [navId, setNavId] = useState<number>(0);
-  const handleClick = (id: number) => setNavId(id);
+  const { user } = useSelector((state: any) => state.authUser);
+  const { navId } = useSelector((state: any) => state.func);
 
   useEffect(() => {
-    dispatch(userToggle());
+    userToggle();
   }, []);
+
+  useEffect(() => {
+    if (user.id)
+      dispatch(MyLibraryRequest({ userId: user.id, progress: navId }));
+    return () => {
+      dispatch(MyLibraryInit());
+    };
+  }, [user.id, navId]);
 
   return (
     <>
       <Wrapper>
-        {NavItems.map((item) => (
-          <NavItem
-            key={item.id}
-            isSelected={item.id === navId}
-            onClick={() => handleClick(item.id)}
-          >
-            <img src={item.img} alt="nav button" width={30} height={30} />
-            <p>{item.desc}</p>
-          </NavItem>
-        ))}
+        <NavItem
+          isSelected={NavItems[0].id === navId}
+          onClick={() => dispatch(navLike())}
+        >
+          <img src={NavItems[0].img} alt="nav button" width={30} height={30} />
+          <p>{NavItems[0].desc}</p>
+        </NavItem>
+        <NavItem
+          isSelected={NavItems[1].id === navId}
+          onClick={() => dispatch(navRead())}
+        >
+          <img src={NavItems[1].img} alt="nav button" width={30} height={30} />
+          <p>{NavItems[1].desc}</p>
+        </NavItem>
+        <NavItem
+          isSelected={NavItems[2].id === navId}
+          onClick={() => dispatch(navDone())}
+        >
+          <img src={NavItems[2].img} alt="nav button" width={30} height={30} />
+          <p>{NavItems[2].desc}</p>
+        </NavItem>
       </Wrapper>
-      <Nav id={navId} />
+      <Nav id={navId} userId={user.id} />
     </>
   );
 }

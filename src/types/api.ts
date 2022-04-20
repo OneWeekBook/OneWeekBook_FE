@@ -41,8 +41,8 @@ export type MyLibraryAddTypes = {
 
 export type MyLibraryModifyTypes = {
   progress: number;
-  isbn: number;
-  userid: number;
+  isbn: string;
+  userId: number;
 };
 
 export type MyLibraryDeleteType = {

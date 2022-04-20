@@ -1,41 +1,39 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { BookItems } from 'db/bookdata';
 import { useToggle } from 'hooks/useToggle';
 import { LibraryItemTypes } from 'types/book';
+import { useDispatch, useSelector } from 'react-redux';
+import { MyLibraryInit, MyLibraryRequest } from 'redux/reducers/MyLibrary';
 import BookItem from '../_item/BookItem';
 import WriteCommentModal from '../Modal/WriteCommentModal';
 
-function ReadBookList() {
+type PropsType = {
+  userId: number;
+};
+
+function ReadBookList({ userId }: PropsType) {
+  const dispatch = useDispatch();
   const [id, setId] = useState<number>(-1);
   const [readToggle, readToggleIsOn] = useToggle(false);
   const [bookData, setBookData] = useState<LibraryItemTypes>();
-
-  // useLayoutEffect(() => {
-  //   if (id !== -1)
-  //     setBookData({
-  //       ...BookItems.filter((item: LibraryItemTypes) => item.id === id)[0],
-  //     });
-  //   return () => {
-  //     setId(-1);
-  //   };
-  // }, [id]);
+  const { userBookList } = useSelector((state: any) => state.myLibrary);
 
   return (
     <>
       <Wrapper>
-        {/* {BookItems.map(
-          (item: LibraryItemTypes) =>
-            item.progress === 1 && (
-              <BookItem
-                key={item.id}
-                {...item}
-                handleToggle={readToggleIsOn}
-                handleReviewToggle={readToggleIsOn}
-                onClick={() => setId(item.id)}
-              />
-            ),
-        )} */}
+        {userBookList.length > 0 &&
+          userBookList.map(
+            (item: LibraryItemTypes) =>
+              item.progress === 1 && (
+                <BookItem
+                  key={item.id}
+                  {...item}
+                  handleToggle={readToggleIsOn}
+                  handleReviewToggle={readToggleIsOn}
+                  onClick={() => setId(item.id)}
+                />
+              ),
+          )}
       </Wrapper>
       {readToggle && bookData && (
         <WriteCommentModal {...bookData} toggleIsOn={readToggleIsOn} />

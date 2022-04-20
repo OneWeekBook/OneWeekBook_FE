@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useToggle } from 'hooks/useToggle';
 import MoveReadModal from 'components/Modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { MyLibraryRequest } from 'redux/reducers/MyLibrary';
+import { MyLibraryModifyRequest } from 'redux/reducers/MyLibrary';
 import { LibraryItemTypes } from 'types/book';
+import { navRead } from 'redux/reducers/Func';
 import BookItem from '../_item/BookItem';
 
 type PropsType = {
@@ -13,17 +14,15 @@ type PropsType = {
 
 function LikeBookList({ userId }: PropsType) {
   const dispatch = useDispatch();
-  const [id, setId] = useState<number>(-1);
+  const [isbn, setIsbn] = useState<string>('');
   const [likeToggle, likeToggleIsOn] = useToggle(false);
   const { userBookList } = useSelector((state: any) => state.myLibrary);
 
-  const moveReadClick = () => {
+  const moveReadClick = async () => {
+    await dispatch(MyLibraryModifyRequest({ progress: 1, isbn, userId }));
     likeToggleIsOn();
+    dispatch(navRead());
   };
-
-  useEffect(() => {
-    if (userId) dispatch(MyLibraryRequest({ userId, progress: 0 }));
-  }, [userId]);
 
   return (
     <>
@@ -35,7 +34,9 @@ function LikeBookList({ userId }: PropsType) {
               {...item}
               handleToggle={likeToggleIsOn}
               handleReviewToggle={likeToggleIsOn}
-              onClick={() => setId(item.id)}
+              onClick={() => {
+                setIsbn(item.isbn);
+              }}
             />
           ))}
       </Wrapper>

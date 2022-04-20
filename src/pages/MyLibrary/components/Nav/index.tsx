@@ -1,20 +1,19 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import DoneBookList from './DoneBookList';
 import LikeBookList from './LikeBookList';
 import ReadBookList from './ReadBookList';
 
 type PropsType = {
   id: number;
+  userId: number;
 };
 
-function Index({ id }: PropsType) {
-  const { user } = useSelector((state: any) => state.authUser);
+function Index({ id, userId }: PropsType) {
   switch (id) {
     case 0:
-      return <LikeBookList userId={user.id} />;
+      return <LikeBookList userId={userId} />;
     case 1:
-      return <ReadBookList />;
+      return <ReadBookList userId={userId} />;
     case 2:
       return <DoneBookList />;
     default:
