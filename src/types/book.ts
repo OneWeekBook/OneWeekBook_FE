@@ -57,3 +57,11 @@ export type LibraryItemTypes = {
   updatedAt: string;
   userId: number;
 };
+
+export type InfoTypes = {
+  progress: number;
+  title: string;
+  author: string;
+  startTime: string | null;
+  endTime: string | null;
+};

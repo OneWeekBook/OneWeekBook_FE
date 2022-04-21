@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import WriteModal from 'components/Modal';
 import styled from 'styled-components';
 import { useInput } from 'hooks/useInput';
-import { LibraryItemTypes } from 'types/book';
+import { InfoTypes } from 'types/book';
+import { SetStartDate } from 'lib/SetDate';
 
 const RecommendItem = [
   {
@@ -32,17 +33,11 @@ const RecommendItem = [
 ];
 
 type PropsType = {
+  bookData: InfoTypes;
   toggleIsOn: () => void;
 };
 
-function WriteReviewModal({
-  progress,
-  title,
-  author,
-  startTime,
-  endTime,
-  toggleIsOn,
-}: LibraryItemTypes & PropsType) {
+function WriteReviewModal({ bookData, toggleIsOn }: PropsType) {
   const [recommend, setRecommend] = useState<string>('');
   const [review, changeReview] = useInput('');
 
@@ -69,12 +64,16 @@ function WriteReviewModal({
       <BodyWrapper>
         <InfoWrapper>
           <div className="bookInfo">
-            <p>{title}</p>
+            <p>{bookData.title.replaceAll('<b>', '').replaceAll('</b>', '')}</p>
             <p>
-              {author} {startTime} ~ {endTime}
+              {bookData.author.replaceAll('<b>', '').replaceAll('</b>', '')}
+              {' | '}
+              {SetStartDate(bookData.startTime)}
+              {' ~ '}
+              {SetStartDate(bookData.endTime)}
             </p>
           </div>
-          {progress === 1 && <button type="button">독서 완료</button>}
+          {bookData.progress === 1 && <button type="button">독서 완료</button>}
         </InfoWrapper>
         <RecommendWrapper>
           <p>책이 어떻나요?</p>
@@ -125,12 +124,12 @@ const InfoWrapper = styled.div`
   justify-content: space-between;
   padding-bottom: 10px;
   .bookInfo {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     .bookInfo {
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 600;
     }
   }

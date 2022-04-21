@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useToggle } from 'hooks/useToggle';
-import { LibraryItemTypes } from 'types/book';
+import { InfoTypes, LibraryItemTypes } from 'types/book';
 import { useDispatch, useSelector } from 'react-redux';
 import { MyLibraryModifyRequest } from 'redux/reducers/MyLibrary';
 import { navDone } from 'redux/reducers/Func';
@@ -12,13 +12,6 @@ type PropsType = {
   userId: number;
 };
 
-type InfoTypes = {
-  progress: number;
-  title: string;
-  author: string;
-  startTime: string | null;
-};
-
 function ReadBookList({ userId }: PropsType) {
   const dispatch = useDispatch();
   const [isbn, setIsbn] = useState<string>('');
@@ -27,7 +20,8 @@ function ReadBookList({ userId }: PropsType) {
     progress: 0,
     title: '',
     author: '',
-    startTime: '',
+    startTime: null,
+    endTime: null,
   });
   const { userBookList } = useSelector((state: any) => state.myLibrary);
 
@@ -56,6 +50,7 @@ function ReadBookList({ userId }: PropsType) {
                       title: item.title,
                       author: item.author,
                       startTime: item.startTime,
+                      endTime: null,
                     });
                   }}
                 />

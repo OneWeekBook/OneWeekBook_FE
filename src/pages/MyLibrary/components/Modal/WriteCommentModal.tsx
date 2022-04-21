@@ -3,18 +3,12 @@ import WriteModal from 'components/Modal';
 import styled from 'styled-components';
 import { useInput } from 'hooks/useInput';
 import { SetStartDate } from 'lib/SetDate';
-
-type InfoTypes = {
-  progress: number;
-  title: string;
-  author: string;
-  startTime: string | null;
-};
+import { InfoTypes } from 'types/book';
 
 type PropsTypes = {
   bookData: InfoTypes;
   toggleIsOn: () => void;
-  moveDoneClick: () => void;
+  moveDoneClick?: () => void;
 };
 
 function WriteCommentModal({
