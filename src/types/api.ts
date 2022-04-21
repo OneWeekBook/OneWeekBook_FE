@@ -45,6 +45,15 @@ export type MyLibraryModifyTypes = {
   userId: number;
 };
 
-export type MyLibraryDeleteType = {
+export type ParagraphType = {
+  bookId: number;
+};
+
+export type ParagraphSaveTypes = {
+  bookId: number;
+  paragraph: string;
+};
+
+export type DeleteType = {
   id: number;
 };

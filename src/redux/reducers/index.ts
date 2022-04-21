@@ -11,6 +11,7 @@ import changePassword from './ChangePassword';
 import func from './Func';
 import removeUser from './RemoveUser';
 import myLibrary from './MyLibrary';
+import paragraph from './Paragraph';
 
 const rootReducer = combineReducers({
   authEmail,
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   func,
   removeUser,
   myLibrary,
+  paragraph,
 });
 
 export default rootReducer;

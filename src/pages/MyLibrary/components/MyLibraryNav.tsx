@@ -1,12 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  navDone,
-  navInit,
-  navLike,
-  navRead,
-  userToggle,
-} from 'redux/reducers/Func';
+import { navDone, navLike, navRead } from 'redux/reducers/Func';
 import { MyLibraryInit, MyLibraryRequest } from 'redux/reducers/MyLibrary';
 import styled from 'styled-components';
 import Nav from './Nav';
@@ -33,10 +27,6 @@ function MyLibraryNav() {
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state.authUser);
   const { navId } = useSelector((state: any) => state.func);
-
-  useEffect(() => {
-    userToggle();
-  }, []);
 
   useEffect(() => {
     if (user.id)

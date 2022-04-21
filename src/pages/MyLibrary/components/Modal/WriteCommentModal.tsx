@@ -1,22 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import WriteModal from 'components/Modal';
 import styled from 'styled-components';
 import { useInput } from 'hooks/useInput';
 import { SetStartDate } from 'lib/SetDate';
-import { InfoTypes } from 'types/book';
+import { InfoTypes, ParagraphTypes } from 'types/book';
+import { useDispatch, useSelector } from 'react-redux';
+import { ParagraphRequest } from 'redux/reducers/Paragraph';
 
 type PropsTypes = {
+  bookId: number;
   bookData: InfoTypes;
   toggleIsOn: () => void;
   moveDoneClick?: () => void;
 };
 
 function WriteCommentModal({
+  bookId,
   bookData,
   toggleIsOn,
   moveDoneClick,
 }: PropsTypes) {
+  const dispatch = useDispatch();
   const [comment, changeComment] = useInput('');
+  const { paragraph } = useSelector((state: any) => state.paragraph);
+
+  useEffect(() => {
+    dispatch(ParagraphRequest({ bookId }));
+  }, []);
+
   return (
     <WriteModal
       type="write"
@@ -60,11 +71,9 @@ function WriteCommentModal({
           <button type="button">추가</button>
         </InputWrapper>
         <div>
-          <ContentItem>안녕하세요안녕하세요</ContentItem>
-          <ContentItem>안녕하세요안녕하세요</ContentItem>
-          <ContentItem>안녕하세요안녕하세요</ContentItem>
-          <ContentItem>안녕하세요안녕하세요</ContentItem>
-          <ContentItem>안녕하세요안녕하세요</ContentItem>
+          {paragraph.map((item: ParagraphTypes) => (
+            <ContentItem key={item.id}>{item.paragraph}</ContentItem>
+          ))}
         </div>
       </BodyWrapper>
     </WriteModal>

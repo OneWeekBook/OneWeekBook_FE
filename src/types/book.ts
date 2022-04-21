@@ -65,3 +65,11 @@ export type InfoTypes = {
   startTime: string | null;
   endTime: string | null;
 };
+
+export type ParagraphTypes = {
+  id: number;
+  bookId: number;
+  paragraph: string;
+  createdAt: string;
+  updatedAt: string;
+};

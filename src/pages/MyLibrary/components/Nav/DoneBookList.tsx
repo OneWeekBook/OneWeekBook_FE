@@ -9,6 +9,7 @@ import WriteReviewModal from '../Modal/WriteReviewModal';
 
 function DoneBookList() {
   const [isbn, setIsbn] = useState<string>('');
+  const [bookId, setBookId] = useState<number>(-1);
   const [commentToggle, commentToggleIsOn] = useToggle(false);
   const [reivewToggle, reviewToggleIsOn] = useToggle(false);
   const [bookData, setBookData] = useState<InfoTypes>({
@@ -32,6 +33,7 @@ function DoneBookList() {
               handleReviewToggle={reviewToggleIsOn}
               onClick={() => {
                 setIsbn(item.isbn);
+                setBookId(item.id);
                 setBookData({
                   progress: item.progress,
                   title: item.title,
@@ -44,7 +46,11 @@ function DoneBookList() {
           ))}
       </Wrapper>
       {commentToggle && bookData && (
-        <WriteCommentModal bookData={bookData} toggleIsOn={commentToggleIsOn} />
+        <WriteCommentModal
+          bookId={bookId}
+          bookData={bookData}
+          toggleIsOn={commentToggleIsOn}
+        />
       )}
       {reivewToggle && bookData && (
         <WriteReviewModal bookData={bookData} toggleIsOn={reviewToggleIsOn} />

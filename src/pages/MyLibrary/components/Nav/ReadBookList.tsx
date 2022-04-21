@@ -15,6 +15,7 @@ type PropsType = {
 function ReadBookList({ userId }: PropsType) {
   const dispatch = useDispatch();
   const [isbn, setIsbn] = useState<string>('');
+  const [bookId, setBookId] = useState<number>(-1);
   const [readToggle, readToggleIsOn] = useToggle(false);
   const [bookData, setBookData] = useState<InfoTypes>({
     progress: 0,
@@ -45,6 +46,7 @@ function ReadBookList({ userId }: PropsType) {
                   handleReviewToggle={readToggleIsOn}
                   onClick={() => {
                     setIsbn(item.isbn);
+                    setBookId(item.id);
                     setBookData({
                       progress: item.progress,
                       title: item.title,
@@ -59,6 +61,7 @@ function ReadBookList({ userId }: PropsType) {
       </Wrapper>
       {readToggle && bookData && (
         <WriteCommentModal
+          bookId={bookId}
           bookData={bookData}
           toggleIsOn={readToggleIsOn}
           moveDoneClick={moveDoneClick}
