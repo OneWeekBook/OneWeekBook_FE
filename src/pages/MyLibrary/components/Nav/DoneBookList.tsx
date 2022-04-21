@@ -31,9 +31,9 @@ function DoneBookList() {
               ),
           )}
       </Wrapper>
-      {commentToggle && bookData && (
+      {/* {commentToggle && bookData && (
         <WriteCommentModal {...bookData} toggleIsOn={commentToggleIsOn} />
-      )}
+      )} */}
       {reivewToggle && bookData && (
         <WriteReviewModal {...bookData} toggleIsOn={reviewToggleIsOn} />
       )}
@@ -52,6 +52,9 @@ const Wrapper = styled.div`
     width: 95%;
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: 500px) {
+    grid-template-columns: 1fr;
   }
 `;

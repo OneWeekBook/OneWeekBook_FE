@@ -2,19 +2,26 @@ import React from 'react';
 import WriteModal from 'components/Modal';
 import styled from 'styled-components';
 import { useInput } from 'hooks/useInput';
-import { LibraryItemTypes } from 'types/book';
+import { SetStartDate } from 'lib/SetDate';
 
-type PropsType = {
+type InfoTypes = {
+  progress: number;
+  title: string;
+  author: string;
+  startTime: string | null;
+};
+
+type PropsTypes = {
+  bookData: InfoTypes;
   toggleIsOn: () => void;
+  moveDoneClick: () => void;
 };
 
 function WriteCommentModal({
-  progress,
-  title,
-  author,
-  startTime,
+  bookData,
   toggleIsOn,
-}: LibraryItemTypes & PropsType) {
+  moveDoneClick,
+}: PropsTypes) {
   const [comment, changeComment] = useInput('');
   return (
     <WriteModal
@@ -33,12 +40,18 @@ function WriteCommentModal({
       <BodyWrapper>
         <InfoWrapper>
           <div className="bookInfo">
-            <p>{title}</p>
+            <p>{bookData.title.replaceAll('<b>', '').replaceAll('</b>', '')}</p>
             <p>
-              {author} {startTime}
+              {bookData.author.replaceAll('<b>', '').replaceAll('</b>', '')}
+              {' | '}
+              {SetStartDate(bookData.startTime)}
             </p>
           </div>
-          {progress === 1 && <button type="button">독서 완료</button>}
+          {bookData.progress === 1 && (
+            <button type="button" onClick={moveDoneClick}>
+              독서 완료
+            </button>
+          )}
         </InfoWrapper>
         <InputWrapper>
           <Input>
@@ -73,6 +86,38 @@ const BodyWrapper = styled.div`
   }
 `;
 
+const InfoWrapper = styled.div`
+  box-sizing: border-box;
+  border-bottom: 2px solid black;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  .bookInfo {
+    font-size: 16px;
+    font-weight: 600;
+  }
+  button {
+    border: none;
+    border-radius: 10px;
+    width: 100px;
+    height: 40px;
+    flex-shrink: 0;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    .bookInfo {
+      font-size: 14px;
+      font-weight: 600;
+    }
+    button {
+      width: 80px;
+      height: 35px;
+      font-size: 14px;
+    }
+  }
+`;
+
 const InputWrapper = styled.div`
   display: flex;
   position: relative;
@@ -81,41 +126,9 @@ const InputWrapper = styled.div`
     bottom: 5px;
     position: absolute;
     border: none;
-    width: 30px;
+    border-radius: 5px;
+    width: 40px;
     height: 30px;
-  }
-`;
-
-const InfoWrapper = styled.div`
-  box-sizing: border-box;
-  border-bottom: 2px solid black;
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 10px;
-  .bookInfo {
-    font-size: 18px;
-    font-weight: 600;
-  }
-  button {
-    border: none;
-    border-radius: 10px;
-    width: 100px;
-    height: 40px;
-    font-size: 16px;
-    font-weight: 600;
-  }
-  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    .bookInfo {
-      font-size: 16px;
-      font-weight: 600;
-    }
-    button {
-      border: none;
-      width: 80px;
-      height: 35px;
-      font-size: 14px;
-      font-weight: 600;
-    }
   }
 `;
 

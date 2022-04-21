@@ -5,9 +5,14 @@ export const SetDate = (date: string) => {
   return `${year}. ${month}. ${day}`;
 };
 
-export const SetStartDate = (date: string) => {
-  const year = date.slice(0, 4);
-  const month = date.slice(5, 7);
-  const day = date.slice(8, 10);
+export const SetStartDate = (date: string | null) => {
+  let year = '';
+  let month = '';
+  let day = '';
+  if (date) {
+    year = date.slice(0, 4);
+    month = date.slice(5, 7);
+    day = date.slice(8, 10);
+  }
   return `${year}. ${month}. ${day}`;
 };

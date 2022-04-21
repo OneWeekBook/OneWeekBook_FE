@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useToggle } from 'hooks/useToggle';
 import { LibraryItemTypes } from 'types/book';
 import { useDispatch, useSelector } from 'react-redux';
-import { MyLibraryInit, MyLibraryRequest } from 'redux/reducers/MyLibrary';
+import { MyLibraryModifyRequest } from 'redux/reducers/MyLibrary';
+import { navDone } from 'redux/reducers/Func';
 import BookItem from '../_item/BookItem';
 import WriteCommentModal from '../Modal/WriteCommentModal';
 
@@ -11,12 +12,30 @@ type PropsType = {
   userId: number;
 };
 
+type InfoTypes = {
+  progress: number;
+  title: string;
+  author: string;
+  startTime: string | null;
+};
+
 function ReadBookList({ userId }: PropsType) {
   const dispatch = useDispatch();
-  const [id, setId] = useState<number>(-1);
+  const [isbn, setIsbn] = useState<string>('');
   const [readToggle, readToggleIsOn] = useToggle(false);
-  const [bookData, setBookData] = useState<LibraryItemTypes>();
+  const [bookData, setBookData] = useState<InfoTypes>({
+    progress: 0,
+    title: '',
+    author: '',
+    startTime: '',
+  });
   const { userBookList } = useSelector((state: any) => state.myLibrary);
+
+  const moveDoneClick = async () => {
+    await dispatch(MyLibraryModifyRequest({ progress: 2, isbn, userId }));
+    readToggleIsOn();
+    dispatch(navDone());
+  };
 
   return (
     <>
@@ -30,13 +49,25 @@ function ReadBookList({ userId }: PropsType) {
                   {...item}
                   handleToggle={readToggleIsOn}
                   handleReviewToggle={readToggleIsOn}
-                  onClick={() => setId(item.id)}
+                  onClick={() => {
+                    setIsbn(item.isbn);
+                    setBookData({
+                      progress: item.progress,
+                      title: item.title,
+                      author: item.author,
+                      startTime: item.startTime,
+                    });
+                  }}
                 />
               ),
           )}
       </Wrapper>
       {readToggle && bookData && (
-        <WriteCommentModal {...bookData} toggleIsOn={readToggleIsOn} />
+        <WriteCommentModal
+          bookData={bookData}
+          toggleIsOn={readToggleIsOn}
+          moveDoneClick={moveDoneClick}
+        />
       )}
     </>
   );
@@ -53,6 +84,9 @@ const Wrapper = styled.div`
     width: 95%;
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: 500px) {
+    grid-template-columns: 1fr;
   }
 `;

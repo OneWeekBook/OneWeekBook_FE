@@ -44,7 +44,7 @@ function MyLibraryNav() {
     return () => {
       dispatch(MyLibraryInit());
     };
-  }, [user.id, navId]);
+  }, [user, navId]);
 
   return (
     <>
