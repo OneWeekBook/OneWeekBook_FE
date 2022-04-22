@@ -1,12 +1,12 @@
-import { DeleteType, ParagraphSaveTypes, ParagraphType } from 'types/api';
+import { DeleteType, ParagraphAddTypes, ParagraphType } from 'types/api';
 
 export const PARAGRAPH_REQUEST = 'PARAGRAPH_REQUEST';
 export const PARAGRAPH_SUCCESS = 'PARAGRAPH_SUCCESS';
 export const PARAGRAPH_FAIL = 'PARAGRAPH_FAIL';
 
-export const PARAGRAPH_SAVE_REQUEST = 'PARAGRAPH_SAVE_REQUEST';
-export const PARAGRAPH_SAVE_SUCCESS = 'PARAGRAPH_SAVE_SUCCESS';
-export const PARAGRAPH_SAVE_FAIL = 'PARAGRAPH_SAVE_FAIL';
+export const PARAGRAPH_ADD_REQUEST = 'PARAGRAPH_ADD_REQUEST';
+export const PARAGRAPH_ADD_SUCCESS = 'PARAGRAPH_ADD_SUCCESS';
+export const PARAGRAPH_ADD_FAIL = 'PARAGRAPH_ADD_FAIL';
 
 export const PARAGRAPH_DELETE_REQUEST = 'PARAGRAPH_DELETE_REQUEST';
 export const PARAGRAPH_DELETE_SUCCESS = 'PARAGRAPH_DELETE_SUCCESS';
@@ -17,8 +17,8 @@ export const PARAGRAPH_INIT = 'PARAGRAPH_INIT';
 const initialState = {
   isLoading: false,
   isSuccess: false,
-  isSaveLoading: false,
-  isSaveSuccess: false,
+  isAddLoading: false,
+  isAddSuccess: false,
   isDeleteLoading: false,
   isDeleteSuccess: false,
   paragraph: [],
@@ -45,23 +45,23 @@ export default function ChangePassword(state = initialState, action: any) {
         isLoading: false,
         isSuccess: false,
       };
-    case PARAGRAPH_SAVE_REQUEST:
+    case PARAGRAPH_ADD_REQUEST:
       return {
         ...state,
-        isSaveLoading: true,
-        isSaveSuccess: false,
+        isAddLoading: true,
+        isAddSuccess: false,
       };
-    case PARAGRAPH_SAVE_SUCCESS:
+    case PARAGRAPH_ADD_SUCCESS:
       return {
         ...state,
-        isSaveLoading: false,
-        isSaveSuccess: true,
+        isAddLoading: false,
+        isAddSuccess: true,
       };
-    case PARAGRAPH_SAVE_FAIL:
+    case PARAGRAPH_ADD_FAIL:
       return {
         ...state,
-        isSaveLoading: false,
-        isSaveSuccess: false,
+        isAddLoading: false,
+        isAddSuccess: false,
       };
     case PARAGRAPH_DELETE_REQUEST:
       return {
@@ -81,6 +81,8 @@ export default function ChangePassword(state = initialState, action: any) {
         isDeleteLoading: false,
         isDeleteSuccess: false,
       };
+    case PARAGRAPH_INIT:
+      return initialState;
     default:
       return state;
   }
@@ -107,22 +109,22 @@ export const ParagraphFail = (error: any) => {
   };
 };
 
-export const ParagraphSaveRequest = (data: ParagraphSaveTypes) => {
+export const ParagraphAddRequest = (data: ParagraphAddTypes) => {
   return {
-    type: PARAGRAPH_SAVE_REQUEST,
+    type: PARAGRAPH_ADD_REQUEST,
     payload: data,
   };
 };
 
-export const ParagraphSaveSuccess = () => {
+export const ParagraphAddSuccess = () => {
   return {
-    type: PARAGRAPH_SAVE_SUCCESS,
+    type: PARAGRAPH_ADD_SUCCESS,
   };
 };
 
-export const ParagraphSaveFail = (error: any) => {
+export const ParagraphAddFail = (error: any) => {
   return {
-    type: PARAGRAPH_SAVE_FAIL,
+    type: PARAGRAPH_ADD_FAIL,
     error: error.response,
   };
 };
@@ -144,5 +146,11 @@ export const ParagraphDeleteFail = (error: any) => {
   return {
     type: PARAGRAPH_DELETE_FAIL,
     error: error.response,
+  };
+};
+
+export const ParagraphInit = () => {
+  return {
+    type: PARAGRAPH_INIT,
   };
 };

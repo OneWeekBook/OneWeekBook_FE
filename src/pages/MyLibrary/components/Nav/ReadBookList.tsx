@@ -5,6 +5,7 @@ import { InfoTypes, LibraryItemTypes } from 'types/book';
 import { useDispatch, useSelector } from 'react-redux';
 import { MyLibraryModifyRequest } from 'redux/reducers/MyLibrary';
 import { navDone } from 'redux/reducers/Func';
+import { ParagraphRequest } from 'redux/reducers/Paragraph';
 import BookItem from '../_item/BookItem';
 import WriteCommentModal from '../Modal/WriteCommentModal';
 
@@ -25,6 +26,11 @@ function ReadBookList({ userId }: PropsType) {
     endTime: null,
   });
   const { userBookList } = useSelector((state: any) => state.myLibrary);
+  const { paragraph } = useSelector((state: any) => state.paragraph);
+
+  const handleParagraphInfo = (id: number) => {
+    dispatch(ParagraphRequest({ bookId: id }));
+  };
 
   const moveDoneClick = async () => {
     await dispatch(MyLibraryModifyRequest({ progress: 2, isbn, userId }));
@@ -54,12 +60,13 @@ function ReadBookList({ userId }: PropsType) {
                       startTime: item.startTime,
                       endTime: null,
                     });
+                    handleParagraphInfo(item.id);
                   }}
                 />
               ),
           )}
       </Wrapper>
-      {readToggle && bookData && (
+      {readToggle && bookData && paragraph.length > 0 && (
         <WriteCommentModal
           bookId={bookId}
           bookData={bookData}

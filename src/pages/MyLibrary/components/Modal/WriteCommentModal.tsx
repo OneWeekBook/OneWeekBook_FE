@@ -1,11 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import WriteModal from 'components/Modal';
 import styled from 'styled-components';
-import { useInput } from 'hooks/useInput';
 import { SetStartDate } from 'lib/SetDate';
 import { InfoTypes, ParagraphTypes } from 'types/book';
 import { useDispatch, useSelector } from 'react-redux';
-import { ParagraphRequest } from 'redux/reducers/Paragraph';
+import {
+  ParagraphAddRequest,
+  ParagraphInit,
+  ParagraphRequest,
+} from 'redux/reducers/Paragraph';
 
 type PropsTypes = {
   bookId: number;
@@ -21,12 +24,28 @@ function WriteCommentModal({
   moveDoneClick,
 }: PropsTypes) {
   const dispatch = useDispatch();
-  const [comment, changeComment] = useInput('');
-  const { paragraph } = useSelector((state: any) => state.paragraph);
+  const [parag, setParag] = useState<string>('');
+  const { paragraph, isAddSuccess } = useSelector(
+    (state: any) => state.paragraph,
+  );
+
+  const addParagraphClick = async () => {
+    const data = { bookId, paragraph: parag };
+    await dispatch(ParagraphAddRequest(data));
+  };
 
   useEffect(() => {
-    dispatch(ParagraphRequest({ bookId }));
+    return () => {
+      dispatch(ParagraphInit());
+    };
   }, []);
+
+  useEffect(() => {
+    if (isAddSuccess) {
+      setParag('');
+      dispatch(ParagraphRequest({ bookId }));
+    }
+  }, [isAddSuccess]);
 
   return (
     <WriteModal
@@ -63,12 +82,14 @@ function WriteCommentModal({
             <input
               type="text"
               placeholder="기억에 남는 문구를 입력해주세요."
-              defaultValue={comment}
-              onBlur={changeComment}
+              value={parag}
+              onChange={(e) => setParag(e.target.value)}
             />
             <span />
           </Input>
-          <button type="button">추가</button>
+          <button type="button" onClick={addParagraphClick}>
+            추가
+          </button>
         </InputWrapper>
         <div>
           {paragraph.map((item: ParagraphTypes) => (

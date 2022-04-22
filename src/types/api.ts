@@ -49,7 +49,7 @@ export type ParagraphType = {
   bookId: number;
 };
 
-export type ParagraphSaveTypes = {
+export type ParagraphAddTypes = {
   bookId: number;
   paragraph: string;
 };
