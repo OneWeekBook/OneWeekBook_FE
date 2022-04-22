@@ -15,6 +15,7 @@ import watchMyLibraryAdd from './MyLibraryAddSaga';
 import watchMyLibraryModify from './MyLibraryModifySaga';
 import watchParagraph from './ParagraphSaga';
 import watchParagraphAdd from './ParagraphAddSaga';
+import watchParagraphDelete from './ParagraphDeleteSaga';
 
 export default function* rootSaga() {
   yield all([
@@ -34,5 +35,6 @@ export default function* rootSaga() {
     call(watchMyLibraryModify),
     call(watchParagraph),
     call(watchParagraphAdd),
+    call(watchParagraphDelete),
   ]);
 }

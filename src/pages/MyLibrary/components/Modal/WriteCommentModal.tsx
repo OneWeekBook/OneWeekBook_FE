@@ -6,9 +6,11 @@ import { InfoTypes, ParagraphTypes } from 'types/book';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   ParagraphAddRequest,
+  ParagraphDeleteRequest,
   ParagraphInit,
   ParagraphRequest,
 } from 'redux/reducers/Paragraph';
+import ParagraphItem from '../_item/ParagraphItem';
 
 type PropsTypes = {
   bookId: number;
@@ -25,13 +27,17 @@ function WriteCommentModal({
 }: PropsTypes) {
   const dispatch = useDispatch();
   const [parag, setParag] = useState<string>('');
-  const { paragraph, isAddSuccess } = useSelector(
+  const { paragraph, isAddSuccess, isDeleteSuccess } = useSelector(
     (state: any) => state.paragraph,
   );
 
-  const addParagraphClick = async () => {
+  const addParagraphClick = () => {
     const data = { bookId, paragraph: parag };
-    await dispatch(ParagraphAddRequest(data));
+    dispatch(ParagraphAddRequest(data));
+  };
+
+  const deleteParagraphClick = (id: number) => {
+    dispatch(ParagraphDeleteRequest({ id }));
   };
 
   useEffect(() => {
@@ -41,11 +47,11 @@ function WriteCommentModal({
   }, []);
 
   useEffect(() => {
-    if (isAddSuccess) {
+    if (isAddSuccess || isDeleteSuccess) {
       setParag('');
       dispatch(ParagraphRequest({ bookId }));
     }
-  }, [isAddSuccess]);
+  }, [isAddSuccess, isDeleteSuccess]);
 
   return (
     <WriteModal
@@ -91,11 +97,14 @@ function WriteCommentModal({
             추가
           </button>
         </InputWrapper>
-        <div>
-          {paragraph.map((item: ParagraphTypes) => (
-            <ContentItem key={item.id}>{item.paragraph}</ContentItem>
-          ))}
-        </div>
+        {paragraph.map((item: ParagraphTypes) => (
+          <ParagraphItem
+            key={item.id}
+            id={item.id}
+            paragraph={item.paragraph}
+            deleteParagraphClick={deleteParagraphClick}
+          />
+        ))}
       </BodyWrapper>
     </WriteModal>
   );
@@ -187,15 +196,5 @@ const Input = styled.div`
   }
   input:disabled {
     background-color: white;
-  }
-`;
-
-const ContentItem = styled.div`
-  box-sizing: border-box;
-  border-bottom: 1px solid gray;
-  margin: 10px auto;
-  padding-bottom: 5px;
-  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    font-size: 14px;
   }
 `;
