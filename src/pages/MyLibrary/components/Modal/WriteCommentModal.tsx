@@ -94,7 +94,11 @@ function WriteCommentModal({
             <span />
           </Input>
           <button type="button" onClick={addParagraphClick}>
-            추가
+            <img
+              src={`${process.env.PUBLIC_URL}/assets/add.svg`}
+              alt="write"
+              height={30}
+            />
           </button>
         </InputWrapper>
         {paragraph.map((item: ParagraphTypes) => (
@@ -159,9 +163,10 @@ const InputWrapper = styled.div`
     bottom: 5px;
     position: absolute;
     border: none;
-    border-radius: 5px;
+    background-color: white;
     width: 40px;
     height: 30px;
+    font-weight: 600;
   }
 `;
 

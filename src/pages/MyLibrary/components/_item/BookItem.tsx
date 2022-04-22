@@ -127,6 +127,14 @@ const ButtonWrapper = styled.div`
   width: 100%;
   display: flex;
   button {
+    :nth-child(2) {
+      margin-left: 10px;
+    }
+    border-radius: 5px;
+    border: 2px solid #1e90ff;
+    background-color: white;
     width: 100%;
+    color: #1e90ff;
+    font-weight: bold;
   }
 `;

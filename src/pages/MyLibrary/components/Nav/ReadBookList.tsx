@@ -26,7 +26,6 @@ function ReadBookList({ userId }: PropsType) {
     endTime: null,
   });
   const { userBookList } = useSelector((state: any) => state.myLibrary);
-  const { paragraph } = useSelector((state: any) => state.paragraph);
 
   const handleParagraphInfo = (id: number) => {
     dispatch(ParagraphRequest({ bookId: id }));
@@ -66,7 +65,7 @@ function ReadBookList({ userId }: PropsType) {
               ),
           )}
       </Wrapper>
-      {readToggle && bookData && paragraph.length > 0 && (
+      {readToggle && bookData && (
         <WriteCommentModal
           bookId={bookId}
           bookData={bookData}
