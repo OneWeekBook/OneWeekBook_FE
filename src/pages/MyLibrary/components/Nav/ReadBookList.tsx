@@ -41,29 +41,26 @@ function ReadBookList({ userId }: PropsType) {
     <>
       <Wrapper>
         {userBookList.length > 0 &&
-          userBookList.map(
-            (item: LibraryItemTypes) =>
-              item.progress === 1 && (
-                <BookItem
-                  key={item.id}
-                  {...item}
-                  handleToggle={readToggleIsOn}
-                  handleReviewToggle={readToggleIsOn}
-                  onClick={() => {
-                    setIsbn(item.isbn);
-                    setBookId(item.id);
-                    setBookData({
-                      progress: item.progress,
-                      title: item.title,
-                      author: item.author,
-                      startTime: item.startTime,
-                      endTime: null,
-                    });
-                    handleParagraphInfo(item.id);
-                  }}
-                />
-              ),
-          )}
+          userBookList.map((item: LibraryItemTypes) => (
+            <BookItem
+              key={item.id}
+              {...item}
+              handleToggle={readToggleIsOn}
+              handleReviewToggle={readToggleIsOn}
+              onClick={() => {
+                setIsbn(item.isbn);
+                setBookId(item.id);
+                setBookData({
+                  progress: item.progress,
+                  title: item.title,
+                  author: item.author,
+                  startTime: item.startTime,
+                  endTime: null,
+                });
+                handleParagraphInfo(item.id);
+              }}
+            />
+          ))}
       </Wrapper>
       {readToggle && bookData && (
         <WriteCommentModal

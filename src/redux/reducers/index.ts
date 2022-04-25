@@ -12,6 +12,7 @@ import func from './Func';
 import removeUser from './RemoveUser';
 import myLibrary from './MyLibrary';
 import paragraph from './Paragraph';
+import review from './Reivew';
 
 const rootReducer = combineReducers({
   authEmail,
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   removeUser,
   myLibrary,
   paragraph,
+  review,
 });
 
 export default rootReducer;

@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useToggle } from 'hooks/useToggle';
 import { InfoTypes, LibraryItemTypes } from 'types/book';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { ParagraphRequest } from 'redux/reducers/Paragraph';
 import BookItem from '../_item/BookItem';
 import WriteCommentModal from '../Modal/WriteCommentModal';
 import WriteReviewModal from '../Modal/WriteReviewModal';
 
 function DoneBookList() {
-  const [isbn, setIsbn] = useState<string>('');
+  const dispatch = useDispatch();
   const [bookId, setBookId] = useState<number>(-1);
   const [commentToggle, commentToggleIsOn] = useToggle(false);
   const [reivewToggle, reviewToggleIsOn] = useToggle(false);
@@ -21,6 +22,10 @@ function DoneBookList() {
   });
   const { userBookList } = useSelector((state: any) => state.myLibrary);
 
+  const handleParagraphInfo = (id: number) => {
+    dispatch(ParagraphRequest({ bookId: id }));
+  };
+
   return (
     <>
       <Wrapper>
@@ -32,7 +37,6 @@ function DoneBookList() {
               handleToggle={commentToggleIsOn}
               handleReviewToggle={reviewToggleIsOn}
               onClick={() => {
-                setIsbn(item.isbn);
                 setBookId(item.id);
                 setBookData({
                   progress: item.progress,
@@ -41,6 +45,7 @@ function DoneBookList() {
                   startTime: item.startTime,
                   endTime: item.endTime,
                 });
+                handleParagraphInfo(item.id);
               }}
             />
           ))}
@@ -53,7 +58,11 @@ function DoneBookList() {
         />
       )}
       {reivewToggle && bookData && (
-        <WriteReviewModal bookData={bookData} toggleIsOn={reviewToggleIsOn} />
+        <WriteReviewModal
+          bookId={bookId}
+          bookData={bookData}
+          toggleIsOn={reviewToggleIsOn}
+        />
       )}
     </>
   );

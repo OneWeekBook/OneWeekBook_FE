@@ -53,10 +53,9 @@ export const RemoveUserRequest = (data: RemoveUserTypes) => {
   };
 };
 
-export const RemoveUserSuccess = (data: any) => {
+export const RemoveUserSuccess = () => {
   return {
     type: REMOVE_USER_SUCCESS,
-    data,
   };
 };
 

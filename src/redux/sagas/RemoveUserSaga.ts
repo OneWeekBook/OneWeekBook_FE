@@ -8,14 +8,14 @@ import {
 } from '../reducers/RemoveUser';
 
 function RemoveUserAPI(data: RemoveUserTypes) {
-  return instance.get('/user');
+  return instance.post('/user', data);
 }
 
 function* fetchRemoveUserSaga(action: any): any {
   try {
-    const result = yield call(RemoveUserAPI, action.payload);
-    yield put(RemoveUserSuccess(result.data));
-    sessionStorage.setItem('accessToken', result.data.accessToken);
+    yield call(RemoveUserAPI, action.payload);
+    yield put(RemoveUserSuccess());
+    sessionStorage.removeItem('accessToken');
   } catch (error) {
     yield put(RemoveUserFail(error));
   }

@@ -57,3 +57,15 @@ export type ParagraphAddTypes = {
 export type DeleteType = {
   id: number;
 };
+
+export type ReviewAddTypes = {
+  bookId: number;
+  review: string;
+  rating: number;
+};
+
+export type ReviewModifyTypes = {
+  id: number;
+  review: string;
+  rating: number;
+};
