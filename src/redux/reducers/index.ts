@@ -13,6 +13,7 @@ import removeUser from './RemoveUser';
 import myLibrary from './MyLibrary';
 import paragraph from './Paragraph';
 import review from './Reivew';
+import userReview from './UserReview';
 
 const rootReducer = combineReducers({
   authEmail,
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   myLibrary,
   paragraph,
   review,
+  userReview,
 });
 
 export default rootReducer;

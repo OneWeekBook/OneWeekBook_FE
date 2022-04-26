@@ -5,7 +5,7 @@ import { useInput } from 'hooks/useInput';
 import { InfoTypes } from 'types/book';
 import { SetStartDate } from 'lib/SetDate';
 import { useDispatch } from 'react-redux';
-import { ReviewAddRequest } from 'redux/reducers/Reivew';
+import { UserReviewAddRequest } from 'redux/reducers/UserReview';
 
 const RecommendItem = [
   {
@@ -57,7 +57,7 @@ function WriteReviewModal({ bookId, bookData, toggleIsOn }: PropsType) {
     if (review === '') {
       alert('리뷰를 남겨주세요...');
     } else {
-      dispatch(ReviewAddRequest({ bookId, review, rating: recommend }));
+      dispatch(UserReviewAddRequest({ bookId, review, rating: recommend }));
       alert('작성 완료');
       toggleIsOn();
     }

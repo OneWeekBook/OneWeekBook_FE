@@ -58,13 +58,18 @@ export type DeleteType = {
   id: number;
 };
 
-export type ReviewAddTypes = {
+export type UserReviewTypes = {
+  bookId: number;
+  userId: number;
+};
+
+export type UserReviewAddTypes = {
   bookId: number;
   review: string;
   rating: number;
 };
 
-export type ReviewModifyTypes = {
+export type UserReviewModifyTypes = {
   id: number;
   review: string;
   rating: number;
