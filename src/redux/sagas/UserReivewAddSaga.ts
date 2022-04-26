@@ -21,6 +21,6 @@ function* fetchUserReviewAddSaga(action: any) {
   }
 }
 
-export default function* watchReviewAdd() {
+export default function* watchUserReviewAdd() {
   yield takeEvery(USER_REVIEW_ADD_REQUEST, fetchUserReviewAddSaga);
 }

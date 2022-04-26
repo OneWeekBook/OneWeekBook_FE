@@ -48,6 +48,7 @@ export default function Review(state = initialState, action: any) {
         ...state,
         isLoading: false,
         isSuccess: true,
+        reviewItem: action.data,
       };
     case USER_REVIEW_FAIL:
       return {
@@ -116,20 +117,21 @@ export default function Review(state = initialState, action: any) {
   }
 }
 
-export const UserReviewsRequest = (data: UserReviewTypes) => {
+export const UserReviewRequest = (data: UserReviewTypes) => {
   return {
     type: USER_REVIEW_REQUEST,
     payload: data,
   };
 };
 
-export const UserReviewsSuccess = () => {
+export const UserReviewSuccess = (data: any) => {
   return {
     type: USER_REVIEW_SUCCESS,
+    data,
   };
 };
 
-export const UserReviewsFail = (error: any) => {
+export const UserReviewFail = (error: any) => {
   return {
     type: USER_REVIEW_FAIL,
     error: error.response,

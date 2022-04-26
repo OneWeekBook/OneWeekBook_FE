@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import WriteModal from 'components/Modal';
 import styled from 'styled-components';
-import { useInput } from 'hooks/useInput';
 import { InfoTypes } from 'types/book';
 import { SetStartDate } from 'lib/SetDate';
-import { useDispatch } from 'react-redux';
-import { UserReviewAddRequest } from 'redux/reducers/UserReview';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  UserReviewAddRequest,
+  UserReviewRequest,
+} from 'redux/reducers/UserReview';
 
 const RecommendItem = [
   {
@@ -35,15 +37,23 @@ const RecommendItem = [
 ];
 
 type PropsType = {
+  userId: number;
   bookId: number;
   bookData: InfoTypes;
   toggleIsOn: () => void;
 };
 
-function WriteReviewModal({ bookId, bookData, toggleIsOn }: PropsType) {
+function WriteReviewModal({ userId, bookId, bookData, toggleIsOn }: PropsType) {
   const dispatch = useDispatch();
+  const { reviewItem, isSuccess } = useSelector(
+    (state: any) => state.userReview,
+  );
   const [recommend, setRecommend] = useState<number>(4);
-  const [review, changeReview] = useInput('');
+  const [review, setReview] = useState('');
+
+  useEffect(() => {
+    dispatch(UserReviewRequest({ userId, bookId }));
+  }, [userId, bookId]);
 
   const recommendClick = (recommend: number) => {
     setRecommend(recommend);
@@ -62,6 +72,10 @@ function WriteReviewModal({ bookId, bookData, toggleIsOn }: PropsType) {
       toggleIsOn();
     }
   };
+
+  useEffect(() => {
+    setReview(reviewItem.review);
+  }, [reviewItem]);
 
   return (
     <WriteModal
@@ -109,19 +123,25 @@ function WriteReviewModal({ bookId, bookData, toggleIsOn }: PropsType) {
             ))}
           </RecommendWrapper>
           <ButtonWrapper>
-            <button
-              type="button"
-              onClick={() => addReviewClick(bookId, recommend, review)}
-            >
-              작성하기
-            </button>
-            <button type="button">삭제하기</button>
+            {isSuccess ? (
+              <>
+                <button type="button">수정</button>
+                <button type="button">삭제</button>
+              </>
+            ) : (
+              <button
+                type="button"
+                onClick={() => addReviewClick(bookId, recommend, review)}
+              >
+                작성
+              </button>
+            )}
           </ButtonWrapper>
         </MiddleWrapper>
         <textarea
           placeholder="리뷰를 작성해주세요."
           defaultValue={review}
-          onBlur={changeReview}
+          onBlur={(e) => setReview(e.target.value)}
         />
       </BodyWrapper>
     </WriteModal>
@@ -182,6 +202,16 @@ const RecommendWrapper = styled.div`
 
 const ButtonWrapper = styled.div`
   display: flex;
+  align-items: center;
+  button {
+    width: 80px;
+    height: 35px;
+    border: none;
+    border-radius: 5px;
+    background-color: #08c1e9;
+    color: white;
+    margin-left: 10px;
+  }
 `;
 
 const RecommendButton = styled.button`

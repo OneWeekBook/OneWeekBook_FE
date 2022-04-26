@@ -15,7 +15,7 @@ function Index({ id, userId }: PropsType) {
     case 1:
       return <ReadBookList userId={userId} />;
     case 2:
-      return <DoneBookList />;
+      return <DoneBookList userId={userId} />;
     default:
       return null;
   }

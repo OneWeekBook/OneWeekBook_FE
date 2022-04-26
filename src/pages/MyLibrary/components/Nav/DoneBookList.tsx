@@ -8,7 +8,11 @@ import BookItem from '../_item/BookItem';
 import WriteCommentModal from '../Modal/WriteCommentModal';
 import WriteReviewModal from '../Modal/WriteReviewModal';
 
-function DoneBookList() {
+type PropsType = {
+  userId: number;
+};
+
+function DoneBookList({ userId }: PropsType) {
   const dispatch = useDispatch();
   const [bookId, setBookId] = useState<number>(-1);
   const [commentToggle, commentToggleIsOn] = useToggle(false);
@@ -59,6 +63,7 @@ function DoneBookList() {
       )}
       {reivewToggle && bookData && (
         <WriteReviewModal
+          userId={userId}
           bookId={bookId}
           bookData={bookData}
           toggleIsOn={reviewToggleIsOn}
