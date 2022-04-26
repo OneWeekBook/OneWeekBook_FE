@@ -6,8 +6,12 @@ import { SetStartDate } from 'lib/SetDate';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   UserReviewAddRequest,
+  UserReviewDeleteRequest,
+  UserReviewInit,
+  UserReviewModifyRequest,
   UserReviewRequest,
 } from 'redux/reducers/UserReview';
+import { useToggle } from 'hooks/useToggle';
 
 const RecommendItem = [
   {
@@ -45,15 +49,12 @@ type PropsType = {
 
 function WriteReviewModal({ userId, bookId, bookData, toggleIsOn }: PropsType) {
   const dispatch = useDispatch();
+  const [reviewToggle, reviewToggleIsOn] = useToggle(false);
   const { reviewItem, isSuccess } = useSelector(
     (state: any) => state.userReview,
   );
   const [recommend, setRecommend] = useState<number>(4);
   const [review, setReview] = useState('');
-
-  useEffect(() => {
-    dispatch(UserReviewRequest({ userId, bookId }));
-  }, [userId, bookId]);
 
   const recommendClick = (recommend: number) => {
     setRecommend(recommend);
@@ -68,14 +69,39 @@ function WriteReviewModal({ userId, bookId, bookData, toggleIsOn }: PropsType) {
       alert('리뷰를 남겨주세요...');
     } else {
       dispatch(UserReviewAddRequest({ bookId, review, rating: recommend }));
+      reviewToggleIsOn();
       alert('작성 완료');
-      toggleIsOn();
     }
   };
+
+  const modifyReviewClick = (id: number, recommend: number, review: string) => {
+    if (review === '') {
+      alert('리뷰를 남겨주세요...');
+    } else {
+      dispatch(UserReviewModifyRequest({ id, review, rating: recommend }));
+      alert('수정 완료');
+    }
+  };
+
+  const deleteReviewClick = (id: number) => {
+    dispatch(UserReviewDeleteRequest({ id }));
+    toggleIsOn();
+    alert('삭제 완료');
+  };
+
+  useEffect(() => {
+    dispatch(UserReviewRequest({ userId, bookId }));
+  }, [userId, bookId, reviewToggle]);
 
   useEffect(() => {
     setReview(reviewItem.review);
   }, [reviewItem]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(UserReviewInit());
+    };
+  }, []);
 
   return (
     <WriteModal
@@ -125,8 +151,20 @@ function WriteReviewModal({ userId, bookId, bookData, toggleIsOn }: PropsType) {
           <ButtonWrapper>
             {isSuccess ? (
               <>
-                <button type="button">수정</button>
-                <button type="button">삭제</button>
+                <button
+                  type="button"
+                  onClick={() =>
+                    modifyReviewClick(reviewItem.id, recommend, review)
+                  }
+                >
+                  수정
+                </button>
+                <button
+                  type="button"
+                  onClick={() => deleteReviewClick(reviewItem.id)}
+                >
+                  삭제
+                </button>
               </>
             ) : (
               <button
