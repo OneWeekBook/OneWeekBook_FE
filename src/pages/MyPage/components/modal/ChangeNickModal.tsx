@@ -4,7 +4,7 @@ import ChangeModal from 'components/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { ChangeNickInit, ChangeNickRequest } from 'redux/reducers/ChangeNick';
 import { useInput } from 'hooks/useInput';
-import { userToggle } from 'redux/reducers/FuncToggle';
+import { userToggle } from 'redux/reducers/Func';
 
 type PropsType = {
   nickToggleIsOn: () => void;
@@ -37,7 +37,7 @@ function ChangeNickModal({ nickToggleIsOn }: PropsType) {
   return (
     <ChangeModal
       title="닉네임 변경"
-      titleSize={24}
+      titleSize={[24, 20]}
       width={500}
       height={300}
       handleToggle={nickToggleIsOn}

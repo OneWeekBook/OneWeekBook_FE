@@ -8,8 +8,12 @@ import category from './Category';
 import search from './Search';
 import changeNick from './ChangeNick';
 import changePassword from './ChangePassword';
-import funcToggle from './FuncToggle';
+import func from './Func';
 import removeUser from './RemoveUser';
+import myLibrary from './MyLibrary';
+import paragraph from './Paragraph';
+import review from './Reivew';
+import userReview from './UserReview';
 
 const rootReducer = combineReducers({
   authEmail,
@@ -21,8 +25,12 @@ const rootReducer = combineReducers({
   search,
   changeNick,
   changePassword,
-  funcToggle,
+  func,
   removeUser,
+  myLibrary,
+  paragraph,
+  review,
+  userReview,
 });
 
 export default rootReducer;

@@ -16,6 +16,10 @@ const globalStyles = createGlobalStyle`
         width: 100%;
         minWidth: ${MOBILE_MIN_WIDTH}
     }
+
+    p {
+        letter-spacing: -0.5px;
+    }
 `;
 
 export default globalStyles;

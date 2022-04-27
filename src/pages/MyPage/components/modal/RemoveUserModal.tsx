@@ -53,7 +53,7 @@ function RemoveUserModal({ removeToggleIsOn, id }: PropsType) {
   return (
     <RemoveModal
       title="회원탈퇴"
-      titleSize={24}
+      titleSize={[24, 20]}
       width={500}
       height={300}
       handleToggle={removeToggleIsOn}

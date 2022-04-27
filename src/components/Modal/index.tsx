@@ -6,14 +6,15 @@ type PropsType = {
   height: number;
   close: boolean;
   title: string;
-  titleSize: number;
+  titleSize: number[];
   isOkBtn: boolean;
-  okBtnTitle: string;
+  okBtnTitle?: string;
   isCancelBtn: boolean;
-  cancelBtnTitle: string;
+  cancelBtnTitle?: string;
+  type?: string;
   handleToggle: () => void;
-  handleOkClick: () => void;
-  handleCanCelClick: () => void;
+  handleOkClick?: () => void;
+  handleCanCelClick?: () => void;
 };
 
 function Index({
@@ -26,6 +27,7 @@ function Index({
   okBtnTitle,
   isCancelBtn,
   cancelBtnTitle,
+  type,
   handleToggle,
   handleOkClick,
   handleCanCelClick,
@@ -33,7 +35,7 @@ function Index({
 }: React.PropsWithChildren<PropsType>) {
   return (
     <BodyWrapper>
-      <ModalWrapper width={width} height={height}>
+      <ModalWrapper width={width} height={height} type={type}>
         <CloseButtonWrapper>
           {close && (
             <button onClick={handleToggle} type="button">
@@ -46,7 +48,7 @@ function Index({
             </button>
           )}
         </CloseButtonWrapper>
-        <ModalBodyWrapper>
+        <ModalBodyWrapper height={height}>
           <ModalTitleWrapper titleSize={titleSize}>
             {title && <p>{title}</p>}
           </ModalTitleWrapper>
@@ -84,16 +86,20 @@ const BodyWrapper = styled.div`
   z-index: 1000;
 `;
 
-const ModalWrapper = styled.div<{ width: number; height: number }>`
+const ModalWrapper = styled.div<{
+  width: number;
+  height: number;
+  type?: string;
+}>`
   background-color: white;
   box-sizing: border-box;
   width: ${({ width }) => width}px;
-  height: ${({ height }) => height}px;
+  min-height: ${({ height }) => height}px;
   padding: 30px 30px;
   z-index: 1100;
   margin: 0 auto;
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    width: 90%;
+    width: ${({ type }) => (type === 'write' ? 100 : 90)}%;
     height: auto;
     padding: 20px 20px;
   }
@@ -113,20 +119,26 @@ const CloseButtonWrapper = styled.div`
   }
 `;
 
-const ModalTitleWrapper = styled.div<{ titleSize: number }>`
+const ModalTitleWrapper = styled.div<{ titleSize: number[] }>`
   width: 100%;
   text-align: center;
   p {
-    font-size: ${({ titleSize }) => titleSize}px;
+    font-size: ${({ titleSize }) => titleSize[0]}px;
     font-weight: 700;
+  }
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    p {
+      font-size: ${({ titleSize }) => titleSize[1]}px;
+      font-weight: 700;
+    }
   }
 `;
 
-const ModalBodyWrapper = styled.div`
+const ModalBodyWrapper = styled.div<{ height: number }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 90%;
+  min-height: ${({ height }) => height - 85}px;
 `;
 
 const ButtonWrapper = styled.div`

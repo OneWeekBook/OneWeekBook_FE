@@ -7,7 +7,7 @@ import {
 } from '../reducers/Category';
 
 function CategoryAPI() {
-  return axios.get(`${process.env.REACT_APP_BASIC_URL}/book/category`);
+  return axios.get(`${process.env.REACT_APP_BASIC_URL}/book/categories`);
 }
 
 function* fetchCategorySaga(): any {

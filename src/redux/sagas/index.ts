@@ -10,6 +10,16 @@ import watchAddSearch from './AddSearchSaga';
 import watchChangeNick from './ChangeNickSaga';
 import watchChangePassword from './ChangePasswordSaga';
 import watchRemoveUser from './RemoveUserSaga';
+import watchMyLibrary from './MyLibrarySaga';
+import watchMyLibraryAdd from './MyLibraryAddSaga';
+import watchMyLibraryModify from './MyLibraryModifySaga';
+import watchParagraph from './ParagraphSaga';
+import watchParagraphAdd from './ParagraphAddSaga';
+import watchParagraphDelete from './ParagraphDeleteSaga';
+import watchUserReview from './UserReviewSaga';
+import watchUserReviewAdd from './UserReivewAddSaga';
+import watchUserReviewModify from './UserReviewModifySaga';
+import watchUserReviewDelete from './UserReviewDeleteSaga';
 
 export default function* rootSaga() {
   yield all([
@@ -24,5 +34,15 @@ export default function* rootSaga() {
     call(watchChangeNick),
     call(watchChangePassword),
     call(watchRemoveUser),
+    call(watchMyLibrary),
+    call(watchMyLibraryAdd),
+    call(watchMyLibraryModify),
+    call(watchParagraph),
+    call(watchParagraphAdd),
+    call(watchParagraphDelete),
+    call(watchUserReview),
+    call(watchUserReviewAdd),
+    call(watchUserReviewModify),
+    call(watchUserReviewDelete),
   ]);
 }
