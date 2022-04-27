@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import WriteModal from 'components/Modal';
 import styled from 'styled-components';
 import { InfoTypes } from 'types/book';
@@ -55,7 +55,6 @@ function WriteReviewModal({ userId, bookId, bookData, toggleIsOn }: PropsType) {
   );
   const [recommend, setRecommend] = useState<number>(4);
   const [review, setReview] = useState('');
-
   const recommendClick = (recommend: number) => {
     setRecommend(recommend);
   };
@@ -93,8 +92,11 @@ function WriteReviewModal({ userId, bookId, bookData, toggleIsOn }: PropsType) {
     dispatch(UserReviewRequest({ userId, bookId }));
   }, [userId, bookId, reviewToggle]);
 
-  useEffect(() => {
-    setReview(reviewItem.review);
+  useLayoutEffect(() => {
+    if (reviewItem.review) {
+      setReview(reviewItem.review);
+      setRecommend(reviewItem.rating);
+    }
   }, [reviewItem]);
 
   useEffect(() => {
