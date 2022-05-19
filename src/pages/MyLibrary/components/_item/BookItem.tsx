@@ -35,14 +35,17 @@ function BookItem({
           <p className="bookAuthor">
             {author.replaceAll('<b>', '').replaceAll('</b>', '')}
           </p>
-          <p className="bookPublisher">{publisher}</p>
+          <p className="bookPublisher">
+            {publisher.replaceAll('<b>', '').replaceAll('</b>', '')}
+          </p>
           {startTime && <p>독서 시작: {SetStartDate(startTime)}</p>}
           {endTime && <p>독서 완료: {SetStartDate(endTime)}</p>}
         </div>
         <ButtonWrapper>
           {progress === 0 && (
             <button
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
                 handleToggle();
                 onClick(id);
               }}
@@ -53,7 +56,8 @@ function BookItem({
           )}
           {(progress === 1 || progress === 2) && (
             <button
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
                 handleToggle();
                 onClick(id);
               }}
@@ -64,7 +68,8 @@ function BookItem({
           )}
           {progress === 2 && (
             <button
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
                 handleReviewToggle();
                 onClick(id);
               }}
@@ -105,6 +110,12 @@ const InfoWrapper = styled.div`
   .bookAuthor {
     font-size: 14px;
     font-weight: 600;
+    display: -webkit-box;
+    word-wrap: break-word;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
     color: gray;
   }
   .bookPublisher {

@@ -53,6 +53,7 @@ function WriteReviewModal({ userId, bookId, bookData, toggleIsOn }: PropsType) {
   const { reviewItem, isSuccess } = useSelector(
     (state: any) => state.userReview,
   );
+  console.log(reviewItem);
   const [recommend, setRecommend] = useState<number>(4);
   const [review, setReview] = useState('');
   const recommendClick = (recommend: number) => {
@@ -125,7 +126,8 @@ function WriteReviewModal({ userId, bookId, bookData, toggleIsOn }: PropsType) {
             <p>{bookData.title.replaceAll('<b>', '').replaceAll('</b>', '')}</p>
             <p>
               {bookData.author.replaceAll('<b>', '').replaceAll('</b>', '')}
-              {' | '}
+            </p>
+            <p>
               {SetStartDate(bookData.startTime)}
               {' ~ '}
               {SetStartDate(bookData.endTime)}
@@ -151,7 +153,7 @@ function WriteReviewModal({ userId, bookId, bookData, toggleIsOn }: PropsType) {
             ))}
           </RecommendWrapper>
           <ButtonWrapper>
-            {isSuccess ? (
+            {reviewItem.review !== null ? (
               <>
                 <button
                   type="button"

@@ -1,7 +1,8 @@
-import PagenationForm from 'components/Form/PagenationForm';
-import { ReviewItems } from 'db/reviewdata';
 import React, { useEffect, useState } from 'react';
+import PagenationForm from 'components/Form/PagenationForm';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { ReviewsRequest } from 'redux/reducers/Review';
 import ReviewItem from './_item/ReviewItem';
 
 export type ReviewItemType = {
@@ -9,34 +10,50 @@ export type ReviewItemType = {
   img: string;
   title: string;
   author: string;
-  rating: number;
-  total: number;
+  publisher: string;
+  isbn: string;
+};
+
+type CountType = {
+  isbn: string;
+  count: number;
 };
 
 function ReviewList() {
+  const dispatch = useDispatch();
   const [curIdx, setCurIdx] = useState<number>(1);
-  const [start, setStart] = useState<number>(0);
-  const [end, setEnd] = useState<number>(12);
-
-  const handleChangeClick = (index: number) => {
-    setEnd(index * 12);
-    setStart(index * 12 - 11);
-  };
+  const { reviews } = useSelector((state: any) => state.review);
 
   useEffect(() => {
-    handleChangeClick(curIdx);
+    dispatch(ReviewsRequest({ start: 0, sortby: 'new' }));
+  }, []);
+
+  useEffect(() => {
+    dispatch(ReviewsRequest({ start: (curIdx - 1) * 10, sortby: 'new' }));
   }, [curIdx]);
 
   return (
     <Wrapper>
-      <ReviewTitle>전체 리뷰 ({ReviewItems.length}건)</ReviewTitle>
+      <ReviewTitle>
+        전체 리뷰 ({reviews.rows && reviews.rows.length}건)
+      </ReviewTitle>
       <ReviewListWrapper>
-        {ReviewItems.slice(start - 1, end).map((item: ReviewItemType) => (
-          <ReviewItem key={item.id} {...item} />
-        ))}
+        {reviews.rows &&
+          reviews.rows.map((item: ReviewItemType) => {
+            const index = reviews.count.findIndex(
+              (i: CountType) => i.isbn === item.isbn,
+            );
+            return (
+              <ReviewItem
+                key={item.id}
+                {...item}
+                count={reviews.count[index].count}
+              />
+            );
+          })}
       </ReviewListWrapper>
       <PagenationForm
-        total={ReviewItems.length}
+        total={reviews.count && reviews.count.length}
         curIdx={curIdx}
         setCurIdx={setCurIdx}
       />
@@ -63,8 +80,9 @@ const ReviewTitle = styled.p`
 const ReviewListWrapper = styled.div`
   display: grid;
   margin-top: 30px;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 10px;
+  min-height: 600px;
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }

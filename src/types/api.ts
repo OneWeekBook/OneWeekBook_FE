@@ -74,3 +74,8 @@ export type UserReviewModifyTypes = {
   review: string;
   rating: number;
 };
+
+export type ReviewTypes = {
+  start: number;
+  sortby: string;
+};

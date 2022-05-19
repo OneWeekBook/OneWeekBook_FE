@@ -1,3 +1,5 @@
+import { ReviewTypes } from 'types/api';
+
 export const REVIEWS_REQUEST = 'REVIEWS_REQUEST';
 export const REVIEWS_SUCCESS = 'REVIEWS_SUCCESS';
 export const REVIEWS_FAIL = 'REVIEWS_FAIL';
@@ -62,9 +64,10 @@ export default function Review(state = initialState, action: any) {
   }
 }
 
-export const ReviewsRequest = () => {
+export const ReviewsRequest = (data: ReviewTypes) => {
   return {
     type: REVIEWS_REQUEST,
+    params: data,
   };
 };
 
@@ -85,7 +88,7 @@ export const ReviewsFail = (error: any) => {
 export const ReviewRequest = (data: { bookId: number }) => {
   return {
     type: REVIEW_REQUEST,
-    payload: data,
+    params: data,
   };
 };
 

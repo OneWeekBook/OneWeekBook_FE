@@ -12,7 +12,7 @@ import func from './Func';
 import removeUser from './RemoveUser';
 import myLibrary from './MyLibrary';
 import paragraph from './Paragraph';
-import review from './Reivew';
+import review from './Review';
 import userReview from './UserReview';
 
 const rootReducer = combineReducers({
