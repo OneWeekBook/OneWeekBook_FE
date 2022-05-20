@@ -1,31 +1,48 @@
 import React from 'react';
 import styled from 'styled-components';
 import PieChart from 'components/Form/PieChartForm';
-import { ReviewDetailItem } from 'db/reviewdetail';
+import { ReviewItemType } from 'types/review';
 
-function BookInfoWrapper() {
+type PropsType = {
+  count: number;
+  average: number;
+};
+
+function BookInfoWrapper({
+  author,
+  id,
+  img,
+  isbn,
+  publisher,
+  title,
+  count,
+  average,
+}: ReviewItemType & PropsType) {
   return (
     <Wrapper>
       <BookInfoBox>
         <ImgWrapper>
-          <img src={ReviewDetailItem.img} alt="book img" />
+          <img src={img} alt="book img" />
         </ImgWrapper>
         <InfoWrapper>
           <div>
-            <p className="bookTitle">{ReviewDetailItem.title}</p>
+            <p className="bookTitle">
+              {title.replaceAll('<b>', '').replaceAll('</b>', '')}
+            </p>
             <p className="bookAuthor">
-              {ReviewDetailItem.author}
-              <span>2020.01.01</span>
+              {author.replaceAll('<b>', '').replaceAll('</b>', '')}
+            </p>
+            <p className="bookPublisher">
+              {publisher.replaceAll('<b>', '').replaceAll('</b>', '')}
             </p>
           </div>
           <p className="reviewTotal">
-            전체 리뷰: <span>{ReviewDetailItem.total}</span>
+            전체 리뷰: <span>{count}</span>
           </p>
         </InfoWrapper>
       </BookInfoBox>
       <ProgressWrapper>
-        <PieChart title="추천 비율" rate={ReviewDetailItem.recommendRate} />
-        <PieChart title="전체 평점" rate={ReviewDetailItem.rating} />
+        <PieChart title="전체 평점" rate={average * 2} />
       </ProgressWrapper>
     </Wrapper>
   );
@@ -38,7 +55,6 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   background-color: #08c1e9;
-  border: 2px solid #1e90ff;
   height: 200px;
   padding: 0 30px;
   margin-bottom: 5px;
@@ -71,10 +87,10 @@ const InfoWrapper = styled.div`
   .bookAuthor {
     font-size: 20px;
     font-weight: 500;
-    span {
-      font-size: 18px;
-      padding-left: 5px;
-    }
+  }
+  .bookPublisher {
+    font-size: 18px;
+    font-weight: 500;
   }
   .reviewTotal {
     font-size: 20px;

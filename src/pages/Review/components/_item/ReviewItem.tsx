@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { ReviewItemType } from '../ReviewList';
+import { ReviewItemType } from 'types/review';
 
 type PropsType = {
   count: number;
@@ -18,7 +18,7 @@ function ReivewItem({
 }: React.PropsWithChildren<ReviewItemType> & PropsType) {
   return (
     <ItemWrapper>
-      <Link to={`/review/${title}`}>
+      <Link to={`/review/${isbn}`}>
         <ImgWrapper>
           <img src={img} alt="book img" />
         </ImgWrapper>

@@ -3,16 +3,8 @@ import PagenationForm from 'components/Form/PagenationForm';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { ReviewsRequest } from 'redux/reducers/Review';
+import { ReviewItemType } from 'types/review';
 import ReviewItem from './_item/ReviewItem';
-
-export type ReviewItemType = {
-  id: number;
-  img: string;
-  title: string;
-  author: string;
-  publisher: string;
-  isbn: string;
-};
 
 type CountType = {
   isbn: string;
@@ -35,7 +27,7 @@ function ReviewList() {
   return (
     <Wrapper>
       <ReviewTitle>
-        전체 리뷰 ({reviews.rows && reviews.rows.length}건)
+        전체 리뷰 ({reviews.count && reviews.count.length}건)
       </ReviewTitle>
       <ReviewListWrapper>
         {reviews.rows &&

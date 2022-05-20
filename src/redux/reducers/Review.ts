@@ -16,6 +16,10 @@ const initialState = {
   itemLoading: false,
   itemSuccess: false,
   reviews: [],
+  bookData: {},
+  reviewCount: 0,
+  ratingAverage: 0,
+  like: {},
 };
 
 export default function Review(state = initialState, action: any) {
@@ -50,6 +54,11 @@ export default function Review(state = initialState, action: any) {
         ...state,
         itemLoading: false,
         itemSuccess: true,
+        reviews: action.data.reviews,
+        bookData: action.data.bookData,
+        reviewCount: action.data.reviewCount,
+        ratingAverage: action.data.ratingAverage,
+        like: action.data.like,
       };
     case REVIEW_FAIL:
       return {
@@ -85,10 +94,10 @@ export const ReviewsFail = (error: any) => {
   };
 };
 
-export const ReviewRequest = (data: { bookId: number }) => {
+export const ReviewRequest = (data: { isbn: number }) => {
   return {
     type: REVIEW_REQUEST,
-    params: data,
+    data,
   };
 };
 
