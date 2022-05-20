@@ -6,3 +6,13 @@ export type ReviewItemType = {
   publisher: string;
   isbn: string;
 };
+
+export type ReviewDetailTypes = {
+  review: string;
+  rating: number;
+  userId: number;
+  email: string;
+  username: string;
+  nick: string;
+  role: number;
+};

@@ -1,12 +1,18 @@
-import { ReviewDetailItem, ReviewDetailItemTypes } from 'db/reviewdetail';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { ReviewDetailTypes } from 'types/review';
 import ReviewItem from './_items/ReivewItem';
 
 function ReviewInfo() {
+  const { reviews, bookData } = useSelector((state: any) => state.review);
   return (
     <Wrapper>
-      <p className="title">{ReviewDetailItem.title} 평가</p>
+      <p className="title">
+        {bookData.title &&
+          bookData.title.replaceAll('<b>', '').replaceAll('</b>', '')}{' '}
+        평가
+      </p>
       <button className="recommendBtn" type="button">
         추천 순
       </button>
@@ -14,11 +20,10 @@ function ReviewInfo() {
         최신 순
       </button>
       <ReviewListWrapper>
-        {ReviewDetailItem.recommendReviews.map(
-          (item: ReviewDetailItemTypes) => (
-            <ReviewItem key={item.id} {...item} />
-          ),
-        )}
+        {reviews.length > 0 &&
+          reviews.map((item: ReviewDetailTypes) => (
+            <ReviewItem key={item.userId} {...item} />
+          ))}
       </ReviewListWrapper>
     </Wrapper>
   );

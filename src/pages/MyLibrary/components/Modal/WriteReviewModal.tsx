@@ -53,7 +53,7 @@ function WriteReviewModal({ userId, bookId, bookData, toggleIsOn }: PropsType) {
   const { reviewItem, isSuccess } = useSelector(
     (state: any) => state.userReview,
   );
-  console.log(reviewItem);
+
   const [recommend, setRecommend] = useState<number>(4);
   const [review, setReview] = useState('');
   const recommendClick = (recommend: number) => {
