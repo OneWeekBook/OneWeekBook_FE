@@ -15,6 +15,7 @@ const initialState = {
   isSuccess: false,
   itemLoading: false,
   itemSuccess: false,
+  count: [],
   reviews: [],
   bookData: {},
   reviewCount: 0,
@@ -35,7 +36,8 @@ export default function Review(state = initialState, action: any) {
         ...state,
         isLoading: false,
         isSuccess: true,
-        reviews: action.data,
+        count: action.data.count,
+        reviews: action.data.rows,
       };
     case REVIEWS_FAIL:
       return {

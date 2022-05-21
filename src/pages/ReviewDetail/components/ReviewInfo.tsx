@@ -34,9 +34,9 @@ function ReviewInfo() {
       </button>
       <ReviewListWrapper>
         {reviews.length > 0 &&
-          reviews.map((item: ReviewDetailTypes) => (
+          reviews.map((item: ReviewDetailTypes, index: number) => (
             <ReviewItem
-              key={item.userId}
+              key={index}
               {...item}
               onClick={() => {
                 detailToggleIsOn();

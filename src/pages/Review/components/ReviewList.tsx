@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PagenationForm from 'components/Form/PagenationForm';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { ReviewsRequest } from 'redux/reducers/Review';
+import { ReviewInit, ReviewsRequest } from 'redux/reducers/Review';
 import { ReviewItemType } from 'types/review';
 import ReviewItem from './_item/ReviewItem';
 
@@ -14,10 +14,13 @@ type CountType = {
 function ReviewList() {
   const dispatch = useDispatch();
   const [curIdx, setCurIdx] = useState<number>(1);
-  const { reviews } = useSelector((state: any) => state.review);
+  const { reviews, count } = useSelector((state: any) => state.review);
 
   useEffect(() => {
     dispatch(ReviewsRequest({ start: 0, sortby: 'new' }));
+    return () => {
+      dispatch(ReviewInit());
+    };
   }, []);
 
   useEffect(() => {
@@ -26,26 +29,27 @@ function ReviewList() {
 
   return (
     <Wrapper>
-      <ReviewTitle>
-        전체 리뷰 ({reviews.count && reviews.count.length}건)
-      </ReviewTitle>
-      <ReviewListWrapper>
-        {reviews.rows &&
-          reviews.rows.map((item: ReviewItemType) => {
-            const index = reviews.count.findIndex(
-              (i: CountType) => i.isbn === item.isbn,
-            );
-            return (
-              <ReviewItem
-                key={item.id}
-                {...item}
-                count={reviews.count[index].count}
-              />
-            );
-          })}
-      </ReviewListWrapper>
+      {reviews.length > 0 && count.length > 0 && (
+        <>
+          <ReviewTitle>전체 리뷰 ({count.length}건)</ReviewTitle>
+          <ReviewListWrapper>
+            {reviews.map((item: ReviewItemType) => {
+              const index = count.findIndex(
+                (i: CountType) => i.isbn === item.isbn,
+              );
+              return (
+                <ReviewItem
+                  key={item.id}
+                  {...item}
+                  count={count[index].count}
+                />
+              );
+            })}
+          </ReviewListWrapper>
+        </>
+      )}
       <PagenationForm
-        total={reviews.count && reviews.count.length}
+        total={count.length}
         curIdx={curIdx}
         setCurIdx={setCurIdx}
       />
