@@ -1,11 +1,24 @@
-import React from 'react';
+import { useToggle } from 'hooks/useToggle';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { ReviewDetailTypes } from 'types/review';
+import ReviewDetailModal from './Modal/ReivewDetailModal';
 import ReviewItem from './_items/ReivewItem';
 
 function ReviewInfo() {
+  const [detailToggle, detailToggleIsOn] = useToggle(false);
   const { reviews, bookData } = useSelector((state: any) => state.review);
+  const [curReview, setCurReview] = useState({
+    review: '',
+    rating: 0,
+    userId: 0,
+    email: '',
+    username: '',
+    nick: '',
+    role: 1,
+  });
+
   return (
     <Wrapper>
       <p className="title">
@@ -22,9 +35,22 @@ function ReviewInfo() {
       <ReviewListWrapper>
         {reviews.length > 0 &&
           reviews.map((item: ReviewDetailTypes) => (
-            <ReviewItem key={item.userId} {...item} />
+            <ReviewItem
+              key={item.userId}
+              {...item}
+              onClick={() => {
+                detailToggleIsOn();
+                setCurReview(item);
+              }}
+            />
           ))}
       </ReviewListWrapper>
+      {detailToggle && (
+        <ReviewDetailModal
+          item={curReview}
+          detailToggleIsOn={detailToggleIsOn}
+        />
+      )}
     </Wrapper>
   );
 }

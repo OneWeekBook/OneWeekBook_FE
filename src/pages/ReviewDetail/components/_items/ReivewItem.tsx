@@ -3,11 +3,15 @@ import React, { PropsWithChildren, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { ReviewDetailTypes } from 'types/review';
 
+type PropsType = {
+  onClick: () => void;
+};
 function ReviewItem({
   review,
   rating,
   nick,
-}: PropsWithChildren<ReviewDetailTypes>) {
+  onClick,
+}: PropsWithChildren<ReviewDetailTypes> & PropsType) {
   const [isRecommend, setIsRecommend] = useState(false);
 
   useEffect(() => {
@@ -15,7 +19,7 @@ function ReviewItem({
   }, []);
 
   return (
-    <Wrapper>
+    <Wrapper onClick={onClick}>
       <ImgWrapper isRecommend={isRecommend}>
         <img
           src={`${process.env.PUBLIC_URL}/assets/main-bestlist-recommend.png`}
