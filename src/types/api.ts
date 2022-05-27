@@ -84,3 +84,9 @@ export type ReivewDetailTypes = {
   isbn: number;
   sortby: string;
 };
+
+export type LikeTypes = {
+  bookId: number;
+  state: number;
+  userId: number;
+};

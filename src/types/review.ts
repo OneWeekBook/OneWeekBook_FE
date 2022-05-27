@@ -10,6 +10,7 @@ export type ReviewItemType = {
 export type ReviewBookTypes = {
   author: string;
   countReviews: number;
+  id: number;
   img: string;
   isbn: string;
   publisher: string;
@@ -26,4 +27,5 @@ export type ReviewDetailTypes = {
   reviewCreationTime: string;
   role: number;
   zeroLikeCount: number;
+  userId: number;
 };

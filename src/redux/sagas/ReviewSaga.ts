@@ -8,16 +8,14 @@ import {
 } from '../reducers/Review';
 
 function ReviewAPI(params: ReviewTypes) {
-  const { start, sortby } = params;
   return axios.get(
-    `${process.env.REACT_APP_BASIC_URL}/book/reviews?start=${start}&display=12&sortby=${sortby}`,
+    `${process.env.REACT_APP_BASIC_URL}/book/reviews?start=${params.start}&display=12&sortby=${params.sortby}`,
   );
 }
 
 function* fetchReviewSaga(action: any): any {
   try {
     const result = yield call(ReviewAPI, action.params);
-    console.log(result);
     yield put(ReviewsSuccess(result.data.reviews));
   } catch (error) {
     yield put(ReviewsFail(error));

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { ReviewDetailTypes } from 'types/review';
 import { ReviewRequest } from 'redux/reducers/Review';
+import { LikeRequest } from 'redux/reducers/Like';
 import ReviewDetailModal from './Modal/ReivewDetailModal';
 import ReviewItem from './_items/ReivewItem';
 
@@ -21,6 +22,7 @@ function ReviewInfo() {
     reviewCreationTime: '',
     role: 1,
     zeroLikeCount: 0,
+    userId: -1,
   });
 
   useEffect(() => {
@@ -30,10 +32,14 @@ function ReviewInfo() {
         sortby: sortBy,
       }),
     );
-  }, [sortBy]);
+  }, [sortBy, detailToggle]);
 
   const handleSortClick = (sort: string) => {
     setSortBy(sort);
+  };
+
+  const handleLikeClick = (state: number, userId: number) => {
+    dispatch(LikeRequest({ bookId: bookData.id, state, userId }));
   };
 
   return (
@@ -76,6 +82,7 @@ function ReviewInfo() {
         <ReviewDetailModal
           item={curReview}
           detailToggleIsOn={detailToggleIsOn}
+          handleLikeClick={handleLikeClick}
         />
       )}
     </Wrapper>
