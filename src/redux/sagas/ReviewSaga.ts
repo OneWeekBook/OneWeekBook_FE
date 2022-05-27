@@ -17,6 +17,7 @@ function ReviewAPI(params: ReviewTypes) {
 function* fetchReviewSaga(action: any): any {
   try {
     const result = yield call(ReviewAPI, action.params);
+    console.log(result);
     yield put(ReviewsSuccess(result.data.reviews));
   } catch (error) {
     yield put(ReviewsFail(error));

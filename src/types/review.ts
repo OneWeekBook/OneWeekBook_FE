@@ -7,12 +7,23 @@ export type ReviewItemType = {
   title: string;
 };
 
+export type ReviewBookTypes = {
+  author: string;
+  countReviews: number;
+  img: string;
+  isbn: string;
+  publisher: string;
+  ratingAverage: number;
+  title: string;
+};
+
 export type ReviewDetailTypes = {
-  review: string;
-  rating: number;
-  userId: number;
-  email: string;
-  username: string;
+  likeCount: number;
   nick: string;
+  oneLikeCount: number;
+  rating: number;
+  review: string;
+  reviewCreationTime: string;
   role: number;
+  zeroLikeCount: number;
 };

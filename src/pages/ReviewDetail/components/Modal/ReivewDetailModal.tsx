@@ -22,9 +22,14 @@ function ReviewDetailModal({ item, detailToggleIsOn }: PropsType) {
       isCancelBtn={false}
     >
       <Wrapper>
-        <Date>2020.01.01</Date>
+        <Date>{item.reviewCreationTime}</Date>
         <ReviewBody>{item.review}</ReviewBody>
-        <Recommend>{0}명이 해당 리뷰를 추천</Recommend>
+        <Recommend>
+          {item.zeroLikeCount}명이 해당 리뷰가 유용하다고 생각해요
+        </Recommend>
+        <Recommend>
+          {item.oneLikeCount}명이 해당 리뷰가 유용하다고 생각해요
+        </Recommend>
       </Wrapper>
     </DetailModal>
   );

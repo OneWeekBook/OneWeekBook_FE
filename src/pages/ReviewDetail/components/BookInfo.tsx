@@ -4,19 +4,9 @@ import styled from 'styled-components';
 import BookInfoWrapper from './_items/BookInfoWrapper';
 
 function BookInfo() {
-  const { bookData, reviewCount, ratingAverage } = useSelector(
-    (state: any) => state.review,
-  );
+  const { bookData } = useSelector((state: any) => state.review);
   return (
-    <Wrapper>
-      {bookData.title && (
-        <BookInfoWrapper
-          {...bookData}
-          average={ratingAverage}
-          count={reviewCount}
-        />
-      )}
-    </Wrapper>
+    <Wrapper>{bookData.title && <BookInfoWrapper {...bookData} />}</Wrapper>
   );
 }
 

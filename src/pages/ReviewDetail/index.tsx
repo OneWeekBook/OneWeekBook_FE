@@ -11,7 +11,12 @@ function Index() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(ReviewRequest({ isbn: Number(location.pathname.split('/')[2]) }));
+    dispatch(
+      ReviewRequest({
+        isbn: Number(location.pathname.split('/')[2]),
+        sortby: 'recommend',
+      }),
+    );
   }, []);
 
   return (

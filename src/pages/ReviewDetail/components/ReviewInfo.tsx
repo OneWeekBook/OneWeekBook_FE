@@ -1,23 +1,40 @@
+import React, { useEffect, useState } from 'react';
 import { useToggle } from 'hooks/useToggle';
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { ReviewDetailTypes } from 'types/review';
+import { ReviewRequest } from 'redux/reducers/Review';
 import ReviewDetailModal from './Modal/ReivewDetailModal';
 import ReviewItem from './_items/ReivewItem';
 
 function ReviewInfo() {
+  const dispatch = useDispatch();
+  const [sortBy, setSortBy] = useState('recommend');
   const [detailToggle, detailToggleIsOn] = useToggle(false);
   const { reviews, bookData } = useSelector((state: any) => state.review);
   const [curReview, setCurReview] = useState({
-    review: '',
-    rating: 0,
-    userId: 0,
-    email: '',
-    username: '',
+    likeCount: 0,
     nick: '',
+    oneLikeCount: 0,
+    rating: 4,
+    review: '',
+    reviewCreationTime: '',
     role: 1,
+    zeroLikeCount: 0,
   });
+
+  useEffect(() => {
+    dispatch(
+      ReviewRequest({
+        isbn: Number(location.pathname.split('/')[2]),
+        sortby: sortBy,
+      }),
+    );
+  }, [sortBy]);
+
+  const handleSortClick = (sort: string) => {
+    setSortBy(sort);
+  };
 
   return (
     <Wrapper>
@@ -26,12 +43,22 @@ function ReviewInfo() {
           bookData.title.replaceAll('<b>', '').replaceAll('</b>', '')}{' '}
         평가
       </p>
-      <button className="recommendBtn" type="button">
+      <Button
+        className="recommendBtn"
+        type="button"
+        isSelected={sortBy === 'recommend'}
+        onClick={() => handleSortClick('recommend')}
+      >
         추천 순
-      </button>
-      <button className="newBtn" type="button">
+      </Button>
+      <Button
+        className="newBtn"
+        type="button"
+        isSelected={sortBy === 'new'}
+        onClick={() => handleSortClick('new')}
+      >
         최신 순
-      </button>
+      </Button>
       <ReviewListWrapper>
         {reviews.length > 0 &&
           reviews.map((item: ReviewDetailTypes, index: number) => (
@@ -86,6 +113,11 @@ const Wrapper = styled.div`
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
     width: 95%;
   }
+`;
+
+const Button = styled.button<{ isSelected?: boolean }>`
+  cursor: pointer;
+  font-weight: ${({ isSelected }) => (isSelected ? 800 : 500)};
 `;
 
 const ReviewListWrapper = styled.div`

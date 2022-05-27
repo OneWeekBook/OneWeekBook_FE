@@ -1,5 +1,4 @@
 import React, { PropsWithChildren, useState, useEffect } from 'react';
-
 import styled from 'styled-components';
 import { ReviewDetailTypes } from 'types/review';
 
@@ -7,9 +6,12 @@ type PropsType = {
   onClick: () => void;
 };
 function ReviewItem({
-  review,
-  rating,
   nick,
+  oneLikeCount,
+  rating,
+  review,
+  reviewCreationTime,
+  zeroLikeCount,
   onClick,
 }: PropsWithChildren<ReviewDetailTypes> & PropsType) {
   const [isRecommend, setIsRecommend] = useState(false);
@@ -29,11 +31,16 @@ function ReviewItem({
       <ReivewInfoWrapper>
         <p className="overall">{review}</p>
         <p className="reviewInfo">
-          {nick}&nbsp;&nbsp;<span>2020.01.01</span>
+          {nick}&nbsp;&nbsp;<span>{reviewCreationTime}</span>
         </p>
-        <p className="recommends">
-          <b>{0}</b>명이 해당 리뷰를 추천
-        </p>
+        <div className="recommends">
+          <p>
+            <span>{zeroLikeCount}</span>명이 해당 리뷰가 유용하다고 생각해요
+          </p>
+          <p>
+            <span>{oneLikeCount}</span>명이 해당 리뷰가 재미있다고 생각해요
+          </p>
+        </div>
       </ReivewInfoWrapper>
     </Wrapper>
   );
@@ -84,6 +91,9 @@ const ReivewInfoWrapper = styled.div`
   }
   .recommends {
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
+    span {
+      font-weight: 600;
+    }
   }
 `;

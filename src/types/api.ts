@@ -79,3 +79,8 @@ export type ReviewTypes = {
   start: number;
   sortby: string;
 };
+
+export type ReivewDetailTypes = {
+  isbn: number;
+  sortby: string;
+};

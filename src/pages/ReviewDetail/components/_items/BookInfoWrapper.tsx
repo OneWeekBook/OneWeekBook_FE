@@ -1,22 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import PieChart from 'components/Form/PieChartForm';
-import { ReviewItemType } from 'types/review';
-
-type PropsType = {
-  count: number;
-  average: number;
-};
+import { ReviewBookTypes } from 'types/review';
 
 function BookInfoWrapper({
   author,
+  countReviews,
   img,
   isbn,
   publisher,
+  ratingAverage,
   title,
-  count,
-  average,
-}: ReviewItemType & PropsType) {
+}: ReviewBookTypes) {
   return (
     <Wrapper>
       <BookInfoBox>
@@ -36,12 +31,12 @@ function BookInfoWrapper({
             </p>
           </div>
           <p className="reviewTotal">
-            전체 리뷰: <span>{count}</span>
+            전체 리뷰: <span>{countReviews}</span>
           </p>
         </InfoWrapper>
       </BookInfoBox>
       <ProgressWrapper>
-        <PieChart title="전체 평점" rate={average * 2} />
+        <PieChart title="전체 평점" rate={ratingAverage * 2} />
       </ProgressWrapper>
     </Wrapper>
   );
@@ -80,15 +75,15 @@ const InfoWrapper = styled.div`
   justify-content: space-between;
   margin-left: 15px;
   .bookTitle {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 600;
   }
   .bookAuthor {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
   }
   .bookPublisher {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
   }
   .reviewTotal {
