@@ -10,7 +10,6 @@ type PropsType = {
 
 function BookInfoWrapper({
   author,
-  id,
   img,
   isbn,
   publisher,

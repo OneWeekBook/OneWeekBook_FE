@@ -8,7 +8,6 @@ type PropsType = {
 };
 
 function ReivewItem({
-  id,
   img,
   title,
   author,
@@ -37,7 +36,7 @@ function ReivewItem({
 export default ReivewItem;
 
 const ItemWrapper = styled.div`
-  width: 170px;
+  width: 150px;
 `;
 
 const ImgWrapper = styled.div`

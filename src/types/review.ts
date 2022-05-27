@@ -1,10 +1,10 @@
 export type ReviewItemType = {
-  id: number;
-  img: string;
-  title: string;
   author: string;
-  publisher: string;
+  countReviews: number;
+  img: string;
   isbn: string;
+  publisher: string;
+  title: string;
 };
 
 export type ReviewDetailTypes = {

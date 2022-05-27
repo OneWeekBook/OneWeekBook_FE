@@ -10,7 +10,7 @@ import {
 function ReviewAPI(params: ReviewTypes) {
   const { start, sortby } = params;
   return axios.get(
-    `${process.env.REACT_APP_BASIC_URL}/book/reviews?start=${start}?sortby=${sortby}`,
+    `${process.env.REACT_APP_BASIC_URL}/book/reviews?start=${start}&display=12&sortby=${sortby}`,
   );
 }
 

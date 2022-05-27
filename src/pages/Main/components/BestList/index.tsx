@@ -4,30 +4,21 @@ import styled from 'styled-components';
 import { ReviewItemType } from 'types/review';
 import BestItem from './BestItem';
 
-type CountType = {
-  isbn: string;
-  count: number;
-};
-
 function Index() {
-  const { reviews, count } = useSelector((state: any) => state.review);
+  const { reviews } = useSelector((state: any) => state.review);
 
   return (
     <Wrapper>
       <BestListTitle>사람들의 관심을 한 몸에 받은 책</BestListTitle>
       <BestListGridWrapper>
         {reviews.length > 0 &&
-          count.length > 0 &&
           reviews.slice(0, 9).map((item: ReviewItemType, idx: number) => {
-            const index = count.findIndex(
-              (i: CountType) => i.isbn === item.isbn,
-            );
             return (
               <BestItem
-                key={item.id}
+                key={item.isbn}
                 idx={idx + 1}
                 {...item}
-                count={count[index].count}
+                count={item.countReviews}
               />
             );
           })}

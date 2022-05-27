@@ -11,7 +11,6 @@ type PropsType = {
 function BestItem({
   idx,
   author,
-  id,
   img,
   isbn,
   publisher,

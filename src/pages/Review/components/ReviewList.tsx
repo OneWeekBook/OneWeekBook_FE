@@ -6,15 +6,10 @@ import { ReviewInit, ReviewsRequest } from 'redux/reducers/Review';
 import { ReviewItemType } from 'types/review';
 import ReviewItem from './_item/ReviewItem';
 
-type CountType = {
-  isbn: string;
-  count: number;
-};
-
 function ReviewList() {
   const dispatch = useDispatch();
   const [curIdx, setCurIdx] = useState<number>(1);
-  const { reviews, count } = useSelector((state: any) => state.review);
+  const { reviews } = useSelector((state: any) => state.review);
 
   useEffect(() => {
     dispatch(ReviewsRequest({ start: 0, sortby: 'new' }));
@@ -29,30 +24,23 @@ function ReviewList() {
 
   return (
     <Wrapper>
-      {reviews.length > 0 && count.length > 0 && (
+      {reviews.length > 0 && (
         <>
-          <ReviewTitle>전체 리뷰 ({count.length}건)</ReviewTitle>
+          <ReviewTitle>전체 리뷰 ({reviews.length}건)</ReviewTitle>
           <ReviewListWrapper>
             {reviews.map((item: ReviewItemType) => {
-              const index = count.findIndex(
-                (i: CountType) => i.isbn === item.isbn,
-              );
               return (
                 <ReviewItem
-                  key={item.id}
+                  key={item.isbn}
                   {...item}
-                  count={count[index].count}
+                  count={item.countReviews}
                 />
               );
             })}
           </ReviewListWrapper>
         </>
       )}
-      <PagenationForm
-        total={count.length}
-        curIdx={curIdx}
-        setCurIdx={setCurIdx}
-      />
+      <PagenationForm total={0} curIdx={curIdx} setCurIdx={setCurIdx} />
     </Wrapper>
   );
 }
@@ -76,7 +64,7 @@ const ReviewTitle = styled.p`
 const ReviewListWrapper = styled.div`
   display: grid;
   margin-top: 30px;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   gap: 10px;
   min-height: 600px;
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
