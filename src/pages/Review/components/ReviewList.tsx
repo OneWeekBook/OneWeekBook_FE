@@ -31,7 +31,7 @@ function ReviewList() {
             {reviews.map((item: ReviewItemType) => {
               return (
                 <ReviewItem
-                  key={item.isbn}
+                  key={item.id}
                   {...item}
                   count={item.countReviews}
                 />

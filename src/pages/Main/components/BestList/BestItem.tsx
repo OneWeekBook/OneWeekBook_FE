@@ -26,13 +26,13 @@ function BestItem({
           <BookInfoWrapper>
             <TitleWrapepr>
               <p className="item-title">
-                {title.replaceAll('<b>', '').replaceAll('</b>', '')}
+                {title && title.replaceAll('<b>', '').replaceAll('</b>', '')}
               </p>
               <p className="item-auth">
-                {author.replaceAll('<b>', '').replaceAll('</b>', '')}
+                {author && author.replaceAll('<b>', '').replaceAll('</b>', '')}
               </p>
               <p className="item-publisher">
-                {publisher.replaceAll('<b>', '').replaceAll('</b>', '')}
+                {publisher && publisher.replaceAll('<b>', '').replaceAll('</b>', '')}
               </p>
             </TitleWrapepr>
             <CountInfoWrapper>

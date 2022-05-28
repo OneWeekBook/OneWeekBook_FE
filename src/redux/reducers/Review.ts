@@ -15,7 +15,10 @@ const initialState = {
   isSuccess: false,
   itemLoading: false,
   itemSuccess: false,
+  isNewLoading: false,
+  isNewSuccess: false,
   reviews: [],
+  newReviews: [],
   bookData: {},
 };
 

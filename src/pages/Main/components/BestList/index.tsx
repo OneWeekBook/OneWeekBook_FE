@@ -15,7 +15,7 @@ function Index() {
           reviews.slice(0, 9).map((item: ReviewItemType, idx: number) => {
             return (
               <BestItem
-                key={item.isbn}
+                key={item.id}
                 idx={idx + 1}
                 {...item}
                 count={item.countReviews}

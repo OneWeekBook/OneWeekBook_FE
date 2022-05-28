@@ -1,57 +1,13 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { NewReviewItemTypes } from 'types/main';
+import { NewReviewTypes } from 'types/main';
 import NewReivewItem from './NewReivewItem';
 
-const NewReivewListItems = [
-  {
-    id: 1,
-    title: '거인의 포트폴리오',
-    auth: '강환국',
-    subTitle: '가나다라마바사아자차카타파하',
-    reviewer: 'Le***',
-    overall:
-      '대충 내용 출력되는 곳, 대충 내용 출력되는 곳, 대충 내용 출력되는 곳, 대충 내용 출력되는 곳, 대충 내용 출력되는 곳, 대충 내용 출력되는 곳, 대충 내용 출력되는 곳, 대충 내용 출력되는 곳',
-    review: 22,
-    recommend: 34,
-  },
-  {
-    id: 2,
-    title: '달러구트 꿈 백화점',
-    auth: '이미예',
-    subTitle: '가나다라마바사아자차카타파하',
-    reviewer: 'Le***',
-    overall:
-      '대충 내용 출력되는 곳, 대충 내용 출력되는 곳, 대충 내용 출력되는 곳, 대충 내용 출력되는 곳, 대충 내용 출력되는 곳, 대충 내용 출력되는 곳, 대충 내용 출력되는 곳, 대충 내용 출력되는 곳',
-    review: 17,
-    recommend: 27,
-  },
-  {
-    id: 3,
-    title: '밤의 피크닉',
-    auth: '온다 리쿠',
-    subTitle: '가나다라마바사아자차카타파하',
-    reviewer: 'Su***',
-    overall:
-      '대충 내용 출력되는 곳, 대충 내용 출력되는 곳, 대충 내용 출력되는 곳, 대충 내용 출력되는 곳, 대충 내용 출력되는 곳, 대충 내용 출력되는 곳, 대충 내용 출력되는 곳, 대충 내용 출력되는 곳',
-    review: 12,
-    recommend: 21,
-  },
-  {
-    id: 4,
-    title: '지구 끝의 온실',
-    auth: '김초엽',
-    subTitle: '가나다라마바사아자차카타파하',
-    reviewer: 'Pa***',
-    overall:
-      '대충 내용 출력되는 곳, 대충 내용 출력되는 곳, 대충 내용 출력되는 곳, 대충 내용 출력되는 곳, 대충 내용 출력되는 곳, 대충 내용 출력되는 곳, 대충 내용 출력되는 곳, 대충 내용 출력되는 곳',
-    review: 10,
-    recommend: 19,
-  },
-];
-
 function NewReviewList() {
+  const { newReviews } = useSelector((state: any) => state.newReview);
+
   return (
     <Wrapper>
       <NewReviewTitleWrapper>
@@ -59,7 +15,7 @@ function NewReviewList() {
         <Link to="/review">모두 보기</Link>
       </NewReviewTitleWrapper>
       <NewReviewListWrapper>
-        {NewReivewListItems.map((item: NewReviewItemTypes) => (
+        {newReviews.length > 0 && newReviews.slice(0, 5).map((item: NewReviewTypes) => (
           <NewReivewItem key={item.id} {...item} />
         ))}
       </NewReviewListWrapper>

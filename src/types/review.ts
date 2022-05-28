@@ -1,4 +1,5 @@
 export type ReviewItemType = {
+  id: number
   author: string;
   countReviews: number;
   img: string;

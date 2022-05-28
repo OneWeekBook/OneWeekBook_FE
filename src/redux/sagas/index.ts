@@ -18,6 +18,7 @@ import watchParagraphAdd from './ParagraphAddSaga';
 import watchParagraphDelete from './ParagraphDeleteSaga';
 import watchReview from './ReviewSaga';
 import watchReviewDetail from './ReviewDetailSaga';
+import watchNewReview from './NewReviewSaga';
 import watchUserReview from './UserReviewSaga';
 import watchUserReviewAdd from './UserReivewAddSaga';
 import watchUserReviewModify from './UserReviewModifySaga';
@@ -45,6 +46,7 @@ export default function* rootSaga() {
     call(watchParagraphDelete),
     call(watchReview),
     call(watchReviewDetail),
+    call(watchNewReview),
     call(watchUserReview),
     call(watchUserReviewAdd),
     call(watchUserReviewModify),

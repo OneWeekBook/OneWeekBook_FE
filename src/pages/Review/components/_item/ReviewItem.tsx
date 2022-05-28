@@ -23,10 +23,10 @@ function ReivewItem({
         </ImgWrapper>
       </Link>
       <ItemTitle>
-        {title.replaceAll('<b>', '').replaceAll('</b>', '')}
+        {title && title.replaceAll('<b>', '').replaceAll('</b>', '')}
       </ItemTitle>
       <ItemAuthor>
-        {author.replaceAll('<b>', '').replaceAll('</b>', '')}
+        {author && author.replaceAll('<b>', '').replaceAll('</b>', '')}
       </ItemAuthor>
       <ItemCount>총 리뷰 ( {count} )</ItemCount>
     </ItemWrapper>
