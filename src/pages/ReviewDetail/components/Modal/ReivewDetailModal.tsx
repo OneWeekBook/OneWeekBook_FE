@@ -1,12 +1,14 @@
 import DetailModal from 'components/Modal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { LikeRequest } from 'redux/reducers/Like';
 import styled from 'styled-components';
 import { ReviewDetailTypes } from 'types/review';
 
 type PropsType = {
   item: ReviewDetailTypes;
   detailToggleIsOn: () => void;
-  handleLikeClick: (state: number, userId: number) => void;
+  handleLikeClick: (bookId: number, state: number, userId: number) => void;
 };
 
 function ReviewDetailModal({
@@ -14,8 +16,15 @@ function ReviewDetailModal({
   detailToggleIsOn,
   handleLikeClick,
 }: PropsType) {
+  const dispatch = useDispatch();
   const [zero, setZero] = useState(item.zeroLikeCount);
   const [one, setOne] = useState(item.oneLikeCount);
+  const {likeData} = useSelector((state: any) => state.like);
+  console.log(likeData);
+
+  useEffect(() => {
+    dispatch(LikeRequest({bookId: item.id}));
+  }, []);
 
   return (
     <DetailModal
@@ -38,7 +47,7 @@ function ReviewDetailModal({
         <button
           type="button"
           onClick={() => {
-            handleLikeClick(0, item.userId);
+            handleLikeClick(item.id, 0, item.userId);
             setZero(zero + 1);
           }}
         >
@@ -47,7 +56,7 @@ function ReviewDetailModal({
         <button
           type="button"
           onClick={() => {
-            handleLikeClick(1, item.userId);
+            handleLikeClick(item.id, 1, item.userId);
             setOne(one + 1);
           }}
         >

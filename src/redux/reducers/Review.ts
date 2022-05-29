@@ -35,7 +35,7 @@ export default function Review(state = initialState, action: any) {
         ...state,
         isLoading: false,
         isSuccess: true,
-        reviews: action.data,
+        reviews: action.data.likeData,
       };
     case REVIEWS_FAIL:
       return {

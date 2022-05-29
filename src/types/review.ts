@@ -20,6 +20,7 @@ export type ReviewBookTypes = {
 };
 
 export type ReviewDetailTypes = {
+  id: number;
   likeCount: number;
   nick: string;
   oneLikeCount: number;

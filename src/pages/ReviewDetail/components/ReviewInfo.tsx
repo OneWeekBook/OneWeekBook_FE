@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { ReviewDetailTypes } from 'types/review';
 import { ReviewRequest } from 'redux/reducers/Review';
-import { LikeRequest } from 'redux/reducers/Like';
+import { LikeAddRequest } from 'redux/reducers/Like';
 import ReviewDetailModal from './Modal/ReivewDetailModal';
 import ReviewItem from './_items/ReivewItem';
 
@@ -14,6 +14,7 @@ function ReviewInfo() {
   const [detailToggle, detailToggleIsOn] = useToggle(false);
   const { reviews, bookData } = useSelector((state: any) => state.review);
   const [curReview, setCurReview] = useState({
+    id: -1,
     likeCount: 0,
     nick: '',
     oneLikeCount: 0,
@@ -38,8 +39,8 @@ function ReviewInfo() {
     setSortBy(sort);
   };
 
-  const handleLikeClick = (state: number, userId: number) => {
-    dispatch(LikeRequest({ bookId: bookData.id, state, userId }));
+  const handleLikeClick = (bookId: number, state: number, userId: number) => {
+    dispatch(LikeAddRequest({ bookId, state, userId }));
   };
 
   return (

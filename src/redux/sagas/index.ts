@@ -24,6 +24,7 @@ import watchUserReviewAdd from './UserReivewAddSaga';
 import watchUserReviewModify from './UserReviewModifySaga';
 import watchUserReviewDelete from './UserReviewDeleteSaga';
 import watchLike from './LikeSaga';
+import watchLikeAdd from './LikeAddSaga';
 
 export default function* rootSaga() {
   yield all([
@@ -52,5 +53,6 @@ export default function* rootSaga() {
     call(watchUserReviewModify),
     call(watchUserReviewDelete),
     call(watchLike),
+    call(watchLikeAdd),
   ]);
 }
