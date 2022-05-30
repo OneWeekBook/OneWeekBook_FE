@@ -21,6 +21,7 @@ const initialState = {
   isAddSuccess: false,
   isCancelLoading: false,
   isCancelSuccess: false,
+  likeErrorStatus: null,
   likeAddErrorStatus: null,
   likeCancelErrorStatus: null,
   likeData: [],
@@ -33,12 +34,14 @@ export default function SignIn(state = initialState, action: any) {
         ...state,
         isLoading: true,
         isSuccess: false,
+        likeErrorStatus: null,
       };
     case LIKE_SUCCESS:
       return {
         ...state,
         isLoading: false,
         isSuccess: true,
+        likeErrorStatus: 200,
         likeData: action.data.likeData,
       };
     case LIKE_FAIL:
@@ -46,6 +49,7 @@ export default function SignIn(state = initialState, action: any) {
         ...state,
         isLoading: false,
         isSuccess: false,
+        likeErrorStatus: action.error.status,
       };
     case LIKE_ADD_REQUEST:
       return {

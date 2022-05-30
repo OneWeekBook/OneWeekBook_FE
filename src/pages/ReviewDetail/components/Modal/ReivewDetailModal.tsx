@@ -19,11 +19,15 @@ function ReviewDetailModal({ item, detailToggleIsOn }: PropsType) {
   const dispatch = useDispatch();
   const [zero, setZero] = useState(item.zeroLikeCount);
   const [one, setOne] = useState(item.oneLikeCount);
-  const { likeData, likeAddErrorStatus, likeCancelErrorStatus } = useSelector(
-    (state: any) => state.like,
-  );
+  const [zeroToggle, setZeroToggle] = useState(false);
+  const [oneToggle, setOneToggle] = useState(false);
   const { user } = useSelector((state: any) => state.authUser);
-  console.log(likeAddErrorStatus, likeCancelErrorStatus);
+  const {
+    likeData,
+    likeErrorStatus,
+    likeAddErrorStatus,
+    likeCancelErrorStatus,
+  } = useSelector((state: any) => state.like);
 
   useEffect(() => {
     dispatch(LikeRequest({ bookId: item.id }));
@@ -33,12 +37,17 @@ function ReviewDetailModal({ item, detailToggleIsOn }: PropsType) {
   }, []);
 
   useEffect(() => {
-    if (likeAddErrorStatus === 200) {
-      dispatch(LikeRequest({ bookId: item.id }));
-    } else if (likeCancelErrorStatus === 200) {
+    if (likeAddErrorStatus === 200 || likeCancelErrorStatus === 200) {
       dispatch(LikeRequest({ bookId: item.id }));
     }
   }, [likeAddErrorStatus, likeCancelErrorStatus]);
+
+  useEffect(() => {
+    if (likeErrorStatus === 404) {
+      setZero(0);
+      setOne(0);
+    }
+  }, [likeErrorStatus]);
 
   useEffect(() => {
     if (likeData.length > 0) {
@@ -47,15 +56,26 @@ function ReviewDetailModal({ item, detailToggleIsOn }: PropsType) {
       );
       setOne(likeData.filter((item: LikeDataTypes) => item.state === 1).length);
     }
-    console.log('likeData', likeData);
+  }, [likeData]);
+
+  useEffect(() => {
+    compareLikeUser();
   }, [likeData]);
 
   const compareLikeUser = () => {
-    if (likeData.filter((like: LikeDataTypes) => like.user.id === user.id)) {
-      console.log('true');
+    if (likeData.find((like: LikeDataTypes) => like.user.id === user.id)) {
+      const data = likeData.find(
+        (like: LikeDataTypes) => like.user.id === user.id,
+      );
+      if (data.state === 0) {
+        setOneToggle(false);
+        setZeroToggle(true);
+      } else if (data.state === 1) {
+        setZeroToggle(false);
+        setOneToggle(true);
+      }
       return true;
     }
-    console.log('false');
     return false;
   };
 
@@ -67,11 +87,19 @@ function ReviewDetailModal({ item, detailToggleIsOn }: PropsType) {
     dispatch(LikeAddRequest({ bookId, state, userId }));
   };
 
-  const likeAddClick = async (state: number) => {
-    if (compareLikeUser()) {
-      await handleLikeCancel(item.id, user.id);
+  const likeAddClick = (state: number, isSelected: boolean) => {
+    if (compareLikeUser() && !isSelected) {
+      handleLikeCancel(item.id, user.id);
+      setTimeout(() => {
+        handleLikeClick(item.id, state, user.id);
+      }, 10);
+    } else if (compareLikeUser() && isSelected) {
+      if (state === 0) setZeroToggle(false);
+      else if (state === 1) setOneToggle(false);
+      handleLikeCancel(item.id, user.id);
+    } else if (!compareLikeUser()) {
+      handleLikeClick(item.id, state, user.id);
     }
-    await handleLikeClick(item.id, state, user.id);
   };
 
   return (
@@ -92,12 +120,20 @@ function ReviewDetailModal({ item, detailToggleIsOn }: PropsType) {
         <ReviewBody>{item.review}</ReviewBody>
         <Recommend>{zero}명이 해당 리뷰가 유용하다고 생각해요</Recommend>
         <Recommend>{one}명이 해당 리뷰가 재미있다고 생각해요</Recommend>
-        <button type="button" onClick={() => likeAddClick(0)}>
+        <Button
+          type="button"
+          isSelected={zeroToggle}
+          onClick={() => likeAddClick(0, zeroToggle)}
+        >
           유용해요
-        </button>
-        <button type="button" onClick={() => likeAddClick(1)}>
+        </Button>
+        <Button
+          type="button"
+          isSelected={oneToggle}
+          onClick={() => likeAddClick(1, oneToggle)}
+        >
           재미있어요
-        </button>
+        </Button>
       </Wrapper>
     </DetailModal>
   );
@@ -121,4 +157,9 @@ const ReviewBody = styled.p`
 
 const Recommend = styled.p`
   font-size: 16px;
+`;
+
+const Button = styled.button<{ isSelected: boolean }>`
+  border: none;
+  background-color: ${({ isSelected }) => (isSelected ? '#1e90ff' : '#08c1e9')};
 `;
