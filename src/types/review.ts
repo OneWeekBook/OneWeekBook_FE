@@ -1,5 +1,5 @@
 export type ReviewItemType = {
-  id: number
+  id: number;
   author: string;
   countReviews: number;
   img: string;
@@ -30,4 +30,24 @@ export type ReviewDetailTypes = {
   role: number;
   zeroLikeCount: number;
   userId: number;
+};
+
+export type LikeDataTypes = {
+  createdAt: string;
+  id: number;
+  state: number;
+  updatedAt: string;
+  user: UserTypes;
+  userBookListId: number;
+  userId: number;
+};
+
+export type UserTypes = {
+  createdAt: string;
+  email: string;
+  id: number;
+  nick: string;
+  role: number;
+  updatedAt: string;
+  username: string;
 };

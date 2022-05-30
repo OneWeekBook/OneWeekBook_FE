@@ -30,11 +30,7 @@ function ReviewList() {
           <ReviewListWrapper>
             {reviews.map((item: ReviewItemType) => {
               return (
-                <ReviewItem
-                  key={item.id}
-                  {...item}
-                  count={item.countReviews}
-                />
+                <ReviewItem key={item.id} {...item} count={item.countReviews} />
               );
             })}
           </ReviewListWrapper>

@@ -90,3 +90,8 @@ export type LikeTypes = {
   state: number;
   userId: number;
 };
+
+export type LikeCancelTypes = {
+  bookId: number;
+  userId: number;
+};

@@ -18,7 +18,6 @@ const initialState = {
   isNewLoading: false,
   isNewSuccess: false,
   reviews: [],
-  newReviews: [],
   bookData: {},
 };
 
@@ -35,7 +34,7 @@ export default function Review(state = initialState, action: any) {
         ...state,
         isLoading: false,
         isSuccess: true,
-        reviews: action.data.likeData,
+        reviews: action.data.reviews,
       };
     case REVIEWS_FAIL:
       return {
