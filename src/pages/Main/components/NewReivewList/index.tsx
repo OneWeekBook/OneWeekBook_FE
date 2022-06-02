@@ -1,27 +1,34 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { NewReviewTypes } from 'types/main';
 import NewReivewItem from './NewReivewItem';
 
 function NewReviewList() {
   const { newReviews } = useSelector((state: any) => state.newReview);
+  const [end, setEnd] = useState(5);
+
+  const onClick = () => {
+    if (end < 20) {
+      setEnd(end + 5);
+    }
+  };
 
   return (
     <Wrapper>
-      <NewReviewTitleWrapper>
-        <NewReviewTitle>따끈따끈한 새 리뷰</NewReviewTitle>
-        <Link to="/review">모두 보기</Link>
-      </NewReviewTitleWrapper>
-      <NewReviewListWrapper>
+      <NewReviewTitle>따끈따끈한 새 리뷰</NewReviewTitle>
+      <div>
         {newReviews.length &&
           newReviews
-            .slice(0, 5)
-            .map((item: NewReviewTypes) => (
-              <NewReivewItem key={item.id} {...item} />
+            .slice(0, end)
+            .map((item: NewReviewTypes, idx: number) => (
+              <NewReivewItem key={item.id} {...item} idx={idx} />
             ))}
-      </NewReviewListWrapper>
+      </div>
+      <ButtonWrapper>
+        <Button onClick={onClick}>더 보기</Button>
+      </ButtonWrapper>
     </Wrapper>
   );
 }
@@ -37,20 +44,9 @@ const Wrapper = styled.div`
   }
 `;
 
-const NewReviewTitleWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 22px;
-  a {
-    text-decoration: none;
-    font-size: 18px;
-    color: gray;
-  }
-`;
-
 const NewReviewTitle = styled.p`
   font-size: 25px;
+  margin-bottom: 22px;
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
     font-size: 20px;
   }
@@ -59,4 +55,15 @@ const NewReviewTitle = styled.p`
   }
 `;
 
-const NewReviewListWrapper = styled.div``;
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+`;
+
+const Button = styled.button`
+  width: 150px;
+  height: 38px;
+  font-size: 16px;
+  font-weight: 700;
+`;

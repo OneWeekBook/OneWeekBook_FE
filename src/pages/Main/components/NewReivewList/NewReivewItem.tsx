@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { NewReviewTypes } from 'types/main';
 
+type PropsType = {
+  idx: number;
+};
+
 function NewReivewListItem({
   img,
   title,
@@ -13,10 +17,12 @@ function NewReivewListItem({
   isbn,
   createdAt,
   user,
-}: React.PropsWithChildren<NewReviewTypes>) {
+  idx,
+}: React.PropsWithChildren<NewReviewTypes> & PropsType) {
   return (
     <ItemWrapper>
       <Link to={`/review/${isbn}?sort=new`}>
+        <Index>{idx + 1}</Index>
         <BookImage src={img} alt="book" />
         <InfoWrapper>
           <BookTitleWrapper>
@@ -53,22 +59,29 @@ export default NewReivewListItem;
 
 const ItemWrapper = styled.div`
   box-sizing: border-box;
+  padding-top: 10px;
   padding-bottom: 10px;
   a {
     display: flex;
     align-items: center;
     width: 100%;
-    height: 150px;
-    margin: 10px auto;
+    height: 120px;
     text-decoration: none;
     color: black;
   }
   border-bottom: 1px solid gray;
 `;
 
+const Index = styled.div`
+  font-size: 20px;
+  font-weight: 700;
+  color: gray;
+  margin: auto 20px;
+`;
+
 const BookImage = styled.img`
-  width: 100px;
-  height: 150px;
+  width: 90px;
+  height: 120px;
   flex-shrink: 0;
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     width: 90px;
@@ -82,21 +95,20 @@ const BookTitleWrapper = styled.p`
   margin-right: 10px;
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     font-size: 16px;
-    font-weight: 700;
-    margin-right: 10px;
   }
 `;
 
 const InfoWrapper = styled.div`
+  box-sizing: border-box;
   display: flex;
   width: 100%;
   height: 100%;
   flex-direction: column;
   justify-content: flex-start;
-  margin-top: 10px;
-  margin-left: 10px;
+  padding-top: 5px;
+  padding-left: 10px;
   .infomation {
-    font-size: 16px;
+    font-size: 15px;
     display: -webkit-box;
     word-wrap: break-word;
     -webkit-line-clamp: 1;
@@ -108,17 +120,17 @@ const InfoWrapper = styled.div`
     }
   }
   .reviewer {
-    font-size: 16px;
-    margin-bottom: 10px;
+    font-size: 15px;
+    margin-bottom: 5px;
     span {
       font-weight: 700;
     }
   }
   .review {
-    font-size: 16px;
+    font-size: 15px;
     display: -webkit-box;
     word-wrap: break-word;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -141,17 +153,16 @@ const CountInfoWrapper = styled.div`
   align-items: center;
   justify-content: center;
   font-size: 14px;
-  font-weight: 500;
   margin: 0 10px;
   .countItem {
     display: flex;
     align-items: center;
     img {
-      padding-right: 5px;
       width: 25px;
       height: 25px;
     }
     p {
+      padding-left: 5px;
       padding-right: 15px;
     }
   }
@@ -163,7 +174,6 @@ const CountInfoWrapper = styled.div`
       display: flex;
       align-items: center;
       img {
-        padding-right: 5px;
         width: 20px;
         height: 20px;
       }
