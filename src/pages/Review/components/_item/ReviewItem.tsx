@@ -1,27 +1,34 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { ReviewItemType } from '../ReviewList';
+import { ReviewItemType } from 'types/review';
+
+type PropsType = {
+  count: number;
+};
 
 function ReivewItem({
   img,
   title,
   author,
-  rating,
-  total,
-}: React.PropsWithChildren<ReviewItemType>) {
+  publisher,
+  isbn,
+  count,
+}: React.PropsWithChildren<ReviewItemType> & PropsType) {
   return (
     <ItemWrapper>
-      <Link to={`/review/${title}`}>
+      <Link to={`/review/${isbn}`}>
         <ImgWrapper>
           <img src={img} alt="book img" />
         </ImgWrapper>
-        <p>{title}</p>
-        <p>{author}</p>
-        <p>
-          {rating} ({total})
-        </p>
       </Link>
+      <ItemTitle>
+        {title && title.replaceAll('<b>', '').replaceAll('</b>', '')}
+      </ItemTitle>
+      <ItemAuthor>
+        {author && author.replaceAll('<b>', '').replaceAll('</b>', '')}
+      </ItemAuthor>
+      <ItemCount>총 리뷰 ( {count} )</ItemCount>
     </ItemWrapper>
   );
 }
@@ -29,14 +36,10 @@ function ReivewItem({
 export default ReivewItem;
 
 const ItemWrapper = styled.div`
-  a {
-    text-decoration: none;
-    color: black;
-  }
+  width: 150px;
 `;
 
 const ImgWrapper = styled.div`
-  background-color: lightcoral;
   width: 100%;
   height: 200px;
   object-fit: cover;
@@ -44,4 +47,31 @@ const ImgWrapper = styled.div`
     width: 100%;
     height: 100%;
   }
+`;
+
+const ItemTitle = styled.p`
+  height: 40px;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 5px;
+  display: -webkit-box;
+  word-wrap: break-word;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+const ItemAuthor = styled.p`
+  font-size: 14px;
+  margin-bottom: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+const ItemCount = styled.p`
+  font-size: 14px;
+  font-weight: 600;
+  color: gray;
 `;

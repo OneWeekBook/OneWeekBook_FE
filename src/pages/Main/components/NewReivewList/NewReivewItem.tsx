@@ -1,47 +1,56 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { NewReviewItemTypes } from 'types/main';
+import { NewReviewTypes } from 'types/main';
+
+type PropsType = {
+  idx: number;
+};
 
 function NewReivewListItem({
+  img,
   title,
-  auth,
-  subTitle,
-  reviewer,
-  overall,
+  author,
+  publisher,
   review,
-  recommend,
-}: React.PropsWithChildren<NewReviewItemTypes>) {
+  rating,
+  isbn,
+  createdAt,
+  user,
+  idx,
+}: React.PropsWithChildren<NewReviewTypes> & PropsType) {
   return (
     <ItemWrapper>
-      <BookImage
-        src={`${process.env.PUBLIC_URL}/assets/main-bestlist-book.png`}
-        alt="book"
-      />
-      <InfoWrapper>
-        <BookTitleWrapper>
-          <p>{title}</p>
-          <p>{auth}</p>
-        </BookTitleWrapper>
-        <p className="subtitle">{subTitle}</p>
-        <p className="reviewer">{reviewer}</p>
-        <p className="overall">{overall}</p>
-      </InfoWrapper>
-      <CountInfoWrapper>
-        <div className="countItem">
-          <img
-            src={`${process.env.PUBLIC_URL}/assets/main-bestlist-comment.png`}
-            alt="comment"
-          />
-          <p>{review}</p>
-        </div>
-        <div className="countItem">
-          <img
-            src={`${process.env.PUBLIC_URL}/assets/main-bestlist-recommend.png`}
-            alt="recommend"
-          />
-          <p>{recommend}</p>
-        </div>
-      </CountInfoWrapper>
+      <Link to={`/review/${isbn}?sort=new`}>
+        <Index>{idx + 1}</Index>
+        <BookImage src={img} alt="book" />
+        <InfoWrapper>
+          <BookTitleWrapper>
+            {title && title.replaceAll('<b>', '').replaceAll('</b>', '')}
+          </BookTitleWrapper>
+          <p className="infomation">
+            <span>
+              {author && author.replaceAll('<b>', '').replaceAll('</b>', '')}
+            </span>
+            &nbsp;&nbsp;
+            {publisher &&
+              publisher.replaceAll('<b>', '').replaceAll('</b>', '')}
+          </p>
+          <p className="reviewer">
+            <span>{user.nick}</span> {createdAt}
+          </p>
+          <p className="review">{review}</p>
+        </InfoWrapper>
+        <CountInfoWrapper>
+          <div className="countItem">
+            <img
+              src={`${process.env.PUBLIC_URL}/assets/main-bestlist-recommend.png`}
+              alt="recommend"
+            />
+            <p>{rating}</p>
+          </div>
+        </CountInfoWrapper>
+      </Link>
     </ItemWrapper>
   );
 }
@@ -50,87 +59,90 @@ export default NewReivewListItem;
 
 const ItemWrapper = styled.div`
   box-sizing: border-box;
+  padding-top: 10px;
   padding-bottom: 10px;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 200px;
-  margin: 10px auto;
+  a {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 120px;
+    text-decoration: none;
+    color: black;
+  }
   border-bottom: 1px solid gray;
 `;
 
+const Index = styled.div`
+  font-size: 20px;
+  font-weight: 700;
+  color: gray;
+  margin: auto 20px;
+`;
+
 const BookImage = styled.img`
-  width: 120px;
+  width: 90px;
+  height: 120px;
+  flex-shrink: 0;
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     width: 90px;
   }
 `;
 
-const BookTitleWrapper = styled.div`
-  display: flex;
+const BookTitleWrapper = styled.p`
   align-items: center;
-  margin-bottom: 10px;
-  p:first-child {
-    font-size: 18px;
-    font-weight: 700;
-    margin-right: 10px;
-  }
-  p:last-child {
-    font-size: 16px;
-    font-weight: 500;
-  }
+  font-size: 18px;
+  font-weight: 700;
+  margin-right: 10px;
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    p:first-child {
-      font-size: 16px;
-      font-weight: 600;
-      margin-right: 10px;
-    }
-    p:last-child {
-      font-size: 14px;
-      font-weight: 500;
-    }
+    font-size: 16px;
   }
 `;
 
 const InfoWrapper = styled.div`
+  box-sizing: border-box;
   display: flex;
   width: 100%;
   height: 100%;
   flex-direction: column;
   justify-content: flex-start;
-  margin-top: 10px;
-  margin-left: 10px;
-  .subtitle {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 10px;
-  }
-  .reviewer {
-    font-size: 14px;
-    margin-bottom: 15px;
-  }
-  .overall {
-    font-size: 16px;
+  padding-top: 5px;
+  padding-left: 10px;
+  .infomation {
+    font-size: 15px;
     display: -webkit-box;
     word-wrap: break-word;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    span {
+      font-weight: 700;
+    }
+  }
+  .reviewer {
+    font-size: 15px;
+    margin-bottom: 5px;
+    span {
+      font-weight: 700;
+    }
+  }
+  .review {
+    font-size: 15px;
+    display: -webkit-box;
+    word-wrap: break-word;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    .subtitle {
+    .infomation {
       font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 10px;
-      text-overflow: ellipsis;
-      white-space: nowrap;
     }
     .reviewer {
-      font-size: 12px;
-      margin-bottom: 15px;
+      font-size: 14px;
     }
-    .overall {
+    .review {
       font-size: 14px;
     }
   }
@@ -141,17 +153,16 @@ const CountInfoWrapper = styled.div`
   align-items: center;
   justify-content: center;
   font-size: 14px;
-  font-weight: 500;
   margin: 0 10px;
   .countItem {
     display: flex;
     align-items: center;
     img {
-      padding-right: 5px;
       width: 25px;
       height: 25px;
     }
     p {
+      padding-left: 5px;
       padding-right: 15px;
     }
   }
@@ -163,7 +174,6 @@ const CountInfoWrapper = styled.div`
       display: flex;
       align-items: center;
       img {
-        padding-right: 5px;
         width: 20px;
         height: 20px;
       }

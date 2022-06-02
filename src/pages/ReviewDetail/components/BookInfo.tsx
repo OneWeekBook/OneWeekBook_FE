@@ -1,18 +1,12 @@
-import { ReviewDetailItem } from 'db/reviewdetail';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import BookInfoWrapper from './_items/BookInfoWrapper';
 
 function BookInfo() {
+  const { bookData } = useSelector((state: any) => state.review);
   return (
-    <Wrapper>
-      <BookInfoWrapper />
-      <ReviewInfoWrapper>
-        <p>
-          종합 평가: {ReviewDetailItem.totalRecommend.join(', ')} <span />
-        </p>
-      </ReviewInfoWrapper>
-    </Wrapper>
+    <Wrapper>{bookData.title && <BookInfoWrapper {...bookData} />}</Wrapper>
   );
 }
 
@@ -25,14 +19,4 @@ const Wrapper = styled.div`
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
     width: 95%;
   }
-`;
-
-const ReviewInfoWrapper = styled.div`
-  box-sizing: border-box;
-  background-color: #08c1e9;
-  border: 2px solid #1e90ff;
-  line-height: 100px;
-  font-size: 30px;
-  font-weight: 600;
-  padding-left: 20px;
 `;

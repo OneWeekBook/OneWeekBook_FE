@@ -16,10 +16,16 @@ import watchMyLibraryModify from './MyLibraryModifySaga';
 import watchParagraph from './ParagraphSaga';
 import watchParagraphAdd from './ParagraphAddSaga';
 import watchParagraphDelete from './ParagraphDeleteSaga';
+import watchReview from './ReviewSaga';
+import watchReviewDetail from './ReviewDetailSaga';
+import watchNewReview from './NewReviewSaga';
 import watchUserReview from './UserReviewSaga';
 import watchUserReviewAdd from './UserReivewAddSaga';
 import watchUserReviewModify from './UserReviewModifySaga';
 import watchUserReviewDelete from './UserReviewDeleteSaga';
+import watchLike from './LikeSaga';
+import watchLikeAdd from './LikeAddSaga';
+import watchLikeCancel from './LikeCancelSaga';
 
 export default function* rootSaga() {
   yield all([
@@ -40,9 +46,15 @@ export default function* rootSaga() {
     call(watchParagraph),
     call(watchParagraphAdd),
     call(watchParagraphDelete),
+    call(watchReview),
+    call(watchReviewDetail),
+    call(watchNewReview),
     call(watchUserReview),
     call(watchUserReviewAdd),
     call(watchUserReviewModify),
     call(watchUserReviewDelete),
+    call(watchLike),
+    call(watchLikeAdd),
+    call(watchLikeCancel),
   ]);
 }

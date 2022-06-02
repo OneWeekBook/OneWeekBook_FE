@@ -1,17 +1,27 @@
-import { ReviewDetailItemTypes } from 'db/reviewdetail';
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { ReviewDetailTypes } from 'types/review';
 
+type PropsType = {
+  onClick: () => void;
+};
 function ReviewItem({
-  reviewer,
-  isRecommend,
-  reviewDate,
-  summary,
-  overall,
-  recommends,
-}: PropsWithChildren<ReviewDetailItemTypes>) {
+  nick,
+  oneLikeCount,
+  rating,
+  review,
+  reviewCreationTime,
+  zeroLikeCount,
+  onClick,
+}: PropsWithChildren<ReviewDetailTypes> & PropsType) {
+  const [isRecommend, setIsRecommend] = useState(false);
+
+  useEffect(() => {
+    if (rating > 2) setIsRecommend(true);
+  }, []);
+
   return (
-    <Wrapper>
+    <Wrapper onClick={onClick}>
       <ImgWrapper isRecommend={isRecommend}>
         <img
           src={`${process.env.PUBLIC_URL}/assets/main-bestlist-recommend.png`}
@@ -19,14 +29,18 @@ function ReviewItem({
         />
       </ImgWrapper>
       <ReivewInfoWrapper>
-        <p className="summary">{summary}</p>
-        <p className="overall">{overall}</p>
+        <p className="overall">{review}</p>
         <p className="reviewInfo">
-          {reviewer}&nbsp;&nbsp;<span>{reviewDate}</span>
+          {nick}&nbsp;&nbsp;<span>{reviewCreationTime}</span>
         </p>
-        <p className="recommends">
-          <b>{recommends}</b>명이 해당 리뷰를 추천
-        </p>
+        <div className="recommends">
+          <p>
+            <span>{zeroLikeCount}</span>명이 해당 리뷰가 유용하다고 생각해요
+          </p>
+          <p>
+            <span>{oneLikeCount}</span>명이 해당 리뷰가 재미있다고 생각해요
+          </p>
+        </div>
       </ReivewInfoWrapper>
     </Wrapper>
   );
@@ -35,7 +49,7 @@ function ReviewItem({
 export default ReviewItem;
 
 const Wrapper = styled.div`
-  min-height: 150px;
+  min-height: 100px;
   background-color: #e6e6e6;
   display: flex;
 `;
@@ -56,12 +70,8 @@ const ImgWrapper = styled.div<{ isRecommend: boolean }>`
 `;
 
 const ReivewInfoWrapper = styled.div`
-  margin: 10px; 10px;
-  .summary {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 5px;
-  }
+  margin: 20px 10px;
+  width: 100%;
   .overall {
     font-size: 16px;
     display: -webkit-box;
@@ -73,15 +83,17 @@ const ReivewInfoWrapper = styled.div`
   }
   .reviewInfo {
     margin: 5px auto;
-    text-align: right;
     font-size: 16px;
     span {
-        font-size: 14px;
-        font-weight: 600;
+      font-size: 14px;
+      font-weight: 600;
     }
   }
   .recommends {
-      font-size: 14px;
+    font-size: 14px;
+    font-weight: 500;
+    span {
       font-weight: 600;
+    }
   }
 `;

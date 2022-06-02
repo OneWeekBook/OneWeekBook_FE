@@ -12,8 +12,10 @@ import func from './Func';
 import removeUser from './RemoveUser';
 import myLibrary from './MyLibrary';
 import paragraph from './Paragraph';
-import review from './Reivew';
+import review from './Review';
+import newReview from './NewReview';
 import userReview from './UserReview';
+import like from './Like';
 
 const rootReducer = combineReducers({
   authEmail,
@@ -30,7 +32,9 @@ const rootReducer = combineReducers({
   myLibrary,
   paragraph,
   review,
+  newReview,
   userReview,
+  like,
 });
 
 export default rootReducer;

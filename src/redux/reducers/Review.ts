@@ -1,3 +1,5 @@
+import { ReivewDetailTypes, ReviewTypes } from 'types/api';
+
 export const REVIEWS_REQUEST = 'REVIEWS_REQUEST';
 export const REVIEWS_SUCCESS = 'REVIEWS_SUCCESS';
 export const REVIEWS_FAIL = 'REVIEWS_FAIL';
@@ -13,7 +15,10 @@ const initialState = {
   isSuccess: false,
   itemLoading: false,
   itemSuccess: false,
+  isNewLoading: false,
+  isNewSuccess: false,
   reviews: [],
+  bookData: {},
 };
 
 export default function Review(state = initialState, action: any) {
@@ -29,7 +34,7 @@ export default function Review(state = initialState, action: any) {
         ...state,
         isLoading: false,
         isSuccess: true,
-        reviews: action.data,
+        reviews: action.data.reviews,
       };
     case REVIEWS_FAIL:
       return {
@@ -48,6 +53,8 @@ export default function Review(state = initialState, action: any) {
         ...state,
         itemLoading: false,
         itemSuccess: true,
+        reviews: action.data.reviewData,
+        bookData: action.data.bookData[0],
       };
     case REVIEW_FAIL:
       return {
@@ -62,9 +69,10 @@ export default function Review(state = initialState, action: any) {
   }
 }
 
-export const ReviewsRequest = () => {
+export const ReviewsRequest = (data: ReviewTypes) => {
   return {
     type: REVIEWS_REQUEST,
+    params: data,
   };
 };
 
@@ -82,10 +90,10 @@ export const ReviewsFail = (error: any) => {
   };
 };
 
-export const ReviewRequest = (data: { bookId: number }) => {
+export const ReviewRequest = (data: ReivewDetailTypes) => {
   return {
     type: REVIEW_REQUEST,
-    payload: data,
+    data,
   };
 };
 

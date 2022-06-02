@@ -9,7 +9,7 @@ type PropsType = {
 
 function PagenationForm({ total, curIdx, setCurIdx }: PropsType) {
   const RotateStyle = useMemo(() => ({ transform: 'rotate(180deg)' }), []);
-  const len = Math.ceil(total / 12);
+  const len = Math.ceil(total / 10);
   const pageNums = [];
 
   for (let i = 1; i <= len; i += 1) {

@@ -1,25 +1,87 @@
-import { ReviewDetailItem, ReviewDetailItemTypes } from 'db/reviewdetail';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useToggle } from 'hooks/useToggle';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { ReviewDetailTypes } from 'types/review';
+import { ReviewRequest } from 'redux/reducers/Review';
+import { useLocation } from 'react-router-dom';
+import ReviewDetailModal from './Modal/ReivewDetailModal';
 import ReviewItem from './_items/ReivewItem';
 
 function ReviewInfo() {
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const [sortBy, setSortBy] = useState(`${location.search.split('=')[1]}`);
+  const [detailToggle, detailToggleIsOn] = useToggle(false);
+  const { reviews, bookData } = useSelector((state: any) => state.review);
+  const [curReview, setCurReview] = useState({
+    id: -1,
+    likeCount: 0,
+    nick: '',
+    oneLikeCount: 0,
+    rating: 4,
+    review: '',
+    reviewCreationTime: '',
+    role: 1,
+    zeroLikeCount: 0,
+    userId: -1,
+  });
+
+  useEffect(() => {
+    dispatch(
+      ReviewRequest({
+        isbn: Number(location.pathname.split('/')[2]),
+        sortby: sortBy,
+      }),
+    );
+  }, [sortBy, detailToggle]);
+
+  const handleSortClick = (sort: string) => {
+    setSortBy(sort);
+  };
+
   return (
     <Wrapper>
-      <p className="title">{ReviewDetailItem.title} 평가</p>
-      <button className="recommendBtn" type="button">
+      <p className="title">
+        {bookData.title &&
+          bookData.title.replaceAll('<b>', '').replaceAll('</b>', '')}{' '}
+        평가
+      </p>
+      <Button
+        className="recommendBtn"
+        type="button"
+        isSelected={sortBy === 'recommend'}
+        onClick={() => handleSortClick('recommend')}
+      >
         추천 순
-      </button>
-      <button className="newBtn" type="button">
+      </Button>
+      <Button
+        className="newBtn"
+        type="button"
+        isSelected={sortBy === 'new'}
+        onClick={() => handleSortClick('new')}
+      >
         최신 순
-      </button>
+      </Button>
       <ReviewListWrapper>
-        {ReviewDetailItem.recommendReviews.map(
-          (item: ReviewDetailItemTypes) => (
-            <ReviewItem key={item.id} {...item} />
-          ),
-        )}
+        {reviews.length &&
+          reviews.map((item: ReviewDetailTypes, index: number) => (
+            <ReviewItem
+              key={index}
+              {...item}
+              onClick={() => {
+                detailToggleIsOn();
+                setCurReview(item);
+              }}
+            />
+          ))}
       </ReviewListWrapper>
+      {detailToggle && (
+        <ReviewDetailModal
+          item={curReview}
+          detailToggleIsOn={detailToggleIsOn}
+        />
+      )}
     </Wrapper>
   );
 }
@@ -55,6 +117,11 @@ const Wrapper = styled.div`
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
     width: 95%;
   }
+`;
+
+const Button = styled.button<{ isSelected?: boolean }>`
+  cursor: pointer;
+  font-weight: ${({ isSelected }) => (isSelected ? 800 : 500)};
 `;
 
 const ReviewListWrapper = styled.div`
