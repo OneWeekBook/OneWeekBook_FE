@@ -10,18 +10,29 @@ function NewReivewListItem({
   publisher,
   review,
   rating,
+  isbn,
+  createdAt,
   user,
 }: React.PropsWithChildren<NewReviewTypes>) {
   return (
     <ItemWrapper>
-      <Link to="/review">
-        <BookImage src={img} alt="book"/>
+      <Link to={`/review/${isbn}?sort=new`}>
+        <BookImage src={img} alt="book" />
         <InfoWrapper>
           <BookTitleWrapper>
-            <p>{title && title.replaceAll('<b>', '').replaceAll('</b>', '')}</p>
+            {title && title.replaceAll('<b>', '').replaceAll('</b>', '')}
           </BookTitleWrapper>
-          <p className="infomation"><span>{author && author.replaceAll('<b>', '').replaceAll('</b>', '')}</span>&nbsp;&nbsp;{publisher && publisher.replaceAll('<b>', '').replaceAll('</b>', '')}</p>
-          <p className="reviewer">{user.nick}</p>
+          <p className="infomation">
+            <span>
+              {author && author.replaceAll('<b>', '').replaceAll('</b>', '')}
+            </span>
+            &nbsp;&nbsp;
+            {publisher &&
+              publisher.replaceAll('<b>', '').replaceAll('</b>', '')}
+          </p>
+          <p className="reviewer">
+            <span>{user.nick}</span> {createdAt}
+          </p>
           <p className="review">{review}</p>
         </InfoWrapper>
         <CountInfoWrapper>
@@ -64,28 +75,15 @@ const BookImage = styled.img`
   }
 `;
 
-const BookTitleWrapper = styled.div`
+const BookTitleWrapper = styled.p`
   align-items: center;
-  margin-bottom: 5px;
-  p:first-child {
-    font-size: 18px;
+  font-size: 18px;
+  font-weight: 700;
+  margin-right: 10px;
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    font-size: 16px;
     font-weight: 700;
     margin-right: 10px;
-  }
-  p:last-child {
-    font-size: 16px;
-    font-weight: 500;
-  }
-  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    p:first-child {
-      font-size: 16px;
-      font-weight: 600;
-      margin-right: 10px;
-    }
-    p:last-child {
-      font-size: 14px;
-      font-weight: 500;
-    }
   }
 `;
 
@@ -99,14 +97,22 @@ const InfoWrapper = styled.div`
   margin-left: 10px;
   .infomation {
     font-size: 16px;
-    margin-bottom: 5px;
+    display: -webkit-box;
+    word-wrap: break-word;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
     span {
-      font-weight: 600;
+      font-weight: 700;
     }
   }
   .reviewer {
-    font-size: 14px;
+    font-size: 16px;
     margin-bottom: 10px;
+    span {
+      font-weight: 700;
+    }
   }
   .review {
     font-size: 16px;
@@ -118,18 +124,13 @@ const InfoWrapper = styled.div`
     text-overflow: ellipsis;
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    .subtitle {
+    .infomation {
       font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 10px;
-      text-overflow: ellipsis;
-      white-space: nowrap;
     }
     .reviewer {
-      font-size: 12px;
-      margin-bottom: 15px;
+      font-size: 14px;
     }
-    .overall {
+    .review {
       font-size: 14px;
     }
   }

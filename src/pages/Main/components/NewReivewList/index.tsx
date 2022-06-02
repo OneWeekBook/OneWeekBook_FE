@@ -15,9 +15,12 @@ function NewReviewList() {
         <Link to="/review">모두 보기</Link>
       </NewReviewTitleWrapper>
       <NewReviewListWrapper>
-        {newReviews.length > 0 && newReviews.slice(0, 5).map((item: NewReviewTypes) => (
-          <NewReivewItem key={item.id} {...item} />
-        ))}
+        {newReviews.length &&
+          newReviews
+            .slice(0, 5)
+            .map((item: NewReviewTypes) => (
+              <NewReivewItem key={item.id} {...item} />
+            ))}
       </NewReviewListWrapper>
     </Wrapper>
   );

@@ -4,12 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { ReviewDetailTypes } from 'types/review';
 import { ReviewRequest } from 'redux/reducers/Review';
+import { useLocation } from 'react-router-dom';
 import ReviewDetailModal from './Modal/ReivewDetailModal';
 import ReviewItem from './_items/ReivewItem';
 
 function ReviewInfo() {
+  const location = useLocation();
   const dispatch = useDispatch();
-  const [sortBy, setSortBy] = useState('recommend');
+  const [sortBy, setSortBy] = useState(`${location.search.split('=')[1]}`);
   const [detailToggle, detailToggleIsOn] = useToggle(false);
   const { reviews, bookData } = useSelector((state: any) => state.review);
   const [curReview, setCurReview] = useState({
@@ -62,7 +64,7 @@ function ReviewInfo() {
         최신 순
       </Button>
       <ReviewListWrapper>
-        {reviews.length > 0 &&
+        {reviews.length &&
           reviews.map((item: ReviewDetailTypes, index: number) => (
             <ReviewItem
               key={index}

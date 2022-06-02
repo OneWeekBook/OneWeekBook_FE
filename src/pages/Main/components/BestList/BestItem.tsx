@@ -19,7 +19,7 @@ function BestItem({
 }: React.PropsWithChildren<ReviewItemType> & PropsType) {
   return (
     <ItemWrapper>
-      <Link to={`/review/${isbn}`}>
+      <Link to={`/review/${isbn}?sort=recommend`}>
         <BookImage src={img} alt="book" />
         <InfoWrapper>
           <p className="item-id">{idx}</p>
@@ -32,7 +32,8 @@ function BestItem({
                 {author && author.replaceAll('<b>', '').replaceAll('</b>', '')}
               </p>
               <p className="item-publisher">
-                {publisher && publisher.replaceAll('<b>', '').replaceAll('</b>', '')}
+                {publisher &&
+                  publisher.replaceAll('<b>', '').replaceAll('</b>', '')}
               </p>
             </TitleWrapepr>
             <CountInfoWrapper>

@@ -14,7 +14,7 @@ function Index() {
     dispatch(
       ReviewRequest({
         isbn: Number(location.pathname.split('/')[2]),
-        sortby: 'recommend',
+        sortby: `${location.search.split('=')[1]}`,
       }),
     );
   }, []);
