@@ -1,6 +1,6 @@
-import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { Toast } from 'lib/Toast';
 import { NavItems } from './Nav';
 
 type PropsTypes = {
@@ -31,7 +31,7 @@ function Sidebar({ toggle, toggleIsOn }: PropsTypes) {
 
   const logoutClick = () => {
     sessionStorage.removeItem('accessToken');
-    alert('로그아웃 되었습니다.');
+    Toast('info', '로그아웃 되었습니다.');
     toggleIsOn();
   };
 

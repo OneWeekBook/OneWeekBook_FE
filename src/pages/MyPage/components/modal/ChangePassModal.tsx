@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import ChangeModal from 'components/Modal';
-import styled from 'styled-components';
-import { useInput } from 'hooks/useInput';
-import { passwordRegex } from 'lib/Regex';
-import ErrorForm from 'components/Form/ErrorForm';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
 import {
   ChangePasswordInit,
   ChangePasswordRequest,
 } from 'redux/reducers/ChangePassword';
+import { useInput } from 'hooks/useInput';
+import { passwordRegex } from 'lib/Regex';
+import { Toast } from 'lib/Toast';
+import ChangeModal from 'components/Modal';
+import ErrorForm from 'components/Form/ErrorForm';
 
 type PropsType = {
   passToggleIsOn: () => void;
@@ -45,7 +46,7 @@ function ChangePassModal({ passToggleIsOn }: PropsType) {
       setError('오류 관리자에게 문의해주세요.');
     else if (changeErrorStatus === 200) {
       dispatch(ChangePasswordInit());
-      alert('비밀번호 변경 성공!');
+      Toast('success', '비밀번호 변경 성공!');
       passToggleIsOn();
     }
     return () => {

@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import { Toast } from 'lib/Toast';
 import Container from '../Container';
 
 type PropsType = {
@@ -24,7 +25,7 @@ function Header({ toggleIsOn }: PropsType) {
 
   const logoutClick = () => {
     sessionStorage.removeItem('accessToken');
-    alert('로그아웃 되었습니다.');
+    Toast('info', '로그아웃 되었습니다.');
   };
 
   return (

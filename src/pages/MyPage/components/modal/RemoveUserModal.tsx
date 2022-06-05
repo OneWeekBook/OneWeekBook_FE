@@ -1,11 +1,12 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import RemoveModal from 'components/Modal';
+import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RemoveUserInit, RemoveUserRequest } from 'redux/reducers/RemoveUser';
-import { useInput } from 'hooks/useInput';
-import styled from 'styled-components';
-import ErrorForm from 'components/Form/ErrorForm';
 import { useNavigate } from 'react-router';
+import { RemoveUserInit, RemoveUserRequest } from 'redux/reducers/RemoveUser';
+import styled from 'styled-components';
+import { useInput } from 'hooks/useInput';
+import { Toast } from 'lib/Toast';
+import ErrorForm from 'components/Form/ErrorForm';
+import RemoveModal from 'components/Modal';
 
 type PropsType = {
   removeToggleIsOn: () => void;
@@ -28,7 +29,7 @@ function RemoveUserModal({ removeToggleIsOn, id }: PropsType) {
     if (removeErrorStatus === 200) {
       sessionStorage.removeItem('accessToken');
       removeToggleIsOn();
-      alert('회원탈퇴가 정상적으로 처리되었습니다.');
+      Toast('info', '회원탈퇴가 정상적으로 처리되었습니다.');
       navigate('/');
     } else if (removeErrorStatus === 400) {
       setIsError(true);

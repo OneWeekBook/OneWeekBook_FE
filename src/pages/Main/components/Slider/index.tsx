@@ -1,6 +1,6 @@
 import { useInterval } from 'hooks/useInterval';
 import { useWindowSize } from 'hooks/useWindowSize';
-import React, { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import SlideButton from './SlideButton';
 

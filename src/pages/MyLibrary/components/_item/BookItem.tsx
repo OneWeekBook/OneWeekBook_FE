@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { SetStartDate } from 'lib/SetDate';
 import { LibraryItemTypes } from 'types/book';

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { useToggle } from 'hooks/useToggle';
 import { InfoTypes, LibraryItemTypes } from 'types/book';
@@ -26,7 +26,7 @@ function DoneBookList({ userId }: PropsType) {
   });
   const { userBookList } = useSelector((state: any) => state.myLibrary);
 
-  console.log(userBookList)
+  console.log(userBookList);
 
   const handleParagraphInfo = (id: number) => {
     dispatch(ParagraphRequest({ bookId: id }));

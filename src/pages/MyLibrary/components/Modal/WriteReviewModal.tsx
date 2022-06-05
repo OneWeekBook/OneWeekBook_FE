@@ -1,9 +1,6 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
-import WriteModal from 'components/Modal';
-import styled from 'styled-components';
-import { InfoTypes } from 'types/book';
-import { SetStartDate } from 'lib/SetDate';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
 import {
   UserReviewAddRequest,
   UserReviewDeleteRequest,
@@ -11,7 +8,11 @@ import {
   UserReviewModifyRequest,
   UserReviewRequest,
 } from 'redux/reducers/UserReview';
+import { InfoTypes } from 'types/book';
 import { useToggle } from 'hooks/useToggle';
+import { SetStartDate } from 'lib/SetDate';
+import { Toast } from 'lib/Toast';
+import WriteModal from 'components/Modal';
 
 const RecommendItem = [
   {
@@ -50,10 +51,7 @@ type PropsType = {
 function WriteReviewModal({ userId, bookId, bookData, toggleIsOn }: PropsType) {
   const dispatch = useDispatch();
   const [reviewToggle, reviewToggleIsOn] = useToggle(false);
-  const { reviewItem, isSuccess } = useSelector(
-    (state: any) => state.userReview,
-  );
-
+  const { reviewItem } = useSelector((state: any) => state.userReview);
   const [recommend, setRecommend] = useState<number>(4);
   const [review, setReview] = useState('');
   const recommendClick = (recommend: number) => {
@@ -66,27 +64,27 @@ function WriteReviewModal({ userId, bookId, bookData, toggleIsOn }: PropsType) {
     review: string,
   ) => {
     if (review === '') {
-      alert('리뷰를 남겨주세요...');
+      Toast('warning', '리뷰를 남겨주세요...');
     } else {
       dispatch(UserReviewAddRequest({ bookId, review, rating: recommend }));
       reviewToggleIsOn();
-      alert('작성 완료');
+      Toast('success', '작성 완료');
     }
   };
 
   const modifyReviewClick = (id: number, recommend: number, review: string) => {
     if (review === '') {
-      alert('리뷰를 남겨주세요...');
+      Toast('warning', '리뷰를 남겨주세요...');
     } else {
       dispatch(UserReviewModifyRequest({ id, review, rating: recommend }));
-      alert('수정 완료');
+      Toast('info', '수정 완료!');
     }
   };
 
   const deleteReviewClick = (id: number) => {
     dispatch(UserReviewDeleteRequest({ id }));
     toggleIsOn();
-    alert('삭제 완료');
+    Toast('info', '삭제 완료!');
   };
 
   useEffect(() => {

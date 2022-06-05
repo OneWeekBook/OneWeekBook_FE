@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
 import { navDone, navLike, navRead } from 'redux/reducers/Func';
 import { MyLibraryInit, MyLibraryRequest } from 'redux/reducers/MyLibrary';
-import styled from 'styled-components';
 import Nav from './Nav';
 
 const NavItems = [
