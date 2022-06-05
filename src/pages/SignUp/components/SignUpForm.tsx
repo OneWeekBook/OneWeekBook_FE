@@ -1,16 +1,21 @@
-import React, { FormEvent, useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
+import { SignUpInit, SignUpRequest } from 'redux/reducers/SignUp';
 import ErrorForm from 'components/Form/ErrorForm';
 import AuthEmailForm from 'components/Form/AuthEmailForm';
-import { SignUpInit, SignUpRequest } from 'redux/reducers/SignUp';
-import { useInput } from 'hooks/useInput';
 import OnboardInputForm from 'components/Form/OnboardInputForm';
+import { useInput } from 'hooks/useInput';
+import { useInputEnter } from 'hooks/useInputEnter';
 import { useErrorCheck } from '../func/ErrorCheck';
 import { useSignUpErrorCheck } from '../func/SignUpErrorCheck';
 
 function SignUpForm() {
   const dispatch = useDispatch();
+  const passRef = useRef<HTMLInputElement>(null);
+  const passConfRef = useRef<HTMLInputElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const nickRef = useRef<HTMLInputElement>(null);
   const [email, setEmail] = useState<string>('');
   const [password, changePassword] = useInput('');
   const [confirmPassword, changeConfirmPassword] = useInput('');
@@ -21,10 +26,9 @@ function SignUpForm() {
   const [signUpError, setSignUpError] = useState<boolean>(false);
   const [authDone, setAuthDone] = useState<boolean>(false);
   const [registerDone, setRegisterDone] = useState<boolean>(true);
-
   const { handleError } = useErrorCheck();
   const { handleSignUpError } = useSignUpErrorCheck();
-
+  const { handleInputEnter } = useInputEnter();
   const { signUpErrorStatus } = useSelector((state: any) => state.signUp);
 
   useEffect(() => {
@@ -50,6 +54,12 @@ function SignUpForm() {
   }, [signUpErrorStatus]);
 
   useEffect(() => {
+    if (authDone) {
+      passRef.current?.focus();
+    }
+  }, [authDone]);
+
+  useEffect(() => {
     return () => {
       setSignUpError(false);
       setAuthDone(false);
@@ -58,7 +68,7 @@ function SignUpForm() {
     };
   }, []);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = { email, username, nick, password, confirmPassword };
     dispatch(SignUpRequest(formData));
@@ -80,6 +90,8 @@ function SignUpForm() {
               placeholder="비밀번호"
               state={password}
               onChange={changePassword}
+              onKeyPress={(event) => handleInputEnter(event, passConfRef)}
+              mref={passRef}
             />
             {passError && (
               <ErrorForm error="비밀번호 형식이 올바르지 않습니다." />
@@ -89,6 +101,8 @@ function SignUpForm() {
               placeholder="비밀번호 확인"
               state={confirmPassword}
               onChange={changeConfirmPassword}
+              onKeyPress={(event) => handleInputEnter(event, nameRef)}
+              mref={passConfRef}
             />
             {passCompareError && (
               <ErrorForm error="비밀번호가 같지 않습니다." />
@@ -98,12 +112,15 @@ function SignUpForm() {
               placeholder="이름"
               state={username}
               onChange={changeUserName}
+              onKeyPress={(event) => handleInputEnter(event, nickRef)}
+              mref={nameRef}
             />
             <OnboardInputForm
               type="text"
               placeholder="닉네임"
               state={nick}
               onChange={changeNick}
+              mref={nickRef}
             />
             {signUpError && <ErrorForm error="회원가입 실패" align="left" />}
             <button type="submit" disabled={registerDone}>

@@ -1,20 +1,20 @@
-import React, { useEffect, useState, Dispatch, SetStateAction } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AuthEmailInit, AuthEmailRequest } from 'redux/reducers/AuthEmail';
 import { AuthCodeInit, AuthCodeRequest } from 'redux/reducers/AuthCode';
 import { useInput } from 'hooks/useInput';
+import { useRegexCheck } from './func/RegCheck';
+import { useAuthErrorCheck } from './func/AuthErrorCheck';
 import TimerForm from '../TimerForm';
 import EmailErrorForm from './components/EmailErrorForm';
 import CodeErrorForm from './components/CodeErrorForm';
 import OnboardInputForm from '../OnboardInputForm';
-import { useRegexCheck } from './func/RegCheck';
-import { useAuthErrorCheck } from './func/AuthErrorCheck';
 
 type AuthMailTypes = {
   authDone: boolean;
-  setAuthDone: Dispatch<SetStateAction<boolean>>;
-  setRegisterEmail: Dispatch<SetStateAction<string>>;
+  setAuthDone: React.Dispatch<React.SetStateAction<boolean>>;
+  setRegisterEmail: React.Dispatch<React.SetStateAction<string>>;
 };
 
 function AuthEmailForm({
@@ -23,6 +23,8 @@ function AuthEmailForm({
   setRegisterEmail,
 }: AuthMailTypes) {
   const dispatch = useDispatch();
+  const emailRef = useRef<HTMLInputElement>(null);
+  const codeRef = useRef<HTMLInputElement>(null);
   const [email, changeEmail] = useInput('');
   const [code, changeCode] = useInput('');
 
@@ -44,6 +46,7 @@ function AuthEmailForm({
   );
 
   useEffect(() => {
+    emailRef.current?.focus();
     return () => {
       dispatch(AuthCodeInit());
       dispatch(AuthEmailInit());
@@ -64,12 +67,28 @@ function AuthEmailForm({
     });
   }, [emailErrorStatus, codeErrorStatus]);
 
+  useEffect(() => {
+    if (toggle) codeRef.current?.focus();
+  }, [toggle]);
+
   const authEmailClick = () => {
     dispatch(AuthEmailRequest({ email }));
   };
 
   const codeInputClick = () => {
     dispatch(AuthCodeRequest({ code }));
+  };
+
+  const onEmailCheckEnter = (event: React.KeyboardEvent<Element>) => {
+    if (event.key === 'Enter') {
+      authEmailClick();
+    }
+  };
+
+  const onCodeCheckEnter = (event: React.KeyboardEvent<Element>) => {
+    if (event.key === 'Enter') {
+      codeInputClick();
+    }
   };
 
   return (
@@ -79,7 +98,9 @@ function AuthEmailForm({
         placeholder="이메일"
         state={email}
         onChange={changeEmail}
+        onKeyPress={onEmailCheckEnter}
         disabled={authDone}
+        mref={emailRef}
       >
         {!authDone && emailDone && (
           <TimerWrapper>
@@ -114,6 +135,8 @@ function AuthEmailForm({
                 state={code}
                 pattern="[0-9]+"
                 onChange={changeCode}
+                onKeyPress={onCodeCheckEnter}
+                mref={codeRef}
               />
               <CodeErrorForm
                 code={code}

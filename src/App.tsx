@@ -1,4 +1,6 @@
 import React from 'react';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 import { ThemeProvider } from 'styled-components';
 import Theme from 'styles/theme';
 import GlobalStyles from 'styles/globalStyle';
@@ -12,6 +14,7 @@ function App() {
       <Layout>
         <RouteSet />
       </Layout>
+      <ToastContainer />
     </ThemeProvider>
   );
 }

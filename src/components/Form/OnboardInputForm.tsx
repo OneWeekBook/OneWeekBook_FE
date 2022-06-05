@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -8,8 +9,13 @@ type PropsTypes = {
   state: string;
   pattern?: string;
   disabled?: boolean;
+  mref?: React.RefObject<HTMLInputElement>;
   onChange: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void;
+  onKeyPress?: (
+    event: React.KeyboardEvent<Element>,
+    ref?: React.RefObject<HTMLInputElement>,
   ) => void;
 };
 
@@ -20,7 +26,9 @@ function OnboardInputForm({
   state,
   pattern,
   disabled,
+  mref,
   onChange,
+  onKeyPress,
   children,
 }: React.PropsWithChildren<PropsTypes>) {
   return (
@@ -31,8 +39,10 @@ function OnboardInputForm({
         placeholder={placeholder}
         defaultValue={state}
         pattern={pattern}
-        onBlur={onChange}
+        onChange={_.debounce(onChange, 200)}
+        onKeyPress={onKeyPress}
         disabled={disabled}
+        ref={mref}
       />
       {children}
       <span />

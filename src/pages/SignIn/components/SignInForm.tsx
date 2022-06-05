@@ -1,26 +1,29 @@
-import React, { useEffect, FormEvent, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import styled from 'styled-components';
 import ErrorForm from 'components/Form/ErrorForm';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { SignInInit, SignInRequest } from 'redux/reducers/SignIn';
 import { useInput } from 'hooks/useInput';
+import { useInputEnter } from 'hooks/useInputEnter';
 import OnboardInputForm from 'components/Form/OnboardInputForm';
 import { useSignInErrorCheck } from '../func/SignInErrorCheck';
 
 function SignInForm() {
   const dispatch = useDispatch();
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passRef = useRef<HTMLInputElement>(null);
   const [email, changeEmail] = useInput('');
   const [password, changePassword] = useInput('');
   const [signInError, setSignInError] = useState<boolean>(false);
-
+  const { handleInputEnter } = useInputEnter();
   const { handleSignInError } = useSignInErrorCheck();
-
   const { signInErrorStatus, signInErrorMsg } = useSelector(
     (state: any) => state.signIn,
   );
 
   useEffect(() => {
+    emailRef.current?.focus();
     return () => {
       setSignInError(false);
       dispatch(SignInInit());
@@ -28,11 +31,13 @@ function SignInForm() {
   }, []);
 
   useEffect(() => {
-    handleSignInError(signInErrorStatus, setSignInError);
+    if (email && password) {
+      handleSignInError(signInErrorStatus, setSignInError);
+    }
   }, [signInErrorStatus]);
 
   const handleSubmit = useCallback(
-    (e: FormEvent<HTMLFormElement>) => {
+    (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       const user = { email, password };
       dispatch(SignInRequest(user));
@@ -49,12 +54,15 @@ function SignInForm() {
           placeholder="이메일"
           state={email}
           onChange={changeEmail}
+          onKeyPress={(event) => handleInputEnter(event, passRef)}
+          mref={emailRef}
         />
         <OnboardInputForm
           type="password"
           placeholder="비밀번호"
           state={password}
           onChange={changePassword}
+          mref={passRef}
         />
         {signInError && <ErrorForm error={signInErrorMsg} align="left" />}
         <button type="submit">로그인</button>
