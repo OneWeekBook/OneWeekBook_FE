@@ -171,8 +171,3 @@ const Recommend = styled.div`
     font-weight: 600;
   }
 `;
-
-const Button = styled.button`
-  background-color: white;
-  border: none;
-`;

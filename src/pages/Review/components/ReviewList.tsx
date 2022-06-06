@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import PagenationForm from 'components/Form/PagenationForm';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -24,7 +24,7 @@ function ReviewList() {
 
   return (
     <Wrapper>
-      {reviews.length > 0 && (
+      {reviews.length && (
         <>
           <ReviewTitle>전체 리뷰 ({reviews.length}건)</ReviewTitle>
           <ReviewListWrapper>
@@ -36,7 +36,7 @@ function ReviewList() {
           </ReviewListWrapper>
         </>
       )}
-      <PagenationForm total={0} curIdx={curIdx} setCurIdx={setCurIdx} />
+      <PagenationForm total={100} curIdx={curIdx} setCurIdx={setCurIdx} />
     </Wrapper>
   );
 }

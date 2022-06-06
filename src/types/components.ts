@@ -10,6 +10,8 @@ export type ImgBtnOptionTypes = {
 export type ImgBtnStyleTypes = {
   pc: number[];
   mobile?: number[];
+  imgPC?: number[];
+  imgMobile?: number[];
   bgColor?: string;
   margin?: number[];
   marginM?: number[];

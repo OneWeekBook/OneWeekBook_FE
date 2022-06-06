@@ -1,5 +1,6 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import ImageButton from 'components/Button/ImageButton';
 
 type PropsType = {
   total: number;
@@ -8,8 +9,8 @@ type PropsType = {
 };
 
 function PagenationForm({ total, curIdx, setCurIdx }: PropsType) {
-  const RotateStyle = useMemo(() => ({ transform: 'rotate(180deg)' }), []);
-  const len = Math.ceil(total / 10);
+  console.log(total, curIdx);
+  const len = Math.ceil(total / 12);
   const pageNums = [];
 
   for (let i = 1; i <= len; i += 1) {
@@ -47,13 +48,16 @@ function PagenationForm({ total, curIdx, setCurIdx }: PropsType) {
   return (
     <PageNationWrapper>
       {len > 5 && curIdx > 5 && (
-        <ArrowButton onClick={prevClick}>
-          <img
-            src={`${process.env.PUBLIC_URL}/assets/pagination-arrow.svg`}
-            alt="prev arrow"
-            style={RotateStyle}
-          />
-        </ArrowButton>
+        <ImageButton
+          type="button"
+          src={`${process.env.PUBLIC_URL}/assets/pagination-prev-arrow.svg`}
+          pc={[20, 20]}
+          imgPC={[20, 20]}
+          bgColor="white"
+          alt="prev arrow"
+          margin={[0, 10, 0, 10]}
+          onClick={prevClick}
+        />
       )}
       {pageNums.length > 0 &&
         pageNums.slice(start, end).map((num) => (
@@ -66,12 +70,16 @@ function PagenationForm({ total, curIdx, setCurIdx }: PropsType) {
           </PageNum>
         ))}
       {len > 5 && curIdx <= 5 && (
-        <ArrowButton onClick={nextClick}>
-          <img
-            src={`${process.env.PUBLIC_URL}/assets/pagination-arrow.svg`}
-            alt="next arrow"
-          />
-        </ArrowButton>
+        <ImageButton
+          type="button"
+          src={`${process.env.PUBLIC_URL}/assets/pagination-next-arrow.svg`}
+          pc={[20, 20]}
+          imgPC={[20, 20]}
+          bgColor="white"
+          alt="next arrow"
+          margin={[0, 10, 0, 10]}
+          onClick={nextClick}
+        />
       )}
     </PageNationWrapper>
   );
@@ -86,18 +94,6 @@ const PageNationWrapper = styled.div`
   width: 100%;
   margin-top: 20px;
   text-align: center;
-`;
-
-const ArrowButton = styled.button`
-  background-color: white;
-  border: none;
-  margin: 0 10px;
-  width: 20px;
-  height: 20px;
-  img {
-    width: 100%;
-    height: 100%;
-  }
 `;
 
 const PageNum = styled.button<{ isSelected: boolean }>`

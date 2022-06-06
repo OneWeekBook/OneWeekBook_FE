@@ -26,8 +26,6 @@ function DoneBookList({ userId }: PropsType) {
   });
   const { userBookList } = useSelector((state: any) => state.myLibrary);
 
-  console.log(userBookList);
-
   const handleParagraphInfo = (id: number) => {
     dispatch(ParagraphRequest({ bookId: id }));
   };

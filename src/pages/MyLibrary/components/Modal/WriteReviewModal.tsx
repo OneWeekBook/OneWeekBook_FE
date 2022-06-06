@@ -51,7 +51,8 @@ type PropsType = {
 function WriteReviewModal({ userId, bookId, bookData, toggleIsOn }: PropsType) {
   const dispatch = useDispatch();
   const [reviewToggle, reviewToggleIsOn] = useToggle(false);
-  const { reviewItem } = useSelector((state: any) => state.userReview);
+  const { reviewItem, itemAddSuccess, itemModifySuccess, itemDeleteSuccess } =
+    useSelector((state: any) => state.userReview);
   const [recommend, setRecommend] = useState<number>(4);
   const [review, setReview] = useState('');
   const recommendClick = (recommend: number) => {
@@ -68,7 +69,6 @@ function WriteReviewModal({ userId, bookId, bookData, toggleIsOn }: PropsType) {
     } else {
       dispatch(UserReviewAddRequest({ bookId, review, rating: recommend }));
       reviewToggleIsOn();
-      Toast('success', '작성 완료');
     }
   };
 
@@ -77,18 +77,19 @@ function WriteReviewModal({ userId, bookId, bookData, toggleIsOn }: PropsType) {
       Toast('warning', '리뷰를 남겨주세요...');
     } else {
       dispatch(UserReviewModifyRequest({ id, review, rating: recommend }));
-      Toast('info', '수정 완료!');
     }
   };
 
   const deleteReviewClick = (id: number) => {
     dispatch(UserReviewDeleteRequest({ id }));
     toggleIsOn();
-    Toast('info', '삭제 완료!');
   };
 
   useEffect(() => {
     dispatch(UserReviewRequest({ userId, bookId }));
+    return () => {
+      dispatch(UserReviewInit());
+    };
   }, [userId, bookId, reviewToggle]);
 
   useLayoutEffect(() => {
@@ -99,10 +100,10 @@ function WriteReviewModal({ userId, bookId, bookData, toggleIsOn }: PropsType) {
   }, [reviewItem]);
 
   useEffect(() => {
-    return () => {
-      dispatch(UserReviewInit());
-    };
-  }, []);
+    if (itemAddSuccess) Toast('success', '작성 완료');
+    else if (itemModifySuccess) Toast('info', '수정 완료!');
+    else if (itemDeleteSuccess) Toast('info', '삭제 완료!');
+  }, [itemAddSuccess, itemModifySuccess, itemDeleteSuccess]);
 
   return (
     <WriteModal
@@ -151,7 +152,7 @@ function WriteReviewModal({ userId, bookId, bookData, toggleIsOn }: PropsType) {
             ))}
           </RecommendWrapper>
           <ButtonWrapper>
-            {reviewItem.review !== null ? (
+            {reviewItem.review !== null || itemAddSuccess ? (
               <>
                 <button
                   type="button"

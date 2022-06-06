@@ -12,6 +12,8 @@ function ImageButton({
   onClick,
   pc,
   mobile,
+  imgPC,
+  imgMobile,
   bgColor,
   margin,
   marginM,
@@ -32,7 +34,7 @@ function ImageButton({
       marginM={marginM}
       onClick={onClick}
     >
-      <img src={src} alt={alt} width={25} height={25} />
+      <ButtonImage src={src} alt={alt} pc={imgPC} mobile={imgMobile} />
     </Button>
   );
 }
@@ -43,6 +45,8 @@ ImageButton.defaultProps = {
   bgColor: 'white',
   margin: [0, 0, 0, 0],
   marginM: [0, 0, 0, 0],
+  imgPC: [25, 25],
+  imgMobile: [20, 20],
 };
 
 export default ImageButton;
@@ -62,4 +66,9 @@ const Button = styled.button<{
     margin && `${margin[0]}px ${margin[1]}px ${margin[2]}px ${margin[3]}px`}
   border: none;
   border-radius: 5px;
+`;
+
+const ButtonImage = styled.img<{ pc?: number[]; mobile?: number[] }>`
+  width: ${({ pc }) => pc && pc[0]}px;
+  hegiht: ${({ pc }) => pc && pc[1]}px;
 `;
