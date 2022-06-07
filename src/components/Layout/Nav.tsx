@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useToggle } from 'hooks/useToggle';
+import { useAuthLink } from 'hooks/useAuthLink';
+import NoticeModal from 'components/Modal';
 import Container from '../Container';
 
 export const NavItems = [
@@ -44,28 +46,8 @@ export const NavItems = [
 function Nav() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [toggle, setToggle] = useState<boolean>(false);
-
-  const handleClick = (link: string) => {
-    if (link === '/my-library' && sessionStorage.getItem('accessToken')) {
-      navigate(link);
-    } else if (
-      link === '/my-library' &&
-      !sessionStorage.getItem('accessToken')
-    ) {
-      if (
-        link === '/my-library' &&
-        confirm(
-          '내 서재로 가시려면 로그인을 하셔야합니다.\n로그인 하시겠습니까?',
-        )
-      ) {
-        navigate('/sign-in');
-      }
-    } else {
-      navigate(link);
-    }
-    setToggle(!toggle);
-  };
+  const [modalToggle, isModalToggleOn] = useToggle(false);
+  const { handleAuthClick } = useAuthLink();
 
   return (
     <>
@@ -73,7 +55,12 @@ function Nav() {
         <Container as="nav">
           <NavWrapper>
             {NavItems.map((item) => (
-              <NavItem key={item.id} onClick={() => handleClick(item.link)}>
+              <NavItem
+                key={item.id}
+                onClick={() =>
+                  handleAuthClick(item.link, ['/my-library'], isModalToggleOn)
+                }
+              >
                 <img
                   src={
                     item.link === `/${location.pathname.split('/')[1]}`
@@ -89,6 +76,24 @@ function Nav() {
             ))}
           </NavWrapper>
         </Container>
+      )}
+      {modalToggle && (
+        <NoticeModal
+          title="내 서재로 가시려면 로그인을 하셔야합니다."
+          titleSize={[18, 16]}
+          subTitle="로그인 하시겠습니까?"
+          subTitleSize={[18, 16]}
+          width={500}
+          height={250}
+          handleToggle={isModalToggleOn}
+          close
+          isOkBtn
+          okBtnTitle="로그인"
+          handleOkClick={() => navigate('/sign-in')}
+          isCancelBtn
+          cancelBtnTitle="나중에..."
+          handleCanCelClick={isModalToggleOn}
+        />
       )}
     </>
   );

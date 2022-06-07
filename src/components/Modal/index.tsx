@@ -1,3 +1,4 @@
+import DefaultButton from 'components/Button/DefaultButton';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -7,6 +8,8 @@ type PropsType = {
   close: boolean;
   title: string;
   titleSize: number[];
+  subTitle?: string;
+  subTitleSize?: number[];
   isOkBtn: boolean;
   okBtnTitle?: string;
   isCancelBtn: boolean;
@@ -23,6 +26,8 @@ function Index({
   close,
   title,
   titleSize,
+  subTitle,
+  subTitleSize,
   isOkBtn,
   okBtnTitle,
   isCancelBtn,
@@ -49,20 +54,43 @@ function Index({
           )}
         </CloseButtonWrapper>
         <ModalBodyWrapper height={height}>
-          <ModalTitleWrapper titleSize={titleSize}>
+          <ModalTitleWrapper size={titleSize}>
             {title && <p>{title}</p>}
+          </ModalTitleWrapper>
+          <ModalTitleWrapper size={subTitleSize}>
+            {subTitle && <p>{subTitle}</p>}
           </ModalTitleWrapper>
           <div>{children}</div>
           <ButtonWrapper>
             {isOkBtn && (
-              <button onClick={handleOkClick} type="button">
-                {okBtnTitle}
-              </button>
+              <DefaultButton
+                pc={[100, 35]}
+                onClick={handleOkClick}
+                isHover
+                hoverBgColor="#08c1e9"
+                hoverColor="white"
+                bgColor="#1e90ff"
+                color="white"
+                margin={[5, 5, 5, 5]}
+                fontSize={[18, 18]}
+                fontWeight={600}
+                title={okBtnTitle ? `${okBtnTitle}` : ''}
+              />
             )}
             {isCancelBtn && (
-              <button onClick={handleCanCelClick} type="button">
-                {cancelBtnTitle}
-              </button>
+              <DefaultButton
+                pc={[100, 35]}
+                onClick={handleCanCelClick}
+                isHover
+                hoverBgColor="#08c1e9"
+                hoverColor="white"
+                bgColor="#1e90ff"
+                color="white"
+                margin={[5, 5, 5, 5]}
+                fontSize={[18, 18]}
+                fontWeight={600}
+                title={cancelBtnTitle ? `${cancelBtnTitle}` : ''}
+              />
             )}
           </ButtonWrapper>
         </ModalBodyWrapper>
@@ -119,16 +147,16 @@ const CloseButtonWrapper = styled.div`
   }
 `;
 
-const ModalTitleWrapper = styled.div<{ titleSize: number[] }>`
+const ModalTitleWrapper = styled.div<{ size?: number[] }>`
   width: 100%;
   text-align: center;
   p {
-    font-size: ${({ titleSize }) => titleSize[0]}px;
+    font-size: ${({ size }) => size && size[0]}px;
     font-weight: 700;
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     p {
-      font-size: ${({ titleSize }) => titleSize[1]}px;
+      font-size: ${({ size }) => size && size[1]}px;
       font-weight: 700;
     }
   }
@@ -143,13 +171,4 @@ const ModalBodyWrapper = styled.div<{ height: number }>`
 
 const ButtonWrapper = styled.div`
   text-align: center;
-  button {
-    font-size: 18px;
-    font-weight: 600;
-    border-radius: 5px;
-    border: none;
-    width: 100px;
-    height: 40px;
-    margin: 5px;
-  }
 `;
