@@ -9,17 +9,17 @@ const NavItems = [
   {
     id: 0,
     desc: '좋아요',
-    img: `${process.env.PUBLIC_URL}/assets/my-library-nav-like.svg`,
+    img: `${process.env.PUBLIC_URL}/assets/myLibrary/my-library-nav-like.svg`,
   },
   {
     id: 1,
     desc: '읽는중',
-    img: `${process.env.PUBLIC_URL}/assets/my-library-nav-read.svg`,
+    img: `${process.env.PUBLIC_URL}/assets/myLibrary/my-library-nav-read.svg`,
   },
   {
     id: 2,
     desc: '다읽은',
-    img: `${process.env.PUBLIC_URL}/assets/my-library-nav-done.svg`,
+    img: `${process.env.PUBLIC_URL}/assets/myLibrary/my-library-nav-done.svg`,
   },
 ];
 
@@ -82,6 +82,7 @@ const Wrapper = styled.div`
 const NavItem = styled.button<{ isSelected: boolean }>`
   border: none;
   background-color: white;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;

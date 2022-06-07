@@ -10,36 +10,29 @@ export const NavItems = [
     id: 1,
     title: '홈',
     link: '/',
-    img: `${process.env.PUBLIC_URL}/assets/nav-none-home.png`,
-    clickImg: `${process.env.PUBLIC_URL}/assets/nav-done-home.png`,
+    img: `${process.env.PUBLIC_URL}/assets/nav/nav-none-home.png`,
+    clickImg: `${process.env.PUBLIC_URL}/assets/nav/nav-done-home.png`,
   },
   {
     id: 2,
-    title: '알림',
-    link: '/notice',
-    img: `${process.env.PUBLIC_URL}/assets/nav-none-notice.png`,
-    clickImg: `${process.env.PUBLIC_URL}/assets/nav-done-notice.png`,
+    title: '내 서재',
+    link: '/my-library',
+    img: `${process.env.PUBLIC_URL}/assets/nav/nav-none-my-library.png`,
+    clickImg: `${process.env.PUBLIC_URL}/assets/nav/nav-done-my-library.png`,
   },
   {
     id: 3,
-    title: '내 서재',
-    link: '/my-library',
-    img: `${process.env.PUBLIC_URL}/assets/nav-none-my-library.png`,
-    clickImg: `${process.env.PUBLIC_URL}/assets/nav-done-my-library.png`,
+    title: '카테고리',
+    link: '/category',
+    img: `${process.env.PUBLIC_URL}/assets/nav/nav-none-category.png`,
+    clickImg: `${process.env.PUBLIC_URL}/assets/nav/nav-done-category.png`,
   },
   {
     id: 4,
-    title: '카테고리',
-    link: '/category',
-    img: `${process.env.PUBLIC_URL}/assets/nav-none-category.png`,
-    clickImg: `${process.env.PUBLIC_URL}/assets/nav-done-category.png`,
-  },
-  {
-    id: 5,
     title: '리뷰',
     link: '/review',
-    img: `${process.env.PUBLIC_URL}/assets/nav-none-review.png`,
-    clickImg: `${process.env.PUBLIC_URL}/assets/nav-done-review.png`,
+    img: `${process.env.PUBLIC_URL}/assets/nav/nav-none-review.png`,
+    clickImg: `${process.env.PUBLIC_URL}/assets/nav/nav-done-review.png`,
   },
 ];
 
@@ -127,6 +120,7 @@ const NavItem = styled.button`
   font-size: 16px;
   margin: 0 10px 0 0;
   color: white;
+  cursor: pointer;
   img {
     margin-right: 2px;
   }

@@ -8,8 +8,8 @@ function MyLibraryTitle({ nick }: PropsType) {
   return (
     <Wrapper>
       <img
-        src={`${process.env.PUBLIC_URL}/assets/my-library-icon.svg`}
-        alt="book"
+        src={`${process.env.PUBLIC_URL}/assets/myLibrary/my-library-icon.svg`}
+        alt="book icon"
         width={60}
         height={60}
       />

@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
-import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { SignUpInit, SignUpRequest } from 'redux/reducers/SignUp';
+import styled from 'styled-components';
+import { useInput } from 'hooks/useInput';
+import { useInputEnter } from 'hooks/useInputEnter';
 import ErrorForm from 'components/Form/ErrorForm';
 import AuthEmailForm from 'components/Form/AuthEmailForm';
 import OnboardInputForm from 'components/Form/OnboardInputForm';
-import { useInput } from 'hooks/useInput';
-import { useInputEnter } from 'hooks/useInputEnter';
 import DefaultButton from 'components/Button/DefaultButton';
-import { useErrorCheck } from '../func/ErrorCheck';
 import { useSignUpErrorCheck } from '../func/SignUpErrorCheck';
+import { useErrorCheck } from '../func/ErrorCheck';
 
 function SignUpForm() {
   const dispatch = useDispatch();

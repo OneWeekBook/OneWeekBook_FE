@@ -38,8 +38,12 @@ function BookItem({
           <p className="bookPublisher">
             {publisher.replaceAll('<b>', '').replaceAll('</b>', '')}
           </p>
-          {startTime && <p>독서 시작: {SetStartDate(startTime)}</p>}
-          {endTime && <p>독서 완료: {SetStartDate(endTime)}</p>}
+          {startTime && (
+            <p className="date">독서 시작: {SetStartDate(startTime)}</p>
+          )}
+          {endTime && (
+            <p className="date">독서 완료: {SetStartDate(endTime)}</p>
+          )}
         </div>
         <ButtonWrapper>
           {progress === 0 && (
@@ -139,6 +143,10 @@ const InfoWrapper = styled.div`
   .bookPublisher {
     font-size: 14px;
     font-weight: 600;
+  }
+  .date {
+    font-size: 14px;
+    font-weight: 500;
   }
 `;
 

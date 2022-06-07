@@ -44,7 +44,7 @@ function NewReivewListItem({
         <CountInfoWrapper>
           <div className="countItem">
             <img
-              src={`${process.env.PUBLIC_URL}/assets/main-bestlist-recommend.png`}
+              src={`${process.env.PUBLIC_URL}/assets/func/recommend.png`}
               alt="recommend"
             />
             <p>{rating}</p>

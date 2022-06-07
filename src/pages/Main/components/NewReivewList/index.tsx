@@ -26,16 +26,21 @@ function NewReviewList() {
               <NewReivewItem key={item.id} {...item} idx={idx} />
             ))}
       </div>
-      <ButtonWrapper>
-        <DefaultButton
-          pc={[150, 38]}
-          onClick={onClick}
-          fontWeight={700}
-          padding={[5, 0, 5, 0]}
-          bgColor="#1e90ff"
-          title="더 보기"
-        />
-      </ButtonWrapper>
+      {end !== 20 && (
+        <ButtonWrapper>
+          <DefaultButton
+            pc={[150, 38]}
+            onClick={onClick}
+            fontWeight={700}
+            padding={[5, 0, 5, 0]}
+            isHover
+            hoverBgColor="#08c1e9"
+            bgColor="#1e90ff"
+            color="white"
+            title="더 보기"
+          />
+        </ButtonWrapper>
+      )}
     </Wrapper>
   );
 }

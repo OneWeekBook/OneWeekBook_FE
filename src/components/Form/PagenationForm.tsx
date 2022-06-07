@@ -50,7 +50,7 @@ function PagenationForm({ total, curIdx, setCurIdx }: PropsType) {
       {len > 5 && curIdx > 5 && (
         <ImageButton
           type="button"
-          src={`${process.env.PUBLIC_URL}/assets/pagination-prev-arrow.svg`}
+          src={`${process.env.PUBLIC_URL}/assets/arrow/pagination-prev-arrow.svg`}
           pc={[20, 20]}
           imgPC={[20, 20]}
           bgColor="white"
@@ -72,7 +72,7 @@ function PagenationForm({ total, curIdx, setCurIdx }: PropsType) {
       {len > 5 && curIdx <= 5 && (
         <ImageButton
           type="button"
-          src={`${process.env.PUBLIC_URL}/assets/pagination-next-arrow.svg`}
+          src={`${process.env.PUBLIC_URL}/assets/arrow/pagination-next-arrow.svg`}
           pc={[20, 20]}
           imgPC={[20, 20]}
           bgColor="white"

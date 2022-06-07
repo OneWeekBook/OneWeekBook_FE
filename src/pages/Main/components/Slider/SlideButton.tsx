@@ -9,7 +9,7 @@ function SlideButton({ onClick }: PropsType) {
     <>
       <Button type="button" onClick={() => onClick(-1)} direct="prev">
         <img
-          src={`${process.env.PUBLIC_URL}/assets/slide-left-arrow.svg`}
+          src={`${process.env.PUBLIC_URL}/assets/arrow/slide-left-arrow.svg`}
           alt="left-arrow"
           width={20}
           height={20}
@@ -17,7 +17,7 @@ function SlideButton({ onClick }: PropsType) {
       </Button>
       <Button type="button" onClick={() => onClick(1)} direct="next">
         <img
-          src={`${process.env.PUBLIC_URL}/assets/slide-right-arrow.svg`}
+          src={`${process.env.PUBLIC_URL}/assets/arrow/slide-right-arrow.svg`}
           alt="right-arrow"
           width={20}
           height={20}
@@ -30,13 +30,14 @@ function SlideButton({ onClick }: PropsType) {
 export default SlideButton;
 
 const Button = styled.button<{ direct: string }>`
+  align-items: center;
   box-shadow: 0px 0px 5px #000;
   border-radius: 25px;
   border: none;
   background-color: white;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
-  align-items: center;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);

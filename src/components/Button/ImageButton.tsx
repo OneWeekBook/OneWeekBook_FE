@@ -62,6 +62,7 @@ const Button = styled.button<{
   hegiht: ${({ pc }) => pc[1]}px;
   border: none;
   background-color: ${({ bgColor }) => bgColor};
+  cursor: pointer;
   margin: ${({ margin }) =>
     margin && `${margin[0]}px ${margin[1]}px ${margin[2]}px ${margin[3]}px`}
   border: none;

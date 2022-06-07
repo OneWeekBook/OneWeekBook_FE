@@ -25,7 +25,7 @@ function ReviewItem({
     <Wrapper onClick={onClick}>
       <ImgWrapper isRecommend={isRecommend}>
         <img
-          src={`${process.env.PUBLIC_URL}/assets/main-bestlist-recommend.png`}
+          src={`${process.env.PUBLIC_URL}/assets/func/recommend.png`}
           alt="icon"
         />
       </ImgWrapper>

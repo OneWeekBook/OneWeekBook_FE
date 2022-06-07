@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import styled from 'styled-components';
 import Container from 'components/Container';
 import { Link } from 'react-router-dom';

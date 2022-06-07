@@ -24,7 +24,7 @@ function Rank({ role }: PropsType) {
       <RankWrapper>
         <ImgWrapper>
           <img
-            src={`${process.env.PUBLIC_URL}/assets/main-bestlist-book.png`}
+            src={`${process.env.PUBLIC_URL}/assets/func/book.png`}
             alt="rank"
           />
         </ImgWrapper>

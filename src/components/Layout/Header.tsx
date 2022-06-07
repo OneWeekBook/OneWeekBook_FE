@@ -99,7 +99,7 @@ function Header({ toggleIsOn }: PropsType) {
         </ButtonWrapper>
         <MobileButton isSign={isSign} onClick={toggleIsOn}>
           <img
-            src={`${process.env.PUBLIC_URL}/assets/header-menu-burger.png`}
+            src={`${process.env.PUBLIC_URL}/assets/func/header-menu-burger.png`}
             alt="sidebar button"
           />
         </MobileButton>

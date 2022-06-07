@@ -1,5 +1,5 @@
-import ErrorForm from 'components/Form/ErrorForm';
 import styled from 'styled-components';
+import ErrorForm from 'components/Form/ErrorForm';
 
 type ErrorTypes = {
   email: string;

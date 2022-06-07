@@ -1,6 +1,7 @@
-import DefaultButton from 'components/Button/DefaultButton';
 import React from 'react';
 import styled from 'styled-components';
+import DefaultButton from 'components/Button/DefaultButton';
+import ImageButton from 'components/Button/ImageButton';
 
 type PropsType = {
   width: number;
@@ -43,14 +44,14 @@ function Index({
       <ModalWrapper width={width} height={height} type={type}>
         <CloseButtonWrapper>
           {close && (
-            <button onClick={handleToggle} type="button">
-              <img
-                src={`${process.env.PUBLIC_URL}/assets/modal-close-icon.svg`}
-                width={25}
-                height={25}
-                alt="close"
-              />
-            </button>
+            <ImageButton
+              type="button"
+              onClick={handleToggle}
+              src={`${process.env.PUBLIC_URL}/assets/func/modal-close.svg`}
+              alt="close"
+              pc={[25, 25]}
+              imgPC={[25, 25]}
+            />
           )}
         </CloseButtonWrapper>
         <ModalBodyWrapper height={height}>
@@ -137,14 +138,6 @@ const CloseButtonWrapper = styled.div`
   width: 100%;
   height: 25px;
   text-align: right;
-  button {
-    background-color: white;
-    background-repeat: no-repeat;
-    background-size: 25px 25px;
-    border: 0 none;
-    width: 25px;
-    height: 25px;
-  }
 `;
 
 const ModalTitleWrapper = styled.div<{ size?: number[] }>`

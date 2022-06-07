@@ -14,7 +14,7 @@ function ParagraphItem({ id, paragraph, deleteParagraphClick }: PropsType) {
       <ImageButton
         type="button"
         onClick={() => deleteParagraphClick(id)}
-        src={`${process.env.PUBLIC_URL}/assets/close.svg`}
+        src={`${process.env.PUBLIC_URL}/assets/func/content-delete.svg`}
         alt="close"
         pc={[30, 30]}
         imgPC={[30, 30]}

@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import ProtectedRoute, { ProtectedRouteProps } from 'PrivateRoute';
 import { Routes, Route } from 'react-router-dom';
 import {

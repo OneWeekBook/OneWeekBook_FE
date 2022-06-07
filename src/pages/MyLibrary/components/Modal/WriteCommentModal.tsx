@@ -65,8 +65,8 @@ function WriteCommentModal({
       type="write"
       title="기록하기"
       titleSize={[24, 18]}
-      width={768}
-      height={400}
+      width={700}
+      height={300}
       handleToggle={toggleIsOn}
       close
       isOkBtn={false}
@@ -118,7 +118,7 @@ function WriteCommentModal({
           <ImageButton
             type="button"
             onClick={addParagraphClick}
-            src={`${process.env.PUBLIC_URL}/assets/add.svg`}
+            src={`${process.env.PUBLIC_URL}/assets/func/content-add.svg`}
             alt="write"
             pc={[30, 30]}
             imgPC={[30, 30]}
@@ -140,7 +140,7 @@ function WriteCommentModal({
 export default WriteCommentModal;
 
 const BodyWrapper = styled.div`
-  margin: 10px 50px 0;
+  margin: 10px 40px 0;
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     margin: 10px auto 0;
   }

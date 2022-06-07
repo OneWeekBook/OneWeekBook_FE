@@ -1,4 +1,4 @@
-import React, { ElementType, HTMLAttributes, PropsWithChildren } from 'react';
+import { ElementType, HTMLAttributes, PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
 type ContainerTypes = {
