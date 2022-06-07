@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { AuthEmailInit, AuthEmailRequest } from 'redux/reducers/AuthEmail';
 import { AuthCodeInit, AuthCodeRequest } from 'redux/reducers/AuthCode';
 import { useInput } from 'hooks/useInput';
+import DefaultButton from 'components/Button/DefaultButton';
 import { useRegexCheck } from './func/RegCheck';
 import { useAuthErrorCheck } from './func/AuthErrorCheck';
 import TimerForm from '../TimerForm';
@@ -99,7 +100,7 @@ function AuthEmailForm({
         state={email}
         onChange={changeEmail}
         onKeyPress={onEmailCheckEnter}
-        disabled={authDone}
+        disabled={emailDone}
         mref={emailRef}
       >
         {!authDone && emailDone && (
@@ -118,13 +119,37 @@ function AuthEmailForm({
             emailErrorStatus={emailErrorStatus}
           />
           {!emailDone ? (
-            <button type="button" onClick={authEmailClick} disabled={!emailReg}>
-              이메일 인증하기
-            </button>
+            <DefaultButton
+              pc={[0, 35]}
+              onClick={authEmailClick}
+              isHover
+              hoverBgColor="#08c1e9"
+              hoverColor="white"
+              bgColor="#1e90ff"
+              color="white"
+              disabled={!emailReg}
+              disabledColor="#a9a9a9"
+              margin={[20, 0, 5, 0]}
+              fontSize={[18, 18]}
+              fontWeight={600}
+              title="이메일 인증하기"
+            />
           ) : (
-            <button type="button" onClick={authEmailClick} disabled={!emailReg}>
-              재발송
-            </button>
+            <DefaultButton
+              pc={[0, 35]}
+              onClick={authEmailClick}
+              isHover
+              hoverBgColor="#08c1e9"
+              hoverColor="white"
+              bgColor="#1e90ff"
+              color="white"
+              disabled={!emailReg}
+              disabledColor="#a9a9a9"
+              margin={[20, 0, 5, 0]}
+              fontSize={[18, 18]}
+              fontWeight={600}
+              title="재발송"
+            />
           )}
           {toggle && (
             <>
@@ -144,13 +169,21 @@ function AuthEmailForm({
                 codeErrorMsg={codeErrorMsg}
                 codeErrorStatus={codeErrorStatus}
               />
-              <button
-                type="button"
+              <DefaultButton
+                pc={[0, 35]}
                 onClick={codeInputClick}
+                isHover
+                hoverBgColor="#08c1e9"
+                hoverColor="white"
+                bgColor="#1e90ff"
+                color="white"
                 disabled={!codeReg}
-              >
-                인증번호 확인
-              </button>
+                disabledColor="#a9a9a9"
+                margin={[20, 0, 5, 0]}
+                fontSize={[18, 18]}
+                fontWeight={600}
+                title="인증번호 확인"
+              />
             </>
           )}
         </>

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useToggle } from 'hooks/useToggle';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { ReviewDetailTypes } from 'types/review';
 import { ReviewRequest } from 'redux/reducers/Review';
-import { useLocation } from 'react-router-dom';
+import { useToggle } from 'hooks/useToggle';
+import { ReviewDetailTypes } from 'types/review';
 import ReviewDetailModal from './Modal/ReivewDetailModal';
 import ReviewItem from './_items/ReivewItem';
 
@@ -47,22 +47,22 @@ function ReviewInfo() {
           bookData.title.replaceAll('<b>', '').replaceAll('</b>', '')}{' '}
         평가
       </p>
-      <Button
+      <SortButton
         className="recommendBtn"
         type="button"
         isSelected={sortBy === 'recommend'}
         onClick={() => handleSortClick('recommend')}
       >
         추천 순
-      </Button>
-      <Button
+      </SortButton>
+      <SortButton
         className="newBtn"
         type="button"
         isSelected={sortBy === 'new'}
         onClick={() => handleSortClick('new')}
       >
         최신 순
-      </Button>
+      </SortButton>
       <ReviewListWrapper>
         {reviews.length &&
           reviews.map((item: ReviewDetailTypes, index: number) => (
@@ -119,7 +119,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const Button = styled.button<{ isSelected?: boolean }>`
+const SortButton = styled.button<{ isSelected?: boolean }>`
   cursor: pointer;
   font-weight: ${({ isSelected }) => (isSelected ? 800 : 500)};
 `;

@@ -1,10 +1,11 @@
-import React, { PropsWithChildren, useState, useEffect } from 'react';
+import { PropsWithChildren, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { ReviewDetailTypes } from 'types/review';
 
 type PropsType = {
   onClick: () => void;
 };
+
 function ReviewItem({
   nick,
   oneLikeCount,

@@ -1,5 +1,4 @@
-import React, { useEffect, useCallback, useState } from 'react';
-import Container from 'components/Container';
+import { useEffect, useCallback, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -7,9 +6,10 @@ import {
   SearchInit,
   SearchRequest,
 } from 'redux/reducers/Search';
-import styled from 'styled-components';
 import LoadingForm from 'components/Form/LoadingForm';
 import LoadingErrorForm from 'components/Form/LoadingErrorForm';
+import DefaultButton from 'components/Button/DefaultButton';
+import Container from 'components/Container';
 import TitleWrapper from './components/TitleWrapper';
 import BooksList from './components/BooksList';
 
@@ -99,24 +99,22 @@ function index() {
       ) : !isSuccess ? (
         <LoadingErrorForm />
       ) : (
-        <MoreButton type="button" onClick={handleAddFetch}>
-          더 보기
-        </MoreButton>
+        <DefaultButton
+          pc={[0, 50]}
+          onClick={handleAddFetch}
+          isHover
+          hoverBgColor="#1e90ff"
+          hoverColor="white"
+          bgColor="#08c1e9"
+          color="white"
+          margin={[0, 0, 30, 0]}
+          fontSize={[18, 18]}
+          fontWeight={600}
+          title="더 보기"
+        />
       )}
     </Container>
   );
 }
 
 export default index;
-
-const MoreButton = styled.button`
-  width: 100%;
-  height: 50px;
-  margin-bottom: 30px;
-  font-size: 18px;
-  font-weight: 600;
-  border: none;
-  border-radius: 10px;
-  background-color: #08c1e9;
-  color: white;
-`;

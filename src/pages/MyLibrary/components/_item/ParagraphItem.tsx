@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import ImageButton from 'components/Button/ImageButton';
 
 type PropsType = {
   id: number;
@@ -10,13 +11,14 @@ function ParagraphItem({ id, paragraph, deleteParagraphClick }: PropsType) {
   return (
     <ParagraphItemWrapper>
       <Paragraph>{paragraph}</Paragraph>
-      <button type="button" onClick={() => deleteParagraphClick(id)}>
-        <img
-          src={`${process.env.PUBLIC_URL}/assets/close.svg`}
-          alt="close"
-          height={30}
-        />
-      </button>
+      <ImageButton
+        type="button"
+        onClick={() => deleteParagraphClick(id)}
+        src={`${process.env.PUBLIC_URL}/assets/close.svg`}
+        alt="close"
+        pc={[30, 30]}
+        imgPC={[30, 30]}
+      />
     </ParagraphItemWrapper>
   );
 }
@@ -32,10 +34,6 @@ const ParagraphItemWrapper = styled.div`
   border-radius: 5px;
   margin: 10px auto;
   padding: 10px;
-  button {
-    height: 30px;
-    border: none;
-  }
 `;
 
 const Paragraph = styled.p`

@@ -1,5 +1,5 @@
-import React from 'react';
 import styled from 'styled-components';
+import DefaultButton from 'components/Button/DefaultButton';
 
 type PropsType = {
   removeToggleIsOn: () => void;
@@ -8,9 +8,15 @@ type PropsType = {
 function OutButton({ removeToggleIsOn }: PropsType) {
   return (
     <Wrapper>
-      <button onClick={removeToggleIsOn} type="button">
-        회원 탈퇴
-      </button>
+      <DefaultButton
+        pc={[80, 20]}
+        onClick={removeToggleIsOn}
+        isHover
+        hoverColor="#1e90ff"
+        fontSize={[16, 16]}
+        fontWeight={600}
+        title="회원 탈퇴"
+      />
     </Wrapper>
   );
 }
@@ -20,9 +26,4 @@ export default OutButton;
 const Wrapper = styled.div`
   display: flex;
   justify-content: flex-end;
-  button {
-    border: none;
-    background-color: white;
-    font-size: 16px;
-  }
 `;

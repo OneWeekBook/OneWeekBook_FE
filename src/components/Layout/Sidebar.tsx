@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Toast } from 'lib/Toast';
+import DefaultButton from 'components/Button/DefaultButton';
 import { NavItems } from './Nav';
 
 type PropsTypes = {
@@ -41,26 +42,70 @@ function Sidebar({ toggle, toggleIsOn }: PropsTypes) {
         {sessionStorage.getItem('accessToken') ? (
           <>
             <Link to="/">
-              <SidebarButton onClick={logoutClick}>로그아웃</SidebarButton>
+              <DefaultButton
+                onClick={logoutClick}
+                pc={[0, 50]}
+                isHover
+                hoverColor="#1e90ff"
+                padding={[0, 20, 0, 0]}
+                fontSize={[20, 20]}
+                fontWeight={600}
+                title="로그아웃"
+              />
             </Link>
-            <Link to="/book">
-              <SidebarButton onClick={toggleIsOn}>내 서재</SidebarButton>
+            <Link to="/my-library">
+              <DefaultButton
+                onClick={toggleIsOn}
+                pc={[0, 50]}
+                isHover
+                hoverColor="#1e90ff"
+                padding={[0, 20, 0, 0]}
+                fontSize={[20, 20]}
+                fontWeight={600}
+                title="내 서재"
+              />
             </Link>
           </>
         ) : (
           <>
             <Link to="/sign-in">
-              <SidebarButton onClick={toggleIsOn}>로그인</SidebarButton>
+              <DefaultButton
+                onClick={toggleIsOn}
+                pc={[0, 50]}
+                isHover
+                hoverColor="#1e90ff"
+                padding={[0, 20, 0, 0]}
+                fontSize={[20, 20]}
+                fontWeight={600}
+                title="로그인"
+              />
             </Link>
             <Link to="/sign-up">
-              <SidebarButton onClick={toggleIsOn}>회원가입</SidebarButton>
+              <DefaultButton
+                onClick={toggleIsOn}
+                pc={[0, 50]}
+                isHover
+                hoverColor="#1e90ff"
+                padding={[0, 20, 0, 0]}
+                fontSize={[20, 20]}
+                fontWeight={600}
+                title="회원가입"
+              />
             </Link>
           </>
         )}
         {NavItems.map((item) => (
-          <SidebarButton key={item.id} onClick={() => handleClick(item.link)}>
-            {item.title}
-          </SidebarButton>
+          <DefaultButton
+            key={item.id}
+            onClick={() => handleClick(item.link)}
+            pc={[0, 50]}
+            isHover
+            hoverColor="#1e90ff"
+            padding={[0, 20, 0, 0]}
+            fontSize={[20, 20]}
+            fontWeight={600}
+            title={item.title}
+          />
         ))}
       </ButtonWrapper>
     </Wrapper>
@@ -91,18 +136,7 @@ const ButtonWrapper = styled.div`
   flex-direction: column;
   a,
   button {
-    width: 100%;
     text-align: right;
-    background-color: white;
+    border-bottom: 1px solid #e6e6e6;
   }
-`;
-
-const SidebarButton = styled.button`
-  box-sizing: border-box;
-  border: none;
-  border-bottom: 1px solid #e6e6e6;
-  font-size: 20px;
-  font-weight: 600;
-  padding-right: 50px;
-  height: 50px;
 `;

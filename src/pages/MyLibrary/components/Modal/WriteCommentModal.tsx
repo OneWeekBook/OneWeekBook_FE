@@ -1,15 +1,18 @@
 import { useEffect, useState } from 'react';
-import WriteModal from 'components/Modal';
-import styled from 'styled-components';
-import { SetStartDate } from 'lib/SetDate';
-import { InfoTypes, ParagraphTypes } from 'types/book';
 import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
 import {
   ParagraphAddRequest,
   ParagraphDeleteRequest,
   ParagraphInit,
   ParagraphRequest,
 } from 'redux/reducers/Paragraph';
+import { Toast } from 'lib/Toast';
+import { SetStartDate } from 'lib/SetDate';
+import { InfoTypes, ParagraphTypes } from 'types/book';
+import DefaultButton from 'components/Button/DefaultButton';
+import ImageButton from 'components/Button/ImageButton';
+import WriteModal from 'components/Modal';
 import ParagraphItem from '../_item/ParagraphItem';
 
 type PropsTypes = {
@@ -32,8 +35,12 @@ function WriteCommentModal({
   );
 
   const addParagraphClick = () => {
-    const data = { bookId, paragraph: parag };
-    dispatch(ParagraphAddRequest(data));
+    if (parag) {
+      const data = { bookId, paragraph: parag };
+      dispatch(ParagraphAddRequest(data));
+    } else {
+      Toast('warning', '문구를 입력해주세요');
+    }
   };
 
   const deleteParagraphClick = (id: number) => {
@@ -71,16 +78,31 @@ function WriteCommentModal({
         <InfoWrapper>
           <div className="bookInfo">
             <p>{bookData.title.replaceAll('<b>', '').replaceAll('</b>', '')}</p>
-            <p>
-              {bookData.author.replaceAll('<b>', '').replaceAll('</b>', '')}
-              {' | '}
-              {SetStartDate(bookData.startTime)}
+            <p className="bookDate">
+              {`${bookData.author
+                .replaceAll('<b>', '')
+                .replaceAll('</b>', '')} | ${SetStartDate(
+                bookData.startTime,
+              )} ~ ${
+                bookData.progress === 2
+                  ? SetStartDate(bookData.endTime)
+                  : '독서중'
+              }`}
             </p>
           </div>
           {bookData.progress === 1 && (
-            <button type="button" onClick={moveDoneClick}>
-              독서 완료
-            </button>
+            <DefaultButton
+              pc={[90, 30]}
+              onClick={moveDoneClick}
+              isHover
+              bgColor="lightgray"
+              hoverBgColor="#303538"
+              hoverColor="white"
+              fontSize={[14, 14]}
+              fontWeight={700}
+              padding={[3, 0, 3, 0]}
+              title="독서완료"
+            />
           )}
         </InfoWrapper>
         <InputWrapper>
@@ -93,13 +115,14 @@ function WriteCommentModal({
             />
             <span />
           </Input>
-          <button type="button" onClick={addParagraphClick}>
-            <img
-              src={`${process.env.PUBLIC_URL}/assets/add.svg`}
-              alt="write"
-              height={30}
-            />
-          </button>
+          <ImageButton
+            type="button"
+            onClick={addParagraphClick}
+            src={`${process.env.PUBLIC_URL}/assets/add.svg`}
+            alt="write"
+            pc={[30, 30]}
+            imgPC={[30, 30]}
+          />
         </InputWrapper>
         {paragraph.map((item: ParagraphTypes) => (
           <ParagraphItem
@@ -133,24 +156,16 @@ const InfoWrapper = styled.div`
     font-size: 16px;
     font-weight: 600;
   }
+  .bookDate {
+    font-size: 14px;
+  }
   button {
-    border: none;
-    border-radius: 10px;
-    width: 100px;
-    height: 40px;
     flex-shrink: 0;
-    font-size: 16px;
-    font-weight: 600;
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     .bookInfo {
       font-size: 14px;
       font-weight: 600;
-    }
-    button {
-      width: 80px;
-      height: 35px;
-      font-size: 14px;
     }
   }
 `;
@@ -159,14 +174,9 @@ const InputWrapper = styled.div`
   display: flex;
   position: relative;
   button {
+    top: 5px;
     right: 0;
-    bottom: 5px;
     position: absolute;
-    border: none;
-    background-color: white;
-    width: 40px;
-    height: 30px;
-    font-weight: 600;
   }
 `;
 

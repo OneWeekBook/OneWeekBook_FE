@@ -1,13 +1,11 @@
-import React from 'react';
 import styled from 'styled-components';
-import PieChart from 'components/Form/PieChartForm';
 import { ReviewBookTypes } from 'types/review';
+import PieChart from 'components/Form/PieChartForm';
 
 function BookInfoWrapper({
   author,
   countReviews,
   img,
-  isbn,
   publisher,
   ratingAverage,
   title,

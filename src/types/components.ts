@@ -21,3 +21,28 @@ export type ImgBtnImageTypes = {
   src: string;
   alt: string;
 };
+
+export type DefaultBtnOptionTypes = {
+  component?: ElementType;
+  className?: string;
+  type?: string;
+  disabled?: boolean;
+  title: string;
+  isHover: boolean;
+  onClick?: (e: any) => void;
+};
+
+export type DefaultBtnStyleTypes = {
+  pc: number[];
+  mobile?: number[];
+  bgColor?: string;
+  color?: string;
+  margin?: number[];
+  marginM?: number[];
+  padding?: number[];
+  fontSize?: number[];
+  fontWeight?: number;
+  hoverBgColor?: string;
+  hoverColor?: string;
+  disabledColor?: string;
+};

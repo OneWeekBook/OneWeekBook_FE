@@ -11,7 +11,6 @@ function ReivewItem({
   img,
   title,
   author,
-  publisher,
   isbn,
   count,
 }: React.PropsWithChildren<ReviewItemType> & PropsType) {

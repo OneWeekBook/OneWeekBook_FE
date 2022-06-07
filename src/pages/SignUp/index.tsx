@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import Container from 'components/Container';
 import { Link } from 'react-router-dom';
+import DefaultButton from 'components/Button/DefaultButton';
 import SignUpForm from './components/SignUpForm';
 
 function SignUpPage() {
@@ -15,7 +16,17 @@ function SignUpPage() {
       <Wrapper>
         <SignUpForm />
         <Link to="/sign-in">
-          <LoginButton>로그인</LoginButton>
+          <DefaultButton
+            pc={[0, 35]}
+            isHover
+            hoverBgColor="#303538"
+            hoverColor="white"
+            bgColor="#e6e6e6"
+            margin={[5, 0, 5, 0]}
+            fontSize={[18, 18]}
+            fontWeight={600}
+            title="로그인"
+          />
         </Link>
       </Wrapper>
     </Container>
@@ -38,17 +49,4 @@ const Wrapper = styled.div`
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     width: 355px;
   }
-`;
-
-const LoginButton = styled.div`
-  width: 100%;
-  height: 35px;
-  line-height: 35px;
-  border: none;
-  border-radius: 5px;
-  margin: 5px auto;
-  color: black;
-  font-size: 18px;
-  background-color: #e6e6e6;
-  text-align: center;
 `;

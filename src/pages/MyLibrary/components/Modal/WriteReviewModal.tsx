@@ -13,6 +13,8 @@ import { useToggle } from 'hooks/useToggle';
 import { SetStartDate } from 'lib/SetDate';
 import { Toast } from 'lib/Toast';
 import WriteModal from 'components/Modal';
+import ImageButton from 'components/Button/ImageButton';
+import DefaultButton from 'components/Button/DefaultButton';
 
 const RecommendItem = [
   {
@@ -127,9 +129,9 @@ function WriteReviewModal({ userId, bookId, bookData, toggleIsOn }: PropsType) {
               {bookData.author.replaceAll('<b>', '').replaceAll('</b>', '')}
             </p>
             <p>
-              {SetStartDate(bookData.startTime)}
-              {' ~ '}
-              {SetStartDate(bookData.endTime)}
+              {`${SetStartDate(bookData.startTime)} ~ ${SetStartDate(
+                bookData.endTime,
+              )}`}
             </p>
           </div>
           {bookData.progress === 1 && <button type="button">독서 완료</button>}
@@ -138,44 +140,65 @@ function WriteReviewModal({ userId, bookId, bookData, toggleIsOn }: PropsType) {
           <RecommendWrapper>
             <p>책이 어떻나요?</p>
             {RecommendItem.map((item) => (
-              <RecommendButton
+              <ImageButton
                 key={item.id}
+                type="button"
+                src={recommend === item.value ? item.img_done : item.img_none}
+                pc={[40, 30]}
+                imgPC={[30, 30]}
+                margin={[0, 0, 0, 10]}
+                bgColor="white"
+                alt="recommend button"
                 onClick={() => recommendClick(item.value)}
-              >
-                <img
-                  src={recommend === item.value ? item.img_done : item.img_none}
-                  alt="recommend button"
-                  width={30}
-                  height={30}
-                />
-              </RecommendButton>
+              />
             ))}
           </RecommendWrapper>
           <ButtonWrapper>
             {reviewItem.review !== null || itemAddSuccess ? (
               <>
-                <button
-                  type="button"
+                <DefaultButton
+                  pc={[60, 30]}
                   onClick={() =>
                     modifyReviewClick(reviewItem.id, recommend, review)
                   }
-                >
-                  수정
-                </button>
-                <button
-                  type="button"
+                  isHover
+                  hoverBgColor="#1e90ff"
+                  hoverColor="white"
+                  bgColor="#08c1e9"
+                  color="white"
+                  margin={[0, 0, 0, 10]}
+                  fontSize={[14, 14]}
+                  fontWeight={700}
+                  title="수정"
+                />
+                <DefaultButton
+                  pc={[60, 30]}
                   onClick={() => deleteReviewClick(reviewItem.id)}
-                >
-                  삭제
-                </button>
+                  isHover
+                  hoverBgColor="#1e90ff"
+                  hoverColor="white"
+                  bgColor="#08c1e9"
+                  color="white"
+                  margin={[0, 0, 0, 10]}
+                  fontSize={[14, 14]}
+                  fontWeight={700}
+                  title="삭제"
+                />
               </>
             ) : (
-              <button
-                type="button"
+              <DefaultButton
+                pc={[60, 30]}
                 onClick={() => addReviewClick(bookId, recommend, review)}
-              >
-                작성
-              </button>
+                isHover
+                hoverBgColor="#1e90ff"
+                hoverColor="white"
+                bgColor="#08c1e9"
+                color="white"
+                margin={[0, 0, 0, 10]}
+                fontSize={[14, 14]}
+                fontWeight={700}
+                title="작성"
+              />
             )}
           </ButtonWrapper>
         </MiddleWrapper>
@@ -218,7 +241,6 @@ const InfoWrapper = styled.div`
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     .bookInfo {
       font-size: 14px;
-      font-weight: 600;
     }
   }
 `;
@@ -237,25 +259,11 @@ const RecommendWrapper = styled.div`
     font-weight: 600;
   }
   img {
-    margin-left: 10px;
+    margin: 0 10px;
   }
 `;
 
 const ButtonWrapper = styled.div`
   display: flex;
   align-items: center;
-  button {
-    width: 80px;
-    height: 35px;
-    border: none;
-    border-radius: 5px;
-    background-color: #08c1e9;
-    color: white;
-    margin-left: 10px;
-  }
-`;
-
-const RecommendButton = styled.button`
-  background-color: white;
-  border: none;
 `;

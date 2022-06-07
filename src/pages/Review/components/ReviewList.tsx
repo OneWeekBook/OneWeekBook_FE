@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import PagenationForm from 'components/Form/PagenationForm';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { ReviewInit, ReviewsRequest } from 'redux/reducers/Review';
 import { ReviewItemType } from 'types/review';
+import PagenationForm from 'components/Form/PagenationForm';
 import ReviewItem from './_item/ReviewItem';
 
 function ReviewList() {

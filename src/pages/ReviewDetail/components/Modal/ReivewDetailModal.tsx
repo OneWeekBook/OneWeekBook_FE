@@ -1,4 +1,3 @@
-import DetailModal from 'components/Modal';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,6 +8,7 @@ import {
   LikeRequest,
 } from 'redux/reducers/Like';
 import { LikeDataTypes, ReviewDetailTypes } from 'types/review';
+import DetailModal from 'components/Modal';
 import ImageButton from 'components/Button/ImageButton';
 
 type PropsType = {

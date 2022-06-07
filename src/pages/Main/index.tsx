@@ -10,7 +10,7 @@ import NewReviewList from './components/NewReivewList';
 function Index() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(ReviewsRequest({ start: 0, sortby: 'new' }));
+    dispatch(ReviewsRequest({ start: 0, sortby: 'totalReviews' }));
     dispatch(NewReviewsRequest());
     return () => {
       dispatch(ReviewInit());

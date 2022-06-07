@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { SetStartDate } from 'lib/SetDate';
 import { LibraryItemTypes } from 'types/book';
+import DefaultButton from 'components/Button/DefaultButton';
 
 type ClickType = {
   handleToggle: () => void;
@@ -42,40 +43,58 @@ function BookItem({
         </div>
         <ButtonWrapper>
           {progress === 0 && (
-            <button
+            <DefaultButton
+              pc={[0, 30]}
               onClick={(e) => {
                 e.preventDefault();
                 handleToggle();
                 onClick(id);
               }}
-              type="button"
-            >
-              시작하기
-            </button>
+              isHover
+              hoverBgColor="#1e90ff"
+              hoverColor="white"
+              color="#1e90ff"
+              fontSize={[14, 14]}
+              fontWeight={700}
+              padding={[3, 0, 3, 0]}
+              title="시작하기"
+            />
           )}
           {(progress === 1 || progress === 2) && (
-            <button
+            <DefaultButton
+              pc={[0, 30]}
               onClick={(e) => {
                 e.preventDefault();
                 handleToggle();
                 onClick(id);
               }}
-              type="button"
-            >
-              기록하기
-            </button>
+              isHover
+              hoverBgColor="#1e90ff"
+              hoverColor="white"
+              color="#1e90ff"
+              fontSize={[14, 14]}
+              fontWeight={700}
+              padding={[3, 0, 3, 0]}
+              title="기록하기"
+            />
           )}
           {progress === 2 && (
-            <button
+            <DefaultButton
+              pc={[0, 30]}
               onClick={(e) => {
                 e.preventDefault();
                 handleReviewToggle();
                 onClick(id);
               }}
-              type="button"
-            >
-              리뷰하기
-            </button>
+              isHover
+              hoverBgColor="#1e90ff"
+              hoverColor="white"
+              color="#1e90ff"
+              fontSize={[14, 14]}
+              fontWeight={700}
+              padding={[3, 0, 3, 0]}
+              title="리뷰하기"
+            />
           )}
         </ButtonWrapper>
       </InfoWrapper>
@@ -140,11 +159,6 @@ const ButtonWrapper = styled.div`
     :nth-child(2) {
       margin-left: 10px;
     }
-    border-radius: 5px;
     border: 2px solid #1e90ff;
-    background-color: white;
-    width: 100%;
-    color: #1e90ff;
-    font-weight: bold;
   }
 `;

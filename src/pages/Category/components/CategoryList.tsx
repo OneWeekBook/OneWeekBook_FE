@@ -1,10 +1,11 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import { CategoryRequest } from 'redux/reducers/Category';
 import { SearchInit, SearchRequest } from 'redux/reducers/Search';
-import styled from 'styled-components';
 import { CategoryItemTypes } from 'types/book';
+import DefaultButton from 'components/Button/DefaultButton';
 import CategoryBoxItem from './_item/CategoryBoxItem';
 import SubCategoryBoxItem from './_item/SubCategoryBoxItem';
 
@@ -168,9 +169,15 @@ function CategoryList() {
           />
         </div>
         {search && (
-          <button type="button" onClick={handleClick}>
-            모두보기
-          </button>
+          <DefaultButton
+            pc={[80, 20]}
+            onClick={handleClick}
+            isHover
+            hoverColor="#1e90ff"
+            fontSize={[18, 18]}
+            fontWeight={600}
+            title="모두보기"
+          />
         )}
       </InputWrapper>
     </Wrapper>
@@ -242,13 +249,6 @@ const InputWrapper = styled.div`
     @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
       font-size: 16px;
     }
-  }
-  button {
-    border: none;
-    background-color: white;
-    color: #1e90ff;
-    font-size: 18px;
-    font-weight: 600;
   }
 `;
 

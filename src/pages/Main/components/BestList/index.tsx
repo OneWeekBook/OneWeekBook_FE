@@ -10,7 +10,7 @@ function Index() {
     <Wrapper>
       <BestListTitle>사람들의 관심을 한 몸에 받은 책</BestListTitle>
       <BestListGridWrapper>
-        {reviews.length > 0 &&
+        {reviews.length &&
           reviews.slice(0, 9).map((item: ReviewItemType, idx: number) => {
             return (
               <BestItem

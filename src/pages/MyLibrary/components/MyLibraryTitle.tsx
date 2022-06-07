@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
-const name = 'leejy';
+type PropsType = {
+  nick: string;
+};
 
-function MyLibraryTitle() {
+function MyLibraryTitle({ nick }: PropsType) {
   return (
     <Wrapper>
       <img
@@ -11,7 +13,7 @@ function MyLibraryTitle() {
         width={60}
         height={60}
       />
-      <p>{name}님의 서재</p>
+      <p>{nick}님의 서재</p>
     </Wrapper>
   );
 }

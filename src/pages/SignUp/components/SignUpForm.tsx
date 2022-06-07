@@ -7,6 +7,7 @@ import AuthEmailForm from 'components/Form/AuthEmailForm';
 import OnboardInputForm from 'components/Form/OnboardInputForm';
 import { useInput } from 'hooks/useInput';
 import { useInputEnter } from 'hooks/useInputEnter';
+import DefaultButton from 'components/Button/DefaultButton';
 import { useErrorCheck } from '../func/ErrorCheck';
 import { useSignUpErrorCheck } from '../func/SignUpErrorCheck';
 
@@ -123,9 +124,21 @@ function SignUpForm() {
               mref={nickRef}
             />
             {signUpError && <ErrorForm error="회원가입 실패" align="left" />}
-            <button type="submit" disabled={registerDone}>
-              회원가입
-            </button>
+            <DefaultButton
+              type="submit"
+              pc={[0, 35]}
+              isHover
+              hoverBgColor="#08c1e9"
+              hoverColor="white"
+              bgColor="#1e90ff"
+              color="white"
+              disabled={registerDone}
+              disabledColor="#a9a9a9"
+              margin={[20, 0, 5, 0]}
+              fontSize={[18, 18]}
+              fontWeight={600}
+              title="회원가입"
+            />
           </form>
         )}
       </FormWrapper>
@@ -142,19 +155,6 @@ const SignUpFormWrapper = styled.div`
   form {
     display: flex;
     flex-direction: column;
-  }
-  button {
-    width: 100%;
-    height: 35px;
-    border: none;
-    border-radius: 5px;
-    margin: 20px auto 5px;
-    color: white;
-    font-size: 18px;
-    background-color: #1e90ff;
-    :disabled {
-      background-color: #a9a9a9;
-    }
   }
 `;
 

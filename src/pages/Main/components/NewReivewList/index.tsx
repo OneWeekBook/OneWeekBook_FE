@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { NewReviewTypes } from 'types/main';
+import DefaultButton from 'components/Button/DefaultButton';
 import NewReivewItem from './NewReivewItem';
 
 function NewReviewList() {
@@ -26,7 +27,14 @@ function NewReviewList() {
             ))}
       </div>
       <ButtonWrapper>
-        <Button onClick={onClick}>더 보기</Button>
+        <DefaultButton
+          pc={[150, 38]}
+          onClick={onClick}
+          fontWeight={700}
+          padding={[5, 0, 5, 0]}
+          bgColor="#1e90ff"
+          title="더 보기"
+        />
       </ButtonWrapper>
     </Wrapper>
   );
@@ -58,11 +66,4 @@ const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 20px;
-`;
-
-const Button = styled.button`
-  width: 150px;
-  height: 38px;
-  font-size: 16px;
-  font-weight: 700;
 `;
