@@ -34,8 +34,8 @@ const MainCategoryButton = styled.button<{ isSelected: boolean }>`
   font-weight: 600;
   height: 40px;
   padding: 0 20px;
-  margin-right: 10px;
-  margin-bottom: 10px;
+  margin: 0 10px 10px 0;
+  transition: 0.5s;
   :hover {
     background-color: #1e90ff;
   }

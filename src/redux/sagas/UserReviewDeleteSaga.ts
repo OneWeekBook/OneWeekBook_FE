@@ -8,7 +8,7 @@ import {
 } from '../reducers/UserReview';
 
 function UserReviewDeleteAPI(data: DeleteType) {
-  return instance.delete(`/book/reviews/?id=${data.id}`);
+  return instance.delete(`/book/reviews/${data.id}`);
 }
 
 function* fetchUserReviewDeleteSaga(action: any) {

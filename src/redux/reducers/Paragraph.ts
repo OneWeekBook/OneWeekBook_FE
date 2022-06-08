@@ -1,5 +1,9 @@
 import { DeleteType, ParagraphAddTypes, ParagraphType } from 'types/api';
 
+export const PARAGRAPH_INIT_REQUEST = 'PARAGRAPH_INIT_REQUEST';
+export const PARAGRAPH_INIT_SUCCESS = 'PARAGRAPH_INIT_SUCCESS';
+export const PARAGRAPH_INIT_FAIL = 'PARAGRAPH_INIT_FAIL';
+
 export const PARAGRAPH_REQUEST = 'PARAGRAPH_REQUEST';
 export const PARAGRAPH_SUCCESS = 'PARAGRAPH_SUCCESS';
 export const PARAGRAPH_FAIL = 'PARAGRAPH_FAIL';
@@ -15,8 +19,10 @@ export const PARAGRAPH_DELETE_FAIL = 'PARAGRAPH_DELETE_FAIL';
 export const PARAGRAPH_INIT = 'PARAGRAPH_INIT';
 
 const initialState = {
-  isLoading: false,
-  isSuccess: false,
+  initLoading: false,
+  initSuccess: false,
+  paragraphLoading: false,
+  paragraphSuccess: false,
   isAddLoading: false,
   isAddSuccess: false,
   isDeleteLoading: false,
@@ -26,24 +32,43 @@ const initialState = {
 
 export default function ChangePassword(state = initialState, action: any) {
   switch (action.type) {
+    case PARAGRAPH_INIT_REQUEST:
+      return {
+        ...state,
+        initLoading: true,
+        initSuccess: false,
+      };
+    case PARAGRAPH_INIT_SUCCESS:
+      return {
+        ...state,
+        initLoading: false,
+        initSuccess: true,
+        paragraph: action.data,
+      };
+    case PARAGRAPH_INIT_FAIL:
+      return {
+        ...state,
+        initLoading: false,
+        initSuccess: false,
+      };
     case PARAGRAPH_REQUEST:
       return {
         ...state,
-        isLoading: true,
-        isSuccess: false,
+        paragraphLoading: true,
+        paragraphSuccess: false,
       };
     case PARAGRAPH_SUCCESS:
       return {
         ...state,
-        isLoading: false,
-        isSuccess: true,
+        paragraphLoading: false,
+        paragraphSuccess: true,
         paragraph: action.data,
       };
     case PARAGRAPH_FAIL:
       return {
         ...state,
-        isLoading: false,
-        isSuccess: false,
+        paragraphLoading: false,
+        paragraphSuccess: false,
       };
     case PARAGRAPH_ADD_REQUEST:
       return {
@@ -87,6 +112,27 @@ export default function ChangePassword(state = initialState, action: any) {
       return state;
   }
 }
+
+export const ParagraphInitRequest = (data: ParagraphType) => {
+  return {
+    type: PARAGRAPH_INIT_REQUEST,
+    payload: data,
+  };
+};
+
+export const ParagraphInitSuccess = (data: any) => {
+  return {
+    type: PARAGRAPH_INIT_SUCCESS,
+    data,
+  };
+};
+
+export const ParagraphInitFail = (error: any) => {
+  return {
+    type: PARAGRAPH_INIT_FAIL,
+    error: error.response,
+  };
+};
 
 export const ParagraphRequest = (data: ParagraphType) => {
   return {

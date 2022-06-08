@@ -24,8 +24,8 @@ export const USER_REVIEW_DELETE_FAIL = 'USER_REVIEW_DELETE_FAIL';
 export const USER_REVIEW_INIT = 'USER_REVIEW_INIT';
 
 const initialState = {
-  isLoading: false,
-  isSuccess: false,
+  userReviewLoading: false,
+  userReviewSuccess: false,
   itemAddLoading: false,
   itemAddSuccess: false,
   itemModifyLoading: false,
@@ -40,21 +40,21 @@ export default function Review(state = initialState, action: any) {
     case USER_REVIEW_REQUEST:
       return {
         ...state,
-        isLoading: true,
-        isSuccess: false,
+        userReviewLoading: true,
+        userReviewSuccess: false,
       };
     case USER_REVIEW_SUCCESS:
       return {
         ...state,
-        isLoading: false,
-        isSuccess: true,
+        userReviewLoading: false,
+        userReviewSuccess: true,
         reviewItem: action.data,
       };
     case USER_REVIEW_FAIL:
       return {
         ...state,
-        isLoading: false,
-        isSuccess: false,
+        userReviewLoading: false,
+        userReviewSuccess: false,
       };
     case USER_REVIEW_ADD_REQUEST:
       return {

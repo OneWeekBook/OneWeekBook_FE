@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { MyLibraryModifyRequest } from 'redux/reducers/MyLibrary';
-import { ParagraphRequest } from 'redux/reducers/Paragraph';
+import { ParagraphInitRequest } from 'redux/reducers/Paragraph';
 import { navDone } from 'redux/reducers/Func';
 import { useToggle } from 'hooks/useToggle';
 import { InfoTypes, LibraryItemTypes } from 'types/book';
 import BookItem from '../_item/BookItem';
-import WriteCommentModal from '../Modal/WriteCommentModal';
+import WriteCommentModal from '../Modal/CommentModal';
 
 type PropsType = {
   userId: number;
@@ -26,9 +26,10 @@ function ReadBookList({ userId }: PropsType) {
     endTime: null,
   });
   const { userBookList } = useSelector((state: any) => state.myLibrary);
+  const { initSuccess } = useSelector((state: any) => state.paragraph);
 
   const handleParagraphInfo = (id: number) => {
-    dispatch(ParagraphRequest({ bookId: id }));
+    dispatch(ParagraphInitRequest({ bookId: id }));
   };
 
   const moveDoneClick = async () => {
@@ -62,7 +63,7 @@ function ReadBookList({ userId }: PropsType) {
             />
           ))}
       </Wrapper>
-      {readToggle && bookData && (
+      {readToggle && initSuccess && (
         <WriteCommentModal
           bookId={bookId}
           bookData={bookData}

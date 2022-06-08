@@ -6,10 +6,8 @@ import {
   UserReviewDeleteRequest,
   UserReviewInit,
   UserReviewModifyRequest,
-  UserReviewRequest,
 } from 'redux/reducers/UserReview';
 import { InfoTypes } from 'types/book';
-import { useToggle } from 'hooks/useToggle';
 import { SetStartDate } from 'lib/SetDate';
 import { Toast } from 'lib/Toast';
 import WriteModal from 'components/Modal';
@@ -44,17 +42,16 @@ const RecommendItem = [
 ];
 
 type PropsType = {
-  userId: number;
   bookId: number;
   bookData: InfoTypes;
   toggleIsOn: () => void;
 };
 
-function WriteReviewModal({ userId, bookId, bookData, toggleIsOn }: PropsType) {
+function WriteReviewModal({ bookId, bookData, toggleIsOn }: PropsType) {
   const dispatch = useDispatch();
-  const [reviewToggle, reviewToggleIsOn] = useToggle(false);
-  const { reviewItem, itemAddSuccess, itemModifySuccess, itemDeleteSuccess } =
-    useSelector((state: any) => state.userReview);
+  const { reviewItem, itemAddSuccess } = useSelector(
+    (state: any) => state.userReview,
+  );
   const [recommend, setRecommend] = useState<number>(4);
   const [review, setReview] = useState('');
   const recommendClick = (recommend: number) => {
@@ -70,7 +67,6 @@ function WriteReviewModal({ userId, bookId, bookData, toggleIsOn }: PropsType) {
       Toast('warning', '리뷰를 남겨주세요...');
     } else {
       dispatch(UserReviewAddRequest({ bookId, review, rating: recommend }));
-      reviewToggleIsOn();
     }
   };
 
@@ -87,25 +83,17 @@ function WriteReviewModal({ userId, bookId, bookData, toggleIsOn }: PropsType) {
     toggleIsOn();
   };
 
-  useEffect(() => {
-    dispatch(UserReviewRequest({ userId, bookId }));
-    return () => {
-      dispatch(UserReviewInit());
-    };
-  }, [userId, bookId, reviewToggle]);
-
   useLayoutEffect(() => {
     if (reviewItem.review) {
       setReview(reviewItem.review);
       setRecommend(reviewItem.rating);
     }
+    return () => {
+      setRecommend(4);
+      setReview('');
+      dispatch(UserReviewInit());
+    };
   }, [reviewItem]);
-
-  useEffect(() => {
-    if (itemAddSuccess) Toast('success', '작성 완료');
-    else if (itemModifySuccess) Toast('info', '수정 완료!');
-    else if (itemDeleteSuccess) Toast('info', '삭제 완료!');
-  }, [itemAddSuccess, itemModifySuccess, itemDeleteSuccess]);
 
   return (
     <WriteModal

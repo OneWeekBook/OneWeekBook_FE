@@ -223,7 +223,6 @@ const SubCategoryWrapper = styled.div`
 
 const SubCategoryList = styled.div`
   display: flex;
-  display: flex;
   flex-wrap: wrap;
   border-top: 2px solid #e6e6e6;
 `;

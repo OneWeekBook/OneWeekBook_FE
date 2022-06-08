@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import { useToggle } from 'hooks/useToggle';
 import { InfoTypes, LibraryItemTypes } from 'types/book';
 import { useDispatch, useSelector } from 'react-redux';
-import { ParagraphRequest } from 'redux/reducers/Paragraph';
+import { ParagraphInitRequest } from 'redux/reducers/Paragraph';
+import { UserReviewRequest } from 'redux/reducers/UserReview';
 import BookItem from '../_item/BookItem';
-import WriteCommentModal from '../Modal/WriteCommentModal';
+import WriteCommentModal from '../Modal/CommentModal';
 import WriteReviewModal from '../Modal/WriteReviewModal';
 
 type PropsType = {
@@ -25,9 +26,15 @@ function DoneBookList({ userId }: PropsType) {
     endTime: null,
   });
   const { userBookList } = useSelector((state: any) => state.myLibrary);
+  const { userReviewSuccess } = useSelector((state: any) => state.userReview);
+  const { initSuccess } = useSelector((state: any) => state.paragraph);
 
   const handleParagraphInfo = (id: number) => {
-    dispatch(ParagraphRequest({ bookId: id }));
+    dispatch(ParagraphInitRequest({ bookId: id }));
+  };
+
+  const handleReviewInfo = (id: number) => {
+    dispatch(UserReviewRequest({ userId, bookId: id }));
   };
 
   return (
@@ -50,20 +57,20 @@ function DoneBookList({ userId }: PropsType) {
                   endTime: item.endTime,
                 });
                 handleParagraphInfo(item.id);
+                handleReviewInfo(item.id);
               }}
             />
           ))}
       </Wrapper>
-      {commentToggle && bookData && (
+      {commentToggle && initSuccess && (
         <WriteCommentModal
           bookId={bookId}
           bookData={bookData}
           toggleIsOn={commentToggleIsOn}
         />
       )}
-      {reivewToggle && bookData && (
+      {reivewToggle && userReviewSuccess && (
         <WriteReviewModal
-          userId={userId}
           bookId={bookId}
           bookData={bookData}
           toggleIsOn={reviewToggleIsOn}

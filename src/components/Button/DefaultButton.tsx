@@ -109,6 +109,7 @@ const Button = styled.button<{
   box-sizing: border-box;
   background-color: ${({ bgColor }) => bgColor};
   cursor: pointer;
+  transition: 0.5s;
   color: ${({ color }) => color};
   font-size: ${({ fontSize }) => fontSize && fontSize[0]}px;
   font-weight: ${({ fontWeight }) => fontWeight};

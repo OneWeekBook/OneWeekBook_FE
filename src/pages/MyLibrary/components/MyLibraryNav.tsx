@@ -81,6 +81,7 @@ const Wrapper = styled.div`
 
 const NavItem = styled.button<{ isSelected: boolean }>`
   border: none;
+  border-radius: 5px;
   background-color: white;
   cursor: pointer;
   display: flex;
@@ -91,6 +92,7 @@ const NavItem = styled.button<{ isSelected: boolean }>`
   font-size: 18px;
   font-weight: 600;
   margin-right: 5px;
+  transition: 0.5s;
   p {
     color: ${({ isSelected }) => (isSelected ? '#1e90ff' : '#000000')};
   }
@@ -98,6 +100,6 @@ const NavItem = styled.button<{ isSelected: boolean }>`
     p {
       color: #1e90ff;
     }
-    box-shadow: 1px 2px 3px #000;
+    box-shadow: -10px -10px 10px -5px rgba(25, 42, 70, 0.2);
   }
 `;
