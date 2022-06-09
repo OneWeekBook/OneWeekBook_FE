@@ -1,4 +1,3 @@
-import React from 'react';
 import LoadingErrorForm from 'components/Form/LoadingErrorForm';
 import LoadingForm from 'components/Form/LoadingForm';
 import { useDispatch, useSelector } from 'react-redux';

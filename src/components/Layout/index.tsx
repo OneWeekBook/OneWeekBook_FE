@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { AuthUserRequest } from 'redux/reducers/AuthUser';
-import { useToggle } from 'hooks/useToggle';
+import useToggle from 'hooks/useToggle';
 import TopScroll from 'lib/TopScroll';
 import Footer from './Footer';
 import Header from './Header';

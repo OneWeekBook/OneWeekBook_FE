@@ -1,8 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Toast } from 'lib/Toast';
-import { useToggle } from 'hooks/useToggle';
-import { useAuthLink } from 'hooks/useAuthLink';
+import useToggle from 'hooks/useToggle';
+import useAuthLink from 'hooks/useAuthLink';
 import DefaultButton from 'components/Button/DefaultButton';
 import NoticeModal from 'components/Modal';
 import { NavItems } from './Nav';

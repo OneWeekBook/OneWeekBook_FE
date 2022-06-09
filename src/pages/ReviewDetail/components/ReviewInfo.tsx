@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { ReviewRequest } from 'redux/reducers/Review';
-import { useToggle } from 'hooks/useToggle';
+import useToggle from 'hooks/useToggle';
 import { ReviewDetailTypes } from 'types/review';
 import ReviewDetailModal from './Modal/ReivewDetailModal';
 import ReviewItem from './_items/ReivewItem';

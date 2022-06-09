@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { useToggle } from 'hooks/useToggle';
-import { useAuthLink } from 'hooks/useAuthLink';
+import useToggle from 'hooks/useToggle';
+import useAuthLink from 'hooks/useAuthLink';
 import NoticeModal from 'components/Modal';
 import Container from '../Container';
 

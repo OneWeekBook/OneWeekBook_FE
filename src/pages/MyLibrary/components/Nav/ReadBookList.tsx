@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { MyLibraryModifyRequest } from 'redux/reducers/MyLibrary';
 import { ParagraphInitRequest } from 'redux/reducers/Paragraph';
 import { navDone } from 'redux/reducers/Func';
-import { useToggle } from 'hooks/useToggle';
+import useToggle from 'hooks/useToggle';
 import { InfoTypes, LibraryItemTypes } from 'types/book';
 import BookItem from '../_item/BookItem';
 import WriteCommentModal from '../Modal/CommentModal';

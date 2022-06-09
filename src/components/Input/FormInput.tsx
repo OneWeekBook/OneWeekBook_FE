@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -10,16 +9,14 @@ type PropsTypes = {
   pattern?: string;
   disabled?: boolean;
   mref?: React.RefObject<HTMLInputElement>;
-  onChange: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onKeyPress?: (
     event: React.KeyboardEvent<Element>,
     ref?: React.RefObject<HTMLInputElement>,
   ) => void;
 };
 
-function OnboardInputForm({
+function FormInput({
   type,
   maxLength,
   placeholder,
@@ -37,9 +34,9 @@ function OnboardInputForm({
         type={type}
         maxLength={maxLength}
         placeholder={placeholder}
-        defaultValue={state}
+        value={state}
         pattern={pattern}
-        onChange={_.debounce(onChange, 200)}
+        onChange={onChange}
         onKeyPress={onKeyPress}
         disabled={disabled}
         ref={mref}
@@ -50,7 +47,7 @@ function OnboardInputForm({
   );
 }
 
-export default OnboardInputForm;
+export default FormInput;
 
 const InputWrapper = styled.div`
   position: relative;

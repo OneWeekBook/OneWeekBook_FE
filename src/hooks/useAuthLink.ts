@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-export function useAuthLink(): {
+function useAuthLink(): {
   handleAuthClick: (
     link: string,
     compLink: string[],
@@ -28,3 +28,5 @@ export function useAuthLink(): {
 
   return { handleAuthClick };
 }
+
+export default useAuthLink;

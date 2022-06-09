@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AuthEmailInit, AuthEmailRequest } from 'redux/reducers/AuthEmail';
 import { AuthCodeInit, AuthCodeRequest } from 'redux/reducers/AuthCode';
-import { useInput } from 'hooks/useInput';
+import useInput from 'hooks/useInput';
 import DefaultButton from 'components/Button/DefaultButton';
 import { useRegexCheck } from './func/RegCheck';
 import { useAuthErrorCheck } from './func/AuthErrorCheck';
 import TimerForm from '../TimerForm';
 import EmailErrorForm from './components/EmailErrorForm';
 import CodeErrorForm from './components/CodeErrorForm';
-import OnboardInputForm from '../OnboardInputForm';
+import FormInput from '../../Input/FormInput';
 
 type AuthMailTypes = {
   authDone: boolean;
@@ -94,7 +94,7 @@ function AuthEmailForm({
 
   return (
     <AuthEmailWrapper>
-      <OnboardInputForm
+      <FormInput
         type="email"
         placeholder="이메일"
         state={email}
@@ -108,7 +108,7 @@ function AuthEmailForm({
             <TimerForm emailDone={emailDone} setEmailDone={setEmailDone} />
           </TimerWrapper>
         )}
-      </OnboardInputForm>
+      </FormInput>
       {!authDone && (
         <>
           <EmailErrorForm
@@ -153,7 +153,7 @@ function AuthEmailForm({
           )}
           {toggle && (
             <>
-              <OnboardInputForm
+              <FormInput
                 type="text"
                 maxLength={6}
                 placeholder="인증번호"

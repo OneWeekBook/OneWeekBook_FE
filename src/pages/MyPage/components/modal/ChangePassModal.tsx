@@ -5,7 +5,7 @@ import {
   ChangePasswordInit,
   ChangePasswordRequest,
 } from 'redux/reducers/ChangePassword';
-import { useInput } from 'hooks/useInput';
+import useInput from 'hooks/useInput';
 import { passwordRegex } from 'lib/Regex';
 import { Toast } from 'lib/Toast';
 import ChangeModal from 'components/Modal';

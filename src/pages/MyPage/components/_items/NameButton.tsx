@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useToggle } from 'hooks/useToggle';
+import useToggle from 'hooks/useToggle';
 import DefaultButton from 'components/Button/DefaultButton';
 import ChangeNickModal from '../modal/ChangeNickModal';
 import ChangePassModal from '../modal/ChangePassModal';

@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { SignInInit, SignInRequest } from 'redux/reducers/SignIn';
-import { useInput } from 'hooks/useInput';
-import { useInputEnter } from 'hooks/useInputEnter';
+import useInput from 'hooks/useInput';
+import useInputEnter from 'hooks/useInputEnter';
 import ErrorForm from 'components/Form/ErrorForm';
-import OnboardInputForm from 'components/Form/OnboardInputForm';
+import FormInput from 'components/Input/FormInput';
 import DefaultButton from 'components/Button/DefaultButton';
 import { useSignInErrorCheck } from '../func/SignInErrorCheck';
 
@@ -50,7 +50,7 @@ function SignInForm() {
     <SignInFormWrapper>
       <Title>로그인</Title>
       <form onSubmit={handleSubmit}>
-        <OnboardInputForm
+        <FormInput
           type="email"
           placeholder="이메일"
           state={email}
@@ -58,7 +58,7 @@ function SignInForm() {
           onKeyPress={(event) => handleInputEnter(event, passRef)}
           mref={emailRef}
         />
-        <OnboardInputForm
+        <FormInput
           type="password"
           placeholder="비밀번호"
           state={password}

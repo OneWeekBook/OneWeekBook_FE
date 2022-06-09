@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import styled from 'styled-components';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
 import { userToggle } from 'redux/reducers/Func';
-import { useToggle } from 'hooks/useToggle';
+import useToggle from 'hooks/useToggle';
 import Rank from './_items/Rank';
 import NameButton from './_items/NameButton';
 import OutButton from './_items/OutButton';

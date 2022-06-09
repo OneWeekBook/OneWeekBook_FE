@@ -2,11 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SignUpInit, SignUpRequest } from 'redux/reducers/SignUp';
 import styled from 'styled-components';
-import { useInput } from 'hooks/useInput';
-import { useInputEnter } from 'hooks/useInputEnter';
+import useInput from 'hooks/useInput';
+import useInputEnter from 'hooks/useInputEnter';
 import ErrorForm from 'components/Form/ErrorForm';
 import AuthEmailForm from 'components/Form/AuthEmailForm';
-import OnboardInputForm from 'components/Form/OnboardInputForm';
+import FormInput from 'components/Input/FormInput';
 import DefaultButton from 'components/Button/DefaultButton';
 import { useSignUpErrorCheck } from '../func/SignUpErrorCheck';
 import { useErrorCheck } from '../func/ErrorCheck';
@@ -86,7 +86,7 @@ function SignUpForm() {
       <FormWrapper>
         {authDone && (
           <form onSubmit={handleSubmit}>
-            <OnboardInputForm
+            <FormInput
               type="password"
               placeholder="비밀번호"
               state={password}
@@ -97,7 +97,7 @@ function SignUpForm() {
             {passError && (
               <ErrorForm error="비밀번호 형식이 올바르지 않습니다." />
             )}
-            <OnboardInputForm
+            <FormInput
               type="password"
               placeholder="비밀번호 확인"
               state={confirmPassword}
@@ -108,7 +108,7 @@ function SignUpForm() {
             {passCompareError && (
               <ErrorForm error="비밀번호가 같지 않습니다." />
             )}
-            <OnboardInputForm
+            <FormInput
               type="text"
               placeholder="이름"
               state={username}
@@ -116,7 +116,7 @@ function SignUpForm() {
               onKeyPress={(event) => handleInputEnter(event, nickRef)}
               mref={nameRef}
             />
-            <OnboardInputForm
+            <FormInput
               type="text"
               placeholder="닉네임"
               state={nick}

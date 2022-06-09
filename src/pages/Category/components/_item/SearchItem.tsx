@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 import { SetDate } from 'lib/SetDate';
 import styled from 'styled-components';
 import { LikeAddTypes } from 'types/book';

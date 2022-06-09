@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { RemoveUserInit, RemoveUserRequest } from 'redux/reducers/RemoveUser';
 import styled from 'styled-components';
-import { useInput } from 'hooks/useInput';
+import useInput from 'hooks/useInput';
 import { Toast } from 'lib/Toast';
 import ErrorForm from 'components/Form/ErrorForm';
 import RemoveModal from 'components/Modal';

@@ -1,9 +1,11 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { ParagraphAddRequest } from 'redux/reducers/Paragraph';
 import { Toast } from 'lib/Toast';
+import useInput from 'hooks/useInput';
 import ImageButton from 'components/Button/ImageButton';
+import FormInput from 'components/Input/FormInput';
 
 type PropsType = {
   bookId: number;
@@ -11,7 +13,12 @@ type PropsType = {
 
 function InputWrapper({ bookId }: PropsType) {
   const dispatch = useDispatch();
-  const [parag, setParag] = useState<string>('');
+  const paragRef = useRef<HTMLInputElement>(null);
+  const [parag, changeParag, setParag] = useInput('');
+
+  useEffect(() => {
+    paragRef.current?.focus();
+  }, []);
 
   const addParagraphClick = useCallback(() => {
     if (parag) {
@@ -23,17 +30,22 @@ function InputWrapper({ bookId }: PropsType) {
     }
   }, [parag]);
 
+  const onParagInputEnter = (event: React.KeyboardEvent<Element>) => {
+    if (event.key === 'Enter') {
+      addParagraphClick();
+    }
+  };
+
   return (
     <Wrapper>
-      <Input>
-        <input
-          type="text"
-          placeholder="기억에 남는 문구를 입력해주세요."
-          value={parag}
-          onChange={(e) => setParag(e.target.value)}
-        />
-        <span />
-      </Input>
+      <FormInput
+        type="text"
+        placeholder="기억에 남는 문구를 입력해주세요."
+        state={parag}
+        onChange={changeParag}
+        onKeyPress={onParagInputEnter}
+        mref={paragRef}
+      />
       <ImageButton
         type="button"
         onClick={addParagraphClick}
@@ -55,39 +67,5 @@ const Wrapper = styled.div`
     top: 5px;
     right: 0;
     position: absolute;
-  }
-`;
-
-const Input = styled.div`
-  position: relative;
-  width: 100%;
-  margin-top: 10px;
-  input {
-    :focus {
-      outline: none;
-    }
-    box-sizing: border-box;
-    padding: 0 5px;
-    height: 30px;
-    border: none;
-    width: 100%;
-    border-bottom: solid 1px black;
-  }
-  input ~ span {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background-color: #1e90ff;
-    transition: 0.4s;
-  }
-  input:focus ~ span {
-    width: 100%;
-    transition: 0.4s;
-    left: 0;
-  }
-  input:disabled {
-    background-color: white;
   }
 `;

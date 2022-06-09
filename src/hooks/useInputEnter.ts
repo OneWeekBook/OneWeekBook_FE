@@ -1,4 +1,4 @@
-export function useInputEnter(): {
+function useInputEnter(): {
   handleInputEnter: (
     event: React.KeyboardEvent<Element>,
     ref: React.RefObject<HTMLInputElement>,
@@ -15,3 +15,5 @@ export function useInputEnter(): {
 
   return { handleInputEnter };
 }
+
+export default useInputEnter;
