@@ -10,8 +10,6 @@ export type ImgBtnOptionTypes = {
 export type ImgBtnStyleTypes = {
   pc: number[];
   mobile?: number[];
-  imgPC?: number[];
-  imgMobile?: number[];
   bgColor?: string;
   margin?: number[];
   marginM?: number[];
@@ -20,6 +18,8 @@ export type ImgBtnStyleTypes = {
 export type ImgBtnImageTypes = {
   src: string;
   alt: string;
+  imgPC?: number[];
+  imgMobile?: number[];
 };
 
 export type DefaultBtnOptionTypes = {
@@ -45,4 +45,18 @@ export type DefaultBtnStyleTypes = {
   hoverBgColor?: string;
   hoverColor?: string;
   disabledColor?: string;
+};
+
+export type SearchInputOptionTypes = {
+  search: string;
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
+  handleFetch: (search: string) => void;
+};
+
+export type SearchInputStyleTypes = {
+  border: string;
+  borderRadius: number;
+  fontSize: number;
+  padding: number[];
+  focusBorder: string;
 };

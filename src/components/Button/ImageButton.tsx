@@ -34,7 +34,7 @@ function ImageButton({
       marginM={marginM}
       onClick={onClick}
     >
-      <ButtonImage src={src} alt={alt} pc={imgPC} mobile={imgMobile} />
+      <ButtonImage src={src} alt={alt} imgPC={imgPC} imgMobile={imgMobile} />
     </Button>
   );
 }
@@ -51,13 +51,7 @@ ImageButton.defaultProps = {
 
 export default ImageButton;
 
-const Button = styled.button<{
-  pc: number[];
-  mobile: number[];
-  bgColor?: string;
-  margin: number[];
-  marginM: number[];
-}>`
+const Button = styled.button<ImgBtnStyleTypes>`
   width: ${({ pc }) => pc[0]}px;
   hegiht: ${({ pc }) => pc[1]}px;
   border: none;
@@ -69,7 +63,7 @@ const Button = styled.button<{
   border-radius: 5px;
 `;
 
-const ButtonImage = styled.img<{ pc?: number[]; mobile?: number[] }>`
-  width: ${({ pc }) => pc && pc[0]}px;
-  hegiht: ${({ pc }) => pc && pc[1]}px;
+const ButtonImage = styled.img<ImgBtnImageTypes>`
+  width: ${({ imgPC }) => imgPC && imgPC[0]}px;
+  hegiht: ${({ imgPC }) => imgPC && imgPC[1]}px;
 `;

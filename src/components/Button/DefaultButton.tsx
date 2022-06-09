@@ -63,23 +63,7 @@ DefaultButton.defaultProps = {
 
 export default DefaultButton;
 
-const Button = styled.button<{
-  pc: number[];
-  mobile: number[];
-  color?: string;
-  bgColor?: string;
-  border?: string;
-  borderRadius?: number;
-  fontSize?: number[];
-  fontWeight?: number;
-  margin: number[];
-  padding: number[];
-  marginM: number[];
-  isHover: boolean;
-  hoverBgColor?: string;
-  hoverColor?: string;
-  disabledColor?: string;
-}>`
+const Button = styled.button<DefaultBtnOptionTypes & DefaultBtnStyleTypes>`
   ${(props) =>
     props.pc[0] === 0
       ? css`
@@ -114,7 +98,8 @@ const Button = styled.button<{
   font-size: ${({ fontSize }) => fontSize && fontSize[0]}px;
   font-weight: ${({ fontWeight }) => fontWeight};
   margin: ${({ margin }) =>
-    `${margin[0]}px ${margin[1]}px ${margin[2]}px ${margin[3]}px`};
+    margin && `${margin[0]}px ${margin[1]}px ${margin[2]}px ${margin[3]}px`};
   padding: ${({ padding }) =>
+    padding &&
     `${padding[0]}px ${padding[1]}px ${padding[2]}px ${padding[3]}px`};
 `;

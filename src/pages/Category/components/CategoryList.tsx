@@ -6,6 +6,7 @@ import { CategoryRequest } from 'redux/reducers/Category';
 import { SearchInit, SearchRequest } from 'redux/reducers/Search';
 import { CategoryItemTypes } from 'types/book';
 import DefaultButton from 'components/Button/DefaultButton';
+import SearchInput from 'components/Input/SearchInput';
 import CategoryBoxItem from './_item/CategoryBoxItem';
 import SubCategoryBoxItem from './_item/SubCategoryBoxItem';
 
@@ -71,29 +72,32 @@ function CategoryList() {
     [],
   );
 
-  const handleFetch = useCallback(() => {
-    const options: {
-      start: number;
-      display: number;
-      d_categ?: string | number;
-      title?: string;
-    } = {
-      start: 1,
-      display: 8,
-    };
+  const handleFetch = useCallback(
+    (search: string) => {
+      const options: {
+        start: number;
+        display: number;
+        d_categ?: string | number;
+        title?: string;
+      } = {
+        start: 1,
+        display: 8,
+      };
 
-    if (curSubCategory[0] && search) {
-      options.d_categ = curSubCategory[0].categoryId;
-      options.title = search;
-    } else if (curParentCategory[0] && search) {
-      options.d_categ = curParentCategory[0].categoryId;
-      options.title = search;
-    } else {
-      options.title = search;
-    }
+      if (curSubCategory[0] && search) {
+        options.d_categ = curSubCategory[0].categoryId;
+        options.title = search;
+      } else if (curParentCategory[0] && search) {
+        options.d_categ = curParentCategory[0].categoryId;
+        options.title = search;
+      } else {
+        options.title = search;
+      }
 
-    dispatch(SearchRequest({ ...options }));
-  }, [search, curSubCategory, curParentCategory]);
+      dispatch(SearchRequest({ ...options }));
+    },
+    [search, curSubCategory, curParentCategory],
+  );
 
   const handleClick = () => {
     if (curSubCategory[0].categoryId !== 0) {
@@ -121,8 +125,8 @@ function CategoryList() {
   }, [categories]);
 
   useEffect(() => {
-    handleFetch();
-  }, [search, curSubCategory, curParentCategory]);
+    handleFetch(search);
+  }, [curSubCategory, curParentCategory]);
 
   return (
     <Wrapper>
@@ -161,12 +165,18 @@ function CategoryList() {
       <InputWrapper>
         <div className="search">
           <p>통합 검색</p>
-          <Input
-            type="text"
-            placeholder="검색어를 입력해주세요."
-            defaultValue={search}
-            onBlur={(e) => setSearch(e.target.value)}
-          />
+          <SearchInputWrapper>
+            <SearchInput
+              search={search}
+              setSearch={setSearch}
+              handleFetch={handleFetch}
+              border="1px solid #e6e6e6"
+              borderRadius={10}
+              fontSize={14}
+              padding={[10, 10, 10, 10]}
+              focusBorder="1px solid #08c1e9"
+            />
+          </SearchInputWrapper>
         </div>
         {search && (
           <DefaultButton
@@ -235,12 +245,6 @@ const InputWrapper = styled.div`
     display: flex;
     align-items: center;
   }
-  a {
-    color: black;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: 600;
-  }
   p {
     font-size: 20px;
     font-weight: 600;
@@ -251,19 +255,10 @@ const InputWrapper = styled.div`
   }
 `;
 
-const Input = styled.input`
-  width: 200px;
+const SearchInputWrapper = styled.div`
+  width: 250px;
   height: 35px;
-  font-size: 14px;
-  padding: 0 10px;
-  border-radius: 10px;
-  border: 1px solid #e6e6e6;
-  :focus {
-    outline: none;
-    border: 1px solid #08c1e9;
-  }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     width: 150px;
-    height: 35px;
   }
 `;
