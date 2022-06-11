@@ -1,7 +1,9 @@
 import { PropsWithChildren } from 'react';
-import { SetDate } from 'lib/SetDate';
+import DOMPurify from 'dompurify';
 import styled from 'styled-components';
+import { SetDate } from 'lib/SetDate';
 import { LikeAddTypes } from 'types/book';
+import ImageButton from 'components/Button/ImageButton';
 
 function SearchItem({
   image,
@@ -19,8 +21,13 @@ function SearchItem({
     <Wrapper>
       <ImgWrapper>
         {userId && (
-          <button
+          <ImageButton
             type="button"
+            src={`${process.env.PUBLIC_URL}/assets/func/heart.svg`}
+            pc={[35, 35]}
+            imgPC={[35, 35]}
+            bgColor="rgba(0,0,0,0)"
+            alt="heart"
             onClick={() =>
               handleAddClick({
                 title,
@@ -31,9 +38,7 @@ function SearchItem({
                 img: image,
               })
             }
-          >
-            찜
-          </button>
+          />
         )}
         <img src={image} alt="book cover" />
       </ImgWrapper>
@@ -42,21 +47,23 @@ function SearchItem({
           <a href={link} target="_blank" rel="noreferrer">
             <p
               className="infoTitle"
-              dangerouslySetInnerHTML={{ __html: title }}
+              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(title) }}
             />
           </a>
           <p
             className="infoAuth"
             dangerouslySetInnerHTML={{
-              __html: `${author}&nbsp;&nbsp;${publisher}&nbsp;&nbsp;${SetDate(
-                pubdate,
-              )}`,
+              __html: DOMPurify.sanitize(
+                `${author}&nbsp;&nbsp;${publisher}&nbsp;&nbsp;${SetDate(
+                  pubdate,
+                )}`,
+              ),
             }}
           />
         </div>
         <p
           className="infoDesc"
-          dangerouslySetInnerHTML={{ __html: description }}
+          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(description) }}
         />
       </InfoWrapper>
     </Wrapper>

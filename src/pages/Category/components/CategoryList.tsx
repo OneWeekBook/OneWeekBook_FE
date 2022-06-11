@@ -8,7 +8,14 @@ import { CategoryItemTypes } from 'types/book';
 import DefaultButton from 'components/Button/DefaultButton';
 import SearchInput from 'components/Input/SearchInput';
 import CategoryBoxItem from './_item/CategoryBoxItem';
-import SubCategoryBoxItem from './_item/SubCategoryBoxItem';
+
+const initialState = {
+  id: 0,
+  parentId: null,
+  categoryId: 0,
+  categoryName: 'example',
+  depth: 1,
+};
 
 function CategoryList() {
   const dispatch = useDispatch();
@@ -16,28 +23,15 @@ function CategoryList() {
   const [parentCategory, setParentCategory] = useState<CategoryItemTypes[]>([]);
   const [curParentCategory, setCurParentCategory] = useState<
     CategoryItemTypes[]
-  >([
-    {
-      id: 0,
-      parentId: null,
-      categoryId: 0,
-      categoryName: 'example',
-      depth: 1,
-    },
-  ]);
+  >([initialState]);
+
   const [subCatgory, setSubCategory] = useState<CategoryItemTypes[]>([]);
   const [curSubCategory, setCurSubCategory] = useState<CategoryItemTypes[]>([
-    {
-      id: 0,
-      parentId: 0,
-      categoryId: 0,
-      categoryName: 'example',
-      depth: 2,
-    },
+    initialState,
   ]);
+
   const [search, setSearch] = useState<string>('');
   const { categories } = useSelector((state: any) => state.category);
-
   const getFilterParentCategories = useCallback(
     (categories: CategoryItemTypes[]) => {
       const parent = categories.filter(
@@ -58,6 +52,7 @@ function CategoryList() {
       );
       setCurParentCategory(parent);
       setSubCategory(sub);
+      setCurSubCategory([initialState]);
     },
     [],
   );
@@ -84,10 +79,10 @@ function CategoryList() {
         display: 8,
       };
 
-      if (curSubCategory[0] && search) {
+      if (!!curSubCategory[0].categoryId && search) {
         options.d_categ = curSubCategory[0].categoryId;
         options.title = search;
-      } else if (curParentCategory[0] && search) {
+      } else if (!!curParentCategory[0].categoryId && search) {
         options.d_categ = curParentCategory[0].categoryId;
         options.title = search;
       } else {
@@ -100,11 +95,11 @@ function CategoryList() {
   );
 
   const handleClick = () => {
-    if (curSubCategory[0].categoryId !== 0) {
+    if (curSubCategory[0].categoryId) {
       navigate(
         `/category/result?${curParentCategory[0].categoryName}=${curParentCategory[0].categoryId}&${curSubCategory[0].categoryName}=${curSubCategory[0].categoryId}&search=${search}`,
       );
-    } else if (curParentCategory[0].categoryId !== 0) {
+    } else if (curParentCategory[0].categoryId) {
       navigate(
         `/category/result?${curParentCategory[0].categoryName}=${curParentCategory[0].categoryId}&search=${search}`,
       );
@@ -143,14 +138,14 @@ function CategoryList() {
           />
         ))}
       </CategoryGridWrapper>
-      {subCatgory.length > 0 && (
+      {subCatgory.length > 0 && !!subCatgory[0].categoryId && (
         <SubCategoryWrapper>
           <p className="subTitle">
             {curParentCategory[0]?.categoryName} 하위 카테고리
           </p>
           <SubCategoryList>
             {subCatgory.map((item: CategoryItemTypes) => (
-              <SubCategoryBoxItem
+              <CategoryBoxItem
                 key={item.categoryId}
                 curCategory={curSubCategory}
                 handleClick={(id: number) => {

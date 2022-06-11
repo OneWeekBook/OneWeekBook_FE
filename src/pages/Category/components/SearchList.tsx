@@ -1,10 +1,12 @@
-import LoadingErrorForm from 'components/Form/LoadingErrorForm';
-import LoadingForm from 'components/Form/LoadingForm';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { BooksTypes } from 'types/book';
 import { MyLibraryAddRequest } from 'redux/reducers/MyLibrary';
+import { Toast } from 'lib/Toast';
 import { MyLibraryAddTypes } from 'types/api';
+import LoadingErrorForm from 'components/Form/LoadingErrorForm';
+import LoadingForm from 'components/Form/LoadingForm';
 import SearchItem from './_item/SearchItem';
 
 function SearchList() {
@@ -13,6 +15,11 @@ function SearchList() {
     (state: any) => state.search,
   );
   const { user } = useSelector((state: any) => state.authUser);
+  const { isAddSuccess } = useSelector((state: any) => state.myLibrary);
+
+  useEffect(() => {
+    if (isAddSuccess) Toast('success', '내 서재에 추가완료~');
+  }, [isAddSuccess]);
 
   const handleAddClick = ({
     title,

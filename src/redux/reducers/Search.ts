@@ -21,7 +21,6 @@ export default function SignIn(state = initialState, action: any) {
         ...state,
         isLoading: true,
         isSuccess: false,
-        params: action.params,
       };
     case SEARCH_SUCCESS:
       return {

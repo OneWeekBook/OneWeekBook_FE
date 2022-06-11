@@ -35,6 +35,7 @@ module.exports = {
     'consistent-return': 0,
     'no-shadow': 0,
     'react/prop-types': 0,
+    'react/no-danger': 0,
     'react/no-array-index-key': 0,
     'react/destructuring-assignment': 0,
     'react/jsx-filename-extension': [
