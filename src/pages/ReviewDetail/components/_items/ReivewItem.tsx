@@ -14,7 +14,7 @@ function ReviewItem({
   reviewCreationTime,
   zeroLikeCount,
   onClick,
-}: PropsWithChildren<ReviewDetailTypes> & PropsType) {
+}: PropsWithChildren<ReviewDetailTypes & PropsType>) {
   const [isRecommend, setIsRecommend] = useState(false);
 
   useEffect(() => {
@@ -23,11 +23,15 @@ function ReviewItem({
 
   return (
     <Wrapper onClick={onClick}>
-      <ImgWrapper isRecommend={isRecommend}>
+      <ImgWrapper>
         <img
-          src={`${process.env.PUBLIC_URL}/assets/func/recommend.png`}
+          src={`${process.env.PUBLIC_URL}/${
+            isRecommend ? 'assets/like/good.svg' : 'assets/like/bad.svg'
+          }`}
           alt="icon"
+          width={75}
         />
+        <p>{rating}</p>
       </ImgWrapper>
       <ReivewInfoWrapper>
         <p className="overall">{review}</p>
@@ -51,22 +55,25 @@ export default ReviewItem;
 
 const Wrapper = styled.div`
   min-height: 100px;
+  border-radius: 10px;
   background-color: #e6e6e6;
+  cursor: pointer;
   display: flex;
 `;
 
-const ImgWrapper = styled.div<{ isRecommend: boolean }>`
+const ImgWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
   flex-shrink: 0;
-  margin-top: 10px;
-  margin-left: 10px;
-  width: 35px;
-  height: 35px;
-  img {
-    transform: rotate(
-      ${({ isRecommend }) => (isRecommend ? '0deg' : '180deg')}
-    );
-    width: 100%;
-    height: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5px;
+  width: 75px;
+  height: 100%;
+  p {
+    margin-top: -20px;
+    font-size: 18px;
+    font-weight: 600;
   }
 `;
 

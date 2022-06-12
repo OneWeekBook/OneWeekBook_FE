@@ -9,7 +9,6 @@ type PropsType = {
 };
 
 function PagenationForm({ total, curIdx, setCurIdx }: PropsType) {
-  console.log(total, curIdx);
   const len = Math.ceil(total / 12);
   const pageNums = [];
 
@@ -102,6 +101,7 @@ const PageNum = styled.button<{ isSelected: boolean }>`
   border-radius: 25px;
   background-color: ${({ isSelected }) => (isSelected ? '#1e90ff' : '#08c1e9')};
   color: white;
+  cursor: pointer;
   width: 30px;
   height: 30px;
   margin: auto 5px;

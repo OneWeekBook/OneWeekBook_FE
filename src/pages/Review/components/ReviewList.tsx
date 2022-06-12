@@ -9,7 +9,7 @@ import ReviewItem from './_item/ReviewItem';
 function ReviewList() {
   const dispatch = useDispatch();
   const [curIdx, setCurIdx] = useState<number>(1);
-  const { reviews } = useSelector((state: any) => state.review);
+  const { reviews, reivewsTotal } = useSelector((state: any) => state.review);
 
   useEffect(() => {
     dispatch(ReviewsRequest({ start: 0, sortby: 'new' }));
@@ -26,7 +26,7 @@ function ReviewList() {
     <Wrapper>
       {reviews.length && (
         <>
-          <ReviewTitle>전체 리뷰 ({reviews.length}건)</ReviewTitle>
+          <ReviewTitle>전체 리뷰 ({reivewsTotal}건)</ReviewTitle>
           <ReviewListWrapper>
             {reviews.map((item: ReviewItemType) => {
               return (
@@ -36,7 +36,11 @@ function ReviewList() {
           </ReviewListWrapper>
         </>
       )}
-      <PagenationForm total={100} curIdx={curIdx} setCurIdx={setCurIdx} />
+      <PagenationForm
+        total={reivewsTotal}
+        curIdx={curIdx}
+        setCurIdx={setCurIdx}
+      />
     </Wrapper>
   );
 }

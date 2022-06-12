@@ -97,31 +97,20 @@ const Wrapper = styled.div`
     font-weight: 600;
     margin-bottom: 10px;
   }
-  .recommendBtn {
-    box-sizing: border-box;
-    border: none;
-    border-right: 1px solid black;
-    background-color: white;
-    height: 20px;
-    padding-right: 10px;
-    font-size: 16px;
-  }
-  .newBtn {
-    box-sizing: border-box;
-    border: none;
-    background-color: white;
-    height: 20px;
-    padding: 0 10px;
-    font-size: 16px;
-  }
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
     width: 95%;
   }
 `;
 
 const SortButton = styled.button<{ isSelected?: boolean }>`
+  box-sizing: border-box;
+  border: none;
+  background-color: white;
   cursor: pointer;
+  font-size: 16px;
   font-weight: ${({ isSelected }) => (isSelected ? 800 : 500)};
+  padding: 5px 0;
+  margin-right: 10px;
 `;
 
 const ReviewListWrapper = styled.div`
