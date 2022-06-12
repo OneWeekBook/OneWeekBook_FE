@@ -7,6 +7,7 @@ import SearchList from './components/SearchList';
 
 function index() {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(userToggle());
   }, []);
