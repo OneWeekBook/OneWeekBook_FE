@@ -1,6 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { MyLibraryInit, MyLibraryRequest } from 'redux/reducers/MyLibrary';
 import { userToggle } from 'redux/reducers/Func';
 import useToggle from 'hooks/useToggle';
 import Rank from './_items/Rank';
@@ -10,17 +11,58 @@ import RemoveUserModal from './modal/RemoveUserModal';
 
 function UserInfo() {
   const dispatch = useDispatch();
+  const [rank, setRank] = useState<string>('');
+  const [remaining, setRemaining] = useState<number>(0);
+  const [limit, setLimit] = useState<number>(10);
+  const [percent, setPercent] = useState<number>(0);
+  const rankLimit = [10, 25, 50];
   const [removeToggle, removeToggleIsOn] = useToggle(false);
   const { user } = useSelector((state: any) => state.authUser);
+  const { userBookList } = useSelector((state: any) => state.myLibrary);
 
   useEffect(() => {
     dispatch(userToggle());
   }, []);
 
+  useLayoutEffect(() => {
+    if (userBookList.length < rankLimit[0]) {
+      setRank('독서 입문자');
+      setLimit(rankLimit[0]);
+      setRemaining(rankLimit[0] - userBookList.length);
+      setPercent(userBookList.length / rankLimit[0]);
+    } else if (userBookList.length < rankLimit[1]) {
+      setRank('독서 중급자');
+      setLimit(rankLimit[1]);
+      setRemaining(rankLimit[1] - userBookList.length);
+      setPercent(userBookList.length / rankLimit[1]);
+    } else if (userBookList.length < rankLimit[2]) {
+      setRank('독서 천재');
+      setLimit(rankLimit[2]);
+      setRemaining(rankLimit[2] - userBookList.length);
+      setPercent(userBookList.length / rankLimit[2]);
+    }
+  }, [userBookList]);
+
+  useEffect(() => {
+    dispatch(MyLibraryRequest({ userId: user.id, progress: 2 }));
+    return () => {
+      MyLibraryInit();
+      setRank('');
+      setRemaining(0);
+      setPercent(0);
+    };
+  }, [user]);
+
   return (
     <Wrapper>
       <NameButton nickName={user.nick} />
-      <Rank role={user.role} />
+      <Rank
+        rank={rank}
+        limit={limit}
+        write={userBookList.length}
+        remaining={remaining}
+        percent={percent}
+      />
       <OutButton removeToggleIsOn={removeToggleIsOn} />
       {removeToggle && (
         <RemoveUserModal removeToggleIsOn={removeToggleIsOn} id={user.id} />

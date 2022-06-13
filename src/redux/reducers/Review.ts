@@ -36,7 +36,7 @@ export default function Review(state = initialState, action: any) {
         isLoading: false,
         isSuccess: true,
         reviews: action.data.reviews,
-        reivewsTotal: action.data.allReviewCount,
+        reivewsTotal: action.data.countAllReviewBooks,
       };
     case REVIEWS_FAIL:
       return {

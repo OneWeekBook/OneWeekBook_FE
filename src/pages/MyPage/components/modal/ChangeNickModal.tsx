@@ -1,10 +1,11 @@
 import { useEffect, useCallback } from 'react';
-import styled from 'styled-components';
-import ChangeModal from 'components/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { ChangeNickInit, ChangeNickRequest } from 'redux/reducers/ChangeNick';
-import useInput from 'hooks/useInput';
 import { userToggle } from 'redux/reducers/Func';
+import { Toast } from 'lib/Toast';
+import ChangeModal from 'components/Modal';
+import useInput from 'hooks/useInput';
+import DefaultInput from 'components/Input/DefaultInput';
 
 type PropsType = {
   nickToggleIsOn: () => void;
@@ -23,6 +24,7 @@ function ChangeNickModal({ nickToggleIsOn }: PropsType) {
   const handleChangeNick = useCallback(() => {
     if (changeErrorStatus === 200) {
       dispatch(userToggle());
+      Toast('success', '닉네임 변경 성공!');
       nickToggleIsOn();
     }
   }, [changeErrorStatus]);
@@ -39,7 +41,7 @@ function ChangeNickModal({ nickToggleIsOn }: PropsType) {
       title="닉네임 변경"
       titleSize={[24, 20]}
       width={500}
-      height={300}
+      height={250}
       handleToggle={nickToggleIsOn}
       close
       isOkBtn
@@ -49,41 +51,15 @@ function ChangeNickModal({ nickToggleIsOn }: PropsType) {
       cancelBtnTitle="취소"
       handleCanCelClick={nickToggleIsOn}
     >
-      <InputWrapper>
-        <p>닉네임</p>
-        <input
-          type="text"
-          placeholder="변경할 닉네임 입력해주세요."
-          defaultValue={nick}
-          onBlur={changeNick}
-        />
-      </InputWrapper>
+      <DefaultInput
+        type="text"
+        title="닉네임"
+        placeholder="변경할 닉네임 입력해주세요."
+        value={nick}
+        onChange={changeNick}
+      />
     </ChangeModal>
   );
 }
 
 export default ChangeNickModal;
-
-const InputWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  font-weight: 600;
-  width: 100%;
-  p {
-    flex-shrink: 0;
-  }
-  input {
-    box-sizing: border-box;
-    padding-left: 10px;
-    max-width: 300px;
-    width: 100%;
-    height: 40px;
-    margin-left: 10px;
-  }
-  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    margin: 20px auto;
-    font-size: 14px;
-  }
-`;

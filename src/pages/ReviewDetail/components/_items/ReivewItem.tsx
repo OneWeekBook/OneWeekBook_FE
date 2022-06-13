@@ -19,7 +19,7 @@ function ReviewItem({
 
   useEffect(() => {
     if (rating > 2) setIsRecommend(true);
-  }, []);
+  }, [rating]);
 
   return (
     <Wrapper onClick={onClick}>

@@ -8,7 +8,7 @@ import {
 } from '../reducers/ChangeNick';
 
 function ChangeNickAPI(data: ChangeNickTypes) {
-  return instance.get('/user');
+  return instance.put('/user/nick', data);
 }
 
 function* fetchChangeNickSaga(action: any): any {
