@@ -38,6 +38,7 @@ function ReviewList() {
       )}
       <PagenationForm
         total={reivewsTotal}
+        display={12}
         curIdx={curIdx}
         setCurIdx={setCurIdx}
       />

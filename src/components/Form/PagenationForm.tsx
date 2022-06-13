@@ -5,11 +5,12 @@ import ImageButton from 'components/Button/ImageButton';
 type PropsType = {
   total: number;
   curIdx: number;
+  display: number;
   setCurIdx: React.Dispatch<React.SetStateAction<number>>;
 };
 
-function PagenationForm({ total, curIdx, setCurIdx }: PropsType) {
-  const len = Math.ceil(total / 12);
+function PagenationForm({ total, curIdx, display, setCurIdx }: PropsType) {
+  const len = Math.ceil(total / display);
   const pageNums = [];
 
   for (let i = 1; i <= len; i += 1) {

@@ -5,12 +5,14 @@ import styled from 'styled-components';
 import { ReviewRequest } from 'redux/reducers/Review';
 import useToggle from 'hooks/useToggle';
 import { ReviewDetailTypes } from 'types/review';
+import PagenationForm from 'components/Form/PagenationForm';
 import ReviewDetailModal from './Modal/ReivewDetailModal';
 import ReviewItem from './_items/ReivewItem';
 
 function ReviewInfo() {
   const location = useLocation();
   const dispatch = useDispatch();
+  const [curIdx, setCurIdx] = useState<number>(1);
   const [sortBy, setSortBy] = useState(`${location.search.split('=')[1]}`);
   const [detailToggle, detailToggleIsOn] = useToggle(false);
   const { reviews, bookData } = useSelector((state: any) => state.review);
@@ -31,10 +33,11 @@ function ReviewInfo() {
     dispatch(
       ReviewRequest({
         isbn: Number(location.pathname.split('/')[2]),
+        start: (curIdx - 1) * 10,
         sortby: sortBy,
       }),
     );
-  }, [sortBy, detailToggle]);
+  }, [sortBy, curIdx, detailToggle]);
 
   const handleSortClick = (sort: string) => {
     setSortBy(sort);
@@ -82,6 +85,12 @@ function ReviewInfo() {
           detailToggleIsOn={detailToggleIsOn}
         />
       )}
+      <PagenationForm
+        total={bookData.countReviews}
+        display={10}
+        curIdx={curIdx}
+        setCurIdx={setCurIdx}
+      />
     </Wrapper>
   );
 }

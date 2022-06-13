@@ -26,8 +26,8 @@ function ReviewDetailModal({ item, detailToggleIsOn }: PropsType) {
   const { likeData, likeAddErrorStatus, likeCancelErrorStatus } = useSelector(
     (state: any) => state.like,
   );
-  const likeDoneImg = `${process.env.PUBLIC_URL}/assets/reviewModal/like-done.svg`;
-  const likeNoneImg = `${process.env.PUBLIC_URL}/assets/reviewModal/like-none.svg`;
+  const likeDoneImg = `${process.env.PUBLIC_URL}/assets/like/like-done.svg`;
+  const likeNoneImg = `${process.env.PUBLIC_URL}/assets/like/like-none.svg`;
 
   useEffect(() => {
     dispatch(LikeRequest({ bookId: item.id }));

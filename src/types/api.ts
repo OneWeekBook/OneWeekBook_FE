@@ -82,6 +82,7 @@ export type ReviewTypes = {
 
 export type ReivewDetailTypes = {
   isbn: number;
+  start: number;
   sortby: string;
 };
 

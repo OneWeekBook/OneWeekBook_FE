@@ -34,7 +34,7 @@ function BookInfoWrapper({
         </InfoWrapper>
       </BookInfoBox>
       <ProgressWrapper>
-        <PieChart title="전체 평점" rate={ratingAverage} />
+        <PieChart title="전체 평점" rate={Number(ratingAverage.toFixed(1))} />
       </ProgressWrapper>
     </Wrapper>
   );
