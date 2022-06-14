@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import ImageButton from 'components/Button/ImageButton';
 

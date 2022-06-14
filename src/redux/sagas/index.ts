@@ -13,6 +13,7 @@ import watchRemoveUser from './RemoveUserSaga';
 import watchMyLibrary from './MyLibrarySaga';
 import watchMyLibraryAdd from './MyLibraryAddSaga';
 import watchMyLibraryModify from './MyLibraryModifySaga';
+import watchMyLibraryDelete from './MyLibraryDeleteSaga';
 import watchParagraph from './ParagraphSaga';
 import watchParagraphAdd from './ParagraphAddSaga';
 import watchParagraphDelete from './ParagraphDeleteSaga';
@@ -43,6 +44,7 @@ export default function* rootSaga() {
     call(watchMyLibrary),
     call(watchMyLibraryAdd),
     call(watchMyLibraryModify),
+    call(watchMyLibraryDelete),
     call(watchParagraph),
     call(watchParagraphAdd),
     call(watchParagraphDelete),

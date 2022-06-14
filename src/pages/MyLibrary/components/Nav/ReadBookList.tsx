@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { MyLibraryModifyRequest } from 'redux/reducers/MyLibrary';
-import { ParagraphInitRequest } from 'redux/reducers/Paragraph';
+import {
+  MyLibraryModifyRequest,
+  MyLibraryRequest,
+} from 'redux/reducers/MyLibrary';
 import { navDone } from 'redux/reducers/Func';
 import useToggle from 'hooks/useToggle';
 import { InfoTypes, LibraryItemTypes } from 'types/book';
@@ -25,18 +27,20 @@ function ReadBookList({ userId }: PropsType) {
     startTime: null,
     endTime: null,
   });
-  const { userBookList } = useSelector((state: any) => state.myLibrary);
+  const { userBookList, isDeleteSuccess } = useSelector(
+    (state: any) => state.myLibrary,
+  );
   const { initSuccess } = useSelector((state: any) => state.paragraph);
-
-  const handleParagraphInfo = (id: number) => {
-    dispatch(ParagraphInitRequest({ bookId: id }));
-  };
 
   const moveDoneClick = async () => {
     await dispatch(MyLibraryModifyRequest({ progress: 2, isbn, userId }));
     readToggleIsOn();
     dispatch(navDone());
   };
+
+  useEffect(() => {
+    if (isDeleteSuccess) dispatch(MyLibraryRequest({ userId, progress: 1 }));
+  }, [isDeleteSuccess]);
 
   return (
     <>
@@ -58,7 +62,6 @@ function ReadBookList({ userId }: PropsType) {
                   startTime: item.startTime,
                   endTime: null,
                 });
-                handleParagraphInfo(item.id);
               }}
             />
           ))}

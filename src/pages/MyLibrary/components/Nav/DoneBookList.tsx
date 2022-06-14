@@ -1,8 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { ParagraphInitRequest } from 'redux/reducers/Paragraph';
-import { UserReviewRequest } from 'redux/reducers/UserReview';
+import { MyLibraryRequest } from 'redux/reducers/MyLibrary';
 import useToggle from 'hooks/useToggle';
 import { InfoTypes, LibraryItemTypes } from 'types/book';
 import BookItem from '../_item/BookItem';
@@ -25,17 +24,15 @@ function DoneBookList({ userId }: PropsType) {
     startTime: null,
     endTime: null,
   });
-  const { userBookList } = useSelector((state: any) => state.myLibrary);
+  const { userBookList, isDeleteSuccess } = useSelector(
+    (state: any) => state.myLibrary,
+  );
   const { userReviewSuccess } = useSelector((state: any) => state.userReview);
   const { initSuccess } = useSelector((state: any) => state.paragraph);
 
-  const handleParagraphInfo = (id: number) => {
-    dispatch(ParagraphInitRequest({ bookId: id }));
-  };
-
-  const handleReviewInfo = (id: number) => {
-    dispatch(UserReviewRequest({ userId, bookId: id }));
-  };
+  useEffect(() => {
+    if (isDeleteSuccess) dispatch(MyLibraryRequest({ userId, progress: 2 }));
+  }, [isDeleteSuccess]);
 
   return (
     <>
@@ -56,8 +53,6 @@ function DoneBookList({ userId }: PropsType) {
                   startTime: item.startTime,
                   endTime: item.endTime,
                 });
-                handleParagraphInfo(item.id);
-                handleReviewInfo(item.id);
               }}
             />
           ))}
