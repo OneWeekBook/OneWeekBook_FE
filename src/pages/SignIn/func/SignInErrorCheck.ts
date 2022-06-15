@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Toast } from 'lib/Toast';
 
 export function useSignInErrorCheck(): {
   handleSignInError: (
@@ -14,7 +15,7 @@ export function useSignInErrorCheck(): {
   ) => {
     switch (type) {
       case 200:
-        alert('로그인에 성공하셨습니다.');
+        Toast('success', '로그인에 성공하였습니다.');
         navigate('/');
         error(false);
         break;

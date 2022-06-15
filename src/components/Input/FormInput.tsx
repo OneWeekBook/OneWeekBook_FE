@@ -8,19 +8,24 @@ type PropsTypes = {
   state: string;
   pattern?: string;
   disabled?: boolean;
-  onChange: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  mref?: React.RefObject<HTMLInputElement>;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyPress?: (
+    event: React.KeyboardEvent<Element>,
+    ref?: React.RefObject<HTMLInputElement>,
   ) => void;
 };
 
-function OnboardInputForm({
+function FormInput({
   type,
   maxLength,
   placeholder,
   state,
   pattern,
   disabled,
+  mref,
   onChange,
+  onKeyPress,
   children,
 }: React.PropsWithChildren<PropsTypes>) {
   return (
@@ -29,10 +34,12 @@ function OnboardInputForm({
         type={type}
         maxLength={maxLength}
         placeholder={placeholder}
-        defaultValue={state}
+        value={state}
         pattern={pattern}
-        onBlur={onChange}
+        onChange={onChange}
+        onKeyPress={onKeyPress}
         disabled={disabled}
+        ref={mref}
       />
       {children}
       <span />
@@ -40,7 +47,7 @@ function OnboardInputForm({
   );
 }
 
-export default OnboardInputForm;
+export default FormInput;
 
 const InputWrapper = styled.div`
   position: relative;

@@ -1,6 +1,5 @@
-import ErrorForm from 'components/Form/ErrorForm';
-import React from 'react';
 import styled from 'styled-components';
+import ErrorForm from 'components/Form/ErrorForm';
 
 type PropsTypes = {
   code: string;

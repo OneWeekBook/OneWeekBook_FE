@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import ChangeModal from 'components/Modal';
-import styled from 'styled-components';
-import { useInput } from 'hooks/useInput';
-import { passwordRegex } from 'lib/Regex';
-import ErrorForm from 'components/Form/ErrorForm';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   ChangePasswordInit,
   ChangePasswordRequest,
 } from 'redux/reducers/ChangePassword';
+import useInput from 'hooks/useInput';
+import { passwordRegex } from 'lib/Regex';
+import { Toast } from 'lib/Toast';
+import ChangeModal from 'components/Modal';
+import ErrorForm from 'components/Form/ErrorForm';
+import DefaultInput from 'components/Input/DefaultInput';
 
 type PropsType = {
   passToggleIsOn: () => void;
@@ -45,7 +46,7 @@ function ChangePassModal({ passToggleIsOn }: PropsType) {
       setError('오류 관리자에게 문의해주세요.');
     else if (changeErrorStatus === 200) {
       dispatch(ChangePasswordInit());
-      alert('비밀번호 변경 성공!');
+      Toast('success', '비밀번호 변경 성공!');
       passToggleIsOn();
     }
     return () => {
@@ -58,7 +59,7 @@ function ChangePassModal({ passToggleIsOn }: PropsType) {
       title="비밀번호 변경"
       titleSize={[24, 20]}
       width={500}
-      height={350}
+      height={300}
       handleToggle={passToggleIsOn}
       close
       isOkBtn
@@ -68,59 +69,23 @@ function ChangePassModal({ passToggleIsOn }: PropsType) {
       handleCanCelClick={passToggleIsOn}
       cancelBtnTitle="취소"
     >
-      <InputWrapper>
-        <p>비밀번호 입력</p>
-        <input
-          type="password"
-          placeholder="변경할 비밀번호를 입력해주세요."
-          defaultValue={password}
-          onBlur={changePasswod}
-        />
-      </InputWrapper>
-      <InputWrapper>
-        <p>비밀번호 확인</p>
-        <input
-          type="password"
-          placeholder="변경할 비밀번호를 입력해주세요."
-          defaultValue={confirmPassword}
-          onBlur={changeConfirmPasswod}
-        />
-      </InputWrapper>
+      <DefaultInput
+        type="password"
+        title="변경할 비밀번호 입력"
+        placeholder="변경할 비밀번호를 입력해주세요."
+        value={password}
+        onChange={changePasswod}
+      />
+      <DefaultInput
+        type="password"
+        title="변경할 비밀번호 확인"
+        placeholder="한번더 비밀번호를 입력해주세요."
+        value={confirmPassword}
+        onChange={changeConfirmPasswod}
+      />
       {passError && <ErrorForm error={error} align="center" />}
     </ChangeModal>
   );
 }
 
 export default ChangePassModal;
-
-const InputWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  font-weight: 600;
-  width: 100%;
-  :first-child {
-    margin: 0 auto 20px;
-  }
-  p {
-    flex-shrink: 0;
-  }
-  input {
-    box-sizing: border-box;
-    padding-left: 10px;
-    max-width: 300px;
-    width: 100%;
-    height: 40px;
-    margin-left: 10px;
-  }
-  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    font-size: 14px;
-    :first-child {
-      margin: 10px auto 10px;
-    }
-    input {
-      height: 36px;
-    }
-  }
-`;

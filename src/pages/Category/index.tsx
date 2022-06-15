@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import Container from 'components/Container';
 import { userToggle } from 'redux/reducers/Func';
 import { useDispatch } from 'react-redux';
@@ -7,6 +7,7 @@ import SearchList from './components/SearchList';
 
 function index() {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(userToggle());
   }, []);

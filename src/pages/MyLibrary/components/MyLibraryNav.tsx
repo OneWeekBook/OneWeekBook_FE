@@ -1,25 +1,25 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
 import { navDone, navLike, navRead } from 'redux/reducers/Func';
 import { MyLibraryInit, MyLibraryRequest } from 'redux/reducers/MyLibrary';
-import styled from 'styled-components';
 import Nav from './Nav';
 
 const NavItems = [
   {
     id: 0,
     desc: '좋아요',
-    img: `${process.env.PUBLIC_URL}/assets/my-library-nav-like.svg`,
+    img: `${process.env.PUBLIC_URL}/assets/myLibrary/my-library-nav-like.svg`,
   },
   {
     id: 1,
     desc: '읽는중',
-    img: `${process.env.PUBLIC_URL}/assets/my-library-nav-read.svg`,
+    img: `${process.env.PUBLIC_URL}/assets/myLibrary/my-library-nav-read.svg`,
   },
   {
     id: 2,
     desc: '다읽은',
-    img: `${process.env.PUBLIC_URL}/assets/my-library-nav-done.svg`,
+    img: `${process.env.PUBLIC_URL}/assets/myLibrary/my-library-nav-done.svg`,
   },
 ];
 
@@ -81,7 +81,9 @@ const Wrapper = styled.div`
 
 const NavItem = styled.button<{ isSelected: boolean }>`
   border: none;
+  border-radius: 5px;
   background-color: white;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -90,6 +92,7 @@ const NavItem = styled.button<{ isSelected: boolean }>`
   font-size: 18px;
   font-weight: 600;
   margin-right: 5px;
+  transition: 0.5s;
   p {
     color: ${({ isSelected }) => (isSelected ? '#1e90ff' : '#000000')};
   }
@@ -97,6 +100,6 @@ const NavItem = styled.button<{ isSelected: boolean }>`
     p {
       color: #1e90ff;
     }
-    box-shadow: 1px 2px 3px #000;
+    box-shadow: -10px -10px 10px -5px rgba(25, 42, 70, 0.2);
   }
 `;

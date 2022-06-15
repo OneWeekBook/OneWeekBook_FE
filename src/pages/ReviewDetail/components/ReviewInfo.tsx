@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { useToggle } from 'hooks/useToggle';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { ReviewDetailTypes } from 'types/review';
 import { ReviewRequest } from 'redux/reducers/Review';
-import { useLocation } from 'react-router-dom';
+import useToggle from 'hooks/useToggle';
+import { ReviewDetailTypes } from 'types/review';
+import PagenationForm from 'components/Form/PagenationForm';
 import ReviewDetailModal from './Modal/ReivewDetailModal';
 import ReviewItem from './_items/ReivewItem';
 
 function ReviewInfo() {
   const location = useLocation();
   const dispatch = useDispatch();
+  const [curIdx, setCurIdx] = useState<number>(1);
   const [sortBy, setSortBy] = useState(`${location.search.split('=')[1]}`);
   const [detailToggle, detailToggleIsOn] = useToggle(false);
   const { reviews, bookData } = useSelector((state: any) => state.review);
@@ -31,10 +33,11 @@ function ReviewInfo() {
     dispatch(
       ReviewRequest({
         isbn: Number(location.pathname.split('/')[2]),
+        start: (curIdx - 1) * 10,
         sortby: sortBy,
       }),
     );
-  }, [sortBy, detailToggle]);
+  }, [sortBy, curIdx, detailToggle]);
 
   const handleSortClick = (sort: string) => {
     setSortBy(sort);
@@ -47,22 +50,22 @@ function ReviewInfo() {
           bookData.title.replaceAll('<b>', '').replaceAll('</b>', '')}{' '}
         평가
       </p>
-      <Button
+      <SortButton
         className="recommendBtn"
         type="button"
         isSelected={sortBy === 'recommend'}
         onClick={() => handleSortClick('recommend')}
       >
         추천 순
-      </Button>
-      <Button
+      </SortButton>
+      <SortButton
         className="newBtn"
         type="button"
         isSelected={sortBy === 'new'}
         onClick={() => handleSortClick('new')}
       >
         최신 순
-      </Button>
+      </SortButton>
       <ReviewListWrapper>
         {reviews.length &&
           reviews.map((item: ReviewDetailTypes, index: number) => (
@@ -82,6 +85,12 @@ function ReviewInfo() {
           detailToggleIsOn={detailToggleIsOn}
         />
       )}
+      <PagenationForm
+        total={bookData.countReviews}
+        display={10}
+        curIdx={curIdx}
+        setCurIdx={setCurIdx}
+      />
     </Wrapper>
   );
 }
@@ -97,31 +106,20 @@ const Wrapper = styled.div`
     font-weight: 600;
     margin-bottom: 10px;
   }
-  .recommendBtn {
-    box-sizing: border-box;
-    border: none;
-    border-right: 1px solid black;
-    background-color: white;
-    height: 20px;
-    padding-right: 10px;
-    font-size: 16px;
-  }
-  .newBtn {
-    box-sizing: border-box;
-    border: none;
-    background-color: white;
-    height: 20px;
-    padding: 0 10px;
-    font-size: 16px;
-  }
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
     width: 95%;
   }
 `;
 
-const Button = styled.button<{ isSelected?: boolean }>`
+const SortButton = styled.button<{ isSelected?: boolean }>`
+  box-sizing: border-box;
+  border: none;
+  background-color: white;
   cursor: pointer;
+  font-size: 16px;
   font-weight: ${({ isSelected }) => (isSelected ? 800 : 500)};
+  padding: 5px 0;
+  margin-right: 10px;
 `;
 
 const ReviewListWrapper = styled.div`

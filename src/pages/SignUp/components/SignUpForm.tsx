@@ -1,16 +1,22 @@
-import React, { FormEvent, useState, useEffect } from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { SignUpInit, SignUpRequest } from 'redux/reducers/SignUp';
+import styled from 'styled-components';
+import useInput from 'hooks/useInput';
+import useInputEnter from 'hooks/useInputEnter';
 import ErrorForm from 'components/Form/ErrorForm';
 import AuthEmailForm from 'components/Form/AuthEmailForm';
-import { SignUpInit, SignUpRequest } from 'redux/reducers/SignUp';
-import { useInput } from 'hooks/useInput';
-import OnboardInputForm from 'components/Form/OnboardInputForm';
-import { useErrorCheck } from '../func/ErrorCheck';
+import FormInput from 'components/Input/FormInput';
+import DefaultButton from 'components/Button/DefaultButton';
 import { useSignUpErrorCheck } from '../func/SignUpErrorCheck';
+import { useErrorCheck } from '../func/ErrorCheck';
 
 function SignUpForm() {
   const dispatch = useDispatch();
+  const passRef = useRef<HTMLInputElement>(null);
+  const passConfRef = useRef<HTMLInputElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const nickRef = useRef<HTMLInputElement>(null);
   const [email, setEmail] = useState<string>('');
   const [password, changePassword] = useInput('');
   const [confirmPassword, changeConfirmPassword] = useInput('');
@@ -21,10 +27,9 @@ function SignUpForm() {
   const [signUpError, setSignUpError] = useState<boolean>(false);
   const [authDone, setAuthDone] = useState<boolean>(false);
   const [registerDone, setRegisterDone] = useState<boolean>(true);
-
   const { handleError } = useErrorCheck();
   const { handleSignUpError } = useSignUpErrorCheck();
-
+  const { handleInputEnter } = useInputEnter();
   const { signUpErrorStatus } = useSelector((state: any) => state.signUp);
 
   useEffect(() => {
@@ -50,6 +55,12 @@ function SignUpForm() {
   }, [signUpErrorStatus]);
 
   useEffect(() => {
+    if (authDone) {
+      passRef.current?.focus();
+    }
+  }, [authDone]);
+
+  useEffect(() => {
     return () => {
       setSignUpError(false);
       setAuthDone(false);
@@ -58,7 +69,7 @@ function SignUpForm() {
     };
   }, []);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = { email, username, nick, password, confirmPassword };
     dispatch(SignUpRequest(formData));
@@ -75,40 +86,59 @@ function SignUpForm() {
       <FormWrapper>
         {authDone && (
           <form onSubmit={handleSubmit}>
-            <OnboardInputForm
+            <FormInput
               type="password"
               placeholder="비밀번호"
               state={password}
               onChange={changePassword}
+              onKeyPress={(event) => handleInputEnter(event, passConfRef)}
+              mref={passRef}
             />
             {passError && (
               <ErrorForm error="비밀번호 형식이 올바르지 않습니다." />
             )}
-            <OnboardInputForm
+            <FormInput
               type="password"
               placeholder="비밀번호 확인"
               state={confirmPassword}
               onChange={changeConfirmPassword}
+              onKeyPress={(event) => handleInputEnter(event, nameRef)}
+              mref={passConfRef}
             />
             {passCompareError && (
               <ErrorForm error="비밀번호가 같지 않습니다." />
             )}
-            <OnboardInputForm
+            <FormInput
               type="text"
               placeholder="이름"
               state={username}
               onChange={changeUserName}
+              onKeyPress={(event) => handleInputEnter(event, nickRef)}
+              mref={nameRef}
             />
-            <OnboardInputForm
+            <FormInput
               type="text"
               placeholder="닉네임"
               state={nick}
               onChange={changeNick}
+              mref={nickRef}
             />
             {signUpError && <ErrorForm error="회원가입 실패" align="left" />}
-            <button type="submit" disabled={registerDone}>
-              회원가입
-            </button>
+            <DefaultButton
+              type="submit"
+              pc={[0, 35]}
+              isHover
+              hoverBgColor="#08c1e9"
+              hoverColor="white"
+              bgColor="#1e90ff"
+              color="white"
+              disabled={registerDone}
+              disabledColor="#a9a9a9"
+              margin={[20, 0, 5, 0]}
+              fontSize={[18, 18]}
+              fontWeight={600}
+              title="회원가입"
+            />
           </form>
         )}
       </FormWrapper>
@@ -125,19 +155,6 @@ const SignUpFormWrapper = styled.div`
   form {
     display: flex;
     flex-direction: column;
-  }
-  button {
-    width: 100%;
-    height: 35px;
-    border: none;
-    border-radius: 5px;
-    margin: 20px auto 5px;
-    color: white;
-    font-size: 18px;
-    background-color: #1e90ff;
-    :disabled {
-      background-color: #a9a9a9;
-    }
   }
 `;
 

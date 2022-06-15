@@ -5,7 +5,7 @@ import { ReviewFail, ReviewSuccess, REVIEW_REQUEST } from '../reducers/Review';
 
 function ReviewDetailAPI(params: ReivewDetailTypes) {
   return axios.get(
-    `${process.env.REACT_APP_BASIC_URL}/book/reviews/${params.isbn}?sortby=${params.sortby}`,
+    `${process.env.REACT_APP_BASIC_URL}/book/reviews/${params.isbn}?start=${params.start}&display=10sortby=${params.sortby}`,
   );
 }
 

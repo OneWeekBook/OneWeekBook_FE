@@ -38,7 +38,7 @@ function BestItem({
             </TitleWrapepr>
             <CountInfoWrapper>
               <img
-                src={`${process.env.PUBLIC_URL}/assets/main-bestlist-comment.png`}
+                src={`${process.env.PUBLIC_URL}/assets/func/comment.png`}
                 alt="comment"
                 width={20}
                 height={20}

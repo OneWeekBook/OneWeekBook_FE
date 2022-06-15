@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import Container from 'components/Container';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { ReviewRequest } from 'redux/reducers/Review';
 import { useLocation } from 'react-router-dom';
+import { ReviewRequest } from 'redux/reducers/Review';
+import Container from 'components/Container';
 import BookInfo from './components/BookInfo';
 import ReviewInfo from './components/ReviewInfo';
 
@@ -14,6 +14,7 @@ function Index() {
     dispatch(
       ReviewRequest({
         isbn: Number(location.pathname.split('/')[2]),
+        start: 0,
         sortby: `${location.search.split('=')[1]}`,
       }),
     );

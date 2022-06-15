@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { NewReviewTypes } from 'types/main';
+import DefaultButton from 'components/Button/DefaultButton';
 import NewReivewItem from './NewReivewItem';
 
 function NewReviewList() {
@@ -26,9 +26,21 @@ function NewReviewList() {
               <NewReivewItem key={item.id} {...item} idx={idx} />
             ))}
       </div>
-      <ButtonWrapper>
-        <Button onClick={onClick}>더 보기</Button>
-      </ButtonWrapper>
+      {end !== 20 && (
+        <ButtonWrapper>
+          <DefaultButton
+            pc={[150, 38]}
+            onClick={onClick}
+            fontWeight={700}
+            padding={[5, 0, 5, 0]}
+            isHover
+            hoverBgColor="#08c1e9"
+            bgColor="#1e90ff"
+            color="white"
+            title="더 보기"
+          />
+        </ButtonWrapper>
+      )}
     </Wrapper>
   );
 }
@@ -59,11 +71,4 @@ const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 20px;
-`;
-
-const Button = styled.button`
-  width: 150px;
-  height: 38px;
-  font-size: 16px;
-  font-weight: 700;
 `;

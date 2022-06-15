@@ -1,11 +1,10 @@
-/* eslint-disable react/jsx-no-useless-fragment */
-import { useToggle } from 'hooks/useToggle';
-import TopScroll from 'lib/TopScroll';
-import React, { PropsWithChildren, useEffect } from 'react';
+import { PropsWithChildren, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router';
-import { AuthUserRequest } from 'redux/reducers/AuthUser';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import { AuthUserRequest } from 'redux/reducers/AuthUser';
+import useToggle from 'hooks/useToggle';
+import TopScroll from 'lib/TopScroll';
 import Footer from './Footer';
 import Header from './Header';
 import Nav from './Nav';

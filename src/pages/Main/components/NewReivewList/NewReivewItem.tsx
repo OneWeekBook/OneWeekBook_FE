@@ -18,7 +18,7 @@ function NewReivewListItem({
   createdAt,
   user,
   idx,
-}: React.PropsWithChildren<NewReviewTypes> & PropsType) {
+}: React.PropsWithChildren<NewReviewTypes & PropsType>) {
   return (
     <ItemWrapper>
       <Link to={`/review/${isbn}?sort=new`}>
@@ -42,13 +42,13 @@ function NewReivewListItem({
           <p className="review">{review}</p>
         </InfoWrapper>
         <CountInfoWrapper>
-          <div className="countItem">
-            <img
-              src={`${process.env.PUBLIC_URL}/assets/main-bestlist-recommend.png`}
-              alt="recommend"
-            />
-            <p>{rating}</p>
-          </div>
+          <img
+            src={`${process.env.PUBLIC_URL}/assets/func/star.svg`}
+            alt="recommend"
+            width={50}
+            height={50}
+          />
+          <p>{rating}</p>
         </CountInfoWrapper>
       </Link>
     </ItemWrapper>
@@ -150,36 +150,15 @@ const InfoWrapper = styled.div`
 
 const CountInfoWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 18px;
+  font-weight: 600;
   margin: 0 10px;
-  .countItem {
-    display: flex;
-    align-items: center;
-    img {
-      width: 25px;
-      height: 25px;
-    }
-    p {
-      padding-left: 5px;
-      padding-right: 15px;
-    }
-  }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     font-size: 12px;
     display: block;
     margin: 0 5px;
-    .countItem {
-      display: flex;
-      align-items: center;
-      img {
-        width: 20px;
-        height: 20px;
-      }
-      p {
-        padding-right: 0;
-      }
-    }
   }
 `;

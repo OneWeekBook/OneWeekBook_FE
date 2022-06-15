@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { useToggle } from 'hooks/useToggle';
-import { InfoTypes, LibraryItemTypes } from 'types/book';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ParagraphRequest } from 'redux/reducers/Paragraph';
+import styled from 'styled-components';
+import { MyLibraryRequest } from 'redux/reducers/MyLibrary';
+import useToggle from 'hooks/useToggle';
+import { InfoTypes, LibraryItemTypes } from 'types/book';
 import BookItem from '../_item/BookItem';
-import WriteCommentModal from '../Modal/WriteCommentModal';
+import WriteCommentModal from '../Modal/CommentModal';
 import WriteReviewModal from '../Modal/WriteReviewModal';
 
 type PropsType = {
@@ -24,13 +24,15 @@ function DoneBookList({ userId }: PropsType) {
     startTime: null,
     endTime: null,
   });
-  const { userBookList } = useSelector((state: any) => state.myLibrary);
+  const { userBookList, isDeleteSuccess } = useSelector(
+    (state: any) => state.myLibrary,
+  );
+  const { userReviewSuccess } = useSelector((state: any) => state.userReview);
+  const { initSuccess } = useSelector((state: any) => state.paragraph);
 
-  console.log(userBookList)
-
-  const handleParagraphInfo = (id: number) => {
-    dispatch(ParagraphRequest({ bookId: id }));
-  };
+  useEffect(() => {
+    if (isDeleteSuccess) dispatch(MyLibraryRequest({ userId, progress: 2 }));
+  }, [isDeleteSuccess]);
 
   return (
     <>
@@ -51,21 +53,19 @@ function DoneBookList({ userId }: PropsType) {
                   startTime: item.startTime,
                   endTime: item.endTime,
                 });
-                handleParagraphInfo(item.id);
               }}
             />
           ))}
       </Wrapper>
-      {commentToggle && bookData && (
+      {commentToggle && initSuccess && (
         <WriteCommentModal
           bookId={bookId}
           bookData={bookData}
           toggleIsOn={commentToggleIsOn}
         />
       )}
-      {reivewToggle && bookData && (
+      {reivewToggle && userReviewSuccess && (
         <WriteReviewModal
-          userId={userId}
           bookId={bookId}
           bookData={bookData}
           toggleIsOn={reviewToggleIsOn}

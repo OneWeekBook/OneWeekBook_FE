@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import Container from 'components/Container';
 import { useDispatch } from 'react-redux';
 import { ReviewInit, ReviewsRequest } from 'redux/reducers/Review';
@@ -10,7 +10,7 @@ import NewReviewList from './components/NewReivewList';
 function Index() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(ReviewsRequest({ start: 0, sortby: 'new' }));
+    dispatch(ReviewsRequest({ start: 0, sortby: 'totalReviews' }));
     dispatch(NewReviewsRequest());
     return () => {
       dispatch(ReviewInit());

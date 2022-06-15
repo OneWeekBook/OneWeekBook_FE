@@ -11,13 +11,12 @@ function ReivewItem({
   img,
   title,
   author,
-  publisher,
   isbn,
   count,
 }: React.PropsWithChildren<ReviewItemType> & PropsType) {
   return (
     <ItemWrapper>
-      <Link to={`/review/${isbn}`}>
+      <Link to={`/review/${isbn}?sortby=recommend`}>
         <ImgWrapper>
           <img src={img} alt="book img" />
         </ImgWrapper>

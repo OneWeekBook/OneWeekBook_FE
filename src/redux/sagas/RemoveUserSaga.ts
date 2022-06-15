@@ -8,7 +8,7 @@ import {
 } from '../reducers/RemoveUser';
 
 function RemoveUserAPI(data: RemoveUserTypes) {
-  return instance.post('/user', data);
+  return instance.post('/user/resign', data);
 }
 
 function* fetchRemoveUserSaga(action: any): any {

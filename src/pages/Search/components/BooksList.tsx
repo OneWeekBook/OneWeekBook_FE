@@ -1,15 +1,21 @@
-import React from 'react';
-import SearchItem from 'pages/Category/components/_item/SearchItem';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { Toast } from 'lib/Toast';
+import { MyLibraryAddRequest } from 'redux/reducers/MyLibrary';
 import { BooksTypes } from 'types/book';
 import { MyLibraryAddTypes } from 'types/api';
-import { MyLibraryAddRequest } from 'redux/reducers/MyLibrary';
+import SearchItem from 'pages/Category/components/_item/SearchItem';
 
 function BooksList() {
   const dispatch = useDispatch();
   const { books } = useSelector((state: any) => state.search);
   const { user } = useSelector((state: any) => state.authUser);
+  const { isAddSuccess } = useSelector((state: any) => state.myLibrary);
+
+  useEffect(() => {
+    if (isAddSuccess) Toast('success', '내 서재에 추가완료~');
+  }, [isAddSuccess]);
 
   const handleAddClick = ({
     title,

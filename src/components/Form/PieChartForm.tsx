@@ -1,4 +1,3 @@
-import React from 'react';
 import { PieChart } from 'react-minimal-pie-chart';
 import styled from 'styled-components';
 
@@ -14,7 +13,7 @@ function ProgressForm({ title, rate }: PropsType) {
       <CircleWrapper>
         <PieChart
           data={[{ value: rate, color: 'black', name: 'name1' }]}
-          reveal={rate * 10}
+          reveal={rate * 20}
           lineWidth={30}
           background="white"
           lengthAngle={360}

@@ -1,17 +1,18 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
-import WriteModal from 'components/Modal';
-import styled from 'styled-components';
-import { InfoTypes } from 'types/book';
-import { SetStartDate } from 'lib/SetDate';
+import { useState, useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
 import {
   UserReviewAddRequest,
   UserReviewDeleteRequest,
   UserReviewInit,
   UserReviewModifyRequest,
-  UserReviewRequest,
 } from 'redux/reducers/UserReview';
-import { useToggle } from 'hooks/useToggle';
+import { InfoTypes } from 'types/book';
+import { SetStartDate } from 'lib/SetDate';
+import { Toast } from 'lib/Toast';
+import WriteModal from 'components/Modal';
+import ImageButton from 'components/Button/ImageButton';
+import DefaultButton from 'components/Button/DefaultButton';
 
 const RecommendItem = [
   {
@@ -41,19 +42,16 @@ const RecommendItem = [
 ];
 
 type PropsType = {
-  userId: number;
   bookId: number;
   bookData: InfoTypes;
   toggleIsOn: () => void;
 };
 
-function WriteReviewModal({ userId, bookId, bookData, toggleIsOn }: PropsType) {
+function WriteReviewModal({ bookId, bookData, toggleIsOn }: PropsType) {
   const dispatch = useDispatch();
-  const [reviewToggle, reviewToggleIsOn] = useToggle(false);
-  const { reviewItem, isSuccess } = useSelector(
+  const { reviewItem, itemAddSuccess } = useSelector(
     (state: any) => state.userReview,
   );
-
   const [recommend, setRecommend] = useState<number>(4);
   const [review, setReview] = useState('');
   const recommendClick = (recommend: number) => {
@@ -66,45 +64,36 @@ function WriteReviewModal({ userId, bookId, bookData, toggleIsOn }: PropsType) {
     review: string,
   ) => {
     if (review === '') {
-      alert('리뷰를 남겨주세요...');
+      Toast('warning', '리뷰를 남겨주세요...');
     } else {
       dispatch(UserReviewAddRequest({ bookId, review, rating: recommend }));
-      reviewToggleIsOn();
-      alert('작성 완료');
     }
   };
 
   const modifyReviewClick = (id: number, recommend: number, review: string) => {
     if (review === '') {
-      alert('리뷰를 남겨주세요...');
+      Toast('warning', '리뷰를 남겨주세요...');
     } else {
       dispatch(UserReviewModifyRequest({ id, review, rating: recommend }));
-      alert('수정 완료');
     }
   };
 
   const deleteReviewClick = (id: number) => {
     dispatch(UserReviewDeleteRequest({ id }));
     toggleIsOn();
-    alert('삭제 완료');
   };
-
-  useEffect(() => {
-    dispatch(UserReviewRequest({ userId, bookId }));
-  }, [userId, bookId, reviewToggle]);
 
   useLayoutEffect(() => {
     if (reviewItem.review) {
       setReview(reviewItem.review);
       setRecommend(reviewItem.rating);
     }
-  }, [reviewItem]);
-
-  useEffect(() => {
     return () => {
+      setRecommend(4);
+      setReview('');
       dispatch(UserReviewInit());
     };
-  }, []);
+  }, [reviewItem]);
 
   return (
     <WriteModal
@@ -128,9 +117,9 @@ function WriteReviewModal({ userId, bookId, bookData, toggleIsOn }: PropsType) {
               {bookData.author.replaceAll('<b>', '').replaceAll('</b>', '')}
             </p>
             <p>
-              {SetStartDate(bookData.startTime)}
-              {' ~ '}
-              {SetStartDate(bookData.endTime)}
+              {`${SetStartDate(bookData.startTime)} ~ ${SetStartDate(
+                bookData.endTime,
+              )}`}
             </p>
           </div>
           {bookData.progress === 1 && <button type="button">독서 완료</button>}
@@ -139,44 +128,65 @@ function WriteReviewModal({ userId, bookId, bookData, toggleIsOn }: PropsType) {
           <RecommendWrapper>
             <p>책이 어떻나요?</p>
             {RecommendItem.map((item) => (
-              <RecommendButton
+              <ImageButton
                 key={item.id}
+                type="button"
+                src={recommend === item.value ? item.img_done : item.img_none}
+                pc={[40, 30]}
+                imgPC={[30, 30]}
+                margin={[0, 0, 0, 10]}
+                bgColor="white"
+                alt="recommend button"
                 onClick={() => recommendClick(item.value)}
-              >
-                <img
-                  src={recommend === item.value ? item.img_done : item.img_none}
-                  alt="recommend button"
-                  width={30}
-                  height={30}
-                />
-              </RecommendButton>
+              />
             ))}
           </RecommendWrapper>
           <ButtonWrapper>
-            {reviewItem.review !== null ? (
+            {reviewItem.review !== null || itemAddSuccess ? (
               <>
-                <button
-                  type="button"
+                <DefaultButton
+                  pc={[60, 30]}
                   onClick={() =>
                     modifyReviewClick(reviewItem.id, recommend, review)
                   }
-                >
-                  수정
-                </button>
-                <button
-                  type="button"
+                  isHover
+                  hoverBgColor="#1e90ff"
+                  hoverColor="white"
+                  bgColor="#08c1e9"
+                  color="white"
+                  margin={[0, 0, 0, 10]}
+                  fontSize={[14, 14]}
+                  fontWeight={700}
+                  title="수정"
+                />
+                <DefaultButton
+                  pc={[60, 30]}
                   onClick={() => deleteReviewClick(reviewItem.id)}
-                >
-                  삭제
-                </button>
+                  isHover
+                  hoverBgColor="#1e90ff"
+                  hoverColor="white"
+                  bgColor="#08c1e9"
+                  color="white"
+                  margin={[0, 0, 0, 10]}
+                  fontSize={[14, 14]}
+                  fontWeight={700}
+                  title="삭제"
+                />
               </>
             ) : (
-              <button
-                type="button"
+              <DefaultButton
+                pc={[60, 30]}
                 onClick={() => addReviewClick(bookId, recommend, review)}
-              >
-                작성
-              </button>
+                isHover
+                hoverBgColor="#1e90ff"
+                hoverColor="white"
+                bgColor="#08c1e9"
+                color="white"
+                margin={[0, 0, 0, 10]}
+                fontSize={[14, 14]}
+                fontWeight={700}
+                title="작성"
+              />
             )}
           </ButtonWrapper>
         </MiddleWrapper>
@@ -219,7 +229,6 @@ const InfoWrapper = styled.div`
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     .bookInfo {
       font-size: 14px;
-      font-weight: 600;
     }
   }
 `;
@@ -238,25 +247,11 @@ const RecommendWrapper = styled.div`
     font-weight: 600;
   }
   img {
-    margin-left: 10px;
+    margin: 0 10px;
   }
 `;
 
 const ButtonWrapper = styled.div`
   display: flex;
   align-items: center;
-  button {
-    width: 80px;
-    height: 35px;
-    border: none;
-    border-radius: 5px;
-    background-color: #08c1e9;
-    color: white;
-    margin-left: 10px;
-  }
-`;
-
-const RecommendButton = styled.button`
-  background-color: white;
-  border: none;
 `;

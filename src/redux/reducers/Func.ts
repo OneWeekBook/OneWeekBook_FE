@@ -3,10 +3,13 @@ export const NAV_LIKE = 'NAV_LIKE';
 export const NAV_READ = 'NAV_READ';
 export const NAV_DONE = 'NAV_DONE';
 export const NAV_INIT = 'NAV_INIT';
+export const SEARCH_NONE = 'SEARCH_NONE';
+export const SEARCH_DONE = 'SEARCH_DONE';
 
 const initialState = {
   userToggle: false,
   navId: 0,
+  search: false,
 };
 
 export default function FuncToggle(state = initialState, action: any) {
@@ -15,6 +18,16 @@ export default function FuncToggle(state = initialState, action: any) {
       return {
         ...state,
         userToggle: !state.userToggle,
+      };
+    case SEARCH_NONE:
+      return {
+        ...state,
+        search: false,
+      };
+    case SEARCH_DONE:
+      return {
+        ...state,
+        search: true,
       };
     case NAV_LIKE:
       return {
@@ -41,6 +54,18 @@ export default function FuncToggle(state = initialState, action: any) {
 export const userToggle = () => {
   return {
     type: USER_TOGGLE,
+  };
+};
+
+export const searchDone = () => {
+  return {
+    type: SEARCH_DONE,
+  };
+};
+
+export const searchNone = () => {
+  return {
+    type: SEARCH_NONE,
   };
 };
 

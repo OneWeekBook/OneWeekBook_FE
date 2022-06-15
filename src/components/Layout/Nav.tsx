@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import useToggle from 'hooks/useToggle';
+import useAuthLink from 'hooks/useAuthLink';
+import NoticeModal from 'components/Modal';
 import Container from '../Container';
 
 export const NavItems = [
@@ -8,64 +10,37 @@ export const NavItems = [
     id: 1,
     title: '홈',
     link: '/',
-    img: `${process.env.PUBLIC_URL}/assets/nav-none-home.png`,
-    clickImg: `${process.env.PUBLIC_URL}/assets/nav-done-home.png`,
+    img: `${process.env.PUBLIC_URL}/assets/nav/nav-none-home.png`,
+    clickImg: `${process.env.PUBLIC_URL}/assets/nav/nav-done-home.png`,
   },
   {
     id: 2,
-    title: '알림',
-    link: '/notice',
-    img: `${process.env.PUBLIC_URL}/assets/nav-none-notice.png`,
-    clickImg: `${process.env.PUBLIC_URL}/assets/nav-done-notice.png`,
+    title: '내 서재',
+    link: '/my-library',
+    img: `${process.env.PUBLIC_URL}/assets/nav/nav-none-my-library.png`,
+    clickImg: `${process.env.PUBLIC_URL}/assets/nav/nav-done-my-library.png`,
   },
   {
     id: 3,
-    title: '내 서재',
-    link: '/my-library',
-    img: `${process.env.PUBLIC_URL}/assets/nav-none-my-library.png`,
-    clickImg: `${process.env.PUBLIC_URL}/assets/nav-done-my-library.png`,
+    title: '카테고리',
+    link: '/category',
+    img: `${process.env.PUBLIC_URL}/assets/nav/nav-none-category.png`,
+    clickImg: `${process.env.PUBLIC_URL}/assets/nav/nav-done-category.png`,
   },
   {
     id: 4,
-    title: '카테고리',
-    link: '/category',
-    img: `${process.env.PUBLIC_URL}/assets/nav-none-category.png`,
-    clickImg: `${process.env.PUBLIC_URL}/assets/nav-done-category.png`,
-  },
-  {
-    id: 5,
     title: '리뷰',
     link: '/review',
-    img: `${process.env.PUBLIC_URL}/assets/nav-none-review.png`,
-    clickImg: `${process.env.PUBLIC_URL}/assets/nav-done-review.png`,
+    img: `${process.env.PUBLIC_URL}/assets/nav/nav-none-review.png`,
+    clickImg: `${process.env.PUBLIC_URL}/assets/nav/nav-done-review.png`,
   },
 ];
 
 function Nav() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [toggle, setToggle] = useState<boolean>(false);
-
-  const handleClick = (link: string) => {
-    if (link === '/my-library' && sessionStorage.getItem('accessToken')) {
-      navigate(link);
-    } else if (
-      link === '/my-library' &&
-      !sessionStorage.getItem('accessToken')
-    ) {
-      if (
-        link === '/my-library' &&
-        confirm(
-          '내 서재로 가시려면 로그인을 하셔야합니다.\n로그인 하시겠습니까?',
-        )
-      ) {
-        navigate('/sign-in');
-      }
-    } else {
-      navigate(link);
-    }
-    setToggle(!toggle);
-  };
+  const [modalToggle, isModalToggleOn] = useToggle(false);
+  const { handleAuthClick } = useAuthLink();
 
   return (
     <>
@@ -73,22 +48,45 @@ function Nav() {
         <Container as="nav">
           <NavWrapper>
             {NavItems.map((item) => (
-              <NavItem key={item.id} onClick={() => handleClick(item.link)}>
-                {item.link === `/${location.pathname.split('/')[1]}` ? (
-                  <img
-                    src={item.clickImg}
-                    alt={item.title}
-                    width={30}
-                    height={30}
-                  />
-                ) : (
-                  <img src={item.img} alt={item.title} width={30} height={30} />
-                )}
+              <NavItem
+                key={item.id}
+                onClick={() =>
+                  handleAuthClick(item.link, ['/my-library'], isModalToggleOn)
+                }
+              >
+                <img
+                  src={
+                    item.link === `/${location.pathname.split('/')[1]}`
+                      ? item.clickImg
+                      : item.img
+                  }
+                  alt={item.title}
+                  width={30}
+                  height={30}
+                />
                 {item.title}
               </NavItem>
             ))}
           </NavWrapper>
         </Container>
+      )}
+      {modalToggle && (
+        <NoticeModal
+          title="내 서재로 가시려면 로그인을 하셔야합니다."
+          titleSize={[18, 16]}
+          subTitle="로그인 하시겠습니까?"
+          subTitleSize={[18, 16]}
+          width={500}
+          height={250}
+          handleToggle={isModalToggleOn}
+          close
+          isOkBtn
+          okBtnTitle="로그인"
+          handleOkClick={() => navigate('/sign-in')}
+          isCancelBtn
+          cancelBtnTitle="나중에..."
+          handleCanCelClick={isModalToggleOn}
+        />
       )}
     </>
   );
@@ -122,6 +120,7 @@ const NavItem = styled.button`
   font-size: 16px;
   margin: 0 10px 0 0;
   color: white;
+  cursor: pointer;
   img {
     margin-right: 2px;
   }

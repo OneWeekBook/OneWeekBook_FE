@@ -1,7 +1,14 @@
-import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { ParagraphInitRequest } from 'redux/reducers/Paragraph';
+import { UserReviewRequest } from 'redux/reducers/UserReview';
+import { MyLibraryDeleteRequest } from 'redux/reducers/MyLibrary';
+import useToggle from 'hooks/useToggle';
 import { SetStartDate } from 'lib/SetDate';
 import { LibraryItemTypes } from 'types/book';
+import MoveDeleteModal from 'components/Modal';
+import ImageButton from 'components/Button/ImageButton';
+import ButtonWrapper from './ButtonWrapper';
 
 type ClickType = {
   handleToggle: () => void;
@@ -22,65 +29,83 @@ function BookItem({
   handleReviewToggle,
   onClick,
 }: LibraryItemTypes & ClickType) {
+  const dispatch = useDispatch();
+  const [deleteToggle, deleteToggleIsOn] = useToggle(false);
+  const { user } = useSelector((state: any) => state.authUser);
+
+  const handleParagraphInfo = () => {
+    dispatch(ParagraphInitRequest({ bookId: id }));
+  };
+
+  const handleReviewInfo = () => {
+    dispatch(UserReviewRequest({ userId: user.id, bookId: id }));
+  };
+
+  const handleDeleteItem = () => {
+    dispatch(MyLibraryDeleteRequest({ id }));
+    deleteToggleIsOn();
+  };
+
   return (
-    <Wrapper>
-      <ImgWrapper>
-        <img src={img} alt="book" />
-      </ImgWrapper>
-      <InfoWrapper>
-        <div>
-          <p className="bookTitle">
-            {title.replaceAll('<b>', '').replaceAll('</b>', '')}
-          </p>
-          <p className="bookAuthor">
-            {author.replaceAll('<b>', '').replaceAll('</b>', '')}
-          </p>
-          <p className="bookPublisher">
-            {publisher.replaceAll('<b>', '').replaceAll('</b>', '')}
-          </p>
-          {startTime && <p>독서 시작: {SetStartDate(startTime)}</p>}
-          {endTime && <p>독서 완료: {SetStartDate(endTime)}</p>}
-        </div>
-        <ButtonWrapper>
-          {progress === 0 && (
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                handleToggle();
-                onClick(id);
-              }}
-              type="button"
-            >
-              시작하기
-            </button>
-          )}
-          {(progress === 1 || progress === 2) && (
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                handleToggle();
-                onClick(id);
-              }}
-              type="button"
-            >
-              기록하기
-            </button>
-          )}
-          {progress === 2 && (
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                handleReviewToggle();
-                onClick(id);
-              }}
-              type="button"
-            >
-              리뷰하기
-            </button>
-          )}
-        </ButtonWrapper>
-      </InfoWrapper>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <ImgWrapper>
+          <ImageButton
+            type="button"
+            onClick={deleteToggleIsOn}
+            src={`${process.env.PUBLIC_URL}/assets/func/trash.svg`}
+            alt="close"
+            pc={[25, 25]}
+            imgPC={[25, 25]}
+          />
+          <img src={img} alt="book" />
+        </ImgWrapper>
+        <InfoWrapper>
+          <div>
+            <p className="bookTitle">
+              {title.replaceAll('<b>', '').replaceAll('</b>', '')}
+            </p>
+            <p className="bookAuthor">
+              {author.replaceAll('<b>', '').replaceAll('</b>', '')}
+            </p>
+            <p className="bookPublisher">
+              {publisher.replaceAll('<b>', '').replaceAll('</b>', '')}
+            </p>
+            {startTime && (
+              <p className="date">독서 시작: {SetStartDate(startTime)}</p>
+            )}
+            {endTime && (
+              <p className="date">독서 완료: {SetStartDate(endTime)}</p>
+            )}
+          </div>
+          <ButtonWrapper
+            id={id}
+            progress={progress}
+            onClick={onClick}
+            handleToggle={handleToggle}
+            handleReviewToggle={handleReviewToggle}
+            handleParagraphInfo={handleParagraphInfo}
+            handleReviewInfo={handleReviewInfo}
+          />
+        </InfoWrapper>
+      </Wrapper>
+      {deleteToggle && (
+        <MoveDeleteModal
+          title="정말 삭제하시겠습니까?"
+          titleSize={[24, 20]}
+          width={500}
+          height={250}
+          handleToggle={deleteToggleIsOn}
+          close
+          isOkBtn
+          okBtnTitle="삭제"
+          handleOkClick={handleDeleteItem}
+          isCancelBtn
+          cancelBtnTitle="나중에..."
+          handleCanCelClick={deleteToggleIsOn}
+        />
+      )}
+    </>
   );
 }
 
@@ -122,30 +147,27 @@ const InfoWrapper = styled.div`
     font-size: 14px;
     font-weight: 600;
   }
+  .date {
+    font-size: 14px;
+    font-weight: 500;
+  }
 `;
 
 const ImgWrapper = styled.div`
   flex-shrink: 0;
   width: 120px;
   height: 150px;
+  button {
+    position: absolute;
+    display: none;
+  }
   img {
     width: 100%;
     height: 100%;
   }
-`;
-
-const ButtonWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  button {
-    :nth-child(2) {
-      margin-left: 10px;
+  :hover {
+    button {
+      display: block;
     }
-    border-radius: 5px;
-    border: 2px solid #1e90ff;
-    background-color: white;
-    width: 100%;
-    color: #1e90ff;
-    font-weight: bold;
   }
 `;

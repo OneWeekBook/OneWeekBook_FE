@@ -4,7 +4,7 @@ function LoadingForm() {
   return (
     <LoadingWrapper>
       <img
-        src={`${process.env.PUBLIC_URL}/assets/book-loading-blue.svg`}
+        src={`${process.env.PUBLIC_URL}/assets/func/book-loading-blue.svg`}
         alt="loading"
       />
       <p>Loading...</p>

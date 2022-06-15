@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { useToggle } from 'hooks/useToggle';
-import { InfoTypes, LibraryItemTypes } from 'types/book';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { MyLibraryModifyRequest } from 'redux/reducers/MyLibrary';
+import styled from 'styled-components';
+import {
+  MyLibraryModifyRequest,
+  MyLibraryRequest,
+} from 'redux/reducers/MyLibrary';
 import { navDone } from 'redux/reducers/Func';
-import { ParagraphRequest } from 'redux/reducers/Paragraph';
+import useToggle from 'hooks/useToggle';
+import { InfoTypes, LibraryItemTypes } from 'types/book';
 import BookItem from '../_item/BookItem';
-import WriteCommentModal from '../Modal/WriteCommentModal';
+import WriteCommentModal from '../Modal/CommentModal';
 
 type PropsType = {
   userId: number;
@@ -25,17 +27,20 @@ function ReadBookList({ userId }: PropsType) {
     startTime: null,
     endTime: null,
   });
-  const { userBookList } = useSelector((state: any) => state.myLibrary);
-
-  const handleParagraphInfo = (id: number) => {
-    dispatch(ParagraphRequest({ bookId: id }));
-  };
+  const { userBookList, isDeleteSuccess } = useSelector(
+    (state: any) => state.myLibrary,
+  );
+  const { initSuccess } = useSelector((state: any) => state.paragraph);
 
   const moveDoneClick = async () => {
     await dispatch(MyLibraryModifyRequest({ progress: 2, isbn, userId }));
     readToggleIsOn();
     dispatch(navDone());
   };
+
+  useEffect(() => {
+    if (isDeleteSuccess) dispatch(MyLibraryRequest({ userId, progress: 1 }));
+  }, [isDeleteSuccess]);
 
   return (
     <>
@@ -57,12 +62,11 @@ function ReadBookList({ userId }: PropsType) {
                   startTime: item.startTime,
                   endTime: null,
                 });
-                handleParagraphInfo(item.id);
               }}
             />
           ))}
       </Wrapper>
-      {readToggle && bookData && (
+      {readToggle && initSuccess && (
         <WriteCommentModal
           bookId={bookId}
           bookData={bookData}

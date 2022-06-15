@@ -1,20 +1,21 @@
-import React, { useEffect, useState, Dispatch, SetStateAction } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AuthEmailInit, AuthEmailRequest } from 'redux/reducers/AuthEmail';
 import { AuthCodeInit, AuthCodeRequest } from 'redux/reducers/AuthCode';
-import { useInput } from 'hooks/useInput';
+import useInput from 'hooks/useInput';
+import DefaultButton from 'components/Button/DefaultButton';
+import { useRegexCheck } from './func/RegCheck';
+import { useAuthErrorCheck } from './func/AuthErrorCheck';
 import TimerForm from '../TimerForm';
 import EmailErrorForm from './components/EmailErrorForm';
 import CodeErrorForm from './components/CodeErrorForm';
-import OnboardInputForm from '../OnboardInputForm';
-import { useRegexCheck } from './func/RegCheck';
-import { useAuthErrorCheck } from './func/AuthErrorCheck';
+import FormInput from '../../Input/FormInput';
 
 type AuthMailTypes = {
   authDone: boolean;
-  setAuthDone: Dispatch<SetStateAction<boolean>>;
-  setRegisterEmail: Dispatch<SetStateAction<string>>;
+  setAuthDone: React.Dispatch<React.SetStateAction<boolean>>;
+  setRegisterEmail: React.Dispatch<React.SetStateAction<string>>;
 };
 
 function AuthEmailForm({
@@ -23,6 +24,8 @@ function AuthEmailForm({
   setRegisterEmail,
 }: AuthMailTypes) {
   const dispatch = useDispatch();
+  const emailRef = useRef<HTMLInputElement>(null);
+  const codeRef = useRef<HTMLInputElement>(null);
   const [email, changeEmail] = useInput('');
   const [code, changeCode] = useInput('');
 
@@ -44,6 +47,7 @@ function AuthEmailForm({
   );
 
   useEffect(() => {
+    emailRef.current?.focus();
     return () => {
       dispatch(AuthCodeInit());
       dispatch(AuthEmailInit());
@@ -64,6 +68,10 @@ function AuthEmailForm({
     });
   }, [emailErrorStatus, codeErrorStatus]);
 
+  useEffect(() => {
+    if (toggle) codeRef.current?.focus();
+  }, [toggle]);
+
   const authEmailClick = () => {
     dispatch(AuthEmailRequest({ email }));
   };
@@ -72,21 +80,35 @@ function AuthEmailForm({
     dispatch(AuthCodeRequest({ code }));
   };
 
+  const onEmailCheckEnter = (event: React.KeyboardEvent<Element>) => {
+    if (event.key === 'Enter') {
+      authEmailClick();
+    }
+  };
+
+  const onCodeCheckEnter = (event: React.KeyboardEvent<Element>) => {
+    if (event.key === 'Enter') {
+      codeInputClick();
+    }
+  };
+
   return (
     <AuthEmailWrapper>
-      <OnboardInputForm
+      <FormInput
         type="email"
         placeholder="이메일"
         state={email}
         onChange={changeEmail}
-        disabled={authDone}
+        onKeyPress={onEmailCheckEnter}
+        disabled={emailDone}
+        mref={emailRef}
       >
         {!authDone && emailDone && (
           <TimerWrapper>
             <TimerForm emailDone={emailDone} setEmailDone={setEmailDone} />
           </TimerWrapper>
         )}
-      </OnboardInputForm>
+      </FormInput>
       {!authDone && (
         <>
           <EmailErrorForm
@@ -97,23 +119,49 @@ function AuthEmailForm({
             emailErrorStatus={emailErrorStatus}
           />
           {!emailDone ? (
-            <button type="button" onClick={authEmailClick} disabled={!emailReg}>
-              이메일 인증하기
-            </button>
+            <DefaultButton
+              pc={[0, 35]}
+              onClick={authEmailClick}
+              isHover
+              hoverBgColor="#08c1e9"
+              hoverColor="white"
+              bgColor="#1e90ff"
+              color="white"
+              disabled={!emailReg}
+              disabledColor="#a9a9a9"
+              margin={[20, 0, 5, 0]}
+              fontSize={[18, 18]}
+              fontWeight={600}
+              title="이메일 인증하기"
+            />
           ) : (
-            <button type="button" onClick={authEmailClick} disabled={!emailReg}>
-              재발송
-            </button>
+            <DefaultButton
+              pc={[0, 35]}
+              onClick={authEmailClick}
+              isHover
+              hoverBgColor="#08c1e9"
+              hoverColor="white"
+              bgColor="#1e90ff"
+              color="white"
+              disabled={!emailReg}
+              disabledColor="#a9a9a9"
+              margin={[20, 0, 5, 0]}
+              fontSize={[18, 18]}
+              fontWeight={600}
+              title="재발송"
+            />
           )}
           {toggle && (
             <>
-              <OnboardInputForm
+              <FormInput
                 type="text"
                 maxLength={6}
                 placeholder="인증번호"
                 state={code}
                 pattern="[0-9]+"
                 onChange={changeCode}
+                onKeyPress={onCodeCheckEnter}
+                mref={codeRef}
               />
               <CodeErrorForm
                 code={code}
@@ -121,13 +169,21 @@ function AuthEmailForm({
                 codeErrorMsg={codeErrorMsg}
                 codeErrorStatus={codeErrorStatus}
               />
-              <button
-                type="button"
+              <DefaultButton
+                pc={[0, 35]}
                 onClick={codeInputClick}
+                isHover
+                hoverBgColor="#08c1e9"
+                hoverColor="white"
+                bgColor="#1e90ff"
+                color="white"
                 disabled={!codeReg}
-              >
-                인증번호 확인
-              </button>
+                disabledColor="#a9a9a9"
+                margin={[20, 0, 5, 0]}
+                fontSize={[18, 18]}
+                fontWeight={600}
+                title="인증번호 확인"
+              />
             </>
           )}
         </>

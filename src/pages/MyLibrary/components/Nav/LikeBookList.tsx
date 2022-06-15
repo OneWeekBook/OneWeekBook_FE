@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { useToggle } from 'hooks/useToggle';
-import MoveReadModal from 'components/Modal';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { MyLibraryModifyRequest } from 'redux/reducers/MyLibrary';
-import { LibraryItemTypes } from 'types/book';
+import styled from 'styled-components';
+import {
+  MyLibraryModifyRequest,
+  MyLibraryRequest,
+} from 'redux/reducers/MyLibrary';
 import { navRead } from 'redux/reducers/Func';
+import useToggle from 'hooks/useToggle';
+import { LibraryItemTypes } from 'types/book';
+import MoveReadModal from 'components/Modal';
 import BookItem from '../_item/BookItem';
 
 type PropsType = {
@@ -16,6 +19,7 @@ function LikeBookList({ userId }: PropsType) {
   const dispatch = useDispatch();
   const [isbn, setIsbn] = useState<string>('');
   const [likeToggle, likeToggleIsOn] = useToggle(false);
+  const { isDeleteSuccess } = useSelector((state: any) => state.myLibrary);
   const { userBookList } = useSelector((state: any) => state.myLibrary);
 
   const moveReadClick = async () => {
@@ -23,6 +27,10 @@ function LikeBookList({ userId }: PropsType) {
     likeToggleIsOn();
     dispatch(navRead());
   };
+
+  useEffect(() => {
+    if (isDeleteSuccess) dispatch(MyLibraryRequest({ userId, progress: 0 }));
+  }, [isDeleteSuccess]);
 
   return (
     <>

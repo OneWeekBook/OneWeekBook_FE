@@ -1,6 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
-import { useToggle } from 'hooks/useToggle';
+import useToggle from 'hooks/useToggle';
+import DefaultButton from 'components/Button/DefaultButton';
 import ChangeNickModal from '../modal/ChangeNickModal';
 import ChangePassModal from '../modal/ChangePassModal';
 
@@ -15,12 +15,32 @@ function NameButton({ nickName }: PropsType) {
     <Wrapper>
       <NickName>닉네임: {nickName}</NickName>
       <ButtonWrapper>
-        <button onClick={nickToggleIsOn} type="button">
-          닉네임 변경
-        </button>
-        <button onClick={passToggleIsOn} type="button">
-          비밀번호 변경
-        </button>
+        <DefaultButton
+          pc={[100, 38]}
+          onClick={nickToggleIsOn}
+          isHover
+          hoverBgColor="#08c1e9"
+          hoverColor="white"
+          bgColor="#1e90ff"
+          color="white"
+          margin={[0, 10, 0, 0]}
+          fontSize={[14, 14]}
+          fontWeight={600}
+          title="닉네임 변경"
+        />
+        <DefaultButton
+          pc={[100, 38]}
+          onClick={passToggleIsOn}
+          isHover
+          hoverBgColor="#08c1e9"
+          hoverColor="white"
+          bgColor="#1e90ff"
+          color="white"
+          margin={[0, 10, 0, 0]}
+          fontSize={[14, 14]}
+          fontWeight={600}
+          title="비밀번호 변경"
+        />
       </ButtonWrapper>
       {nickToggle && <ChangeNickModal nickToggleIsOn={nickToggleIsOn} />}
       {passToggle && <ChangePassModal passToggleIsOn={passToggleIsOn} />}
@@ -45,22 +65,6 @@ const NickName = styled.p`
 
 const ButtonWrapper = styled.div`
   display: flex;
-  button {
-    width: 100px;
-    height: 40px;
-    font-size: 14px;
-    font-weight: 600;
-    background-color: #1e90ff;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    :hover {
-      background-color: #08c1e9;
-    }
-    :last-child {
-      margin-left: 10px;
-    }
-  }
   @media (max-width: 425px) {
     margin-top: 10px;
   }

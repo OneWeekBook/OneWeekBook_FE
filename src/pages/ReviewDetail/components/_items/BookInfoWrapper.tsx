@@ -1,13 +1,11 @@
-import React from 'react';
 import styled from 'styled-components';
-import PieChart from 'components/Form/PieChartForm';
 import { ReviewBookTypes } from 'types/review';
+import PieChart from 'components/Form/PieChartForm';
 
 function BookInfoWrapper({
   author,
   countReviews,
   img,
-  isbn,
   publisher,
   ratingAverage,
   title,
@@ -36,7 +34,7 @@ function BookInfoWrapper({
         </InfoWrapper>
       </BookInfoBox>
       <ProgressWrapper>
-        <PieChart title="전체 평점" rate={ratingAverage * 2} />
+        <PieChart title="전체 평점" rate={Number(ratingAverage.toFixed(1))} />
       </ProgressWrapper>
     </Wrapper>
   );
@@ -48,7 +46,9 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #08c1e9;
+  border: 2px #e6e6e6 solid;
+  border-radius: 10px;
+  background-color: #f6f7f7;
   height: 200px;
   padding: 0 30px;
   margin-bottom: 5px;
@@ -59,7 +59,7 @@ const BookInfoBox = styled.div`
 `;
 
 const ImgWrapper = styled.div`
-  background-color: lightcoral;
+  background-color: lightgray;
   width: 120px;
   height: 150px;
   object-fit: cover;
@@ -87,7 +87,7 @@ const InfoWrapper = styled.div`
     font-weight: 500;
   }
   .reviewTotal {
-    font-size: 20px;
+    font-size: 18px;
     span {
       font-weight: 600;
     }

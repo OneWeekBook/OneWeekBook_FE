@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import { Toast } from 'lib/Toast';
+import DefaultButton from 'components/Button/DefaultButton';
 import Container from '../Container';
 
 type PropsType = {
@@ -24,7 +26,7 @@ function Header({ toggleIsOn }: PropsType) {
 
   const logoutClick = () => {
     sessionStorage.removeItem('accessToken');
-    alert('로그아웃 되었습니다.');
+    Toast('info', '로그아웃 되었습니다.');
   };
 
   return (
@@ -35,28 +37,69 @@ function Header({ toggleIsOn }: PropsType) {
           {sessionStorage.getItem('accessToken') ? (
             <>
               <Link to="/myPage">
-                <button type="button">마이페이지</button>
+                <DefaultButton
+                  pc={[90, 35]}
+                  isHover
+                  hoverBgColor="white"
+                  hoverColor="#1e90ff"
+                  bgColor="#1e90ff"
+                  color="white"
+                  fontSize={[14, 14]}
+                  fontWeight={600}
+                  title="마이페이지"
+                />
               </Link>
               <Link to="/">
-                <button type="button" onClick={logoutClick}>
-                  로그아웃
-                </button>
+                <DefaultButton
+                  onClick={logoutClick}
+                  pc={[90, 35]}
+                  isHover
+                  hoverBgColor="white"
+                  hoverColor="#1e90ff"
+                  bgColor="#1e90ff"
+                  color="white"
+                  margin={[0, 0, 0, 10]}
+                  fontSize={[14, 14]}
+                  fontWeight={600}
+                  title="로그아웃"
+                />
               </Link>
             </>
           ) : (
             <>
               <Link to="/sign-up">
-                <button type="button">회원가입</button>
+                <DefaultButton
+                  pc={[90, 35]}
+                  isHover
+                  hoverBgColor="white"
+                  hoverColor="#1e90ff"
+                  bgColor="#1e90ff"
+                  color="white"
+                  fontSize={[14, 14]}
+                  fontWeight={600}
+                  title="회원가입"
+                />
               </Link>
               <Link to="/sign-in">
-                <button type="button">로그인</button>
+                <DefaultButton
+                  pc={[90, 35]}
+                  isHover
+                  hoverBgColor="white"
+                  hoverColor="#1e90ff"
+                  bgColor="#1e90ff"
+                  color="white"
+                  margin={[0, 0, 0, 10]}
+                  fontSize={[14, 14]}
+                  fontWeight={600}
+                  title="로그인"
+                />
               </Link>
             </>
           )}
         </ButtonWrapper>
         <MobileButton isSign={isSign} onClick={toggleIsOn}>
           <img
-            src={`${process.env.PUBLIC_URL}/assets/header-menu-burger.png`}
+            src={`${process.env.PUBLIC_URL}/assets/func/header-menu-burger.png`}
             alt="sidebar button"
           />
         </MobileButton>
@@ -93,20 +136,8 @@ const ButtonWrapper = styled.div<{ isSign: boolean }>`
   align-items: center;
   justify-content: space-between;
   button {
-    width: 90px;
-    margin-left: 10px;
-    background-color: #1e90ff;
     border: solid 2px white;
     border-radius: 7px;
-    color: white;
-    font-size: 14px;
-    font-weight: 600;
-    height: 35px;
-    :hover {
-      background-color: white;
-      color: #1e90ff;
-      font-weight: 800;
-    }
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     display: none;

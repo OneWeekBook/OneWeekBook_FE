@@ -1,39 +1,35 @@
-import React, { useState, useLayoutEffect } from 'react';
 import styled from 'styled-components';
 import ProgressBarForm from 'components/Form/ProgressBarForm';
+import { useEffect } from 'react';
 
 type PropsType = {
-  role: number;
+  rank: string;
+  limit: number;
+  write: number;
+  remaining: number;
+  percent: number;
 };
 
-function Rank({ role }: PropsType) {
-  const [rank, setRank] = useState<string>('');
-
-  useLayoutEffect(() => {
-    if (role === 3) {
-      setRank('독서 천재');
-    } else if (role === 2) {
-      setRank('독서 중급자');
-    } else if (role === 1) {
-      setRank('독서 입문자');
-    }
-  }, [role]);
-
+function Rank({ rank, limit, write, remaining, percent }: PropsType) {
   return (
     <Wrapper>
       <RankWrapper>
         <ImgWrapper>
           <img
-            src={`${process.env.PUBLIC_URL}/assets/main-bestlist-book.png`}
+            src={`${process.env.PUBLIC_URL}/assets/func/book.png`}
             alt="rank"
           />
         </ImgWrapper>
         <p>등급: {rank}</p>
       </RankWrapper>
       <InfoWrapper>
-        <p>다음 등급 까지</p>
-        <ProgressBarForm width={200} percent={0.2} />
-        <p>10권</p>
+        <ProgressBarForm
+          limit={limit}
+          write={write}
+          width={200}
+          percent={percent}
+        />
+        <p>다음 등급까지 {remaining}권 남았습니다.</p>
       </InfoWrapper>
     </Wrapper>
   );
@@ -69,20 +65,9 @@ const ImgWrapper = styled.div`
 `;
 
 const InfoWrapper = styled.div`
-  display: flex;
   p {
-    font-size: 20px;
+    margin-top: 10px;
+    font-size: 18px;
     font-weight: 600;
-    :first-child {
-      margin-right: 10px;
-    }
-    :last-child {
-      margin-left: 10px;
-    }
-  }
-  @media (max-width: 425px) {
-    p:first-child {
-      margin-right: 0;
-    }
   }
 `;

@@ -1,26 +1,41 @@
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import styled from 'styled-components';
 
 type PropsType = {
+  limit: number;
+  write: number;
   width: number;
   percent: number;
 };
 
-function ProgressBarForm({ width, percent }: PropsType) {
+function ProgressBarForm({ limit, write, width, percent }: PropsType) {
   const [value, setValue] = React.useState(0);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setValue(percent * width);
-  }, []);
+  }, [percent]);
 
   return (
-    <Wrapper width={width}>
-      <ProgressWrapper value={value} />
-    </Wrapper>
+    <ProgressWrapper>
+      <Wrapper width={width}>
+        {percent && <Progress value={value}>{write}</Progress>}
+      </Wrapper>
+      <div className="limit">{limit}</div>
+    </ProgressWrapper>
   );
 }
 
 export default ProgressBarForm;
+
+const ProgressWrapper = styled.div`
+  display: flex;
+  font-weight: 600;
+  .limit {
+    line-height: 30px;
+    font-size: 18px;
+    margin-left: 5px;
+  }
+`;
 
 const Wrapper = styled.div<{ width: number }>`
   background-color: #e6e6e6;
@@ -32,11 +47,15 @@ const Wrapper = styled.div<{ width: number }>`
   }
 `;
 
-const ProgressWrapper = styled.div<{ value: number }>`
+const Progress = styled.div<{ value: number }>`
+  box-sizing: border-box;
   background-color: #1e90ff;
   border-radius: 5px;
   width: ${({ value }) => value}px;
   height: 30px;
+  line-height: 30px;
+  padding-right: 5px;
+  text-align: right;
   transition: 1s ease;
   transition-delay: 0.5s;
 `;
