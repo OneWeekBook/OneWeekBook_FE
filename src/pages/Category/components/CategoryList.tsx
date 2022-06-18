@@ -18,6 +18,7 @@ const initialState = {
 
 function CategoryList() {
   const dispatch = useDispatch();
+  const { categories } = useSelector((state: any) => state.category);
   const [parentCategory, setParentCategory] = useState<CategoryItemTypes[]>([]);
   const [curParentCategory, setCurParentCategory] = useState<
     CategoryItemTypes[]
@@ -26,8 +27,6 @@ function CategoryList() {
   const [curSubCategory, setCurSubCategory] = useState<CategoryItemTypes[]>([
     initialState,
   ]);
-
-  const { categories } = useSelector((state: any) => state.category);
   const getFilterParentCategories = useCallback(
     (categories: CategoryItemTypes[]) => {
       const parent = categories.filter(

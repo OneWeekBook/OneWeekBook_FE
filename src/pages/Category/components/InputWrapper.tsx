@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { SearchRequest } from 'redux/reducers/Search';
@@ -17,6 +17,7 @@ function InputWrapper({ curSubCategory, curParentCategory }: PropsTypes) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
+  const { books } = useSelector((state: any) => state.search);
 
   const handleFetch = useCallback(
     (search: string) => {
@@ -36,6 +37,12 @@ function InputWrapper({ curSubCategory, curParentCategory }: PropsTypes) {
       } else if (!!curParentCategory[0].categoryId && search) {
         options.d_categ = curParentCategory[0].categoryId;
         options.title = search;
+      } else if (!!curSubCategory[0].categoryId && !search) {
+        options.d_categ = curSubCategory[0].categoryId;
+        options.title = curSubCategory[0].categoryName?.split('/')[0];
+      } else if (!!curParentCategory[0].categoryId && !search) {
+        options.d_categ = curParentCategory[0].categoryId;
+        options.title = curParentCategory[0].categoryName?.split('/')[0];
       } else {
         options.title = search;
       }
@@ -63,7 +70,10 @@ function InputWrapper({ curSubCategory, curParentCategory }: PropsTypes) {
   }, [curSubCategory, curParentCategory]);
 
   useEffect(() => {
-    if (search === '') dispatch(searchNone());
+    if (search === '') {
+      handleFetch(search);
+      dispatch(searchNone());
+    }
   }, [search]);
 
   return (
@@ -83,7 +93,7 @@ function InputWrapper({ curSubCategory, curParentCategory }: PropsTypes) {
           />
         </SearchInputWrapper>
       </div>
-      {search && (
+      {books.length > 0 && (
         <DefaultButton
           pc={[80, 20]}
           onClick={handleClick}

@@ -2,6 +2,8 @@ export const AUTH_USER_REQUEST = 'AUTH_USER_REQUEST';
 export const AUTH_USER_SUCCESS = 'AUTH_USER_SUCCESS';
 export const AUTH_USER_FAIL = 'AUTH_USER_FAIL';
 
+export const AUTH_USER_INIT = 'AUTH_USER_INIT';
+
 const initialState = {
   isLoading: false,
   isSuccess: false,
@@ -29,6 +31,8 @@ export default function AuthEmail(state = initialState, action: any) {
         isLoading: false,
         isSuccess: false,
       };
+    case AUTH_USER_INIT:
+      return initialState;
     default:
       return state;
   }
@@ -51,5 +55,11 @@ export const AuthUserFail = (error: any) => {
   return {
     type: AUTH_USER_FAIL,
     error: error.response,
+  };
+};
+
+export const AuthInit = () => {
+  return {
+    type: AUTH_USER_INIT,
   };
 };

@@ -20,7 +20,7 @@ function SearchItem({
   return (
     <Wrapper>
       <ImgWrapper>
-        {userId && (
+        {sessionStorage.getItem('accessToken') && userId && (
           <ImageButton
             type="button"
             src={`${process.env.PUBLIC_URL}/assets/func/heart.svg`}

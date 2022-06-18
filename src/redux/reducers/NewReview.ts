@@ -59,7 +59,7 @@ export const NewReviewsFail = (error: any) => {
 };
 
 export const NewReviewInit = () => {
-    return {
-      type: NEW_REVIEW_INIT,
-    };
+  return {
+    type: NEW_REVIEW_INIT,
+  };
 };
