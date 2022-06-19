@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import styled from 'styled-components';
 
 type PropsType = {
@@ -9,7 +9,7 @@ type PropsType = {
 };
 
 function ProgressBarForm({ limit, write, width, percent }: PropsType) {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   useLayoutEffect(() => {
     setValue(percent * width);

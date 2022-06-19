@@ -1,5 +1,6 @@
 import { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { AppStateType } from 'redux/reducers';
 import { ChangeNickInit, ChangeNickRequest } from 'redux/reducers/ChangeNick';
 import { userToggle } from 'redux/reducers/Func';
 import { Toast } from 'lib/Toast';
@@ -14,8 +15,10 @@ type PropsType = {
 function ChangeNickModal({ nickToggleIsOn }: PropsType) {
   const dispatch = useDispatch();
   const [nick, changeNick] = useInput('');
-  const { user } = useSelector((state: any) => state.authUser);
-  const { changeErrorStatus } = useSelector((state: any) => state.changeNick);
+  const { user } = useSelector((state: AppStateType) => state.authUser);
+  const { changeErrorStatus } = useSelector(
+    (state: AppStateType) => state.changeNick,
+  );
 
   const handleChangeClick = () => {
     dispatch(ChangeNickRequest({ nick, id: user.id }));

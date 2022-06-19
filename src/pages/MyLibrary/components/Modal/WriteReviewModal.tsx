@@ -1,6 +1,7 @@
 import { useState, useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { AppStateType } from 'redux/reducers';
 import {
   UserReviewAddRequest,
   UserReviewDeleteRequest,
@@ -50,7 +51,7 @@ type PropsType = {
 function WriteReviewModal({ bookId, bookData, toggleIsOn }: PropsType) {
   const dispatch = useDispatch();
   const { reviewItem, itemAddSuccess } = useSelector(
-    (state: any) => state.userReview,
+    (state: AppStateType) => state.userReview,
   );
   const [recommend, setRecommend] = useState<number>(4);
   const [review, setReview] = useState('');

@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { AppStateType } from 'redux/reducers';
 import { NewReviewTypes } from 'types/main';
 import DefaultButton from 'components/Button/DefaultButton';
 import NewReivewItem from './NewReivewItem';
 
 function NewReviewList() {
-  const { newReviews } = useSelector((state: any) => state.newReview);
+  const { newReviews } = useSelector((state: AppStateType) => state.newReview);
   const [end, setEnd] = useState(5);
 
   const onClick = () => {

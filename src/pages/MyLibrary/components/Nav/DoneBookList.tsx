@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { AppStateType } from 'redux/reducers';
 import { MyLibraryRequest } from 'redux/reducers/MyLibrary';
 import useToggle from 'hooks/useToggle';
 import { InfoTypes, LibraryItemTypes } from 'types/book';
@@ -25,10 +26,12 @@ function DoneBookList({ userId }: PropsType) {
     endTime: null,
   });
   const { userBookList, isDeleteSuccess } = useSelector(
-    (state: any) => state.myLibrary,
+    (state: AppStateType) => state.myLibrary,
   );
-  const { userReviewSuccess } = useSelector((state: any) => state.userReview);
-  const { initSuccess } = useSelector((state: any) => state.paragraph);
+  const { userReviewSuccess } = useSelector(
+    (state: AppStateType) => state.userReview,
+  );
+  const { initSuccess } = useSelector((state: AppStateType) => state.paragraph);
 
   useEffect(() => {
     if (isDeleteSuccess) dispatch(MyLibraryRequest({ userId, progress: 2 }));

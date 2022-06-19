@@ -1,9 +1,10 @@
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { AppStateType } from 'redux/reducers';
 import BookInfoWrapper from './_items/BookInfoWrapper';
 
 function BookInfo() {
-  const { bookData } = useSelector((state: any) => state.review);
+  const { bookData } = useSelector((state: AppStateType) => state.review);
   return (
     <Wrapper>{bookData.title && <BookInfoWrapper {...bookData} />}</Wrapper>
   );

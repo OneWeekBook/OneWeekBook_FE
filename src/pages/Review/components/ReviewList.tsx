@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { AppStateType } from 'redux/reducers';
 import { ReviewInit, ReviewsRequest } from 'redux/reducers/Review';
 import { ReviewItemType } from 'types/review';
 import PagenationForm from 'components/Form/PagenationForm';
@@ -9,7 +10,9 @@ import ReviewItem from './_item/ReviewItem';
 function ReviewList() {
   const dispatch = useDispatch();
   const [curIdx, setCurIdx] = useState<number>(1);
-  const { reviews, reivewsTotal } = useSelector((state: any) => state.review);
+  const { reviews, reivewsTotal } = useSelector(
+    (state: AppStateType) => state.review,
+  );
 
   useEffect(() => {
     dispatch(ReviewsRequest({ start: 0, sortby: 'new' }));
@@ -19,7 +22,7 @@ function ReviewList() {
   }, []);
 
   useEffect(() => {
-    dispatch(ReviewsRequest({ start: (curIdx - 1) * 10, sortby: 'new' }));
+    dispatch(ReviewsRequest({ start: (curIdx - 1) * 12, sortby: 'new' }));
   }, [curIdx]);
 
   return (

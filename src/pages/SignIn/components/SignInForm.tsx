@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { AppStateType } from 'redux/reducers';
 import { SignInInit, SignInRequest } from 'redux/reducers/SignIn';
 import useInput from 'hooks/useInput';
 import useInputEnter from 'hooks/useInputEnter';
@@ -20,7 +21,7 @@ function SignInForm() {
   const { handleInputEnter } = useInputEnter();
   const { handleSignInError } = useSignInErrorCheck();
   const { signInErrorStatus, signInErrorMsg } = useSelector(
-    (state: any) => state.signIn,
+    (state: AppStateType) => state.signIn,
   );
 
   useEffect(() => {

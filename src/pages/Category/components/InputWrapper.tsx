@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { AppStateType } from 'redux/reducers';
 import { SearchRequest } from 'redux/reducers/Search';
 import { searchNone } from 'redux/reducers/Func';
 import { CategoryItemTypes } from 'types/book';
@@ -17,7 +18,7 @@ function InputWrapper({ curSubCategory, curParentCategory }: PropsTypes) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
-  const { books } = useSelector((state: any) => state.search);
+  const { books } = useSelector((state: AppStateType) => state.search);
 
   const handleFetch = useCallback(
     (search: string) => {

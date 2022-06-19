@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { AppStateType } from 'redux/reducers';
 import {
   ChangePasswordInit,
   ChangePasswordRequest,
@@ -21,9 +22,9 @@ function ChangePassModal({ passToggleIsOn }: PropsType) {
   const [confirmPassword, changeConfirmPasswod] = useInput('');
   const [passError, setPassError] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
-  const { user } = useSelector((state: any) => state.authUser);
+  const { user } = useSelector((state: AppStateType) => state.authUser);
   const { changeErrorStatus } = useSelector(
-    (state: any) => state.changePassword,
+    (state: AppStateType) => state.changePassword,
   );
 
   const handleChangePassword = () => {

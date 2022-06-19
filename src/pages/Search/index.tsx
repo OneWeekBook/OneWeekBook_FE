@@ -1,6 +1,7 @@
 import { useEffect, useCallback, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { AppStateType } from 'redux/reducers';
 import {
   AddSearchRequest,
   SearchInit,
@@ -20,7 +21,9 @@ function index() {
   const searchArr: string[] = [];
   const tagArr: string[] = [];
   const [startIdx, setStartIdx] = useState<number>(1);
-  const { isLoading, isSuccess } = useSelector((state: any) => state.search);
+  const { isLoading, isSuccess } = useSelector(
+    (state: AppStateType) => state.search,
+  );
 
   for (let i = 1; i < pathArr.length - 2; i += 1) {
     if (i % 2 === 1) {

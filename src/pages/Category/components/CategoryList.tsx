@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { CategoryRequest } from 'redux/reducers/Category';
 import { SearchInit } from 'redux/reducers/Search';
-import { CategoryItemTypes } from 'types/book';
 import { searchNone } from 'redux/reducers/Func';
+import { AppStateType } from 'redux/reducers';
+import { CategoryItemTypes } from 'types/book';
 import CategoryBoxItem from './_item/CategoryBoxItem';
 import InputWrapper from './InputWrapper';
 
@@ -18,7 +19,7 @@ const initialState = {
 
 function CategoryList() {
   const dispatch = useDispatch();
-  const { categories } = useSelector((state: any) => state.category);
+  const { categories } = useSelector((state: AppStateType) => state.category);
   const [parentCategory, setParentCategory] = useState<CategoryItemTypes[]>([]);
   const [curParentCategory, setCurParentCategory] = useState<
     CategoryItemTypes[]

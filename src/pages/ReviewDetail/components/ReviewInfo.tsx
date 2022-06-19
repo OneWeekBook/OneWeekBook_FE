@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { AppStateType } from 'redux/reducers';
 import { ReviewRequest } from 'redux/reducers/Review';
 import useToggle from 'hooks/useToggle';
 import { ReviewDetailTypes } from 'types/review';
@@ -15,7 +16,9 @@ function ReviewInfo() {
   const [curIdx, setCurIdx] = useState<number>(1);
   const [sortBy, setSortBy] = useState(`${location.search.split('=')[1]}`);
   const [detailToggle, detailToggleIsOn] = useToggle(false);
-  const { reviews, bookData } = useSelector((state: any) => state.review);
+  const { reviews, bookData } = useSelector(
+    (state: AppStateType) => state.review,
+  );
   const [curReview, setCurReview] = useState({
     id: -1,
     likeCount: 0,

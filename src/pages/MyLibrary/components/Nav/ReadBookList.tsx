@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { AppStateType } from 'redux/reducers';
 import {
   MyLibraryModifyRequest,
   MyLibraryRequest,
@@ -28,9 +29,9 @@ function ReadBookList({ userId }: PropsType) {
     endTime: null,
   });
   const { userBookList, isDeleteSuccess } = useSelector(
-    (state: any) => state.myLibrary,
+    (state: AppStateType) => state.myLibrary,
   );
-  const { initSuccess } = useSelector((state: any) => state.paragraph);
+  const { initSuccess } = useSelector((state: AppStateType) => state.paragraph);
 
   const moveDoneClick = async () => {
     await dispatch(MyLibraryModifyRequest({ progress: 2, isbn, userId }));

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { AppStateType } from 'redux/reducers';
 import { ParagraphRequest } from 'redux/reducers/Paragraph';
 import { ParagraphTypes } from 'types/book';
 import ParagraphItem from '../../_item/ParagraphItem';
@@ -12,7 +13,7 @@ type PropsType = {
 function ListWrapper({ bookId, deleteParagraphClick }: PropsType) {
   const dispatch = useDispatch();
   const { paragraph, isAddSuccess, isDeleteSuccess } = useSelector(
-    (state: any) => state.paragraph,
+    (state: AppStateType) => state.paragraph,
   );
 
   useEffect(() => {
