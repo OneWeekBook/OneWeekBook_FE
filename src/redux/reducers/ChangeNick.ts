@@ -1,4 +1,4 @@
-import { ChangeNickTypes } from 'types/api';
+import { ChangeNickTypes, ActionsTypes } from 'types/api';
 
 export const CHANGE_NICK_REQUEST = 'CHANGE_NICK_REQUEST';
 export const CHANGE_NICK_SUCCESS = 'CHANGE_NICK_SUCCESS';
@@ -13,7 +13,7 @@ const initialState = {
   changeErrorMsg: '',
 };
 
-export default function SignIn(state = initialState, action: any) {
+export default function SignIn(state = initialState, action: ActionsTypes) {
   switch (action.type) {
     case CHANGE_NICK_REQUEST:
       return {
@@ -53,10 +53,9 @@ export const ChangeNickRequest = (data: ChangeNickTypes) => {
   };
 };
 
-export const ChangeNickSuccess = (data: any) => {
+export const ChangeNickSuccess = () => {
   return {
     type: CHANGE_NICK_SUCCESS,
-    data,
   };
 };
 

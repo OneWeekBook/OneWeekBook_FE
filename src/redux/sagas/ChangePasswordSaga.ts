@@ -13,8 +13,8 @@ function ChangePasswordAPI(data: ChangePasswordTypes) {
 
 function* fetchChangePasswordSaga(action: any): any {
   try {
-    const result = yield call(ChangePasswordAPI, action.payload);
-    yield put(ChangePasswordSuccess(result));
+    yield call(ChangePasswordAPI, action.payload);
+    yield put(ChangePasswordSuccess());
   } catch (error) {
     yield put(ChangePasswordFail(error));
   }

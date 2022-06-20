@@ -3,6 +3,7 @@ import {
   MyLibraryAddTypes,
   MyLibraryModifyTypes,
   DeleteType,
+  ActionsTypes,
 } from 'types/api';
 
 export const MY_LIBRARY_REQUEST = 'MY_LIBRARY_REQUEST';
@@ -35,7 +36,10 @@ const initialState = {
   userBookList: [],
 };
 
-export default function ChangePassword(state = initialState, action: any) {
+export default function ChangePassword(
+  state = initialState,
+  action: ActionsTypes,
+) {
   switch (action.type) {
     case MY_LIBRARY_REQUEST:
       return {
@@ -48,7 +52,7 @@ export default function ChangePassword(state = initialState, action: any) {
         ...state,
         isLoading: false,
         isSuccess: true,
-        userBookList: action.data,
+        userBookList: action.payload,
       };
     case MY_LIBRARY_FAIL:
       return {
@@ -127,7 +131,7 @@ export const MyLibraryRequest = (data: MyLibraryTypes) => {
 export const MyLibrarySuccess = (data: any) => {
   return {
     type: MY_LIBRARY_SUCCESS,
-    data,
+    payload: data,
   };
 };
 

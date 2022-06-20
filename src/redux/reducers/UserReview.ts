@@ -3,6 +3,7 @@ import {
   UserReviewAddTypes,
   UserReviewModifyTypes,
   UserReviewTypes,
+  ActionsTypes,
 } from 'types/api';
 
 export const USER_REVIEW_REQUEST = 'USER_REVIEW_REQUEST';
@@ -35,7 +36,7 @@ const initialState = {
   reviewItem: {},
 };
 
-export default function Review(state = initialState, action: any) {
+export default function Review(state = initialState, action: ActionsTypes) {
   switch (action.type) {
     case USER_REVIEW_REQUEST:
       return {
@@ -48,7 +49,7 @@ export default function Review(state = initialState, action: any) {
         ...state,
         userReviewLoading: false,
         userReviewSuccess: true,
-        reviewItem: action.data,
+        reviewItem: action.payload,
       };
     case USER_REVIEW_FAIL:
       return {
@@ -127,7 +128,7 @@ export const UserReviewRequest = (data: UserReviewTypes) => {
 export const UserReviewSuccess = (data: any) => {
   return {
     type: USER_REVIEW_SUCCESS,
-    data,
+    payload: data,
   };
 };
 

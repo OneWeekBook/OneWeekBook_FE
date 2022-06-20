@@ -13,8 +13,8 @@ function ChangeNickAPI(data: ChangeNickTypes) {
 
 function* fetchChangeNickSaga(action: any): any {
   try {
-    const result = yield call(ChangeNickAPI, action.payload);
-    yield put(ChangeNickSuccess(result));
+    yield call(ChangeNickAPI, action.payload);
+    yield put(ChangeNickSuccess());
   } catch (error) {
     yield put(ChangeNickFail(error));
   }

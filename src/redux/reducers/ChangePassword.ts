@@ -1,4 +1,4 @@
-import { ChangePasswordTypes } from 'types/api';
+import { ChangePasswordTypes, ActionsTypes } from 'types/api';
 
 export const CHANGE_PASSWORD_REQUEST = 'CHANGE_PASSWORD_REQUEST';
 export const CHANGE_PASSWORD_SUCCESS = 'CHANGE_PASSWORD_SUCCESS';
@@ -13,7 +13,10 @@ const initialState = {
   changeErrorMsg: '',
 };
 
-export default function ChangePassword(state = initialState, action: any) {
+export default function ChangePassword(
+  state = initialState,
+  action: ActionsTypes,
+) {
   switch (action.type) {
     case CHANGE_PASSWORD_REQUEST:
       return {
@@ -53,10 +56,9 @@ export const ChangePasswordRequest = (data: ChangePasswordTypes) => {
   };
 };
 
-export const ChangePasswordSuccess = (data: any) => {
+export const ChangePasswordSuccess = () => {
   return {
     type: CHANGE_PASSWORD_SUCCESS,
-    data,
   };
 };
 

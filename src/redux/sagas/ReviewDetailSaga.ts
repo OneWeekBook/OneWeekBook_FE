@@ -11,7 +11,7 @@ function ReviewDetailAPI(params: ReivewDetailTypes) {
 
 function* fetchReviewDetailSaga(action: any): any {
   try {
-    const result = yield call(ReviewDetailAPI, action.data);
+    const result = yield call(ReviewDetailAPI, action.payload);
     yield put(ReviewSuccess(result.data));
   } catch (error) {
     yield put(ReviewFail(error));

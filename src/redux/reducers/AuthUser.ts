@@ -1,3 +1,5 @@
+import { ActionsTypes } from 'types/api';
+
 export const AUTH_USER_REQUEST = 'AUTH_USER_REQUEST';
 export const AUTH_USER_SUCCESS = 'AUTH_USER_SUCCESS';
 export const AUTH_USER_FAIL = 'AUTH_USER_FAIL';
@@ -10,7 +12,7 @@ const initialState = {
   user: {},
 };
 
-export default function AuthEmail(state = initialState, action: any) {
+export default function AuthEmail(state = initialState, action: ActionsTypes) {
   switch (action.type) {
     case AUTH_USER_REQUEST:
       return {

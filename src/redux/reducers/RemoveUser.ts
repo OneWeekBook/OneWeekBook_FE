@@ -1,4 +1,4 @@
-import { RemoveUserTypes } from 'types/api';
+import { RemoveUserTypes, ActionsTypes } from 'types/api';
 
 export const REMOVE_USER_REQUEST = 'REMOVE_USER_REQUEST';
 export const REMOVE_USER_SUCCESS = 'REMOVE_USER_SUCCESS';
@@ -13,7 +13,10 @@ const initialState = {
   removeErrorMsg: '',
 };
 
-export default function RemoveError(state = initialState, action: any) {
+export default function RemoveError(
+  state = initialState,
+  action: ActionsTypes,
+) {
   switch (action.type) {
     case REMOVE_USER_REQUEST:
       return {

@@ -1,3 +1,5 @@
+import { ActionsTypes } from 'types/api';
+
 export const AUTH_CODE_REQUEST = 'AUTH_CODE_REQUEST';
 export const AUTH_CODE_SUCCESS = 'AUTH_CODE_SUCCESS';
 export const AUTH_CODE_FAIL = 'AUTH_CODE_FAIL';
@@ -11,7 +13,7 @@ const initialState = {
   codeErrorMsg: '',
 };
 
-export default function AuthCode(state = initialState, action: any) {
+export default function AuthCode(state = initialState, action: ActionsTypes) {
   switch (action.type) {
     case AUTH_CODE_REQUEST:
       return {
