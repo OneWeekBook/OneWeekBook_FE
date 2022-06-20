@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
 type PropsType = {
-  tags: string[];
+  tags: Set<string>;
 };
 
 function TitleWrapper({ tags }: PropsType) {
   return (
     <Wrapper>
       <ResultPageTitle>전체 검색 결과</ResultPageTitle>
-      {tags.map((item, index) => (
+      {Array.from(tags).map((item, index) => (
         <Tag key={index}>{item}</Tag>
       ))}
     </Wrapper>

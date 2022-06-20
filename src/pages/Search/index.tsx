@@ -19,7 +19,7 @@ function index() {
   const dispatch = useDispatch();
   const pathArr = location.search.split(/[?=&]+/);
   const searchArr: string[] = [];
-  const tagArr: string[] = [];
+  const tagArr: Set<string> = new Set([]);
   const [startIdx, setStartIdx] = useState<number>(1);
   const { isLoading, isSuccess } = useSelector(
     (state: AppStateType) => state.search,
@@ -27,14 +27,18 @@ function index() {
 
   for (let i = 1; i < pathArr.length - 2; i += 1) {
     if (i % 2 === 1) {
-      tagArr.push(decodeURI(decodeURIComponent(pathArr[i])));
+      tagArr.add(decodeURI(decodeURIComponent(pathArr[i])));
     } else {
       searchArr.push(decodeURI(decodeURIComponent(pathArr[i])));
     }
   }
 
-  tagArr.push(decodeURI(decodeURIComponent(pathArr[pathArr.length - 1])));
+  tagArr.add(decodeURI(decodeURIComponent(pathArr[pathArr.length - 1])));
   searchArr.push(decodeURI(decodeURIComponent(pathArr[pathArr.length - 1])));
+
+  const isNumeric = (val: string) => {
+    return /^-?\d+$/.test(val);
+  };
 
   const handleFetch = useCallback(() => {
     const options: {
@@ -50,6 +54,9 @@ function index() {
     if (searchArr.length === 3) {
       options.d_categ = searchArr[1].toString();
       options.title = searchArr[2].toString();
+    } else if (searchArr.length === 2 && isNumeric(searchArr[1].toString())) {
+      options.d_categ = searchArr[1].toString();
+      options.title = searchArr[1].toString();
     } else if (searchArr.length === 2) {
       options.d_categ = searchArr[0].toString();
       options.title = searchArr[1].toString();
@@ -75,6 +82,9 @@ function index() {
     if (searchArr.length === 3) {
       options.d_categ = searchArr[1].toString();
       options.title = searchArr[2].toString();
+    } else if (searchArr.length === 2 && isNumeric(searchArr[1].toString())) {
+      options.d_categ = searchArr[1].toString();
+      options.title = searchArr[1].toString();
     } else if (searchArr.length === 2) {
       options.d_categ = searchArr[0].toString();
       options.title = searchArr[1].toString();
