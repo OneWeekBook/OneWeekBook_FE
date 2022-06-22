@@ -126,7 +126,7 @@ const Wrapper = styled.div<{ isSign: boolean }>`
     font-weight: 800;
     text-decoration: none;
   }
-  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
     margin: 10px auto;
     width: 90%;
     a {

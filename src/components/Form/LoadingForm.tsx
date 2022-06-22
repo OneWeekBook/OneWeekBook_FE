@@ -24,4 +24,7 @@ const LoadingWrapper = styled.div`
     color: #1e90ff;
     text-align: center;
   }
+  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
+    width: 95%;
+  }
 `;

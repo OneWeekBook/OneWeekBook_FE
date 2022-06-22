@@ -44,7 +44,6 @@ export default function SignIn(state = initialState, action: ActionsTypes) {
         ...state,
         isLoading: true,
         isSuccess: false,
-        params: action.payload,
       };
     case ADD_SEARCH_SUCCESS:
       return {

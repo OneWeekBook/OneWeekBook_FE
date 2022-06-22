@@ -40,7 +40,10 @@ const NoneItemWrapper = styled.div`
   height: 300px;
   background-color: #e6e6e6;
   border-radius: 10px;
-  margin: 20px 0;
+  margin: 20px auto;
+  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
+    width: 95%;
+  }
 `;
 
 const Wrapper = styled.div`

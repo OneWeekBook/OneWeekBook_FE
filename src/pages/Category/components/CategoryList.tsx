@@ -126,7 +126,7 @@ const Wrapper = styled.div`
     font-weight: 700;
     margin: 10px auto;
   }
-  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
     margin: auto;
     width: 95%;
     .mainTitle {

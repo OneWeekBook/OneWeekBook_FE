@@ -27,7 +27,7 @@ function ReviewList() {
 
   return (
     <Wrapper>
-      {reviews.length && (
+      {Array.isArray(reviews) && !!reviews && (
         <>
           <ReviewTitle>전체 리뷰 ({reivewsTotal}건)</ReviewTitle>
           <ReviewListWrapper>
@@ -55,8 +55,8 @@ const Wrapper = styled.div`
   margin: 30px auto 50px;
   width: 100%;
   height: auto;
-  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
-    width: 95%;
+  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
+    width: 85%;
   }
 `;
 
@@ -68,10 +68,11 @@ const ReviewTitle = styled.p`
 const ReviewListWrapper = styled.div`
   display: grid;
   margin-top: 30px;
+  justify-items: center;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   gap: 10px;
   min-height: 600px;
-  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
   @media (max-width: ${({ theme: { device } }) =>

@@ -7,7 +7,6 @@ import SlideButton from './SlideButton';
 const SlideItems = [
   { id: 1, color: '#33a' },
   { id: 2, color: '#8c9' },
-  { id: 3, color: '#e6e6e6' },
 ];
 
 type SlideItemsType = {

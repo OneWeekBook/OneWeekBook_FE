@@ -1,6 +1,7 @@
 import { useEffect, useCallback, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
 import {
   AddSearchRequest,
@@ -112,22 +113,31 @@ function index() {
       ) : !isSuccess ? (
         <LoadingErrorForm />
       ) : (
-        <DefaultButton
-          pc={[0, 50]}
-          onClick={handleAddFetch}
-          isHover
-          hoverBgColor="#1e90ff"
-          hoverColor="white"
-          bgColor="#08c1e9"
-          color="white"
-          margin={[0, 0, 30, 0]}
-          fontSize={[18, 18]}
-          fontWeight={600}
-          title="더 보기"
-        />
+        <ButtonWrapper>
+          <DefaultButton
+            pc={[0, 50]}
+            onClick={handleAddFetch}
+            isHover
+            hoverBgColor="#1e90ff"
+            hoverColor="white"
+            bgColor="#08c1e9"
+            color="white"
+            margin={[0, 0, 30, 0]}
+            fontSize={[18, 18]}
+            fontWeight={600}
+            title="더 보기"
+          />
+        </ButtonWrapper>
       )}
     </Container>
   );
 }
 
 export default index;
+
+const ButtonWrapper = styled.div`
+  margin: 0 auto;
+  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
+    width: 95%;
+  }
+`;
