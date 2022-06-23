@@ -75,7 +75,7 @@ const Wrapper = styled.div`
   padding-bottom: 5px;
   border-bottom: 2px solid black;
   margin: auto;
-  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
     width: 95%;
   }
 `;

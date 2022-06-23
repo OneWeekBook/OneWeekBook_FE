@@ -24,7 +24,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   p {
-    font-size: 25px;
+    font-size: 24px;
     font-weight: 600;
   }
 `;

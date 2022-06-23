@@ -171,4 +171,8 @@ const ImgWrapper = styled.div`
       display: block;
     }
   }
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    width: 100px;
+    height: 130px;
+  }
 `;

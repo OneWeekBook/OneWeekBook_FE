@@ -109,8 +109,11 @@ const Wrapper = styled.div`
     font-weight: 600;
     margin-bottom: 10px;
   }
-  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
     width: 95%;
+    .title {
+      font-size: 18px;
+    }
   }
 `;
 
@@ -130,4 +133,7 @@ const ReviewListWrapper = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 15px;
   margin-top: 20px;
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    grid-template-columns: 1fr;
+  }
 `;

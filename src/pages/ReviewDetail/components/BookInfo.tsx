@@ -16,7 +16,8 @@ const Wrapper = styled.div`
   margin: 10px auto 50px;
   width: 100%;
   height: auto;
-  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
+    margin: 10px auto 30px;
     width: 95%;
   }
 `;

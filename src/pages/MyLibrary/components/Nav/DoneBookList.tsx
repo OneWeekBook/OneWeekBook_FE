@@ -85,13 +85,12 @@ const Wrapper = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
   margin: 10px auto 30px;
-  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
     width: 95%;
   }
-  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    grid-template-columns: 1fr 1fr;
-  }
-  @media (max-width: 500px) {
+  @media (max-width: 660px) {
     grid-template-columns: 1fr;
   }
 `;

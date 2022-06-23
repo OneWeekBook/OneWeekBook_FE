@@ -51,6 +51,7 @@ function Index({ children }: PropsWithChildren<any>) {
 export default Index;
 
 const LayoutWrapper = styled.section`
+  min-width: 375px;
   display: flex;
   height: 100vh;
   flex-direction: column;

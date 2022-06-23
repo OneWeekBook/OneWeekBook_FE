@@ -11,34 +11,23 @@ type PropsType = {
 
 function Rank({ rank, limit, write, remaining, percent }: PropsType) {
   return (
-    <Wrapper>
-      <InfoWrapper>
-        <RankTitle>등급: {rank}</RankTitle>
-        <ProgressBarForm
-          limit={limit}
-          write={write}
-          width={200}
-          percent={percent}
-        />
-        <p className="rankDesc">다음 등급까지 {remaining}권 남았습니다.</p>
-      </InfoWrapper>
-    </Wrapper>
+    <InfoWrapper>
+      <RankTitle>등급: {rank}</RankTitle>
+      <ProgressBarForm
+        limit={limit}
+        write={write}
+        width={200}
+        percent={percent}
+      />
+      <p className="rankDesc">다음 등급까지 {remaining}권 남았습니다.</p>
+    </InfoWrapper>
   );
 }
 
 export default Rank;
 
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  margin-top: 20px;
-  @media (max-width: 670px) {
-    display: block;
-  }
-`;
-
 const InfoWrapper = styled.div`
+  margin-top: 20px;
   .rankDesc {
     margin: 10px 0px;
     font-size: 18px;
@@ -47,5 +36,5 @@ const InfoWrapper = styled.div`
 
 const RankTitle = styled.p`
   margin: 10px 0px;
-  font-size: 22px;
+  font-size: 20px;
 `;

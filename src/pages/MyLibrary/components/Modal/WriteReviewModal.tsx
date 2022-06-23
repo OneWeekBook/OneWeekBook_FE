@@ -128,19 +128,21 @@ function WriteReviewModal({ bookId, bookData, toggleIsOn }: PropsType) {
         <MiddleWrapper>
           <RecommendWrapper>
             <p>책이 어떻나요?</p>
-            {RecommendItem.map((item) => (
-              <ImageButton
-                key={item.id}
-                type="button"
-                src={recommend === item.value ? item.img_done : item.img_none}
-                pc={[40, 30]}
-                imgPC={[30, 30]}
-                margin={[0, 0, 0, 10]}
-                bgColor="white"
-                alt="recommend button"
-                onClick={() => recommendClick(item.value)}
-              />
-            ))}
+            <ImageButtonWrapper>
+              {RecommendItem.map((item) => (
+                <ImageButton
+                  key={item.id}
+                  type="button"
+                  src={recommend === item.value ? item.img_done : item.img_none}
+                  pc={[40, 30]}
+                  imgPC={[30, 30]}
+                  margin={[0, 10, 0, 0]}
+                  bgColor="white"
+                  alt="recommend button"
+                  onClick={() => recommendClick(item.value)}
+                />
+              ))}
+            </ImageButtonWrapper>
           </RecommendWrapper>
           <ButtonWrapper>
             {reviewItem.review !== null || itemAddSuccess ? (
@@ -192,6 +194,7 @@ function WriteReviewModal({ bookId, bookData, toggleIsOn }: PropsType) {
           </ButtonWrapper>
         </MiddleWrapper>
         <textarea
+          className="review"
           placeholder="리뷰를 작성해주세요."
           defaultValue={review}
           onBlur={(e) => setReview(e.target.value)}
@@ -205,12 +208,12 @@ export default WriteReviewModal;
 
 const BodyWrapper = styled.div`
   margin: 10px 50px 0;
-  textarea {
+  .review {
     box-sizing: border-box;
     width: 100%;
     min-height: 150px;
     padding: 10px;
-    resize : vertical:
+    border: none;
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     margin: 10px auto 0;
@@ -246,10 +249,18 @@ const RecommendWrapper = styled.div`
   p {
     font-size: 18px;
     font-weight: 600;
+    margin-right: 10px;
   }
-  img {
-    margin: 0 10px;
+  @media (max-width: 660px) {
+    display: block;
+    p {
+      margin-bottom: 10px;
+    }
   }
+`;
+
+const ImageButtonWrapper = styled.div`
+  display: flex;
 `;
 
 const ButtonWrapper = styled.div`
