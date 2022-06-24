@@ -70,7 +70,8 @@ function ReviewInfo() {
         최신 순
       </SortButton>
       <ReviewListWrapper>
-        {reviews.length &&
+        {Array.isArray(reviews) &&
+          !!reviews &&
           reviews.map((item: ReviewDetailTypes, index: number) => (
             <ReviewItem
               key={index}
@@ -105,7 +106,7 @@ const Wrapper = styled.div`
   width: 100%;
   height: auto;
   .title {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 600;
     margin-bottom: 10px;
   }

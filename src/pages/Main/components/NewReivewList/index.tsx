@@ -20,7 +20,8 @@ function NewReviewList() {
     <Wrapper>
       <NewReviewTitle>따끈따끈한 새 리뷰</NewReviewTitle>
       <div>
-        {newReviews.length &&
+        {Array.isArray(newReviews) &&
+          !!newReviews &&
           newReviews
             .slice(0, end)
             .map((item: NewReviewTypes, idx: number) => (

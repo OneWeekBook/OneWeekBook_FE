@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { getImgErr } from 'lib/ImageError';
 import { NewReviewTypes } from 'types/main';
 
 type PropsType = {
@@ -23,7 +24,7 @@ function NewReivewListItem({
     <ItemWrapper>
       <Link to={`/review/${isbn}?sort=new`}>
         <Index>{idx + 1}</Index>
-        <BookImage src={img} alt="book" />
+        <BookImage src={img} alt="book" onError={getImgErr} />
         <InfoWrapper>
           <BookTitleWrapper>
             {title && title.replaceAll('<b>', '').replaceAll('</b>', '')}

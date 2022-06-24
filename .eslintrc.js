@@ -34,6 +34,7 @@ module.exports = {
     'default-param-last': 0,
     'consistent-return': 0,
     'no-shadow': 0,
+    'no-param-reassign': 0,
     'react/prop-types': 0,
     'react/no-danger': 0,
     'react/no-array-index-key': 0,

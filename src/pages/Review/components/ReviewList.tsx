@@ -37,14 +37,14 @@ function ReviewList() {
               );
             })}
           </ReviewListWrapper>
+          <PagenationForm
+            total={reivewsTotal}
+            display={12}
+            curIdx={curIdx}
+            setCurIdx={setCurIdx}
+          />
         </>
       )}
-      <PagenationForm
-        total={reivewsTotal}
-        display={12}
-        curIdx={curIdx}
-        setCurIdx={setCurIdx}
-      />
     </Wrapper>
   );
 }

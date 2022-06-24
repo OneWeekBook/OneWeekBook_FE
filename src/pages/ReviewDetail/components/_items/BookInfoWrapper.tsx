@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { getImgErr } from 'lib/ImageError';
 import { ReviewBookTypes } from 'types/review';
 import PieChart from 'components/Form/PieChartForm';
 
@@ -14,7 +15,7 @@ function BookInfoWrapper({
     <Wrapper>
       <BookInfoBox>
         <ImgWrapper>
-          <img src={img} alt="book img" />
+          <img src={img} alt="book img" onError={getImgErr} />
         </ImgWrapper>
         <InfoWrapper>
           <div>
@@ -91,11 +92,11 @@ const InfoWrapper = styled.div`
   justify-content: space-between;
   margin-left: 15px;
   .bookTitle {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
   }
   .bookAuthor {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
   }
   .bookPublisher {
@@ -103,7 +104,7 @@ const InfoWrapper = styled.div`
     font-weight: 500;
   }
   .reviewTotal {
-    font-size: 18px;
+    font-size: 16px;
     span {
       font-weight: 600;
     }

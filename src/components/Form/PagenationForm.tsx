@@ -46,42 +46,46 @@ function PagenationForm({ total, curIdx, display, setCurIdx }: PropsType) {
   };
 
   return (
-    <PageNationWrapper>
-      {len > 5 && curIdx > 5 && (
-        <ImageButton
-          type="button"
-          src={`${process.env.PUBLIC_URL}/assets/arrow/pagination-prev-arrow.svg`}
-          pc={[20, 20]}
-          imgPC={[20, 20]}
-          bgColor="white"
-          alt="prev arrow"
-          margin={[0, 10, 0, 10]}
-          onClick={prevClick}
-        />
+    <>
+      {total > display && (
+        <PageNationWrapper>
+          {len > 5 && curIdx > 5 && (
+            <ImageButton
+              type="button"
+              src={`${process.env.PUBLIC_URL}/assets/arrow/pagination-prev-arrow.svg`}
+              pc={[20, 20]}
+              imgPC={[20, 20]}
+              bgColor="white"
+              alt="prev arrow"
+              margin={[0, 10, 0, 10]}
+              onClick={prevClick}
+            />
+          )}
+          {pageNums.length > 0 &&
+            pageNums.slice(start, end).map((num) => (
+              <PageNum
+                key={num}
+                onClick={() => setCurIdx(num)}
+                isSelected={curIdx === num}
+              >
+                {num}
+              </PageNum>
+            ))}
+          {len > 5 && curIdx <= 5 && (
+            <ImageButton
+              type="button"
+              src={`${process.env.PUBLIC_URL}/assets/arrow/pagination-next-arrow.svg`}
+              pc={[20, 20]}
+              imgPC={[20, 20]}
+              bgColor="white"
+              alt="next arrow"
+              margin={[0, 10, 0, 10]}
+              onClick={nextClick}
+            />
+          )}
+        </PageNationWrapper>
       )}
-      {pageNums.length > 0 &&
-        pageNums.slice(start, end).map((num) => (
-          <PageNum
-            key={num}
-            onClick={() => setCurIdx(num)}
-            isSelected={curIdx === num}
-          >
-            {num}
-          </PageNum>
-        ))}
-      {len > 5 && curIdx <= 5 && (
-        <ImageButton
-          type="button"
-          src={`${process.env.PUBLIC_URL}/assets/arrow/pagination-next-arrow.svg`}
-          pc={[20, 20]}
-          imgPC={[20, 20]}
-          bgColor="white"
-          alt="next arrow"
-          margin={[0, 10, 0, 10]}
-          onClick={nextClick}
-        />
-      )}
-    </PageNationWrapper>
+    </>
   );
 }
 

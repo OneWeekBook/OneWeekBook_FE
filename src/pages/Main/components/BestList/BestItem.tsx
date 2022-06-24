@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { getImgErr } from 'lib/ImageError';
 import { ReviewItemType } from 'types/review';
 
 type PropsType = {
@@ -20,7 +21,7 @@ function BestItem({
   return (
     <ItemWrapper>
       <Link to={`/review/${isbn}?sort=recommend`}>
-        <BookImage src={img} alt="book" />
+        <img src={img} alt="book" onError={getImgErr} />
         <InfoWrapper>
           <p className="item-id">{idx}</p>
           <BookInfoWrapper>
@@ -63,11 +64,6 @@ const ItemWrapper = styled.div`
     text-decoration: none;
     color: black;
   }
-`;
-
-const BookImage = styled.img`
-  width: 100px;
-  background-color: lightblue;
 `;
 
 const InfoWrapper = styled.div`

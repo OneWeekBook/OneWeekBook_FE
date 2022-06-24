@@ -46,7 +46,8 @@ function ReadBookList({ userId }: PropsType) {
   return (
     <>
       <Wrapper>
-        {userBookList.length > 0 &&
+        {Array.isArray(userBookList) &&
+          !!userBookList &&
           userBookList.map((item: LibraryItemTypes) => (
             <BookItem
               key={item.id}
