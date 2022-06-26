@@ -1,8 +1,10 @@
-import { SignInTypes } from 'types/api';
+import { SignInTypes, ActionsTypes } from 'types/api';
 
 export const SIGN_IN_REQUEST = 'SIGN_IN_REQUEST';
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
 export const SIGN_IN_FAIL = 'SIGN_IN_FAIL';
+
+export const SIGN_IN_INIT = 'SIGN_IN_INIT';
 
 const initialState = {
   isLoading: false,
@@ -11,7 +13,7 @@ const initialState = {
   signInErrorMsg: '',
 };
 
-export default function SignIn(state = initialState, action: any) {
+export default function SignIn(state = initialState, action: ActionsTypes) {
   switch (action.type) {
     case SIGN_IN_REQUEST:
       return {
@@ -37,6 +39,8 @@ export default function SignIn(state = initialState, action: any) {
         signInErrorStatus: action.error.status,
         signInErrorMsg: action.error.data.message,
       };
+    case SIGN_IN_INIT:
+      return initialState;
     default:
       return state;
   }
@@ -52,7 +56,7 @@ export const SignInRequest = (data: SignInTypes) => {
 export const SignInSuccess = (data: any) => {
   return {
     type: SIGN_IN_SUCCESS,
-    data,
+    payload: data,
   };
 };
 
@@ -60,5 +64,11 @@ export const SignInFail = (error: any) => {
   return {
     type: SIGN_IN_FAIL,
     error: error.response,
+  };
+};
+
+export const SignInInit = () => {
+  return {
+    type: SIGN_IN_INIT,
   };
 };

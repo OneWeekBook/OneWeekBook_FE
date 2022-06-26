@@ -1,6 +1,10 @@
+import { ActionsTypes } from 'types/api';
+
 export const AUTH_CODE_REQUEST = 'AUTH_CODE_REQUEST';
 export const AUTH_CODE_SUCCESS = 'AUTH_CODE_SUCCESS';
 export const AUTH_CODE_FAIL = 'AUTH_CODE_FAIL';
+
+export const AUTH_CODE_INIT = 'AUTH_CODE_INIT';
 
 const initialState = {
   isLoading: false,
@@ -9,7 +13,7 @@ const initialState = {
   codeErrorMsg: '',
 };
 
-export default function AuthCode(state = initialState, action: any) {
+export default function AuthCode(state = initialState, action: ActionsTypes) {
   switch (action.type) {
     case AUTH_CODE_REQUEST:
       return {
@@ -35,6 +39,8 @@ export default function AuthCode(state = initialState, action: any) {
         codeErrorStatus: action.error.status,
         codeErrorMsg: action.error.data.message,
       };
+    case AUTH_CODE_INIT:
+      return initialState;
     default:
       return state;
   }
@@ -57,5 +63,11 @@ export const AuthCodeFail = (error: any) => {
   return {
     type: AUTH_CODE_FAIL,
     error: error.response,
+  };
+};
+
+export const AuthCodeInit = () => {
+  return {
+    type: AUTH_CODE_INIT,
   };
 };

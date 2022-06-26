@@ -1,4 +1,4 @@
-import React, { ElementType, HTMLAttributes, PropsWithChildren } from 'react';
+import { ElementType, HTMLAttributes, PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
 type ContainerTypes = {
@@ -50,7 +50,7 @@ const Component = styled.section`
 `;
 
 const ContentsWrapper = styled.section`
-  max-width: 1240px;
+  max-width: 1000px;
   width: 100%;
   min-width: 375px;
 `;

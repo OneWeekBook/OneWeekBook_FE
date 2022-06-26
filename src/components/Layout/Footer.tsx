@@ -1,17 +1,26 @@
-import React from 'react';
 import styled from 'styled-components';
 import Container from '../Container';
 
 function Footer() {
   return (
     <Container as="footer">
-      <LOGO>ONEWEEKBOOK</LOGO>
-      <DESC>Create by leejy001 leejh96</DESC>
+      <Wrapper>
+        <LOGO>ONEWEEKBOOK</LOGO>
+        <DESC>Create by leejy001 leejh96</DESC>
+      </Wrapper>
     </Container>
   );
 }
 
 export default Footer;
+
+const Wrapper = styled.div`
+  width: 100%;
+  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
+    margin: auto;
+    width: 90%;
+  }
+`;
 
 const LOGO = styled.p`
   color: #fffafa;

@@ -1,13 +1,17 @@
-import React from 'react';
+import { useMemo } from 'react';
 import styled from 'styled-components';
 import Container from 'components/Container';
 import SignInForm from './components/SignInForm';
 
 function Index() {
+  const FormStyle = useMemo(
+    () => ({ height: '100%', display: 'flex', alignItems: 'center' }),
+    [],
+  );
+
   return (
-    <Container>
+    <Container style={FormStyle}>
       <Wrapper>
-        <ImgWrapper />
         <SignInWrapper>
           <SignInForm />
         </SignInWrapper>
@@ -19,27 +23,26 @@ function Index() {
 export default Index;
 
 const Wrapper = styled.div`
-  display: flex;
-  margin: 150px auto 0;
-  background-color: lightblue;
+  box-sizing: border-box;
+  background-color: white;
   border: solid 2px lightblue;
-  width: 70%;
+  width: 375px;
+  margin: auto;
   height: 500px;
-`;
-
-const ImgWrapper = styled.div`
-  width: 100%;
+  a {
+    text-decoration: none;
+  }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    display: none;
+    width: 355px;
   }
 `;
 
 const SignInWrapper = styled.div`
-  flex-shrink: 0;
-  width: 400px;
-  height: 500px;
   background-color: white;
-  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    width: 100%;
+  width: 100%;
+  text-align: center;
+  form {
+    display: flex;
+    flex-direction: column;
   }
 `;

@@ -1,8 +1,10 @@
-import { SignUpTypes } from 'types/api';
+import { SignUpTypes, ActionsTypes } from 'types/api';
 
 export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
 export const SIGN_UP_FAIL = 'SIGN_UP_FAIL';
+
+export const SIGN_UP_INIT = 'SIGN_UP_INIT';
 
 const initialState = {
   isLoading: false,
@@ -11,7 +13,7 @@ const initialState = {
   signUpErrorMsg: '',
 };
 
-export default function SignUp(state = initialState, action: any) {
+export default function SignUp(state = initialState, action: ActionsTypes) {
   switch (action.type) {
     case SIGN_UP_REQUEST:
       return {
@@ -37,6 +39,8 @@ export default function SignUp(state = initialState, action: any) {
         signUpErrorStatus: action.error.status,
         signUpErrorMsg: action.error.data.message,
       };
+    case SIGN_UP_INIT:
+      return initialState;
     default:
       return state;
   }
@@ -52,7 +56,7 @@ export const SignUpRequest = (data: SignUpTypes) => {
 export const SignUpSuccess = (data: any) => {
   return {
     type: SIGN_UP_SUCCESS,
-    data,
+    payload: data,
   };
 };
 
@@ -60,5 +64,11 @@ export const SignUpFail = (error: any) => {
   return {
     type: SIGN_UP_FAIL,
     error: error.response,
+  };
+};
+
+export const SignUpInit = () => {
+  return {
+    type: SIGN_UP_INIT,
   };
 };

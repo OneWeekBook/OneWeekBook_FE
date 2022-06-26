@@ -1,46 +1,45 @@
-import React, {
-  useEffect,
-  ChangeEvent,
-  FormEvent,
-  useState,
-  useCallback,
-} from 'react';
-import styled from 'styled-components';
-import ErrorForm from 'components/Form/ErrorForm';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { SignInRequest } from 'redux/reducers/SignIn';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { AppStateType } from 'redux/reducers';
+import { SignInInit, SignInRequest } from 'redux/reducers/SignIn';
+import useInput from 'hooks/useInput';
+import useInputEnter from 'hooks/useInputEnter';
+import ErrorForm from 'components/Form/ErrorForm';
+import FormInput from 'components/Input/FormInput';
+import DefaultButton from 'components/Button/DefaultButton';
+import { useSignInErrorCheck } from '../func/SignInErrorCheck';
 
 function SignInForm() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passRef = useRef<HTMLInputElement>(null);
+  const [email, changeEmail] = useInput('');
+  const [password, changePassword] = useInput('');
   const [signInError, setSignInError] = useState<boolean>(false);
-
+  const { handleInputEnter } = useInputEnter();
+  const { handleSignInError } = useSignInErrorCheck();
   const { signInErrorStatus, signInErrorMsg } = useSelector(
-    (state: any) => state.signIn,
+    (state: AppStateType) => state.signIn,
   );
 
   useEffect(() => {
-    switch (signInErrorStatus) {
-      case 200:
-        setSignInError(false);
-        navigate('/');
-        break;
-      case 400:
-      case 401:
-      case 500:
-      case 501:
-        setSignInError(true);
-        break;
-      default:
-        break;
+    emailRef.current?.focus();
+    return () => {
+      setSignInError(false);
+      dispatch(SignInInit());
+    };
+  }, []);
+
+  useEffect(() => {
+    if (email && password) {
+      handleSignInError(signInErrorStatus, setSignInError);
     }
   }, [signInErrorStatus]);
 
   const handleSubmit = useCallback(
-    (e: FormEvent<HTMLFormElement>) => {
+    (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       const user = { email, password };
       dispatch(SignInRequest(user));
@@ -52,28 +51,48 @@ function SignInForm() {
     <SignInFormWrapper>
       <Title>로그인</Title>
       <form onSubmit={handleSubmit}>
-        <input
-          id="email"
+        <FormInput
+          type="email"
           placeholder="이메일"
-          defaultValue={email}
-          onBlur={(event: ChangeEvent<HTMLInputElement>) =>
-            setEmail(event.target.value)
-          }
+          state={email}
+          onChange={changeEmail}
+          onKeyPress={(event) => handleInputEnter(event, passRef)}
+          mref={emailRef}
         />
-        <input
-          id="password"
-          placeholder="비밀번호"
-          defaultValue={password}
+        <FormInput
           type="password"
-          onBlur={(event: ChangeEvent<HTMLInputElement>) =>
-            setPassword(event.target.value)
-          }
+          placeholder="비밀번호"
+          state={password}
+          onChange={changePassword}
+          mref={passRef}
         />
         {signInError && <ErrorForm error={signInErrorMsg} align="left" />}
-        <button type="submit">로그인</button>
+        <DefaultButton
+          pc={[0, 50]}
+          type="submit"
+          isHover
+          hoverBgColor="#08c1e9"
+          hoverColor="white"
+          bgColor="#1e90ff"
+          color="white"
+          margin={[10, 0, 10, 0]}
+          fontSize={[18, 18]}
+          fontWeight={600}
+          title="로그인"
+        />
       </form>
       <Link to="/sign-up">
-        <button type="button">회원가입</button>
+        <DefaultButton
+          pc={[0, 50]}
+          isHover
+          hoverBgColor="#303538"
+          hoverColor="white"
+          bgColor="#e6e6e6"
+          margin={[10, 0, 10, 0]}
+          fontSize={[18, 18]}
+          fontWeight={600}
+          title="회원가입"
+        />
       </Link>
     </SignInFormWrapper>
   );
@@ -89,33 +108,6 @@ const SignInFormWrapper = styled.div`
     display: flex;
     flex-direction: column;
   }
-  input {
-    box-sizing: border-box;
-    width: 100%;
-    height: 45px;
-    border: 1px solid #e6e6e6;
-    margin: 5px auto;
-    padding-left: 5px;
-  }
-  input:focus {
-    outline: none !important;
-    border: 1px solid lightblue;
-  }
-  button {
-    width: 100%;
-    height: 50px;
-    border: none;
-    border-radius: 5px;
-    margin: 10px auto;
-    color: white;
-    font-size: 18px;
-    background-color: #1e90ff;
-    :first-child {
-      color: black;
-      background-color: #e6e6e6;
-    }
-  }
-
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     padding: 0px 30px;
   }
