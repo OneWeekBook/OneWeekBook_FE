@@ -4,9 +4,14 @@ import useInterval from 'hooks/useInterval';
 import useWindowSize from 'hooks/useWindowSize';
 import SlideButton from './SlideButton';
 
-const SlideItems = [
-  { id: 1, img: `/assets/slide/slide_one.png` },
-  { id: 2, img: `/assets/slide/slide_two.png` },
+const SlidePCItems = [
+  { id: 1, img: `/assets/slide/slidePC_one.png` },
+  { id: 2, img: `/assets/slide/slidePC_two.png` },
+];
+
+const SlideMobileItems = [
+  { id: 1, img: `/assets/slide/slideMobile_one.png` },
+  { id: 2, img: `/assets/slide/slideMobile_two.png` },
 ];
 
 type SlideItemsType = {
@@ -15,7 +20,7 @@ type SlideItemsType = {
 };
 
 function Index() {
-  const itemSize = SlideItems.length;
+  const itemSize = SlidePCItems.length;
   const addItemSize = 2;
   const [windowWidth, windowHeight] = useWindowSize();
   const [curIndex, setCurIndex] = useState<number>(addItemSize);
@@ -24,21 +29,33 @@ function Index() {
   const [isSwiping, setIsSwiping] = useState<boolean>(false);
   const isResizing = useRef<boolean>(false);
 
-  const setSlides = () => {
+  const setPCSlides = () => {
     const addedStart = [];
     const addedEnd = [];
     let index = 0;
     while (index < addItemSize) {
-      addedEnd.push(SlideItems[index % SlideItems.length]);
-      addedStart.unshift(
-        SlideItems[SlideItems.length - 1 - (index % SlideItems.length)],
-      );
+      addedEnd.push(SlidePCItems[index % itemSize]);
+      addedStart.unshift(SlidePCItems[itemSize - 1 - (index % itemSize)]);
       index += 1;
     }
-    return [...addedStart, ...SlideItems, ...addedEnd];
+    return [...addedStart, ...SlidePCItems, ...addedEnd];
   };
 
-  const slides = setSlides();
+  const setMobileSlides = () => {
+    const addedStart = [];
+    const addedEnd = [];
+    let index = 0;
+    while (index < addItemSize) {
+      addedEnd.push(SlideMobileItems[index % itemSize]);
+      addedStart.unshift(SlideMobileItems[itemSize - 1 - (index % itemSize)]);
+      index += 1;
+    }
+    return [...addedStart, ...SlideMobileItems, ...addedEnd];
+  };
+
+  const pcSlides = setPCSlides();
+
+  const mobileSlides = setMobileSlides();
 
   const getNewItemWidth = () => {
     let itemWidth = windowWidth * 0.9 - 10 * 2;
@@ -93,17 +110,6 @@ function Index() {
     handleSlide(curIndex + num);
   };
 
-  const getItemIndex = (idx: number) => {
-    let index = idx;
-    index -= addItemSize;
-    if (index < 0) {
-      index += itemSize;
-    } else if (index >= itemSize) {
-      index -= itemSize;
-    }
-    return index;
-  };
-
   return (
     <Wrapper>
       <Slider>
@@ -111,21 +117,38 @@ function Index() {
         <SlideListWrapper>
           <SlideWrapper
             index={curIndex}
-            len={slides.length}
+            len={pcSlides.length}
             transition={transition}
             onMouseOver={() => setIsSwiping(true)}
             onMouseOut={() => setIsSwiping(false)}
           >
-            {slides.map((item: SlideItemsType, index: number) => {
-              return (
-                <SlideItem
-                  key={index}
-                  style={{ width: newItemWidth || 'auto' }}
-                >
-                  <img src={item.img} alt="slide one" />
-                </SlideItem>
-              );
-            })}
+            {newItemWidth > 849 ? (
+              <>
+                {pcSlides.map((item: SlideItemsType, index: number) => {
+                  return (
+                    <SlideItem
+                      key={index}
+                      style={{ width: newItemWidth || 'auto' }}
+                    >
+                      <img src={item.img} alt="slide one" />
+                    </SlideItem>
+                  );
+                })}
+              </>
+            ) : (
+              <>
+                {mobileSlides.map((item: SlideItemsType, index: number) => {
+                  return (
+                    <SlideItem
+                      key={index}
+                      style={{ width: newItemWidth || 'auto' }}
+                    >
+                      <img src={item.img} alt="slide one" />
+                    </SlideItem>
+                  );
+                })}
+              </>
+            )}
           </SlideWrapper>
         </SlideListWrapper>
       </Slider>
@@ -192,8 +215,16 @@ const SlideItem = styled.div`
     border-radius: 10px;
     width: 100%;
     height: 100%;
+    object-fit: cover;
   }
-  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
     margin: 0 5px;
+    img {
+      position: absolute;
+      width: 100%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 `;
