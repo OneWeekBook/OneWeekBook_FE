@@ -1,3 +1,5 @@
+import { ActionsTypes } from 'types/api';
+
 export const AUTH_EMAIL_REQUEST = 'AUTH_EMAIL_REQUEST';
 export const AUTH_EMAIL_SUCCESS = 'AUTH_EMAIL_SUCCESS';
 export const AUTH_EMAIL_FAIL = 'AUTH_EMAIL_FAIL';
@@ -11,7 +13,7 @@ const initialState = {
   emailErrorMsg: '',
 };
 
-export default function AuthEmail(state = initialState, action: any) {
+export default function AuthEmail(state = initialState, action: ActionsTypes) {
   switch (action.type) {
     case AUTH_EMAIL_REQUEST:
       return {

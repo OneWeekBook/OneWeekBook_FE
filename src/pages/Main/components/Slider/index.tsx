@@ -5,14 +5,13 @@ import useWindowSize from 'hooks/useWindowSize';
 import SlideButton from './SlideButton';
 
 const SlideItems = [
-  { id: 1, color: '#33a' },
-  { id: 2, color: '#8c9' },
-  { id: 3, color: '#e6e6e6' },
+  { id: 1, img: `/assets/slide/slide_one.png` },
+  { id: 2, img: `/assets/slide/slide_two.png` },
 ];
 
 type SlideItemsType = {
   id: number;
-  color: string;
+  img: string;
 };
 
 function Index() {
@@ -66,7 +65,7 @@ function Index() {
     () => {
       handleSlide(curIndex + 1);
     },
-    !isSwiping ? 2000 : null,
+    !isSwiping ? 3000 : null,
   );
 
   const replaceSlide = (index: number) => {
@@ -118,14 +117,12 @@ function Index() {
             onMouseOut={() => setIsSwiping(false)}
           >
             {slides.map((item: SlideItemsType, index: number) => {
-              const itemIndex = getItemIndex(index);
               return (
                 <SlideItem
                   key={index}
-                  color={SlideItems[itemIndex].color}
                   style={{ width: newItemWidth || 'auto' }}
                 >
-                  {itemIndex}({item.id})
+                  <img src={item.img} alt="slide one" />
                 </SlideItem>
               );
             })}
@@ -186,13 +183,16 @@ const SlideWrapper = styled.div<{
   transition: ${({ transition }) => transition};
 `;
 
-const SlideItem = styled.div<{ color: string }>`
+const SlideItem = styled.div`
   position: relative;
   width: 100%;
   height: 350px;
   margin: 0 10px;
-  background-color: ${({ color }) => color};
-  border-radius: 10px;
+  img {
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+  }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     margin: 0 5px;
   }

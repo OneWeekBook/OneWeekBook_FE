@@ -1,4 +1,9 @@
-import { DeleteType, ParagraphAddTypes, ParagraphType } from 'types/api';
+import {
+  DeleteType,
+  ParagraphAddTypes,
+  ParagraphType,
+  ActionsTypes,
+} from 'types/api';
 
 export const PARAGRAPH_INIT_REQUEST = 'PARAGRAPH_INIT_REQUEST';
 export const PARAGRAPH_INIT_SUCCESS = 'PARAGRAPH_INIT_SUCCESS';
@@ -30,7 +35,10 @@ const initialState = {
   paragraph: [],
 };
 
-export default function ChangePassword(state = initialState, action: any) {
+export default function ChangePassword(
+  state = initialState,
+  action: ActionsTypes,
+) {
   switch (action.type) {
     case PARAGRAPH_INIT_REQUEST:
       return {
@@ -43,7 +51,7 @@ export default function ChangePassword(state = initialState, action: any) {
         ...state,
         initLoading: false,
         initSuccess: true,
-        paragraph: action.data,
+        paragraph: action.payload,
       };
     case PARAGRAPH_INIT_FAIL:
       return {
@@ -62,7 +70,7 @@ export default function ChangePassword(state = initialState, action: any) {
         ...state,
         paragraphLoading: false,
         paragraphSuccess: true,
-        paragraph: action.data,
+        paragraph: action.payload,
       };
     case PARAGRAPH_FAIL:
       return {
@@ -123,7 +131,7 @@ export const ParagraphInitRequest = (data: ParagraphType) => {
 export const ParagraphInitSuccess = (data: any) => {
   return {
     type: PARAGRAPH_INIT_SUCCESS,
-    data,
+    payload: data,
   };
 };
 
@@ -144,7 +152,7 @@ export const ParagraphRequest = (data: ParagraphType) => {
 export const ParagraphSuccess = (data: any) => {
   return {
     type: PARAGRAPH_SUCCESS,
-    data,
+    payload: data,
   };
 };
 

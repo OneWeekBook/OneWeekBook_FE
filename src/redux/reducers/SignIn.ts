@@ -1,4 +1,4 @@
-import { SignInTypes } from 'types/api';
+import { SignInTypes, ActionsTypes } from 'types/api';
 
 export const SIGN_IN_REQUEST = 'SIGN_IN_REQUEST';
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
@@ -13,7 +13,7 @@ const initialState = {
   signInErrorMsg: '',
 };
 
-export default function SignIn(state = initialState, action: any) {
+export default function SignIn(state = initialState, action: ActionsTypes) {
   switch (action.type) {
     case SIGN_IN_REQUEST:
       return {
@@ -56,7 +56,7 @@ export const SignInRequest = (data: SignInTypes) => {
 export const SignInSuccess = (data: any) => {
   return {
     type: SIGN_IN_SUCCESS,
-    data,
+    payload: data,
   };
 };
 

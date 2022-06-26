@@ -1,3 +1,5 @@
+import { ActionsTypes } from 'types/api';
+
 export const CATEGORY_REQUEST = 'CATEGORY_REQUEST';
 export const CATEGORY_SUCCESS = 'CATEGORY_SUCCESS';
 export const CATEGORY_FAIL = 'CATEGORY_FAIL';
@@ -8,7 +10,7 @@ const initialState = {
   categories: [],
 };
 
-export default function SignIn(state = initialState, action: any) {
+export default function SignIn(state = initialState, action: ActionsTypes) {
   switch (action.type) {
     case CATEGORY_REQUEST:
       return {
@@ -21,7 +23,7 @@ export default function SignIn(state = initialState, action: any) {
         ...state,
         isLoading: false,
         isSuccess: true,
-        categories: action.data.categories,
+        categories: action.payload.categories,
       };
     case CATEGORY_FAIL:
       return {
@@ -43,7 +45,7 @@ export const CategoryRequest = () => {
 export const CategorySuccess = (data: any) => {
   return {
     type: CATEGORY_SUCCESS,
-    data,
+    payload: data,
   };
 };
 

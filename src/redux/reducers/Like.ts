@@ -1,4 +1,4 @@
-import { LikeCancelTypes, LikeTypes } from 'types/api';
+import { LikeCancelTypes, LikeTypes, ActionsTypes } from 'types/api';
 
 export const LIKE_REQUEST = 'LIKE_REQUEST';
 export const LIKE_SUCCESS = 'LIKE_SUCCESS';
@@ -27,7 +27,7 @@ const initialState = {
   likeData: [],
 };
 
-export default function SignIn(state = initialState, action: any) {
+export default function SignIn(state = initialState, action: ActionsTypes) {
   switch (action.type) {
     case LIKE_REQUEST:
       return {
@@ -42,7 +42,7 @@ export default function SignIn(state = initialState, action: any) {
         isLoading: false,
         isSuccess: true,
         likeErrorStatus: 200,
-        likeData: action.data.likeData,
+        likeData: action.payload.likeData,
       };
     case LIKE_FAIL:
       return {
@@ -110,7 +110,7 @@ export const LikeRequest = (data: { bookId: number }) => {
 export const LikeSuccess = (data: any) => {
   return {
     type: LIKE_SUCCESS,
-    data,
+    payload: data,
   };
 };
 

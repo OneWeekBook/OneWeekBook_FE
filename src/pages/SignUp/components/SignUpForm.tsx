@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { SignUpInit, SignUpRequest } from 'redux/reducers/SignUp';
 import styled from 'styled-components';
+import { AppStateType } from 'redux/reducers';
+import { SignUpInit, SignUpRequest } from 'redux/reducers/SignUp';
 import useInput from 'hooks/useInput';
 import useInputEnter from 'hooks/useInputEnter';
 import ErrorForm from 'components/Form/ErrorForm';
@@ -30,7 +31,9 @@ function SignUpForm() {
   const { handleError } = useErrorCheck();
   const { handleSignUpError } = useSignUpErrorCheck();
   const { handleInputEnter } = useInputEnter();
-  const { signUpErrorStatus } = useSelector((state: any) => state.signUp);
+  const { signUpErrorStatus } = useSelector(
+    (state: AppStateType) => state.signUp,
+  );
 
   useEffect(() => {
     handleError(

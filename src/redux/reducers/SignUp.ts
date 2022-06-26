@@ -1,4 +1,4 @@
-import { SignUpTypes } from 'types/api';
+import { SignUpTypes, ActionsTypes } from 'types/api';
 
 export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
@@ -13,7 +13,7 @@ const initialState = {
   signUpErrorMsg: '',
 };
 
-export default function SignUp(state = initialState, action: any) {
+export default function SignUp(state = initialState, action: ActionsTypes) {
   switch (action.type) {
     case SIGN_UP_REQUEST:
       return {
@@ -56,7 +56,7 @@ export const SignUpRequest = (data: SignUpTypes) => {
 export const SignUpSuccess = (data: any) => {
   return {
     type: SIGN_UP_SUCCESS,
-    data,
+    payload: data,
   };
 };
 

@@ -1,4 +1,4 @@
-import { call, put, throttle } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 import {
   AddSearchFail,
@@ -21,7 +21,7 @@ function AddSearchAPI(params: any) {
 
 function* fetchAddSearchSaga(action: any): any {
   try {
-    const result = yield call(AddSearchAPI, action.params);
+    const result = yield call(AddSearchAPI, action.payload);
     yield put(AddSearchSuccess(result.data));
   } catch (error) {
     yield put(AddSearchFail(error));
@@ -29,5 +29,5 @@ function* fetchAddSearchSaga(action: any): any {
 }
 
 export default function* watchAddSearch() {
-  yield throttle(5000, ADD_SEARCH_REQUEST, fetchAddSearchSaga);
+  yield takeEvery(ADD_SEARCH_REQUEST, fetchAddSearchSaga);
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { AppStateType } from 'redux/reducers';
 import { MyLibraryRequest } from 'redux/reducers/MyLibrary';
 import useToggle from 'hooks/useToggle';
 import { InfoTypes, LibraryItemTypes } from 'types/book';
@@ -25,10 +26,12 @@ function DoneBookList({ userId }: PropsType) {
     endTime: null,
   });
   const { userBookList, isDeleteSuccess } = useSelector(
-    (state: any) => state.myLibrary,
+    (state: AppStateType) => state.myLibrary,
   );
-  const { userReviewSuccess } = useSelector((state: any) => state.userReview);
-  const { initSuccess } = useSelector((state: any) => state.paragraph);
+  const { userReviewSuccess } = useSelector(
+    (state: AppStateType) => state.userReview,
+  );
+  const { initSuccess } = useSelector((state: AppStateType) => state.paragraph);
 
   useEffect(() => {
     if (isDeleteSuccess) dispatch(MyLibraryRequest({ userId, progress: 2 }));
@@ -37,7 +40,8 @@ function DoneBookList({ userId }: PropsType) {
   return (
     <>
       <Wrapper>
-        {userBookList.length > 0 &&
+        {Array.isArray(userBookList) &&
+          !!userBookList &&
           userBookList.map((item: LibraryItemTypes) => (
             <BookItem
               key={item.id}
@@ -82,13 +86,12 @@ const Wrapper = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
   margin: 10px auto 30px;
-  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
     width: 95%;
   }
-  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    grid-template-columns: 1fr 1fr;
-  }
-  @media (max-width: 500px) {
+  @media (max-width: 660px) {
     grid-template-columns: 1fr;
   }
 `;

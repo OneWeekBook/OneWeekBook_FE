@@ -5,13 +5,13 @@ import { ReviewFail, ReviewSuccess, REVIEW_REQUEST } from '../reducers/Review';
 
 function ReviewDetailAPI(params: ReivewDetailTypes) {
   return axios.get(
-    `${process.env.REACT_APP_BASIC_URL}/book/reviews/${params.isbn}?start=${params.start}&display=10sortby=${params.sortby}`,
+    `${process.env.REACT_APP_BASIC_URL}/book/reviews/${params.isbn}?start=${params.start}&display=10&sortby=${params.sortby}`,
   );
 }
 
 function* fetchReviewDetailSaga(action: any): any {
   try {
-    const result = yield call(ReviewDetailAPI, action.data);
+    const result = yield call(ReviewDetailAPI, action.payload);
     yield put(ReviewSuccess(result.data));
   } catch (error) {
     yield put(ReviewFail(error));

@@ -17,7 +17,7 @@ function SearchAPI(params: any) {
 
 function* fetchSearchSaga(action: any): any {
   try {
-    const result = yield call(SearchAPI, action.params);
+    const result = yield call(SearchAPI, action.payload);
     yield put(SearchSuccess(result.data));
   } catch (error) {
     yield put(SearchFail(error));

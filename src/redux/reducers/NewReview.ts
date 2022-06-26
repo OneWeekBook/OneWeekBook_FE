@@ -1,3 +1,5 @@
+import { ActionsTypes } from 'types/api';
+
 export const NEW_REVIEWS_REQUEST = 'NEW_REVIEWS_REQUEST';
 export const NEW_REVIEWS_SUCCESS = 'NEW_REVIEWS_SUCCESS';
 export const NEW_REVIEWS_FAIL = 'NEW_REVIEWS_FAIL';
@@ -10,7 +12,7 @@ const initialState = {
   newReviews: [],
 };
 
-export default function Review(state = initialState, action: any) {
+export default function Review(state = initialState, action: ActionsTypes) {
   switch (action.type) {
     case NEW_REVIEWS_REQUEST:
       return {
@@ -23,7 +25,7 @@ export default function Review(state = initialState, action: any) {
         ...state,
         isNewLoading: false,
         isNewSuccess: true,
-        newReviews: action.data.reviews,
+        newReviews: action.payload.reviews,
       };
     case NEW_REVIEWS_FAIL:
       return {
@@ -47,7 +49,7 @@ export const NewReviewsRequest = () => {
 export const NewReviewsSuccess = (data: any) => {
   return {
     type: NEW_REVIEWS_SUCCESS,
-    data,
+    payload: data,
   };
 };
 
@@ -59,7 +61,7 @@ export const NewReviewsFail = (error: any) => {
 };
 
 export const NewReviewInit = () => {
-    return {
-      type: NEW_REVIEW_INIT,
-    };
+  return {
+    type: NEW_REVIEW_INIT,
+  };
 };

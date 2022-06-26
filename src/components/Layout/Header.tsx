@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import { AuthInit } from 'redux/reducers/AuthUser';
 import { Toast } from 'lib/Toast';
 import DefaultButton from 'components/Button/DefaultButton';
 import Container from '../Container';
@@ -11,6 +13,7 @@ type PropsType = {
 
 function Header({ toggleIsOn }: PropsType) {
   const location = useLocation();
+  const dispatch = useDispatch();
   const [isSign, setIsSign] = useState<boolean>(false);
 
   useEffect(() => {
@@ -26,6 +29,7 @@ function Header({ toggleIsOn }: PropsType) {
 
   const logoutClick = () => {
     sessionStorage.removeItem('accessToken');
+    dispatch(AuthInit());
     Toast('info', '로그아웃 되었습니다.');
   };
 
@@ -122,7 +126,7 @@ const Wrapper = styled.div<{ isSign: boolean }>`
     font-weight: 800;
     text-decoration: none;
   }
-  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
     margin: 10px auto;
     width: 90%;
     a {

@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { AppStateType } from 'redux/reducers';
 import { ParagraphInitRequest } from 'redux/reducers/Paragraph';
 import { UserReviewRequest } from 'redux/reducers/UserReview';
 import { MyLibraryDeleteRequest } from 'redux/reducers/MyLibrary';
@@ -31,7 +32,7 @@ function BookItem({
 }: LibraryItemTypes & ClickType) {
   const dispatch = useDispatch();
   const [deleteToggle, deleteToggleIsOn] = useToggle(false);
-  const { user } = useSelector((state: any) => state.authUser);
+  const { user } = useSelector((state: AppStateType) => state.authUser);
 
   const handleParagraphInfo = () => {
     dispatch(ParagraphInitRequest({ bookId: id }));
@@ -169,5 +170,9 @@ const ImgWrapper = styled.div`
     button {
       display: block;
     }
+  }
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    width: 100px;
+    height: 130px;
   }
 `;

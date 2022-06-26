@@ -1,6 +1,7 @@
 import { PropsWithChildren } from 'react';
 import DOMPurify from 'dompurify';
 import styled from 'styled-components';
+import { getImgErr } from 'lib/ImageError';
 import { SetDate } from 'lib/SetDate';
 import { LikeAddTypes } from 'types/book';
 import ImageButton from 'components/Button/ImageButton';
@@ -20,7 +21,7 @@ function SearchItem({
   return (
     <Wrapper>
       <ImgWrapper>
-        {userId && (
+        {sessionStorage.getItem('accessToken') && userId && (
           <ImageButton
             type="button"
             src={`${process.env.PUBLIC_URL}/assets/func/heart.svg`}
@@ -40,7 +41,7 @@ function SearchItem({
             }
           />
         )}
-        <img src={image} alt="book cover" />
+        <img src={image} alt="book cover" onError={getImgErr} />
       </ImgWrapper>
       <InfoWrapper>
         <div>
@@ -81,7 +82,6 @@ const Wrapper = styled.div`
 `;
 
 const ImgWrapper = styled.div`
-  background-color: blue;
   flex-shrink: 0;
   width: 150px;
   object-fit: contain;
@@ -123,7 +123,6 @@ const InfoWrapper = styled.div`
     font-weight: 600;
   }
   .infoDesc {
-    min-height: 90px;
     font-size: 14px;
     display: -webkit-box;
     word-wrap: break-word;

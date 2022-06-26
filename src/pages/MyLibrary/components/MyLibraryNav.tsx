@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { AppStateType } from 'redux/reducers';
 import { navDone, navLike, navRead } from 'redux/reducers/Func';
 import { MyLibraryInit, MyLibraryRequest } from 'redux/reducers/MyLibrary';
 import Nav from './Nav';
@@ -25,8 +26,8 @@ const NavItems = [
 
 function MyLibraryNav() {
   const dispatch = useDispatch();
-  const { user } = useSelector((state: any) => state.authUser);
-  const { navId } = useSelector((state: any) => state.func);
+  const { user } = useSelector((state: AppStateType) => state.authUser);
+  const { navId } = useSelector((state: AppStateType) => state.func);
 
   useEffect(() => {
     if (user.id)
@@ -74,7 +75,7 @@ const Wrapper = styled.div`
   padding-bottom: 5px;
   border-bottom: 2px solid black;
   margin: auto;
-  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
     width: 95%;
   }
 `;

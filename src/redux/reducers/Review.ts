@@ -1,4 +1,4 @@
-import { ReivewDetailTypes, ReviewTypes } from 'types/api';
+import { ReivewDetailTypes, ReviewTypes, ActionsTypes } from 'types/api';
 
 export const REVIEWS_REQUEST = 'REVIEWS_REQUEST';
 export const REVIEWS_SUCCESS = 'REVIEWS_SUCCESS';
@@ -22,7 +22,7 @@ const initialState = {
   bookData: {},
 };
 
-export default function Review(state = initialState, action: any) {
+export default function Review(state = initialState, action: ActionsTypes) {
   switch (action.type) {
     case REVIEWS_REQUEST:
       return {
@@ -35,8 +35,8 @@ export default function Review(state = initialState, action: any) {
         ...state,
         isLoading: false,
         isSuccess: true,
-        reviews: action.data.reviews,
-        reivewsTotal: action.data.countAllReviewBooks,
+        reviews: action.payload.reviews,
+        reivewsTotal: action.payload.countAllReviewBooks,
       };
     case REVIEWS_FAIL:
       return {
@@ -55,8 +55,8 @@ export default function Review(state = initialState, action: any) {
         ...state,
         itemLoading: false,
         itemSuccess: true,
-        reviews: action.data.reviewData,
-        bookData: action.data.bookData[0],
+        reviews: action.payload.reviewData,
+        bookData: action.payload.bookData[0],
       };
     case REVIEW_FAIL:
       return {
@@ -74,14 +74,14 @@ export default function Review(state = initialState, action: any) {
 export const ReviewsRequest = (data: ReviewTypes) => {
   return {
     type: REVIEWS_REQUEST,
-    params: data,
+    payload: data,
   };
 };
 
 export const ReviewsSuccess = (data: any) => {
   return {
     type: REVIEWS_SUCCESS,
-    data,
+    payload: data,
   };
 };
 
@@ -95,14 +95,14 @@ export const ReviewsFail = (error: any) => {
 export const ReviewRequest = (data: ReivewDetailTypes) => {
   return {
     type: REVIEW_REQUEST,
-    data,
+    payload: data,
   };
 };
 
 export const ReviewSuccess = (data: any) => {
   return {
     type: REVIEW_SUCCESS,
-    data,
+    payload: data,
   };
 };
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { AppStateType } from 'redux/reducers';
 import { AuthEmailInit, AuthEmailRequest } from 'redux/reducers/AuthEmail';
 import { AuthCodeInit, AuthCodeRequest } from 'redux/reducers/AuthCode';
 import useInput from 'hooks/useInput';
@@ -39,11 +40,11 @@ function AuthEmailForm({
   const { handleEmailCheck, handleCodeCheck } = useAuthErrorCheck();
 
   const { emailErrorStatus, emailErrorMsg } = useSelector(
-    (state: any) => state.authEmail,
+    (state: AppStateType) => state.authEmail,
   );
 
   const { codeErrorStatus, codeErrorMsg } = useSelector(
-    (state: any) => state.authCode,
+    (state: AppStateType) => state.authCode,
   );
 
   useEffect(() => {

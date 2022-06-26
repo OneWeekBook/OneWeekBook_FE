@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { getImgErr } from 'lib/ImageError';
 import { NewReviewTypes } from 'types/main';
 
 type PropsType = {
@@ -23,7 +24,7 @@ function NewReivewListItem({
     <ItemWrapper>
       <Link to={`/review/${isbn}?sort=new`}>
         <Index>{idx + 1}</Index>
-        <BookImage src={img} alt="book" />
+        <BookImage src={img} alt="book" onError={getImgErr} />
         <InfoWrapper>
           <BookTitleWrapper>
             {title && title.replaceAll('<b>', '').replaceAll('</b>', '')}
@@ -84,7 +85,8 @@ const BookImage = styled.img`
   height: 120px;
   flex-shrink: 0;
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    width: 90px;
+    width: 70px;
+    height: 100px;
   }
 `;
 
@@ -93,6 +95,12 @@ const BookTitleWrapper = styled.p`
   font-size: 18px;
   font-weight: 700;
   margin-right: 10px;
+  display: -webkit-box;
+  word-wrap: break-word;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     font-size: 16px;
   }
@@ -149,16 +157,12 @@ const InfoWrapper = styled.div`
 `;
 
 const CountInfoWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
   font-size: 18px;
   font-weight: 600;
   margin: 0 10px;
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    font-size: 12px;
-    display: block;
+    font-size: 16px;
     margin: 0 5px;
   }
 `;

@@ -1,5 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { AuthInit } from 'redux/reducers/AuthUser';
 import { Toast } from 'lib/Toast';
 import useToggle from 'hooks/useToggle';
 import useAuthLink from 'hooks/useAuthLink';
@@ -13,12 +15,14 @@ type PropsTypes = {
 };
 
 function Sidebar({ toggle, toggleIsOn }: PropsTypes) {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [modalToggle, isModalToggleOn] = useToggle(false);
   const { handleAuthClick } = useAuthLink();
 
   const logoutClick = () => {
     sessionStorage.removeItem('accessToken');
+    dispatch(AuthInit());
     Toast('info', '로그아웃 되었습니다.');
     toggleIsOn();
   };

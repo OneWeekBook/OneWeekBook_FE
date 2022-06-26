@@ -1,5 +1,6 @@
 import { PropsWithChildren, useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { getImgErr } from 'lib/ImageError';
 import { ReviewDetailTypes } from 'types/review';
 
 type PropsType = {
@@ -30,6 +31,7 @@ function ReviewItem({
           }`}
           alt="icon"
           width={75}
+          onError={getImgErr}
         />
         <p>{rating}</p>
       </ImgWrapper>

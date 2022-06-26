@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { AppStateType } from 'redux/reducers';
 import { ReviewRequest } from 'redux/reducers/Review';
 import useToggle from 'hooks/useToggle';
 import { ReviewDetailTypes } from 'types/review';
@@ -15,7 +16,9 @@ function ReviewInfo() {
   const [curIdx, setCurIdx] = useState<number>(1);
   const [sortBy, setSortBy] = useState(`${location.search.split('=')[1]}`);
   const [detailToggle, detailToggleIsOn] = useToggle(false);
-  const { reviews, bookData } = useSelector((state: any) => state.review);
+  const { reviews, bookData } = useSelector(
+    (state: AppStateType) => state.review,
+  );
   const [curReview, setCurReview] = useState({
     id: -1,
     likeCount: 0,
@@ -67,7 +70,8 @@ function ReviewInfo() {
         최신 순
       </SortButton>
       <ReviewListWrapper>
-        {reviews.length &&
+        {Array.isArray(reviews) &&
+          !!reviews &&
           reviews.map((item: ReviewDetailTypes, index: number) => (
             <ReviewItem
               key={index}
@@ -102,12 +106,15 @@ const Wrapper = styled.div`
   width: 100%;
   height: auto;
   .title {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 600;
     margin-bottom: 10px;
   }
-  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
     width: 95%;
+    .title {
+      font-size: 18px;
+    }
   }
 `;
 
@@ -127,4 +134,7 @@ const ReviewListWrapper = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 15px;
   margin-top: 20px;
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    grid-template-columns: 1fr;
+  }
 `;

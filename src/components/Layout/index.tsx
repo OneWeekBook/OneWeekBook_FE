@@ -2,6 +2,7 @@ import { PropsWithChildren, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import { AppStateType } from 'redux/reducers';
 import { AuthUserRequest } from 'redux/reducers/AuthUser';
 import useToggle from 'hooks/useToggle';
 import TopScroll from 'lib/TopScroll';
@@ -14,8 +15,8 @@ function Index({ children }: PropsWithChildren<any>) {
   const location = useLocation();
   const dispatch = useDispatch();
   const [toggle, toggleIsOn] = useToggle(false);
-  const { userToggle } = useSelector((state: any) => state.func);
-  const { isSuccess } = useSelector((state: any) => state.signIn);
+  const { userToggle } = useSelector((state: AppStateType) => state.func);
+  const { isSuccess } = useSelector((state: AppStateType) => state.signIn);
 
   useEffect(() => {
     dispatch(AuthUserRequest());
@@ -50,6 +51,7 @@ function Index({ children }: PropsWithChildren<any>) {
 export default Index;
 
 const LayoutWrapper = styled.section`
+  min-width: 375px;
   display: flex;
   height: 100vh;
   flex-direction: column;

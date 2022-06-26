@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
+import { AppStateType } from 'redux/reducers';
 import {
   LikeAddRequest,
   LikeCancelRequest,
@@ -22,10 +23,16 @@ function ReviewDetailModal({ item, detailToggleIsOn }: PropsType) {
   const [one, setOne] = useState(item.oneLikeCount);
   const [zeroToggle, setZeroToggle] = useState(false);
   const [oneToggle, setOneToggle] = useState(false);
-  const { user } = useSelector((state: any) => state.authUser);
-  const { likeData, likeAddErrorStatus, likeCancelErrorStatus } = useSelector(
-    (state: any) => state.like,
-  );
+  const { user } = useSelector((state: AppStateType) => state.authUser);
+  const {
+    likeData,
+    likeAddErrorStatus,
+    likeCancelErrorStatus,
+  }: {
+    likeData: LikeDataTypes[];
+    likeAddErrorStatus?: number;
+    likeCancelErrorStatus?: number;
+  } = useSelector((state: AppStateType) => state.like);
   const likeDoneImg = `${process.env.PUBLIC_URL}/assets/like/like-done.svg`;
   const likeNoneImg = `${process.env.PUBLIC_URL}/assets/like/like-none.svg`;
 
@@ -44,7 +51,7 @@ function ReviewDetailModal({ item, detailToggleIsOn }: PropsType) {
 
   useEffect(() => {
     compareLikeUser();
-    if (likeData.length > 0) {
+    if (Array.isArray(likeData) && !!likeData) {
       setZero(
         likeData.filter((item: LikeDataTypes) => item.state === 0).length,
       );
@@ -60,10 +67,10 @@ function ReviewDetailModal({ item, detailToggleIsOn }: PropsType) {
       const data = likeData.find(
         (like: LikeDataTypes) => like.user.id === user.id,
       );
-      if (data.state === 0) {
+      if (data?.state === 0) {
         setOneToggle(false);
         setZeroToggle(true);
-      } else if (data.state === 1) {
+      } else if (data?.state === 1) {
         setZeroToggle(false);
         setOneToggle(true);
       }

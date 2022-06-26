@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { AppStateType } from 'redux/reducers';
 import { MyLibraryInit, MyLibraryRequest } from 'redux/reducers/MyLibrary';
 import { userToggle } from 'redux/reducers/Func';
 import useToggle from 'hooks/useToggle';
@@ -17,8 +18,10 @@ function UserInfo() {
   const [percent, setPercent] = useState<number>(0);
   const rankLimit = [10, 25, 50];
   const [removeToggle, removeToggleIsOn] = useToggle(false);
-  const { user } = useSelector((state: any) => state.authUser);
-  const { userBookList } = useSelector((state: any) => state.myLibrary);
+  const { user } = useSelector((state: AppStateType) => state.authUser);
+  const { userBookList } = useSelector(
+    (state: AppStateType) => state.myLibrary,
+  );
 
   useEffect(() => {
     dispatch(userToggle());

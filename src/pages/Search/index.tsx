@@ -1,6 +1,8 @@
 import { useEffect, useCallback, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
+import { AppStateType } from 'redux/reducers';
 import {
   AddSearchRequest,
   SearchInit,
@@ -18,20 +20,26 @@ function index() {
   const dispatch = useDispatch();
   const pathArr = location.search.split(/[?=&]+/);
   const searchArr: string[] = [];
-  const tagArr: string[] = [];
+  const tagArr: Set<string> = new Set([]);
   const [startIdx, setStartIdx] = useState<number>(1);
-  const { isLoading, isSuccess } = useSelector((state: any) => state.search);
+  const { isLoading, isSuccess } = useSelector(
+    (state: AppStateType) => state.search,
+  );
 
   for (let i = 1; i < pathArr.length - 2; i += 1) {
     if (i % 2 === 1) {
-      tagArr.push(decodeURI(decodeURIComponent(pathArr[i])));
+      tagArr.add(decodeURI(decodeURIComponent(pathArr[i])));
     } else {
       searchArr.push(decodeURI(decodeURIComponent(pathArr[i])));
     }
   }
 
-  tagArr.push(decodeURI(decodeURIComponent(pathArr[pathArr.length - 1])));
+  tagArr.add(decodeURI(decodeURIComponent(pathArr[pathArr.length - 1])));
   searchArr.push(decodeURI(decodeURIComponent(pathArr[pathArr.length - 1])));
+
+  const isNumeric = (val: string) => {
+    return /^-?\d+$/.test(val);
+  };
 
   const handleFetch = useCallback(() => {
     const options: {
@@ -47,6 +55,9 @@ function index() {
     if (searchArr.length === 3) {
       options.d_categ = searchArr[1].toString();
       options.title = searchArr[2].toString();
+    } else if (searchArr.length === 2 && isNumeric(searchArr[1].toString())) {
+      options.d_categ = searchArr[1].toString();
+      options.title = searchArr[1].toString();
     } else if (searchArr.length === 2) {
       options.d_categ = searchArr[0].toString();
       options.title = searchArr[1].toString();
@@ -72,6 +83,9 @@ function index() {
     if (searchArr.length === 3) {
       options.d_categ = searchArr[1].toString();
       options.title = searchArr[2].toString();
+    } else if (searchArr.length === 2 && isNumeric(searchArr[1].toString())) {
+      options.d_categ = searchArr[1].toString();
+      options.title = searchArr[1].toString();
     } else if (searchArr.length === 2) {
       options.d_categ = searchArr[0].toString();
       options.title = searchArr[1].toString();
@@ -99,22 +113,31 @@ function index() {
       ) : !isSuccess ? (
         <LoadingErrorForm />
       ) : (
-        <DefaultButton
-          pc={[0, 50]}
-          onClick={handleAddFetch}
-          isHover
-          hoverBgColor="#1e90ff"
-          hoverColor="white"
-          bgColor="#08c1e9"
-          color="white"
-          margin={[0, 0, 30, 0]}
-          fontSize={[18, 18]}
-          fontWeight={600}
-          title="더 보기"
-        />
+        <ButtonWrapper>
+          <DefaultButton
+            pc={[0, 50]}
+            onClick={handleAddFetch}
+            isHover
+            hoverBgColor="#1e90ff"
+            hoverColor="white"
+            bgColor="#08c1e9"
+            color="white"
+            margin={[0, 0, 30, 0]}
+            fontSize={[18, 18]}
+            fontWeight={600}
+            title="더 보기"
+          />
+        </ButtonWrapper>
       )}
     </Container>
   );
 }
 
 export default index;
+
+const ButtonWrapper = styled.div`
+  margin: 0 auto;
+  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
+    width: 95%;
+  }
+`;

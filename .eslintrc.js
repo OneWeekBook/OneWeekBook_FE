@@ -34,6 +34,7 @@ module.exports = {
     'default-param-last': 0,
     'consistent-return': 0,
     'no-shadow': 0,
+    'no-param-reassign': 0,
     'react/prop-types': 0,
     'react/no-danger': 0,
     'react/no-array-index-key': 0,
@@ -44,6 +45,7 @@ module.exports = {
     ],
     'jsx-a11y/no-noninteractive-element-interactions': 0,
     '@typescript-eslint/explicit-module-boundary-types': 0,
+    '@typescript-eslint/no-explicit-any': 0,
   },
   settings: {
     'import/resolver': {

@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { CategoryRequest } from 'redux/reducers/Category';
 import { SearchInit } from 'redux/reducers/Search';
-import { CategoryItemTypes } from 'types/book';
 import { searchNone } from 'redux/reducers/Func';
+import { AppStateType } from 'redux/reducers';
+import { CategoryItemTypes } from 'types/book';
 import CategoryBoxItem from './_item/CategoryBoxItem';
 import InputWrapper from './InputWrapper';
 
@@ -18,6 +19,7 @@ const initialState = {
 
 function CategoryList() {
   const dispatch = useDispatch();
+  const { categories } = useSelector((state: AppStateType) => state.category);
   const [parentCategory, setParentCategory] = useState<CategoryItemTypes[]>([]);
   const [curParentCategory, setCurParentCategory] = useState<
     CategoryItemTypes[]
@@ -26,8 +28,6 @@ function CategoryList() {
   const [curSubCategory, setCurSubCategory] = useState<CategoryItemTypes[]>([
     initialState,
   ]);
-
-  const { categories } = useSelector((state: any) => state.category);
   const getFilterParentCategories = useCallback(
     (categories: CategoryItemTypes[]) => {
       const parent = categories.filter(
@@ -126,7 +126,7 @@ const Wrapper = styled.div`
     font-weight: 700;
     margin: 10px auto;
   }
-  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
     margin: auto;
     width: 95%;
     .mainTitle {

@@ -1,3 +1,9 @@
+export type ActionsTypes = {
+  type: string;
+  payload?: any;
+  error?: any;
+};
+
 export type SignInTypes = {
   email: string;
   password: string;

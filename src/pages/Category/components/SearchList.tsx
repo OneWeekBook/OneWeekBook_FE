@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { BooksTypes } from 'types/book';
+import { AppStateType } from 'redux/reducers';
 import { MyLibraryAddRequest } from 'redux/reducers/MyLibrary';
 import { searchDone } from 'redux/reducers/Func';
 import { Toast } from 'lib/Toast';
@@ -14,11 +15,13 @@ import NoneItem from './_item/NoneItem';
 function SearchList() {
   const dispatch = useDispatch();
   const { books, isLoading, isSuccess } = useSelector(
-    (state: any) => state.search,
+    (state: AppStateType) => state.search,
   );
-  const { search } = useSelector((state: any) => state.func);
-  const { user } = useSelector((state: any) => state.authUser);
-  const { isAddSuccess } = useSelector((state: any) => state.myLibrary);
+  const { search } = useSelector((state: AppStateType) => state.func);
+  const { user } = useSelector((state: AppStateType) => state.authUser);
+  const { isAddSuccess } = useSelector(
+    (state: AppStateType) => state.myLibrary,
+  );
 
   useEffect(() => {
     if (isAddSuccess) Toast('success', '내 서재에 추가완료~');
@@ -81,7 +84,7 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
-  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
     width: 95%;
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {

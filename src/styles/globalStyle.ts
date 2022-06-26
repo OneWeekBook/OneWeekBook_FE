@@ -16,6 +16,10 @@ const globalStyles = createGlobalStyle`
         width: 100%;
         minWidth: ${MOBILE_MIN_WIDTH}
     }
+    
+    textarea {
+        resize : none:
+    }
 
     p {
         letter-spacing: -0.5px;

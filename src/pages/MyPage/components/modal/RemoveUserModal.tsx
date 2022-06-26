@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { RemoveUserInit, RemoveUserRequest } from 'redux/reducers/RemoveUser';
 import styled from 'styled-components';
+import { AppStateType } from 'redux/reducers';
+import { RemoveUserInit, RemoveUserRequest } from 'redux/reducers/RemoveUser';
 import useInput from 'hooks/useInput';
 import { Toast } from 'lib/Toast';
 import ErrorForm from 'components/Form/ErrorForm';
@@ -19,7 +20,9 @@ function RemoveUserModal({ removeToggleIsOn, id }: PropsType) {
   const [error, setError] = useState<string>('');
   const [isError, setIsError] = useState<boolean>(false);
   const [password, changePassword] = useInput('');
-  const { removeErrorStatus } = useSelector((state: any) => state.removeUser);
+  const { removeErrorStatus } = useSelector(
+    (state: AppStateType) => state.removeUser,
+  );
 
   const handleRemoveClick = () => {
     dispatch(RemoveUserRequest({ id, password }));

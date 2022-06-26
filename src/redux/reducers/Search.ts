@@ -1,3 +1,5 @@
+import { ActionsTypes } from 'types/api';
+
 export const SEARCH_REQUEST = 'SEARCH_REQUEST';
 export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
 export const SEARCH_FAIL = 'SEARCH_FAIL';
@@ -14,7 +16,7 @@ const initialState = {
   books: [],
 };
 
-export default function SignIn(state = initialState, action: any) {
+export default function SignIn(state = initialState, action: ActionsTypes) {
   switch (action.type) {
     case SEARCH_REQUEST:
       return {
@@ -27,7 +29,7 @@ export default function SignIn(state = initialState, action: any) {
         ...state,
         isLoading: false,
         isSuccess: true,
-        books: action.data.books,
+        books: action.payload.books,
       };
     case SEARCH_FAIL:
       return {
@@ -42,14 +44,13 @@ export default function SignIn(state = initialState, action: any) {
         ...state,
         isLoading: true,
         isSuccess: false,
-        params: action.params,
       };
     case ADD_SEARCH_SUCCESS:
       return {
         ...state,
         isLoading: false,
         isSuccess: true,
-        books: [...state.books, ...action.data.books],
+        books: [...state.books, ...action.payload.books],
       };
     case ADD_SEARCH_FAIL:
       return {
@@ -65,14 +66,14 @@ export default function SignIn(state = initialState, action: any) {
 export const SearchRequest = (params: any) => {
   return {
     type: SEARCH_REQUEST,
-    params,
+    payload: params,
   };
 };
 
 export const SearchSuccess = (data: any) => {
   return {
     type: SEARCH_SUCCESS,
-    data,
+    payload: data,
   };
 };
 
@@ -92,14 +93,14 @@ export const SearchInit = () => {
 export const AddSearchRequest = (params: any) => {
   return {
     type: ADD_SEARCH_REQUEST,
-    params,
+    payload: params,
   };
 };
 
 export const AddSearchSuccess = (data: any) => {
   return {
     type: ADD_SEARCH_SUCCESS,
-    data,
+    payload: data,
   };
 };
 

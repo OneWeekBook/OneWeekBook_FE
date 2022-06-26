@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { AppStateType } from 'redux/reducers';
 import {
   MyLibraryModifyRequest,
   MyLibraryRequest,
@@ -28,9 +29,9 @@ function ReadBookList({ userId }: PropsType) {
     endTime: null,
   });
   const { userBookList, isDeleteSuccess } = useSelector(
-    (state: any) => state.myLibrary,
+    (state: AppStateType) => state.myLibrary,
   );
-  const { initSuccess } = useSelector((state: any) => state.paragraph);
+  const { initSuccess } = useSelector((state: AppStateType) => state.paragraph);
 
   const moveDoneClick = async () => {
     await dispatch(MyLibraryModifyRequest({ progress: 2, isbn, userId }));
@@ -45,7 +46,8 @@ function ReadBookList({ userId }: PropsType) {
   return (
     <>
       <Wrapper>
-        {userBookList.length > 0 &&
+        {Array.isArray(userBookList) &&
+          !!userBookList &&
           userBookList.map((item: LibraryItemTypes) => (
             <BookItem
               key={item.id}
@@ -85,13 +87,12 @@ const Wrapper = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
   margin: 10px auto 30px;
-  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
     width: 95%;
   }
-  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    grid-template-columns: 1fr 1fr;
-  }
-  @media (max-width: 500px) {
+  @media (max-width: 660px) {
     grid-template-columns: 1fr;
   }
 `;

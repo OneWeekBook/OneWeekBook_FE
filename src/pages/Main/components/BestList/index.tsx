@@ -1,16 +1,18 @@
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { AppStateType } from 'redux/reducers';
 import { ReviewItemType } from 'types/review';
 import BestItem from './BestItem';
 
 function Index() {
-  const { reviews } = useSelector((state: any) => state.review);
+  const { reviews } = useSelector((state: AppStateType) => state.review);
 
   return (
     <Wrapper>
       <BestListTitle>사람들의 관심을 한 몸에 받은 책</BestListTitle>
       <BestListGridWrapper>
-        {reviews.length &&
+        {Array.isArray(reviews) &&
+          !!reviews &&
           reviews.slice(0, 9).map((item: ReviewItemType, idx: number) => {
             return (
               <BestItem
@@ -49,6 +51,7 @@ const BestListTitle = styled.p`
 `;
 
 const BestListGridWrapper = styled.div`
+  min-height: 300px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
