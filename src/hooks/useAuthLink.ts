@@ -4,7 +4,8 @@ function useAuthLink(): {
   handleAuthClick: (
     link: string,
     compLink: string[],
-    toggle: () => void,
+    Modaltoggle: () => void,
+    toggle?: () => void,
   ) => void;
 } {
   const navigate = useNavigate();
@@ -12,14 +13,28 @@ function useAuthLink(): {
   const handleAuthClick = (
     link: string,
     compLink: string[],
-    toggle: () => void,
+    Modaltoggle: () => void,
+    toggle?: () => void,
   ) => {
-    if (compLink.includes(link) && sessionStorage.getItem('accessToken')) {
+    if (
+      toggle &&
+      compLink.includes(link) &&
+      sessionStorage.getItem('accessToken')
+    ) {
+      navigate(link);
+      toggle();
+    } else if (
+      compLink.includes(link) &&
+      sessionStorage.getItem('accessToken')
+    ) {
       navigate(link);
     } else if (
       compLink.includes(link) &&
       !sessionStorage.getItem('accessToken')
     ) {
+      Modaltoggle();
+    } else if (toggle) {
+      navigate(link);
       toggle();
     } else {
       navigate(link);

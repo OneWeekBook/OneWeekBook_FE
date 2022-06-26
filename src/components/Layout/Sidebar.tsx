@@ -7,6 +7,7 @@ import useToggle from 'hooks/useToggle';
 import useAuthLink from 'hooks/useAuthLink';
 import DefaultButton from 'components/Button/DefaultButton';
 import NoticeModal from 'components/Modal';
+import { useEffect } from 'react';
 import { NavItems } from './Nav';
 
 type PropsTypes = {
@@ -27,6 +28,14 @@ function Sidebar({ toggle, toggleIsOn }: PropsTypes) {
     toggleIsOn();
   };
 
+  useEffect(() => {
+    if (toggle) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [toggle]);
+
   return (
     <Wrapper isToggle={toggle}>
       <ButtonWrapper>
@@ -44,7 +53,7 @@ function Sidebar({ toggle, toggleIsOn }: PropsTypes) {
                 title="로그아웃"
               />
             </Link>
-            <Link to="/my-library">
+            <Link to="/myPage">
               <DefaultButton
                 onClick={toggleIsOn}
                 pc={[0, 50]}
@@ -53,7 +62,7 @@ function Sidebar({ toggle, toggleIsOn }: PropsTypes) {
                 padding={[0, 20, 0, 0]}
                 fontSize={[20, 20]}
                 fontWeight={600}
-                title="내 서재"
+                title="마이페이지"
               />
             </Link>
           </>
@@ -89,7 +98,12 @@ function Sidebar({ toggle, toggleIsOn }: PropsTypes) {
           <DefaultButton
             key={item.id}
             onClick={() =>
-              handleAuthClick(item.link, ['/my-library'], isModalToggleOn)
+              handleAuthClick(
+                item.link,
+                ['/my-library'],
+                isModalToggleOn,
+                toggleIsOn,
+              )
             }
             pc={[0, 50]}
             isHover
