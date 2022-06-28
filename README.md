@@ -75,8 +75,19 @@
 - 마음에 드는 리뷰가 있다면 좋아요를 누를 수 있는 기능 구현
   
 ### SignPage
-  
-![SignIn](https://user-images.githubusercontent.com/49552804/175852527-05ff63b0-6ec1-48fb-9ea4-c83e8bec7b46.gif)
+
+<table>
+   <tr>
+     <th align="center">
+       <img width="480" alt="1" src="https://user-images.githubusercontent.com/49552804/175852527-05ff63b0-6ec1-48fb-9ea4-c83e8bec7b46.gif"/>
+       <br><br>[로그인]
+     </th>
+     <th align="center">
+       <img width="480" alt="2" src="https://user-images.githubusercontent.com/49552804/176085077-34ed952f-d1c8-472a-a956-f0bb8012031d.gif"/>
+       <br><br>[회원가입] 
+    </th>
+  </tr>
+</table>
   
 - 로그인 및 회원 가입, 로그아웃 기능 구현
 - 회원 가입 시 이메일 인증 기능을 통해 인증 코드를 받고 해당 코드로 인증을 진행하는 기능 구현
