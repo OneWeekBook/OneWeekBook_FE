@@ -15,13 +15,12 @@ function SearchItem({
   pubdate,
   publisher,
   description,
-  userId,
   handleAddClick,
 }: PropsWithChildren<LikeAddTypes>) {
   return (
     <Wrapper>
       <ImgWrapper>
-        {sessionStorage.getItem('accessToken') && userId && (
+        {sessionStorage.getItem('accessToken') && (
           <ImageButton
             type="button"
             src={`${process.env.PUBLIC_URL}/assets/func/heart.svg`}
@@ -35,7 +34,6 @@ function SearchItem({
                 isbn,
                 author,
                 publisher,
-                userId,
                 img: image,
               })
             }

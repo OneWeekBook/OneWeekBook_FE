@@ -47,14 +47,14 @@ function UserInfo() {
   }, [userBookList]);
 
   useEffect(() => {
-    dispatch(MyLibraryRequest({ userId: user.id, progress: 2 }));
+    dispatch(MyLibraryRequest({ progress: 2 }));
     return () => {
       MyLibraryInit();
       setRank('');
       setRemaining(0);
       setPercent(0);
     };
-  }, [user]);
+  }, []);
 
   return (
     <Wrapper>

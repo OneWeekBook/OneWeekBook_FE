@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppStateType } from 'redux/reducers';
-import { navInit } from 'redux/reducers/Func';
+import { navInit, userToggle } from 'redux/reducers/Func';
 import { Toast } from 'lib/Toast';
 import Container from 'components/Container';
 import MyLibraryNav from './components/MyLibraryNav';
@@ -25,6 +25,7 @@ function Index() {
   }, [itemAddSuccess, itemModifySuccess, itemDeleteSuccess, isDeleteSuccess]);
 
   useEffect(() => {
+    dispatch(userToggle());
     return () => {
       dispatch(navInit());
     };

@@ -9,11 +9,7 @@ import BookItem from '../_item/BookItem';
 import WriteCommentModal from '../Modal/CommentModal';
 import WriteReviewModal from '../Modal/WriteReviewModal';
 
-type PropsType = {
-  userId: number;
-};
-
-function DoneBookList({ userId }: PropsType) {
+function DoneBookList() {
   const dispatch = useDispatch();
   const [bookId, setBookId] = useState<number>(-1);
   const [commentToggle, commentToggleIsOn] = useToggle(false);
@@ -34,7 +30,7 @@ function DoneBookList({ userId }: PropsType) {
   const { initSuccess } = useSelector((state: AppStateType) => state.paragraph);
 
   useEffect(() => {
-    if (isDeleteSuccess) dispatch(MyLibraryRequest({ userId, progress: 2 }));
+    if (isDeleteSuccess) dispatch(MyLibraryRequest({ progress: 2 }));
   }, [isDeleteSuccess]);
 
   return (

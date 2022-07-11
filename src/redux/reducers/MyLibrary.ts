@@ -1,10 +1,4 @@
-import {
-  MyLibraryTypes,
-  MyLibraryAddTypes,
-  MyLibraryModifyTypes,
-  DeleteType,
-  ActionsTypes,
-} from 'types/api';
+import { MyLibraryAddTypes, DeleteType, ActionsTypes } from 'types/api';
 
 export const MY_LIBRARY_REQUEST = 'MY_LIBRARY_REQUEST';
 export const MY_LIBRARY_SUCCESS = 'MY_LIBRARY_SUCCESS';
@@ -121,7 +115,7 @@ export default function ChangePassword(
   }
 }
 
-export const MyLibraryRequest = (data: MyLibraryTypes) => {
+export const MyLibraryRequest = (data: { progress: number }) => {
   return {
     type: MY_LIBRARY_REQUEST,
     payload: data,
@@ -162,7 +156,10 @@ export const MyLibraryAddFail = (error: any) => {
   };
 };
 
-export const MyLibraryModifyRequest = (data: MyLibraryModifyTypes) => {
+export const MyLibraryModifyRequest = (data: {
+  progress: number;
+  isbn: string;
+}) => {
   return {
     type: MY_LIBRARY_MODIFY_REQUEST,
     payload: data,

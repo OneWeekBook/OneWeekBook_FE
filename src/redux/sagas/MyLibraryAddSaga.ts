@@ -1,5 +1,5 @@
 import instance from 'api/axios';
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { MyLibraryAddTypes } from 'types/api';
 import {
   MyLibraryAddFail,
@@ -7,13 +7,14 @@ import {
   MY_LIBRARY_ADD_REQUEST,
 } from '../reducers/MyLibrary';
 
-function MyLibraryAddAPI(data: MyLibraryAddTypes) {
+function MyLibraryAddAPI(data: { userId: number & MyLibraryAddTypes }) {
   return instance.post(`${process.env.REACT_APP_BASIC_URL}/book/mylist`, data);
 }
 
-function* fetchMyLibraryAddSaga(action: any) {
+function* fetchMyLibraryAddSaga(action: any): any {
   try {
-    yield call(MyLibraryAddAPI, action.payload);
+    const user = yield select((state) => state.authUser.user);
+    yield call(MyLibraryAddAPI, { userId: user.id, ...action.payload });
     yield put(MyLibraryAddSuccess());
   } catch (error) {
     yield put(MyLibraryAddFail(error));

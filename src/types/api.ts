@@ -31,24 +31,12 @@ export type RemoveUserTypes = {
   password: string;
 };
 
-export type MyLibraryTypes = {
-  userId: number;
-  progress: number;
-};
-
 export type MyLibraryAddTypes = {
-  userId: number;
   isbn: string;
   title: string;
   author: string;
   publisher: string;
   img: string;
-};
-
-export type MyLibraryModifyTypes = {
-  progress: number;
-  isbn: string;
-  userId: number;
 };
 
 export type ParagraphType = {

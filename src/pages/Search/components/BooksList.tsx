@@ -26,11 +26,8 @@ function BooksList() {
     publisher,
     isbn,
     img,
-    userId,
   }: MyLibraryAddTypes) => {
-    dispatch(
-      MyLibraryAddRequest({ title, author, publisher, isbn, img, userId }),
-    );
+    dispatch(MyLibraryAddRequest({ title, author, publisher, isbn, img }));
   };
 
   return (

@@ -18,7 +18,6 @@ function SearchList() {
     (state: AppStateType) => state.search,
   );
   const { search } = useSelector((state: AppStateType) => state.func);
-  const { user } = useSelector((state: AppStateType) => state.authUser);
   const { isAddSuccess } = useSelector(
     (state: AppStateType) => state.myLibrary,
   );
@@ -37,20 +36,16 @@ function SearchList() {
     publisher,
     isbn,
     img,
-    userId,
   }: MyLibraryAddTypes) => {
-    if (userId) {
-      dispatch(
-        MyLibraryAddRequest({
-          title,
-          author,
-          publisher,
-          isbn,
-          img,
-          userId,
-        }),
-      );
-    }
+    dispatch(
+      MyLibraryAddRequest({
+        title,
+        author,
+        publisher,
+        isbn,
+        img,
+      }),
+    );
   };
 
   if (isLoading) return <LoadingForm />;
@@ -65,12 +60,7 @@ function SearchList() {
   return (
     <Wrapper>
       {books.map((item: BooksTypes, index: number) => (
-        <SearchItem
-          key={index}
-          {...item}
-          userId={user.id}
-          handleAddClick={handleAddClick}
-        />
+        <SearchItem key={index} {...item} handleAddClick={handleAddClick} />
       ))}
     </Wrapper>
   );

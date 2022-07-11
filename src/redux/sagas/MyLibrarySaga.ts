@@ -1,21 +1,24 @@
 import instance from 'api/axios';
-import { call, put, takeEvery } from 'redux-saga/effects';
-import { MyLibraryTypes } from 'types/api';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 import {
   MyLibraryFail,
   MyLibrarySuccess,
   MY_LIBRARY_REQUEST,
 } from '../reducers/MyLibrary';
 
-function MyLibraryAPI(params: MyLibraryTypes) {
+export function MyLibraryAPI(params: { userId: number; progress: number }) {
   return instance.get(
     `${process.env.REACT_APP_BASIC_URL}/book/mylist?userId=${params.userId}&progress=${params.progress}`,
   );
 }
 
-function* fetchMyLibrarySaga(action: any): any {
+export function* fetchMyLibrarySaga(action: any): any {
   try {
-    const result = yield call(MyLibraryAPI, action.payload);
+    const user = yield select((state) => state.authUser.user);
+    const result = yield call(MyLibraryAPI, {
+      userId: user.id,
+      progress: action.payload.progress,
+    });
     yield put(MyLibrarySuccess(result.data.myList));
   } catch (error) {
     yield put(MyLibraryFail(error));

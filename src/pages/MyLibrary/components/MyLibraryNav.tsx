@@ -30,8 +30,7 @@ function MyLibraryNav() {
   const { navId } = useSelector((state: AppStateType) => state.func);
 
   useEffect(() => {
-    if (user.id)
-      dispatch(MyLibraryRequest({ userId: user.id, progress: navId }));
+    if (user.id) dispatch(MyLibraryRequest({ progress: navId }));
     return () => {
       dispatch(MyLibraryInit());
     };
@@ -62,7 +61,7 @@ function MyLibraryNav() {
           <p>{NavItems[2].desc}</p>
         </NavItem>
       </Wrapper>
-      <Nav id={navId} userId={user.id} />
+      <Nav id={navId} />
     </>
   );
 }

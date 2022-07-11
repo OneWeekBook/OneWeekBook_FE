@@ -12,11 +12,7 @@ import { InfoTypes, LibraryItemTypes } from 'types/book';
 import BookItem from '../_item/BookItem';
 import WriteCommentModal from '../Modal/CommentModal';
 
-type PropsType = {
-  userId: number;
-};
-
-function ReadBookList({ userId }: PropsType) {
+function ReadBookList() {
   const dispatch = useDispatch();
   const [isbn, setIsbn] = useState<string>('');
   const [bookId, setBookId] = useState<number>(-1);
@@ -34,13 +30,13 @@ function ReadBookList({ userId }: PropsType) {
   const { initSuccess } = useSelector((state: AppStateType) => state.paragraph);
 
   const moveDoneClick = async () => {
-    await dispatch(MyLibraryModifyRequest({ progress: 2, isbn, userId }));
+    await dispatch(MyLibraryModifyRequest({ progress: 2, isbn }));
     readToggleIsOn();
     dispatch(navDone());
   };
 
   useEffect(() => {
-    if (isDeleteSuccess) dispatch(MyLibraryRequest({ userId, progress: 1 }));
+    if (isDeleteSuccess) dispatch(MyLibraryRequest({ progress: 1 }));
   }, [isDeleteSuccess]);
 
   return (

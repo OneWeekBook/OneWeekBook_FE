@@ -4,17 +4,16 @@ import ReadBookList from './ReadBookList';
 
 type PropsType = {
   id: number;
-  userId: number;
 };
 
-function Index({ id, userId }: PropsType) {
+function Index({ id }: PropsType) {
   switch (id) {
     case 0:
-      return <LikeBookList userId={userId} />;
+      return <LikeBookList />;
     case 1:
-      return <ReadBookList userId={userId} />;
+      return <ReadBookList />;
     case 2:
-      return <DoneBookList userId={userId} />;
+      return <DoneBookList />;
     default:
       return null;
   }
