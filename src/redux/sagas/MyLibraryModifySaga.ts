@@ -17,11 +17,7 @@ function MyLibraryModifyAPI(data: {
 function* fetchMyLibraryModifySaga(action: any): any {
   try {
     const user = yield select((state) => state.authUser.user);
-    yield call(MyLibraryModifyAPI, {
-      userId: user.id,
-      progress: action.payload.progress,
-      isbn: action.payload.isbn,
-    });
+    yield call(MyLibraryModifyAPI, { userId: user.id, ...action.payload });
     yield put(MyLibraryModifySuccess());
   } catch (error) {
     yield put(MyLibraryModifyFail(error));

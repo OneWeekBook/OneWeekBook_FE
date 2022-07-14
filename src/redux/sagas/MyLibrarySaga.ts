@@ -17,7 +17,7 @@ export function* fetchMyLibrarySaga(action: any): any {
     const user = yield select((state) => state.authUser.user);
     const result = yield call(MyLibraryAPI, {
       userId: user.id,
-      progress: action.payload.progress,
+      ...action.payload,
     });
     yield put(MyLibrarySuccess(result.data.myList));
   } catch (error) {

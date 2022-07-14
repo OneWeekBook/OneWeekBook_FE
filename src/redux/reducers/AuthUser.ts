@@ -10,6 +10,7 @@ const initialState = {
   isLoading: false,
   isSuccess: false,
   user: {},
+  userBooks: [],
 };
 
 export default function AuthEmail(state = initialState, action: ActionsTypes) {
@@ -25,7 +26,8 @@ export default function AuthEmail(state = initialState, action: ActionsTypes) {
         ...state,
         isLoading: false,
         isSuccess: true,
-        user: action.payload.data.user,
+        user: action.payload.userData,
+        userBooks: action.payload.bookData,
       };
     case AUTH_USER_FAIL:
       return {
