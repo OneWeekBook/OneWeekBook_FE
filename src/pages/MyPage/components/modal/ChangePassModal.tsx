@@ -22,7 +22,6 @@ function ChangePassModal({ passToggleIsOn }: PropsType) {
   const [confirmPassword, changeConfirmPasswod] = useInput('');
   const [passError, setPassError] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
-  const { user } = useSelector((state: AppStateType) => state.authUser);
   const { changeErrorStatus } = useSelector(
     (state: AppStateType) => state.changePassword,
   );
@@ -39,7 +38,7 @@ function ChangePassModal({ passToggleIsOn }: PropsType) {
       return;
     }
     setPassError(false);
-    dispatch(ChangePasswordRequest({ email: user.email, password }));
+    dispatch(ChangePasswordRequest({ password }));
   };
 
   useEffect(() => {

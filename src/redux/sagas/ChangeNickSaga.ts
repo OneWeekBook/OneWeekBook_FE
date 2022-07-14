@@ -1,19 +1,19 @@
 import instance from 'api/axios';
-import { call, put, takeEvery } from 'redux-saga/effects';
-import { ChangeNickTypes } from 'types/api';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 import {
   ChangeNickFail,
   ChangeNickSuccess,
   CHANGE_NICK_REQUEST,
 } from '../reducers/ChangeNick';
 
-function ChangeNickAPI(data: ChangeNickTypes) {
+function ChangeNickAPI(data: { nick: string; id: number }) {
   return instance.put('/user/nick', data);
 }
 
 function* fetchChangeNickSaga(action: any): any {
   try {
-    yield call(ChangeNickAPI, action.payload);
+    const user = yield select((state) => state.authUser.user);
+    yield call(ChangeNickAPI, { id: user.id, ...action.payload });
     yield put(ChangeNickSuccess());
   } catch (error) {
     yield put(ChangeNickFail(error));

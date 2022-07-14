@@ -63,9 +63,7 @@ function UserInfo() {
         percent={percent}
       />
       <OutButton removeToggleIsOn={removeToggleIsOn} />
-      {removeToggle && (
-        <RemoveUserModal removeToggleIsOn={removeToggleIsOn} id={user.id} />
-      )}
+      {removeToggle && <RemoveUserModal removeToggleIsOn={removeToggleIsOn} />}
     </Wrapper>
   );
 }

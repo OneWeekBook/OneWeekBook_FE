@@ -16,21 +16,6 @@ export type SignUpTypes = {
   nick: string;
 };
 
-export type ChangeNickTypes = {
-  nick: string;
-  id: number;
-};
-
-export type ChangePasswordTypes = {
-  email: string;
-  password: string;
-};
-
-export type RemoveUserTypes = {
-  id: number;
-  password: string;
-};
-
 export type MyLibraryAddTypes = {
   isbn: string;
   title: string;
