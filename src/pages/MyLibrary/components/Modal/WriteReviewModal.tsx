@@ -71,16 +71,16 @@ function WriteReviewModal({ bookId, bookData, toggleIsOn }: PropsType) {
     }
   };
 
-  const modifyReviewClick = (id: number, recommend: number, review: string) => {
+  const modifyReviewClick = (recommend: number, review: string) => {
     if (review === '') {
       Toast('warning', '리뷰를 남겨주세요...');
     } else {
-      dispatch(UserReviewModifyRequest({ id, review, rating: recommend }));
+      dispatch(UserReviewModifyRequest({ review, rating: recommend }));
     }
   };
 
-  const deleteReviewClick = (id: number) => {
-    dispatch(UserReviewDeleteRequest({ id }));
+  const deleteReviewClick = () => {
+    dispatch(UserReviewDeleteRequest());
     toggleIsOn();
   };
 
@@ -149,9 +149,7 @@ function WriteReviewModal({ bookId, bookData, toggleIsOn }: PropsType) {
               <>
                 <DefaultButton
                   pc={[60, 30]}
-                  onClick={() =>
-                    modifyReviewClick(reviewItem.id, recommend, review)
-                  }
+                  onClick={() => modifyReviewClick(recommend, review)}
                   isHover
                   hoverBgColor="#1e90ff"
                   hoverColor="white"
@@ -164,7 +162,7 @@ function WriteReviewModal({ bookId, bookData, toggleIsOn }: PropsType) {
                 />
                 <DefaultButton
                   pc={[60, 30]}
-                  onClick={() => deleteReviewClick(reviewItem.id)}
+                  onClick={deleteReviewClick}
                   isHover
                   hoverBgColor="#1e90ff"
                   hoverColor="white"

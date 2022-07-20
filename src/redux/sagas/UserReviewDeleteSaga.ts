@@ -1,5 +1,5 @@
 import instance from 'api/axios';
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { DeleteType } from 'types/api';
 import {
   UserReviewDeleteFail,
@@ -11,9 +11,10 @@ function UserReviewDeleteAPI(data: DeleteType) {
   return instance.delete(`/book/reviews/${data.id}`);
 }
 
-function* fetchUserReviewDeleteSaga(action: any) {
+function* fetchUserReviewDeleteSaga(): any {
   try {
-    yield call(UserReviewDeleteAPI, action.payload);
+    const review = yield select((state) => state.userReview.reviewItem);
+    yield call(UserReviewDeleteAPI, { id: review.id });
     yield put(UserReviewDeleteSuccess());
   } catch (error) {
     yield put(UserReviewDeleteFail(error));
