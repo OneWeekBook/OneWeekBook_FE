@@ -64,14 +64,3 @@ export type ReivewDetailTypes = {
   start: number;
   sortby: string;
 };
-
-export type LikeTypes = {
-  bookId: number;
-  state: number;
-  userId: number;
-};
-
-export type LikeCancelTypes = {
-  bookId: number;
-  userId: number;
-};

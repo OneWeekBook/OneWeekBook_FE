@@ -1,5 +1,4 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
-import { LikeCancelTypes } from 'types/api';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 import instance from 'api/axios';
 import {
   LikeCancelFail,
@@ -7,17 +6,18 @@ import {
   LIKE_CANCEL_REQUEST,
 } from '../reducers/Like';
 
-function LikeCancelAPI(params: LikeCancelTypes) {
-  const { bookId, userId } = params;
+function LikeCancelAPI(data: { userId: number; bookId: number }) {
+  const { userId, bookId } = data;
   return instance.post(
     `${process.env.REACT_APP_BASIC_URL}/book/reviews/${bookId}/like/cancel`,
     { userId },
   );
 }
 
-function* fetchLikeCancelSaga(action: any) {
+function* fetchLikeCancelSaga(action: any): any {
   try {
-    yield call(LikeCancelAPI, action.payload);
+    const user = yield select((state) => state.authUser.user);
+    yield call(LikeCancelAPI, { userId: user.id, ...action.payload });
     yield put(LikeCancelSuccess());
   } catch (error) {
     yield put(LikeCancelFail(error));
