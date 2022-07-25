@@ -1,0 +1,113 @@
+.sprite {
+    background-image: url('./spritesheet.png');
+    background-repeat: no-repeat;
+    display: block;
+}
+
+.sprite-best_done {
+    width: 30px;
+    height: 30px;
+    background-position: -5px -5px;
+}
+
+.sprite-best_none {
+    width: 30px;
+    height: 30px;
+    background-position: -45px -5px;
+}
+
+.sprite-good_done {
+    width: 30px;
+    height: 30px;
+    background-position: -143px -5px;
+}
+
+.sprite-good_none {
+    width: 30px;
+    height: 30px;
+    background-position: -5px -45px;
+}
+
+.sprite-header-menu-burger {
+    width: 32px;
+    height: 32px;
+    background-position: -143px -45px;
+}
+
+.sprite-nav-done-book {
+    width: 30px;
+    height: 30px;
+    background-position: -45px -45px;
+}
+
+.sprite-nav-done-category {
+    width: 30px;
+    height: 30px;
+    background-position: -5px -87px;
+}
+
+.sprite-nav-done-home {
+    width: 30px;
+    height: 30px;
+    background-position: -45px -87px;
+}
+
+.sprite-nav-done-review {
+    width: 30px;
+    height: 30px;
+    background-position: -85px -87px;
+}
+
+.sprite-nav-none-book {
+    width: 30px;
+    height: 30px;
+    background-position: -125px -87px;
+}
+
+.sprite-nav-none-category {
+    width: 30px;
+    height: 30px;
+    background-position: -5px -127px;
+}
+
+.sprite-nav-none-home {
+    width: 30px;
+    height: 30px;
+    background-position: -45px -127px;
+}
+
+.sprite-nav-none-review {
+    width: 30px;
+    height: 30px;
+    background-position: -85px -127px;
+}
+
+.sprite-recommend {
+    width: 48px;
+    height: 48px;
+    background-position: -125px -127px;
+}
+
+.sprite-recommend_done {
+    width: 30px;
+    height: 30px;
+    background-position: -183px -5px;
+}
+
+.sprite-recommend_none {
+    width: 30px;
+    height: 30px;
+    background-position: -185px -45px;
+}
+
+.sprite-soso_done {
+    width: 30px;
+    height: 30px;
+    background-position: -185px -85px;
+}
+
+.sprite-soso_none {
+    width: 30px;
+    height: 30px;
+    background-position: -183px -125px;
+}
