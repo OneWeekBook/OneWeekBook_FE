@@ -31,6 +31,7 @@ function ReviewItem({
           }`}
           alt="icon"
           width={75}
+          height={75}
           onError={getImgErr}
         />
         <p>{rating}</p>

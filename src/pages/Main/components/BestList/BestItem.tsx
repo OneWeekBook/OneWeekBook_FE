@@ -21,7 +21,7 @@ function BestItem({
   return (
     <ItemWrapper>
       <Link to={`/review/${isbn}?sort=recommend`}>
-        <img src={img} alt="book" onError={getImgErr} />
+        <img src={img} alt="book" onError={getImgErr} width={80} height={120} />
         <InfoWrapper>
           <p className="item-id">{idx}</p>
           <BookInfoWrapper>

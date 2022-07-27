@@ -6,6 +6,8 @@ function LoadingForm() {
       <img
         src={`${process.env.PUBLIC_URL}/assets/func/book-loading-blue.svg`}
         alt="loading"
+        width={150}
+        height={150}
       />
       <p>Loading...</p>
     </LoadingWrapper>
