@@ -39,7 +39,6 @@ export interface LikeAddTypes extends BooksTypes {
     publisher,
     isbn,
     img,
-    userId,
   }: MyLibraryAddTypes) => void;
 }
 

@@ -15,13 +15,12 @@ function SearchItem({
   pubdate,
   publisher,
   description,
-  userId,
   handleAddClick,
 }: PropsWithChildren<LikeAddTypes>) {
   return (
     <Wrapper>
       <ImgWrapper>
-        {sessionStorage.getItem('accessToken') && userId && (
+        {sessionStorage.getItem('accessToken') && (
           <ImageButton
             type="button"
             src={`${process.env.PUBLIC_URL}/assets/func/heart.svg`}
@@ -35,13 +34,12 @@ function SearchItem({
                 isbn,
                 author,
                 publisher,
-                userId,
                 img: image,
               })
             }
           />
         )}
-        <img src={image} alt="book cover" onError={getImgErr} />
+        <BookImage src={image} alt="book cover" onError={getImgErr} />
       </ImgWrapper>
       <InfoWrapper>
         <div>
@@ -85,15 +83,17 @@ const ImgWrapper = styled.div`
   flex-shrink: 0;
   width: 150px;
   object-fit: contain;
-  img {
-    width: 100%;
-    height: 100%;
-  }
   button {
     position: absolute;
   }
+`;
+
+const BookImage = styled.img`
+  width: 150px;
+  height: 200px;
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     width: 100px;
+    height: 150px;
   }
 `;
 

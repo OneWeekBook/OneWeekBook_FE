@@ -16,39 +16,12 @@ export type SignUpTypes = {
   nick: string;
 };
 
-export type ChangeNickTypes = {
-  nick: string;
-  id: number;
-};
-
-export type ChangePasswordTypes = {
-  email: string;
-  password: string;
-};
-
-export type RemoveUserTypes = {
-  id: number;
-  password: string;
-};
-
-export type MyLibraryTypes = {
-  userId: number;
-  progress: number;
-};
-
 export type MyLibraryAddTypes = {
-  userId: number;
   isbn: string;
   title: string;
   author: string;
   publisher: string;
   img: string;
-};
-
-export type MyLibraryModifyTypes = {
-  progress: number;
-  isbn: string;
-  userId: number;
 };
 
 export type ParagraphType = {
@@ -64,19 +37,8 @@ export type DeleteType = {
   id: number;
 };
 
-export type UserReviewTypes = {
-  bookId: number;
-  userId: number;
-};
-
 export type UserReviewAddTypes = {
   bookId: number;
-  review: string;
-  rating: number;
-};
-
-export type UserReviewModifyTypes = {
-  id: number;
   review: string;
   rating: number;
 };
@@ -90,15 +52,4 @@ export type ReivewDetailTypes = {
   isbn: number;
   start: number;
   sortby: string;
-};
-
-export type LikeTypes = {
-  bookId: number;
-  state: number;
-  userId: number;
-};
-
-export type LikeCancelTypes = {
-  bookId: number;
-  userId: number;
 };

@@ -1,10 +1,4 @@
-import {
-  DeleteType,
-  UserReviewAddTypes,
-  UserReviewModifyTypes,
-  UserReviewTypes,
-  ActionsTypes,
-} from 'types/api';
+import { UserReviewAddTypes, ActionsTypes } from 'types/api';
 
 export const USER_REVIEW_REQUEST = 'USER_REVIEW_REQUEST';
 export const USER_REVIEW_SUCCESS = 'USER_REVIEW_SUCCESS';
@@ -118,7 +112,7 @@ export default function Review(state = initialState, action: ActionsTypes) {
   }
 }
 
-export const UserReviewRequest = (data: UserReviewTypes) => {
+export const UserReviewRequest = (data: { bookId: number }) => {
   return {
     type: USER_REVIEW_REQUEST,
     payload: data,
@@ -159,7 +153,10 @@ export const UserReviewAddFail = (error: any) => {
   };
 };
 
-export const UserReviewModifyRequest = (data: UserReviewModifyTypes) => {
+export const UserReviewModifyRequest = (data: {
+  review: string;
+  rating: number;
+}) => {
   return {
     type: USER_REVIEW_MODIFY_REQUEST,
     payload: data,
@@ -179,10 +176,9 @@ export const UserReviewModifyFail = (error: any) => {
   };
 };
 
-export const UserReviewDeleteRequest = (data: DeleteType) => {
+export const UserReviewDeleteRequest = () => {
   return {
     type: USER_REVIEW_DELETE_REQUEST,
-    payload: data,
   };
 };
 

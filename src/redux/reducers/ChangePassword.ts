@@ -1,4 +1,4 @@
-import { ChangePasswordTypes, ActionsTypes } from 'types/api';
+import { ActionsTypes } from 'types/api';
 
 export const CHANGE_PASSWORD_REQUEST = 'CHANGE_PASSWORD_REQUEST';
 export const CHANGE_PASSWORD_SUCCESS = 'CHANGE_PASSWORD_SUCCESS';
@@ -49,7 +49,7 @@ export default function ChangePassword(
   }
 }
 
-export const ChangePasswordRequest = (data: ChangePasswordTypes) => {
+export const ChangePasswordRequest = (data: { password: string }) => {
   return {
     type: CHANGE_PASSWORD_REQUEST,
     payload: data,

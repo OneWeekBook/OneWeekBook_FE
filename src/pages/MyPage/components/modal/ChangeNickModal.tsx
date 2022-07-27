@@ -15,13 +15,12 @@ type PropsType = {
 function ChangeNickModal({ nickToggleIsOn }: PropsType) {
   const dispatch = useDispatch();
   const [nick, changeNick] = useInput('');
-  const { user } = useSelector((state: AppStateType) => state.authUser);
   const { changeErrorStatus } = useSelector(
     (state: AppStateType) => state.changeNick,
   );
 
   const handleChangeClick = () => {
-    dispatch(ChangeNickRequest({ nick, id: user.id }));
+    dispatch(ChangeNickRequest({ nick }));
   };
 
   const handleChangeNick = useCallback(() => {

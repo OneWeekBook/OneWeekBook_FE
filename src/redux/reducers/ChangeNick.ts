@@ -1,4 +1,4 @@
-import { ChangeNickTypes, ActionsTypes } from 'types/api';
+import { ActionsTypes } from 'types/api';
 
 export const CHANGE_NICK_REQUEST = 'CHANGE_NICK_REQUEST';
 export const CHANGE_NICK_SUCCESS = 'CHANGE_NICK_SUCCESS';
@@ -46,7 +46,7 @@ export default function SignIn(state = initialState, action: ActionsTypes) {
   }
 }
 
-export const ChangeNickRequest = (data: ChangeNickTypes) => {
+export const ChangeNickRequest = (data: { nick: string }) => {
   return {
     type: CHANGE_NICK_REQUEST,
     payload: data,

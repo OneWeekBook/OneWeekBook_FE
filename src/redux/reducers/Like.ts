@@ -1,4 +1,4 @@
-import { LikeCancelTypes, LikeTypes, ActionsTypes } from 'types/api';
+import { ActionsTypes } from 'types/api';
 
 export const LIKE_REQUEST = 'LIKE_REQUEST';
 export const LIKE_SUCCESS = 'LIKE_SUCCESS';
@@ -121,7 +121,7 @@ export const LikeFail = (error: any) => {
   };
 };
 
-export const LikeAddRequest = (data: LikeTypes) => {
+export const LikeAddRequest = (data: { bookId: number; state: number }) => {
   return {
     type: LIKE_ADD_REQUEST,
     payload: data,
@@ -141,7 +141,7 @@ export const LikeAddFail = (error: any) => {
   };
 };
 
-export const LikeCancelRequest = (data: LikeCancelTypes) => {
+export const LikeCancelRequest = (data: { bookId: number }) => {
   return {
     type: LIKE_CANCEL_REQUEST,
     payload: data,

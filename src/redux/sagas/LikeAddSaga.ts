@@ -1,5 +1,4 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
-import { LikeTypes } from 'types/api';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 import instance from 'api/axios';
 import {
   LikeAddFail,
@@ -7,7 +6,7 @@ import {
   LIKE_ADD_REQUEST,
 } from '../reducers/Like';
 
-function LikeAddAPI(params: LikeTypes) {
+function LikeAddAPI(params: { bookId: number; state: number; userId: number }) {
   const { bookId, state, userId } = params;
   return instance.post(
     `${process.env.REACT_APP_BASIC_URL}/book/reviews/${bookId}/like`,
@@ -15,9 +14,10 @@ function LikeAddAPI(params: LikeTypes) {
   );
 }
 
-function* fetchLikeAddSaga(action: any) {
+function* fetchLikeAddSaga(action: any): any {
   try {
-    yield call(LikeAddAPI, action.payload);
+    const user = yield select((state) => state.authUser.user);
+    yield call(LikeAddAPI, { userId: user.id, ...action.payload });
     yield put(LikeAddSuccess());
   } catch (error) {
     yield put(LikeAddFail(error));

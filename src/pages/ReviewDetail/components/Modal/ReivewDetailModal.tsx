@@ -79,26 +79,18 @@ function ReviewDetailModal({ item, detailToggleIsOn }: PropsType) {
     return false;
   };
 
-  const handleLikeCancel = (bookId: number, userId: number) => {
-    dispatch(LikeCancelRequest({ bookId, userId }));
-  };
-
-  const handleLikeClick = (bookId: number, state: number, userId: number) => {
-    dispatch(LikeAddRequest({ bookId, state, userId }));
-  };
-
   const likeAddClick = (state: number, isSelected: boolean) => {
     if (compareLikeUser() && !isSelected) {
-      handleLikeCancel(item.id, user.id);
+      dispatch(LikeCancelRequest({ bookId: item.id }));
       setTimeout(() => {
-        handleLikeClick(item.id, state, user.id);
+        dispatch(LikeAddRequest({ bookId: item.id, state }));
       }, 10);
     } else if (compareLikeUser() && isSelected) {
       if (state === 0) setZeroToggle(false);
       else if (state === 1) setOneToggle(false);
-      handleLikeCancel(item.id, user.id);
+      dispatch(LikeCancelRequest({ bookId: item.id }));
     } else if (!compareLikeUser()) {
-      handleLikeClick(item.id, state, user.id);
+      dispatch(LikeAddRequest({ bookId: item.id, state }));
     }
   };
 

@@ -10,29 +10,29 @@ export const NavItems = [
     id: 1,
     title: '홈',
     link: '/',
-    img: `${process.env.PUBLIC_URL}/assets/nav/nav-none-home.png`,
-    clickImg: `${process.env.PUBLIC_URL}/assets/nav/nav-done-home.png`,
+    img: `sprite sprite-nav-none-home`,
+    clickImg: `sprite sprite-nav-done-home`,
   },
   {
     id: 2,
     title: '내 서재',
     link: '/my-library',
-    img: `${process.env.PUBLIC_URL}/assets/nav/nav-none-my-library.png`,
-    clickImg: `${process.env.PUBLIC_URL}/assets/nav/nav-done-my-library.png`,
+    img: `sprite sprite-nav-none-book`,
+    clickImg: `sprite sprite-nav-done-book`,
   },
   {
     id: 3,
     title: '카테고리',
     link: '/category',
-    img: `${process.env.PUBLIC_URL}/assets/nav/nav-none-category.png`,
-    clickImg: `${process.env.PUBLIC_URL}/assets/nav/nav-done-category.png`,
+    img: `sprite sprite-nav-none-category`,
+    clickImg: `sprite sprite-nav-done-category`,
   },
   {
     id: 4,
     title: '리뷰',
     link: '/review',
-    img: `${process.env.PUBLIC_URL}/assets/nav/nav-none-review.png`,
-    clickImg: `${process.env.PUBLIC_URL}/assets/nav/nav-done-review.png`,
+    img: `sprite sprite-nav-none-review`,
+    clickImg: `sprite sprite-nav-done-review`,
   },
 ];
 
@@ -54,17 +54,14 @@ function Nav() {
                   handleAuthClick(item.link, ['/my-library'], isModalToggleOn)
                 }
               >
-                <img
-                  src={
+                <i
+                  className={
                     item.link === `/${location.pathname.split('/')[1]}`
                       ? item.clickImg
                       : item.img
                   }
-                  alt={item.title}
-                  width={30}
-                  height={30}
                 />
-                {item.title}
+                &nbsp;{item.title}
               </NavItem>
             ))}
           </NavWrapper>

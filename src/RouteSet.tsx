@@ -1,8 +1,8 @@
 import ProtectedRoute, { ProtectedRouteProps } from 'PrivateRoute';
 import { Routes, Route } from 'react-router-dom';
 import {
-  CategoryPage,
   MainPage,
+  CategoryPage,
   SignInPage,
   SignUpPage,
   ReviewPage,

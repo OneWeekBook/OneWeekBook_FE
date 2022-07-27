@@ -12,33 +12,32 @@ import { InfoTypes } from 'types/book';
 import { SetStartDate } from 'lib/SetDate';
 import { Toast } from 'lib/Toast';
 import WriteModal from 'components/Modal';
-import ImageButton from 'components/Button/ImageButton';
 import DefaultButton from 'components/Button/DefaultButton';
 
 const RecommendItem = [
   {
     id: 0,
     value: 4,
-    img_done: `${process.env.PUBLIC_URL}/assets/recommend/best_done.png`,
-    img_none: `${process.env.PUBLIC_URL}/assets/recommend/best_none.png`,
+    img_done: 'sprite sprite-best_done',
+    img_none: 'sprite sprite-best_none',
   },
   {
     id: 1,
     value: 3,
-    img_done: `${process.env.PUBLIC_URL}/assets/recommend/recommend_done.png`,
-    img_none: `${process.env.PUBLIC_URL}/assets/recommend/recommend_none.png`,
+    img_done: 'sprite sprite-recommend_done',
+    img_none: 'sprite sprite-recommend_none',
   },
   {
     id: 2,
     value: 2,
-    img_done: `${process.env.PUBLIC_URL}/assets/recommend/good_done.png`,
-    img_none: `${process.env.PUBLIC_URL}/assets/recommend/good_none.png`,
+    img_done: 'sprite sprite-good_done',
+    img_none: 'sprite sprite-good_none',
   },
   {
     id: 3,
     value: 1,
-    img_done: `${process.env.PUBLIC_URL}/assets/recommend/soso_done.png`,
-    img_none: `${process.env.PUBLIC_URL}/assets/recommend/soso_none.png`,
+    img_done: 'sprite sprite-soso_done',
+    img_none: 'sprite sprite-soso_none',
   },
 ];
 
@@ -55,9 +54,6 @@ function WriteReviewModal({ bookId, bookData, toggleIsOn }: PropsType) {
   );
   const [recommend, setRecommend] = useState<number>(4);
   const [review, setReview] = useState('');
-  const recommendClick = (recommend: number) => {
-    setRecommend(recommend);
-  };
 
   const addReviewClick = (
     bookId: number,
@@ -71,16 +67,16 @@ function WriteReviewModal({ bookId, bookData, toggleIsOn }: PropsType) {
     }
   };
 
-  const modifyReviewClick = (id: number, recommend: number, review: string) => {
+  const modifyReviewClick = (recommend: number, review: string) => {
     if (review === '') {
       Toast('warning', '리뷰를 남겨주세요...');
     } else {
-      dispatch(UserReviewModifyRequest({ id, review, rating: recommend }));
+      dispatch(UserReviewModifyRequest({ review, rating: recommend }));
     }
   };
 
-  const deleteReviewClick = (id: number) => {
-    dispatch(UserReviewDeleteRequest({ id }));
+  const deleteReviewClick = () => {
+    dispatch(UserReviewDeleteRequest());
     toggleIsOn();
   };
 
@@ -130,17 +126,17 @@ function WriteReviewModal({ bookId, bookData, toggleIsOn }: PropsType) {
             <p>책이 어떻나요?</p>
             <ImageButtonWrapper>
               {RecommendItem.map((item) => (
-                <ImageButton
-                  key={item.id}
+                <button
                   type="button"
-                  src={recommend === item.value ? item.img_done : item.img_none}
-                  pc={[40, 30]}
-                  imgPC={[30, 30]}
-                  margin={[0, 10, 0, 0]}
-                  bgColor="white"
-                  alt="recommend button"
-                  onClick={() => recommendClick(item.value)}
-                />
+                  key={item.id}
+                  onClick={() => setRecommend(item.value)}
+                >
+                  <i
+                    className={
+                      recommend === item.value ? item.img_done : item.img_none
+                    }
+                  />
+                </button>
               ))}
             </ImageButtonWrapper>
           </RecommendWrapper>
@@ -149,9 +145,7 @@ function WriteReviewModal({ bookId, bookData, toggleIsOn }: PropsType) {
               <>
                 <DefaultButton
                   pc={[60, 30]}
-                  onClick={() =>
-                    modifyReviewClick(reviewItem.id, recommend, review)
-                  }
+                  onClick={() => modifyReviewClick(recommend, review)}
                   isHover
                   hoverBgColor="#1e90ff"
                   hoverColor="white"
@@ -164,7 +158,7 @@ function WriteReviewModal({ bookId, bookData, toggleIsOn }: PropsType) {
                 />
                 <DefaultButton
                   pc={[60, 30]}
-                  onClick={() => deleteReviewClick(reviewItem.id)}
+                  onClick={deleteReviewClick}
                   isHover
                   hoverBgColor="#1e90ff"
                   hoverColor="white"
@@ -261,6 +255,12 @@ const RecommendWrapper = styled.div`
 
 const ImageButtonWrapper = styled.div`
   display: flex;
+  button {
+    cursor: pointer;
+    background: white;
+    border: none;
+    margin: 2px;
+  }
 `;
 
 const ButtonWrapper = styled.div`

@@ -11,10 +11,9 @@ import RemoveModal from 'components/Modal';
 
 type PropsType = {
   removeToggleIsOn: () => void;
-  id: number;
 };
 
-function RemoveUserModal({ removeToggleIsOn, id }: PropsType) {
+function RemoveUserModal({ removeToggleIsOn }: PropsType) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [error, setError] = useState<string>('');
@@ -25,7 +24,7 @@ function RemoveUserModal({ removeToggleIsOn, id }: PropsType) {
   );
 
   const handleRemoveClick = () => {
-    dispatch(RemoveUserRequest({ id, password }));
+    dispatch(RemoveUserRequest({ password }));
   };
 
   const handleRemoveUser = useCallback(() => {

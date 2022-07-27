@@ -12,11 +12,7 @@ import { LibraryItemTypes } from 'types/book';
 import MoveReadModal from 'components/Modal';
 import BookItem from '../_item/BookItem';
 
-type PropsType = {
-  userId: number;
-};
-
-function LikeBookList({ userId }: PropsType) {
+function LikeBookList() {
   const dispatch = useDispatch();
   const [isbn, setIsbn] = useState<string>('');
   const [likeToggle, likeToggleIsOn] = useToggle(false);
@@ -28,13 +24,13 @@ function LikeBookList({ userId }: PropsType) {
   );
 
   const moveReadClick = async () => {
-    await dispatch(MyLibraryModifyRequest({ progress: 1, isbn, userId }));
+    await dispatch(MyLibraryModifyRequest({ progress: 1, isbn }));
     likeToggleIsOn();
     dispatch(navRead());
   };
 
   useEffect(() => {
-    if (isDeleteSuccess) dispatch(MyLibraryRequest({ userId, progress: 0 }));
+    if (isDeleteSuccess) dispatch(MyLibraryRequest({ progress: 0 }));
   }, [isDeleteSuccess]);
 
   return (

@@ -102,10 +102,7 @@ function Header({ toggleIsOn }: PropsType) {
           )}
         </ButtonWrapper>
         <MobileButton isSign={isSign} onClick={toggleIsOn}>
-          <img
-            src={`${process.env.PUBLIC_URL}/assets/func/header-menu-burger.png`}
-            alt="sidebar button"
-          />
+          <i className="sprite sprite-header-menu-burger" />
         </MobileButton>
       </Wrapper>
     </Container>

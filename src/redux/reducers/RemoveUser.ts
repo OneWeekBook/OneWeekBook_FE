@@ -1,4 +1,4 @@
-import { RemoveUserTypes, ActionsTypes } from 'types/api';
+import { ActionsTypes } from 'types/api';
 
 export const REMOVE_USER_REQUEST = 'REMOVE_USER_REQUEST';
 export const REMOVE_USER_SUCCESS = 'REMOVE_USER_SUCCESS';
@@ -49,7 +49,7 @@ export default function RemoveError(
   }
 }
 
-export const RemoveUserRequest = (data: RemoveUserTypes) => {
+export const RemoveUserRequest = (data: { password: string }) => {
   return {
     type: REMOVE_USER_REQUEST,
     payload: data,
