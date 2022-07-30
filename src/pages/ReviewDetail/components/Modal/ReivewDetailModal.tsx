@@ -160,6 +160,7 @@ const Date = styled.p`
 const ReviewBody = styled.p`
   font-size: 18px;
   margin: 10px auto;
+  white-space: pre-wrap;
 `;
 
 const Recommend = styled.div`

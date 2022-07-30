@@ -1,4 +1,4 @@
-import { useState, useCallback, ChangeEvent } from 'react';
+import React, { useState, useCallback, ChangeEvent } from 'react';
 
 type onChangeType = (
   e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -7,7 +7,7 @@ type onChangeType = (
 const useInput = (initValue = '') => {
   const [value, setValue] = useState(initValue);
 
-  const handler = useCallback((e) => {
+  const handler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     setValue(val);
   }, []);
