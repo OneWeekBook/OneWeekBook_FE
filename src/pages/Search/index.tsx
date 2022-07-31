@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useState } from 'react';
+import { lazy, useEffect, useCallback, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -13,7 +13,10 @@ import LoadingErrorForm from 'components/Form/LoadingErrorForm';
 import DefaultButton from 'components/Button/DefaultButton';
 import Container from 'components/Container';
 import TitleWrapper from './components/TitleWrapper';
-import BooksList from './components/BooksList';
+
+const BooksList = lazy(
+  () => import(/* webpackChunkName: "BooksList" */ './components/BooksList'),
+);
 
 function index() {
   const location = useLocation();

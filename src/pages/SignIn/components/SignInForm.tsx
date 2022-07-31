@@ -48,57 +48,86 @@ function SignInForm() {
   );
 
   return (
-    <SignInFormWrapper>
-      <Title>로그인</Title>
-      <form onSubmit={handleSubmit}>
-        <FormInput
-          type="email"
-          placeholder="이메일"
-          state={email}
-          onChange={changeEmail}
-          onKeyPress={(event) => handleInputEnter(event, passRef)}
-          mref={emailRef}
-        />
-        <FormInput
-          type="password"
-          placeholder="비밀번호"
-          state={password}
-          onChange={changePassword}
-          mref={passRef}
-        />
-        {signInError && <ErrorForm error={signInErrorMsg} align="left" />}
-        <DefaultButton
-          pc={[0, 50]}
-          type="submit"
-          isHover
-          hoverBgColor="#08c1e9"
-          hoverColor="white"
-          bgColor="#1e90ff"
-          color="white"
-          margin={[10, 0, 10, 0]}
-          fontSize={[18, 18]}
-          fontWeight={600}
-          title="로그인"
-        />
-      </form>
-      <Link to="/sign-up">
-        <DefaultButton
-          pc={[0, 50]}
-          isHover
-          hoverBgColor="#303538"
-          hoverColor="white"
-          bgColor="#e6e6e6"
-          margin={[10, 0, 10, 0]}
-          fontSize={[18, 18]}
-          fontWeight={600}
-          title="회원가입"
-        />
-      </Link>
-    </SignInFormWrapper>
+    <Wrapper>
+      <SignInWrapper>
+        <SignInFormWrapper>
+          <Title>로그인</Title>
+          <form onSubmit={handleSubmit}>
+            <FormInput
+              type="email"
+              placeholder="이메일"
+              state={email}
+              onChange={changeEmail}
+              onKeyPress={(event) => handleInputEnter(event, passRef)}
+              mref={emailRef}
+            />
+            <FormInput
+              type="password"
+              placeholder="비밀번호"
+              state={password}
+              onChange={changePassword}
+              mref={passRef}
+            />
+            {signInError && <ErrorForm error={signInErrorMsg} align="left" />}
+            <DefaultButton
+              pc={[0, 50]}
+              type="submit"
+              isHover
+              hoverBgColor="#08c1e9"
+              hoverColor="white"
+              bgColor="#1e90ff"
+              color="white"
+              margin={[10, 0, 10, 0]}
+              fontSize={[18, 18]}
+              fontWeight={600}
+              title="로그인"
+            />
+          </form>
+          <Link to="/sign-up">
+            <DefaultButton
+              pc={[0, 50]}
+              isHover
+              hoverBgColor="#303538"
+              hoverColor="white"
+              bgColor="#e6e6e6"
+              margin={[10, 0, 10, 0]}
+              fontSize={[18, 18]}
+              fontWeight={600}
+              title="회원가입"
+            />
+          </Link>
+        </SignInFormWrapper>
+      </SignInWrapper>
+    </Wrapper>
   );
 }
 
 export default SignInForm;
+
+const Wrapper = styled.div`
+  box-sizing: border-box;
+  background-color: white;
+  border: solid 2px lightblue;
+  width: 375px;
+  margin: auto;
+  height: 500px;
+  a {
+    text-decoration: none;
+  }
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    width: 355px;
+  }
+`;
+
+const SignInWrapper = styled.div`
+  background-color: white;
+  width: 100%;
+  text-align: center;
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+`;
 
 const SignInFormWrapper = styled.div`
   box-sizing: border-box;

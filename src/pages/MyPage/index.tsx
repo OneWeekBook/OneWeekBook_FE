@@ -1,5 +1,9 @@
+import { lazy } from 'react';
 import Container from 'components/Container';
-import UserInfo from './components/UserInfo';
+
+const UserInfo = lazy(
+  () => import(/* webpackChunkName: "UserInfo" */ './components/UserInfo'),
+);
 
 function Index() {
   return (

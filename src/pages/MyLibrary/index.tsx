@@ -1,11 +1,15 @@
-import { useEffect } from 'react';
+import { lazy, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppStateType } from 'redux/reducers';
 import { navInit, userToggle } from 'redux/reducers/Func';
 import { Toast } from 'lib/Toast';
 import Container from 'components/Container';
-import MyLibraryNav from './components/MyLibraryNav';
 import MyLibraryTitle from './components/MyLibraryTitle';
+
+const MyLibraryNav = lazy(
+  () =>
+    import(/* webpackChunkName: "MyLibraryNav" */ './components/MyLibraryNav'),
+);
 
 function Index() {
   const dispatch = useDispatch();

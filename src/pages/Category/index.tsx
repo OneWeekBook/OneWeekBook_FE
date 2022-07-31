@@ -1,9 +1,15 @@
-import { useEffect } from 'react';
+import { lazy, useEffect } from 'react';
 import Container from 'components/Container';
 import { userToggle } from 'redux/reducers/Func';
 import { useDispatch } from 'react-redux';
-import CategoryList from './components/CategoryList';
-import SearchList from './components/SearchList';
+
+const CategoryList = lazy(
+  () =>
+    import(/* webpackChunkName: "CategoryList" */ './components/CategoryList'),
+);
+const SearchList = lazy(
+  () => import(/* webpackChunkName: "SearchList" */ './components/SearchList'),
+);
 
 function index() {
   const dispatch = useDispatch();

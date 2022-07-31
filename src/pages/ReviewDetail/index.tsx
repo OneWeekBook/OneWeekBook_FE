@@ -1,10 +1,16 @@
-import { useEffect } from 'react';
+import { lazy, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { ReviewRequest } from 'redux/reducers/Review';
 import Container from 'components/Container';
-import BookInfo from './components/BookInfo';
-import ReviewInfo from './components/ReviewInfo';
+
+const BookInfo = lazy(
+  () => import(/* webpackChunkName: "BookInfo" */ './components/BookInfo'),
+);
+
+const ReviewInfo = lazy(
+  () => import(/* webpackChunkName: "ReviewInfo" */ './components/ReviewInfo'),
+);
 
 function Index() {
   const location = useLocation();

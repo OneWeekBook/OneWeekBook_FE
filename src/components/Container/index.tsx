@@ -1,4 +1,9 @@
-import { ElementType, HTMLAttributes, PropsWithChildren } from 'react';
+import {
+  ElementType,
+  HTMLAttributes,
+  PropsWithChildren,
+  Suspense,
+} from 'react';
 import styled from 'styled-components';
 
 type ContainerTypes = {
@@ -23,7 +28,9 @@ function Index({
       }
       {...rest}
     >
-      <ContentsWrapper>{children}</ContentsWrapper>
+      <Suspense>
+        <ContentsWrapper>{children}</ContentsWrapper>
+      </Suspense>
     </Component>
   );
 }
