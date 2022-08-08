@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
 import {
@@ -23,7 +23,10 @@ function ReviewDetailModal({ item, detailToggleIsOn }: PropsType) {
   const [one, setOne] = useState(item.oneLikeCount);
   const [zeroToggle, setZeroToggle] = useState(false);
   const [oneToggle, setOneToggle] = useState(false);
-  const { user } = useSelector((state: AppStateType) => state.authUser);
+  const { user } = useSelector(
+    (state: AppStateType) => state.authUser,
+    shallowEqual,
+  );
   const {
     likeData,
     likeAddErrorStatus,
@@ -32,7 +35,7 @@ function ReviewDetailModal({ item, detailToggleIsOn }: PropsType) {
     likeData: LikeDataTypes[];
     likeAddErrorStatus?: number;
     likeCancelErrorStatus?: number;
-  } = useSelector((state: AppStateType) => state.like);
+  } = useSelector((state: AppStateType) => state.like, shallowEqual);
   const likeDoneImg = `${process.env.PUBLIC_URL}/assets/like/like-done.svg`;
   const likeNoneImg = `${process.env.PUBLIC_URL}/assets/like/like-none.svg`;
 

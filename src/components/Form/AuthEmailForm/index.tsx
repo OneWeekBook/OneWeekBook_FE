@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
 import { AuthEmailInit, AuthEmailRequest } from 'redux/reducers/AuthEmail';
@@ -41,10 +41,12 @@ function AuthEmailForm({
 
   const { emailErrorStatus, emailErrorMsg } = useSelector(
     (state: AppStateType) => state.authEmail,
+    shallowEqual,
   );
 
   const { codeErrorStatus, codeErrorMsg } = useSelector(
     (state: AppStateType) => state.authCode,
+    shallowEqual,
   );
 
   useEffect(() => {

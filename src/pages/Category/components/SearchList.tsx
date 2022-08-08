@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { BooksTypes } from 'types/book';
 import { AppStateType } from 'redux/reducers';
@@ -16,10 +16,11 @@ function SearchList() {
   const dispatch = useDispatch();
   const { books, isLoading, isSuccess } = useSelector(
     (state: AppStateType) => state.search,
+    shallowEqual,
   );
-  const { search } = useSelector((state: AppStateType) => state.func);
-  const { isAddSuccess } = useSelector(
-    (state: AppStateType) => state.myLibrary,
+  const search = useSelector((state: AppStateType) => state.func.search);
+  const isAddSuccess = useSelector(
+    (state: AppStateType) => state.myLibrary.isAddSuccess,
   );
 
   useEffect(() => {

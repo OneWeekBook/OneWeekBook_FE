@@ -1,6 +1,6 @@
 import { lazy, useEffect, useCallback, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
 import {
@@ -27,6 +27,7 @@ function index() {
   const [startIdx, setStartIdx] = useState<number>(1);
   const { isLoading, isSuccess } = useSelector(
     (state: AppStateType) => state.search,
+    shallowEqual,
   );
 
   for (let i = 1; i < pathArr.length - 2; i += 1) {

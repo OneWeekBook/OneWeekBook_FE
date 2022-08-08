@@ -1,5 +1,5 @@
 import { lazy, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { AppStateType } from 'redux/reducers';
 import { navInit, userToggle } from 'redux/reducers/Func';
 import { Toast } from 'lib/Toast';
@@ -13,12 +13,16 @@ const MyLibraryNav = lazy(
 
 function Index() {
   const dispatch = useDispatch();
-  const { user } = useSelector((state: AppStateType) => state.authUser);
-  const { isDeleteSuccess } = useSelector(
-    (state: AppStateType) => state.myLibrary,
+  const { user } = useSelector(
+    (state: AppStateType) => state.authUser,
+    shallowEqual,
+  );
+  const isDeleteSuccess = useSelector(
+    (state: AppStateType) => state.myLibrary.isDeleteSuccess,
   );
   const { itemAddSuccess, itemModifySuccess, itemDeleteSuccess } = useSelector(
     (state: AppStateType) => state.userReview,
+    shallowEqual,
   );
 
   useEffect(() => {

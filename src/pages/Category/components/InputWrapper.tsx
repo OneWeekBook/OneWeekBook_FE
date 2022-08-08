@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
@@ -18,7 +18,10 @@ function InputWrapper({ curSubCategory, curParentCategory }: PropsTypes) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
-  const { books } = useSelector((state: AppStateType) => state.search);
+  const books = useSelector(
+    (state: AppStateType) => state.search.books,
+    shallowEqual,
+  );
 
   const handleFetch = useCallback(
     (search: string) => {

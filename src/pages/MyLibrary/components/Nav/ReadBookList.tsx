@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
 import {
@@ -26,8 +26,11 @@ function ReadBookList() {
   });
   const { userBookList, isDeleteSuccess } = useSelector(
     (state: AppStateType) => state.myLibrary,
+    shallowEqual,
   );
-  const { initSuccess } = useSelector((state: AppStateType) => state.paragraph);
+  const initSuccess = useSelector(
+    (state: AppStateType) => state.paragraph.initSuccess,
+  );
 
   const moveDoneClick = async () => {
     await dispatch(MyLibraryModifyRequest({ progress: 2, isbn }));

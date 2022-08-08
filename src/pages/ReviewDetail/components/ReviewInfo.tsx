@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
 import { ReviewRequest } from 'redux/reducers/Review';
@@ -18,6 +18,7 @@ function ReviewInfo() {
   const [detailToggle, detailToggleIsOn] = useToggle(false);
   const { reviews, bookData } = useSelector(
     (state: AppStateType) => state.review,
+    shallowEqual,
   );
   const [curReview, setCurReview] = useState({
     id: -1,

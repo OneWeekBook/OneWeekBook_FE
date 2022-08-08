@@ -1,5 +1,5 @@
 import { useState, useLayoutEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
 import {
@@ -51,6 +51,7 @@ function WriteReviewModal({ bookId, bookData, toggleIsOn }: PropsType) {
   const dispatch = useDispatch();
   const { reviewItem, itemAddSuccess } = useSelector(
     (state: AppStateType) => state.userReview,
+    shallowEqual,
   );
   const [recommend, setRecommend] = useState<number>(4);
   const [review, setReview] = useState('');

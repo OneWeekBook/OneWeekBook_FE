@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { CategoryRequest } from 'redux/reducers/Category';
 import { SearchInit } from 'redux/reducers/Search';
@@ -19,7 +19,10 @@ const initialState = {
 
 function CategoryList() {
   const dispatch = useDispatch();
-  const { categories } = useSelector((state: AppStateType) => state.category);
+  const categories = useSelector(
+    (state: AppStateType) => state.category.categories,
+    shallowEqual,
+  );
   const [parentCategory, setParentCategory] = useState<CategoryItemTypes[]>([]);
   const [curParentCategory, setCurParentCategory] = useState<
     CategoryItemTypes[]
@@ -28,6 +31,7 @@ function CategoryList() {
   const [curSubCategory, setCurSubCategory] = useState<CategoryItemTypes[]>([
     initialState,
   ]);
+
   const getFilterParentCategories = useCallback(
     (categories: CategoryItemTypes[]) => {
       const parent = categories.filter(

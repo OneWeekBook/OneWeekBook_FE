@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
 import { userToggle } from 'redux/reducers/Func';
@@ -19,6 +19,7 @@ function UserInfo() {
   const [removeToggle, removeToggleIsOn] = useToggle(false);
   const { user, userBooks } = useSelector(
     (state: AppStateType) => state.authUser,
+    shallowEqual,
   );
 
   useEffect(() => {

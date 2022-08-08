@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
 import { ReviewInit, ReviewsRequest } from 'redux/reducers/Review';
 import { ReviewItemType } from 'types/review';
 import PagenationForm from 'components/Form/PagenationForm';
-import ReviewItem from './_item/ReviewItem';
+import ReviewItem from './ReviewItem';
 
 function ReviewList() {
   const dispatch = useDispatch();
   const [curIdx, setCurIdx] = useState<number>(1);
   const { reviews, reivewsTotal } = useSelector(
     (state: AppStateType) => state.review,
+    shallowEqual,
   );
 
   useEffect(() => {

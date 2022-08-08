@@ -15,8 +15,12 @@ function Index({ children }: PropsWithChildren<any>) {
   const location = useLocation();
   const dispatch = useDispatch();
   const [toggle, toggleIsOn] = useToggle(false);
-  const { userToggle } = useSelector((state: AppStateType) => state.func);
-  const { isSuccess } = useSelector((state: AppStateType) => state.signIn);
+  const userToggle = useSelector(
+    (state: AppStateType) => state.func.userToggle,
+  );
+  const isSuccess = useSelector(
+    (state: AppStateType) => state.signIn.isSuccess,
+  );
 
   useEffect(() => {
     dispatch(AuthUserRequest());

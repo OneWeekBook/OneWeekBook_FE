@@ -25,7 +25,7 @@ function BestItem({
         <InfoWrapper>
           <p className="item-id">{idx}</p>
           <BookInfoWrapper>
-            <TitleWrapepr>
+            <TitleWrapper>
               <p className="item-title">
                 {title && title.replaceAll('<b>', '').replaceAll('</b>', '')}
               </p>
@@ -36,7 +36,7 @@ function BestItem({
                 {publisher &&
                   publisher.replaceAll('<b>', '').replaceAll('</b>', '')}
               </p>
-            </TitleWrapepr>
+            </TitleWrapper>
             <CountInfoWrapper>
               <img
                 src={`${process.env.PUBLIC_URL}/assets/func/comment.png`}
@@ -91,7 +91,7 @@ const BookInfoWrapper = styled.div`
   height: 100%;
 `;
 
-const TitleWrapepr = styled.div`
+const TitleWrapper = styled.div`
   .item-title {
     font-size: 16px;
     font-weight: 700;

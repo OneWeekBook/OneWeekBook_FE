@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
 import { navDone, navLike, navRead } from 'redux/reducers/Func';
@@ -26,8 +26,11 @@ const NavItems = [
 
 function MyLibraryNav() {
   const dispatch = useDispatch();
-  const { user } = useSelector((state: AppStateType) => state.authUser);
-  const { navId } = useSelector((state: AppStateType) => state.func);
+  const { user } = useSelector(
+    (state: AppStateType) => state.authUser,
+    shallowEqual,
+  );
+  const navId = useSelector((state: AppStateType) => state.func.navId);
 
   useEffect(() => {
     if (user.id) dispatch(MyLibraryRequest({ progress: navId }));

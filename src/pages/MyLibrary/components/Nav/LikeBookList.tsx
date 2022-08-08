@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
 import {
@@ -16,11 +16,12 @@ function LikeBookList() {
   const dispatch = useDispatch();
   const [isbn, setIsbn] = useState<string>('');
   const [likeToggle, likeToggleIsOn] = useToggle(false);
-  const { isDeleteSuccess } = useSelector(
-    (state: AppStateType) => state.myLibrary,
+  const isDeleteSuccess = useSelector(
+    (state: AppStateType) => state.myLibrary.isDeleteSuccess,
   );
   const { userBookList } = useSelector(
     (state: AppStateType) => state.myLibrary,
+    shallowEqual,
   );
 
   const moveReadClick = async () => {

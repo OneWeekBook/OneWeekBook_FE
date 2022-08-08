@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
@@ -22,6 +22,7 @@ function SignInForm() {
   const { handleSignInError } = useSignInErrorCheck();
   const { signInErrorStatus, signInErrorMsg } = useSelector(
     (state: AppStateType) => state.signIn,
+    shallowEqual,
   );
 
   useEffect(() => {

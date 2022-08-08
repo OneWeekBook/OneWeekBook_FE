@@ -31,8 +31,8 @@ function SignUpForm() {
   const { handleError } = useErrorCheck();
   const { handleSignUpError } = useSignUpErrorCheck();
   const { handleInputEnter } = useInputEnter();
-  const { signUpErrorStatus } = useSelector(
-    (state: AppStateType) => state.signUp,
+  const signUpErrorStatus = useSelector(
+    (state: AppStateType) => state.signUp.signUpErrorStatus,
   );
 
   useEffect(() => {

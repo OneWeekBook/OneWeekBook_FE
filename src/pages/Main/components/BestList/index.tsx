@@ -1,11 +1,14 @@
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
 import { ReviewItemType } from 'types/review';
 import BestItem from './BestItem';
 
 function Index() {
-  const { reviews } = useSelector((state: AppStateType) => state.review);
+  const reviews = useSelector(
+    (state: AppStateType) => state.review.reviews,
+    shallowEqual,
+  );
 
   return (
     <Wrapper>

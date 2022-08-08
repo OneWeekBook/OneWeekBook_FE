@@ -19,8 +19,8 @@ function RemoveUserModal({ removeToggleIsOn }: PropsType) {
   const [error, setError] = useState<string>('');
   const [isError, setIsError] = useState<boolean>(false);
   const [password, changePassword] = useInput('');
-  const { removeErrorStatus } = useSelector(
-    (state: AppStateType) => state.removeUser,
+  const removeErrorStatus = useSelector(
+    (state: AppStateType) => state.removeUser.removeErrorStatus,
   );
 
   const handleRemoveClick = () => {

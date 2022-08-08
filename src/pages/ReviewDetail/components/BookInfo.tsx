@@ -1,10 +1,13 @@
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
 import BookInfoWrapper from './_items/BookInfoWrapper';
 
 function BookInfo() {
-  const { bookData } = useSelector((state: AppStateType) => state.review);
+  const { bookData } = useSelector(
+    (state: AppStateType) => state.review,
+    shallowEqual,
+  );
   return (
     <Wrapper>{bookData.title && <BookInfoWrapper {...bookData} />}</Wrapper>
   );
