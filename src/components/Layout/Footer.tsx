@@ -23,15 +23,15 @@ const Wrapper = styled.div`
 `;
 
 const LOGO = styled.p`
-  color: #fffafa;
+  color: ${({ theme }) => theme.color.COLOR_FONT_FOUR};
   font-size: 28px;
-  font-weight: 800;
+  font-weight: 700;
   margin-top: 50px;
 `;
 
 const DESC = styled.p`
-  color: white;
+  color: ${({ theme }) => theme.color.COLOR_FONT_FOUR};
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 400;
   margin-top: 20px;
 `;

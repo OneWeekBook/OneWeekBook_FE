@@ -71,6 +71,6 @@ const TopWrapper = styled.section`
 `;
 
 const BottomWrapper = styled.section`
-  background-color: #303538;
+  background-color: ${({ theme }) => theme.color.COLOR_LAYOUT_ONE};
   min-height: 200px;
 `;
