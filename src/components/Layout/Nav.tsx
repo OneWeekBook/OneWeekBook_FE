@@ -10,29 +10,29 @@ export const NavItems = [
     id: 1,
     title: '홈',
     link: '/',
-    img: `sprite sprite-nav-none-home`,
-    clickImg: `sprite sprite-nav-done-home`,
+    img: `${process.env.PUBLIC_URL}/assets/verTwo/home_none.png`,
+    clickImg: `${process.env.PUBLIC_URL}/assets/verTwo/home_done.png`,
   },
   {
     id: 2,
     title: '내 서재',
     link: '/my-library',
-    img: `sprite sprite-nav-none-book`,
-    clickImg: `sprite sprite-nav-done-book`,
+    img: `${process.env.PUBLIC_URL}/assets/verTwo/myLibrary_none.png`,
+    clickImg: `${process.env.PUBLIC_URL}/assets/verTwo/myLibrary_done.png`,
   },
   {
     id: 3,
     title: '카테고리',
     link: '/category',
-    img: `sprite sprite-nav-none-category`,
-    clickImg: `sprite sprite-nav-done-category`,
+    img: `${process.env.PUBLIC_URL}/assets/verTwo/category_none.png`,
+    clickImg: `${process.env.PUBLIC_URL}/assets/verTwo/category_done.png`,
   },
   {
     id: 4,
     title: '리뷰',
     link: '/review',
-    img: `sprite sprite-nav-none-review`,
-    clickImg: `sprite sprite-nav-done-review`,
+    img: `${process.env.PUBLIC_URL}/assets/verTwo/reviews_none.png`,
+    clickImg: `${process.env.PUBLIC_URL}/assets/verTwo/reviews_done.png`,
   },
 ];
 
@@ -54,12 +54,15 @@ function Nav() {
                   handleAuthClick(item.link, ['/my-library'], isModalToggleOn)
                 }
               >
-                <i
-                  className={
+                <img
+                  src={
                     item.link === `/${location.pathname.split('/')[1]}`
                       ? item.clickImg
                       : item.img
                   }
+                  alt={item.title}
+                  width={30}
+                  height={30}
                 />
                 &nbsp;{item.title}
               </NavItem>
@@ -95,9 +98,8 @@ const NavWrapper = styled.div`
   display: flex;
   margin-bottom: 5px;
   width: 100%;
-  a {
-    text-decoration: none;
-  }
+  font-size: 16px;
+  font-weight: 600;
   @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
     margin: auto;
     width: 90%;
@@ -115,8 +117,9 @@ const NavItem = styled.button`
   text-decoration: none;
   line-height: 35px;
   font-size: 16px;
+  font-weight: 600;
   margin: 0 10px 0 0;
-  color: white;
+  color: ${({ theme }) => theme.color.COLOR_MAIN};
   cursor: pointer;
   img {
     margin-right: 2px;

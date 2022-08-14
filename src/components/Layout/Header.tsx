@@ -4,7 +4,6 @@ import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { AuthInit } from 'redux/reducers/AuthUser';
 import { Toast } from 'lib/Toast';
-import DefaultButton from 'components/Button/DefaultButton';
 import Container from '../Container';
 
 type PropsType = {
@@ -36,68 +35,21 @@ function Header({ toggleIsOn }: PropsType) {
   return (
     <Container as="header">
       <Wrapper isSign={isSign}>
-        <Link to="/">ONEWEEKBOOK</Link>
+        <Logo to="/">ONEWEEKBOOK</Logo>
         <ButtonWrapper isSign={isSign}>
           {sessionStorage.getItem('accessToken') ? (
             <>
-              <Link to="/myPage">
-                <DefaultButton
-                  pc={[90, 35]}
-                  isHover
-                  hoverBgColor="white"
-                  hoverColor="#1e90ff"
-                  bgColor="#1e90ff"
-                  color="white"
-                  fontSize={[14, 14]}
-                  fontWeight={600}
-                  title="마이페이지"
-                />
-              </Link>
-              <Link to="/">
-                <DefaultButton
-                  onClick={logoutClick}
-                  pc={[90, 35]}
-                  isHover
-                  hoverBgColor="white"
-                  hoverColor="#1e90ff"
-                  bgColor="#1e90ff"
-                  color="white"
-                  margin={[0, 0, 0, 10]}
-                  fontSize={[14, 14]}
-                  fontWeight={600}
-                  title="로그아웃"
-                />
+              <Link to="/myPage">마이페이지</Link>
+              <span>&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+              <Link to="/" onClick={logoutClick}>
+                로그아웃
               </Link>
             </>
           ) : (
             <>
-              <Link to="/sign-up">
-                <DefaultButton
-                  pc={[90, 35]}
-                  isHover
-                  hoverBgColor="white"
-                  hoverColor="#1e90ff"
-                  bgColor="#1e90ff"
-                  color="white"
-                  fontSize={[14, 14]}
-                  fontWeight={600}
-                  title="회원가입"
-                />
-              </Link>
-              <Link to="/sign-in">
-                <DefaultButton
-                  pc={[90, 35]}
-                  isHover
-                  hoverBgColor="white"
-                  hoverColor="#1e90ff"
-                  bgColor="#1e90ff"
-                  color="white"
-                  margin={[0, 0, 0, 10]}
-                  fontSize={[14, 14]}
-                  fontWeight={600}
-                  title="로그인"
-                />
-              </Link>
+              <Link to="/sign-up">회원가입</Link>
+              <span>&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+              <Link to="/sign-in">로그인</Link>
             </>
           )}
         </ButtonWrapper>
@@ -115,31 +67,26 @@ const Wrapper = styled.div<{ isSign: boolean }>`
   width: 100%;
   display: flex;
   align-items: center;
+  color: ${({ theme }) => theme.color.COLOR_MAIN};
   justify-content: ${({ isSign }) => (isSign ? 'center' : 'space-between')};
   margin: 10px 0;
-  a {
-    color: white;
-    font-size: 28px;
-    font-weight: 800;
-    text-decoration: none;
-  }
   @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
     margin: 10px auto;
     width: 90%;
-    a {
-      font-size: 24px;
-    }
   }
+`;
+
+const Logo = styled(Link)`
+  font-size: 32px;
+  font-weight: 800;
 `;
 
 const ButtonWrapper = styled.div<{ isSign: boolean }>`
   display: ${({ isSign }) => (isSign ? 'none' : 'flex')};
   align-items: center;
   justify-content: space-between;
-  button {
-    border: solid 2px white;
-    border-radius: 7px;
-  }
+  font-size: 16px;
+  font-weight: 600;
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     display: none;
   }

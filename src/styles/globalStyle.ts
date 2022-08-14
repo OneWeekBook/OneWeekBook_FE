@@ -7,18 +7,19 @@ const globalStyles = createGlobalStyle`
         padding: 0;
     }
 
-    body {
+    html, body {
         width: 100%;
-        minWidth: ${MOBILE_MIN_WIDTH}
-    }
-
-    html {
-        width: 100%;
+        height: 100%;
         minWidth: ${MOBILE_MIN_WIDTH}
     }
     
     textarea {
         resize : none:
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
     }
 
     p {
