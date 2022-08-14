@@ -34,15 +34,15 @@ function Index({ children }: PropsWithChildren<any>) {
     <LayoutWrapper>
       <TopScroll />
       {location.pathname === '/sign-up' || location.pathname === '/sign-in' ? (
-        <TopWrapper>
+        <section>
           <Header />
-        </TopWrapper>
+        </section>
       ) : (
-        <TopWrapper>
+        <section>
           <Header toggleIsOn={toggleIsOn} />
           <Nav />
           <Sidebar toggle={toggle} toggleIsOn={toggleIsOn} />
-        </TopWrapper>
+        </section>
       )}
       <main>{children}</main>
       <BottomWrapper>
@@ -64,10 +64,6 @@ const LayoutWrapper = styled.section`
     align-items: center;
     flex-grow: 1;
   }
-`;
-
-const TopWrapper = styled.section`
-  background-color: #1e90ff;
 `;
 
 const BottomWrapper = styled.section`
