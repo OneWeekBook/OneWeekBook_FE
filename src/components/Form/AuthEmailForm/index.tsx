@@ -126,9 +126,9 @@ function AuthEmailForm({
               pc={[0, 35]}
               onClick={authEmailClick}
               isHover
-              hoverBgColor="#08c1e9"
+              hoverBgColor="#1e90ff"
               hoverColor="white"
-              bgColor="#1e90ff"
+              bgColor="#7ca7d3"
               color="white"
               disabled={!emailReg}
               disabledColor="#a9a9a9"
@@ -142,9 +142,9 @@ function AuthEmailForm({
               pc={[0, 35]}
               onClick={authEmailClick}
               isHover
-              hoverBgColor="#08c1e9"
+              hoverBgColor="#1e90ff"
               hoverColor="white"
-              bgColor="#1e90ff"
+              bgColor="#7ca7d3"
               color="white"
               disabled={!emailReg}
               disabledColor="#a9a9a9"
@@ -176,9 +176,9 @@ function AuthEmailForm({
                 pc={[0, 35]}
                 onClick={codeInputClick}
                 isHover
-                hoverBgColor="#08c1e9"
+                hoverBgColor="#1e90ff"
                 hoverColor="white"
-                bgColor="#1e90ff"
+                bgColor="#7ca7d3"
                 color="white"
                 disabled={!codeReg}
                 disabledColor="#a9a9a9"

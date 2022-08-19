@@ -9,6 +9,7 @@ import useInputEnter from 'hooks/useInputEnter';
 import ErrorForm from 'components/Form/ErrorForm';
 import FormInput from 'components/Input/FormInput';
 import DefaultButton from 'components/Button/DefaultButton';
+import OnboardForm from 'components/Form/OnboardForm';
 import { useSignInErrorCheck } from '../func/SignInErrorCheck';
 
 function SignInForm() {
@@ -49,7 +50,7 @@ function SignInForm() {
   );
 
   return (
-    <Wrapper>
+    <OnboardForm>
       <SignInWrapper>
         <SignInFormWrapper>
           <Title>로그인</Title>
@@ -99,23 +100,11 @@ function SignInForm() {
           </Link>
         </SignInFormWrapper>
       </SignInWrapper>
-    </Wrapper>
+    </OnboardForm>
   );
 }
 
 export default SignInForm;
-
-const Wrapper = styled.div`
-  box-sizing: border-box;
-  background-color: white;
-  border: solid 1px ${({ theme }) => theme.color.COLOR_MAIN};
-  width: 375px;
-  margin: auto;
-  height: 500px;
-  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    width: 355px;
-  }
-`;
 
 const SignInWrapper = styled.div`
   background-color: white;
@@ -126,7 +115,6 @@ const SignInWrapper = styled.div`
 const SignInFormWrapper = styled.div`
   box-sizing: border-box;
   text-align: center;
-  padding: 0px 50px;
   form {
     display: flex;
     flex-direction: column;
@@ -137,7 +125,7 @@ const SignInFormWrapper = styled.div`
 `;
 
 const Title = styled.div`
-  margin: 100px auto 20px;
+  margin: 50px auto 20px;
   font-size: 24px;
   font-weight: 600;
   color: ${({ theme }) => theme.color.COLOR_FONT_ONE};
