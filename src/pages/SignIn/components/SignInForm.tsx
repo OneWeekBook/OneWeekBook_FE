@@ -74,11 +74,11 @@ function SignInForm() {
               pc={[0, 50]}
               type="submit"
               isHover
-              hoverBgColor="#08c1e9"
+              hoverBgColor="#1e90ff"
               hoverColor="white"
-              bgColor="#1e90ff"
+              bgColor="#7ca7d3"
               color="white"
-              margin={[10, 0, 10, 0]}
+              margin={[20, 0, 10, 0]}
               fontSize={[18, 18]}
               fontWeight={600}
               title="로그인"
@@ -88,10 +88,10 @@ function SignInForm() {
             <DefaultButton
               pc={[0, 50]}
               isHover
-              hoverBgColor="#303538"
-              hoverColor="white"
-              bgColor="#e6e6e6"
-              margin={[10, 0, 10, 0]}
+              hoverBgColor="#ffd400"
+              hoverColor="black"
+              bgColor="#faf39e"
+              margin={[10, 0, 0, 0]}
               fontSize={[18, 18]}
               fontWeight={600}
               title="회원가입"
@@ -108,13 +108,10 @@ export default SignInForm;
 const Wrapper = styled.div`
   box-sizing: border-box;
   background-color: white;
-  border: solid 2px lightblue;
+  border: solid 1px ${({ theme }) => theme.color.COLOR_MAIN};
   width: 375px;
   margin: auto;
   height: 500px;
-  a {
-    text-decoration: none;
-  }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     width: 355px;
   }
@@ -124,10 +121,6 @@ const SignInWrapper = styled.div`
   background-color: white;
   width: 100%;
   text-align: center;
-  form {
-    display: flex;
-    flex-direction: column;
-  }
 `;
 
 const SignInFormWrapper = styled.div`
@@ -145,6 +138,7 @@ const SignInFormWrapper = styled.div`
 
 const Title = styled.div`
   margin: 100px auto 20px;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 600;
+  color: ${({ theme }) => theme.color.COLOR_FONT_ONE};
 `;

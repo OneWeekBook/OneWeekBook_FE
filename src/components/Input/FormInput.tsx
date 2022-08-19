@@ -57,12 +57,16 @@ const InputWrapper = styled.div`
     :focus {
       outline: none;
     }
-    box-sizing: border-box;
+    ::placeholder {
+      color: ${({ theme }) => theme.color.COLOR_FONT_FIVE};
+    }
+    font-size: 16px;
     padding: 0 5px;
-    height: 30px;
-    border: none;
     width: 100%;
-    border-bottom: solid 1px black;
+    height: 30px;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: solid 2px ${({ theme }) => theme.color.COLOR_LAYOUT_THREE};
   }
   input ~ span {
     position: absolute;
@@ -70,7 +74,7 @@ const InputWrapper = styled.div`
     left: 50%;
     width: 0;
     height: 2px;
-    background-color: #1e90ff;
+    background-color: ${({ theme }) => theme.color.COLOR_MAIN};
     transition: 0.4s;
   }
   input:focus ~ span {
