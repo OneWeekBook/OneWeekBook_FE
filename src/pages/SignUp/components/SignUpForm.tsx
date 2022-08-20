@@ -131,9 +131,9 @@ function SignUpForm() {
               type="submit"
               pc={[0, 35]}
               isHover
-              hoverBgColor="#08c1e9"
+              hoverBgColor="#1e90ff"
               hoverColor="white"
-              bgColor="#1e90ff"
+              bgColor="#7ca7d3"
               color="white"
               disabled={registerDone}
               disabledColor="#a9a9a9"
@@ -162,8 +162,9 @@ const SignUpFormWrapper = styled.div`
 `;
 
 const Title = styled.p`
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 24px;
+  font-weight: 600;
+  color: ${({ theme }) => theme.color.COLOR_FONT_ONE};
 `;
 
 const FormWrapper = styled.div`

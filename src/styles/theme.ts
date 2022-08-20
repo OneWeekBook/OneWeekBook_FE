@@ -16,6 +16,7 @@ const color = {
   COLOR_FONT_TWO: '#322a25',
   COLOR_FONT_THREE: '#7ca7d3',
   COLOR_FONT_FOUR: '#ffffff',
+  COLOR_FONT_FIVE: '#ad8b73',
 };
 
 const Theme = {
