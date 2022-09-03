@@ -52,10 +52,14 @@ function SearchItem({
           <p
             className="infoAuth"
             dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(`${author}`),
+            }}
+          />
+          <p
+            className="infoPubDate"
+            dangerouslySetInnerHTML={{
               __html: DOMPurify.sanitize(
-                `${author}&nbsp;&nbsp;${publisher}&nbsp;&nbsp;${SetDate(
-                  pubdate,
-                )}`,
+                `${publisher}&nbsp;&nbsp;${SetDate(pubdate)}`,
               ),
             }}
           />
@@ -81,7 +85,7 @@ const Wrapper = styled.div`
 
 const ImgWrapper = styled.div`
   flex-shrink: 0;
-  width: 150px;
+  max-width: 150px;
   object-fit: contain;
   button {
     position: absolute;
@@ -98,17 +102,18 @@ const BookImage = styled.img`
 `;
 
 const InfoWrapper = styled.div`
-  flex-glow: 1;
   display: flex;
+  width: 100%;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-left: 10px;
   a {
     text-decoration: none;
     color: black;
   }
   .infoTitle {
-    font-size: 18px;
+    height: 46px;
+    font-size: 16px;
     font-weight: 700;
     margin-bottom: 5px;
     display: -webkit-box;
@@ -119,8 +124,18 @@ const InfoWrapper = styled.div`
     text-overflow: ellipsis;
   }
   .infoAuth {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .infoPubDate {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
   }
   .infoDesc {
     font-size: 14px;
@@ -132,13 +147,10 @@ const InfoWrapper = styled.div`
     text-overflow: ellipsis;
   }
   padding-bottom: 5px;
-  border-bottom: 2px solid #e6e6e6;
+  border-bottom: 2px solid ${({ theme }) => theme.color.COLOR_LAYOUT_THREE};
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    .infoTitle {
-      font-size: 16px;
-    }
-    .infoAuth {
-      font-size: 14px;
+    .infoDesc {
+      -webkit-line-clamp: 2;
     }
   }
 `;

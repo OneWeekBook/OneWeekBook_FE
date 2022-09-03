@@ -103,7 +103,7 @@ function InputWrapper({ curSubCategory, curParentCategory }: PropsTypes) {
             borderRadius={10}
             fontSize={14}
             padding={[10, 10, 10, 10]}
-            focusBorder="1px solid #08c1e9"
+            focusBorder="1px solid #f7b7a9"
           />
         </SearchInputWrapper>
       </div>
@@ -112,8 +112,8 @@ function InputWrapper({ curSubCategory, curParentCategory }: PropsTypes) {
           pc={[80, 20]}
           onClick={handleClick}
           isHover
-          hoverColor="#1e90ff"
-          fontSize={[18, 18]}
+          hoverColor="#f07055"
+          fontSize={[18, 14]}
           fontWeight={600}
           title="모두보기"
         />
@@ -136,6 +136,7 @@ const Wrapper = styled.div`
     font-size: 20px;
     font-weight: 600;
     margin-right: 10px;
+    color: ${({ theme }) => theme.color.COLOR_FONT_TWO};
     @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
       font-size: 16px;
     }
@@ -146,6 +147,6 @@ const SearchInputWrapper = styled.div`
   width: 250px;
   height: 35px;
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    width: 150px;
+    width: 200px;
   }
 `;
