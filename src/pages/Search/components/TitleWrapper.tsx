@@ -29,16 +29,17 @@ const Wrapper = styled.div`
 const ResultPageTitle = styled.p`
   font-size: 24px;
   font-weight: 600;
+  color: ${({ theme }) => theme.color.COLOR_FONT_TWO};
   @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
     font-size: 18px;
   }
 `;
 
 const Tag = styled.p`
-  background-color: #0080ff;
+  background-color: ${({ theme }) => theme.color.COLOR_MAIN};
   border-radius: 10px;
   color: white;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   padding: 5px 10px;
   margin-left: 10px;

@@ -129,6 +129,7 @@ const Wrapper = styled.div`
     font-size: 24px;
     font-weight: 700;
     margin: 10px auto;
+    color: ${({ theme }) => theme.color.COLOR_FONT_TWO};
   }
   @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
     margin: auto;
@@ -152,6 +153,7 @@ const SubCategoryWrapper = styled.div`
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 10px;
+    color: ${({ theme }) => theme.color.COLOR_FONT_TWO};
     @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
       font-size: 18px;
     }
@@ -161,5 +163,5 @@ const SubCategoryWrapper = styled.div`
 const SubCategoryList = styled.div`
   display: flex;
   flex-wrap: wrap;
-  border-top: 2px solid #e6e6e6;
+  border-top: 2px solid ${({ theme }) => theme.color.COLOR_LAYOUT_ONE};
 `;
