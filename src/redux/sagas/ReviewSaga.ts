@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, throttle } from 'redux-saga/effects';
 import { ReviewTypes } from 'types/api';
 import {
   ReviewsFail,
@@ -23,5 +23,5 @@ function* fetchReviewSaga(action: any): any {
 }
 
 export default function* watchReview() {
-  yield takeEvery(REVIEWS_REQUEST, fetchReviewSaga);
+  yield throttle(1500, REVIEWS_REQUEST, fetchReviewSaga);
 }

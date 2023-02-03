@@ -45,11 +45,12 @@ const ImgWrapper = styled.div`
   img {
     width: 100%;
     height: 100%;
+    border-radius: 0px 5px 5px 0px;
   }
 `;
 
 const ItemTitle = styled.p`
-  height: 40px;
+  height: 44px;
   font-size: 16px;
   font-weight: 700;
   margin-bottom: 5px;

@@ -1,19 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
 import { ReviewInit, ReviewsRequest } from 'redux/reducers/Review';
 import { ReviewItemType } from 'types/review';
-import PagenationForm from 'components/Form/PagenationForm';
 import ReviewItem from './ReviewItem';
 
 function ReviewList() {
   const dispatch = useDispatch();
-  const [curIdx, setCurIdx] = useState<number>(1);
-  const { reviews, reivewsTotal } = useSelector(
-    (state: AppStateType) => state.review,
-    shallowEqual,
-  );
+  const { reviews, reivewsTotal, reviewCount, moreReviews, isLoading } =
+    useSelector((state: AppStateType) => state.review, shallowEqual);
 
   useEffect(() => {
     dispatch(ReviewsRequest({ start: 0, sortby: 'new' }));
@@ -23,8 +19,20 @@ function ReviewList() {
   }, []);
 
   useEffect(() => {
-    dispatch(ReviewsRequest({ start: (curIdx - 1) * 12, sortby: 'new' }));
-  }, [curIdx]);
+    function onScroll() {
+      if (
+        window.scrollY + document.documentElement.clientHeight >
+        document.documentElement.scrollHeight - 100
+      ) {
+        if (moreReviews && !isLoading)
+          dispatch(ReviewsRequest({ start: reviewCount, sortby: 'new' }));
+      }
+    }
+    window.addEventListener('scroll', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, [reviewCount, moreReviews]);
 
   return (
     <Wrapper>
@@ -38,12 +46,6 @@ function ReviewList() {
               );
             })}
           </ReviewListWrapper>
-          <PagenationForm
-            total={reivewsTotal}
-            display={12}
-            curIdx={curIdx}
-            setCurIdx={setCurIdx}
-          />
         </>
       )}
     </Wrapper>
@@ -53,11 +55,14 @@ function ReviewList() {
 export default ReviewList;
 
 const Wrapper = styled.div`
-  margin: 30px auto 50px;
+  margin: 50px auto;
   width: 100%;
   height: auto;
-  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
-    width: 85%;
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+    width: 700px;
+  }
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    width: 350px;
   }
 `;
 
@@ -73,11 +78,10 @@ const ReviewListWrapper = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   gap: 10px;
   min-height: 600px;
-  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
-  @media (max-width: ${({ theme: { device } }) =>
-      device.mobile.maxWidth - 1}px) {
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     grid-template-columns: 1fr 1fr;
   }
 `;

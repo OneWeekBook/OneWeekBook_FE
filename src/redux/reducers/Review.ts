@@ -19,6 +19,8 @@ const initialState = {
   isNewSuccess: false,
   reviews: [],
   reivewsTotal: 0,
+  reviewCount: 0,
+  moreReviews: false,
   bookData: {},
 };
 
@@ -35,8 +37,10 @@ export default function Review(state = initialState, action: ActionsTypes) {
         ...state,
         isLoading: false,
         isSuccess: true,
-        reviews: action.payload.reviews,
+        reviews: action.payload.reviews.concat(state.reviews),
         reivewsTotal: action.payload.countAllReviewBooks,
+        moreReviews: state.reviewCount < action.payload.countAllReviewBooks,
+        reviewCount: state.reviewCount + 12,
       };
     case REVIEWS_FAIL:
       return {
