@@ -1,46 +1,48 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
 import { ReviewInit, ReviewsRequest } from 'redux/reducers/Review';
 import { ReviewItemType } from 'types/review';
 import LoadingForm from 'components/Form/LoadingForm';
+import useIntersectionObserver from 'hooks/useIntersectionObserver';
 import ReviewItem from './ReviewItem';
 
 function ReviewList() {
   const dispatch = useDispatch();
+  const [sort, setSort] = useState('new');
   const { reviews, reivewsTotal, reviewCount, moreReviews, isLoading } =
     useSelector((state: AppStateType) => state.review, shallowEqual);
 
   useEffect(() => {
-    dispatch(ReviewsRequest({ start: 0, sortby: 'new' }));
+    dispatch(ReviewsRequest({ start: 0, sortby: sort }));
     return () => {
       dispatch(ReviewInit());
     };
-  }, []);
+  }, [sort]);
 
-  useEffect(() => {
-    function onScroll() {
-      if (
-        window.scrollY + document.documentElement.clientHeight >
-        document.documentElement.scrollHeight - 100
-      ) {
-        if (moreReviews && !isLoading) {
-          dispatch(ReviewsRequest({ start: reviewCount, sortby: 'new' }));
-        }
-      }
+  const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
+    if (isIntersecting && moreReviews && !isLoading) {
+      dispatch(ReviewsRequest({ start: reviewCount, sortby: sort }));
     }
-    window.addEventListener('scroll', onScroll);
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-    };
-  }, [isLoading, moreReviews]);
+  };
+  const { setTarget } = useIntersectionObserver({ onIntersect });
 
   return (
     <Wrapper>
-      {Array.isArray(reviews) && !!reviews ? (
+      {Array.isArray(reviews) && !!reviews && (
         <>
-          <ReviewTitle>전체 리뷰 ({reivewsTotal}건)</ReviewTitle>
+          <TitleWrapper>
+            <ReviewTitle>전체 리뷰 ({reivewsTotal}건)</ReviewTitle>
+            <ButtonWrapper>
+              <button type="button" onClick={() => setSort('new')}>
+                최신순
+              </button>
+              <button type="button" onClick={() => setSort('totalReviews')}>
+                댓글순
+              </button>
+            </ButtonWrapper>
+          </TitleWrapper>
           <ReviewListWrapper>
             {reviews.map((item: ReviewItemType) => {
               return (
@@ -49,9 +51,8 @@ function ReviewList() {
             })}
           </ReviewListWrapper>
         </>
-      ) : (
-        <LoadingForm />
       )}
+      <div ref={setTarget}>{isLoading && <LoadingForm />}</div>
     </Wrapper>
   );
 }
@@ -70,9 +71,45 @@ const Wrapper = styled.div`
   }
 `;
 
+const TitleWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid #f07055;
+`;
+
 const ReviewTitle = styled.p`
-  font-size: 20px;
-  font-weight: 600;
+  height: 30px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #f07055;
+  padding-bottom: 10px;
+`;
+
+const ButtonWrapper = styled.div`
+  width: 160px;
+  margin-top: 10px;
+  margin-bottom: -2px;
+  background-color: #fff;
+  border-radius: 10px 10px 0px 0px;
+  border-top: 2px solid #f07055;
+  border-left: 2px solid #f07055;
+  border-right: 2px solid #f07055;
+  button {
+    border: 2px solid #fff;
+    border-radius: 10px 10px 0px 0px;
+    width: 80px;
+    height: 100%;
+    cursor: pointer;
+    background-color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    color: #f07055;
+  }
+  button:hover {
+    color: #fff;
+    background-color: #f07055;
+    transition: 0.5s;
+  }
 `;
 
 const ReviewListWrapper = styled.div`

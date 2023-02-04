@@ -28,13 +28,13 @@ function ReivewItem({
           <ImgWrapper>
             <img src={img} alt="book img" />
           </ImgWrapper>
+          <ItemTitle>
+            {title && title.replaceAll('<b>', '').replaceAll('</b>', '')}
+          </ItemTitle>
+          <ItemAuthor>
+            {author && author.replaceAll('<b>', '').replaceAll('</b>', '')}
+          </ItemAuthor>
         </Link>
-        <ItemTitle>
-          {title && title.replaceAll('<b>', '').replaceAll('</b>', '')}
-        </ItemTitle>
-        <ItemAuthor>
-          {author && author.replaceAll('<b>', '').replaceAll('</b>', '')}
-        </ItemAuthor>
       </ItemInner>
     </ItemOuter>
   );
@@ -43,6 +43,7 @@ function ReivewItem({
 export default ReivewItem;
 
 const ItemOuter = styled.div`
+  cursor: pointer;
   position: relative;
   width: 190px;
   border: 5px solid #f07055;
@@ -51,6 +52,16 @@ const ItemOuter = styled.div`
   display: flex;
   flex-direction: column;
   padding: 30px 0px 10px;
+  &:hover {
+    background-color: rgba(240, 112, 85, 0.3);
+    transition: 0.5s;
+  }
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+    width: 165px;
+  }
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    width: 170px;
+  }
 `;
 
 const ReviewCount = styled.div`
@@ -70,7 +81,7 @@ const ReviewCount = styled.div`
 `;
 
 const ItemInner = styled.div`
-  width: 150px;
+  width: 140px;
   margin: 0 auto;
 `;
 
@@ -99,7 +110,6 @@ const ItemTitle = styled.p`
 
 const ItemAuthor = styled.p`
   font-size: 14px;
-  margin-bottom: 5px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
