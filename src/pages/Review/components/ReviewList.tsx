@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
 import { ReviewInit, ReviewsRequest } from 'redux/reducers/Review';
 import { ReviewItemType } from 'types/review';
+import LoadingForm from 'components/Form/LoadingForm';
 import ReviewItem from './ReviewItem';
 
 function ReviewList() {
@@ -24,19 +25,20 @@ function ReviewList() {
         window.scrollY + document.documentElement.clientHeight >
         document.documentElement.scrollHeight - 100
       ) {
-        if (moreReviews && !isLoading)
+        if (moreReviews && !isLoading) {
           dispatch(ReviewsRequest({ start: reviewCount, sortby: 'new' }));
+        }
       }
     }
     window.addEventListener('scroll', onScroll);
     return () => {
       window.removeEventListener('scroll', onScroll);
     };
-  }, [reviewCount, moreReviews]);
+  }, [isLoading, moreReviews]);
 
   return (
     <Wrapper>
-      {Array.isArray(reviews) && !!reviews && (
+      {Array.isArray(reviews) && !!reviews ? (
         <>
           <ReviewTitle>전체 리뷰 ({reivewsTotal}건)</ReviewTitle>
           <ReviewListWrapper>
@@ -47,6 +49,8 @@ function ReviewList() {
             })}
           </ReviewListWrapper>
         </>
+      ) : (
+        <LoadingForm />
       )}
     </Wrapper>
   );
@@ -75,8 +79,8 @@ const ReviewListWrapper = styled.div`
   display: grid;
   margin-top: 30px;
   justify-items: center;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  gap: 10px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 20px 10px;
   min-height: 600px;
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
     grid-template-columns: 1fr 1fr 1fr 1fr;

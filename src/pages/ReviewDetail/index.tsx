@@ -1,7 +1,7 @@
 import { lazy, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { ReviewRequest } from 'redux/reducers/Review';
+import { ReviewInit, ReviewRequest } from 'redux/reducers/Review';
 import Container from 'components/Container';
 
 const BookInfo = lazy(
@@ -24,6 +24,9 @@ function Index() {
         sortby: `${location.search.split('=')[1]}`,
       }),
     );
+    return () => {
+      dispatch(ReviewInit());
+    };
   }, []);
 
   return (

@@ -15,33 +15,68 @@ function ReivewItem({
   count,
 }: React.PropsWithChildren<ReviewItemType> & PropsType) {
   return (
-    <ItemWrapper>
-      <Link to={`/review/${isbn}?sortby=recommend`}>
-        <ImgWrapper>
-          <img src={img} alt="book img" />
-        </ImgWrapper>
-      </Link>
-      <ItemTitle>
-        {title && title.replaceAll('<b>', '').replaceAll('</b>', '')}
-      </ItemTitle>
-      <ItemAuthor>
-        {author && author.replaceAll('<b>', '').replaceAll('</b>', '')}
-      </ItemAuthor>
-      <ItemCount>총 리뷰 ( {count} )</ItemCount>
-    </ItemWrapper>
+    <ItemOuter>
+      <ReviewCount>
+        <img
+          src={`${process.env.PUBLIC_URL}/assets/func/review-white.png`}
+          alt="review count"
+        />
+        <p>{count}</p>
+      </ReviewCount>
+      <ItemInner>
+        <Link to={`/review/${isbn}?sortby=recommend`}>
+          <ImgWrapper>
+            <img src={img} alt="book img" />
+          </ImgWrapper>
+        </Link>
+        <ItemTitle>
+          {title && title.replaceAll('<b>', '').replaceAll('</b>', '')}
+        </ItemTitle>
+        <ItemAuthor>
+          {author && author.replaceAll('<b>', '').replaceAll('</b>', '')}
+        </ItemAuthor>
+      </ItemInner>
+    </ItemOuter>
   );
 }
 
 export default ReivewItem;
 
-const ItemWrapper = styled.div`
+const ItemOuter = styled.div`
+  position: relative;
+  width: 190px;
+  border: 5px solid #f07055;
+  border-radius: 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: 30px 0px 10px;
+`;
+
+const ReviewCount = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #f07055;
+  border-radius: 0px 0px 0px 5px;
+  text-align: center;
+  padding-bottom: 2px;
+  width: 60px;
+  font-size: 16px;
+  color: #fff;
+`;
+
+const ItemInner = styled.div`
   width: 150px;
+  margin: 0 auto;
 `;
 
 const ImgWrapper = styled.div`
-  width: 100%;
-  height: 200px;
   object-fit: cover;
+  height: 200px;
   img {
     width: 100%;
     height: 100%;
@@ -68,10 +103,4 @@ const ItemAuthor = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-`;
-
-const ItemCount = styled.p`
-  font-size: 14px;
-  font-weight: 600;
-  color: gray;
 `;
