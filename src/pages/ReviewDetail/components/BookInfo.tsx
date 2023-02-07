@@ -28,7 +28,7 @@ const Wrapper = styled.div`
 `;
 
 const Blind = styled.div`
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
   height: 300px;
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {

@@ -45,7 +45,7 @@ function ReviewStar({ ratingAverage }: PropsType) {
             alt="star"
           />
         ))}
-      <p>{ratingAverage}</p>
+      <p>{ratingAverage.toFixed(1)}</p>
     </RateWrapper>
   );
 }

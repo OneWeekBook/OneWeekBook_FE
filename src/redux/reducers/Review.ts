@@ -60,8 +60,12 @@ export default function Review(state = initialState, action: ActionsTypes) {
         ...state,
         itemLoading: false,
         itemSuccess: true,
-        reviews: action.payload.reviewData,
         bookData: action.payload.bookData[0],
+        reviews: state.reviews.concat(action.payload.reviewData),
+        reivewsTotal: action.payload.bookData[0].countReviews,
+        moreReviews:
+          action.payload.bookData[0].countReviews > state.reviewCount + 10,
+        reviewCount: state.reviewCount + 10,
       };
     case REVIEW_FAIL:
       return {

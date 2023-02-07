@@ -24,7 +24,7 @@ function ReivewItem({
         <p>{count}</p>
       </ReviewCount>
       <ItemInner>
-        <Link to={`/review/${isbn}?sortby=recommend`}>
+        <Link to={`/review/${isbn}`}>
           <ImgWrapper>
             <img src={img} alt="book img" />
           </ImgWrapper>

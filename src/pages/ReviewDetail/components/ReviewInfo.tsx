@@ -3,23 +3,50 @@ import { useLocation } from 'react-router-dom';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
-import { ReviewRequest } from 'redux/reducers/Review';
+import { ReviewInit, ReviewRequest } from 'redux/reducers/Review';
 import useToggle from 'hooks/useToggle';
 import { ReviewDetailTypes } from 'types/review';
-import PagenationForm from 'components/Form/PagenationForm';
+import useIntersectionObserver from 'hooks/useIntersectionObserver';
+import LoadingForm from 'components/Form/LoadingForm';
 import ReviewDetailModal from './Modal/ReivewDetailModal';
 import ReviewItem from './_items/ReivewItem';
 
 function ReviewInfo() {
   const location = useLocation();
   const dispatch = useDispatch();
-  const [curIdx, setCurIdx] = useState<number>(1);
-  const [sortBy, setSortBy] = useState(`${location.search.split('=')[1]}`);
+  const [sort, setSort] = useState('recommend');
   const [detailToggle, detailToggleIsOn] = useToggle(false);
-  const { reviews, bookData } = useSelector(
+  const { reviews, moreReviews, reviewCount, itemLoading } = useSelector(
     (state: AppStateType) => state.review,
     shallowEqual,
   );
+
+  useEffect(() => {
+    dispatch(
+      ReviewRequest({
+        isbn: Number(location.pathname.split('/')[2]),
+        start: 0,
+        sortby: sort,
+      }),
+    );
+    return () => {
+      dispatch(ReviewInit());
+    };
+  }, [sort]);
+
+  const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
+    if (isIntersecting && moreReviews && !itemLoading) {
+      dispatch(
+        ReviewRequest({
+          isbn: Number(location.pathname.split('/')[2]),
+          start: reviewCount,
+          sortby: sort,
+        }),
+      );
+    }
+  };
+  const { setTarget } = useIntersectionObserver({ onIntersect });
+
   const [curReview, setCurReview] = useState({
     id: -1,
     likeCount: 0,
@@ -33,35 +60,21 @@ function ReviewInfo() {
     userId: -1,
   });
 
-  useEffect(() => {
-    dispatch(
-      ReviewRequest({
-        isbn: Number(location.pathname.split('/')[2]),
-        start: (curIdx - 1) * 10,
-        sortby: sortBy,
-      }),
-    );
-  }, [sortBy, curIdx, detailToggle]);
-
-  const handleSortClick = (sort: string) => {
-    setSortBy(sort);
-  };
-
   return (
     <Wrapper>
       <SortButton
         className="recommendBtn"
         type="button"
-        isSelected={sortBy === 'recommend'}
-        onClick={() => handleSortClick('recommend')}
+        isSelected={sort === 'recommend'}
+        onClick={() => setSort('recommend')}
       >
         추천 순
       </SortButton>
       <SortButton
         className="newBtn"
         type="button"
-        isSelected={sortBy === 'new'}
-        onClick={() => handleSortClick('new')}
+        isSelected={sort === 'new'}
+        onClick={() => setSort('new')}
       >
         최신 순
       </SortButton>
@@ -79,18 +92,13 @@ function ReviewInfo() {
             />
           ))}
       </ReviewListWrapper>
+      <div ref={setTarget}>{itemLoading && <LoadingForm />}</div>
       {detailToggle && (
         <ReviewDetailModal
           item={curReview}
           detailToggleIsOn={detailToggleIsOn}
         />
       )}
-      <PagenationForm
-        total={bookData.countReviews}
-        display={10}
-        curIdx={curIdx}
-        setCurIdx={setCurIdx}
-      />
     </Wrapper>
   );
 }
@@ -100,17 +108,9 @@ export default ReviewInfo;
 const Wrapper = styled.div`
   margin: 10px auto;
   width: 1000px;
-  height: auto;
-  .title {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 10px;
-  }
+  min-height: 600px;
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
     width: 700px;
-    .title {
-      font-size: 18px;
-    }
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     width: 350px;
@@ -118,21 +118,23 @@ const Wrapper = styled.div`
 `;
 
 const SortButton = styled.button<{ isSelected?: boolean }>`
-  box-sizing: border-box;
+  width: 80px;
+  text-align: left;
   border: none;
   background-color: white;
   cursor: pointer;
-  font-size: 16px;
-  font-weight: ${({ isSelected }) => (isSelected ? 800 : 500)};
-  padding: 5px 0;
-  margin-right: 10px;
+  color: #f07055;
+  font-size: 24px;
+  font-weight: ${({ isSelected }) => (isSelected ? 700 : 500)};
 `;
 
 const ReviewListWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 15px;
-  margin-top: 20px;
+  margin-top: 10px;
+  border-top: 2px solid #f07055;
+  padding: 20px 0px 50px;
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     grid-template-columns: 1fr;
   }
