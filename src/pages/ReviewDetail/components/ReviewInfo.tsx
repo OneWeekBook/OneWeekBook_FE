@@ -133,7 +133,7 @@ const ReviewListWrapper = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 15px;
   margin-top: 10px;
-  border-top: 2px solid #f07055;
+  border-top: 3px solid #f07055;
   padding: 20px 0px 50px;
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     grid-template-columns: 1fr;

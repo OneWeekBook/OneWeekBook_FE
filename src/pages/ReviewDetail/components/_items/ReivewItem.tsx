@@ -37,18 +37,31 @@ function ReviewItem({
         <p>{rating}</p>
       </ImgWrapper>
       <ReivewInfoWrapper>
+        <p className="reviewInfo">{nick}님의 리뷰</p>
+        <p className="createDate">작성일 : {reviewCreationTime}</p>
         <p className="overall">{review}</p>
-        <p className="reviewInfo">
-          {nick}&nbsp;&nbsp;<span>{reviewCreationTime}</span>
-        </p>
-        <div className="recommends">
-          <p>
-            <span>{zeroLikeCount}</span>명이 해당 리뷰가 유용하다고 생각해요
-          </p>
-          <p>
-            <span>{oneLikeCount}</span>명이 해당 리뷰가 재미있다고 생각해요
-          </p>
-        </div>
+        <RecommendWrapper>
+          <RecommendItem>
+            <img
+              src={`${process.env.PUBLIC_URL}/assets/like/fun.png`}
+              alt="interest"
+              width={30}
+            />
+            <p>
+              <span>{zeroLikeCount}</span>유용해요
+            </p>
+          </RecommendItem>
+          <RecommendItem>
+            <img
+              src={`${process.env.PUBLIC_URL}/assets/like/interest.png`}
+              alt="funny"
+              width={30}
+            />
+            <p>
+              <span>{oneLikeCount}</span>재미있어요
+            </p>
+          </RecommendItem>
+        </RecommendWrapper>
       </ReivewInfoWrapper>
     </Wrapper>
   );
@@ -58,8 +71,8 @@ export default ReviewItem;
 
 const Wrapper = styled.div`
   min-height: 100px;
-  border-radius: 10px;
-  background-color: #e6e6e6;
+  border-radius: 5px;
+  border: 3px solid #f07055;
   cursor: pointer;
   display: flex;
 `;
@@ -74,8 +87,9 @@ const ImgWrapper = styled.div`
   width: 75px;
   height: 100%;
   p {
+    color: #f07055;
     margin-top: -20px;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 600;
   }
 `;
@@ -84,6 +98,7 @@ const ReivewInfoWrapper = styled.div`
   margin: 20px 10px;
   width: 100%;
   .overall {
+    margin-bottom: 20px;
     font-size: 16px;
     display: -webkit-box;
     word-wrap: break-word;
@@ -93,18 +108,39 @@ const ReivewInfoWrapper = styled.div`
     text-overflow: ellipsis;
   }
   .reviewInfo {
-    margin: 5px auto;
-    font-size: 16px;
-    span {
-      font-size: 14px;
-      font-weight: 600;
-    }
+    font-size: 18px;
+    font-weight: 700;
   }
-  .recommends {
+  .createDate {
+    margin: 5px auto 10px;
     font-size: 14px;
+    font-weight: 700;
+  }
+`;
+
+const RecommendWrapper = styled.div`
+  display: flex;
+  gap: 10px;
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+    flex-direction: column;
+  }
+`;
+
+const RecommendItem = styled.div`
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  border: 3px solid #f07055;
+  border-radius: 5px;
+  background-color: #f7f7f7;
+  padding: 5px 10px;
+  p {
+    color: #f07055;
+    font-size: 16px;
     font-weight: 500;
-    span {
-      font-weight: 600;
-    }
+  }
+  span {
+    font-weight: 600;
+    margin-right: 5px;
   }
 `;
