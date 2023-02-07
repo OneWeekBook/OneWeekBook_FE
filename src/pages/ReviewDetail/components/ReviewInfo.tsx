@@ -49,11 +49,6 @@ function ReviewInfo() {
 
   return (
     <Wrapper>
-      <p className="title">
-        {bookData.title &&
-          bookData.title.replaceAll('<b>', '').replaceAll('</b>', '')}{' '}
-        평가
-      </p>
       <SortButton
         className="recommendBtn"
         type="button"
@@ -103,19 +98,22 @@ function ReviewInfo() {
 export default ReviewInfo;
 
 const Wrapper = styled.div`
-  margin: 10px auto 50px;
-  width: 100%;
+  margin: 10px auto;
+  width: 1000px;
   height: auto;
   .title {
     font-size: 20px;
     font-weight: 600;
     margin-bottom: 10px;
   }
-  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
-    width: 95%;
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+    width: 700px;
     .title {
       font-size: 18px;
     }
+  }
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    width: 350px;
   }
 `;
 

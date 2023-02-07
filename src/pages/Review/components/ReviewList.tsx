@@ -35,12 +35,20 @@ function ReviewList() {
           <TitleWrapper>
             <ReviewTitle>전체 리뷰 ({reivewsTotal}건)</ReviewTitle>
             <ButtonWrapper>
-              <button type="button" onClick={() => setSort('new')}>
+              <SortButton
+                className={sort === 'new' ? 'selected' : ''}
+                type="button"
+                onClick={() => setSort('new')}
+              >
                 최신순
-              </button>
-              <button type="button" onClick={() => setSort('totalReviews')}>
+              </SortButton>
+              <SortButton
+                className={sort === 'totalReviews' ? 'selected' : ''}
+                type="button"
+                onClick={() => setSort('totalReviews')}
+              >
                 댓글순
-              </button>
+              </SortButton>
             </ButtonWrapper>
           </TitleWrapper>
           <ReviewListWrapper>
@@ -94,18 +102,23 @@ const ButtonWrapper = styled.div`
   border-top: 2px solid #f07055;
   border-left: 2px solid #f07055;
   border-right: 2px solid #f07055;
-  button {
-    border: 2px solid #fff;
-    border-radius: 10px 10px 0px 0px;
-    width: 80px;
-    height: 100%;
-    cursor: pointer;
-    background-color: #fff;
-    font-size: 16px;
-    font-weight: 700;
-    color: #f07055;
+`;
+
+const SortButton = styled.button`
+  border: 2px solid #fff;
+  border-radius: 10px 10px 0px 0px;
+  width: 80px;
+  height: 100%;
+  cursor: pointer;
+  background-color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  color: #f07055;
+  &.selected {
+    color: #fff;
+    background-color: #f07055;
   }
-  button:hover {
+  &:hover {
     color: #fff;
     background-color: #f07055;
     transition: 0.5s;

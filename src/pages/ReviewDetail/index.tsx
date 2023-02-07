@@ -1,16 +1,10 @@
-import { lazy, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { ReviewInit, ReviewRequest } from 'redux/reducers/Review';
 import Container from 'components/Container';
-
-const BookInfo = lazy(
-  () => import(/* webpackChunkName: "BookInfo" */ './components/BookInfo'),
-);
-
-const ReviewInfo = lazy(
-  () => import(/* webpackChunkName: "ReviewInfo" */ './components/ReviewInfo'),
-);
+import BookInfo from './components/BookInfo';
+import ReviewInfo from './components/ReviewInfo';
 
 function Index() {
   const location = useLocation();
@@ -30,10 +24,12 @@ function Index() {
   }, []);
 
   return (
-    <Container>
+    <>
       <BookInfo />
-      <ReviewInfo />
-    </Container>
+      <Container>
+        <ReviewInfo />
+      </Container>
+    </>
   );
 }
 

@@ -32,7 +32,7 @@ function NewReivewListItem({
               <img
                 key={el}
                 src={`${process.env.PUBLIC_URL}/assets/func/${
-                  el < rating ? 'star_full' : 'star_empty'
+                  el < rating ? 'star-full' : 'star-empty'
                 }.png`}
                 alt="recommend"
                 width={24}
