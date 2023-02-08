@@ -45,7 +45,7 @@ function ReviewItem({
             <img
               src={`${process.env.PUBLIC_URL}/assets/like/fun.png`}
               alt="interest"
-              width={30}
+              width={25}
             />
             <p>
               <span>{zeroLikeCount}</span>유용해요
@@ -55,7 +55,7 @@ function ReviewItem({
             <img
               src={`${process.env.PUBLIC_URL}/assets/like/interest.png`}
               alt="funny"
-              width={30}
+              width={25}
             />
             <p>
               <span>{oneLikeCount}</span>재미있어요
@@ -132,15 +132,15 @@ const RecommendItem = styled.div`
   align-items: center;
   border: 3px solid #f07055;
   border-radius: 5px;
-  background-color: #f7f7f7;
-  padding: 5px 10px;
+  background-color: #f07055;
+  padding: 5px;
+  width: 140px;
   p {
-    color: #f07055;
+    color: #fff;
     font-size: 16px;
-    font-weight: 500;
-  }
-  span {
-    font-weight: 600;
-    margin-right: 5px;
+    span {
+      font-weight: 700;
+      margin-right: 5px;
+    }
   }
 `;

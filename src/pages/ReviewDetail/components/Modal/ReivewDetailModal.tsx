@@ -10,7 +10,6 @@ import {
 } from 'redux/reducers/Like';
 import { LikeDataTypes, ReviewDetailTypes } from 'types/review';
 import DetailModal from 'components/Modal';
-import ImageButton from 'components/Button/ImageButton';
 
 type PropsType = {
   item: ReviewDetailTypes;
@@ -36,8 +35,6 @@ function ReviewDetailModal({ item, detailToggleIsOn }: PropsType) {
     likeAddErrorStatus?: number;
     likeCancelErrorStatus?: number;
   } = useSelector((state: AppStateType) => state.like, shallowEqual);
-  const likeDoneImg = `${process.env.PUBLIC_URL}/assets/like/like-done.svg`;
-  const likeNoneImg = `${process.env.PUBLIC_URL}/assets/like/like-none.svg`;
 
   useEffect(() => {
     dispatch(LikeRequest({ bookId: item.id }));
@@ -91,8 +88,10 @@ function ReviewDetailModal({ item, detailToggleIsOn }: PropsType) {
     } else if (compareLikeUser() && isSelected) {
       if (state === 0) setZeroToggle(false);
       else if (state === 1) setOneToggle(false);
+      console.log(1);
       dispatch(LikeCancelRequest({ bookId: item.id }));
     } else if (!compareLikeUser()) {
+      console.log(2);
       dispatch(LikeAddRequest({ bookId: item.id, state }));
     }
   };
@@ -101,7 +100,7 @@ function ReviewDetailModal({ item, detailToggleIsOn }: PropsType) {
     <DetailModal
       title={`${item.nick}님의 리뷰 전체 보기`}
       titleSize={[24, 20]}
-      width={900}
+      width={700}
       height={300}
       handleToggle={detailToggleIsOn}
       close
@@ -111,38 +110,40 @@ function ReviewDetailModal({ item, detailToggleIsOn }: PropsType) {
       isCancelBtn={false}
     >
       <Wrapper>
-        <Date>{item.reviewCreationTime}</Date>
-        <ReviewBody>{item.review}</ReviewBody>
-        <Recommend>
-          <p>
-            <span>{zero}</span>명이 해당 리뷰가 유용하다고 생각해요
-          </p>
-          {sessionStorage.getItem('accessToken') && (
-            <ImageButton
+        <Date>작성일자 : {item.reviewCreationTime}</Date>
+        <Review>{item.review}</Review>
+        {sessionStorage.getItem('accessToken') && (
+          <LikeButtonWrapper>
+            <LikeButton
               type="button"
-              src={zeroToggle ? likeDoneImg : likeNoneImg}
-              pc={[25, 25]}
-              bgColor="white"
-              alt="like"
               onClick={() => likeAddClick(0, zeroToggle)}
-            />
-          )}
-        </Recommend>
-        <Recommend>
-          <p>
-            <span>{one}</span>명이 해당 리뷰가 재미있다고 생각해요
-          </p>
-          {sessionStorage.getItem('accessToken') && (
-            <ImageButton
+              toggle={zeroToggle}
+            >
+              <img
+                src={`${process.env.PUBLIC_URL}/assets/like/interest.png`}
+                alt="funny"
+                width={25}
+              />
+              <p>
+                <span>{zero}</span>유용해요
+              </p>
+            </LikeButton>
+            <LikeButton
               type="button"
-              src={oneToggle ? likeDoneImg : likeNoneImg}
-              pc={[25, 25]}
-              bgColor="white"
-              alt="like"
               onClick={() => likeAddClick(1, oneToggle)}
-            />
-          )}
-        </Recommend>
+              toggle={oneToggle}
+            >
+              <img
+                src={`${process.env.PUBLIC_URL}/assets/like/fun.png`}
+                alt="funny"
+                width={25}
+              />
+              <p>
+                <span>{one}</span>재미있어요
+              </p>
+            </LikeButton>
+          </LikeButtonWrapper>
+        )}
       </Wrapper>
     </DetailModal>
   );
@@ -151,26 +152,48 @@ function ReviewDetailModal({ item, detailToggleIsOn }: PropsType) {
 export default ReviewDetailModal;
 
 const Wrapper = styled.div`
-  margin: 0 40px;
+  margin: 20px 0px;
+  border: 2px solid #f07055;
+  border-radius: 10px;
+  padding: 10px;
 `;
 
 const Date = styled.p`
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
-  margin-top: 20px;
 `;
 
-const ReviewBody = styled.p`
+const Review = styled.p`
   font-size: 18px;
-  margin: 10px auto;
+  margin: 10px auto 20px;
   white-space: pre-wrap;
 `;
 
-const Recommend = styled.div`
+const LikeButtonWrapper = styled.div`
   display: flex;
+  gap: 10px;
+  margin-top: 5px;
+`;
+
+const LikeButton = styled.button<{ toggle: boolean }>`
+  display: flex;
+  justify-content: center;
   align-items: center;
-  font-size: 16px;
-  span {
-    font-weight: 600;
+  gap: 5px;
+  width: 140px;
+  height: 36px;
+  border: none;
+  border-radius: 5px;
+  background-color: ${({ toggle }) => (toggle ? '#ffa07a' : '#f07055')};
+  cursor: pointer;
+  &:hover {
+    background-color: #ffa07a;
+  }
+  p {
+    font-size: 16px;
+    color: #fff;
+    span {
+      margin-right: 5px;
+    }
   }
 `;

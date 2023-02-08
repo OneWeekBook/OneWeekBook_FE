@@ -32,7 +32,7 @@ function ReviewInfo() {
     return () => {
       dispatch(ReviewInit());
     };
-  }, [sort]);
+  }, [sort, detailToggle]);
 
   const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
     if (isIntersecting && moreReviews && !itemLoading) {
