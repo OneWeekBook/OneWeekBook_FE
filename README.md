@@ -22,11 +22,11 @@
 <table>
    <tr>
      <th align="center">
-       <img width="480" alt="1" src="https://user-images.githubusercontent.com/49552804/175851124-782a233b-cd84-4567-bac3-a913a18a2c58.gif"/>
+       <img width="400" alt="1" src="https://user-images.githubusercontent.com/49552804/175851124-782a233b-cd84-4567-bac3-a913a18a2c58.gif"/>
        <br><br>[메인]
      </th>
      <th align="center">
-       <img width="480" alt="2" src="https://user-images.githubusercontent.com/49552804/175851135-1f8cf1b8-5112-49b0-9695-e7d23fb95696.gif"/>
+       <img width="400" alt="2" src="https://user-images.githubusercontent.com/49552804/175851135-1f8cf1b8-5112-49b0-9695-e7d23fb95696.gif"/>
        <br><br>[반응형] 
     </th>
   </tr>
@@ -41,11 +41,11 @@
 <table>
    <tr>
      <th align="center">
-       <img width="480" alt="1" src="https://user-images.githubusercontent.com/49552804/175852247-3f1493b9-b7fa-4a97-a239-d55f730d203f.gif"/>
+       <img width="400" alt="1" src="https://user-images.githubusercontent.com/49552804/175852247-3f1493b9-b7fa-4a97-a239-d55f730d203f.gif"/>
        <br><br>[검색]
      </th>
      <th align="center">
-       <img width="480" alt="2" src="https://user-images.githubusercontent.com/49552804/175852252-f83d70be-75f3-4f93-8463-72d2c97970ad.gif"/>
+       <img width="400" alt="2" src="https://user-images.githubusercontent.com/49552804/175852252-f83d70be-75f3-4f93-8463-72d2c97970ad.gif"/>
        <br><br>[모두보기 및 찜] 
     </th>
   </tr>
@@ -60,11 +60,11 @@
 <table>
    <tr>
      <th align="center">
-       <img width="480" alt="1" src="https://user-images.githubusercontent.com/49552804/175852441-5f041e88-cb8e-44f7-81c4-710cb6ded791.gif"/>
+       <img width="400" alt="1" src="https://user-images.githubusercontent.com/49552804/175852441-5f041e88-cb8e-44f7-81c4-710cb6ded791.gif"/>
        <br><br>[전체 리뷰]
      </th>
      <th align="center">
-       <img width="480" alt="2" src="https://user-images.githubusercontent.com/49552804/175852446-20ec328d-832a-4e9d-b678-043a3f2ddf0f.gif"/>
+       <img width="400" alt="2" src="https://user-images.githubusercontent.com/49552804/175852446-20ec328d-832a-4e9d-b678-043a3f2ddf0f.gif"/>
        <br><br>[리뷰 상세보기] 
     </th>
   </tr>
@@ -79,11 +79,11 @@
 <table>
    <tr>
      <th align="center">
-       <img width="480" alt="1" src="https://user-images.githubusercontent.com/49552804/175852527-05ff63b0-6ec1-48fb-9ea4-c83e8bec7b46.gif"/>
+       <img width="400" alt="1" src="https://user-images.githubusercontent.com/49552804/175852527-05ff63b0-6ec1-48fb-9ea4-c83e8bec7b46.gif"/>
        <br><br>[로그인]
      </th>
      <th align="center">
-       <img width="480" alt="2" src="https://user-images.githubusercontent.com/49552804/176085077-34ed952f-d1c8-472a-a956-f0bb8012031d.gif"/>
+       <img width="400" alt="2" src="https://user-images.githubusercontent.com/49552804/176085077-34ed952f-d1c8-472a-a956-f0bb8012031d.gif"/>
        <br><br>[회원가입] 
     </th>
   </tr>
@@ -97,11 +97,11 @@
 <table>
    <tr>
      <th align="center">
-       <img width="480" alt="1" src="https://user-images.githubusercontent.com/49552804/175852568-17db5964-38c2-436a-ac32-32180fd5ccc7.gif"/>
+       <img width="400" alt="1" src="https://user-images.githubusercontent.com/49552804/175852568-17db5964-38c2-436a-ac32-32180fd5ccc7.gif"/>
        <br><br>[내서재]
      </th>
      <th align="center">
-       <img width="480" alt="2" src="https://user-images.githubusercontent.com/49552804/175852572-7439f631-384d-4e3a-8c50-2137ce33d558.gif"/>
+       <img width="400" alt="2" src="https://user-images.githubusercontent.com/49552804/175852572-7439f631-384d-4e3a-8c50-2137ce33d558.gif"/>
        <br><br>[리뷰 작성] 
     </th>
   </tr>
