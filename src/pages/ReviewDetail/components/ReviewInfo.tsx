@@ -6,17 +6,18 @@ import { AppStateType } from 'redux/reducers';
 import { ReviewInit, ReviewRequest } from 'redux/reducers/Review';
 import useToggle from 'hooks/useToggle';
 import { ReviewDetailTypes } from 'types/review';
-import useIntersectionObserver from 'hooks/useIntersectionObserver';
-import LoadingForm from 'components/Form/LoadingForm';
+import PagenationForm from 'components/Form/PagenationForm';
 import ReviewDetailModal from './Modal/ReivewDetailModal';
 import ReviewItem from './_items/ReivewItem';
 
 function ReviewInfo() {
   const location = useLocation();
   const dispatch = useDispatch();
+  const isbn = Number(location.pathname.split('/')[2]);
+  const [curIdx, setCurIdx] = useState<number>(1);
   const [sort, setSort] = useState('recommend');
   const [detailToggle, detailToggleIsOn] = useToggle(false);
-  const { reviews, moreReviews, reviewCount, itemLoading } = useSelector(
+  const { reviews, bookData } = useSelector(
     (state: AppStateType) => state.review,
     shallowEqual,
   );
@@ -24,28 +25,15 @@ function ReviewInfo() {
   useEffect(() => {
     dispatch(
       ReviewRequest({
-        isbn: Number(location.pathname.split('/')[2]),
-        start: 0,
+        isbn,
+        start: (curIdx - 1) * 10,
         sortby: sort,
       }),
     );
     return () => {
       dispatch(ReviewInit());
     };
-  }, [sort, detailToggle]);
-
-  const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
-    if (isIntersecting && moreReviews && !itemLoading) {
-      dispatch(
-        ReviewRequest({
-          isbn: Number(location.pathname.split('/')[2]),
-          start: reviewCount,
-          sortby: sort,
-        }),
-      );
-    }
-  };
-  const { setTarget } = useIntersectionObserver({ onIntersect });
+  }, [sort, curIdx]);
 
   const [curReview, setCurReview] = useState({
     id: -1,
@@ -92,13 +80,21 @@ function ReviewInfo() {
             />
           ))}
       </ReviewListWrapper>
-      <div ref={setTarget}>{itemLoading && <LoadingForm />}</div>
       {detailToggle && (
         <ReviewDetailModal
           item={curReview}
           detailToggleIsOn={detailToggleIsOn}
+          isbn={isbn}
+          reviewCount={(curIdx - 1) * 10}
+          sort={sort}
         />
       )}
+      <PagenationForm
+        total={bookData.countReviews}
+        display={10}
+        curIdx={curIdx}
+        setCurIdx={setCurIdx}
+      />
     </Wrapper>
   );
 }

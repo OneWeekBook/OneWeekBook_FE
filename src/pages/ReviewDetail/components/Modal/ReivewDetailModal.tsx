@@ -8,15 +8,25 @@ import {
   LikeInit,
   LikeRequest,
 } from 'redux/reducers/Like';
+import { ReviewInit, ReviewRequest } from 'redux/reducers/Review';
 import { LikeDataTypes, ReviewDetailTypes } from 'types/review';
 import DetailModal from 'components/Modal';
 
 type PropsType = {
   item: ReviewDetailTypes;
+  isbn: number;
+  reviewCount: number;
+  sort: string;
   detailToggleIsOn: () => void;
 };
 
-function ReviewDetailModal({ item, detailToggleIsOn }: PropsType) {
+function ReviewDetailModal({
+  item,
+  isbn,
+  reviewCount,
+  sort,
+  detailToggleIsOn,
+}: PropsType) {
   const dispatch = useDispatch();
   const [zero, setZero] = useState(item.zeroLikeCount);
   const [one, setOne] = useState(item.oneLikeCount);
@@ -46,6 +56,14 @@ function ReviewDetailModal({ item, detailToggleIsOn }: PropsType) {
   useEffect(() => {
     if (likeAddErrorStatus === 200 || likeCancelErrorStatus === 200) {
       dispatch(LikeRequest({ bookId: item.id }));
+      dispatch(ReviewInit());
+      dispatch(
+        ReviewRequest({
+          isbn,
+          start: reviewCount,
+          sortby: sort,
+        }),
+      );
     }
   }, [likeAddErrorStatus, likeCancelErrorStatus]);
 
@@ -88,10 +106,8 @@ function ReviewDetailModal({ item, detailToggleIsOn }: PropsType) {
     } else if (compareLikeUser() && isSelected) {
       if (state === 0) setZeroToggle(false);
       else if (state === 1) setOneToggle(false);
-      console.log(1);
       dispatch(LikeCancelRequest({ bookId: item.id }));
     } else if (!compareLikeUser()) {
-      console.log(2);
       dispatch(LikeAddRequest({ bookId: item.id, state }));
     }
   };
