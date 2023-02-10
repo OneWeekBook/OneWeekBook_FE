@@ -96,7 +96,7 @@ const PageNationWrapper = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-top: 20px;
+  margin: 20px auto 80px;
   text-align: center;
 `;
 
@@ -104,7 +104,7 @@ const PageNum = styled.button<{ isSelected: boolean }>`
   font-size: 15px;
   border: 0 none;
   border-radius: 25px;
-  background-color: ${({ isSelected }) => (isSelected ? '#1e90ff' : '#08c1e9')};
+  background-color: ${({ isSelected }) => (isSelected ? '#ffa07a' : '#f07055')};
   color: white;
   cursor: pointer;
   width: 30px;

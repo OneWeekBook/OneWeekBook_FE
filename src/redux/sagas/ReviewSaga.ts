@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, throttle } from 'redux-saga/effects';
 import { ReviewTypes } from 'types/api';
 import {
   ReviewsFail,
@@ -9,7 +9,7 @@ import {
 
 function ReviewAPI(params: ReviewTypes) {
   return axios.get(
-    `${process.env.REACT_APP_BASIC_URL}/book/reviews?start=${params.start}&display=12&sortby=${params.sortby}`,
+    `${process.env.REACT_APP_BASIC_URL}/book/reviews?start=${params.start}&display=15&sortby=${params.sortby}`,
   );
 }
 
@@ -23,5 +23,5 @@ function* fetchReviewSaga(action: any): any {
 }
 
 export default function* watchReview() {
-  yield takeEvery(REVIEWS_REQUEST, fetchReviewSaga);
+  yield throttle(2000, REVIEWS_REQUEST, fetchReviewSaga);
 }

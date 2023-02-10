@@ -9,19 +9,29 @@ function BookInfo() {
     shallowEqual,
   );
   return (
-    <Wrapper>{bookData.title && <BookInfoWrapper {...bookData} />}</Wrapper>
+    <Wrapper style={{ backgroundImage: `url(${bookData.img})` }}>
+      <Blind>{bookData.title && <BookInfoWrapper {...bookData} />}</Blind>
+    </Wrapper>
   );
 }
 
 export default BookInfo;
 
 const Wrapper = styled.div`
-  margin: 10px auto 50px;
+  background-size: cover;
+  margin: 20px auto 50px;
   width: 100%;
-  min-height: 200px;
-  height: auto;
-  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
-    margin: 10px auto 30px;
-    width: 95%;
+  height: 300px;
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    height: 200px;
+  }
+`;
+
+const Blind = styled.div`
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  height: 300px;
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    height: 200px;
   }
 `;

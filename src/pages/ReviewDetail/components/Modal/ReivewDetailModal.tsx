@@ -8,16 +8,25 @@ import {
   LikeInit,
   LikeRequest,
 } from 'redux/reducers/Like';
+import { ReviewInit, ReviewRequest } from 'redux/reducers/Review';
 import { LikeDataTypes, ReviewDetailTypes } from 'types/review';
 import DetailModal from 'components/Modal';
-import ImageButton from 'components/Button/ImageButton';
 
 type PropsType = {
   item: ReviewDetailTypes;
+  isbn: number;
+  reviewCount: number;
+  sort: string;
   detailToggleIsOn: () => void;
 };
 
-function ReviewDetailModal({ item, detailToggleIsOn }: PropsType) {
+function ReviewDetailModal({
+  item,
+  isbn,
+  reviewCount,
+  sort,
+  detailToggleIsOn,
+}: PropsType) {
   const dispatch = useDispatch();
   const [zero, setZero] = useState(item.zeroLikeCount);
   const [one, setOne] = useState(item.oneLikeCount);
@@ -36,8 +45,6 @@ function ReviewDetailModal({ item, detailToggleIsOn }: PropsType) {
     likeAddErrorStatus?: number;
     likeCancelErrorStatus?: number;
   } = useSelector((state: AppStateType) => state.like, shallowEqual);
-  const likeDoneImg = `${process.env.PUBLIC_URL}/assets/like/like-done.svg`;
-  const likeNoneImg = `${process.env.PUBLIC_URL}/assets/like/like-none.svg`;
 
   useEffect(() => {
     dispatch(LikeRequest({ bookId: item.id }));
@@ -49,6 +56,14 @@ function ReviewDetailModal({ item, detailToggleIsOn }: PropsType) {
   useEffect(() => {
     if (likeAddErrorStatus === 200 || likeCancelErrorStatus === 200) {
       dispatch(LikeRequest({ bookId: item.id }));
+      dispatch(ReviewInit());
+      dispatch(
+        ReviewRequest({
+          isbn,
+          start: reviewCount,
+          sortby: sort,
+        }),
+      );
     }
   }, [likeAddErrorStatus, likeCancelErrorStatus]);
 
@@ -101,7 +116,7 @@ function ReviewDetailModal({ item, detailToggleIsOn }: PropsType) {
     <DetailModal
       title={`${item.nick}님의 리뷰 전체 보기`}
       titleSize={[24, 20]}
-      width={900}
+      width={700}
       height={300}
       handleToggle={detailToggleIsOn}
       close
@@ -111,38 +126,38 @@ function ReviewDetailModal({ item, detailToggleIsOn }: PropsType) {
       isCancelBtn={false}
     >
       <Wrapper>
-        <Date>{item.reviewCreationTime}</Date>
-        <ReviewBody>{item.review}</ReviewBody>
-        <Recommend>
-          <p>
-            <span>{zero}</span>명이 해당 리뷰가 유용하다고 생각해요
-          </p>
-          {sessionStorage.getItem('accessToken') && (
-            <ImageButton
+        <Date>작성일자 : {item.reviewCreationTime}</Date>
+        <Review>{item.review}</Review>
+        {sessionStorage.getItem('accessToken') && (
+          <LikeButtonWrapper>
+            <LikeButton
               type="button"
-              src={zeroToggle ? likeDoneImg : likeNoneImg}
-              pc={[25, 25]}
-              bgColor="white"
-              alt="like"
               onClick={() => likeAddClick(0, zeroToggle)}
-            />
-          )}
-        </Recommend>
-        <Recommend>
-          <p>
-            <span>{one}</span>명이 해당 리뷰가 재미있다고 생각해요
-          </p>
-          {sessionStorage.getItem('accessToken') && (
-            <ImageButton
+              toggle={zeroToggle}
+            >
+              <img
+                src={`${process.env.PUBLIC_URL}/assets/like/interest.png`}
+                alt="funny"
+              />
+              <p>
+                <span>{zero}</span>유용해요
+              </p>
+            </LikeButton>
+            <LikeButton
               type="button"
-              src={oneToggle ? likeDoneImg : likeNoneImg}
-              pc={[25, 25]}
-              bgColor="white"
-              alt="like"
               onClick={() => likeAddClick(1, oneToggle)}
-            />
-          )}
-        </Recommend>
+              toggle={oneToggle}
+            >
+              <img
+                src={`${process.env.PUBLIC_URL}/assets/like/fun.png`}
+                alt="funny"
+              />
+              <p>
+                <span>{one}</span>재미있어요
+              </p>
+            </LikeButton>
+          </LikeButtonWrapper>
+        )}
       </Wrapper>
     </DetailModal>
   );
@@ -151,26 +166,65 @@ function ReviewDetailModal({ item, detailToggleIsOn }: PropsType) {
 export default ReviewDetailModal;
 
 const Wrapper = styled.div`
-  margin: 0 40px;
+  margin: 20px 0px;
+  border: 2px solid #f07055;
+  border-radius: 10px;
+  padding: 30px;
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    padding: 15px;
+  }
 `;
 
 const Date = styled.p`
-  font-size: 18px;
-  font-weight: 600;
-  margin-top: 20px;
-`;
-
-const ReviewBody = styled.p`
-  font-size: 18px;
-  margin: 10px auto;
-  white-space: pre-wrap;
-`;
-
-const Recommend = styled.div`
-  display: flex;
-  align-items: center;
   font-size: 16px;
-  span {
-    font-weight: 600;
+  font-weight: 600;
+`;
+
+const Review = styled.p`
+  font-size: 18px;
+  margin: 10px auto 20px;
+  white-space: pre-wrap;
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    font-size: 16px;
+  }
+`;
+
+const LikeButtonWrapper = styled.div`
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+`;
+
+const LikeButton = styled.button<{ toggle: boolean }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 140px;
+  height: 36px;
+  border: none;
+  border-radius: 5px;
+  background-color: ${({ toggle }) => (toggle ? '#ffa07a' : '#f07055')};
+  cursor: pointer;
+  &:hover {
+    background-color: #ffa07a;
+  }
+  img {
+    width: 25px;
+  }
+  p {
+    font-size: 16px;
+    color: #fff;
+    span {
+      margin-right: 5px;
+    }
+  }
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    img {
+      width: 20px;
+    }
+    p {
+      font-size: 14px;
+    }
   }
 `;
