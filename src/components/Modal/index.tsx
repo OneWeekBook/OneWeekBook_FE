@@ -65,7 +65,7 @@ function Index({
           <ButtonWrapper>
             {isOkBtn && (
               <DefaultButton
-                pc={[100, 35]}
+                pc={[120, 40]}
                 onClick={handleOkClick}
                 isHover
                 hoverBgColor="#ffa07a"
@@ -80,7 +80,7 @@ function Index({
             )}
             {isCancelBtn && (
               <DefaultButton
-                pc={[100, 35]}
+                pc={[120, 40]}
                 onClick={handleCanCelClick}
                 isHover
                 hoverBgColor="#ffa07a"

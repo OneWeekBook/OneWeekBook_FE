@@ -23,58 +23,66 @@ function ReviewItem({
   }, [rating]);
 
   return (
-    <Wrapper onClick={onClick}>
-      <ImgWrapper>
-        <img
-          src={`${process.env.PUBLIC_URL}/${
-            isRecommend ? 'assets/like/good.svg' : 'assets/like/bad.svg'
-          }`}
-          alt="icon"
-          width={75}
-          height={75}
-          onError={getImgErr}
-        />
-        <p>{rating}</p>
-      </ImgWrapper>
-      <ReivewInfoWrapper>
-        <p className="reviewInfo">{nick}님의 리뷰</p>
-        <p className="createDate">작성일 : {reviewCreationTime}</p>
-        <p className="overall">{review}</p>
-        <RecommendWrapper>
-          <RecommendItem>
-            <img
-              src={`${process.env.PUBLIC_URL}/assets/like/fun.png`}
-              alt="interest"
-              width={25}
-            />
-            <p>
-              <span>{zeroLikeCount}</span>유용해요
-            </p>
-          </RecommendItem>
-          <RecommendItem>
-            <img
-              src={`${process.env.PUBLIC_URL}/assets/like/interest.png`}
-              alt="funny"
-              width={25}
-            />
-            <p>
-              <span>{oneLikeCount}</span>재미있어요
-            </p>
-          </RecommendItem>
-        </RecommendWrapper>
-      </ReivewInfoWrapper>
-    </Wrapper>
+    <ReviewItemWrapper onClick={onClick}>
+      <InfoWrapper>
+        <ImgWrapper>
+          <img
+            src={`${process.env.PUBLIC_URL}/${
+              isRecommend ? 'assets/like/good.svg' : 'assets/like/bad.svg'
+            }`}
+            alt="icon"
+            width={75}
+            height={75}
+            onError={getImgErr}
+          />
+          <p>{rating}</p>
+        </ImgWrapper>
+        <ReivewInfoWrapper>
+          <div>
+            <p className="reviewInfo">{nick}님의 리뷰</p>
+            <p className="createDate">작성일 : {reviewCreationTime}</p>
+          </div>
+          <p className="overall">{review}</p>
+        </ReivewInfoWrapper>
+      </InfoWrapper>
+      <RecommendWrapper>
+        <RecommendItem>
+          <img
+            src={`${process.env.PUBLIC_URL}/assets/like/fun.png`}
+            alt="interest"
+            width={25}
+          />
+          <p>
+            <span>{zeroLikeCount}</span>유용해요
+          </p>
+        </RecommendItem>
+        <RecommendItem>
+          <img
+            src={`${process.env.PUBLIC_URL}/assets/like/interest.png`}
+            alt="funny"
+            width={25}
+          />
+          <p>
+            <span>{oneLikeCount}</span>재미있어요
+          </p>
+        </RecommendItem>
+      </RecommendWrapper>
+    </ReviewItemWrapper>
   );
 }
 
 export default ReviewItem;
 
-const Wrapper = styled.div`
-  min-height: 100px;
+const ReviewItemWrapper = styled.div`
+  height: 250px;
   border-radius: 5px;
   border: 3px solid #f07055;
   cursor: pointer;
+`;
+
+const InfoWrapper = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 const ImgWrapper = styled.div`
@@ -83,6 +91,7 @@ const ImgWrapper = styled.div`
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
+  margin-bottom: -60px;
   margin-left: 5px;
   width: 75px;
   height: 100%;
@@ -92,12 +101,19 @@ const ImgWrapper = styled.div`
     font-size: 20px;
     font-weight: 600;
   }
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+    margin-bottom: 0px;
+  }
 `;
 
 const ReivewInfoWrapper = styled.div`
-  margin: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 20px 20px 20px 10px;
   width: 100%;
   .overall {
+    height: 70px;
     margin-bottom: 20px;
     font-size: 16px;
     display: -webkit-box;
@@ -120,10 +136,8 @@ const ReivewInfoWrapper = styled.div`
 
 const RecommendWrapper = styled.div`
   display: flex;
+  justify-content: center;
   gap: 10px;
-  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
-    flex-direction: column;
-  }
 `;
 
 const RecommendItem = styled.div`
@@ -134,7 +148,7 @@ const RecommendItem = styled.div`
   border-radius: 5px;
   background-color: #f07055;
   padding: 5px;
-  width: 140px;
+  width: 130px;
   p {
     color: #fff;
     font-size: 16px;

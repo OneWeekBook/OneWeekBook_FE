@@ -138,7 +138,6 @@ function ReviewDetailModal({
               <img
                 src={`${process.env.PUBLIC_URL}/assets/like/interest.png`}
                 alt="funny"
-                width={25}
               />
               <p>
                 <span>{zero}</span>유용해요
@@ -152,7 +151,6 @@ function ReviewDetailModal({
               <img
                 src={`${process.env.PUBLIC_URL}/assets/like/fun.png`}
                 alt="funny"
-                width={25}
               />
               <p>
                 <span>{one}</span>재미있어요
@@ -171,7 +169,10 @@ const Wrapper = styled.div`
   margin: 20px 0px;
   border: 2px solid #f07055;
   border-radius: 10px;
-  padding: 10px;
+  padding: 30px;
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    padding: 15px;
+  }
 `;
 
 const Date = styled.p`
@@ -183,6 +184,9 @@ const Review = styled.p`
   font-size: 18px;
   margin: 10px auto 20px;
   white-space: pre-wrap;
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    font-size: 16px;
+  }
 `;
 
 const LikeButtonWrapper = styled.div`
@@ -205,11 +209,22 @@ const LikeButton = styled.button<{ toggle: boolean }>`
   &:hover {
     background-color: #ffa07a;
   }
+  img {
+    width: 25px;
+  }
   p {
     font-size: 16px;
     color: #fff;
     span {
       margin-right: 5px;
+    }
+  }
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    img {
+      width: 20px;
+    }
+    p {
+      font-size: 14px;
     }
   }
 `;
