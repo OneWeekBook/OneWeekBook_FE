@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Route, useLocation, useNavigate } from 'react-router-dom';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
@@ -12,10 +12,11 @@ import ReviewItem from './_items/ReivewItem';
 
 function ReviewInfo() {
   const location = useLocation();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const isbn = Number(location.pathname.split('/')[2]);
+  const sort = `${location.search.split('=')[1]}`;
   const [curIdx, setCurIdx] = useState<number>(1);
-  const [sort, setSort] = useState('recommend');
   const [detailToggle, detailToggleIsOn] = useToggle(false);
   const { reviews, bookData } = useSelector(
     (state: AppStateType) => state.review,
@@ -54,7 +55,9 @@ function ReviewInfo() {
         className="recommendBtn"
         type="button"
         isSelected={sort === 'recommend'}
-        onClick={() => setSort('recommend')}
+        onClick={() =>
+          navigate(`/review/${isbn}?sort=recommend`, { replace: true })
+        }
       >
         추천 순
       </SortButton>
@@ -62,7 +65,7 @@ function ReviewInfo() {
         className="newBtn"
         type="button"
         isSelected={sort === 'new'}
-        onClick={() => setSort('new')}
+        onClick={() => navigate(`/review/${isbn}?sort=new`, { replace: true })}
       >
         최신 순
       </SortButton>

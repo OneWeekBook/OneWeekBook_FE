@@ -6,9 +6,6 @@ import { NewReviewTypes } from 'types/main';
 
 function NewReivewListItem({
   img,
-  title,
-  author,
-  publisher,
   review,
   rating,
   isbn,
