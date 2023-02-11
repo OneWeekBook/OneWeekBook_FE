@@ -88,6 +88,7 @@ const ItemInner = styled.div`
 const ImgWrapper = styled.div`
   object-fit: cover;
   height: 200px;
+  margin-bottom: 5px;
   img {
     width: 100%;
     height: 100%;
@@ -96,7 +97,7 @@ const ImgWrapper = styled.div`
 `;
 
 const ItemTitle = styled.p`
-  height: 44px;
+  height: 42px;
   font-size: 16px;
   font-weight: 700;
   margin-bottom: 5px;
