@@ -18,6 +18,7 @@ function SearchList() {
     (state: AppStateType) => state.search,
     shallowEqual,
   );
+
   const search = useSelector((state: AppStateType) => state.func.search);
   const isAddSuccess = useSelector(
     (state: AppStateType) => state.myLibrary.isAddSuccess,

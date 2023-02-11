@@ -89,7 +89,8 @@ const ImgWrapper = styled.div`
   position: relative;
   background-color: #f07055;
   flex-shrink: 0;
-  width: 150px;
+  max-width: 150px;
+  width: 100%;
   object-fit: cover;
   button {
     position: absolute;
@@ -127,7 +128,7 @@ const InfoWrapper = styled.div`
     color: black;
   }
   .infoTitle {
-    height: 50px;
+    height: 46px;
     font-size: 18px;
     font-weight: 700;
     margin-bottom: 5px;
