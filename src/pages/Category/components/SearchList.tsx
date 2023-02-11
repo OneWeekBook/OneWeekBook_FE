@@ -71,14 +71,12 @@ export default SearchList;
 
 const Wrapper = styled.div`
   width: 100%;
-  margin: 30px auto;
   display: grid;
+  margin: 30px auto;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
-  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
     width: 95%;
-  }
-  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     grid-template-columns: 1fr;
   }
 `;

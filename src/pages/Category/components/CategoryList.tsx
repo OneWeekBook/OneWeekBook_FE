@@ -125,17 +125,16 @@ export default CategoryList;
 
 const Wrapper = styled.div`
   width: 100%;
+  margin: 50px auto 20px;
   .mainTitle {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 700;
-    margin: 10px auto;
     color: ${({ theme }) => theme.color.COLOR_FONT_TWO};
   }
   @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
-    margin: auto;
     width: 95%;
     .mainTitle {
-      font-size: 20px;
+      font-size: 24px;
     }
   }
 `;
@@ -163,5 +162,4 @@ const SubCategoryWrapper = styled.div`
 const SubCategoryList = styled.div`
   display: flex;
   flex-wrap: wrap;
-  border-top: 2px solid ${({ theme }) => theme.color.COLOR_LAYOUT_ONE};
 `;
