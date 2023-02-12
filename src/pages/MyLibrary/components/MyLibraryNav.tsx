@@ -10,17 +10,20 @@ const NavItems = [
   {
     id: 0,
     desc: '좋아요',
-    img: `${process.env.PUBLIC_URL}/assets/myLibrary/my-library-nav-like.svg`,
+    clickImg: `${process.env.PUBLIC_URL}/assets/myLibrary/like-white.svg`,
+    nonClickImg: `${process.env.PUBLIC_URL}/assets/myLibrary/like.svg`,
   },
   {
     id: 1,
     desc: '읽는중',
-    img: `${process.env.PUBLIC_URL}/assets/myLibrary/my-library-nav-read.svg`,
+    clickImg: `${process.env.PUBLIC_URL}/assets/myLibrary/read-white.svg`,
+    nonClickImg: `${process.env.PUBLIC_URL}/assets/myLibrary/read.svg`,
   },
   {
     id: 2,
     desc: '다읽은',
-    img: `${process.env.PUBLIC_URL}/assets/myLibrary/my-library-nav-done.svg`,
+    clickImg: `${process.env.PUBLIC_URL}/assets/myLibrary/done-white.svg`,
+    nonClickImg: `${process.env.PUBLIC_URL}/assets/myLibrary/done.svg`,
   },
 ];
 
@@ -39,30 +42,34 @@ function MyLibraryNav() {
     };
   }, [user, navId]);
 
+  const navMoveClick = (curId: number) => {
+    if (NavItems[0].id === curId) {
+      dispatch(navLike());
+    } else if (NavItems[1].id === curId) {
+      dispatch(navRead());
+    } else {
+      dispatch(navDone());
+    }
+  };
+
   return (
     <>
       <Wrapper>
-        <NavItem
-          isSelected={NavItems[0].id === navId}
-          onClick={() => dispatch(navLike())}
-        >
-          <img src={NavItems[0].img} alt="nav button" width={30} height={30} />
-          <p>{NavItems[0].desc}</p>
-        </NavItem>
-        <NavItem
-          isSelected={NavItems[1].id === navId}
-          onClick={() => dispatch(navRead())}
-        >
-          <img src={NavItems[1].img} alt="nav button" width={30} height={30} />
-          <p>{NavItems[1].desc}</p>
-        </NavItem>
-        <NavItem
-          isSelected={NavItems[2].id === navId}
-          onClick={() => dispatch(navDone())}
-        >
-          <img src={NavItems[2].img} alt="nav button" width={30} height={30} />
-          <p>{NavItems[2].desc}</p>
-        </NavItem>
+        {NavItems.map((item) => (
+          <NavItem
+            key={item.id}
+            isSelected={item.id === navId}
+            onClick={() => navMoveClick(item.id)}
+          >
+            <img
+              src={navId === item.id ? item.clickImg : item.nonClickImg}
+              alt="nav button"
+              width={22}
+              height={22}
+            />
+            <p>{item.desc}</p>
+          </NavItem>
+        ))}
       </Wrapper>
       <Nav id={navId} />
     </>
@@ -72,37 +79,35 @@ function MyLibraryNav() {
 export default MyLibraryNav;
 
 const Wrapper = styled.div`
-  box-sizing: border-box;
   display: flex;
-  padding-bottom: 5px;
-  border-bottom: 2px solid black;
-  margin: auto;
+  border-bottom: 2px solid #f07055;
+  margin: 0 auto;
   @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
     width: 95%;
   }
 `;
 
 const NavItem = styled.button<{ isSelected: boolean }>`
-  border: none;
-  border-radius: 5px;
-  background-color: white;
+  border-top: 2px solid #f07055;
+  border-left: 2px solid #f07055;
+  border-right: 2px solid #f07055;
+  border-bottom: none;
+  border-radius: 10px 10px 0px 0px;
+  background-color: ${({ isSelected }) => (isSelected ? '#f07055' : '#fff')};
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 200px;
+  gap: 10px;
+  width: 150px;
   height: 40px;
-  font-size: 18px;
-  font-weight: 600;
-  margin-right: 5px;
   transition: 0.5s;
-  p {
-    color: ${({ isSelected }) => (isSelected ? '#1e90ff' : '#000000')};
+  &:nth-child(n + 2) {
+    margin-left: -2px;
   }
-  :hover {
-    p {
-      color: #1e90ff;
-    }
-    box-shadow: -10px -10px 10px -5px rgba(25, 42, 70, 0.2);
+  p {
+    font-size: 16px;
+    font-weight: 700;
+    color: ${({ isSelected }) => (isSelected ? '#fff' : '#f07055')};
   }
 `;
