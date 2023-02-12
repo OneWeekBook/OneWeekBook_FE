@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
 import {
   MyLibraryModifyRequest,

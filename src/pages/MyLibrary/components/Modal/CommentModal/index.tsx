@@ -69,13 +69,14 @@ function Index({
           </div>
           {bookData.progress === 1 && (
             <DefaultButton
-              pc={[90, 30]}
+              pc={[90, 45]}
               onClick={moveDoneClick}
               isHover
-              bgColor="lightgray"
+              color="#fff"
+              bgColor="#a25b5b"
               hoverBgColor="#303538"
               hoverColor="white"
-              fontSize={[14, 14]}
+              fontSize={[16, 14]}
               fontWeight={700}
               padding={[3, 0, 3, 0]}
               title="독서완료"
@@ -103,24 +104,21 @@ const BodyWrapper = styled.div`
 
 const InfoWrapper = styled.div`
   box-sizing: border-box;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid #070707;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  padding-bottom: 10px;
+  padding-bottom: 15px;
   .bookInfo {
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 700;
+    margin-right: 5px;
   }
   .bookDate {
-    font-size: 14px;
+    font-size: 16px;
+    color: #f07055;
   }
   button {
     flex-shrink: 0;
-  }
-  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    .bookInfo {
-      font-size: 14px;
-      font-weight: 600;
-    }
   }
 `;
