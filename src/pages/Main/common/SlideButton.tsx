@@ -14,8 +14,16 @@ function SlideButton({ dist, idx, setIdx, totalPage }: PropsType) {
     else if (dist === 'next' && idx + 1 <= totalPage) setIdx(idx + 1);
   };
 
+  const isDisplay =
+    (dist === 'prev' && idx === 0) || (dist === 'next' && idx === totalPage);
+
   return (
-    <ButtonWrapper type="button" dist={dist} onClick={moveClick}>
+    <ButtonWrapper
+      type="button"
+      dist={dist}
+      onClick={moveClick}
+      isDisplay={isDisplay}
+    >
       <img
         src={`${process.env.PUBLIC_URL}/assets/arrow/white-arrow.png`}
         alt="slide-button"
@@ -26,7 +34,10 @@ function SlideButton({ dist, idx, setIdx, totalPage }: PropsType) {
 
 export default SlideButton;
 
-const ButtonWrapper = styled.button<{ dist: string }>`
+const ButtonWrapper = styled.button<{
+  dist: string;
+  isDisplay: boolean;
+}>`
   opacity: 0.1;
   cursor: pointer;
   position: absolute;
@@ -36,7 +47,9 @@ const ButtonWrapper = styled.button<{ dist: string }>`
   background-color: #f07055;
   border: none;
   transform: translateY(-50%);
+  display: ${({ isDisplay }) => isDisplay && 'none'};
   &:hover {
+    transition: all 0.5s;
     opacity: 0.9;
   }
   ${({ dist }) =>

@@ -15,7 +15,7 @@ import { SearchInit, SearchRequest } from 'redux/reducers/Search';
 interface PropsType {
   searchArr: string[];
 }
-function BooksList({ searchArr } : PropsType) {
+function BooksList({ searchArr }: PropsType) {
   const dispatch = useDispatch();
   const [startIdx, setStartIdx] = useState<number>(1);
   const { books, moreBooks, isLoading, isSuccess } = useSelector(
@@ -93,16 +93,20 @@ function BooksList({ searchArr } : PropsType) {
   return (
     <BookListWrapper>
       <BookGridWrapper>
-        {Array.isArray(books) && !!books && books.map((item: BooksTypes, index: number) => (
-          <SearchItem
-            key={index}
-            {...item}
-            userId={user.id}
-            handleAddClick={handleAddClick}
-          />
-        ))}
+        {Array.isArray(books) &&
+          !!books &&
+          books.map((item: BooksTypes, index: number) => (
+            <SearchItem
+              key={index}
+              {...item}
+              userId={user.id}
+              handleAddClick={handleAddClick}
+            />
+          ))}
       </BookGridWrapper>
-      <div ref={setTarget}>{ isLoading ? <LoadingForm /> : !isSuccess && <LoadingErrorForm /> }</div>
+      <div ref={setTarget}>
+        {isLoading ? <LoadingForm /> : !isSuccess && <LoadingErrorForm />}
+      </div>
     </BookListWrapper>
   );
 }
@@ -112,7 +116,6 @@ export default BooksList;
 const BookListWrapper = styled.div`
   margin: 30px auto 50px;
 `;
-
 
 const BookGridWrapper = styled.div`
   width: 100%;
