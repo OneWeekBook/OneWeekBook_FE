@@ -54,7 +54,7 @@ function MyLibraryNav() {
 
   return (
     <>
-      <Wrapper>
+      <NavWrapper>
         {NavItems.map((item) => (
           <NavItem
             key={item.id}
@@ -70,20 +70,36 @@ function MyLibraryNav() {
             <p>{item.desc}</p>
           </NavItem>
         ))}
-      </Wrapper>
-      <Nav id={navId} />
+      </NavWrapper>
+      <ComponentWrapper>
+        <Nav id={navId} />
+      </ComponentWrapper>
     </>
   );
 }
 
 export default MyLibraryNav;
 
-const Wrapper = styled.div`
+const NavWrapper = styled.div`
   display: flex;
   border-bottom: 2px solid #f07055;
   margin: 0 auto;
   @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
     width: 95%;
+  }
+`;
+
+const ComponentWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin: 10px auto 30px;
+  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
+    grid-template-columns: 1fr 1fr;
+    width: 95%;
+  }
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    grid-template-columns: 1fr;
   }
 `;
 

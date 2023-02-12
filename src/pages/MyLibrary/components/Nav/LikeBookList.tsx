@@ -36,21 +36,19 @@ function LikeBookList() {
 
   return (
     <>
-      <Wrapper>
-        {Array.isArray(userBookList) &&
-          !!userBookList &&
-          userBookList.map((item: LibraryItemTypes) => (
-            <BookItem
-              key={item.id}
-              {...item}
-              handleToggle={likeToggleIsOn}
-              handleReviewToggle={likeToggleIsOn}
-              onClick={() => {
-                setIsbn(item.isbn);
-              }}
-            />
-          ))}
-      </Wrapper>
+      {Array.isArray(userBookList) &&
+        !!userBookList &&
+        userBookList.map((item: LibraryItemTypes) => (
+          <BookItem
+            key={item.id}
+            {...item}
+            handleToggle={likeToggleIsOn}
+            handleReviewToggle={likeToggleIsOn}
+            onClick={() => {
+              setIsbn(item.isbn);
+            }}
+          />
+        ))}
       {likeToggle && (
         <MoveReadModal
           title="시작해볼까요?"
@@ -72,18 +70,3 @@ function LikeBookList() {
 }
 
 export default LikeBookList;
-
-const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
-  margin: 10px auto 30px;
-  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    width: 95%;
-  }
-  @media (max-width: 660px) {
-    grid-template-columns: 1fr;
-  }
-`;

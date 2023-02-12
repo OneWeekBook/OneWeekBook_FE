@@ -30,9 +30,9 @@ function ButtonWrapper({
             onClick(id);
           }}
           isHover
-          hoverBgColor="#1e90ff"
+          hoverBgColor="#f07055"
           hoverColor="white"
-          color="#1e90ff"
+          color="#f07055"
           fontSize={[14, 14]}
           fontWeight={700}
           padding={[3, 0, 3, 0]}
@@ -49,9 +49,9 @@ function ButtonWrapper({
             handleParagraphInfo();
           }}
           isHover
-          hoverBgColor="#1e90ff"
+          hoverBgColor="#f07055"
           hoverColor="white"
-          color="#1e90ff"
+          color="#f07055"
           fontSize={[14, 14]}
           fontWeight={700}
           padding={[3, 0, 3, 0]}
@@ -68,9 +68,9 @@ function ButtonWrapper({
             handleReviewInfo();
           }}
           isHover
-          hoverBgColor="#1e90ff"
+          hoverBgColor="#f07055"
           hoverColor="white"
-          color="#1e90ff"
+          color="#f07055"
           fontSize={[14, 14]}
           fontWeight={700}
           padding={[3, 0, 3, 0]}
@@ -88,8 +88,8 @@ const Wrapper = styled.div`
   display: flex;
   button {
     :nth-child(2) {
-      margin-left: 10px;
+      margin-left: 5px;
     }
-    border: 2px solid #1e90ff;
+    border: 2px solid #f07055;
   }
 `;

@@ -44,29 +44,27 @@ function ReadBookList() {
 
   return (
     <>
-      <Wrapper>
-        {Array.isArray(userBookList) &&
-          !!userBookList &&
-          userBookList.map((item: LibraryItemTypes) => (
-            <BookItem
-              key={item.id}
-              {...item}
-              handleToggle={readToggleIsOn}
-              handleReviewToggle={readToggleIsOn}
-              onClick={() => {
-                setIsbn(item.isbn);
-                setBookId(item.id);
-                setBookData({
-                  progress: item.progress,
-                  title: item.title,
-                  author: item.author,
-                  startTime: item.startTime,
-                  endTime: null,
-                });
-              }}
-            />
-          ))}
-      </Wrapper>
+      {Array.isArray(userBookList) &&
+        !!userBookList &&
+        userBookList.map((item: LibraryItemTypes) => (
+          <BookItem
+            key={item.id}
+            {...item}
+            handleToggle={readToggleIsOn}
+            handleReviewToggle={readToggleIsOn}
+            onClick={() => {
+              setIsbn(item.isbn);
+              setBookId(item.id);
+              setBookData({
+                progress: item.progress,
+                title: item.title,
+                author: item.author,
+                startTime: item.startTime,
+                endTime: null,
+              });
+            }}
+          />
+        ))}
       {readToggle && initSuccess && (
         <WriteCommentModal
           bookId={bookId}
@@ -80,18 +78,3 @@ function ReadBookList() {
 }
 
 export default ReadBookList;
-
-const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
-  margin: 10px auto 30px;
-  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    width: 95%;
-  }
-  @media (max-width: 660px) {
-    grid-template-columns: 1fr;
-  }
-`;
