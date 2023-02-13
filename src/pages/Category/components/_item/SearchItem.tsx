@@ -52,7 +52,7 @@ function SearchItem({
           <p
             className="infoAuth"
             dangerouslySetInnerHTML={{
-              __html: DOMPurify.sanitize(`${author}`),
+              __html: DOMPurify.sanitize(`${author.replaceAll('^', ',')}`),
             }}
           />
           <p
@@ -128,7 +128,7 @@ const InfoWrapper = styled.div`
     color: black;
   }
   .infoTitle {
-    height: 46px;
+    height: 48px;
     font-size: 18px;
     font-weight: 700;
     margin-bottom: 5px;
@@ -146,9 +146,11 @@ const InfoWrapper = styled.div`
   .infoAuth {
     font-size: 16px;
     font-weight: 600;
-    display: block;
     margin-bottom: 5px;
-    white-space: nowrap;
+    display: -webkit-box;
+    word-wrap: break-word;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
   }

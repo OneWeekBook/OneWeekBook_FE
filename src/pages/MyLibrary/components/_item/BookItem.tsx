@@ -54,22 +54,16 @@ function BookItem({
             onClick={deleteToggleIsOn}
             src={`${process.env.PUBLIC_URL}/assets/func/trash.svg`}
             alt="close"
-            pc={[25, 25]}
-            imgPC={[25, 25]}
+            pc={[30, 30]}
+            imgPC={[30, 30]}
           />
           <img src={img} alt="book" />
         </ImgWrapper>
         <InfoWrapper>
           <div>
-            <p className="bookTitle">
-              {title.replaceAll('<b>', '').replaceAll('</b>', '')}
-            </p>
-            <p className="bookAuthor">
-              {author.replaceAll('<b>', '').replaceAll('</b>', '')}
-            </p>
-            <p className="bookPublisher">
-              {publisher.replaceAll('<b>', '').replaceAll('</b>', '')}
-            </p>
+            <p>{title.replaceAll('<b>', '').replaceAll('</b>', '')}</p>
+            <p>{author.replaceAll('<b>', '').replaceAll('</b>', '')}</p>
+            <p>{publisher.replaceAll('<b>', '').replaceAll('</b>', '')}</p>
             {startTime && (
               <p className="date">독서 시작: {SetStartDate(startTime)}</p>
             )}
@@ -113,64 +107,63 @@ export default BookItem;
 const Wrapper = styled.div`
   margin-top: 10px;
   display: flex;
-`;
-
-const InfoWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-left: 10px;
-  width: 100%;
-  .bookTitle {
-    font-size: 16px;
-    font-weight: 600;
-    display: -webkit-box;
-    word-wrap: break-word;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .bookAuthor {
-    font-size: 14px;
-    font-weight: 600;
-    display: -webkit-box;
-    word-wrap: break-word;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    color: gray;
-  }
-  .bookPublisher {
-    font-size: 14px;
-    font-weight: 600;
-  }
-  .date {
-    font-size: 14px;
-    font-weight: 500;
-  }
+  border: 2px solid #f07055;
+  border-radius: 5px;
 `;
 
 const ImgWrapper = styled.div`
+  position: relative;
+  box-sizing: border-box;
+  background-color: #f07055;
   flex-shrink: 0;
   width: 120px;
-  height: 150px;
+  height: 180px;
+  text-align: center;
+  padding-top: 15px;
   button {
     position: absolute;
+    top: 0;
     display: none;
   }
   img {
-    width: 100%;
-    height: 100%;
+    width: 90%;
+    height: 90%;
+    border-radius: 0px 5px 5px 0px;
+    vertical-aline: middle;
   }
   :hover {
     button {
       display: block;
     }
   }
-  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    width: 100px;
-    height: 130px;
+`;
+
+const InfoWrapper = styled.div`
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  p {
+    display: -webkit-box;
+    word-wrap: break-word;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 700;
+    font-size: 14px;
+    color: #070707;
+    &:nth-child(1) {
+      font-size: 16px;
+      -webkit-line-clamp: 2;
+    }
+    &:nth-child(2) {
+      color: #f07055;
+    }
+  }
+  .date {
+    font-size: 14px;
+    font-weight: 500;
   }
 `;

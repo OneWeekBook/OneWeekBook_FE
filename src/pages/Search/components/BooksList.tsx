@@ -11,6 +11,7 @@ import useIntersectionObserver from 'hooks/useIntersectionObserver';
 import LoadingErrorForm from 'components/Form/LoadingErrorForm';
 import LoadingForm from 'components/Form/LoadingForm';
 import { SearchInit, SearchRequest } from 'redux/reducers/Search';
+import TopButton from 'components/Button/TopButton';
 
 interface PropsType {
   searchArr: string[];
@@ -107,6 +108,7 @@ function BooksList({ searchArr }: PropsType) {
       <div ref={setTarget}>
         {isLoading ? <LoadingForm /> : !isSuccess && <LoadingErrorForm />}
       </div>
+      <TopButton />
     </BookListWrapper>
   );
 }
@@ -115,6 +117,10 @@ export default BooksList;
 
 const BookListWrapper = styled.div`
   margin: 30px auto 50px;
+  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
+    width: 95%;
+    grid-template-columns: 1fr;
+  }
 `;
 
 const BookGridWrapper = styled.div`
@@ -123,8 +129,4 @@ const BookGridWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
-  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
-    width: 95%;
-    grid-template-columns: 1fr;
-  }
 `;

@@ -64,8 +64,8 @@ const Wrapper = styled.div`
   display: flex;
   position: relative;
   button {
-    top: 5px;
-    right: 0;
     position: absolute;
+    top: 8px;
+    right: 0;
   }
 `;
