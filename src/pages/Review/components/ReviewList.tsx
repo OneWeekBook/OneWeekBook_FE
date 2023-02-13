@@ -6,6 +6,7 @@ import { ReviewInit, ReviewsRequest } from 'redux/reducers/Review';
 import { ReviewItemType } from 'types/review';
 import LoadingForm from 'components/Form/LoadingForm';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
+import TopButton from 'components/Button/TopButton';
 import ReviewItem from './ReviewItem';
 
 function ReviewList() {
@@ -13,7 +14,6 @@ function ReviewList() {
   const [sort, setSort] = useState('new');
   const { reviews, reivewsTotal, reviewCount, moreReviews, isLoading } =
     useSelector((state: AppStateType) => state.review, shallowEqual);
-
   useEffect(() => {
     dispatch(ReviewsRequest({ start: 0, sortby: sort }));
     return () => {
@@ -61,6 +61,7 @@ function ReviewList() {
         </>
       )}
       <div ref={setTarget}>{isLoading && <LoadingForm />}</div>
+      <TopButton />
     </Wrapper>
   );
 }
