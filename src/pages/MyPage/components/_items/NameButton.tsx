@@ -19,12 +19,12 @@ function NameButton({ nickName }: PropsType) {
           pc={[100, 38]}
           onClick={nickToggleIsOn}
           isHover
-          hoverBgColor="#08c1e9"
+          hoverBgColor="#ffa07a"
           hoverColor="white"
-          bgColor="#1e90ff"
+          bgColor="#f07055"
           color="white"
           margin={[0, 10, 0, 0]}
-          fontSize={[14, 14]}
+          fontSize={[16, 14]}
           fontWeight={600}
           title="닉네임 변경"
         />
@@ -32,12 +32,11 @@ function NameButton({ nickName }: PropsType) {
           pc={[100, 38]}
           onClick={passToggleIsOn}
           isHover
-          hoverBgColor="#08c1e9"
+          hoverBgColor="#ffa07a"
           hoverColor="white"
-          bgColor="#1e90ff"
+          bgColor="#f07055"
           color="white"
-          margin={[0, 10, 0, 0]}
-          fontSize={[14, 14]}
+          fontSize={[16, 14]}
           fontWeight={600}
           title="비밀번호 변경"
         />

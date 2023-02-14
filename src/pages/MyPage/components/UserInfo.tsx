@@ -72,15 +72,12 @@ function UserInfo() {
 export default UserInfo;
 
 const Wrapper = styled.div`
-  border: 3px solid #1e90ff;
+  border: 3px solid #f07055;
   border-radius: 10px;
   box-sizing: border-box;
-  width: 100%;
-  height: 250px;
-  margin: 100px auto 0;
-  padding: 20px;
-  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+  margin: 50px auto 0;
+  padding: 30px;
+  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
     width: 95%;
-    height: auto;
   }
 `;

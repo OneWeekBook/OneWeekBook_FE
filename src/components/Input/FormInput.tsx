@@ -40,6 +40,7 @@ function FormInput({
         onKeyPress={onKeyPress}
         disabled={disabled}
         ref={mref}
+        autoComplete="off"
       />
       {children}
       <span />
