@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
@@ -11,19 +11,18 @@ import ReviewItem from './ReviewItem';
 
 function ReviewList() {
   const dispatch = useDispatch();
-  const [sort, setSort] = useState('new');
   const { reviews, reivewsTotal, reviewCount, moreReviews, isLoading } =
     useSelector((state: AppStateType) => state.review, shallowEqual);
   useEffect(() => {
-    dispatch(ReviewsRequest({ start: 0, sortby: sort }));
+    dispatch(ReviewsRequest({ start: 0, sortby: 'new' }));
     return () => {
       dispatch(ReviewInit());
     };
-  }, [sort]);
+  }, []);
 
   const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
     if (isIntersecting && moreReviews && !isLoading) {
-      dispatch(ReviewsRequest({ start: reviewCount, sortby: sort }));
+      dispatch(ReviewsRequest({ start: reviewCount, sortby: 'new' }));
     }
   };
   const { setTarget } = useIntersectionObserver({ onIntersect });
@@ -34,22 +33,6 @@ function ReviewList() {
         <>
           <TitleWrapper>
             <ReviewTitle>전체 리뷰 ({reivewsTotal}건)</ReviewTitle>
-            <ButtonWrapper>
-              <SortButton
-                className={sort === 'new' ? 'selected' : ''}
-                type="button"
-                onClick={() => setSort('new')}
-              >
-                최신순
-              </SortButton>
-              <SortButton
-                className={sort === 'totalReviews' ? 'selected' : ''}
-                type="button"
-                onClick={() => setSort('totalReviews')}
-              >
-                댓글순
-              </SortButton>
-            </ButtonWrapper>
           </TitleWrapper>
           <ReviewListWrapper>
             {reviews.map((item: ReviewItemType) => {
@@ -92,38 +75,6 @@ const ReviewTitle = styled.p`
   font-weight: 700;
   color: #f07055;
   padding-bottom: 10px;
-`;
-
-const ButtonWrapper = styled.div`
-  width: 160px;
-  margin-top: 10px;
-  margin-bottom: -2px;
-  background-color: #fff;
-  border-radius: 10px 10px 0px 0px;
-  border-top: 2px solid #f07055;
-  border-left: 2px solid #f07055;
-  border-right: 2px solid #f07055;
-`;
-
-const SortButton = styled.button`
-  border: 2px solid #fff;
-  border-radius: 10px 10px 0px 0px;
-  width: 80px;
-  height: 100%;
-  cursor: pointer;
-  background-color: #fff;
-  font-size: 14px;
-  font-weight: 700;
-  color: #f07055;
-  &.selected {
-    color: #fff;
-    background-color: #f07055;
-  }
-  &:hover {
-    color: #fff;
-    background-color: #f07055;
-    transition: 0.5s;
-  }
 `;
 
 const ReviewListWrapper = styled.div`

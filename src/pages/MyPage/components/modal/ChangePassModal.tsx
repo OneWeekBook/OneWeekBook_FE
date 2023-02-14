@@ -69,20 +69,22 @@ function ChangePassModal({ passToggleIsOn }: PropsType) {
       handleCanCelClick={passToggleIsOn}
       cancelBtnTitle="취소"
     >
-      <DefaultInput
-        type="password"
-        title="변경할 비밀번호 입력"
-        placeholder="변경할 비밀번호를 입력해주세요."
-        value={password}
-        onChange={changePasswod}
-      />
-      <DefaultInput
-        type="password"
-        title="변경할 비밀번호 확인"
-        placeholder="한번더 비밀번호를 입력해주세요."
-        value={confirmPassword}
-        onChange={changeConfirmPasswod}
-      />
+      <form>
+        <DefaultInput
+          type="password"
+          title="변경할 비밀번호 입력"
+          placeholder="변경할 비밀번호를 입력해주세요."
+          value={password}
+          onChange={changePasswod}
+        />
+        <DefaultInput
+          type="password"
+          title="변경할 비밀번호 확인"
+          placeholder="한번더 비밀번호를 입력해주세요."
+          value={confirmPassword}
+          onChange={changeConfirmPasswod}
+        />
+      </form>
       {passError && <ErrorForm error={error} align="center" />}
     </ChangeModal>
   );
