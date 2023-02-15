@@ -25,6 +25,7 @@ function DefaultInput({
         placeholder={placeholder}
         defaultValue={value}
         onBlur={onChange}
+        autoComplete="off"
       />
     </InputWrapper>
   );
@@ -44,6 +45,12 @@ const InputWrapper = styled.div`
     flex-shrink: 0;
   }
   input {
+    outline: none;
+    &:focus {
+      border: 2px solid #f07055;
+    }
+    border-radius: 5px;
+    border: 2px solid #070707;
     box-sizing: border-box;
     padding-left: 10px;
     max-width: 300px;

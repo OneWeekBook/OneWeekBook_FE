@@ -12,9 +12,9 @@ function OutButton({ removeToggleIsOn }: PropsType) {
         pc={[80, 20]}
         onClick={removeToggleIsOn}
         isHover
-        hoverColor="#1e90ff"
-        fontSize={[16, 16]}
-        fontWeight={600}
+        hoverColor="#f07055"
+        fontSize={[18, 18]}
+        fontWeight={700}
         title="회원 탈퇴"
       />
     </Wrapper>

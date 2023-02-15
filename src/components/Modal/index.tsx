@@ -65,12 +65,12 @@ function Index({
           <ButtonWrapper>
             {isOkBtn && (
               <DefaultButton
-                pc={[100, 35]}
+                pc={[120, 40]}
                 onClick={handleOkClick}
                 isHover
-                hoverBgColor="#08c1e9"
+                hoverBgColor="#ffa07a"
                 hoverColor="white"
-                bgColor="#1e90ff"
+                bgColor="#f07055"
                 color="white"
                 margin={[5, 5, 5, 5]}
                 fontSize={[18, 18]}
@@ -80,12 +80,12 @@ function Index({
             )}
             {isCancelBtn && (
               <DefaultButton
-                pc={[100, 35]}
+                pc={[120, 40]}
                 onClick={handleCanCelClick}
                 isHover
-                hoverBgColor="#08c1e9"
+                hoverBgColor="#ffa07a"
                 hoverColor="white"
-                bgColor="#1e90ff"
+                bgColor="#f07055"
                 color="white"
                 margin={[5, 5, 5, 5]}
                 fontSize={[18, 18]}
@@ -122,13 +122,14 @@ const ModalWrapper = styled.div<{
 }>`
   background-color: white;
   box-sizing: border-box;
+  border-radius: 10px;
   width: ${({ width }) => width}px;
   min-height: ${({ height }) => height}px;
   padding: 30px 30px;
   z-index: 1100;
   margin: 0 auto;
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    width: ${({ type }) => (type === 'write' ? 100 : 90)}%;
+    width: 95%;
     height: auto;
     padding: 20px 20px;
   }
@@ -150,7 +151,6 @@ const ModalTitleWrapper = styled.div<{ size?: number[] }>`
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     p {
       font-size: ${({ size }) => size && size[1]}px;
-      font-weight: 700;
     }
   }
 `;

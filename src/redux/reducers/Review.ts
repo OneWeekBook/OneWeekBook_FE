@@ -19,6 +19,8 @@ const initialState = {
   isNewSuccess: false,
   reviews: [],
   reivewsTotal: 0,
+  reviewCount: 0,
+  moreReviews: false,
   bookData: {},
 };
 
@@ -35,8 +37,11 @@ export default function Review(state = initialState, action: ActionsTypes) {
         ...state,
         isLoading: false,
         isSuccess: true,
-        reviews: action.payload.reviews,
+        reviews: state.reviews.concat(action.payload.reviews),
         reivewsTotal: action.payload.countAllReviewBooks,
+        moreReviews:
+          action.payload.countAllReviewBooks > state.reviewCount + 15,
+        reviewCount: state.reviewCount + 15,
       };
     case REVIEWS_FAIL:
       return {
@@ -55,8 +60,12 @@ export default function Review(state = initialState, action: ActionsTypes) {
         ...state,
         itemLoading: false,
         itemSuccess: true,
-        reviews: action.payload.reviewData,
         bookData: action.payload.bookData[0],
+        reviews: state.reviews.concat(action.payload.reviewData),
+        reivewsTotal: action.payload.bookData[0].countReviews,
+        moreReviews:
+          action.payload.bookData[0].countReviews > state.reviewCount + 10,
+        reviewCount: state.reviewCount + 10,
       };
     case REVIEW_FAIL:
       return {

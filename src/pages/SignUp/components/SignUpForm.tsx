@@ -131,9 +131,9 @@ function SignUpForm() {
               type="submit"
               pc={[0, 35]}
               isHover
-              hoverBgColor="#1e90ff"
+              hoverBgColor="#f07055"
               hoverColor="white"
-              bgColor="#7ca7d3"
+              bgColor="#c05944"
               color="white"
               disabled={registerDone}
               disabledColor="#a9a9a9"

@@ -20,7 +20,7 @@ function ProgressBarForm({ limit, write, width, percent }: PropsType) {
       <Wrapper width={width}>
         {percent && <Progress value={value}>{write}</Progress>}
       </Wrapper>
-      <div className="limit">{limit}</div>
+      <Limit>{limit}</Limit>
     </ProgressWrapper>
   );
 }
@@ -29,15 +29,12 @@ export default ProgressBarForm;
 
 const ProgressWrapper = styled.div`
   display: flex;
-  font-weight: 600;
-  .limit {
-    line-height: 30px;
-    font-size: 18px;
-    margin-left: 5px;
-  }
+  align-items: center;
+  font-weight: 700;
 `;
 
 const Wrapper = styled.div<{ width: number }>`
+  border: 2px solid #f07055;
   background-color: #e6e6e6;
   border-radius: 5px;
   width: ${({ width }) => width}px;
@@ -45,9 +42,9 @@ const Wrapper = styled.div<{ width: number }>`
 `;
 
 const Progress = styled.div<{ value: number }>`
-  box-sizing: border-box;
-  background-color: #1e90ff;
-  border-radius: 5px;
+  background-color: #f07055;
+  color: #fff;
+  border-radius: 0px 5px 5px 0px;
   width: ${({ value }) => value}px;
   height: 30px;
   line-height: 30px;
@@ -55,4 +52,10 @@ const Progress = styled.div<{ value: number }>`
   text-align: right;
   transition: 1s ease;
   transition-delay: 0.5s;
+`;
+
+const Limit = styled.div`
+  line-height: 30px;
+  font-size: 18px;
+  margin-left: 5px;
 `;

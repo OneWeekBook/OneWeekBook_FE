@@ -19,7 +19,9 @@ function Rank({ rank, limit, write, remaining, percent }: PropsType) {
         width={200}
         percent={percent}
       />
-      <p className="rankDesc">다음 등급까지 {remaining}권 남았습니다.</p>
+      <RankDesc>
+        다음 등급까지 <span>{remaining}</span>권 남았습니다.
+      </RankDesc>
     </InfoWrapper>
   );
 }
@@ -28,13 +30,18 @@ export default Rank;
 
 const InfoWrapper = styled.div`
   margin-top: 20px;
-  .rankDesc {
-    margin: 10px 0px;
-    font-size: 18px;
-  }
 `;
 
 const RankTitle = styled.p`
   margin: 10px 0px;
   font-size: 20px;
+`;
+
+const RankDesc = styled.p`
+  margin: 10px 0px;
+  font-size: 18px;
+  span {
+    color: #f07055;
+    font-weight: 700;
+  }
 `;

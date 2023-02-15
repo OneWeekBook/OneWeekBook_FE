@@ -34,6 +34,7 @@ function SearchInput({
       fontSize={fontSize}
       padding={padding}
       focusBorder={focusBorder}
+      autoComplete="off"
     />
   );
 }

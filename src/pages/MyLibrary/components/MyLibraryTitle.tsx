@@ -23,8 +23,10 @@ export default MyLibraryTitle;
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
+  margin: 10px auto;
   p {
     font-size: 24px;
     font-weight: 600;
+    color: #070707;
   }
 `;

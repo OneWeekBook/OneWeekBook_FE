@@ -98,7 +98,7 @@ function WriteReviewModal({ bookId, bookData, toggleIsOn }: PropsType) {
       type="write"
       title="책 리뷰하기"
       titleSize={[24, 18]}
-      width={768}
+      width={700}
       height={400}
       handleToggle={toggleIsOn}
       close
@@ -109,22 +109,17 @@ function WriteReviewModal({ bookId, bookData, toggleIsOn }: PropsType) {
     >
       <BodyWrapper>
         <InfoWrapper>
-          <div className="bookInfo">
-            <p>{bookData.title.replaceAll('<b>', '').replaceAll('</b>', '')}</p>
-            <p>
-              {bookData.author.replaceAll('<b>', '').replaceAll('</b>', '')}
-            </p>
-            <p>
-              {`${SetStartDate(bookData.startTime)} ~ ${SetStartDate(
-                bookData.endTime,
-              )}`}
-            </p>
-          </div>
-          {bookData.progress === 1 && <button type="button">독서 완료</button>}
+          <p>{bookData.title.replaceAll('<b>', '').replaceAll('</b>', '')}</p>
+          <p>{bookData.author.replaceAll('<b>', '').replaceAll('</b>', '')}</p>
+          <p>
+            {`${SetStartDate(bookData.startTime)} ~ ${SetStartDate(
+              bookData.endTime,
+            )}`}
+          </p>
         </InfoWrapper>
         <MiddleWrapper>
           <RecommendWrapper>
-            <p>책이 어떻나요?</p>
+            <p>책을 소개해주세요</p>
             <ImageButtonWrapper>
               {RecommendItem.map((item) => (
                 <button
@@ -148,12 +143,12 @@ function WriteReviewModal({ bookId, bookData, toggleIsOn }: PropsType) {
                   pc={[60, 30]}
                   onClick={() => modifyReviewClick(recommend, review)}
                   isHover
-                  hoverBgColor="#1e90ff"
+                  hoverBgColor="#ffa07a"
                   hoverColor="white"
-                  bgColor="#08c1e9"
+                  bgColor="#f07055"
                   color="white"
                   margin={[0, 0, 0, 10]}
-                  fontSize={[14, 14]}
+                  fontSize={[16, 14]}
                   fontWeight={700}
                   title="수정"
                 />
@@ -161,12 +156,12 @@ function WriteReviewModal({ bookId, bookData, toggleIsOn }: PropsType) {
                   pc={[60, 30]}
                   onClick={deleteReviewClick}
                   isHover
-                  hoverBgColor="#1e90ff"
+                  hoverBgColor="#ffa07a"
                   hoverColor="white"
-                  bgColor="#08c1e9"
+                  bgColor="#f07055"
                   color="white"
                   margin={[0, 0, 0, 10]}
-                  fontSize={[14, 14]}
+                  fontSize={[16, 14]}
                   fontWeight={700}
                   title="삭제"
                 />
@@ -176,12 +171,12 @@ function WriteReviewModal({ bookId, bookData, toggleIsOn }: PropsType) {
                 pc={[60, 30]}
                 onClick={() => addReviewClick(bookId, recommend, review)}
                 isHover
-                hoverBgColor="#1e90ff"
+                hoverBgColor="#ffa07a"
                 hoverColor="white"
-                bgColor="#08c1e9"
+                bgColor="#f07055"
                 color="white"
                 margin={[0, 0, 0, 10]}
-                fontSize={[14, 14]}
+                fontSize={[16, 14]}
                 fontWeight={700}
                 title="작성"
               />
@@ -202,13 +197,21 @@ function WriteReviewModal({ bookId, bookData, toggleIsOn }: PropsType) {
 export default WriteReviewModal;
 
 const BodyWrapper = styled.div`
-  margin: 10px 50px 0;
+  margin: 10px auto;
   .review {
     box-sizing: border-box;
     width: 100%;
     min-height: 150px;
-    padding: 10px;
+    padding: 10px 5px;
     border: none;
+    font-size: 16px;
+    font-weight: 700;
+    outline: none;
+    resize: vertical;
+    &:focus {
+      border: 2px solid #f07055;
+      border-radius: 5px;
+    }
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     margin: 10px auto 0;
@@ -218,17 +221,14 @@ const BodyWrapper = styled.div`
 const InfoWrapper = styled.div`
   box-sizing: border-box;
   border-bottom: 2px solid black;
-  display: flex;
-  justify-content: space-between;
   padding-bottom: 10px;
-  .bookInfo {
-    font-size: 16px;
-    font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
+  p:nth-child(1) {
+    font-size: 18px;
   }
-  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    .bookInfo {
-      font-size: 14px;
-    }
+  p:nth-child(2) {
+    color: #f07055;
   }
 `;
 
@@ -249,7 +249,7 @@ const RecommendWrapper = styled.div`
   @media (max-width: 660px) {
     display: block;
     p {
-      margin-bottom: 10px;
+      margin-bottom: 5px;
     }
   }
 `;

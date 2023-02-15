@@ -52,7 +52,7 @@ function SearchItem({
           <p
             className="infoAuth"
             dangerouslySetInnerHTML={{
-              __html: DOMPurify.sanitize(`${author}`),
+              __html: DOMPurify.sanitize(`${author.replaceAll('^', ',')}`),
             }}
           />
           <p
@@ -77,27 +77,42 @@ export default SearchItem;
 
 const Wrapper = styled.div`
   display: flex;
-  height: 200px;
+  height: 245px;
+  border: 2px solid #f07055;
+  border-radius: 5px;
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    height: 150px;
+    height: 170px;
   }
 `;
 
 const ImgWrapper = styled.div`
+  position: relative;
+  background-color: #f07055;
   flex-shrink: 0;
   max-width: 150px;
-  object-fit: contain;
+  width: 100%;
+  object-fit: cover;
   button {
     position: absolute;
+    z-index: 100;
+  }
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    width: 90px;
   }
 `;
 
 const BookImage = styled.img`
-  width: 150px;
-  height: 200px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 180px;
+  border-radius: 0px 5px 5px 0px;
+  object-fit: contain;
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    width: 100px;
-    height: 150px;
+    width: 80px;
+    height: 120px;
   }
 `;
 
@@ -106,14 +121,15 @@ const InfoWrapper = styled.div`
   width: 100%;
   flex-direction: column;
   justify-content: flex-start;
-  margin-left: 10px;
+  box-sizing: border-box;
+  padding: 10px;
   a {
     text-decoration: none;
     color: black;
   }
   .infoTitle {
-    height: 46px;
-    font-size: 16px;
+    height: 48px;
+    font-size: 18px;
     font-weight: 700;
     margin-bottom: 5px;
     display: -webkit-box;
@@ -122,23 +138,29 @@ const InfoWrapper = styled.div`
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: all 0.5s;
+    &:hover {
+      color: #f07055;
+    }
   }
   .infoAuth {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
-    display: block;
     margin-bottom: 5px;
-    white-space: nowrap;
+    display: -webkit-box;
+    word-wrap: break-word;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
   }
   .infoPubDate {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
     margin-bottom: 5px;
   }
   .infoDesc {
-    font-size: 14px;
+    font-size: 16px;
     display: -webkit-box;
     word-wrap: break-word;
     -webkit-line-clamp: 5;
@@ -146,11 +168,20 @@ const InfoWrapper = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  padding-bottom: 5px;
-  border-bottom: 2px solid ${({ theme }) => theme.color.COLOR_LAYOUT_THREE};
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    .infoTitle {
+      height: 42px;
+      font-size: 16px;
+    }
+    .infoAuth {
+      font-size: 14px;
+    }
+    .infoPubDate {
+      font-size: 14px;
+    }
     .infoDesc {
-      -webkit-line-clamp: 2;
+      font-size: 14px;
+      -webkit-line-clamp: 3;
     }
   }
 `;

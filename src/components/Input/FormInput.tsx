@@ -40,6 +40,7 @@ function FormInput({
         onKeyPress={onKeyPress}
         disabled={disabled}
         ref={mref}
+        autoComplete="off"
       />
       {children}
       <span />
@@ -61,9 +62,9 @@ const InputWrapper = styled.div`
       color: ${({ theme }) => theme.color.COLOR_FONT_FIVE};
     }
     font-size: 16px;
-    padding: 0 5px;
+    padding: 5px;
     width: 100%;
-    height: 30px;
+    height: 34px;
     box-sizing: border-box;
     border: none;
     border-bottom: solid 2px ${({ theme }) => theme.color.COLOR_LAYOUT_THREE};

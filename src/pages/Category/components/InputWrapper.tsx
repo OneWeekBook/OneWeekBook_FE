@@ -3,7 +3,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
-import { SearchRequest } from 'redux/reducers/Search';
+import { SearchInit, SearchRequest } from 'redux/reducers/Search';
 import { searchNone } from 'redux/reducers/Func';
 import { CategoryItemTypes } from 'types/book';
 import DefaultButton from 'components/Button/DefaultButton';
@@ -50,6 +50,7 @@ function InputWrapper({ curSubCategory, curParentCategory }: PropsTypes) {
       } else {
         options.title = search;
       }
+      dispatch(SearchInit());
       dispatch(SearchRequest({ ...options }));
     },
     [search, curSubCategory, curParentCategory],

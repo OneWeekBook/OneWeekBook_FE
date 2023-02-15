@@ -1,20 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
 import { ReviewInit, ReviewsRequest } from 'redux/reducers/Review';
 import { ReviewItemType } from 'types/review';
-import PagenationForm from 'components/Form/PagenationForm';
+import LoadingForm from 'components/Form/LoadingForm';
+import useIntersectionObserver from 'hooks/useIntersectionObserver';
+import TopButton from 'components/Button/TopButton';
 import ReviewItem from './ReviewItem';
 
 function ReviewList() {
   const dispatch = useDispatch();
-  const [curIdx, setCurIdx] = useState<number>(1);
-  const { reviews, reivewsTotal } = useSelector(
-    (state: AppStateType) => state.review,
-    shallowEqual,
-  );
-
+  const { reviews, reivewsTotal, reviewCount, moreReviews, isLoading } =
+    useSelector((state: AppStateType) => state.review, shallowEqual);
   useEffect(() => {
     dispatch(ReviewsRequest({ start: 0, sortby: 'new' }));
     return () => {
@@ -22,15 +20,20 @@ function ReviewList() {
     };
   }, []);
 
-  useEffect(() => {
-    dispatch(ReviewsRequest({ start: (curIdx - 1) * 12, sortby: 'new' }));
-  }, [curIdx]);
+  const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
+    if (isIntersecting && moreReviews && !isLoading) {
+      dispatch(ReviewsRequest({ start: reviewCount, sortby: 'new' }));
+    }
+  };
+  const { setTarget } = useIntersectionObserver({ onIntersect });
 
   return (
     <Wrapper>
       {Array.isArray(reviews) && !!reviews && (
         <>
-          <ReviewTitle>전체 리뷰 ({reivewsTotal}건)</ReviewTitle>
+          <TitleWrapper>
+            <ReviewTitle>전체 리뷰 ({reivewsTotal}건)</ReviewTitle>
+          </TitleWrapper>
           <ReviewListWrapper>
             {reviews.map((item: ReviewItemType) => {
               return (
@@ -38,14 +41,10 @@ function ReviewList() {
               );
             })}
           </ReviewListWrapper>
-          <PagenationForm
-            total={reivewsTotal}
-            display={12}
-            curIdx={curIdx}
-            setCurIdx={setCurIdx}
-          />
         </>
       )}
+      <div ref={setTarget}>{isLoading && <LoadingForm />}</div>
+      <TopButton />
     </Wrapper>
   );
 }
@@ -53,31 +52,42 @@ function ReviewList() {
 export default ReviewList;
 
 const Wrapper = styled.div`
-  margin: 30px auto 50px;
+  margin: 50px auto;
   width: 100%;
   height: auto;
-  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
-    width: 85%;
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+    width: 700px;
+  }
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    width: 350px;
   }
 `;
 
+const TitleWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid #f07055;
+`;
+
 const ReviewTitle = styled.p`
-  font-size: 20px;
-  font-weight: 600;
+  height: 30px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #f07055;
+  padding-bottom: 10px;
 `;
 
 const ReviewListWrapper = styled.div`
   display: grid;
   margin-top: 30px;
   justify-items: center;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  gap: 10px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 20px 10px;
   min-height: 600px;
-  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
-  @media (max-width: ${({ theme: { device } }) =>
-      device.mobile.maxWidth - 1}px) {
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     grid-template-columns: 1fr 1fr;
   }
 `;

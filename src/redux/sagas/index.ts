@@ -6,7 +6,6 @@ import watchSignUp from './SignUpSaga';
 import watchSignIn from './SignInSaga';
 import watchCategory from './CategorySaga';
 import watchSearch from './SearchSaga';
-import watchAddSearch from './AddSearchSaga';
 import watchChangeNick from './ChangeNickSaga';
 import watchChangePassword from './ChangePasswordSaga';
 import watchRemoveUser from './RemoveUserSaga';
@@ -37,7 +36,6 @@ export default function* rootSaga() {
     call(watchSignIn),
     call(watchCategory),
     call(watchSearch),
-    call(watchAddSearch),
     call(watchChangeNick),
     call(watchChangePassword),
     call(watchRemoveUser),

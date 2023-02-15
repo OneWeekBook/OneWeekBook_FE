@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import { getImgErr } from 'lib/ImageError';
 import { ReviewBookTypes } from 'types/review';
-import PieChart from 'components/Form/PieChartForm';
+import ReviewStar from './ReviewStar';
 
 function BookInfoWrapper({
   author,
@@ -14,14 +13,14 @@ function BookInfoWrapper({
   return (
     <Wrapper>
       <BookInfoBox>
-        <ImgWrapper>
-          <img src={img} alt="book img" onError={getImgErr} />
-        </ImgWrapper>
+        <BookImage>
+          <img src={img} alt="book img" />
+        </BookImage>
         <InfoWrapper>
+          <p className="bookTitle">
+            {title.replaceAll('<b>', '').replaceAll('</b>', '')}
+          </p>
           <div>
-            <p className="bookTitle">
-              {title.replaceAll('<b>', '').replaceAll('</b>', '')}
-            </p>
             <p className="bookAuthor">
               {author.replaceAll('<b>', '').replaceAll('</b>', '')}
             </p>
@@ -29,19 +28,14 @@ function BookInfoWrapper({
               {publisher.replaceAll('<b>', '').replaceAll('</b>', '')}
             </p>
           </div>
-          <TotalWrapper>
+          <ReviewWrapper>
             <p className="reviewTotal">
               전체 리뷰: <span>{countReviews}</span>
             </p>
-            <p className="reviewAverage">
-              전체 평점 : <span>{ratingAverage}</span>
-            </p>
-          </TotalWrapper>
+            <ReviewStar ratingAverage={ratingAverage} />
+          </ReviewWrapper>
         </InfoWrapper>
       </BookInfoBox>
-      <ProgressWrapper>
-        <PieChart title="전체 평점" rate={Number(ratingAverage.toFixed(1))} />
-      </ProgressWrapper>
     </Wrapper>
   );
 }
@@ -50,100 +44,90 @@ export default BookInfoWrapper;
 
 const Wrapper = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-  border: 2px #e6e6e6 solid;
-  border-radius: 10px;
-  background-color: #f6f7f7;
-  height: 200px;
-  padding: 0 30px;
-  margin-bottom: 5px;
+  flex-direction: column;
+  justify-content: center;
+  width: 1000px;
+  height: 300px;
+  margin: 0 auto;
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+    width: 700px;
+  }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    display: block;
-    padding: 10px;
-    height: auto;
+    width: 350px;
+    height: 200px;
   }
 `;
 
 const BookInfoBox = styled.div`
+  width: 100%;
   display: flex;
 `;
 
-const ImgWrapper = styled.div`
-  background-color: lightgray;
-  width: 120px;
-  height: 150px;
-  object-fit: cover;
+const BookImage = styled.div`
+  width: 160px;
+  height: 240px;
   flex-shrink: 0;
   img {
+    border-radius: 0px 5px 5px 0px;
     width: 100%;
     height: 100%;
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    width: 80px;
-    height: 100px;
+    width: 120px;
+    height: 180px;
   }
 `;
 
 const InfoWrapper = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   margin-left: 15px;
   .bookTitle {
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
   }
   .bookAuthor {
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 24px;
+    font-weight: 600;
+    color: #fff;
   }
   .bookPublisher {
-    font-size: 16px;
-    font-weight: 500;
-  }
-  .reviewTotal {
-    font-size: 16px;
-    span {
-      font-weight: 600;
-    }
-  }
-  .reviewAverage {
-    margin-left: 10px;
-    display: none;
-    font-size: 18px;
-    span {
-      font-weight: 600;
-    }
+    font-size: 24px;
+    font-weight: 600;
+    color: #fff;
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     .bookTitle {
-      font-size: 16px;
+      font-size: 18px;
     }
     .bookAuthor {
-      font-size: 16px;
+      font-size: 14px;
     }
     .bookPublisher {
       font-size: 14px;
     }
     .reviewTotal {
-      font-size: 16px;
-    }
-    .reviewAverage {
-      display: block;
-      font-size: 16px;
+      font-size: 14px;
     }
   }
 `;
 
-const TotalWrapper = styled.div`
+const ReviewWrapper = styled.div`
   display: flex;
-`;
-
-const ProgressWrapper = styled.div`
-  display: flex;
+  justify-content: space-between;
+  .reviewTotal {
+    font-size: 20px;
+    color: #fff;
+    span {
+      font-weight: 700;
+    }
+  }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    display: none;
+    .reviewTotal {
+      font-size: 14px;
+    }
   }
 `;

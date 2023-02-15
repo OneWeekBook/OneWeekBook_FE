@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
 import { MyLibraryRequest } from 'redux/reducers/MyLibrary';
 import useToggle from 'hooks/useToggle';
@@ -38,28 +37,26 @@ function DoneBookList() {
 
   return (
     <>
-      <Wrapper>
-        {Array.isArray(userBookList) &&
-          !!userBookList &&
-          userBookList.map((item: LibraryItemTypes) => (
-            <BookItem
-              key={item.id}
-              {...item}
-              handleToggle={commentToggleIsOn}
-              handleReviewToggle={reviewToggleIsOn}
-              onClick={() => {
-                setBookId(item.id);
-                setBookData({
-                  progress: item.progress,
-                  title: item.title,
-                  author: item.author,
-                  startTime: item.startTime,
-                  endTime: item.endTime,
-                });
-              }}
-            />
-          ))}
-      </Wrapper>
+      {Array.isArray(userBookList) &&
+        !!userBookList &&
+        userBookList.map((item: LibraryItemTypes) => (
+          <BookItem
+            key={item.id}
+            {...item}
+            handleToggle={commentToggleIsOn}
+            handleReviewToggle={reviewToggleIsOn}
+            onClick={() => {
+              setBookId(item.id);
+              setBookData({
+                progress: item.progress,
+                title: item.title,
+                author: item.author,
+                startTime: item.startTime,
+                endTime: item.endTime,
+              });
+            }}
+          />
+        ))}
       {commentToggle && initSuccess && (
         <WriteCommentModal
           bookId={bookId}
@@ -79,18 +76,3 @@ function DoneBookList() {
 }
 
 export default DoneBookList;
-
-const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
-  margin: 10px auto 30px;
-  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    width: 95%;
-  }
-  @media (max-width: 660px) {
-    grid-template-columns: 1fr;
-  }
-`;

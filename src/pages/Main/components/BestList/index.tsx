@@ -1,10 +1,14 @@
+import { useState } from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
 import { ReviewItemType } from 'types/review';
 import BestItem from './BestItem';
+import MainListTitle from '../MainListTitle';
+import SlideButton from '../../common/SlideButton';
 
 function Index() {
+  const [idx, setIdx] = useState(0);
   const reviews = useSelector(
     (state: AppStateType) => state.review.reviews,
     shallowEqual,
@@ -12,21 +16,28 @@ function Index() {
 
   return (
     <Wrapper>
-      <BestListTitle>사람들의 관심을 한 몸에 받은 책</BestListTitle>
-      <BestListGridWrapper>
-        {Array.isArray(reviews) &&
-          !!reviews &&
-          reviews.slice(0, 9).map((item: ReviewItemType, idx: number) => {
-            return (
-              <BestItem
-                key={item.id}
-                idx={idx + 1}
-                {...item}
-                count={item.countReviews}
-              />
-            );
-          })}
-      </BestListGridWrapper>
+      <MainListTitle
+        title="Best Books"
+        subTitle="사람들의 관심을 한몸에 받는 책"
+      />
+      <SlideWrapper>
+        <BestListGridWrapper idx={idx}>
+          {Array.isArray(reviews) &&
+            !!reviews &&
+            reviews.slice(0, 12).map((item: ReviewItemType, idx: number) => {
+              return (
+                <BestItem
+                  key={item.id}
+                  idx={idx + 1}
+                  {...item}
+                  count={item.countReviews}
+                />
+              );
+            })}
+        </BestListGridWrapper>
+        <SlideButton dist="prev" idx={idx} setIdx={setIdx} totalPage={1} />
+        <SlideButton dist="next" idx={idx} setIdx={setIdx} totalPage={1} />
+      </SlideWrapper>
     </Wrapper>
   );
 }
@@ -34,34 +45,35 @@ function Index() {
 export default Index;
 
 const Wrapper = styled.div`
+  overflow: hidden;
   margin: 50px auto;
   width: 100%;
   height: auto;
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
-    width: 95%;
-  }
-`;
-
-const BestListTitle = styled.p`
-  font-size: 25px;
-  margin-bottom: 32px;
-  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
-    font-size: 20px;
+    width: 700px;
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    font-size: 18px;
+    width: 350px;
   }
 `;
 
-const BestListGridWrapper = styled.div`
-  min-height: 300px;
+const SlideWrapper = styled.div`
+  position: relative;
+`;
+
+const BestListGridWrapper = styled.div<{ idx: number }>`
+  transform: translateX(${({ idx }) => 0 - idx * 1000}px);
+  transition-duration: 0.5s;
+  width: 100%;
+  min-height: 150px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-auto-flow: column;
   gap: 10px;
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
-    grid-template-columns: 1fr 1fr;
+    transform: translateX(${({ idx }) => 0 - idx * 710}px);
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    grid-template-columns: 1fr;
+    transform: translateX(${({ idx }) => 0 - idx * 360}px);
   }
 `;

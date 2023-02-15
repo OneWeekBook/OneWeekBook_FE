@@ -3,49 +3,31 @@ import { shallowEqual, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
 import { NewReviewTypes } from 'types/main';
-import DefaultButton from 'components/Button/DefaultButton';
 import NewReivewItem from './NewReivewItem';
+import MainListTitle from '../MainListTitle';
+import SlideButton from '../../common/SlideButton';
 
 function NewReviewList() {
   const newReviews = useSelector(
     (state: AppStateType) => state.newReview.newReviews,
     shallowEqual,
   );
-  const [end, setEnd] = useState(5);
-
-  const onClick = () => {
-    if (end < 20) {
-      setEnd(end + 5);
-    }
-  };
+  const [idx, setIdx] = useState(0);
 
   return (
     <Wrapper>
-      <NewReviewTitle>따끈따끈한 새 리뷰</NewReviewTitle>
-      <div>
-        {Array.isArray(newReviews) &&
-          !!newReviews &&
-          newReviews
-            .slice(0, end)
-            .map((item: NewReviewTypes, idx: number) => (
-              <NewReivewItem key={item.id} {...item} idx={idx} />
+      <MainListTitle title="Books Review" subTitle="따끈따끈한 새 리뷰" />
+      <SlideWrapper>
+        <NewReviewGridWrapper idx={idx}>
+          {Array.isArray(newReviews) &&
+            !!newReviews &&
+            newReviews.map((item: NewReviewTypes) => (
+              <NewReivewItem key={item.id} {...item} />
             ))}
-      </div>
-      {end !== 20 && (
-        <ButtonWrapper>
-          <DefaultButton
-            pc={[150, 38]}
-            onClick={onClick}
-            fontWeight={700}
-            padding={[5, 0, 5, 0]}
-            isHover
-            hoverBgColor="#08c1e9"
-            bgColor="#1e90ff"
-            color="white"
-            title="더 보기"
-          />
-        </ButtonWrapper>
-      )}
+        </NewReviewGridWrapper>
+        <SlideButton dist="prev" idx={idx} setIdx={setIdx} totalPage={4} />
+        <SlideButton dist="next" idx={idx} setIdx={setIdx} totalPage={4} />
+      </SlideWrapper>
     </Wrapper>
   );
 }
@@ -53,27 +35,35 @@ function NewReviewList() {
 export default NewReviewList;
 
 const Wrapper = styled.div`
+  overflow: hidden;
   margin: 50px auto;
   width: 100%;
   height: auto;
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
-    width: 95%;
-  }
-`;
-
-const NewReviewTitle = styled.p`
-  font-size: 25px;
-  margin-bottom: 22px;
-  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
-    font-size: 20px;
+    width: 700px;
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    font-size: 18px;
+    width: 350px;
   }
 `;
 
-const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
+const SlideWrapper = styled.div`
+  position: relative;
+`;
+
+const NewReviewGridWrapper = styled.div<{ idx: number }>`
+  transform: translateX(${({ idx }) => 0 - idx * 1010}px);
+  transition-duration: 0.5s;
+  width: 100%;
+  min-height: 150px;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-auto-flow: column;
+  gap: 10px;
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+    transform: translateX(${({ idx }) => 0 - idx * 710}px);
+  }
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    transform: translateX(${({ idx }) => 0 - idx * 360}px);
+  }
 `;

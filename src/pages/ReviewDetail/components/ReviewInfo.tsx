@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Route, useLocation, useNavigate } from 'react-router-dom';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
-import { ReviewRequest } from 'redux/reducers/Review';
+import { ReviewInit, ReviewRequest } from 'redux/reducers/Review';
 import useToggle from 'hooks/useToggle';
 import { ReviewDetailTypes } from 'types/review';
 import PagenationForm from 'components/Form/PagenationForm';
@@ -12,14 +12,30 @@ import ReviewItem from './_items/ReivewItem';
 
 function ReviewInfo() {
   const location = useLocation();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isbn = Number(location.pathname.split('/')[2]);
+  const sort = `${location.search.split('=')[1]}`;
   const [curIdx, setCurIdx] = useState<number>(1);
-  const [sortBy, setSortBy] = useState(`${location.search.split('=')[1]}`);
   const [detailToggle, detailToggleIsOn] = useToggle(false);
   const { reviews, bookData } = useSelector(
     (state: AppStateType) => state.review,
     shallowEqual,
   );
+
+  useEffect(() => {
+    dispatch(
+      ReviewRequest({
+        isbn,
+        start: (curIdx - 1) * 10,
+        sortby: sort,
+      }),
+    );
+    return () => {
+      dispatch(ReviewInit());
+    };
+  }, [sort, curIdx]);
+
   const [curReview, setCurReview] = useState({
     id: -1,
     likeCount: 0,
@@ -33,40 +49,23 @@ function ReviewInfo() {
     userId: -1,
   });
 
-  useEffect(() => {
-    dispatch(
-      ReviewRequest({
-        isbn: Number(location.pathname.split('/')[2]),
-        start: (curIdx - 1) * 10,
-        sortby: sortBy,
-      }),
-    );
-  }, [sortBy, curIdx, detailToggle]);
-
-  const handleSortClick = (sort: string) => {
-    setSortBy(sort);
-  };
-
   return (
     <Wrapper>
-      <p className="title">
-        {bookData.title &&
-          bookData.title.replaceAll('<b>', '').replaceAll('</b>', '')}{' '}
-        평가
-      </p>
       <SortButton
         className="recommendBtn"
         type="button"
-        isSelected={sortBy === 'recommend'}
-        onClick={() => handleSortClick('recommend')}
+        isSelected={sort === 'recommend'}
+        onClick={() =>
+          navigate(`/review/${isbn}?sort=recommend`, { replace: true })
+        }
       >
         추천 순
       </SortButton>
       <SortButton
         className="newBtn"
         type="button"
-        isSelected={sortBy === 'new'}
-        onClick={() => handleSortClick('new')}
+        isSelected={sort === 'new'}
+        onClick={() => navigate(`/review/${isbn}?sort=new`, { replace: true })}
       >
         최신 순
       </SortButton>
@@ -88,6 +87,9 @@ function ReviewInfo() {
         <ReviewDetailModal
           item={curReview}
           detailToggleIsOn={detailToggleIsOn}
+          isbn={isbn}
+          reviewCount={(curIdx - 1) * 10}
+          sort={sort}
         />
       )}
       <PagenationForm
@@ -103,38 +105,35 @@ function ReviewInfo() {
 export default ReviewInfo;
 
 const Wrapper = styled.div`
-  margin: 10px auto 50px;
-  width: 100%;
-  height: auto;
-  .title {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 10px;
+  margin: 10px auto;
+  width: 1000px;
+  min-height: 600px;
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+    width: 700px;
   }
-  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
-    width: 95%;
-    .title {
-      font-size: 18px;
-    }
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    width: 350px;
   }
 `;
 
 const SortButton = styled.button<{ isSelected?: boolean }>`
-  box-sizing: border-box;
+  width: 80px;
+  text-align: left;
   border: none;
   background-color: white;
   cursor: pointer;
-  font-size: 16px;
-  font-weight: ${({ isSelected }) => (isSelected ? 800 : 500)};
-  padding: 5px 0;
-  margin-right: 10px;
+  color: #f07055;
+  font-size: 24px;
+  font-weight: ${({ isSelected }) => (isSelected ? 700 : 500)};
 `;
 
 const ReviewListWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 15px;
-  margin-top: 20px;
+  margin-top: 10px;
+  border-top: 3px solid #f07055;
+  padding: 20px 0px 50px;
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     grid-template-columns: 1fr;
   }
