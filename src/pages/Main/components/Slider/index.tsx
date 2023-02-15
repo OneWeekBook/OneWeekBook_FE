@@ -163,7 +163,10 @@ const Wrapper = styled.div`
   overflow: hidden;
   height: auto;
   border-radius: 10px;
-  margin-top: 10px;
+  margin: 20px auto;
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+    width: 90%;
+  }
 `;
 
 const Slider = styled.div`

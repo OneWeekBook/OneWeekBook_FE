@@ -75,12 +75,12 @@ function SignInForm() {
               pc={[0, 50]}
               type="submit"
               isHover
-              hoverBgColor="#1e90ff"
+              hoverBgColor="#f07055"
               hoverColor="white"
-              bgColor="#7ca7d3"
+              bgColor="#c05944"
               color="white"
               margin={[20, 0, 10, 0]}
-              fontSize={[18, 18]}
+              fontSize={[20, 18]}
               fontWeight={600}
               title="로그인"
             />
@@ -93,7 +93,7 @@ function SignInForm() {
               hoverColor="black"
               bgColor="#faf39e"
               margin={[10, 0, 0, 0]}
-              fontSize={[18, 18]}
+              fontSize={[20, 18]}
               fontWeight={600}
               title="회원가입"
             />

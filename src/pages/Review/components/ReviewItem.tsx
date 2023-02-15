@@ -52,9 +52,9 @@ const ItemOuter = styled.div`
   display: flex;
   flex-direction: column;
   padding: 30px 0px 10px;
+  transition: 0.5s;
   &:hover {
     background-color: rgba(240, 112, 85, 0.3);
-    transition: 0.5s;
   }
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
     width: 165px;

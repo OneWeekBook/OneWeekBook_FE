@@ -46,10 +46,10 @@ function Sidebar({ toggle, toggleIsOn }: PropsTypes) {
                 onClick={logoutClick}
                 pc={[0, 50]}
                 isHover
-                hoverColor="#1e90ff"
+                hoverColor="#f07055"
                 padding={[0, 20, 0, 0]}
-                fontSize={[20, 20]}
-                fontWeight={600}
+                fontSize={[24, 24]}
+                fontWeight={700}
                 title="로그아웃"
               />
             </Link>
@@ -58,10 +58,10 @@ function Sidebar({ toggle, toggleIsOn }: PropsTypes) {
                 onClick={toggleIsOn}
                 pc={[0, 50]}
                 isHover
-                hoverColor="#1e90ff"
+                hoverColor="#f07055"
                 padding={[0, 20, 0, 0]}
-                fontSize={[20, 20]}
-                fontWeight={600}
+                fontSize={[24, 24]}
+                fontWeight={700}
                 title="마이페이지"
               />
             </Link>
@@ -73,9 +73,9 @@ function Sidebar({ toggle, toggleIsOn }: PropsTypes) {
                 onClick={toggleIsOn}
                 pc={[0, 50]}
                 isHover
-                hoverColor="#1e90ff"
+                hoverColor="#f07055"
                 padding={[0, 20, 0, 0]}
-                fontSize={[20, 20]}
+                fontSize={[24, 24]}
                 fontWeight={600}
                 title="로그인"
               />
@@ -85,9 +85,9 @@ function Sidebar({ toggle, toggleIsOn }: PropsTypes) {
                 onClick={toggleIsOn}
                 pc={[0, 50]}
                 isHover
-                hoverColor="#1e90ff"
+                hoverColor="#f07055"
                 padding={[0, 20, 0, 0]}
-                fontSize={[20, 20]}
+                fontSize={[24, 24]}
                 fontWeight={600}
                 title="회원가입"
               />
@@ -107,9 +107,9 @@ function Sidebar({ toggle, toggleIsOn }: PropsTypes) {
             }
             pc={[0, 50]}
             isHover
-            hoverColor="#1e90ff"
+            hoverColor="#f07055"
             padding={[0, 20, 0, 0]}
-            fontSize={[20, 20]}
+            fontSize={[24, 24]}
             fontWeight={600}
             title={item.title}
           />
@@ -162,9 +162,8 @@ const Wrapper = styled.div<{ isToggle: boolean }>`
 const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  a,
   button {
     text-align: right;
-    border-bottom: 1px solid #e6e6e6;
+    border-bottom: 2px solid #e6e6e6;
   }
 `;

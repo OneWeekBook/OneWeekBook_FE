@@ -47,9 +47,9 @@ const ButtonWrapper = styled.button<{
   background-color: #f07055;
   border: none;
   transform: translateY(-50%);
+  transition: all 0.5s;
   display: ${({ isDisplay }) => isDisplay && 'none'};
   &:hover {
-    transition: all 0.5s;
     opacity: 0.9;
   }
   ${({ dist }) =>
