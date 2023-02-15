@@ -100,7 +100,7 @@ const NavWrapper = styled.div`
   width: 100%;
   font-size: 16px;
   font-weight: 600;
-  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
     margin: auto;
     width: 90%;
   }

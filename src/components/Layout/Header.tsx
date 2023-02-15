@@ -70,7 +70,7 @@ const Wrapper = styled.div<{ isSign: boolean }>`
   color: ${({ theme }) => theme.color.COLOR_MAIN};
   justify-content: ${({ isSign }) => (isSign ? 'center' : 'space-between')};
   margin: 10px 0;
-  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
     margin: 10px auto;
     width: 90%;
   }
@@ -93,9 +93,16 @@ const ButtonWrapper = styled.div<{ isSign: boolean }>`
 `;
 
 const MobileButton = styled.button<{ isSign: boolean }>`
-  background-color: rgba(0, 0, 0, 0);
+  background-color: #f07055;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 5px;
   border: none;
   display: none;
+  transition: all 0.5s;
+  &:hover {
+    background-color: #ffa07a;
+  }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     display: ${({ isSign }) => (isSign ? 'none' : 'block')};
   }

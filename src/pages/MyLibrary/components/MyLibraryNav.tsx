@@ -117,7 +117,6 @@ const NavItem = styled.button<{ isSelected: boolean }>`
   gap: 10px;
   width: 150px;
   height: 40px;
-  transition: 0.5s;
   &:nth-child(n + 2) {
     margin-left: -2px;
   }

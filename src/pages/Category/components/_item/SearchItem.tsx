@@ -138,8 +138,8 @@ const InfoWrapper = styled.div`
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: all 0.5s;
     &:hover {
-      transition: all 0.5s;
       color: #f07055;
     }
   }
