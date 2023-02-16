@@ -1,4 +1,6 @@
+import { AxiosError } from 'axios';
 import { ActionsTypes } from 'types/api';
+import { IAuthUserSuccess } from 'types/success';
 
 export const AUTH_USER_REQUEST = 'AUTH_USER_REQUEST';
 export const AUTH_USER_SUCCESS = 'AUTH_USER_SUCCESS';
@@ -48,14 +50,14 @@ export const AuthUserRequest = () => {
   };
 };
 
-export const AuthUserSuccess = (data: any) => {
+export const AuthUserSuccess = (data: IAuthUserSuccess) => {
   return {
     type: AUTH_USER_SUCCESS,
     payload: data,
   };
 };
 
-export const AuthUserFail = (error: any) => {
+export const AuthUserFail = (error: AxiosError) => {
   return {
     type: AUTH_USER_FAIL,
     error: error.response,

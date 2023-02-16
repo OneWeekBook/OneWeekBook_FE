@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios';
 import { ActionsTypes } from 'types/api';
 
 export const REMOVE_USER_REQUEST = 'REMOVE_USER_REQUEST';
@@ -62,7 +63,7 @@ export const RemoveUserSuccess = () => {
   };
 };
 
-export const RemoveUserFail = (error: any) => {
+export const RemoveUserFail = (error: AxiosError) => {
   return {
     type: REMOVE_USER_FAIL,
     error: error.response,

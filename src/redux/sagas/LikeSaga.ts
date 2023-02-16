@@ -1,5 +1,7 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import instance from 'api/axios';
+import axios from 'axios';
+import { ActionLike } from 'types/action';
 import { LikeFail, LikeSuccess, LIKE_REQUEST } from '../reducers/Like';
 
 function LikeAPI(params: { bookId: number }) {
@@ -8,12 +10,12 @@ function LikeAPI(params: { bookId: number }) {
   );
 }
 
-function* fetchLikeSaga(action: any): any {
+function* fetchLikeSaga(action: ActionLike): object {
   try {
     const result = yield call(LikeAPI, action.payload);
     yield put(LikeSuccess(result.data));
   } catch (error) {
-    yield put(LikeFail(error));
+    if (axios.isAxiosError(error)) yield put(LikeFail(error));
   }
 }
 

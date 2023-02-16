@@ -1,4 +1,4 @@
-export type ReviewItemType = {
+export interface ReviewItemType {
   id: number;
   author: string;
   countReviews: number;
@@ -6,9 +6,9 @@ export type ReviewItemType = {
   isbn: string;
   publisher: string;
   title: string;
-};
+}
 
-export type ReviewBookTypes = {
+export interface ReviewBookTypes {
   author: string;
   countReviews: number;
   id: number;
@@ -17,9 +17,9 @@ export type ReviewBookTypes = {
   publisher: string;
   ratingAverage: number;
   title: string;
-};
+}
 
-export type ReviewDetailTypes = {
+export interface ReviewDetailTypes {
   id: number;
   likeCount: number;
   nick: string;
@@ -30,9 +30,9 @@ export type ReviewDetailTypes = {
   role: number;
   zeroLikeCount: number;
   userId: number;
-};
+}
 
-export type LikeDataTypes = {
+export interface LikeDataTypes {
   createdAt: string;
   id: number;
   state: number;
@@ -40,9 +40,9 @@ export type LikeDataTypes = {
   user: UserTypes;
   userBookListId: number;
   userId: number;
-};
+}
 
-export type UserTypes = {
+export interface UserTypes {
   createdAt: string;
   email: string;
   id: number;
@@ -50,4 +50,4 @@ export type UserTypes = {
   role: number;
   updatedAt: string;
   username: string;
-};
+}

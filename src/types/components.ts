@@ -1,38 +1,38 @@
 import { ElementType } from 'react';
 
-export type ImgBtnOptionTypes = {
+export interface ImgBtnOptionTypes {
   component?: ElementType;
   className?: string;
   type?: string;
-  onClick: (e: any) => void;
-};
+  onClick: (e: MouseEvent) => void;
+}
 
-export type ImgBtnStyleTypes = {
+export interface ImgBtnStyleTypes {
   pc: number[];
   mobile?: number[];
   bgColor?: string;
   margin?: number[];
   marginM?: number[];
-};
+}
 
-export type ImgBtnImageTypes = {
+export interface ImgBtnImageTypes {
   src: string;
   alt: string;
   imgPC?: number[];
   imgMobile?: number[];
-};
+}
 
-export type DefaultBtnOptionTypes = {
+export interface DefaultBtnOptionTypes {
   component?: ElementType;
   className?: string;
   type?: string;
   disabled?: boolean;
   title: string;
   isHover: boolean;
-  onClick?: (e: any) => void;
-};
+  onClick?: (e: MouseEvent) => void;
+}
 
-export type DefaultBtnStyleTypes = {
+export interface DefaultBtnStyleTypes {
   pc: number[];
   mobile?: number[];
   bgColor?: string;
@@ -45,18 +45,18 @@ export type DefaultBtnStyleTypes = {
   hoverBgColor?: string;
   hoverColor?: string;
   disabledColor?: string;
-};
+}
 
-export type SearchInputOptionTypes = {
+export interface SearchInputOptionTypes {
   search: string;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
   handleFetch: (search: string) => void;
-};
+}
 
-export type SearchInputStyleTypes = {
+export interface SearchInputStyleTypes {
   border: string;
   borderRadius: number;
   fontSize: number;
   padding: number[];
   focusBorder: string;
-};
+}

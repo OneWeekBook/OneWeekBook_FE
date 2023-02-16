@@ -1,4 +1,6 @@
-import { MyLibraryAddTypes, DeleteType, ActionsTypes } from 'types/api';
+import { AxiosError } from 'axios';
+import { ApiMyLibraryAdd, ApiDelete, ActionsTypes } from 'types/api';
+import { LibraryItemTypes } from 'types/book';
 
 export const MY_LIBRARY_REQUEST = 'MY_LIBRARY_REQUEST';
 export const MY_LIBRARY_SUCCESS = 'MY_LIBRARY_SUCCESS';
@@ -122,21 +124,21 @@ export const MyLibraryRequest = (data: { progress: number }) => {
   };
 };
 
-export const MyLibrarySuccess = (data: any) => {
+export const MyLibrarySuccess = (data: LibraryItemTypes[]) => {
   return {
     type: MY_LIBRARY_SUCCESS,
     payload: data,
   };
 };
 
-export const MyLibraryFail = (error: any) => {
+export const MyLibraryFail = (error: AxiosError) => {
   return {
     type: MY_LIBRARY_FAIL,
     error: error.response,
   };
 };
 
-export const MyLibraryAddRequest = (data: MyLibraryAddTypes) => {
+export const MyLibraryAddRequest = (data: ApiMyLibraryAdd) => {
   return {
     type: MY_LIBRARY_ADD_REQUEST,
     payload: data,
@@ -149,7 +151,7 @@ export const MyLibraryAddSuccess = () => {
   };
 };
 
-export const MyLibraryAddFail = (error: any) => {
+export const MyLibraryAddFail = (error: AxiosError) => {
   return {
     type: MY_LIBRARY_ADD_FAIL,
     error: error.response,
@@ -172,14 +174,14 @@ export const MyLibraryModifySuccess = () => {
   };
 };
 
-export const MyLibraryModifyFail = (error: any) => {
+export const MyLibraryModifyFail = (error: AxiosError) => {
   return {
     type: MY_LIBRARY_MODIFY_FAIL,
     error: error.response,
   };
 };
 
-export const MyLibraryDeleteRequest = (data: DeleteType) => {
+export const MyLibraryDeleteRequest = (data: ApiDelete) => {
   return {
     type: MY_LIBRARY_DELETE_REQUEST,
     payload: data,
@@ -192,7 +194,7 @@ export const MyLibraryDeleteSuccess = () => {
   };
 };
 
-export const MyLibraryDeleteFail = (error: any) => {
+export const MyLibraryDeleteFail = (error: AxiosError) => {
   return {
     type: MY_LIBRARY_DELETE_FAIL,
     error: error.response,

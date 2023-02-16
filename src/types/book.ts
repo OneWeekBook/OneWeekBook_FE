@@ -1,12 +1,12 @@
-import { MyLibraryAddTypes } from './api';
+import { ApiMyLibraryAdd } from './api';
 
-export type CategoryItemTypes = {
+export interface CategoryItemTypes {
   id: number;
   parentId: number | null;
   categoryId: number;
   categoryName: string;
   depth: number;
-};
+}
 
 export interface BooksTypes {
   author: string;
@@ -39,10 +39,10 @@ export interface LikeAddTypes extends BooksTypes {
     publisher,
     isbn,
     img,
-  }: MyLibraryAddTypes) => void;
+  }: ApiMyLibraryAdd) => void;
 }
 
-export type LibraryItemTypes = {
+export interface LibraryItemTypes {
   id: number;
   title: string;
   author: string;
@@ -52,23 +52,25 @@ export type LibraryItemTypes = {
   progress: number;
   startTime: null | string;
   endTime: null | string;
+  review: null | string;
+  reviewCreationTime: null | string;
   createdAt: string;
   updatedAt: string;
   userId: number;
-};
+}
 
-export type InfoTypes = {
+export interface InfoTypes {
   progress: number;
   title: string;
   author: string;
   startTime: string | null;
   endTime: string | null;
-};
+}
 
-export type ParagraphTypes = {
+export interface ParagraphTypes {
   id: number;
   bookId: number;
   paragraph: string;
   createdAt: string;
   updatedAt: string;
-};
+}

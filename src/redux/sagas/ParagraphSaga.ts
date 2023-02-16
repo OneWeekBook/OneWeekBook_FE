@@ -1,6 +1,8 @@
 import instance from 'api/axios';
+import axios from 'axios';
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { ParagraphType } from 'types/api';
+import { ActionParagraph } from 'types/action';
+import { ApiParagraph } from 'types/api';
 import {
   ParagraphFail,
   ParagraphInitFail,
@@ -10,27 +12,27 @@ import {
   PARAGRAPH_REQUEST,
 } from '../reducers/Paragraph';
 
-function ParagraphAPI(params: ParagraphType) {
+function ParagraphAPI(params: ApiParagraph) {
   return instance.get(
     `${process.env.REACT_APP_BASIC_URL}/book/paragraph?bookId=${params.bookId}`,
   );
 }
 
-function* fetchParagraphInitSaga(action: any): any {
+function* fetchParagraphInitSaga(action: ActionParagraph): object {
   try {
     const result = yield call(ParagraphAPI, action.payload);
     yield put(ParagraphInitSuccess(result.data.paragraphs));
   } catch (error) {
-    yield put(ParagraphInitFail(error));
+    if (axios.isAxiosError(error)) yield put(ParagraphInitFail(error));
   }
 }
 
-function* fetchParagraphSaga(action: any): any {
+function* fetchParagraphSaga(action: ActionParagraph): object {
   try {
     const result = yield call(ParagraphAPI, action.payload);
     yield put(ParagraphSuccess(result.data.paragraphs));
   } catch (error) {
-    yield put(ParagraphFail(error));
+    if (axios.isAxiosError(error)) yield put(ParagraphFail(error));
   }
 }
 

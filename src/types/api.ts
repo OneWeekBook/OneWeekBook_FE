@@ -1,55 +1,74 @@
-export type ActionsTypes = {
+export interface ActionsTypes {
   type: string;
   payload?: any;
   error?: any;
-};
+}
 
-export type SignInTypes = {
+export interface ApiSignIn {
   email: string;
   password: string;
-};
+}
 
-export type SignUpTypes = {
+export interface ApiSignUp {
   email: string;
   username: string;
   password: string;
   nick: string;
-};
+}
 
-export type MyLibraryAddTypes = {
+export interface ApiMyLibraryAdd {
   isbn: string;
   title: string;
   author: string;
   publisher: string;
   img: string;
-};
+}
 
-export type ParagraphType = {
+export interface ApiMyLibraryModify {
+  userId: number;
+  progress: number;
+  isbn: string;
+}
+
+export interface ApiParagraph {
   bookId: number;
-};
+}
 
-export type ParagraphAddTypes = {
+export interface ApiParagraphAdd {
   bookId: number;
   paragraph: string;
-};
+}
 
-export type DeleteType = {
+export interface ApiDelete {
   id: number;
-};
+}
 
-export type UserReviewAddTypes = {
+export interface ApiUserReviewAdd {
   bookId: number;
   review: string;
   rating: number;
-};
+}
 
-export type ReviewTypes = {
+export interface ApiReview {
   start: number;
   sortby: string;
-};
+}
 
-export type ReivewDetailTypes = {
+export interface ApiReivewDetail {
   isbn: number;
   start: number;
   sortby: string;
-};
+}
+
+export interface ApiSearch {
+  d_categ?: string;
+  title?: string;
+  start: number;
+  display: number;
+}
+
+export interface ApiUserReview {
+  id: number;
+  review: string;
+  rating: number;
+}

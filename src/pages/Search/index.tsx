@@ -49,7 +49,7 @@ function index() {
     const options: {
       start: number;
       display: number;
-      d_categ?: string | number;
+      d_categ?: string;
       title?: string;
     } = {
       start: 1,
@@ -68,16 +68,17 @@ function index() {
     } else {
       options.title = searchArr[0].toString();
     }
-
-    dispatch(SearchRequest({ ...options }));
-    setStartIdx(startIdx + 12);
+    if (options.d_categ || options.title) {
+      dispatch(SearchRequest({ ...options }));
+      setStartIdx(startIdx + 12);
+    }
   }, []);
 
   const handleAddFetch = useCallback(() => {
     const options: {
       start: number;
       display: number;
-      d_categ?: string | number;
+      d_categ?: string;
       title?: string;
     } = {
       start: startIdx,
@@ -96,9 +97,10 @@ function index() {
     } else {
       options.title = searchArr[0].toString();
     }
-
-    dispatch(AddSearchRequest({ ...options }));
-    setStartIdx(startIdx + 12);
+    if (options.d_categ || options.title) {
+      dispatch(AddSearchRequest({ ...options }));
+      setStartIdx(startIdx + 12);
+    }
   }, [startIdx]);
 
   useEffect(() => {

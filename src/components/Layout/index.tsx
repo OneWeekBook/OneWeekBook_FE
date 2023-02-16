@@ -11,7 +11,7 @@ import Header from './Header';
 import Nav from './Nav';
 import Sidebar from './Sidebar';
 
-function Index({ children }: PropsWithChildren<any>) {
+function Index({ children }: PropsWithChildren) {
   const location = useLocation();
   const dispatch = useDispatch();
   const [toggle, toggleIsOn] = useToggle(false);

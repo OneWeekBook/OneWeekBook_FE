@@ -1,4 +1,6 @@
-import { ActionsTypes } from 'types/api';
+import { AxiosError } from 'axios';
+import { ActionsTypes, ApiSearch } from 'types/api';
+import { IBookSearchSuccess } from 'types/success';
 
 export const SEARCH_REQUEST = 'SEARCH_REQUEST';
 export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
@@ -63,21 +65,21 @@ export default function SignIn(state = initialState, action: ActionsTypes) {
   }
 }
 
-export const SearchRequest = (params: any) => {
+export const SearchRequest = (params: ApiSearch) => {
   return {
     type: SEARCH_REQUEST,
     payload: params,
   };
 };
 
-export const SearchSuccess = (data: any) => {
+export const SearchSuccess = (data: IBookSearchSuccess) => {
   return {
     type: SEARCH_SUCCESS,
     payload: data,
   };
 };
 
-export const SearchFail = (error: any) => {
+export const SearchFail = (error: AxiosError) => {
   return {
     type: SEARCH_FAIL,
     error: error.response,
@@ -90,21 +92,21 @@ export const SearchInit = () => {
   };
 };
 
-export const AddSearchRequest = (params: any) => {
+export const AddSearchRequest = (params: ApiSearch) => {
   return {
     type: ADD_SEARCH_REQUEST,
     payload: params,
   };
 };
 
-export const AddSearchSuccess = (data: any) => {
+export const AddSearchSuccess = (data: IBookSearchSuccess) => {
   return {
     type: ADD_SEARCH_SUCCESS,
     payload: data,
   };
 };
 
-export const AddSearchFail = (error: any) => {
+export const AddSearchFail = (error: AxiosError) => {
   return {
     type: ADD_SEARCH_FAIL,
     error: error.response,

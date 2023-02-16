@@ -1,24 +1,25 @@
 import axios from 'axios';
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { ReviewTypes } from 'types/api';
+import { ActionReview } from 'types/action';
+import { ApiReview } from 'types/api';
 import {
   ReviewsFail,
   ReviewsSuccess,
   REVIEWS_REQUEST,
 } from '../reducers/Review';
 
-function ReviewAPI(params: ReviewTypes) {
+function ReviewAPI(params: ApiReview) {
   return axios.get(
     `${process.env.REACT_APP_BASIC_URL}/book/reviews?start=${params.start}&display=12&sortby=${params.sortby}`,
   );
 }
 
-function* fetchReviewSaga(action: any): any {
+function* fetchReviewSaga(action: ActionReview): object {
   try {
     const result = yield call(ReviewAPI, action.payload);
     yield put(ReviewsSuccess(result.data));
   } catch (error) {
-    yield put(ReviewsFail(error));
+    if (axios.isAxiosError(error)) yield put(ReviewsFail(error));
   }
 }
 

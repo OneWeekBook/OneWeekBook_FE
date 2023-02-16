@@ -1,4 +1,6 @@
-import { SignInTypes, ActionsTypes } from 'types/api';
+import { AxiosError } from 'axios';
+import { ApiSignIn, ActionsTypes } from 'types/api';
+import { ISignInSuccess } from 'types/success';
 
 export const SIGN_IN_REQUEST = 'SIGN_IN_REQUEST';
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
@@ -46,21 +48,21 @@ export default function SignIn(state = initialState, action: ActionsTypes) {
   }
 }
 
-export const SignInRequest = (data: SignInTypes) => {
+export const SignInRequest = (data: ApiSignIn) => {
   return {
     type: SIGN_IN_REQUEST,
     payload: data,
   };
 };
 
-export const SignInSuccess = (data: any) => {
+export const SignInSuccess = (data: ISignInSuccess) => {
   return {
     type: SIGN_IN_SUCCESS,
     payload: data,
   };
 };
 
-export const SignInFail = (error: any) => {
+export const SignInFail = (error: AxiosError) => {
   return {
     type: SIGN_IN_FAIL,
     error: error.response,

@@ -1,5 +1,7 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import instance from 'api/axios';
+import axios from 'axios';
+import { ActionLikeCancel } from 'types/action';
 import {
   LikeCancelFail,
   LikeCancelSuccess,
@@ -14,13 +16,13 @@ function LikeCancelAPI(data: { userId: number; bookId: number }) {
   );
 }
 
-function* fetchLikeCancelSaga(action: any): any {
+function* fetchLikeCancelSaga(action: ActionLikeCancel): object {
   try {
     const user = yield select((state) => state.authUser.user);
     yield call(LikeCancelAPI, { userId: user.id, ...action.payload });
     yield put(LikeCancelSuccess());
   } catch (error) {
-    yield put(LikeCancelFail(error));
+    if (axios.isAxiosError(error)) yield put(LikeCancelFail(error));
   }
 }
 

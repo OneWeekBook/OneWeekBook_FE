@@ -1,12 +1,12 @@
-export type BestItemTypes = {
+export interface BestItemTypes {
   id: number;
   title: string;
   auth: string;
   review: number;
   recommend: number;
-};
+}
 
-export type ReviewDetailTypes = {
+export interface ReviewDetailTypes {
   likeCount: number;
   nick: string;
   oneLikeCount: number;
@@ -16,9 +16,9 @@ export type ReviewDetailTypes = {
   role: number;
   zeroLikeCount: number;
   userId: number;
-};
+}
 
-export type NewReviewTypes = {
+export interface NewReviewTypes {
   id: number;
   title: string;
   author: string;
@@ -35,9 +35,9 @@ export type NewReviewTypes = {
   updatedAt: string;
   userId: number;
   user: UserTypes;
-};
+}
 
-export type UserTypes = {
+export interface UserTypes {
   id: number;
   username: string;
   email: string;
@@ -45,4 +45,4 @@ export type UserTypes = {
   role: number;
   createdAt: string;
   updatedAt: string;
-};
+}

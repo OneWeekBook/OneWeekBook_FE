@@ -1,5 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
+import { ActionCode } from 'types/action';
 import {
   AuthCodeFail,
   AuthCodeSuccess,
@@ -10,12 +11,12 @@ function AuthCodeAPI(data: { code: string }) {
   return axios.post(`${process.env.REACT_APP_BASIC_URL}/auth/email`, data);
 }
 
-function* fetchAuthCodeSaga(action: any) {
+function* fetchAuthCodeSaga(action: ActionCode) {
   try {
     yield call(AuthCodeAPI, action.payload);
     yield put(AuthCodeSuccess());
   } catch (error) {
-    yield put(AuthCodeFail(error));
+    if (axios.isAxiosError(error)) yield put(AuthCodeFail(error));
   }
 }
 

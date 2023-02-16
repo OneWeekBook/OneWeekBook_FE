@@ -1,4 +1,6 @@
-import { SignUpTypes, ActionsTypes } from 'types/api';
+import { AxiosError } from 'axios';
+import { ApiSignUp, ActionsTypes } from 'types/api';
+import { SuccessType } from 'types/success';
 
 export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
@@ -46,21 +48,21 @@ export default function SignUp(state = initialState, action: ActionsTypes) {
   }
 }
 
-export const SignUpRequest = (data: SignUpTypes) => {
+export const SignUpRequest = (data: ApiSignUp) => {
   return {
     type: SIGN_UP_REQUEST,
     payload: data,
   };
 };
 
-export const SignUpSuccess = (data: any) => {
+export const SignUpSuccess = (data: SuccessType) => {
   return {
     type: SIGN_UP_SUCCESS,
     payload: data,
   };
 };
 
-export const SignUpFail = (error: any) => {
+export const SignUpFail = (error: AxiosError) => {
   return {
     type: SIGN_UP_FAIL,
     error: error.response,

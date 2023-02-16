@@ -6,7 +6,7 @@ import { AppStateType } from 'redux/reducers';
 import { MyLibraryAddRequest } from 'redux/reducers/MyLibrary';
 import { searchDone } from 'redux/reducers/Func';
 import { Toast } from 'lib/Toast';
-import { MyLibraryAddTypes } from 'types/api';
+import { ApiMyLibraryAdd } from 'types/api';
 import LoadingErrorForm from 'components/Form/LoadingErrorForm';
 import LoadingForm from 'components/Form/LoadingForm';
 import SearchItem from './_item/SearchItem';
@@ -37,7 +37,7 @@ function SearchList() {
     publisher,
     isbn,
     img,
-  }: MyLibraryAddTypes) => {
+  }: ApiMyLibraryAdd) => {
     dispatch(
       MyLibraryAddRequest({
         title,

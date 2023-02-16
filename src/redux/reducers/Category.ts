@@ -1,4 +1,6 @@
+import { AxiosError } from 'axios';
 import { ActionsTypes } from 'types/api';
+import { ICategorySuccess } from 'types/success';
 
 export const CATEGORY_REQUEST = 'CATEGORY_REQUEST';
 export const CATEGORY_SUCCESS = 'CATEGORY_SUCCESS';
@@ -42,14 +44,14 @@ export const CategoryRequest = () => {
   };
 };
 
-export const CategorySuccess = (data: any) => {
+export const CategorySuccess = (data: ICategorySuccess) => {
   return {
     type: CATEGORY_SUCCESS,
     payload: data,
   };
 };
 
-export const CategoryFail = (error: any) => {
+export const CategoryFail = (error: AxiosError) => {
   return {
     type: CATEGORY_FAIL,
     error: error.response,

@@ -1,4 +1,6 @@
-import { UserReviewAddTypes, ActionsTypes } from 'types/api';
+import { AxiosError } from 'axios';
+import { ApiUserReviewAdd, ActionsTypes } from 'types/api';
+import { NewReviewTypes } from 'types/main';
 
 export const USER_REVIEW_REQUEST = 'USER_REVIEW_REQUEST';
 export const USER_REVIEW_SUCCESS = 'USER_REVIEW_SUCCESS';
@@ -119,21 +121,21 @@ export const UserReviewRequest = (data: { bookId: number }) => {
   };
 };
 
-export const UserReviewSuccess = (data: any) => {
+export const UserReviewSuccess = (data: NewReviewTypes) => {
   return {
     type: USER_REVIEW_SUCCESS,
     payload: data,
   };
 };
 
-export const UserReviewFail = (error: any) => {
+export const UserReviewFail = (error: AxiosError) => {
   return {
     type: USER_REVIEW_FAIL,
     error: error.response,
   };
 };
 
-export const UserReviewAddRequest = (data: UserReviewAddTypes) => {
+export const UserReviewAddRequest = (data: ApiUserReviewAdd) => {
   return {
     type: USER_REVIEW_ADD_REQUEST,
     payload: data,
@@ -146,7 +148,7 @@ export const UserReviewAddSuccess = () => {
   };
 };
 
-export const UserReviewAddFail = (error: any) => {
+export const UserReviewAddFail = (error: AxiosError) => {
   return {
     type: USER_REVIEW_ADD_FAIL,
     error: error.response,
@@ -169,7 +171,7 @@ export const UserReviewModifySuccess = () => {
   };
 };
 
-export const UserReviewModifyFail = (error: any) => {
+export const UserReviewModifyFail = (error: AxiosError) => {
   return {
     type: USER_REVIEW_MODIFY_FAIL,
     error: error.response,
@@ -188,7 +190,7 @@ export const UserReviewDeleteSuccess = () => {
   };
 };
 
-export const UserReviewDeleteFail = (error: any) => {
+export const UserReviewDeleteFail = (error: AxiosError) => {
   return {
     type: USER_REVIEW_DELETE_FAIL,
     error: error.response,

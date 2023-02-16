@@ -1,8 +1,10 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
+import { ApiSearch } from 'types/api';
+import { ActionSearch } from 'types/action';
 import { SearchFail, SearchSuccess, SEARCH_REQUEST } from '../reducers/Search';
 
-function SearchAPI(params: any) {
+function SearchAPI(params: ApiSearch) {
   if (params.d_categ) {
     return axios.get(
       `${process.env.REACT_APP_BASIC_URL}/search?d_catg=${params.d_categ}&d_titl=${params.title}&start=${params.start}&display=${params.display}`,
@@ -15,12 +17,12 @@ function SearchAPI(params: any) {
   }
 }
 
-function* fetchSearchSaga(action: any): any {
+function* fetchSearchSaga(action: ActionSearch): object {
   try {
     const result = yield call(SearchAPI, action.payload);
     yield put(SearchSuccess(result.data));
   } catch (error) {
-    yield put(SearchFail(error));
+    if (axios.isAxiosError(error)) yield put(SearchFail(error));
   }
 }
 

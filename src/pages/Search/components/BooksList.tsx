@@ -5,7 +5,7 @@ import { AppStateType } from 'redux/reducers';
 import { MyLibraryAddRequest } from 'redux/reducers/MyLibrary';
 import { Toast } from 'lib/Toast';
 import { BooksTypes } from 'types/book';
-import { MyLibraryAddTypes } from 'types/api';
+import { ApiMyLibraryAdd } from 'types/api';
 import SearchItem from 'pages/Category/components/_item/SearchItem';
 
 function BooksList() {
@@ -32,7 +32,7 @@ function BooksList() {
     publisher,
     isbn,
     img,
-  }: MyLibraryAddTypes) => {
+  }: ApiMyLibraryAdd) => {
     dispatch(MyLibraryAddRequest({ title, author, publisher, isbn, img }));
   };
 

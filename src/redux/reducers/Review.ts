@@ -1,4 +1,6 @@
-import { ReivewDetailTypes, ReviewTypes, ActionsTypes } from 'types/api';
+import { AxiosError } from 'axios';
+import { ApiReivewDetail, ApiReview, ActionsTypes } from 'types/api';
+import { IReviewDetailSuccess, IReviewSuccess } from 'types/success';
 
 export const REVIEWS_REQUEST = 'REVIEWS_REQUEST';
 export const REVIEWS_SUCCESS = 'REVIEWS_SUCCESS';
@@ -71,42 +73,42 @@ export default function Review(state = initialState, action: ActionsTypes) {
   }
 }
 
-export const ReviewsRequest = (data: ReviewTypes) => {
+export const ReviewsRequest = (data: ApiReview) => {
   return {
     type: REVIEWS_REQUEST,
     payload: data,
   };
 };
 
-export const ReviewsSuccess = (data: any) => {
+export const ReviewsSuccess = (data: IReviewSuccess) => {
   return {
     type: REVIEWS_SUCCESS,
     payload: data,
   };
 };
 
-export const ReviewsFail = (error: any) => {
+export const ReviewsFail = (error: AxiosError) => {
   return {
     type: REVIEWS_FAIL,
     error: error.response,
   };
 };
 
-export const ReviewRequest = (data: ReivewDetailTypes) => {
+export const ReviewRequest = (data: ApiReivewDetail) => {
   return {
     type: REVIEW_REQUEST,
     payload: data,
   };
 };
 
-export const ReviewSuccess = (data: any) => {
+export const ReviewSuccess = (data: IReviewDetailSuccess) => {
   return {
     type: REVIEW_SUCCESS,
     payload: data,
   };
 };
 
-export const ReviewFail = (error: any) => {
+export const ReviewFail = (error: AxiosError) => {
   return {
     type: REVIEW_FAIL,
     error: error.response,

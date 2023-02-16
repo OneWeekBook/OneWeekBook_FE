@@ -28,7 +28,7 @@ function InputWrapper({ curSubCategory, curParentCategory }: PropsTypes) {
       const options: {
         start: number;
         display: number;
-        d_categ?: string | number;
+        d_categ?: string;
         title?: string;
       } = {
         start: 1,
@@ -36,21 +36,22 @@ function InputWrapper({ curSubCategory, curParentCategory }: PropsTypes) {
       };
 
       if (!!curSubCategory[0].categoryId && search) {
-        options.d_categ = curSubCategory[0].categoryId;
+        options.d_categ = curSubCategory[0].categoryId.toString();
         options.title = search;
       } else if (!!curParentCategory[0].categoryId && search) {
-        options.d_categ = curParentCategory[0].categoryId;
+        options.d_categ = curParentCategory[0].categoryId.toString();
         options.title = search;
       } else if (!!curSubCategory[0].categoryId && !search) {
-        options.d_categ = curSubCategory[0].categoryId;
+        options.d_categ = curSubCategory[0].categoryId.toString();
         options.title = curSubCategory[0].categoryName?.split('/')[0];
       } else if (!!curParentCategory[0].categoryId && !search) {
-        options.d_categ = curParentCategory[0].categoryId;
+        options.d_categ = curParentCategory[0].categoryId.toString();
         options.title = curParentCategory[0].categoryName?.split('/')[0];
       } else {
         options.title = search;
       }
-      dispatch(SearchRequest({ ...options }));
+      if (options.d_categ || options.title)
+        dispatch(SearchRequest({ ...options }));
     },
     [search, curSubCategory, curParentCategory],
   );

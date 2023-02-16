@@ -1,9 +1,11 @@
+import { AxiosError } from 'axios';
 import {
-  DeleteType,
-  ParagraphAddTypes,
-  ParagraphType,
+  ApiDelete,
+  ApiParagraphAdd,
+  ApiParagraph,
   ActionsTypes,
 } from 'types/api';
+import { ParagraphTypes } from 'types/book';
 
 export const PARAGRAPH_INIT_REQUEST = 'PARAGRAPH_INIT_REQUEST';
 export const PARAGRAPH_INIT_SUCCESS = 'PARAGRAPH_INIT_SUCCESS';
@@ -121,49 +123,49 @@ export default function ChangePassword(
   }
 }
 
-export const ParagraphInitRequest = (data: ParagraphType) => {
+export const ParagraphInitRequest = (data: ApiParagraph) => {
   return {
     type: PARAGRAPH_INIT_REQUEST,
     payload: data,
   };
 };
 
-export const ParagraphInitSuccess = (data: any) => {
+export const ParagraphInitSuccess = (data: ParagraphTypes[]) => {
   return {
     type: PARAGRAPH_INIT_SUCCESS,
     payload: data,
   };
 };
 
-export const ParagraphInitFail = (error: any) => {
+export const ParagraphInitFail = (error: AxiosError) => {
   return {
     type: PARAGRAPH_INIT_FAIL,
     error: error.response,
   };
 };
 
-export const ParagraphRequest = (data: ParagraphType) => {
+export const ParagraphRequest = (data: ApiParagraph) => {
   return {
     type: PARAGRAPH_REQUEST,
     payload: data,
   };
 };
 
-export const ParagraphSuccess = (data: any) => {
+export const ParagraphSuccess = (data: ParagraphTypes[]) => {
   return {
     type: PARAGRAPH_SUCCESS,
     payload: data,
   };
 };
 
-export const ParagraphFail = (error: any) => {
+export const ParagraphFail = (error: AxiosError) => {
   return {
     type: PARAGRAPH_FAIL,
     error: error.response,
   };
 };
 
-export const ParagraphAddRequest = (data: ParagraphAddTypes) => {
+export const ParagraphAddRequest = (data: ApiParagraphAdd) => {
   return {
     type: PARAGRAPH_ADD_REQUEST,
     payload: data,
@@ -176,14 +178,14 @@ export const ParagraphAddSuccess = () => {
   };
 };
 
-export const ParagraphAddFail = (error: any) => {
+export const ParagraphAddFail = (error: AxiosError) => {
   return {
     type: PARAGRAPH_ADD_FAIL,
     error: error.response,
   };
 };
 
-export const ParagraphDeleteRequest = (data: DeleteType) => {
+export const ParagraphDeleteRequest = (data: ApiDelete) => {
   return {
     type: PARAGRAPH_DELETE_REQUEST,
     payload: data,
@@ -196,7 +198,7 @@ export const ParagraphDeleteSuccess = () => {
   };
 };
 
-export const ParagraphDeleteFail = (error: any) => {
+export const ParagraphDeleteFail = (error: AxiosError) => {
   return {
     type: PARAGRAPH_DELETE_FAIL,
     error: error.response,

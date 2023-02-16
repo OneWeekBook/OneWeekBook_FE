@@ -1,6 +1,6 @@
 import { CategoryItemTypes } from './book';
 
-export type BoxItemType = {
+export interface BoxItemType {
   curCategory: CategoryItemTypes[];
   handleClick: (id: number) => void;
-};
+}

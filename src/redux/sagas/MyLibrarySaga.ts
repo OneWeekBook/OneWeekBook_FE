@@ -1,5 +1,7 @@
 import instance from 'api/axios';
+import axios from 'axios';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { ActionMyLibrary } from 'types/action';
 import {
   MyLibraryFail,
   MyLibrarySuccess,
@@ -12,7 +14,7 @@ export function MyLibraryAPI(params: { userId: number; progress: number }) {
   );
 }
 
-export function* fetchMyLibrarySaga(action: any): any {
+export function* fetchMyLibrarySaga(action: ActionMyLibrary): object {
   try {
     const user = yield select((state) => state.authUser.user);
     const result = yield call(MyLibraryAPI, {
@@ -21,7 +23,7 @@ export function* fetchMyLibrarySaga(action: any): any {
     });
     yield put(MyLibrarySuccess(result.data.myList));
   } catch (error) {
-    yield put(MyLibraryFail(error));
+    if (axios.isAxiosError(error)) yield put(MyLibraryFail(error));
   }
 }
 
