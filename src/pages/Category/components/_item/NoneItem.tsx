@@ -49,7 +49,7 @@ const NoneItemWrapper = styled.div`
     align-items: center;
     justify-content: center;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 500;
     color: #fff;
     img {
       margin-bottom: 20px;

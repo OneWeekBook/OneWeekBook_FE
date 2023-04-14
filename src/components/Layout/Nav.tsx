@@ -99,7 +99,7 @@ const NavWrapper = styled.div`
   margin-bottom: 5px;
   width: 100%;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
     margin: auto;
     width: 90%;
@@ -117,7 +117,7 @@ const NavItem = styled.button`
   text-decoration: none;
   line-height: 35px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   margin: 0 10px 0 0;
   color: ${({ theme }) => theme.color.COLOR_MAIN};
   cursor: pointer;

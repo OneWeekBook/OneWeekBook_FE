@@ -12,14 +12,25 @@ const globalStyles = createGlobalStyle`
         height: 100%;
         minWidth: ${MOBILE_MIN_WIDTH}
     }
+
+    body {
+        margin: 0;
+        font-family: 'Noto Sans Korean', 'sans-serif';
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    
+    code {
+        font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+    }
     
     textarea {
-        font-family: 'Spoqa Han Sans', 'sans-serif';
+        font-family: 'Noto Sans Korean', 'sans-serif';
         resize : none:
     }
 
     a {
-        font-family: 'Spoqa Han Sans', 'sans-serif';
+        font-family: 'Noto Sans Korean', 'sans-serif';
         text-decoration: none;
         color: inherit;
     }
@@ -29,7 +40,7 @@ const globalStyles = createGlobalStyle`
     }
 
     button {
-        font-family: 'Spoqa Han Sans', 'sans-serif';
+        font-family: 'Noto Sans Korean', 'sans-serif';
     }
 `;
 

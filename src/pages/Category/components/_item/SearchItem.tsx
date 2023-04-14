@@ -145,7 +145,7 @@ const InfoWrapper = styled.div`
   }
   .infoAuth {
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 500;
     margin-bottom: 5px;
     display: -webkit-box;
     word-wrap: break-word;
@@ -156,7 +156,7 @@ const InfoWrapper = styled.div`
   }
   .infoPubDate {
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 500;
     margin-bottom: 5px;
   }
   .infoDesc {

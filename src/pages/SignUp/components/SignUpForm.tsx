@@ -163,7 +163,7 @@ const SignUpFormWrapper = styled.div`
 
 const Title = styled.p`
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 500;
   color: ${({ theme }) => theme.color.COLOR_FONT_ONE};
 `;
 

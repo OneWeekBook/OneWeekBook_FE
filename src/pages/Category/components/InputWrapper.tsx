@@ -135,7 +135,7 @@ const Wrapper = styled.div`
   }
   p {
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 500;
     margin-right: 10px;
     color: ${({ theme }) => theme.color.COLOR_FONT_TWO};
     @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {

@@ -243,7 +243,7 @@ const RecommendWrapper = styled.div`
   margin: 5px 0;
   p {
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 500;
     margin-right: 10px;
   }
   @media (max-width: 660px) {

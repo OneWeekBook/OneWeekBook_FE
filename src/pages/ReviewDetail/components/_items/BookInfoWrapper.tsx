@@ -91,12 +91,12 @@ const InfoWrapper = styled.div`
   }
   .bookAuthor {
     font-size: 24px;
-    font-weight: 600;
+    font-weight: 500;
     color: #fff;
   }
   .bookPublisher {
     font-size: 24px;
-    font-weight: 600;
+    font-weight: 500;
     color: #fff;
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {

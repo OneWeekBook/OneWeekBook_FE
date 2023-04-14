@@ -127,6 +127,6 @@ const SignInFormWrapper = styled.div`
 const Title = styled.div`
   margin: 50px auto 20px;
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 500;
   color: ${({ theme }) => theme.color.COLOR_FONT_ONE};
 `;

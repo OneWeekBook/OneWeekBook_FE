@@ -28,7 +28,7 @@ const Wrapper = styled.div`
 
 const ResultPageTitle = styled.p`
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 500;
   color: ${({ theme }) => theme.color.COLOR_FONT_TWO};
   @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
     font-size: 18px;
@@ -40,7 +40,7 @@ const Tag = styled.p`
   border-radius: 10px;
   color: white;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   padding: 5px 10px;
   margin-left: 10px;
   @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {

@@ -99,7 +99,7 @@ const ImgWrapper = styled.div`
     color: #f07055;
     margin-top: -20px;
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 500;
   }
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
     margin-bottom: 0px;

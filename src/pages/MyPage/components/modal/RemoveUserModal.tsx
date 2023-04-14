@@ -95,7 +95,7 @@ const InputWrapper = styled.div`
   align-items: center;
   justify-content: center;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
   width: 100%;
   p {
     flex-shrink: 0;

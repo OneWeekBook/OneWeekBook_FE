@@ -86,7 +86,7 @@ const ButtonWrapper = styled.div<{ isSign: boolean }>`
   align-items: center;
   justify-content: space-between;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     display: none;
   }

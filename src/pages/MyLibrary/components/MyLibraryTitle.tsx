@@ -26,7 +26,7 @@ const Wrapper = styled.div`
   margin: 10px auto;
   p {
     font-size: 24px;
-    font-weight: 600;
+    font-weight: 500;
     color: #070707;
   }
 `;

@@ -22,7 +22,7 @@ const LoadingWrapper = styled.div`
   margin-bottom: 20px;
   p {
     font-size: 24px;
-    font-weight: 600;
+    font-weight: 500;
     color: #1e90ff;
     text-align: center;
   }

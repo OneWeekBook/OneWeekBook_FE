@@ -36,7 +36,7 @@ const MainCategoryButton = styled.button<{ isSelected: boolean }>`
   color: #fff;
   cursor: pointer;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   height: 40px;
   padding: 0 20px;
   margin: 10px 10px 5px 0;
