@@ -11,6 +11,7 @@ const globalStyles = createGlobalStyle`
         width: 100%;
         height: 100%;
         minWidth: ${MOBILE_MIN_WIDTH}
+        font-size:10px;
     }
 
     body {

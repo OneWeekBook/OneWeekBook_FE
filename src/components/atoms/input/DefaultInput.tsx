@@ -31,7 +31,7 @@ function DefaultInput({
 }
 
 DefaultInput.defaultProps = {
-  fontSize: 1,
+  fontSize: 1.6,
 };
 
 export default DefaultInput;

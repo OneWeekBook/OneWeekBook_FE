@@ -34,7 +34,7 @@ function DefaultButton({
 
 DefaultButton.defaultProps = {
   type: 'button',
-  fontSize: 1,
+  fontSize: 1.6,
   fontColor: '#f07055',
   fontWeight: 500,
   bgColor: ['#fff', '#fff'],

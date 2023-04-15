@@ -28,7 +28,7 @@ function DefaultButton({
 
 DefaultButton.defaultProps = {
   type: 'button',
-  fontSize: 1,
+  fontSize: 1.6,
   fontColor: 'white',
   fontWeight: 500,
   bgColor: ['#f07055', '#ffa07a'],
