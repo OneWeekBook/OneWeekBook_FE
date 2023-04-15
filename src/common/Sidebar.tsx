@@ -8,7 +8,7 @@ import useAuthLink from 'hooks/useAuthLink';
 import DefaultButton from 'components/Button/DefaultButton';
 import NoticeModal from 'components/Modal';
 import { useEffect } from 'react';
-import { NavItems } from './Nav';
+import { NavItems } from 'contain/mainmenu';
 
 type PropsTypes = {
   toggle: boolean;

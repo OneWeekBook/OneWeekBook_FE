@@ -6,9 +6,9 @@ import { AppStateType } from 'redux/reducers';
 import { AuthUserRequest } from 'redux/reducers/AuthUser';
 import useToggle from 'hooks/useToggle';
 import TopScroll from 'lib/TopScroll';
+import DefaultLink from 'components/atoms/link/DefaultLink';
 import Footer from './Footer';
 import Header from './Header';
-import Nav from './Nav';
 import Sidebar from './Sidebar';
 
 function Index({ children }: PropsWithChildren<any>) {
@@ -34,20 +34,24 @@ function Index({ children }: PropsWithChildren<any>) {
     <LayoutWrapper>
       <TopScroll />
       {location.pathname === '/sign-up' || location.pathname === '/sign-in' ? (
-        <section>
-          <Header />
-        </section>
+        <HeaderWrapper>
+          <DefaultLink
+            to="/"
+            content="ONEWEEKBOOK"
+            fontSize={3.2}
+            fontWeight={700}
+          />
+        </HeaderWrapper>
       ) : (
-        <section>
+        <HeaderWrapper>
           <Header toggleIsOn={toggleIsOn} />
-          <Nav />
           <Sidebar toggle={toggle} toggleIsOn={toggleIsOn} />
-        </section>
+        </HeaderWrapper>
       )}
       <main>{children}</main>
-      <BottomWrapper>
+      <FooterWrapper>
         <Footer />
-      </BottomWrapper>
+      </FooterWrapper>
     </LayoutWrapper>
   );
 }
@@ -66,7 +70,12 @@ const LayoutWrapper = styled.section`
   }
 `;
 
-const BottomWrapper = styled.section`
+const HeaderWrapper = styled.section`
+  display: flex;
+  justify-content: center;
+`;
+
+const FooterWrapper = styled.section`
   background-color: ${({ theme }) => theme.color.COLOR_LAYOUT_ONE};
   min-height: 200px;
 `;

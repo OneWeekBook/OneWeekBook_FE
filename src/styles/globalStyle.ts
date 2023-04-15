@@ -5,13 +5,13 @@ const globalStyles = createGlobalStyle`
     * {
         margin: 0;
         padding: 0;
+        font-size: 10px;
     }
 
     html, body {
         width: 100%;
         height: 100%;
         minWidth: ${MOBILE_MIN_WIDTH}
-        font-size:10px;
     }
 
     body {
@@ -33,7 +33,6 @@ const globalStyles = createGlobalStyle`
     a {
         font-family: 'Noto Sans Korean', 'sans-serif';
         text-decoration: none;
-        color: inherit;
     }
 
     p {

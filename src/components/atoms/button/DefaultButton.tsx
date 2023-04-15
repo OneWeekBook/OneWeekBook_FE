@@ -37,6 +37,7 @@ DefaultButton.defaultProps = {
 export default DefaultButton;
 
 const DefaultButtonAtom = styled.button<StyleProps>`
+  cursor: pointer;
   color: ${({ fontColor }) => fontColor};
   font-size: ${({ fontSize }) => fontSize}rem;
   font-weight: ${({ fontWeight }) => fontWeight};

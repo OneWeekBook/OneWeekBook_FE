@@ -4,7 +4,6 @@ interface ButtonProps {
   handleClick: () => void;
   type?: 'button' | 'submit';
   src: string;
-  alt: string;
 }
 
 interface StyleProps {
@@ -16,18 +15,17 @@ function ImageButton({
   type,
   handleClick,
   src,
-  alt,
   ...rest
 }: ButtonProps & StyleProps) {
   return (
     <ImageButtonAtom type={type} onClick={handleClick} {...rest}>
-      <img src={src} alt={alt} />
+      <img src={src} alt="img button" />
     </ImageButtonAtom>
   );
 }
 
 ImageButton.defaultProps = {
-  bgColor: 'white',
+  bgColor: 'transparent',
 };
 
 export default ImageButton;
