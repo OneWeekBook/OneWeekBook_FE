@@ -12,7 +12,7 @@ type ContainerTypes = {
   as?: ElementType;
 };
 
-function Index({
+function Container({
   pc,
   mobile,
   as,
@@ -35,7 +35,7 @@ function Index({
   );
 }
 
-export default Index;
+export default Container;
 
 const Component = styled.section`
   width: 100%;

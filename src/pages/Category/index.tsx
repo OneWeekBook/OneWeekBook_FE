@@ -1,5 +1,5 @@
 import { lazy, useEffect } from 'react';
-import Container from 'components/Container';
+import Container from 'common/Container';
 import { userToggle } from 'redux/reducers/Func';
 import { useDispatch } from 'react-redux';
 

@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { AuthInit } from 'redux/reducers/AuthUser';
 import { Toast } from 'lib/Toast';
-import Container from '../Container';
+import Container from './Container';
 
 type PropsType = {
   toggleIsOn?: () => void;

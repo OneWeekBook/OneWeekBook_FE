@@ -1,5 +1,5 @@
 import { lazy, useMemo } from 'react';
-import Container from 'components/Container';
+import Container from 'common/Container';
 
 const SignUpWrapper = lazy(
   () =>

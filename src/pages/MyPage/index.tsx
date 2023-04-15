@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import Container from 'components/Container';
+import Container from 'common/Container';
 
 const UserInfo = lazy(
   () => import(/* webpackChunkName: "UserInfo" */ './components/UserInfo'),

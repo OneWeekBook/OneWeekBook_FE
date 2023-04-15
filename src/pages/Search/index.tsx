@@ -1,6 +1,6 @@
 import { lazy } from 'react';
 import { useLocation } from 'react-router-dom';
-import Container from 'components/Container';
+import Container from 'common/Container';
 import TitleWrapper from './components/TitleWrapper';
 
 const BooksList = lazy(

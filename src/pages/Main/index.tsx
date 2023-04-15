@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import Container from 'components/Container';
+import Container from 'common/Container';
 import { useDispatch } from 'react-redux';
 import { ReviewInit, ReviewsRequest } from 'redux/reducers/Review';
 import { NewReviewInit, NewReviewsRequest } from 'redux/reducers/NewReview';

@@ -1,4 +1,4 @@
-import Container from 'components/Container';
+import Container from 'common/Container';
 import BookInfo from './components/BookInfo';
 import ReviewInfo from './components/ReviewInfo';
 

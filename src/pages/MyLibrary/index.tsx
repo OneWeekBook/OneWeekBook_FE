@@ -3,7 +3,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { AppStateType } from 'redux/reducers';
 import { navInit, userToggle } from 'redux/reducers/Func';
 import { Toast } from 'lib/Toast';
-import Container from 'components/Container';
+import Container from 'common/Container';
 import MyLibraryTitle from './components/MyLibraryTitle';
 
 const MyLibraryNav = lazy(
