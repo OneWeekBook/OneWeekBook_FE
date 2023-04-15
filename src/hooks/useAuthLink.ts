@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 function useAuthLink(): {
   handleAuthClick: (
@@ -9,6 +9,7 @@ function useAuthLink(): {
   ) => void;
 } {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleAuthClick = (
     link: string,
@@ -21,23 +22,23 @@ function useAuthLink(): {
       compLink.includes(link) &&
       sessionStorage.getItem('accessToken')
     ) {
-      navigate(link);
+      navigate(link, { replace: link === location.pathname });
       toggle();
     } else if (
       compLink.includes(link) &&
       sessionStorage.getItem('accessToken')
     ) {
-      navigate(link);
+      navigate(link, { replace: link === location.pathname });
     } else if (
       compLink.includes(link) &&
       !sessionStorage.getItem('accessToken')
     ) {
       Modaltoggle();
     } else if (toggle) {
-      navigate(link);
+      navigate(link, { replace: link === location.pathname });
       toggle();
     } else {
-      navigate(link);
+      navigate(link, { replace: link === location.pathname });
     }
   };
 

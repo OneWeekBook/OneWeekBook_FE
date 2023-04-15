@@ -1,14 +1,14 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { AuthInit } from 'redux/reducers/AuthUser';
 import { Toast } from 'lib/Toast';
 import useToggle from 'hooks/useToggle';
 import useAuthLink from 'hooks/useAuthLink';
-import DefaultButton from 'components/Button/DefaultButton';
 import NoticeModal from 'components/Modal';
 import { useEffect } from 'react';
 import { NavItems } from 'contain/mainmenu';
+import SideBarLink from 'components/atoms/link/SideBarLink';
 
 type PropsTypes = {
   toggle: boolean;
@@ -18,13 +18,20 @@ type PropsTypes = {
 function Sidebar({ toggle, toggleIsOn }: PropsTypes) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const [modalToggle, isModalToggleOn] = useToggle(false);
   const { handleAuthClick } = useAuthLink();
+
+  const handleMoveLink = (link: string) => {
+    navigate(link, { replace: link === location.pathname });
+    toggleIsOn();
+  };
 
   const logoutClick = () => {
     sessionStorage.removeItem('accessToken');
     dispatch(AuthInit());
     Toast('info', '로그아웃 되었습니다.');
+    navigate('/', { replace: true });
     toggleIsOn();
   };
 
@@ -38,83 +45,40 @@ function Sidebar({ toggle, toggleIsOn }: PropsTypes) {
 
   return (
     <Wrapper isToggle={toggle}>
-      <ButtonWrapper>
-        {sessionStorage.getItem('accessToken') ? (
-          <>
-            <Link to="/">
-              <DefaultButton
-                onClick={logoutClick}
-                pc={[0, 50]}
-                isHover
-                hoverColor="#f07055"
-                padding={[0, 20, 0, 0]}
-                fontSize={[24, 24]}
-                fontWeight={700}
-                title="로그아웃"
-              />
-            </Link>
-            <Link to="/myPage">
-              <DefaultButton
-                onClick={toggleIsOn}
-                pc={[0, 50]}
-                isHover
-                hoverColor="#f07055"
-                padding={[0, 20, 0, 0]}
-                fontSize={[24, 24]}
-                fontWeight={700}
-                title="마이페이지"
-              />
-            </Link>
-          </>
-        ) : (
-          <>
-            <Link to="/sign-in">
-              <DefaultButton
-                onClick={toggleIsOn}
-                pc={[0, 50]}
-                isHover
-                hoverColor="#f07055"
-                padding={[0, 20, 0, 0]}
-                fontSize={[24, 24]}
-                fontWeight={600}
-                title="로그인"
-              />
-            </Link>
-            <Link to="/sign-up">
-              <DefaultButton
-                onClick={toggleIsOn}
-                pc={[0, 50]}
-                isHover
-                hoverColor="#f07055"
-                padding={[0, 20, 0, 0]}
-                fontSize={[24, 24]}
-                fontWeight={600}
-                title="회원가입"
-              />
-            </Link>
-          </>
-        )}
-        {NavItems.map((item) => (
-          <DefaultButton
-            key={item.id}
-            onClick={() =>
-              handleAuthClick(
-                item.link,
-                ['/my-library'],
-                isModalToggleOn,
-                toggleIsOn,
-              )
-            }
-            pc={[0, 50]}
-            isHover
-            hoverColor="#f07055"
-            padding={[0, 20, 0, 0]}
-            fontSize={[24, 24]}
-            fontWeight={600}
-            title={item.title}
+      {sessionStorage.getItem('accessToken') ? (
+        <>
+          <SideBarLink handleClick={logoutClick} content="로그아웃" />
+          <SideBarLink
+            handleClick={() => handleMoveLink('/myPage')}
+            content="마이페이지"
           />
-        ))}
-      </ButtonWrapper>
+        </>
+      ) : (
+        <>
+          <SideBarLink
+            handleClick={() => handleMoveLink('/sign-in')}
+            content="로그인"
+          />
+          <SideBarLink
+            handleClick={() => handleMoveLink('/sign-up')}
+            content="회원가입"
+          />
+        </>
+      )}
+      {NavItems.map((item) => (
+        <SideBarLink
+          key={item.id}
+          handleClick={() =>
+            handleAuthClick(
+              item.link,
+              ['/my-library'],
+              isModalToggleOn,
+              toggleIsOn,
+            )
+          }
+          content={item.title}
+        />
+      ))}
       {modalToggle && (
         <NoticeModal
           title="내 서재로 가시려면 로그인을 하셔야합니다."
@@ -156,14 +120,5 @@ const Wrapper = styled.div<{ isToggle: boolean }>`
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     visibility: visible;
     transition-duration: 0.5s;
-  }
-`;
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  button {
-    text-align: right;
-    border-bottom: 2px solid #e6e6e6;
   }
 `;

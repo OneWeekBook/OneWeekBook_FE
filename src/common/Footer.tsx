@@ -24,14 +24,14 @@ const Wrapper = styled.div`
 
 const LOGO = styled.p`
   color: ${({ theme }) => theme.color.COLOR_FONT_FOUR};
-  font-size: 28px;
+  font-size: 2.8rem;
   font-weight: 700;
   margin-top: 50px;
 `;
 
 const DESC = styled.p`
   color: ${({ theme }) => theme.color.COLOR_FONT_FOUR};
-  font-size: 18px;
+  font-size: 1.8rem;
   font-weight: 400;
   margin-top: 20px;
 `;

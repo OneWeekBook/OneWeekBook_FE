@@ -8,7 +8,7 @@ interface ButtonProps {
 
 interface StyleProps {
   fontSize?: number;
-  fontColor?: string;
+  fontColor?: string[];
   fontWeight?: number;
   bgColor?: string[];
 }
@@ -29,7 +29,7 @@ function DefaultButton({
 DefaultButton.defaultProps = {
   type: 'button',
   fontSize: 1.6,
-  fontColor: 'white',
+  fontColor: ['white', 'white'],
   fontWeight: 500,
   bgColor: ['#f07055', '#ffa07a'],
 };
