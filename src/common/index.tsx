@@ -14,7 +14,7 @@ import Sidebar from './Sidebar';
 function Index({ children }: PropsWithChildren<any>) {
   const location = useLocation();
   const dispatch = useDispatch();
-  const [toggle, toggleIsOn] = useToggle(false);
+  const [toggle, handleToggle] = useToggle(false);
   const userToggle = useSelector(
     (state: AppStateType) => state.func.userToggle,
   );
@@ -44,8 +44,8 @@ function Index({ children }: PropsWithChildren<any>) {
         </HeaderWrapper>
       ) : (
         <HeaderWrapper>
-          <Header toggleIsOn={toggleIsOn} />
-          <Sidebar toggle={toggle} toggleIsOn={toggleIsOn} />
+          <Header handleToggle={handleToggle} />
+          <Sidebar toggle={toggle} handleToggle={handleToggle} />
         </HeaderWrapper>
       )}
       <main>{children}</main>

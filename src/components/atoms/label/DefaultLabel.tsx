@@ -9,6 +9,7 @@ interface StyleProps {
   fontSize?: number;
   fontColor?: string;
   fontWeight?: number;
+  flexGap?: number;
 }
 
 function DefaultLabel({
@@ -19,7 +20,7 @@ function DefaultLabel({
   return (
     <DefaultLabelAtom {...rest}>
       <p>{content}</p>
-      <p>{subContent}</p>
+      {subContent && <p>{subContent}</p>}
     </DefaultLabelAtom>
   );
 }
@@ -35,16 +36,16 @@ export default DefaultLabel;
 const DefaultLabelAtom = styled.div<StyleProps>`
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  background-color: #fff;
-  p:first-child {
+  gap: ${({ flexGap }) => flexGap}px;
+  background-color: transperant;
+  p {
     color: ${({ fontColor }) => fontColor};
-    font-size: ${({ fontSize }) => fontSize}rem;
     font-weight: ${({ fontWeight }) => fontWeight};
-  }
-  p:last-child {
-    color: ${({ fontColor }) => fontColor};
-    font-size: ${({ fontSize }) => fontSize && fontSize - 0.2}rem;
-    font-weight: ${({ fontWeight }) => fontWeight};
+    &:first-child {
+      font-size: ${({ fontSize }) => fontSize}rem;
+    }
+    &:last-child {
+      font-size: ${({ fontSize }) => fontSize && fontSize - 1}rem;
+    }
   }
 `;

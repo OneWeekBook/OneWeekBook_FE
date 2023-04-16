@@ -12,19 +12,19 @@ import SideBarLink from 'components/atoms/link/SideBarLink';
 
 type PropsTypes = {
   toggle: boolean;
-  toggleIsOn: () => void;
+  handleToggle: () => void;
 };
 
-function Sidebar({ toggle, toggleIsOn }: PropsTypes) {
+function Sidebar({ toggle, handleToggle }: PropsTypes) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const [modalToggle, isModalToggleOn] = useToggle(false);
+  const [modalToggle, handleModalToggle] = useToggle(false);
   const { handleAuthClick } = useAuthLink();
 
   const handleMoveLink = (link: string) => {
     navigate(link, { replace: link === location.pathname });
-    toggleIsOn();
+    handleToggle();
   };
 
   const logoutClick = () => {
@@ -32,7 +32,7 @@ function Sidebar({ toggle, toggleIsOn }: PropsTypes) {
     dispatch(AuthInit());
     Toast('info', '로그아웃 되었습니다.');
     navigate('/', { replace: true });
-    toggleIsOn();
+    handleToggle();
   };
 
   useEffect(() => {
@@ -72,8 +72,8 @@ function Sidebar({ toggle, toggleIsOn }: PropsTypes) {
             handleAuthClick(
               item.link,
               ['/my-library'],
-              isModalToggleOn,
-              toggleIsOn,
+              handleModalToggle,
+              handleToggle,
             )
           }
           content={item.title}
@@ -87,17 +87,14 @@ function Sidebar({ toggle, toggleIsOn }: PropsTypes) {
           subTitleSize={[18, 16]}
           width={500}
           height={250}
-          handleToggle={isModalToggleOn}
+          handleToggle={handleModalToggle}
           close
           isOkBtn
           okBtnTitle="로그인"
-          handleOkClick={() => {
-            toggleIsOn();
-            navigate('/sign-in');
-          }}
+          handleOkClick={() => handleMoveLink('/sign-in')}
           isCancelBtn
           cancelBtnTitle="나중에..."
-          handleCanCelClick={isModalToggleOn}
+          handleCanCelClick={handleModalToggle}
         />
       )}
     </Wrapper>

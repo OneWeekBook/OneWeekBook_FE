@@ -6,10 +6,10 @@ import HeaderMainCategory from 'components/modules/common/HeaderMainCategory';
 import Container from './Container';
 
 type PropsType = {
-  toggleIsOn: () => void;
+  handleToggle: () => void;
 };
 
-function Header({ toggleIsOn }: PropsType) {
+function Header({ handleToggle }: PropsType) {
   const dispatch = useDispatch();
 
   const logoutClick = () => {
@@ -20,7 +20,7 @@ function Header({ toggleIsOn }: PropsType) {
 
   return (
     <Container as="header">
-      <HeaderTopMenu handleToggle={toggleIsOn} handleSignout={logoutClick} />
+      <HeaderTopMenu handleToggle={handleToggle} handleSignout={logoutClick} />
       <HeaderMainCategory />
     </Container>
   );

@@ -1,37 +1,34 @@
 import styled from 'styled-components';
+import DefaultLabel from 'components/atoms/label/DefaultLabel';
+import theme from 'styles/theme';
 import Container from './Container';
 
 function Footer() {
   return (
     <Container as="footer">
-      <Wrapper>
-        <LOGO>ONEWEEKBOOK</LOGO>
-        <DESC>Create by leejy001 leejh96</DESC>
-      </Wrapper>
+      <FooterBody>
+        <DefaultLabel
+          content="ONEWEEKBOOK"
+          subContent="Create by leejy001 leejh96"
+          fontColor={theme.color.COLOR_FONT_FOUR}
+          fontSize={2.8}
+          flexGap={10}
+        />
+      </FooterBody>
     </Container>
   );
 }
 
 export default Footer;
 
-const Wrapper = styled.div`
+const FooterBody = styled.div`
   width: 100%;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
     margin: auto;
     width: 90%;
   }
-`;
-
-const LOGO = styled.p`
-  color: ${({ theme }) => theme.color.COLOR_FONT_FOUR};
-  font-size: 2.8rem;
-  font-weight: 700;
-  margin-top: 50px;
-`;
-
-const DESC = styled.p`
-  color: ${({ theme }) => theme.color.COLOR_FONT_FOUR};
-  font-size: 1.8rem;
-  font-weight: 400;
-  margin-top: 20px;
 `;
