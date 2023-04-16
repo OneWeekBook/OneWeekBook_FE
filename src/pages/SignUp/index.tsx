@@ -1,14 +1,13 @@
-import { lazy, useMemo } from 'react';
+import { useMemo } from 'react';
 import Container from 'common/Container';
-
-const SignUpWrapper = lazy(
-  () =>
-    import(
-      /* webpackChunkName: "SignUpWrapper" */ './components/SignUpWrapper'
-    ),
-);
+import SignForm from 'components/modules/sign/SignForm';
+import useRouter from 'hooks/useRouter';
+import DefaultButton from 'components/atoms/button/DefaultButton';
+import SignUpForm from '../../components/modules/sign/SignUpForm';
 
 function SignUpPage() {
+  const { routeTo } = useRouter();
+
   const FormStyle = useMemo(
     () => ({ height: '100%', display: 'flex', alignItems: 'center' }),
     [],
@@ -16,7 +15,17 @@ function SignUpPage() {
 
   return (
     <Container style={FormStyle}>
-      <SignUpWrapper />
+      <SignForm>
+        <SignUpForm />
+        <DefaultButton
+          bgColor={['#faf39e', '#ffd400']}
+          content="로그인"
+          width="auto"
+          fontColor={['#000000', '#000000']}
+          fontSize={2}
+          handleClick={() => routeTo('/sign-in')}
+        />
+      </SignForm>
     </Container>
   );
 }

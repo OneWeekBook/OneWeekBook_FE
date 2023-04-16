@@ -55,7 +55,7 @@ function SignInForm() {
     <SignInFormWrapper>
       <DefaultLabel
         content="로그인"
-        fontSize={3}
+        fontSize={2.4}
         fontColor={theme.color.COLOR_FONT_ONE}
       />
       <Form onSubmit={handleSubmit}>

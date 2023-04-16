@@ -1,11 +1,11 @@
 import { passwordRegex } from 'lib/Regex';
 
-type SignUpType = {
+interface SignUpType {
   username: string;
   nick: string;
   password: string;
   confirmPassword: string;
-};
+}
 
 type ErrorType = {
   passError: boolean;
@@ -14,10 +14,10 @@ type ErrorType = {
   setPassCompareError: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export function useErrorCheck(): {
-  handleError: (values: SignUpType, error: ErrorType) => void;
+export function useFormErrorCheck(): {
+  handleFormError: (values: SignUpType, error: ErrorType) => void;
 } {
-  const handleError = (values: SignUpType, error: ErrorType) => {
+  const handleFormError = (values: SignUpType, error: ErrorType) => {
     if (values.password && !passwordRegex.test(values.password)) {
       error.setPassError(true);
     } else if (values.password && passwordRegex.test(values.password)) {
@@ -39,5 +39,5 @@ export function useErrorCheck(): {
     }
   };
 
-  return { handleError };
+  return { handleFormError };
 }

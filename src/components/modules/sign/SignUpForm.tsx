@@ -1,16 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import theme from 'styles/theme';
 import { AppStateType } from 'redux/reducers';
 import { SignUpInit, SignUpRequest } from 'redux/reducers/SignUp';
+import ErrorText from 'components/atoms/text/ErrorText';
+import AuthEmailForm from 'components/Form/AuthEmailForm';
+import DefaultButton from 'components/Button/DefaultButton';
+import DefaultLabel from 'components/atoms/label/DefaultLabel';
+import BorderInput from 'components/atoms/input/BorderInput';
 import useInput from 'hooks/useInput';
 import useInputEnter from 'hooks/useInputEnter';
-import ErrorForm from 'components/Form/ErrorForm';
-import AuthEmailForm from 'components/Form/AuthEmailForm';
-import FormInput from 'components/Input/FormInput';
-import DefaultButton from 'components/Button/DefaultButton';
-import { useSignUpErrorCheck } from '../func/SignUpErrorCheck';
-import { useErrorCheck } from '../func/ErrorCheck';
+import { useFormErrorCheck } from 'hooks/useFormErrorCheck';
+import { useSignUpErrorCheck } from 'hooks/useSignUpErrorCheck';
 
 function SignUpForm() {
   const dispatch = useDispatch();
@@ -28,7 +30,7 @@ function SignUpForm() {
   const [signUpError, setSignUpError] = useState<boolean>(false);
   const [authDone, setAuthDone] = useState<boolean>(false);
   const [registerDone, setRegisterDone] = useState<boolean>(true);
-  const { handleError } = useErrorCheck();
+  const { handleFormError } = useFormErrorCheck();
   const { handleSignUpError } = useSignUpErrorCheck();
   const { handleInputEnter } = useInputEnter();
   const signUpErrorStatus = useSelector(
@@ -36,7 +38,7 @@ function SignUpForm() {
   );
 
   useEffect(() => {
-    handleError(
+    handleFormError(
       { username, nick, password, confirmPassword },
       {
         passError,
@@ -80,7 +82,11 @@ function SignUpForm() {
 
   return (
     <SignUpFormWrapper>
-      <Title>이메일로 회원가입</Title>
+      <DefaultLabel
+        content="이메일로 회원가입"
+        fontSize={2.4}
+        fontColor={theme.color.COLOR_FONT_ONE}
+      />
       <AuthEmailForm
         authDone={authDone}
         setAuthDone={setAuthDone}
@@ -88,45 +94,45 @@ function SignUpForm() {
       />
       <FormWrapper>
         {authDone && (
-          <form onSubmit={handleSubmit}>
-            <FormInput
+          <Form onSubmit={handleSubmit}>
+            <BorderInput
               type="password"
               placeholder="비밀번호"
-              state={password}
+              value={password}
               onChange={changePassword}
               onKeyPress={(event) => handleInputEnter(event, passConfRef)}
               mref={passRef}
             />
             {passError && (
-              <ErrorForm error="비밀번호 형식이 올바르지 않습니다." />
+              <ErrorText error="비밀번호 형식이 올바르지 않습니다." />
             )}
-            <FormInput
+            <BorderInput
               type="password"
               placeholder="비밀번호 확인"
-              state={confirmPassword}
+              value={confirmPassword}
               onChange={changeConfirmPassword}
               onKeyPress={(event) => handleInputEnter(event, nameRef)}
               mref={passConfRef}
             />
             {passCompareError && (
-              <ErrorForm error="비밀번호가 같지 않습니다." />
+              <ErrorText error="비밀번호가 같지 않습니다." />
             )}
-            <FormInput
+            <BorderInput
               type="text"
               placeholder="이름"
-              state={username}
+              value={username}
               onChange={changeUserName}
               onKeyPress={(event) => handleInputEnter(event, nickRef)}
               mref={nameRef}
             />
-            <FormInput
+            <BorderInput
               type="text"
               placeholder="닉네임"
-              state={nick}
+              value={nick}
               onChange={changeNick}
               mref={nickRef}
             />
-            {signUpError && <ErrorForm error="회원가입 실패" align="left" />}
+            {signUpError && <ErrorText error="회원가입 실패" align="left" />}
             <DefaultButton
               type="submit"
               pc={[0, 35]}
@@ -142,7 +148,7 @@ function SignUpForm() {
               fontWeight={600}
               title="회원가입"
             />
-          </form>
+          </Form>
         )}
       </FormWrapper>
     </SignUpFormWrapper>
@@ -155,16 +161,11 @@ const SignUpFormWrapper = styled.div`
   background-color: white;
   width: 100%;
   text-align: center;
-  form {
-    display: flex;
-    flex-direction: column;
-  }
 `;
 
-const Title = styled.p`
-  font-size: 24px;
-  font-weight: 500;
-  color: ${({ theme }) => theme.color.COLOR_FONT_ONE};
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
 `;
 
 const FormWrapper = styled.div`

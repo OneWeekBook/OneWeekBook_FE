@@ -3,6 +3,7 @@ import styled from 'styled-components';
 interface ButtonProps {
   handleClick?: () => void;
   content: string;
+  disabled?: boolean;
   type?: 'button' | 'submit';
 }
 
@@ -18,11 +19,17 @@ interface StyleProps {
 function DefaultButton({
   handleClick,
   content,
+  disabled,
   type,
   ...rest
 }: ButtonProps & StyleProps) {
   return (
-    <DefaultButtonAtom type={type} onClick={handleClick} {...rest}>
+    <DefaultButtonAtom
+      type={type}
+      onClick={handleClick}
+      disabled={disabled}
+      {...rest}
+    >
       {content}
     </DefaultButtonAtom>
   );
@@ -53,5 +60,8 @@ const DefaultButtonAtom = styled.button<StyleProps>`
   &:hover {
     color: ${({ fontColor }) => fontColor && fontColor[1]};
     background-color: ${({ bgColor }) => bgColor && `${bgColor[1]}`};
+  }
+  &:disabled {
+    background-color: #a9a9a9;
   }
 `;
