@@ -5,13 +5,13 @@ import { AppStateType } from 'redux/reducers';
 import { AuthEmailInit, AuthEmailRequest } from 'redux/reducers/AuthEmail';
 import { AuthCodeInit, AuthCodeRequest } from 'redux/reducers/AuthCode';
 import useInput from 'hooks/useInput';
-import DefaultButton from 'components/Button/DefaultButton';
-import { useRegexCheck } from './func/RegCheck';
-import { useAuthErrorCheck } from './func/AuthErrorCheck';
-import TimerForm from '../TimerForm';
-import EmailErrorForm from './components/EmailErrorForm';
-import CodeErrorForm from './components/CodeErrorForm';
-import FormInput from '../../Input/FormInput';
+import { useRegexCheck } from 'hooks/useRegCheck';
+import { useAuthErrorCheck } from 'hooks/useAuthErrorCheck';
+import DefaultButton from 'components/atoms/button/DefaultButton';
+import BorderInput from 'components/atoms/input/BorderInput';
+import TimerForm from '../../Form/TimerForm';
+import EmailErrorForm from '../error/EmailErrorForm';
+import CodeErrorForm from '../error/CodeErrorForm';
 
 type AuthMailTypes = {
   authDone: boolean;
@@ -97,10 +97,10 @@ function AuthEmailForm({
 
   return (
     <AuthEmailWrapper>
-      <FormInput
+      <BorderInput
         type="email"
         placeholder="이메일"
-        state={email}
+        value={email}
         onChange={changeEmail}
         onKeyPress={onEmailCheckEnter}
         disabled={emailDone}
@@ -111,7 +111,7 @@ function AuthEmailForm({
             <TimerForm emailDone={emailDone} setEmailDone={setEmailDone} />
           </TimerWrapper>
         )}
-      </FormInput>
+      </BorderInput>
       {!authDone && (
         <>
           <EmailErrorForm
@@ -123,44 +123,28 @@ function AuthEmailForm({
           />
           {!emailDone ? (
             <DefaultButton
-              pc={[0, 35]}
-              onClick={authEmailClick}
-              isHover
-              hoverBgColor="#f07055"
-              hoverColor="white"
-              bgColor="#c05944"
-              color="white"
+              handleClick={authEmailClick}
               disabled={!emailReg}
-              disabledColor="#a9a9a9"
-              margin={[20, 0, 5, 0]}
-              fontSize={[18, 18]}
-              fontWeight={600}
-              title="이메일 인증하기"
+              fontSize={1.8}
+              width="auto"
+              content="이메일 인증하기"
             />
           ) : (
             <DefaultButton
-              pc={[0, 35]}
-              onClick={authEmailClick}
-              isHover
-              hoverBgColor="#f07055"
-              hoverColor="white"
-              bgColor="#c05944"
-              color="white"
+              handleClick={authEmailClick}
               disabled={!emailReg}
-              disabledColor="#a9a9a9"
-              margin={[20, 0, 5, 0]}
-              fontSize={[18, 18]}
-              fontWeight={600}
-              title="재발송"
+              fontSize={1.8}
+              width="auto"
+              content="재발송"
             />
           )}
           {toggle && (
             <>
-              <FormInput
+              <BorderInput
                 type="text"
                 maxLength={6}
                 placeholder="인증번호"
-                state={code}
+                value={code}
                 pattern="[0-9]+"
                 onChange={changeCode}
                 onKeyPress={onCodeCheckEnter}
@@ -173,19 +157,11 @@ function AuthEmailForm({
                 codeErrorStatus={codeErrorStatus}
               />
               <DefaultButton
-                pc={[0, 35]}
-                onClick={codeInputClick}
-                isHover
-                hoverBgColor="#f07055"
-                hoverColor="white"
-                bgColor="#c05944"
-                color="white"
+                handleClick={codeInputClick}
                 disabled={!codeReg}
-                disabledColor="#a9a9a9"
-                margin={[20, 0, 5, 0]}
-                fontSize={[18, 18]}
-                fontWeight={600}
-                title="인증번호 확인"
+                fontSize={1.8}
+                width="auto"
+                content="인증번호 확인"
               />
             </>
           )}
@@ -199,6 +175,9 @@ export default AuthEmailForm;
 
 const AuthEmailWrapper = styled.div`
   margin-top: 20px;
+  button {
+    margin-top: 10px;
+  }
 `;
 
 const TimerWrapper = styled.div`

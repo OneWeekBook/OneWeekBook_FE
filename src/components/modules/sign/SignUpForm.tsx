@@ -4,17 +4,19 @@ import styled from 'styled-components';
 import theme from 'styles/theme';
 import { AppStateType } from 'redux/reducers';
 import { SignUpInit, SignUpRequest } from 'redux/reducers/SignUp';
-import ErrorText from 'components/atoms/text/ErrorText';
-import AuthEmailForm from 'components/Form/AuthEmailForm';
-import DefaultButton from 'components/Button/DefaultButton';
-import DefaultLabel from 'components/atoms/label/DefaultLabel';
-import BorderInput from 'components/atoms/input/BorderInput';
 import useInput from 'hooks/useInput';
+import useRouter from 'hooks/useRouter';
 import useInputEnter from 'hooks/useInputEnter';
 import { useFormErrorCheck } from 'hooks/useFormErrorCheck';
 import { useSignUpErrorCheck } from 'hooks/useSignUpErrorCheck';
+import ErrorText from 'components/atoms/text/ErrorText';
+import AuthEmailForm from 'components/modules/sign/SignAuthEmail';
+import DefaultButton from 'components/atoms/button/DefaultButton';
+import DefaultLabel from 'components/atoms/label/DefaultLabel';
+import BorderInput from 'components/atoms/input/BorderInput';
 
 function SignUpForm() {
+  const { routeTo } = useRouter();
   const dispatch = useDispatch();
   const passRef = useRef<HTMLInputElement>(null);
   const passConfRef = useRef<HTMLInputElement>(null);
@@ -92,65 +94,71 @@ function SignUpForm() {
         setAuthDone={setAuthDone}
         setRegisterEmail={setEmail}
       />
-      <FormWrapper>
-        {authDone && (
-          <Form onSubmit={handleSubmit}>
-            <BorderInput
-              type="password"
-              placeholder="비밀번호"
-              value={password}
-              onChange={changePassword}
-              onKeyPress={(event) => handleInputEnter(event, passConfRef)}
-              mref={passRef}
+      {authDone && (
+        <Form onSubmit={handleSubmit}>
+          <BorderInput
+            type="password"
+            placeholder="비밀번호"
+            value={password}
+            onChange={changePassword}
+            onKeyPress={(event) => handleInputEnter(event, passConfRef)}
+            mref={passRef}
+          />
+          {passError && (
+            <ErrorText
+              error="비밀번호 형식이 올바르지 않습니다."
+              align="left"
             />
-            {passError && (
-              <ErrorText error="비밀번호 형식이 올바르지 않습니다." />
-            )}
-            <BorderInput
-              type="password"
-              placeholder="비밀번호 확인"
-              value={confirmPassword}
-              onChange={changeConfirmPassword}
-              onKeyPress={(event) => handleInputEnter(event, nameRef)}
-              mref={passConfRef}
+          )}
+          <BorderInput
+            type="password"
+            placeholder="비밀번호 확인"
+            value={confirmPassword}
+            onChange={changeConfirmPassword}
+            onKeyPress={(event) => handleInputEnter(event, nameRef)}
+            mref={passConfRef}
+          />
+          {passCompareError && (
+            <ErrorText error="비밀번호가 같지 않습니다." align="left" />
+          )}
+          <BorderInput
+            type="text"
+            placeholder="이름"
+            value={username}
+            onChange={changeUserName}
+            onKeyPress={(event) => handleInputEnter(event, nickRef)}
+            mref={nameRef}
+          />
+          <BorderInput
+            type="text"
+            placeholder="닉네임"
+            value={nick}
+            onChange={changeNick}
+            mref={nickRef}
+          />
+          {signUpError && (
+            <ErrorText
+              error="회원가입 실패, 이미 존재하는 이메일 입니다."
+              align="left"
             />
-            {passCompareError && (
-              <ErrorText error="비밀번호가 같지 않습니다." />
-            )}
-            <BorderInput
-              type="text"
-              placeholder="이름"
-              value={username}
-              onChange={changeUserName}
-              onKeyPress={(event) => handleInputEnter(event, nickRef)}
-              mref={nameRef}
-            />
-            <BorderInput
-              type="text"
-              placeholder="닉네임"
-              value={nick}
-              onChange={changeNick}
-              mref={nickRef}
-            />
-            {signUpError && <ErrorText error="회원가입 실패" align="left" />}
-            <DefaultButton
-              type="submit"
-              pc={[0, 35]}
-              isHover
-              hoverBgColor="#f07055"
-              hoverColor="white"
-              bgColor="#c05944"
-              color="white"
-              disabled={registerDone}
-              disabledColor="#a9a9a9"
-              margin={[20, 0, 5, 0]}
-              fontSize={[18, 18]}
-              fontWeight={600}
-              title="회원가입"
-            />
-          </Form>
-        )}
-      </FormWrapper>
+          )}
+          <DefaultButton
+            type="submit"
+            content="회원가입"
+            width="auto"
+            disabled={registerDone}
+            fontSize={2}
+          />
+        </Form>
+      )}
+      <DefaultButton
+        bgColor={['#faf39e', '#ffd400']}
+        content="로그인"
+        width="auto"
+        fontColor={['#000000', '#000000']}
+        fontSize={2}
+        handleClick={() => routeTo('/sign-in')}
+      />
     </SignUpFormWrapper>
   );
 }
@@ -161,20 +169,12 @@ const SignUpFormWrapper = styled.div`
   background-color: white;
   width: 100%;
   text-align: center;
+  button {
+    margin-top: 10px;
+  }
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-`;
-
-const FormWrapper = styled.div`
-  input {
-    width: 100%;
-    box-sizing: border-box;
-    border: none;
-    border-bottom: solid 1px black;
-    padding: 5px 5px;
-    margin-top: 10px;
-  }
 `;

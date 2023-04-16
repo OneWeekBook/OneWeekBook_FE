@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import Container from 'common/Container';
 import SignInForm from 'components/modules/sign/SignInForm';
-import SignForm from 'components/modules/sign/SignForm';
+import SignContainer from 'components/modules/sign/SignContainer';
 
 function Index() {
   const FormStyle = useMemo(
@@ -11,9 +11,9 @@ function Index() {
 
   return (
     <Container style={FormStyle}>
-      <SignForm>
+      <SignContainer>
         <SignInForm />
-      </SignForm>
+      </SignContainer>
     </Container>
   );
 }

@@ -13,7 +13,6 @@ export default ErrorText;
 
 const ErrorTextAtom = styled.p<{ align?: string }>`
   font-size: 12px;
-  padding: 5px;
   color: red;
   text-align: ${({ align }) => align};
 `;
