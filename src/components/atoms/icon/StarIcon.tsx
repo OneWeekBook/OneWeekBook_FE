@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-interface LabelProps {
+interface IconProps {
   score: number;
 }
 
@@ -8,10 +8,10 @@ interface StyleProps {
   imageSize: number;
 }
 
-function StarCountLabel({ score, imageSize }: LabelProps & StyleProps) {
+function StarIcon({ score, imageSize }: IconProps & StyleProps) {
   if (score === 1) {
     return (
-      <StarCountAtom
+      <StarIconAtom
         src={`${process.env.PUBLIC_URL}/assets/func/star-full.png`}
         alt="star full"
         imageSize={imageSize}
@@ -20,7 +20,7 @@ function StarCountLabel({ score, imageSize }: LabelProps & StyleProps) {
   }
   if (score > 0 && score < 1) {
     return (
-      <StarCountAtom
+      <StarIconAtom
         src={
           score % 1 < 0.5
             ? `${process.env.PUBLIC_URL}/assets/func/star-one-third.png`
@@ -35,7 +35,7 @@ function StarCountLabel({ score, imageSize }: LabelProps & StyleProps) {
   }
   if (score === 0) {
     return (
-      <StarCountAtom
+      <StarIconAtom
         src={`${process.env.PUBLIC_URL}/assets/func/star-empty.png`}
         alt="star empty"
         imageSize={imageSize}
@@ -44,9 +44,9 @@ function StarCountLabel({ score, imageSize }: LabelProps & StyleProps) {
   }
 }
 
-export default StarCountLabel;
+export default StarIcon;
 
-const StarCountAtom = styled.img<StyleProps>`
+const StarIconAtom = styled.img<StyleProps>`
   width: ${({ imageSize }) => imageSize};
   height: ${({ imageSize }) => imageSize};
 `;

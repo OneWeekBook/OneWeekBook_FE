@@ -41,11 +41,9 @@ const DefaultLabelAtom = styled.div<StyleProps>`
   p {
     color: ${({ fontColor }) => fontColor};
     font-weight: ${({ fontWeight }) => fontWeight};
+    font-size: ${({ fontSize }) => fontSize && fontSize - 1}rem;
     &:first-child {
       font-size: ${({ fontSize }) => fontSize}rem;
-    }
-    &:last-child {
-      font-size: ${({ fontSize }) => fontSize && fontSize - 1}rem;
     }
   }
 `;

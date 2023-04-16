@@ -1,9 +1,7 @@
-import { lazy, useMemo } from 'react';
+import { useMemo } from 'react';
 import Container from 'common/Container';
-
-const SignInForm = lazy(
-  () => import(/* webpackChunkName: "SignInForm" */ './components/SignInForm'),
-);
+import SignInForm from 'components/modules/sign/SignInForm';
+import SignForm from 'components/modules/sign/SignForm';
 
 function Index() {
   const FormStyle = useMemo(
@@ -13,7 +11,9 @@ function Index() {
 
   return (
     <Container style={FormStyle}>
-      <SignInForm />
+      <SignForm>
+        <SignInForm />
+      </SignForm>
     </Container>
   );
 }

@@ -44,7 +44,7 @@ function Sidebar({ toggle, handleToggle }: PropsTypes) {
   }, [toggle]);
 
   return (
-    <Wrapper isToggle={toggle}>
+    <SideBarBody isToggle={toggle}>
       {sessionStorage.getItem('accessToken') ? (
         <>
           <SideBarLink handleClick={logoutClick} content="로그아웃" />
@@ -97,13 +97,13 @@ function Sidebar({ toggle, handleToggle }: PropsTypes) {
           handleCanCelClick={handleModalToggle}
         />
       )}
-    </Wrapper>
+    </SideBarBody>
   );
 }
 
 export default Sidebar;
 
-const Wrapper = styled.div<{ isToggle: boolean }>`
+const SideBarBody = styled.div<{ isToggle: boolean }>`
   background-color: white;
   position: fixed;
   z-index: 100;

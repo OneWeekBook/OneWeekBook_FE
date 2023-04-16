@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import DefaultButton from 'components/Button/DefaultButton';
-import OnboardForm from 'components/Form/OnboardForm';
+import SignForm from 'components/modules/sign/SignForm';
 import SignUpForm from './SignUpForm';
 
 function SignUpWrapper() {
   return (
-    <OnboardForm>
+    <SignForm>
       <SignUpForm />
       <Link to="/sign-in">
         <DefaultButton
@@ -20,7 +20,7 @@ function SignUpWrapper() {
           title="로그인"
         />
       </Link>
-    </OnboardForm>
+    </SignForm>
   );
 }
 

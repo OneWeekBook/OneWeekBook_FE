@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-interface LabelProps {
+interface TextProps {
   before?: string;
   data: string;
   after?: string;
@@ -12,25 +12,25 @@ interface StyleProps {
   fontWeight?: number;
 }
 
-function DataLabel({ before, data, after, ...rest }: LabelProps & StyleProps) {
+function DataText({ before, data, after, ...rest }: TextProps & StyleProps) {
   return (
-    <DataLabelAtom {...rest}>
+    <DataTextAtom {...rest}>
       {before}
       <span>{data}</span>
       {after}
-    </DataLabelAtom>
+    </DataTextAtom>
   );
 }
 
-DataLabel.defaultProps = {
+DataText.defaultProps = {
   fontSize: 1.6,
   fontColor: 'black',
   fontWeight: 500,
 };
 
-export default DataLabel;
+export default DataText;
 
-const DataLabelAtom = styled.p<StyleProps>`
+const DataTextAtom = styled.p<StyleProps>`
   color: ${({ fontColor }) => fontColor};
   font-size: ${({ fontSize }) => fontSize}rem;
   font-weight: ${({ fontWeight }) => fontWeight};
