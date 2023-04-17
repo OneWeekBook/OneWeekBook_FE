@@ -33,20 +33,18 @@ function StarIcon({ score, imageSize }: IconProps & StyleProps) {
       />
     );
   }
-  if (score === 0) {
-    return (
-      <StarIconAtom
-        src={`${process.env.PUBLIC_URL}/assets/func/star-empty.png`}
-        alt="star empty"
-        imageSize={imageSize}
-      />
-    );
-  }
+  return (
+    <StarIconAtom
+      src={`${process.env.PUBLIC_URL}/assets/func/star-empty.png`}
+      alt="star empty"
+      imageSize={imageSize}
+    />
+  );
 }
 
 export default StarIcon;
 
 const StarIconAtom = styled.img<StyleProps>`
-  width: ${({ imageSize }) => imageSize};
-  height: ${({ imageSize }) => imageSize};
+  width: ${({ imageSize }) => imageSize}px;
+  height: ${({ imageSize }) => imageSize}px;
 `;

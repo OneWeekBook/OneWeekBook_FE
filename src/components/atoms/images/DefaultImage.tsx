@@ -9,6 +9,7 @@ interface DefaultImageProps {
 
 interface StyleProps {
   pc: number[];
+  tablet?: number[];
   mobile?: number[];
 }
 
@@ -38,6 +39,10 @@ const DefaultImageAtom = styled.img<StyleProps>`
   &.bookimage {
     border-radius: 0px 5px 5px 0px;
     box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.2);
+  }
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+    width: ${({ tablet }) => tablet && tablet[0]}px;
+    height: ${({ tablet }) => tablet && tablet[1]}px;
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     width: ${({ mobile }) => mobile && mobile[0]}px;

@@ -10,7 +10,7 @@ function Footer() {
         <DefaultLabel
           content="ONEWEEKBOOK"
           subContent="Create by leejy001 leejh96"
-          fontColor={theme.color.COLOR_FONT_FOUR}
+          fontColor={theme.color.COLOR_WHITE}
           fontSize={2.8}
           flexGap={10}
         />

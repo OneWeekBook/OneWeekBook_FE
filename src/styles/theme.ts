@@ -9,6 +9,7 @@ const color = {
   COLOR_NONE: 'transparent',
   COLOR_BLACK: 'black',
   COLOR_WHITE: 'white',
+  COLOR_ANTIQUE_WHITE: 'antiquewhite',
   COLOR_RED: 'red',
   COLOR_GRAY: 'gray',
   COLOR_DIM_GRAY: 'dimgray',
@@ -26,7 +27,6 @@ const color = {
   COLOR_FONT_ONE: '#a25b5b',
   COLOR_FONT_TWO: '#322a25',
   COLOR_FONT_THREE: '#7ca7d3',
-  COLOR_FONT_FOUR: '#ffffff',
   COLOR_FONT_FIVE: '#ad8b73',
 };
 
