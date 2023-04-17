@@ -1,14 +1,7 @@
 import styled from 'styled-components';
+import { IconType, IconStyleType } from 'types/atom';
 
-interface IconProps {
-  score: number;
-}
-
-interface StyleProps {
-  imageSize: number;
-}
-
-function StarIcon({ score, imageSize }: IconProps & StyleProps) {
+function StarIcon({ score, imageSize }: IconType & IconStyleType) {
   if (score === 1) {
     return (
       <StarIconAtom
@@ -44,7 +37,7 @@ function StarIcon({ score, imageSize }: IconProps & StyleProps) {
 
 export default StarIcon;
 
-const StarIconAtom = styled.img<StyleProps>`
+const StarIconAtom = styled.img<IconStyleType>`
   width: ${({ imageSize }) => imageSize}px;
   height: ${({ imageSize }) => imageSize}px;
 `;

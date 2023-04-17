@@ -1,11 +1,7 @@
 import styled from 'styled-components';
+import { ReviewInputTypes } from 'types/atom';
 
-interface InputProps {
-  value: string;
-  handleBlur: () => void;
-}
-
-function ReviewInput({ value, handleBlur }: InputProps) {
+function ReviewInput({ value, handleBlur }: ReviewInputTypes) {
   return (
     <ReviewInputAtom
       placeholder="리뷰를 작성해주세요."

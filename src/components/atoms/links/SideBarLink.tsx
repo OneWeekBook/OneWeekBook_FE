@@ -1,11 +1,7 @@
 import styled from 'styled-components';
+import { LinkTypes } from 'types/atom';
 
-interface LinkProps {
-  content: string;
-  handleClick: () => void;
-}
-
-function SideBarLink({ content, handleClick }: LinkProps) {
+function SideBarLink({ content, handleClick }: LinkTypes) {
   return <SideBarLinkAtom onClick={handleClick}>{content}</SideBarLinkAtom>;
 }
 

@@ -1,11 +1,7 @@
 import styled from 'styled-components';
+import { BannerImageTypes } from 'types/atom';
 
-interface ImageProps {
-  newItemWidth: number;
-  imageSrc: string;
-}
-
-function BannerImage({ newItemWidth, imageSrc }: ImageProps) {
+function BannerImage({ newItemWidth, imageSrc }: BannerImageTypes) {
   return (
     <BannerImageAtom style={{ width: newItemWidth || 'auto' }}>
       <img src={imageSrc} alt="banner img" />

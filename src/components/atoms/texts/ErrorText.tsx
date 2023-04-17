@@ -1,11 +1,7 @@
 import styled from 'styled-components';
+import { ErrorTypes } from 'types/atom';
 
-interface ErrorProps {
-  error: string;
-  align?: string;
-}
-
-function ErrorText({ error, align }: ErrorProps) {
+function ErrorText({ error, align }: ErrorTypes) {
   return <ErrorTextAtom align={align}>{error}</ErrorTextAtom>;
 }
 

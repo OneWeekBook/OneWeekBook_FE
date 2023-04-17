@@ -1,17 +1,5 @@
 import styled from 'styled-components';
-
-interface DefaultImageProps {
-  imageSrc: string;
-  imageAlt: string;
-  className?: string;
-  onError?: (event: React.SyntheticEvent<HTMLImageElement, Event>) => void;
-}
-
-interface StyleProps {
-  pc: number[];
-  tablet?: number[];
-  mobile?: number[];
-}
+import { DefaultImageTypes, ImageStyleTypes } from 'types/atom';
 
 function DefaultImage({
   imageSrc,
@@ -19,7 +7,7 @@ function DefaultImage({
   className,
   onError,
   ...rest
-}: DefaultImageProps & StyleProps) {
+}: DefaultImageTypes & ImageStyleTypes) {
   return (
     <DefaultImageAtom
       className={className}
@@ -33,7 +21,7 @@ function DefaultImage({
 
 export default DefaultImage;
 
-const DefaultImageAtom = styled.img<StyleProps>`
+const DefaultImageAtom = styled.img<ImageStyleTypes>`
   width: ${({ pc }) => pc[0]}px;
   height: ${({ pc }) => pc[1]}px;
   &.bookimage {

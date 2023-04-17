@@ -1,19 +1,8 @@
 import styled from 'styled-components';
 import theme from 'styles/theme';
+import { TagStyleTypes, TagTypes } from 'types/atom';
 
-interface TagProps {
-  content: string;
-  src: string;
-}
-
-interface StyleProps {
-  fontSize?: number;
-  fontColor?: string;
-  fontWeight?: number;
-  imgSize?: number;
-}
-
-function DefaultTag({ content, src, ...rest }: TagProps & StyleProps) {
+function DefaultTag({ content, src, ...rest }: TagTypes & TagStyleTypes) {
   return (
     <DefaultTagAtom {...rest}>
       <img src={src} alt="tag img" />
@@ -30,7 +19,7 @@ DefaultTag.defaultProps = {
 
 export default DefaultTag;
 
-const DefaultTagAtom = styled.div<StyleProps>`
+const DefaultTagAtom = styled.div<TagStyleTypes>`
   img {
     width: ${({ imgSize }) => imgSize}px;
     height: ${({ imgSize }) => imgSize}px;

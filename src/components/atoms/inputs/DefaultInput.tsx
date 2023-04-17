@@ -1,23 +1,12 @@
 import styled from 'styled-components';
-
-interface InputProps {
-  value: string;
-  handleChange: () => void;
-  placeholder: string;
-}
-
-interface StyleProps {
-  fontSize?: number;
-  fontColor?: string;
-  fontWeight?: number;
-}
+import { DefaultInputTypes, InputStyleTypes } from 'types/atom';
 
 function DefaultInput({
   value,
   handleChange,
   placeholder,
   ...rest
-}: InputProps & StyleProps) {
+}: DefaultInputTypes & InputStyleTypes) {
   return (
     <DefaultInputAtom
       type="text"
@@ -36,7 +25,7 @@ DefaultInput.defaultProps = {
 
 export default DefaultInput;
 
-const DefaultInputAtom = styled.input<StyleProps>`
+const DefaultInputAtom = styled.input<InputStyleTypes>`
   width: 100%;
   height: 40px;
   box-sizing: border-box;

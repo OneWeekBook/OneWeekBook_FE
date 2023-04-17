@@ -1,16 +1,11 @@
 import styled from 'styled-components';
+import { BannerButtonTypes } from 'types/atom';
 
-interface ButtonProps {
-  onClick: (idx: number) => void;
-  direct: string;
-  imageSrc: string;
-}
-
-function BannerButton({ onClick, direct, imageSrc }: ButtonProps) {
+function BannerButton({ handleClick, direct, imageSrc }: BannerButtonTypes) {
   return (
     <BannerButtonAtom
       type="button"
-      onClick={() => onClick(-1)}
+      onClick={() => handleClick(-1)}
       direct={direct}
       url={imageSrc}
     />

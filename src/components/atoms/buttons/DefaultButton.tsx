@@ -1,22 +1,6 @@
 import styled from 'styled-components';
 import theme from 'styles/theme';
-
-interface ButtonProps {
-  handleClick?: () => void;
-  content?: string;
-  disabled?: boolean;
-  type?: 'button' | 'submit';
-}
-
-interface StyleProps {
-  fontSize?: number;
-  fontColor?: string[];
-  fontWeight?: number;
-  bgColor?: string[];
-  isBtnClick?: boolean;
-  width?: number | string;
-  height?: number;
-}
+import { ButtonStyleTypes, DefaultButtonTypes } from 'types/atom';
 
 function DefaultButton({
   handleClick,
@@ -24,7 +8,7 @@ function DefaultButton({
   disabled,
   type,
   ...rest
-}: ButtonProps & StyleProps) {
+}: DefaultButtonTypes & ButtonStyleTypes) {
   return (
     <DefaultButtonAtom
       type={type}
@@ -50,7 +34,7 @@ DefaultButton.defaultProps = {
 
 export default DefaultButton;
 
-const DefaultButtonAtom = styled.button<StyleProps>`
+const DefaultButtonAtom = styled.button<ButtonStyleTypes>`
   cursor: pointer;
   color: ${({ fontColor }) => fontColor && fontColor[0]};
   font-size: ${({ fontSize }) => fontSize}rem;

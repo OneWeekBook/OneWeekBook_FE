@@ -1,22 +1,12 @@
 import styled from 'styled-components';
-
-interface ButtonProps {
-  handleClick: () => void;
-  type?: 'button' | 'submit';
-  src: string;
-}
-
-interface StyleProps {
-  bgColor?: string;
-  imgSize?: number;
-}
+import { ButtonStyleTypes, ImageButtonTypes } from 'types/atom';
 
 function ImageButton({
   type,
   handleClick,
   src,
   ...rest
-}: ButtonProps & StyleProps) {
+}: ImageButtonTypes & ButtonStyleTypes) {
   return (
     <ImageButtonAtom type={type} onClick={handleClick} {...rest}>
       <img src={src} alt="img button" />
@@ -30,7 +20,7 @@ ImageButton.defaultProps = {
 
 export default ImageButton;
 
-const ImageButtonAtom = styled.button<StyleProps>`
+const ImageButtonAtom = styled.button<ButtonStyleTypes>`
   border: none;
   background-color: ${({ bgColor }) => bgColor};
   cursor: pointer;

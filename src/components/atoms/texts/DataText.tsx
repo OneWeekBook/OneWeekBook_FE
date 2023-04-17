@@ -1,19 +1,13 @@
 import styled from 'styled-components';
 import theme from 'styles/theme';
+import { DataTextTypes, TextStyleTypes } from 'types/atom';
 
-interface TextProps {
-  before?: string;
-  data: string | number;
-  after?: string;
-}
-
-interface StyleProps {
-  fontSize?: number;
-  fontColor?: string;
-  fontWeight?: number;
-}
-
-function DataText({ before, data, after, ...rest }: TextProps & StyleProps) {
+function DataText({
+  before,
+  data,
+  after,
+  ...rest
+}: DataTextTypes & TextStyleTypes) {
   return (
     <DataTextAtom {...rest}>
       {before}
@@ -31,7 +25,7 @@ DataText.defaultProps = {
 
 export default DataText;
 
-const DataTextAtom = styled.p<StyleProps>`
+const DataTextAtom = styled.p<TextStyleTypes>`
   color: ${({ fontColor }) => fontColor};
   font-size: ${({ fontSize }) => fontSize}rem;
   font-weight: ${({ fontWeight }) => fontWeight};

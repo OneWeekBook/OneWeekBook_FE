@@ -1,20 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
-interface InputProps {
-  type: string;
-  maxLength?: number;
-  placeholder: string;
-  value: string;
-  pattern?: string;
-  disabled?: boolean;
-  mref?: React.RefObject<HTMLInputElement>;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onKeyPress?: (
-    event: React.KeyboardEvent<Element>,
-    ref?: React.RefObject<HTMLInputElement>,
-  ) => void;
-}
+import { BorderInputTypes } from 'types/atom';
 
 function BorderInput({
   type,
@@ -27,7 +13,7 @@ function BorderInput({
   onChange,
   onKeyPress,
   children,
-}: React.PropsWithChildren<InputProps>) {
+}: React.PropsWithChildren<BorderInputTypes>) {
   return (
     <BorderInputAtom>
       <input

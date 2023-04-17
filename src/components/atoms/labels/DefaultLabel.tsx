@@ -1,24 +1,12 @@
 import styled from 'styled-components';
 import theme from 'styles/theme';
-
-interface LabelProps {
-  content: string;
-  subContent?: string;
-}
-
-interface StyleProps {
-  fontSize?: number;
-  fontColor?: string;
-  fontWeight?: number;
-  flexGap?: number;
-  reactive?: boolean;
-}
+import { DefaultLabelTypes, LabelStyleTypes } from 'types/atom';
 
 function DefaultLabel({
   content,
   subContent,
   ...rest
-}: LabelProps & StyleProps) {
+}: DefaultLabelTypes & LabelStyleTypes) {
   return (
     <DefaultLabelAtom {...rest}>
       <p>{content}</p>
@@ -36,7 +24,7 @@ DefaultLabel.defaultProps = {
 
 export default DefaultLabel;
 
-const DefaultLabelAtom = styled.div<StyleProps>`
+const DefaultLabelAtom = styled.div<LabelStyleTypes>`
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -1,20 +1,6 @@
 import styled from 'styled-components';
 import theme from 'styles/theme';
-
-interface ButtonProps {
-  handleClick?: () => void;
-  content: string;
-  src: string;
-  type?: 'button' | 'submit';
-}
-
-interface StyleProps {
-  fontSize?: number;
-  fontColor?: string;
-  fontWeight?: number;
-  bgColor?: string[];
-  imgSize?: number;
-}
+import { ButtonStyleTypes, MenuButtonTypes } from 'types/atom';
 
 function MenuButton({
   handleClick,
@@ -22,7 +8,7 @@ function MenuButton({
   src,
   type,
   ...rest
-}: ButtonProps & StyleProps) {
+}: MenuButtonTypes & ButtonStyleTypes) {
   return (
     <MenuButtonAtom type={type} onClick={handleClick} {...rest}>
       <img src={src} alt="menu img" />
@@ -41,7 +27,7 @@ MenuButton.defaultProps = {
 
 export default MenuButton;
 
-const MenuButtonAtom = styled.button<StyleProps>`
+const MenuButtonAtom = styled.button<ButtonStyleTypes>`
   display: flex;
   align-items: center;
   gap: 5px;

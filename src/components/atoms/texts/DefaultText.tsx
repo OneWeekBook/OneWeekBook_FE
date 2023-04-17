@@ -1,27 +1,13 @@
 import styled from 'styled-components';
 import theme from 'styles/theme';
-
-interface LabelProps {
-  content: string | number;
-  subContent?: string | number;
-  className?: string;
-}
-
-interface StyleProps {
-  fontSize?: number;
-  fontColor?: string;
-  fontWeight?: number;
-  padding?: number;
-  align?: string;
-  reactive?: boolean;
-}
+import { DefaultTextTypes, TextStyleTypes } from 'types/atom';
 
 function DefaultText({
   content,
   subContent,
   className,
   ...rest
-}: LabelProps & StyleProps) {
+}: DefaultTextTypes & TextStyleTypes) {
   return (
     <DefaultTextAtom className={className} {...rest}>
       {content}
@@ -45,7 +31,7 @@ DefaultText.defaultProps = {
 
 export default DefaultText;
 
-const DefaultTextAtom = styled.p<StyleProps>`
+const DefaultTextAtom = styled.p<TextStyleTypes>`
   padding: ${({ padding }) => padding}px;
   color: ${({ fontColor }) => fontColor};
   font-weight: ${({ fontWeight }) => fontWeight};

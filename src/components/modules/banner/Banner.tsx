@@ -6,7 +6,7 @@ import BannerButton from 'components/atoms/buttons/BannerButton';
 import BannerImage from 'components/atoms/images/BannerImage';
 import { SlideMobileItems, SlidePCItems } from 'contain/banner';
 
-interface SlideItemProps {
+interface BannerProps {
   id: number;
   img: string;
 }
@@ -105,12 +105,12 @@ function Banner() {
   return (
     <BannerContainer>
       <BannerButton
-        onClick={() => handleSwipe(-1)}
+        handleClick={() => handleSwipe(-1)}
         direct="prev"
         imageSrc={`${process.env.PUBLIC_URL}/assets/arrow/slide-left-arrow.svg`}
       />
       <BannerButton
-        onClick={() => handleSwipe(1)}
+        handleClick={() => handleSwipe(1)}
         direct="next"
         imageSrc={`${process.env.PUBLIC_URL}/assets/arrow/slide-right-arrow.svg`}
       />
@@ -123,7 +123,7 @@ function Banner() {
       >
         {newItemWidth > 849 ? (
           <>
-            {pcSlides.map((item: SlideItemProps, index: number) => (
+            {pcSlides.map((item: BannerProps, index: number) => (
               <BannerImage
                 key={index}
                 imageSrc={item.img}
@@ -133,7 +133,7 @@ function Banner() {
           </>
         ) : (
           <>
-            {mobileSlides.map((item: SlideItemProps, index: number) => (
+            {mobileSlides.map((item: BannerProps, index: number) => (
               <BannerImage
                 key={index}
                 imageSrc={item.img}

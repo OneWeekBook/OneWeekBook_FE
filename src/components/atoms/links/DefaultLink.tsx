@@ -1,26 +1,14 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import theme from 'styles/theme';
-
-interface LinkProps {
-  to: string;
-  content: string;
-  replace?: boolean;
-  handleClick?: () => void;
-}
-
-interface StyleProps {
-  fontSize?: number;
-  color?: string;
-  fontWeight?: number;
-}
+import { DefaultLinkTypes, LinkStyleTypes } from 'types/atom';
 
 function DefaultLink({
   to,
   content,
   handleClick,
   ...rest
-}: React.PropsWithChildren<LinkProps & StyleProps>) {
+}: React.PropsWithChildren<DefaultLinkTypes & LinkStyleTypes>) {
   return (
     <DefaultLinkAtom
       to={to}
@@ -42,7 +30,7 @@ DefaultLink.defaultProps = {
 
 export default DefaultLink;
 
-const DefaultLinkAtom = styled(Link)<StyleProps>`
+const DefaultLinkAtom = styled(Link)<LinkStyleTypes>`
   color: ${({ color }) => color};
   font-size: ${({ fontSize }) => fontSize}rem;
   font-weight: ${({ fontWeight }) => fontWeight};
