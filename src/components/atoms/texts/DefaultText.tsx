@@ -2,8 +2,9 @@ import styled from 'styled-components';
 import theme from 'styles/theme';
 
 interface LabelProps {
-  content: string;
-  subContent?: string;
+  content: string | number;
+  subContent?: string | number;
+  className?: string;
 }
 
 interface StyleProps {
@@ -16,13 +17,18 @@ interface StyleProps {
 function DefaultText({
   content,
   subContent,
+  className,
   ...rest
 }: LabelProps & StyleProps) {
   return (
-    <DefaultTextAtom {...rest}>
+    <DefaultTextAtom className={className} {...rest}>
       {content}
-      <br />
-      {subContent}
+      {subContent && (
+        <>
+          <br />
+          {subContent}
+        </>
+      )}
     </DefaultTextAtom>
   );
 }

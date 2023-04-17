@@ -3,7 +3,7 @@ import theme from 'styles/theme';
 
 interface TextProps {
   before?: string;
-  data: string;
+  data: string | number;
   after?: string;
 }
 

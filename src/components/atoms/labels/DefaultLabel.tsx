@@ -11,6 +11,7 @@ interface StyleProps {
   fontColor?: string;
   fontWeight?: number;
   flexGap?: number;
+  reactive?: boolean;
 }
 
 function DefaultLabel({
@@ -30,6 +31,7 @@ DefaultLabel.defaultProps = {
   fontSize: 1.6,
   fontColor: theme.color.COLOR_CORAL,
   fontWeight: 500,
+  reactive: false,
 };
 
 export default DefaultLabel;
@@ -37,6 +39,7 @@ export default DefaultLabel;
 const DefaultLabelAtom = styled.div<StyleProps>`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: ${({ flexGap }) => flexGap}px;
   background-color: ${({ theme }) => theme.color.COLOR_NONE};
   p {
@@ -45,6 +48,16 @@ const DefaultLabelAtom = styled.div<StyleProps>`
     font-size: ${({ fontSize }) => fontSize && fontSize - 1}rem;
     &:first-child {
       font-size: ${({ fontSize }) => fontSize}rem;
+    }
+  }
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    p {
+      font-size: ${({ fontSize, reactive }) =>
+        reactive && fontSize && fontSize - 2}rem;
+      &:first-child {
+        font-size: ${({ fontSize, reactive }) =>
+          reactive && fontSize && fontSize - 1}rem;
+      }
     }
   }
 `;

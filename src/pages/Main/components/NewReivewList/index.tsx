@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
 import { NewReviewTypes } from 'types/main';
 import NewReivewItem from './NewReivewItem';
-import MainListTitle from '../MainListTitle';
+import MainListTitle from '../../../../components/modules/labels/MainLabel';
 import SlideButton from '../../common/SlideButton';
 
 function NewReviewList() {

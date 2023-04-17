@@ -3,7 +3,7 @@ import theme from 'styles/theme';
 
 interface ButtonProps {
   handleClick?: () => void;
-  content: string;
+  content?: string;
   disabled?: boolean;
   type?: 'button' | 'submit';
 }
@@ -13,6 +13,7 @@ interface StyleProps {
   fontColor?: string[];
   fontWeight?: number;
   bgColor?: string[];
+  isBtnClick?: boolean;
   width?: number | string;
   height?: number;
 }
@@ -41,6 +42,7 @@ DefaultButton.defaultProps = {
   fontSize: 1.6,
   fontColor: ['white', 'white'],
   fontWeight: 500,
+  isBtnClick: false,
   bgColor: [theme.color.COLOR_CORAL, theme.color.COLOR_TOMATO],
   width: 120,
   height: 40,
@@ -57,7 +59,8 @@ const DefaultButtonAtom = styled.button<StyleProps>`
   height: ${({ height }) => height}px;
   border: none;
   border-radius: 5px;
-  background-color: ${({ bgColor }) => bgColor && `${bgColor[0]}`};
+  background-color: ${({ bgColor, isBtnClick }) =>
+    isBtnClick ? bgColor && `${bgColor[1]}` : bgColor && `${bgColor[0]}`};
   &:hover {
     color: ${({ fontColor }) => fontColor && fontColor[1]};
     background-color: ${({ bgColor }) => bgColor && `${bgColor[1]}`};
