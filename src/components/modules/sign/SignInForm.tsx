@@ -1,21 +1,17 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import theme from 'styles/theme';
 import { AppStateType } from 'redux/reducers';
 import { SignInInit, SignInRequest } from 'redux/reducers/SignIn';
+import useInput from 'hooks/useInput';
+import useInputEnter from 'hooks/useInputEnter';
+import { useSignInErrorCheck } from 'hooks/useSignInErrorCheck';
 import ErrorText from 'components/atoms/text/ErrorText';
 import DefaultButton from 'components/atoms/button/DefaultButton';
 import BorderInput from 'components/atoms/input/BorderInput';
-import DefaultLabel from 'components/atoms/label/DefaultLabel';
-import useInput from 'hooks/useInput';
-import useRouter from 'hooks/useRouter';
-import useInputEnter from 'hooks/useInputEnter';
-import { useSignInErrorCheck } from 'hooks/useSignInErrorCheck';
 
 function SignInForm() {
   const dispatch = useDispatch();
-  const { routeTo } = useRouter();
   const emailRef = useRef<HTMLInputElement>(null);
   const passRef = useRef<HTMLInputElement>(null);
   const [email, changeEmail] = useInput('');
@@ -52,57 +48,29 @@ function SignInForm() {
   }, [signInErrorStatus]);
 
   return (
-    <SignInFormWrapper>
-      <DefaultLabel
-        content="로그인"
-        fontSize={2.4}
-        fontColor={theme.color.COLOR_FONT_ONE}
+    <Form onSubmit={handleSubmit}>
+      <BorderInput
+        type="email"
+        placeholder="이메일"
+        value={email}
+        onChange={changeEmail}
+        onKeyPress={(event) => handleInputEnter(event, passRef)}
+        mref={emailRef}
       />
-      <Form onSubmit={handleSubmit}>
-        <BorderInput
-          type="email"
-          placeholder="이메일"
-          value={email}
-          onChange={changeEmail}
-          onKeyPress={(event) => handleInputEnter(event, passRef)}
-          mref={emailRef}
-        />
-        <BorderInput
-          type="password"
-          placeholder="비밀번호"
-          value={password}
-          onChange={changePassword}
-          mref={passRef}
-        />
-        {signInError && <ErrorText error={signInErrorMsg} align="left" />}
-        <DefaultButton
-          type="submit"
-          content="로그인"
-          width="auto"
-          fontSize={2}
-        />
-      </Form>
-      <DefaultButton
-        bgColor={['#faf39e', '#ffd400']}
-        content="회원가입"
-        width="auto"
-        fontColor={['#000000', '#000000']}
-        fontSize={2}
-        handleClick={() => routeTo('/sign-up')}
+      <BorderInput
+        type="password"
+        placeholder="비밀번호"
+        value={password}
+        onChange={changePassword}
+        mref={passRef}
       />
-    </SignInFormWrapper>
+      {signInError && <ErrorText error={signInErrorMsg} align="left" />}
+      <DefaultButton type="submit" content="로그인" width="auto" fontSize={2} />
+    </Form>
   );
 }
 
 export default SignInForm;
-
-const SignInFormWrapper = styled.div`
-  box-sizing: border-box;
-  text-align: center;
-  button {
-    margin-top: 10px;
-  }
-`;
 
 const Form = styled.form`
   display: flex;

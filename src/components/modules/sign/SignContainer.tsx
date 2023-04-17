@@ -2,12 +2,16 @@ import { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
 function SignForm({ children }: PropsWithChildren) {
-  return <SignFormBody>{children}</SignFormBody>;
+  return (
+    <SignFormContainer>
+      <SignFormBody>{children}</SignFormBody>
+    </SignFormContainer>
+  );
 }
 
 export default SignForm;
 
-const SignFormBody = styled.div`
+const SignFormContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,5 +25,13 @@ const SignFormBody = styled.div`
   height: 500px;
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     width: 355px;
+  }
+`;
+
+const SignFormBody = styled.div`
+  box-sizing: border-box;
+  text-align: center;
+  button {
+    margin-top: 10px;
   }
 `;
