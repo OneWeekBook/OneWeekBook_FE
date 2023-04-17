@@ -9,7 +9,7 @@ type PropsType = {
   count: number;
 };
 
-function BestItem({
+function BestBookCard({
   idx,
   author,
   img,
@@ -19,7 +19,7 @@ function BestItem({
   count,
 }: React.PropsWithChildren<ReviewItemType> & PropsType) {
   return (
-    <ItemWrapper>
+    <CardContainer>
       <Link to={`/review/${isbn}?sort=recommend`}>
         <BookImage src={img} alt="book" onError={getImgErr} />
         <InfoWrapper>
@@ -49,13 +49,13 @@ function BestItem({
           </BookInfoWrapper>
         </InfoWrapper>
       </Link>
-    </ItemWrapper>
+    </CardContainer>
   );
 }
 
-export default BestItem;
+export default BestBookCard;
 
-const ItemWrapper = styled.div`
+const CardContainer = styled.div`
   width: 495px;
   a {
     display: flex;

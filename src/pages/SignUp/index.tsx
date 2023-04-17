@@ -2,11 +2,11 @@ import { useMemo, useState } from 'react';
 import theme from 'styles/theme';
 import useRouter from 'hooks/useRouter';
 import Container from 'common/Container';
-import SignContainer from 'components/modules/sign/SignContainer';
-import SignUpForm from 'components/modules/sign/SignUpForm';
-import DefaultLabel from 'components/atoms/label/DefaultLabel';
-import DefaultButton from 'components/atoms/button/DefaultButton';
-import AuthEmailForm from 'components/modules/sign/SignAuthEmail';
+import SignContainer from 'components/modules/signs/SignContainer';
+import SignUpForm from 'components/modules/signs/SignUpForm';
+import DefaultLabel from 'components/atoms/labels/DefaultLabel';
+import DefaultButton from 'components/atoms/buttons/DefaultButton';
+import AuthEmailForm from 'components/modules/signs/SignAuthEmail';
 
 function SignUpPage() {
   const { routeTo } = useRouter();

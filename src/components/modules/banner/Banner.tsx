@@ -2,27 +2,19 @@ import { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import useInterval from 'hooks/useInterval';
 import useWindowSize from 'hooks/useWindowSize';
-import SlideButton from './SlideButton';
+import BannerButton from 'components/atoms/buttons/BannerButton';
+import BannerImage from 'components/atoms/images/BannerImage';
+import { SlideMobileItems, SlidePCItems } from 'contain/banner';
 
-const SlidePCItems = [
-  { id: 1, img: `/assets/slide/slidePC_one.png` },
-  { id: 2, img: `/assets/slide/slidePC_two.png` },
-];
-
-const SlideMobileItems = [
-  { id: 1, img: `/assets/slide/slideMobile_one.png` },
-  { id: 2, img: `/assets/slide/slideMobile_two.png` },
-];
-
-type SlideItemsType = {
+interface SlideItemProps {
   id: number;
   img: string;
-};
+}
 
-function Index() {
+function Banner() {
   const itemSize = SlidePCItems.length;
   const addItemSize = 2;
-  const [windowWidth, windowHeight] = useWindowSize();
+  const [windowWidth] = useWindowSize();
   const [curIndex, setCurIndex] = useState<number>(addItemSize);
   const transitionStyle = `transform 500ms ease 0s`;
   const [transition, setTransition] = useState<string>(transitionStyle);
@@ -82,7 +74,7 @@ function Index() {
     () => {
       handleSlide(curIndex + 1);
     },
-    !isSwiping ? 3000 : null,
+    !isSwiping ? 5000 : null,
   );
 
   const replaceSlide = (index: number) => {
@@ -111,67 +103,58 @@ function Index() {
   };
 
   return (
-    <Wrapper>
-      <Slider>
-        <SlideButton onClick={handleSwipe} />
-        <SlideListWrapper>
-          <SlideWrapper
-            index={curIndex}
-            len={pcSlides.length}
-            transition={transition}
-            onMouseOver={() => setIsSwiping(true)}
-            onMouseOut={() => setIsSwiping(false)}
-          >
-            {newItemWidth > 849 ? (
-              <>
-                {pcSlides.map((item: SlideItemsType, index: number) => {
-                  return (
-                    <SlideItem
-                      key={index}
-                      style={{ width: newItemWidth || 'auto' }}
-                    >
-                      <img src={item.img} alt="slide one" />
-                    </SlideItem>
-                  );
-                })}
-              </>
-            ) : (
-              <>
-                {mobileSlides.map((item: SlideItemsType, index: number) => {
-                  return (
-                    <SlideItem
-                      key={index}
-                      style={{ width: newItemWidth || 'auto' }}
-                    >
-                      <img src={item.img} alt="slide one" />
-                    </SlideItem>
-                  );
-                })}
-              </>
-            )}
-          </SlideWrapper>
-        </SlideListWrapper>
-      </Slider>
-    </Wrapper>
+    <BannerContainer>
+      <BannerButton
+        onClick={() => handleSwipe(-1)}
+        direct="prev"
+        imageSrc={`${process.env.PUBLIC_URL}/assets/arrow/slide-left-arrow.svg`}
+      />
+      <BannerButton
+        onClick={() => handleSwipe(1)}
+        direct="next"
+        imageSrc={`${process.env.PUBLIC_URL}/assets/arrow/slide-right-arrow.svg`}
+      />
+      <BannerSlider
+        index={curIndex}
+        len={pcSlides.length}
+        transition={transition}
+        onMouseOver={() => setIsSwiping(true)}
+        onMouseOut={() => setIsSwiping(false)}
+      >
+        {newItemWidth > 849 ? (
+          <>
+            {pcSlides.map((item: SlideItemProps, index: number) => (
+              <BannerImage
+                key={index}
+                imageSrc={item.img}
+                newItemWidth={newItemWidth}
+              />
+            ))}
+          </>
+        ) : (
+          <>
+            {mobileSlides.map((item: SlideItemProps, index: number) => (
+              <BannerImage
+                key={index}
+                imageSrc={item.img}
+                newItemWidth={newItemWidth}
+              />
+            ))}
+          </>
+        )}
+      </BannerSlider>
+    </BannerContainer>
   );
 }
 
-export default Index;
+export default Banner;
 
-const Wrapper = styled.div`
+const BannerContainer = styled.div`
   position: relative;
   overflow: hidden;
   height: auto;
   border-radius: 10px;
   margin: 20px auto;
-  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
-    width: 90%;
-  }
-`;
-
-const Slider = styled.div`
-  position: relative;
-  display: block;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-touch-callout: none;
@@ -182,16 +165,12 @@ const Slider = styled.div`
   -ms-touch-action: pan-y;
   touch-action: pan-y;
   -webkit-tap-highlight-color: transparent;
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+    width: 90%;
+  }
 `;
 
-const SlideListWrapper = styled.div`
-  position: relative;
-  overflow: hidden;
-  display: block;
-  margin: 0;
-`;
-
-const SlideWrapper = styled.div<{
+const BannerSlider = styled.div<{
   index: number;
   len: number;
   transition: string;
@@ -207,27 +186,4 @@ const SlideWrapper = styled.div<{
     `translateX(${(-100 / len) * (0.5 + index)}%)`};
   transition: -webkit-${({ transition }) => transition};
   transition: ${({ transition }) => transition};
-`;
-
-const SlideItem = styled.div`
-  position: relative;
-  width: 100%;
-  height: 350px;
-  margin: 0 10px;
-  img {
-    border-radius: 10px;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
-    margin: 0 5px;
-    img {
-      position: absolute;
-      width: 100%;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-  }
 `;

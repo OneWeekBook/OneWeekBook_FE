@@ -6,7 +6,7 @@ import { AppStateType } from 'redux/reducers';
 import { AuthUserRequest } from 'redux/reducers/AuthUser';
 import useToggle from 'hooks/useToggle';
 import TopScroll from 'lib/TopScroll';
-import DefaultLink from 'components/atoms/link/DefaultLink';
+import DefaultLink from 'components/atoms/links/DefaultLink';
 import Footer from './Footer';
 import Header from './Header';
 import Sidebar from './Sidebar';

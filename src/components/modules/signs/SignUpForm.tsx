@@ -7,9 +7,9 @@ import useInput from 'hooks/useInput';
 import useInputEnter from 'hooks/useInputEnter';
 import { useFormErrorCheck } from 'hooks/useFormErrorCheck';
 import { useSignUpErrorCheck } from 'hooks/useSignUpErrorCheck';
-import ErrorText from 'components/atoms/text/ErrorText';
-import DefaultButton from 'components/atoms/button/DefaultButton';
-import BorderInput from 'components/atoms/input/BorderInput';
+import ErrorText from 'components/atoms/texts/ErrorText';
+import DefaultButton from 'components/atoms/buttons/DefaultButton';
+import BorderInput from 'components/atoms/inputs/BorderInput';
 
 interface SignUpProps {
   email: string;

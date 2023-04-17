@@ -7,11 +7,11 @@ import { AuthCodeInit, AuthCodeRequest } from 'redux/reducers/AuthCode';
 import useInput from 'hooks/useInput';
 import { useRegexCheck } from 'hooks/useRegCheck';
 import { useAuthErrorCheck } from 'hooks/useAuthErrorCheck';
-import DefaultButton from 'components/atoms/button/DefaultButton';
-import BorderInput from 'components/atoms/input/BorderInput';
+import DefaultButton from 'components/atoms/buttons/DefaultButton';
+import BorderInput from 'components/atoms/inputs/BorderInput';
 import TimerForm from '../../Form/TimerForm';
-import EmailErrorForm from '../error/EmailErrorForm';
-import CodeErrorForm from '../error/CodeErrorForm';
+import EmailErrorForm from '../errors/EmailErrorForm';
+import CodeErrorForm from '../errors/CodeErrorForm';
 
 type AuthMailTypes = {
   authDone: boolean;

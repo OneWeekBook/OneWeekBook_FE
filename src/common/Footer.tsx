@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import DefaultLabel from 'components/atoms/label/DefaultLabel';
+import DefaultLabel from 'components/atoms/labels/DefaultLabel';
 import theme from 'styles/theme';
 import Container from './Container';
 

@@ -1,5 +1,5 @@
-import DefaultText from 'components/atoms/text/DefaultText';
-import ErrorText from 'components/atoms/text/ErrorText';
+import DefaultText from 'components/atoms/texts/DefaultText';
+import ErrorText from 'components/atoms/texts/ErrorText';
 
 interface EmailErrorProps {
   email: string;

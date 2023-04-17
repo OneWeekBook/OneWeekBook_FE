@@ -6,9 +6,9 @@ import { SignInInit, SignInRequest } from 'redux/reducers/SignIn';
 import useInput from 'hooks/useInput';
 import useInputEnter from 'hooks/useInputEnter';
 import { useSignInErrorCheck } from 'hooks/useSignInErrorCheck';
-import ErrorText from 'components/atoms/text/ErrorText';
-import DefaultButton from 'components/atoms/button/DefaultButton';
-import BorderInput from 'components/atoms/input/BorderInput';
+import ErrorText from 'components/atoms/texts/ErrorText';
+import DefaultButton from 'components/atoms/buttons/DefaultButton';
+import BorderInput from 'components/atoms/inputs/BorderInput';
 
 function SignInForm() {
   const dispatch = useDispatch();

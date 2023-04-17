@@ -1,5 +1,5 @@
-import ErrorText from 'components/atoms/text/ErrorText';
-import DefaultText from 'components/atoms/text/DefaultText';
+import ErrorText from 'components/atoms/texts/ErrorText';
+import DefaultText from 'components/atoms/texts/DefaultText';
 
 interface CodeErrorProps {
   code: string;

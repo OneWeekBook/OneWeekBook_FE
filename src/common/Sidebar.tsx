@@ -8,7 +8,7 @@ import useAuthLink from 'hooks/useAuthLink';
 import NoticeModal from 'components/Modal';
 import { useEffect } from 'react';
 import { NavItems } from 'contain/mainmenu';
-import SideBarLink from 'components/atoms/link/SideBarLink';
+import SideBarLink from 'components/atoms/links/SideBarLink';
 
 type PropsTypes = {
   toggle: boolean;

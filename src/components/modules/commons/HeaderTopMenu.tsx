@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import ImageButton from 'components/atoms/button/ImageButton';
-import DefaultLink from 'components/atoms/link/DefaultLink';
+import ImageButton from 'components/atoms/buttons/ImageButton';
+import DefaultLink from 'components/atoms/links/DefaultLink';
 
 interface HeaderProps {
   handleToggle: () => void;

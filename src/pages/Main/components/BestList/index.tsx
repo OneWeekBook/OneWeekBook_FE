@@ -3,7 +3,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
 import { ReviewItemType } from 'types/review';
-import BestItem from './BestItem';
+import BestBookCard from 'components/modules/cards/BestBookCard';
 import MainListTitle from '../MainListTitle';
 import SlideButton from '../../common/SlideButton';
 
@@ -26,7 +26,7 @@ function Index() {
             !!reviews &&
             reviews.slice(0, 12).map((item: ReviewItemType, idx: number) => {
               return (
-                <BestItem
+                <BestBookCard
                   key={item.id}
                   idx={idx + 1}
                   {...item}
@@ -45,7 +45,6 @@ function Index() {
 export default Index;
 
 const Wrapper = styled.div`
-  overflow: hidden;
   margin: 50px auto;
   width: 100%;
   height: auto;
@@ -58,6 +57,7 @@ const Wrapper = styled.div`
 `;
 
 const SlideWrapper = styled.div`
+  overflow: hidden;
   position: relative;
 `;
 

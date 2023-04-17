@@ -4,7 +4,7 @@ import useToggle from 'hooks/useToggle';
 import useAuthLink from 'hooks/useAuthLink';
 import Container from 'common/Container';
 import NoticeModal from 'components/Modal';
-import MenuButton from 'components/atoms/button/MenuButton';
+import MenuButton from 'components/atoms/buttons/MenuButton';
 import { NavItems } from 'contain/mainmenu';
 
 function HeaderMainCategory() {
