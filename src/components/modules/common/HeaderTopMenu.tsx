@@ -1,6 +1,6 @@
+import styled from 'styled-components';
 import ImageButton from 'components/atoms/button/ImageButton';
 import DefaultLink from 'components/atoms/link/DefaultLink';
-import styled from 'styled-components';
 
 interface HeaderProps {
   handleToggle: () => void;
@@ -45,7 +45,7 @@ const HeaderTopMenuModule = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: ${({ theme }) => theme.color.COLOR_MAIN};
+  color: ${({ theme }) => theme.color.COLOR_CORAL};
   margin: 10px 0;
   button {
     display: none;

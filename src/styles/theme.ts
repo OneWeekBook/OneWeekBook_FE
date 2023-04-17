@@ -6,6 +6,17 @@ import {
 } from './devices';
 
 const color = {
+  COLOR_NONE: 'transparent',
+  COLOR_BLACK: 'black',
+  COLOR_WHITE: 'white',
+  COLOR_RED: 'red',
+  COLOR_GRAY: 'gray',
+  COLOR_DIM_GRAY: 'dimgray',
+  COLOR_CORAL: 'coral',
+  COLOR_TOMATO: 'tomato',
+  COLOR_LEMON_CHIFFON: 'lemonchiffon',
+  COLOR_GOLD: 'gold',
+  COLOR_SIENNA: 'sienna',
   COLOR_MAIN: '#f07055',
   COLOR_SUB_ONE: '#faf39e',
   COLOR_SUB_TWO: '#7ca7d3',

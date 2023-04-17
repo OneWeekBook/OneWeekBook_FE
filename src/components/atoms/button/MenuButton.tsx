@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from 'styles/theme';
 
 interface ButtonProps {
   handleClick?: () => void;
@@ -33,9 +34,9 @@ function MenuButton({
 MenuButton.defaultProps = {
   type: 'button',
   fontSize: 1.6,
-  fontColor: '#f07055',
+  fontColor: theme.color.COLOR_CORAL,
   fontWeight: 500,
-  bgColor: ['#fff', '#fff'],
+  bgColor: [theme.color.COLOR_NONE, theme.color.COLOR_NONE],
 };
 
 export default MenuButton;

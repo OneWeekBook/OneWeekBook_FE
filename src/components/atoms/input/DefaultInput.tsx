@@ -48,7 +48,7 @@ const DefaultInputAtom = styled.input<StyleProps>`
   padding: 5px 10px;
   :focus {
     outline: none;
-    border: 2px solid #f07055;
+    border: 2px solid ${({ theme }) => theme.color.COLOR_CORAL};
     transition: 0.5s;
   }
 `;

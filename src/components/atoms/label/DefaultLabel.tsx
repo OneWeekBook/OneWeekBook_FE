@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from 'styles/theme';
 
 interface LabelProps {
   content: string;
@@ -27,7 +28,7 @@ function DefaultLabel({
 
 DefaultLabel.defaultProps = {
   fontSize: 1.6,
-  fontColor: 'black',
+  fontColor: theme.color.COLOR_CORAL,
   fontWeight: 500,
 };
 
@@ -37,7 +38,7 @@ const DefaultLabelAtom = styled.div<StyleProps>`
   display: flex;
   flex-direction: column;
   gap: ${({ flexGap }) => flexGap}px;
-  background-color: transperant;
+  background-color: ${({ theme }) => theme.color.COLOR_NONE};
   p {
     color: ${({ fontColor }) => fontColor};
     font-weight: ${({ fontWeight }) => fontWeight};

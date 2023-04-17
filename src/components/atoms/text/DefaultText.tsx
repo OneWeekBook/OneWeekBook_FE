@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from 'styles/theme';
 
 interface LabelProps {
   content: string;
@@ -28,7 +29,7 @@ function DefaultText({
 
 DefaultText.defaultProps = {
   fontSize: 1.6,
-  fontColor: 'black',
+  fontColor: theme.color.COLOR_BLACK,
   fontWeight: 500,
 };
 

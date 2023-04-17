@@ -24,10 +24,10 @@ function Index() {
         />
         <SignInForm />
         <DefaultButton
-          bgColor={['#faf39e', '#ffd400']}
+          bgColor={[theme.color.COLOR_LEMON_CHIFFON, theme.color.COLOR_GOLD]}
           content="회원가입"
           width="auto"
-          fontColor={['#000000', '#000000']}
+          fontColor={[theme.color.COLOR_BLACK, theme.color.COLOR_BLACK]}
           fontSize={2}
           handleClick={() => routeTo('/sign-up')}
         />

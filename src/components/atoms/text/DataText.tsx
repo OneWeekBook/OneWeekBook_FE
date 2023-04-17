@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from 'styles/theme';
 
 interface TextProps {
   before?: string;
@@ -24,7 +25,7 @@ function DataText({ before, data, after, ...rest }: TextProps & StyleProps) {
 
 DataText.defaultProps = {
   fontSize: 1.6,
-  fontColor: 'black',
+  fontColor: theme.color.COLOR_BLACK,
   fontWeight: 500,
 };
 

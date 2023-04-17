@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from 'styles/theme';
 
 interface ButtonProps {
   handleClick?: () => void;
@@ -40,7 +41,7 @@ DefaultButton.defaultProps = {
   fontSize: 1.6,
   fontColor: ['white', 'white'],
   fontWeight: 500,
-  bgColor: ['#f07055', '#ffa07a'],
+  bgColor: [theme.color.COLOR_CORAL, theme.color.COLOR_TOMATO],
   width: 120,
   height: 40,
 };

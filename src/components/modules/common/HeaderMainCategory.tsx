@@ -2,8 +2,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import useToggle from 'hooks/useToggle';
 import useAuthLink from 'hooks/useAuthLink';
-import NoticeModal from 'components/Modal';
 import Container from 'common/Container';
+import NoticeModal from 'components/Modal';
 import MenuButton from 'components/atoms/button/MenuButton';
 import { NavItems } from 'contain/mainmenu';
 

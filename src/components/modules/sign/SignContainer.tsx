@@ -16,7 +16,7 @@ const SignFormContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   box-sizing: border-box;
-  background-color: transperant;
+  background-color: ${({ theme }) => theme.color.COLOR_NONE};
   border-radius: 5px;
   border: solid 1px ${({ theme }) => theme.color.COLOR_MAIN};
   width: 375px;

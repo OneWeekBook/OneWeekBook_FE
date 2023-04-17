@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import theme from 'styles/theme';
 
 interface LinkProps {
   to: string;
@@ -35,7 +36,7 @@ function DefaultLink({
 DefaultLink.defaultProps = {
   replace: false,
   fontSize: 1.6,
-  color: '#f07055',
+  color: theme.color.COLOR_CORAL,
   fontWeight: 300,
 };
 

@@ -59,7 +59,7 @@ const BorderInputAtom = styled.div`
       outline: none;
     }
     ::placeholder {
-      color: ${({ theme }) => theme.color.COLOR_FONT_FIVE};
+      color: ${({ theme }) => theme.color.COLOR_SIENNA};
     }
     font-size: 16px;
     padding: 5px;
@@ -67,7 +67,7 @@ const BorderInputAtom = styled.div`
     height: 34px;
     box-sizing: border-box;
     border: none;
-    border-bottom: solid 2px ${({ theme }) => theme.color.COLOR_LAYOUT_THREE};
+    border-bottom: solid 2px ${({ theme }) => theme.color.COLOR_DIM_GRAY};
   }
   input ~ span {
     position: absolute;
@@ -75,7 +75,7 @@ const BorderInputAtom = styled.div`
     left: 50%;
     width: 0;
     height: 2px;
-    background-color: ${({ theme }) => theme.color.COLOR_MAIN};
+    background-color: ${({ theme }) => theme.color.COLOR_CORAL};
     transition: 0.4s;
   }
   input:focus ~ span {

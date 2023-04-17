@@ -28,7 +28,7 @@ const ReviewInputAtom = styled.textarea`
   outline: none;
   resize: vertical;
   &:focus {
-    border: 2px solid #f07055;
+    border: 2px solid ${({ theme }) => theme.color.COLOR_CORAL};
     border-radius: 5px;
   }
 `;

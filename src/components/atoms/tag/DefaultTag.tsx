@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from 'styles/theme';
 
 interface TagProps {
   content: string;
@@ -23,7 +24,7 @@ function DefaultTag({ content, src, ...rest }: TagProps & StyleProps) {
 
 DefaultTag.defaultProps = {
   fontSize: 1.6,
-  fontColor: 'black',
+  fontColor: theme.color.COLOR_BLACK,
   fontWeight: 500,
 };
 
