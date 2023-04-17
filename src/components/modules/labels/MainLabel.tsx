@@ -1,13 +1,8 @@
 import styled from 'styled-components';
+import { MainLabelTypes } from 'types/module';
 import DefaultLabel from 'components/atoms/labels/DefaultLabel';
 
-interface PropsType {
-  title: string;
-  subTitle: string;
-  fontSize?: number;
-}
-
-function MainLabel({ title, subTitle, fontSize }: PropsType) {
+function MainLabel({ title, subTitle, fontSize }: MainLabelTypes) {
   return (
     <MainLabelContainer>
       <Bar />

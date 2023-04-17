@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
 import { AuthEmailInit, AuthEmailRequest } from 'redux/reducers/AuthEmail';
 import { AuthCodeInit, AuthCodeRequest } from 'redux/reducers/AuthCode';
+import { AuthMailTypes } from 'types/module';
 import useInput from 'hooks/useInput';
 import { useRegexCheck } from 'hooks/useRegCheck';
 import { useAuthErrorCheck } from 'hooks/useAuthErrorCheck';
@@ -12,12 +13,6 @@ import BorderInput from 'components/atoms/inputs/BorderInput';
 import TimerForm from '../../Form/TimerForm';
 import EmailErrorForm from '../errors/EmailErrorForm';
 import CodeErrorForm from '../errors/CodeErrorForm';
-
-type AuthMailTypes = {
-  authDone: boolean;
-  setAuthDone: React.Dispatch<React.SetStateAction<boolean>>;
-  setRegisterEmail: React.Dispatch<React.SetStateAction<string>>;
-};
 
 function AuthEmailForm({
   authDone,

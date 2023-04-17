@@ -1,13 +1,8 @@
-import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import styled from 'styled-components';
+import { PaginationTypes } from 'types/module';
+import DefaultButton from 'components/atoms/buttons/DefaultButton';
 
-interface PaginationProps {
-  totalPage: number;
-  idx: number;
-  setIdx: React.Dispatch<React.SetStateAction<number>>;
-}
-
-function Pagination({ totalPage, idx, setIdx }: PaginationProps) {
+function Pagination({ totalPage, idx, setIdx }: PaginationTypes) {
   const pages = Array.from({ length: totalPage }, (_, i) => i + 1 - 1);
 
   return (

@@ -1,19 +1,13 @@
+import { CodeErrorTypes } from 'types/module';
 import ErrorText from 'components/atoms/texts/ErrorText';
 import DefaultText from 'components/atoms/texts/DefaultText';
-
-interface CodeErrorProps {
-  code: string;
-  codeReg: boolean;
-  codeErrorMsg: string;
-  codeErrorStatus: number;
-}
 
 function CodeErrorForm({
   code,
   codeReg,
   codeErrorMsg,
   codeErrorStatus,
-}: CodeErrorProps) {
+}: CodeErrorTypes) {
   return (
     <>
       {(!code || codeReg) && !codeErrorStatus ? (

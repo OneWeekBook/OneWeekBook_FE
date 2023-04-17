@@ -1,13 +1,9 @@
 import styled from 'styled-components';
+import { HeaderTypes } from 'types/module';
 import ImageButton from 'components/atoms/buttons/ImageButton';
 import DefaultLink from 'components/atoms/links/DefaultLink';
 
-interface HeaderProps {
-  handleToggle: () => void;
-  handleSignout: () => void;
-}
-
-function HeaderTopMenu({ handleToggle, handleSignout }: HeaderProps) {
+function HeaderTopMenu({ handleToggle, handleSignout }: HeaderTypes) {
   return (
     <HeaderTopMenuModule>
       <DefaultLink

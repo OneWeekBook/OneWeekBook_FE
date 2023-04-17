@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
 import { SignUpInit, SignUpRequest } from 'redux/reducers/SignUp';
+import { SignUpTypes } from 'types/module';
 import useInput from 'hooks/useInput';
 import useInputEnter from 'hooks/useInputEnter';
 import { useFormErrorCheck } from 'hooks/useFormErrorCheck';
@@ -11,13 +12,7 @@ import ErrorText from 'components/atoms/texts/ErrorText';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import BorderInput from 'components/atoms/inputs/BorderInput';
 
-interface SignUpProps {
-  email: string;
-  authDone: boolean;
-  setAuthDone: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-function SignUpForm({ email, authDone, setAuthDone }: SignUpProps) {
+function SignUpForm({ email, authDone, setAuthDone }: SignUpTypes) {
   const dispatch = useDispatch();
   const passRef = useRef<HTMLInputElement>(null);
   const passConfRef = useRef<HTMLInputElement>(null);

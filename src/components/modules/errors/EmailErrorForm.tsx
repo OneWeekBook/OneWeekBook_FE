@@ -1,13 +1,6 @@
+import { EmailErrorTypes } from 'types/module';
 import DefaultText from 'components/atoms/texts/DefaultText';
 import ErrorText from 'components/atoms/texts/ErrorText';
-
-interface EmailErrorProps {
-  email: string;
-  emailReg: boolean;
-  emailDone: boolean;
-  emailErrorMsg: string;
-  emailErrorStatus: number;
-}
 
 function EmailErrorForm({
   email,
@@ -15,7 +8,7 @@ function EmailErrorForm({
   emailDone,
   emailErrorMsg,
   emailErrorStatus,
-}: EmailErrorProps) {
+}: EmailErrorTypes) {
   return (
     <>
       {emailDone && emailErrorStatus === 200 ? (
