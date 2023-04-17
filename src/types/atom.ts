@@ -8,6 +8,7 @@ export interface DefaultButtonTypes {
   handleClick?: () => void;
   content?: string;
   disabled?: boolean;
+  className?: string;
   type?: 'button' | 'submit';
 }
 

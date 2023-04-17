@@ -6,6 +6,7 @@ function DefaultButton({
   handleClick,
   content,
   disabled,
+  className,
   type,
   ...rest
 }: DefaultButtonTypes & ButtonStyleTypes) {
@@ -14,6 +15,7 @@ function DefaultButton({
       type={type}
       onClick={handleClick}
       disabled={disabled}
+      className={className}
       {...rest}
     >
       {content}
@@ -27,7 +29,7 @@ DefaultButton.defaultProps = {
   fontColor: ['white', 'white'],
   fontWeight: 500,
   isBtnClick: false,
-  bgColor: [theme.color.COLOR_CORAL, theme.color.COLOR_TOMATO],
+  bgColor: [theme.color.COLOR_CORAL, theme.color.COLOR_ORANGE_RED],
   width: 120,
   height: 40,
 };
@@ -45,11 +47,16 @@ const DefaultButtonAtom = styled.button<ButtonStyleTypes>`
   border-radius: 5px;
   background-color: ${({ bgColor, isBtnClick }) =>
     isBtnClick ? bgColor && `${bgColor[1]}` : bgColor && `${bgColor[0]}`};
+  transition: 0.5s;
   &:hover {
     color: ${({ fontColor }) => fontColor && fontColor[1]};
     background-color: ${({ bgColor }) => bgColor && `${bgColor[1]}`};
   }
   &:disabled {
-    background-color: #a9a9a9;
+    background-color: ${({ theme }) => theme.color.COLOR_GRAY};
+  }
+  &.pagination:hover {
+    height: ${({ height }) => height && height + 10}px;
+    transform: translateY(-5px);
   }
 `;

@@ -10,9 +10,10 @@ function Pagination({ totalPage, idx, setIdx }: PaginationTypes) {
       {pages.map((item) => (
         <DefaultButton
           key={item}
+          className="pagination"
           handleClick={() => setIdx(item)}
           isBtnClick={item === idx}
-          height={10}
+          height={5}
         />
       ))}
     </PaginationContainer>
@@ -26,4 +27,5 @@ const PaginationContainer = styled.div`
   justify-content: center;
   gap: 10px;
   margin-top: 40px;
+  height: 15px;
 `;

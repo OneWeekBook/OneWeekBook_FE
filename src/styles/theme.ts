@@ -14,7 +14,7 @@ const color = {
   COLOR_GRAY: 'gray',
   COLOR_DIM_GRAY: 'dimgray',
   COLOR_CORAL: 'coral',
-  COLOR_TOMATO: 'tomato',
+  COLOR_ORANGE_RED: 'orangered',
   COLOR_LEMON_CHIFFON: 'lemonchiffon',
   COLOR_GOLD: 'gold',
   COLOR_SIENNA: 'sienna',
