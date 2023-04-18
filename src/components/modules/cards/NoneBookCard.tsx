@@ -1,10 +1,7 @@
+import styled from 'styled-components';
+import { NoneCardTypes } from 'types/module';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DefaultText from 'components/atoms/texts/DefaultText';
-import styled from 'styled-components';
-
-interface NoneCardTypes {
-  type: string;
-}
 
 function NoneBookCard({ type }: NoneCardTypes) {
   return (

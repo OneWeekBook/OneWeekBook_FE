@@ -1,3 +1,5 @@
+import { CategoryItemTypes } from './book';
+
 export interface AuthMailTypes {
   authDone: boolean;
   setAuthDone: React.Dispatch<React.SetStateAction<boolean>>;
@@ -21,6 +23,18 @@ export interface CodeErrorTypes {
   codeErrorStatus: number;
 }
 
+export interface CategoryProps {
+  initialState: CategoryItemTypes;
+  curParentCategory: CategoryItemTypes[];
+  setCurParentCategory: React.Dispatch<
+    React.SetStateAction<CategoryItemTypes[]>
+  >;
+  curChildCategory: CategoryItemTypes[];
+  setCurChildCategory: React.Dispatch<
+    React.SetStateAction<CategoryItemTypes[]>
+  >;
+}
+
 export interface EmailErrorTypes {
   email: string;
   emailReg: boolean;
@@ -32,6 +46,10 @@ export interface EmailErrorTypes {
 export interface HeaderTypes {
   handleToggle: () => void;
   handleSignout: () => void;
+}
+
+export interface NoneCardTypes {
+  type: string;
 }
 
 export interface MainLabelTypes {
@@ -50,4 +68,9 @@ export interface SignUpTypes {
   email: string;
   authDone: boolean;
   setAuthDone: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface SearchInputTypes {
+  curSubCategory: CategoryItemTypes[];
+  curParentCategory: CategoryItemTypes[];
 }

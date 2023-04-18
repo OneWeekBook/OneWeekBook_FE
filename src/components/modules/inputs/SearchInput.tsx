@@ -2,18 +2,13 @@ import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { CategoryItemTypes } from 'types/book';
+import { SearchInputTypes } from 'types/module';
 import { AppStateType } from 'redux/reducers';
 import { SearchInit, SearchRequest } from 'redux/reducers/Search';
 import { searchNone } from 'redux/reducers/Func';
 import useDebounce from 'hooks/useDebounce';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import DefaultInput from 'components/atoms/inputs/DefaultInput';
-
-interface SearchInputTypes {
-  curSubCategory: CategoryItemTypes[];
-  curParentCategory: CategoryItemTypes[];
-}
 
 function SearchInput({ curSubCategory, curParentCategory }: SearchInputTypes) {
   const dispatch = useDispatch();

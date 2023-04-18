@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { CategoryProps } from 'types/module';
 import { CategoryItemTypes } from 'types/book';
 import { CategoryRequest } from 'redux/reducers/Category';
 import { SearchInit } from 'redux/reducers/Search';
@@ -8,18 +9,6 @@ import { searchNone } from 'redux/reducers/Func';
 import { AppStateType } from 'redux/reducers';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import DefaultLabel from 'components/atoms/labels/DefaultLabel';
-
-interface CategoryProps {
-  initialState: CategoryItemTypes;
-  curParentCategory: CategoryItemTypes[];
-  setCurParentCategory: React.Dispatch<
-    React.SetStateAction<CategoryItemTypes[]>
-  >;
-  curChildCategory: CategoryItemTypes[];
-  setCurChildCategory: React.Dispatch<
-    React.SetStateAction<CategoryItemTypes[]>
-  >;
-}
 
 function CategoryList({
   initialState,
