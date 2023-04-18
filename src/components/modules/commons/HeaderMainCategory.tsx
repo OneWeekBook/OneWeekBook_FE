@@ -24,7 +24,7 @@ function HeaderMainCategory() {
                 ? item.clickImg
                 : item.img
             }
-            imgSize={3}
+            imgSize={30}
             content={item.title}
             handleClick={() =>
               handleAuthClick(item.link, ['/my-library'], isModalToggleOn)

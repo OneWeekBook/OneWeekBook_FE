@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
 import { ReviewInit, ReviewsRequest } from 'redux/reducers/Review';
 import { ReviewItemType } from 'types/review';
-import LoadingForm from 'components/Form/LoadingForm';
+import LoadingForm from 'components/modules/commons/LoadingForm';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
 import TopButton from 'components/Button/TopButton';
 import ReviewItem from './ReviewItem';

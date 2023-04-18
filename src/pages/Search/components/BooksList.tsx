@@ -1,17 +1,18 @@
 import { useCallback, useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import theme from 'styles/theme';
 import { AppStateType } from 'redux/reducers';
 import { MyLibraryAddRequest } from 'redux/reducers/MyLibrary';
 import { Toast } from 'lib/Toast';
 import { BooksTypes } from 'types/book';
 import { MyLibraryAddTypes } from 'types/api';
-import SearchItem from 'pages/Category/components/_item/SearchItem';
+import SearchItem from 'components/modules/cards/SearchBookCard';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
-import LoadingErrorForm from 'components/Form/LoadingErrorForm';
-import LoadingForm from 'components/Form/LoadingForm';
+import LoadingForm from 'components/modules/commons/LoadingForm';
 import { SearchInit, SearchRequest } from 'redux/reducers/Search';
 import TopButton from 'components/Button/TopButton';
+import DefaultText from 'components/atoms/texts/DefaultText';
 
 interface PropsType {
   searchArr: string[];
@@ -106,7 +107,16 @@ function BooksList({ searchArr }: PropsType) {
           ))}
       </BookGridWrapper>
       <div ref={setTarget}>
-        {isLoading ? <LoadingForm /> : !isSuccess && <LoadingErrorForm />}
+        {isLoading ? (
+          <LoadingForm />
+        ) : (
+          !isSuccess && (
+            <DefaultText
+              content="요청한 데이터를 가져올 수 없습니다."
+              fontColor={theme.color.COLOR_RED}
+            />
+          )
+        )}
       </div>
       <TopButton />
     </BookListWrapper>

@@ -33,6 +33,7 @@ const globalStyles = createGlobalStyle`
     a {
         font-family: 'Noto Sans Korean', 'sans-serif';
         text-decoration: none;
+        color: black;
     }
 
     p {

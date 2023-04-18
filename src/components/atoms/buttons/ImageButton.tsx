@@ -27,6 +27,6 @@ const ImageButtonAtom = styled.button<ButtonStyleTypes>`
   border: none;
   border-radius: 5px;
   img {
-    width: ${({ imgSize }) => imgSize}rem;
+    width: ${({ imgSize }) => imgSize}px;
   }
 `;

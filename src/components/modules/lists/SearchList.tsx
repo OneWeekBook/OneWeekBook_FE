@@ -1,16 +1,17 @@
 import { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import theme from 'styles/theme';
+import { MyLibraryAddTypes } from 'types/api';
 import { BooksTypes } from 'types/book';
 import { AppStateType } from 'redux/reducers';
 import { MyLibraryAddRequest } from 'redux/reducers/MyLibrary';
 import { searchDone } from 'redux/reducers/Func';
 import { Toast } from 'lib/Toast';
-import { MyLibraryAddTypes } from 'types/api';
-import LoadingErrorForm from 'components/Form/LoadingErrorForm';
-import LoadingForm from 'components/Form/LoadingForm';
-import SearchItem from './_item/SearchItem';
-import NoneBookInfoCard from '../../../components/modules/cards/NoneBookInfoCard';
+import DefaultText from 'components/atoms/texts/DefaultText';
+import LoadingForm from 'components/modules/commons/LoadingForm';
+import SearchBookCard from 'components/modules/cards/SearchBookCard';
+import NoneBookInfoCard from 'components/modules/cards/NoneBookCard';
 
 function SearchList() {
   const dispatch = useDispatch();
@@ -18,7 +19,6 @@ function SearchList() {
     (state: AppStateType) => state.search,
     shallowEqual,
   );
-
   const search = useSelector((state: AppStateType) => state.func.search);
   const isAddSuccess = useSelector(
     (state: AppStateType) => state.myLibrary.isAddSuccess,
@@ -58,20 +58,26 @@ function SearchList() {
   if (!isLoading && isSuccess && books.length === 0)
     return <NoneBookInfoCard type="fail" />;
 
-  if (isLoading && !isSuccess) return <LoadingErrorForm />;
+  if (isLoading && !isSuccess)
+    return (
+      <DefaultText
+        content="요청한 데이터를 가져올 수 없습니다."
+        fontColor={theme.color.COLOR_RED}
+      />
+    );
 
   return (
-    <Wrapper>
+    <SearchListContainer>
       {books.map((item: BooksTypes, index: number) => (
-        <SearchItem key={index} {...item} handleAddClick={handleAddClick} />
+        <SearchBookCard key={index} {...item} handleAddClick={handleAddClick} />
       ))}
-    </Wrapper>
+    </SearchListContainer>
   );
 }
 
 export default SearchList;
 
-const Wrapper = styled.div`
+const SearchListContainer = styled.div`
   width: 100%;
   display: grid;
   margin: 30px auto;

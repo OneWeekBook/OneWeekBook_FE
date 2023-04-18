@@ -5,8 +5,8 @@ import { CategoryItemTypes } from 'types/book';
 import { initialState } from 'contain/category';
 import Container from 'common/Container';
 import SearchInput from 'components/modules/inputs/SearchInput';
-import CategoryList from 'components/modules/Lists/CategoryList';
-import SearchList from './components/SearchList';
+import CategoryList from 'components/modules/lists/CategoryList';
+import SearchList from '../../components/modules/lists/SearchList';
 
 function index() {
   const dispatch = useDispatch();

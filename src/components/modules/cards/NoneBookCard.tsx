@@ -6,9 +6,9 @@ interface NoneCardTypes {
   type: string;
 }
 
-function NoneBookInfoCard({ type }: NoneCardTypes) {
+function NoneBookCard({ type }: NoneCardTypes) {
   return (
-    <NoneItemWrapper>
+    <NoneBookCardContainer>
       <DefaultImage
         imageSrc={`${process.env.PUBLIC_URL}/assets/func/question_mark.svg`}
         imageAlt="search icon"
@@ -22,13 +22,13 @@ function NoneBookInfoCard({ type }: NoneCardTypes) {
       ) : (
         <DefaultText content="검색 결과가 존재하지 않습니다." />
       )}
-    </NoneItemWrapper>
+    </NoneBookCardContainer>
   );
 }
 
-export default NoneBookInfoCard;
+export default NoneBookCard;
 
-const NoneItemWrapper = styled.div`
+const NoneBookCardContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

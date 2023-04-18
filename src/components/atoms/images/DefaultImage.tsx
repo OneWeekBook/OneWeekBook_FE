@@ -26,7 +26,7 @@ const DefaultImageAtom = styled.img<ImageStyleTypes>`
   height: ${({ pc }) => pc[1]}px;
   &.bookimage {
     border-radius: 0px 5px 5px 0px;
-    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
   }
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
     width: ${({ tablet }) => tablet && tablet[0]}px;

@@ -34,7 +34,7 @@ function CategoryList({
     shallowEqual,
   );
   const [parentCategory, setParentCategory] = useState<CategoryItemTypes[]>([]);
-  const [subCatgory, setSubCategory] = useState<CategoryItemTypes[]>([]);
+  const [childCatgory, setChildCategory] = useState<CategoryItemTypes[]>([]);
 
   const getFilterParentCategories = useCallback(
     (categories: CategoryItemTypes[]) => {
@@ -55,7 +55,7 @@ function CategoryList({
         (item: CategoryItemTypes) => item.parentId === id,
       );
       setCurParentCategory(parent);
-      setSubCategory(sub);
+      setChildCategory(sub);
       setCurChildCategory([initialState]);
     },
     [],
@@ -99,7 +99,7 @@ function CategoryList({
           />
         ))}
       </ParentCategory>
-      {subCatgory.length > 0 && !!subCatgory[0].categoryId && (
+      {childCatgory.length > 0 && !!childCatgory[0].categoryId && (
         <>
           <DefaultLabel
             content={`${curParentCategory[0]?.categoryName} 하위 카테고리`}
@@ -107,7 +107,7 @@ function CategoryList({
             fontSize={2}
           />
           <ChildCategory>
-            {subCatgory.map((item: CategoryItemTypes) => (
+            {childCatgory.map((item: CategoryItemTypes) => (
               <DefaultButton
                 key={item.categoryId}
                 className="category"

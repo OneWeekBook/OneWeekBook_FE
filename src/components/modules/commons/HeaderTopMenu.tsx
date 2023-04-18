@@ -27,7 +27,7 @@ function HeaderTopMenu({ handleToggle, handleSignout }: HeaderTypes) {
       )}
       <ImageButton
         src={`${process.env.PUBLIC_URL}/assets/func/hamburger.svg`}
-        imgSize={3.2}
+        imgSize={32}
         handleClick={handleToggle}
       />
     </HeaderTopMenuModule>
