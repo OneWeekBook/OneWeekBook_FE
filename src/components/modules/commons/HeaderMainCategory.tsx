@@ -65,7 +65,7 @@ const MenuListWrapper = styled.div`
   font-weight: 500;
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
     margin: auto;
-    width: 90%;
+    width: 95%;
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     display: none;

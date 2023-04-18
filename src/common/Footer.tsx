@@ -30,6 +30,6 @@ const FooterBody = styled.div`
   justify-content: center;
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
     margin: auto;
-    width: 90%;
+    width: 95%;
   }
 `;

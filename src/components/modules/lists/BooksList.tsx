@@ -2,21 +2,22 @@ import { useCallback, useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import theme from 'styles/theme';
-import { AppStateType } from 'redux/reducers';
-import { MyLibraryAddRequest } from 'redux/reducers/MyLibrary';
-import { Toast } from 'lib/Toast';
 import { BooksTypes } from 'types/book';
 import { MyLibraryAddTypes } from 'types/api';
-import SearchItem from 'components/modules/cards/SearchBookCard';
-import useIntersectionObserver from 'hooks/useIntersectionObserver';
-import LoadingForm from 'components/modules/commons/LoadingForm';
+import { AppStateType } from 'redux/reducers';
+import { MyLibraryAddRequest } from 'redux/reducers/MyLibrary';
 import { SearchInit, SearchRequest } from 'redux/reducers/Search';
-import TopButton from 'components/Button/TopButton';
+import { Toast } from 'lib/Toast';
+import useIntersectionObserver from 'hooks/useIntersectionObserver';
+import SearchBookCard from 'components/modules/cards/SearchBookCard';
+import LoadingForm from 'components/modules/commons/LoadingForm';
+import TopButton from 'components/atoms/buttons/TopButton';
 import DefaultText from 'components/atoms/texts/DefaultText';
 
 interface PropsType {
   searchArr: string[];
 }
+
 function BooksList({ searchArr }: PropsType) {
   const dispatch = useDispatch();
   const [startIdx, setStartIdx] = useState<number>(1);
@@ -35,17 +36,6 @@ function BooksList({ searchArr }: PropsType) {
   const isNumeric = (val: string) => {
     return /^-?\d+$/.test(val);
   };
-
-  useEffect(() => {
-    if (!isLoading) handleFetch();
-    return () => {
-      dispatch(SearchInit());
-    };
-  }, []);
-
-  useEffect(() => {
-    if (isAddSuccess) Toast('success', '내 서재에 추가완료~');
-  }, [isAddSuccess]);
 
   const handleFetch = useCallback(() => {
     const options: {
@@ -92,20 +82,31 @@ function BooksList({ searchArr }: PropsType) {
   };
   const { setTarget } = useIntersectionObserver({ onIntersect });
 
+  useEffect(() => {
+    if (!isLoading) handleFetch();
+    return () => {
+      dispatch(SearchInit());
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isAddSuccess) Toast('success', '내 서재에 추가완료~');
+  }, [isAddSuccess]);
+
   return (
-    <BookListWrapper>
-      <BookGridWrapper>
+    <BookListContainer>
+      <BookListGrid>
         {Array.isArray(books) &&
           !!books &&
           books.map((item: BooksTypes, index: number) => (
-            <SearchItem
+            <SearchBookCard
               key={index}
               {...item}
               userId={user.id}
               handleAddClick={handleAddClick}
             />
           ))}
-      </BookGridWrapper>
+      </BookListGrid>
       <div ref={setTarget}>
         {isLoading ? (
           <LoadingForm />
@@ -119,24 +120,25 @@ function BooksList({ searchArr }: PropsType) {
         )}
       </div>
       <TopButton />
-    </BookListWrapper>
+    </BookListContainer>
   );
 }
 
 export default BooksList;
 
-const BookListWrapper = styled.div`
+const BookListContainer = styled.div`
   margin: 30px auto 50px;
-  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
-    width: 95%;
-    grid-template-columns: 1fr;
-  }
 `;
 
-const BookGridWrapper = styled.div`
+const BookListGrid = styled.div`
+  margin: auto;
   width: 100%;
   height: auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+    width: 95%;
+    grid-template-columns: 1fr;
+  }
 `;

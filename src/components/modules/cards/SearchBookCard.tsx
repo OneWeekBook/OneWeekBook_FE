@@ -107,7 +107,7 @@ const BookCover = styled.div`
     transform: translate(-50%, -50%);
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    width: 90px;
+    width: 95px;
   }
 `;
 

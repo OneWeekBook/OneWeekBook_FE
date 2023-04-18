@@ -46,17 +46,3 @@ export type DefaultBtnStyleTypes = {
   hoverColor?: string;
   disabledColor?: string;
 };
-
-export type SearchInputOptionTypes = {
-  search: string;
-  setSearch: React.Dispatch<React.SetStateAction<string>>;
-  handleFetch: (search: string) => void;
-};
-
-export type SearchInputStyleTypes = {
-  border: string;
-  borderRadius: number;
-  fontSize: number;
-  padding: number[];
-  focusBorder: string;
-};

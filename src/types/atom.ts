@@ -159,4 +159,6 @@ export interface TextStyleTypes {
   padding?: number;
   align?: string;
   reactive?: boolean;
+  bgColor?: string;
+  border?: number;
 }

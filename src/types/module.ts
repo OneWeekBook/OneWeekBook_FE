@@ -74,3 +74,7 @@ export interface SearchInputTypes {
   curSubCategory: CategoryItemTypes[];
   curParentCategory: CategoryItemTypes[];
 }
+
+export interface TagLabelType {
+  tags: Set<string>;
+}

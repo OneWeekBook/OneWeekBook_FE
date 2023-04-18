@@ -48,7 +48,7 @@ const HeaderTopMenuModule = styled.div`
   }
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
     margin: 10px auto;
-    width: 90%;
+    width: 95%;
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     button {

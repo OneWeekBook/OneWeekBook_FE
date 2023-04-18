@@ -14,15 +14,19 @@ function TopButton() {
   }, [scrollHeight]);
 
   return (
-    <Button type="button" onClick={onScrollTop} scroll={scrollHeight > 500}>
+    <TopButtonAtom
+      type="button"
+      onClick={onScrollTop}
+      scroll={scrollHeight > 500}
+    >
       TOP
-    </Button>
+    </TopButtonAtom>
   );
 }
 
 export default TopButton;
 
-const Button = styled.button<{ scroll: boolean }>`
+const TopButtonAtom = styled.button<{ scroll: boolean }>`
   display ${({ scroll }) => (scroll ? 'block' : 'none')};
   position: fixed;
   z-index: 100;
@@ -32,8 +36,8 @@ const Button = styled.button<{ scroll: boolean }>`
   height: 50px;
   border-radius: 10px;
   border: none;
-  background-color: #f07055;
-  color: #fff;
+  background-color: ${({ theme }) => theme.color.COLOR_CORAL};
+  color: ${({ theme }) => theme.color.COLOR_WHITE};
   cursor: pointer;
   font-size: 24px;
   font-weight: 700;

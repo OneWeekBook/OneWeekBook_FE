@@ -162,7 +162,7 @@ const BannerContainer = styled.div`
   touch-action: pan-y;
   -webkit-tap-highlight-color: transparent;
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
-    width: 90%;
+    width: 95%;
   }
 `;
 

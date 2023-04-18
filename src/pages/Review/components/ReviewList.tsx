@@ -6,7 +6,7 @@ import { ReviewInit, ReviewsRequest } from 'redux/reducers/Review';
 import { ReviewItemType } from 'types/review';
 import LoadingForm from 'components/modules/commons/LoadingForm';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
-import TopButton from 'components/Button/TopButton';
+import TopButton from 'components/atoms/buttons/TopButton';
 import ReviewItem from './ReviewItem';
 
 function ReviewList() {

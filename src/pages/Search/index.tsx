@@ -1,11 +1,7 @@
-import { lazy } from 'react';
 import { useLocation } from 'react-router-dom';
 import Container from 'common/Container';
-import TitleWrapper from './components/TitleWrapper';
-
-const BooksList = lazy(
-  () => import(/* webpackChunkName: "BooksList" */ './components/BooksList'),
-);
+import TagLabel from 'components/modules/labels/TagLabel';
+import BooksList from '../../components/modules/lists/BooksList';
 
 function index() {
   const location = useLocation();
@@ -26,7 +22,7 @@ function index() {
 
   return (
     <Container>
-      <TitleWrapper tags={tagArr} />
+      <TagLabel tags={tagArr} />
       <BooksList searchArr={searchArr} />
     </Container>
   );
