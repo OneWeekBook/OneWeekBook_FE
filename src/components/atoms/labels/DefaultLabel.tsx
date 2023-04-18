@@ -20,6 +20,7 @@ DefaultLabel.defaultProps = {
   fontColor: theme.color.COLOR_CORAL,
   fontWeight: 500,
   reactive: false,
+  align: 'center',
 };
 
 export default DefaultLabel;
@@ -27,7 +28,7 @@ export default DefaultLabel;
 const DefaultLabelAtom = styled.div<LabelStyleTypes>`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: ${({ align }) => align};
   gap: ${({ flexGap }) => flexGap}px;
   background-color: ${({ theme }) => theme.color.COLOR_NONE};
   p {

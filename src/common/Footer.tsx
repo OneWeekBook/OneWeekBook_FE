@@ -13,6 +13,7 @@ function Footer() {
           fontColor={theme.color.COLOR_WHITE}
           fontSize={2.8}
           flexGap={10}
+          align="left"
         />
       </FooterBody>
     </Container>

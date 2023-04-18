@@ -1,23 +1,25 @@
-import { useCallback, useEffect, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { CategoryItemTypes } from 'types/book';
 import { AppStateType } from 'redux/reducers';
 import { SearchInit, SearchRequest } from 'redux/reducers/Search';
 import { searchNone } from 'redux/reducers/Func';
-import { CategoryItemTypes } from 'types/book';
-import DefaultButton from 'components/Button/DefaultButton';
-import SearchInput from 'components/Input/SearchInput';
+import useDebounce from 'hooks/useDebounce';
+import DefaultButton from 'components/atoms/buttons/DefaultButton';
+import DefaultInput from 'components/atoms/inputs/DefaultInput';
 
-type PropsTypes = {
+interface SearchInputTypes {
   curSubCategory: CategoryItemTypes[];
   curParentCategory: CategoryItemTypes[];
-};
+}
 
-function InputWrapper({ curSubCategory, curParentCategory }: PropsTypes) {
+function SearchInput({ curSubCategory, curParentCategory }: SearchInputTypes) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
+  const debouncedSearch = useDebounce(search, 500);
   const books = useSelector(
     (state: AppStateType) => state.search.books,
     shallowEqual,
@@ -80,6 +82,10 @@ function InputWrapper({ curSubCategory, curParentCategory }: PropsTypes) {
     }
   };
 
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.target.value);
+  };
+
   useEffect(() => {
     handleFetch(search);
   }, [curSubCategory, curParentCategory]);
@@ -91,63 +97,47 @@ function InputWrapper({ curSubCategory, curParentCategory }: PropsTypes) {
     }
   }, [search]);
 
+  useEffect(() => {
+    if (debouncedSearch) {
+      handleFetch(debouncedSearch);
+    }
+  }, [debouncedSearch]);
+
   return (
-    <Wrapper>
-      <div className="search">
-        <p>통합 검색</p>
-        <SearchInputWrapper>
-          <SearchInput
-            search={search}
-            setSearch={setSearch}
-            handleFetch={handleFetch}
-            border="1px solid #e6e6e6"
-            borderRadius={10}
-            fontSize={14}
-            padding={[10, 10, 10, 10]}
-            focusBorder="1px solid #f7b7a9"
-          />
-        </SearchInputWrapper>
-      </div>
+    <SearchInputContainer>
+      <SearchInputWrapper>
+        <DefaultInput
+          value={search}
+          handleChange={handleChange}
+          placeholder="검색어를 입력해주세요."
+          fontSize={1.4}
+        />
+      </SearchInputWrapper>
       {books.length > 0 && (
         <DefaultButton
-          pc={[80, 20]}
-          onClick={handleClick}
-          isHover
-          hoverColor="#f07055"
-          fontSize={[18, 14]}
-          fontWeight={600}
-          title="모두보기"
+          fontSize={1.6}
+          content="모두보기"
+          handleClick={handleClick}
+          height={35}
         />
       )}
-    </Wrapper>
+    </SearchInputContainer>
   );
 }
 
-export default InputWrapper;
+export default SearchInput;
 
-const Wrapper = styled.div`
+const SearchInputContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  .search {
-    display: flex;
-    align-items: center;
-  }
-  p {
-    font-size: 20px;
-    font-weight: 500;
-    margin-right: 10px;
-    color: ${({ theme }) => theme.color.COLOR_FONT_TWO};
-    @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-      font-size: 16px;
-    }
+  button {
+    margin-left: 10px;
   }
 `;
 
 const SearchInputWrapper = styled.div`
-  width: 250px;
-  height: 35px;
-  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    width: 200px;
-  }
+  width: 300px;
+  display: flex;
+  align-items: center;
 `;

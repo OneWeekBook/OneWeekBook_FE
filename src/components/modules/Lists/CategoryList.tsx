@@ -1,36 +1,40 @@
 import { useCallback, useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { CategoryItemTypes } from 'types/book';
 import { CategoryRequest } from 'redux/reducers/Category';
 import { SearchInit } from 'redux/reducers/Search';
 import { searchNone } from 'redux/reducers/Func';
 import { AppStateType } from 'redux/reducers';
-import { CategoryItemTypes } from 'types/book';
-import CategoryBoxItem from './_item/CategoryBoxItem';
-import InputWrapper from './InputWrapper';
+import DefaultButton from 'components/atoms/buttons/DefaultButton';
+import DefaultLabel from 'components/atoms/labels/DefaultLabel';
 
-const initialState = {
-  id: 0,
-  parentId: null,
-  categoryId: 0,
-  categoryName: 'example',
-  depth: 1,
-};
+interface CategoryProps {
+  initialState: CategoryItemTypes;
+  curParentCategory: CategoryItemTypes[];
+  setCurParentCategory: React.Dispatch<
+    React.SetStateAction<CategoryItemTypes[]>
+  >;
+  curChildCategory: CategoryItemTypes[];
+  setCurChildCategory: React.Dispatch<
+    React.SetStateAction<CategoryItemTypes[]>
+  >;
+}
 
-function CategoryList() {
+function CategoryList({
+  initialState,
+  curParentCategory,
+  setCurParentCategory,
+  curChildCategory,
+  setCurChildCategory,
+}: CategoryProps) {
   const dispatch = useDispatch();
   const categories = useSelector(
     (state: AppStateType) => state.category.categories,
     shallowEqual,
   );
   const [parentCategory, setParentCategory] = useState<CategoryItemTypes[]>([]);
-  const [curParentCategory, setCurParentCategory] = useState<
-    CategoryItemTypes[]
-  >([initialState]);
   const [subCatgory, setSubCategory] = useState<CategoryItemTypes[]>([]);
-  const [curSubCategory, setCurSubCategory] = useState<CategoryItemTypes[]>([
-    initialState,
-  ]);
 
   const getFilterParentCategories = useCallback(
     (categories: CategoryItemTypes[]) => {
@@ -52,7 +56,7 @@ function CategoryList() {
       );
       setCurParentCategory(parent);
       setSubCategory(sub);
-      setCurSubCategory([initialState]);
+      setCurChildCategory([initialState]);
     },
     [],
   );
@@ -62,7 +66,7 @@ function CategoryList() {
       const result = categoriesData.filter(
         (item: CategoryItemTypes) => item.categoryId === id,
       );
-      setCurSubCategory(result);
+      setCurChildCategory(result);
     },
     [],
   );
@@ -80,86 +84,76 @@ function CategoryList() {
   }, [categories]);
 
   return (
-    <Wrapper>
-      <p className="mainTitle">전체 카테고리</p>
-      <CategoryGridWrapper>
+    <CategoryListContainer>
+      <DefaultLabel content="전체 카테고리" align="left" fontSize={2.4} />
+      <ParentCategory>
         {parentCategory.map((item: CategoryItemTypes) => (
-          <CategoryBoxItem
+          <DefaultButton
             key={item.categoryId}
-            curCategory={curParentCategory}
-            handleClick={(id: number) => {
-              getFilterSubCategories(categories, id);
-            }}
-            {...item}
+            className="category"
+            isBtnClick={item.categoryId === curParentCategory[0].categoryId}
+            handleClick={() =>
+              getFilterSubCategories(categories, item.categoryId)
+            }
+            content={item.categoryName}
           />
         ))}
-      </CategoryGridWrapper>
+      </ParentCategory>
       {subCatgory.length > 0 && !!subCatgory[0].categoryId && (
-        <SubCategoryWrapper>
-          <p className="subTitle">
-            {curParentCategory[0]?.categoryName} 하위 카테고리
-          </p>
-          <SubCategoryList>
+        <>
+          <DefaultLabel
+            content={`${curParentCategory[0]?.categoryName} 하위 카테고리`}
+            align="left"
+            fontSize={2}
+          />
+          <ChildCategory>
             {subCatgory.map((item: CategoryItemTypes) => (
-              <CategoryBoxItem
+              <DefaultButton
                 key={item.categoryId}
-                curCategory={curSubCategory}
-                handleClick={(id: number) => {
-                  getPeekCategory(categories, id);
-                }}
-                {...item}
+                className="category"
+                isBtnClick={item.categoryId === curChildCategory[0].categoryId}
+                handleClick={() => getPeekCategory(categories, item.categoryId)}
+                content={item.categoryName}
               />
             ))}
-          </SubCategoryList>
-        </SubCategoryWrapper>
+          </ChildCategory>
+        </>
       )}
-      <InputWrapper
-        curSubCategory={curSubCategory}
-        curParentCategory={curParentCategory}
-      />
-    </Wrapper>
+    </CategoryListContainer>
   );
 }
 
 export default CategoryList;
 
-const Wrapper = styled.div`
+const CategoryListContainer = styled.div`
   width: 100%;
   margin: 50px auto 20px;
-  .mainTitle {
-    font-size: 28px;
-    font-weight: 700;
-    color: ${({ theme }) => theme.color.COLOR_FONT_TWO};
-  }
   @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
     width: 95%;
-    .mainTitle {
-      font-size: 24px;
-    }
   }
 `;
 
-const CategoryGridWrapper = styled.div`
+const ParentCategory = styled.div`
   margin: 10px auto 20px;
   min-height: 150px;
   display: flex;
   flex-wrap: wrap;
-`;
-
-const SubCategoryWrapper = styled.div`
-  margin-bottom: 20px;
-  .subTitle {
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 10px;
-    color: ${({ theme }) => theme.color.COLOR_FONT_TWO};
-    @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-      font-size: 18px;
-    }
+  button {
+    box-sizing: border-box;
+    margin: 10px 10px 5px 0;
+    padding: 0 20px;
+    width: auto;
   }
 `;
 
-const SubCategoryList = styled.div`
+const ChildCategory = styled.div`
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 20px;
+  button {
+    box-sizing: border-box;
+    margin: 10px 10px 5px 0;
+    padding: 0 20px;
+    width: auto;
+  }
 `;

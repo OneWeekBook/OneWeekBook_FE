@@ -1,3 +1,5 @@
+import { ChangeEvent } from 'react';
+
 export interface BannerButtonTypes {
   handleClick: (idx: number) => void;
   direct: string;
@@ -76,7 +78,7 @@ export interface BorderInputTypes {
 
 export interface DefaultInputTypes {
   value: string;
-  handleChange: () => void;
+  handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
 }
 
@@ -102,6 +104,7 @@ export interface LabelStyleTypes {
   fontWeight?: number;
   flexGap?: number;
   reactive?: boolean;
+  align?: string;
 }
 
 export interface LinkTypes {

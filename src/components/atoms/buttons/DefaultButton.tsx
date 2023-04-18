@@ -26,7 +26,7 @@ function DefaultButton({
 DefaultButton.defaultProps = {
   type: 'button',
   fontSize: 1.6,
-  fontColor: ['white', 'white'],
+  fontColor: [theme.color.COLOR_WHITE, theme.color.COLOR_WHITE],
   fontWeight: 500,
   isBtnClick: false,
   bgColor: [theme.color.COLOR_CORAL, theme.color.COLOR_ORANGE_RED],
@@ -58,5 +58,24 @@ const DefaultButtonAtom = styled.button<ButtonStyleTypes>`
   &.pagination:hover {
     height: ${({ height }) => height && height + 10}px;
     transform: translateY(-5px);
+  }
+  &.category {
+    box-shadow: 3px 3px 3px
+      ${({ isBtnClick }) =>
+        isBtnClick ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 0.2)'};
+    background-color: ${({ isBtnClick }) =>
+      isBtnClick
+        ? `${theme.color.COLOR_ORANGE_RED}`
+        : `${theme.color.COLOR_CORAL}`};
+    :hover {
+      background-color: ${theme.color.COLOR_ORANGE_RED};
+      box-shadow: 3px 8px 3px rgba(0, 0, 0, 0.5);
+      margin: 5px 10px 10px 0;
+    }
+    @media (max-width: ${({ theme: { device } }) =>
+      device.mobile.maxWidth}px) {\
+      font-size: 1.4rem;
+      height: 35px;
+    }
   }
 `;

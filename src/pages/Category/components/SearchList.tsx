@@ -10,7 +10,7 @@ import { MyLibraryAddTypes } from 'types/api';
 import LoadingErrorForm from 'components/Form/LoadingErrorForm';
 import LoadingForm from 'components/Form/LoadingForm';
 import SearchItem from './_item/SearchItem';
-import NoneItem from './_item/NoneItem';
+import NoneBookInfoCard from '../../../components/modules/cards/NoneBookInfoCard';
 
 function SearchList() {
   const dispatch = useDispatch();
@@ -52,10 +52,11 @@ function SearchList() {
 
   if (isLoading) return <LoadingForm />;
 
-  if ((!isLoading && !isSuccess) || !search) return <NoneItem type="init" />;
+  if ((!isLoading && !isSuccess) || !search)
+    return <NoneBookInfoCard type="init" />;
 
   if (!isLoading && isSuccess && books.length === 0)
-    return <NoneItem type="fail" />;
+    return <NoneBookInfoCard type="fail" />;
 
   if (isLoading && !isSuccess) return <LoadingErrorForm />;
 

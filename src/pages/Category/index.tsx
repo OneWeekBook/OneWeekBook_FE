@@ -1,18 +1,21 @@
-import { lazy, useEffect } from 'react';
-import Container from 'common/Container';
-import { userToggle } from 'redux/reducers/Func';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-
-const CategoryList = lazy(
-  () =>
-    import(/* webpackChunkName: "CategoryList" */ './components/CategoryList'),
-);
-const SearchList = lazy(
-  () => import(/* webpackChunkName: "SearchList" */ './components/SearchList'),
-);
+import { userToggle } from 'redux/reducers/Func';
+import { CategoryItemTypes } from 'types/book';
+import { initialState } from 'contain/category';
+import Container from 'common/Container';
+import SearchInput from 'components/modules/inputs/SearchInput';
+import CategoryList from 'components/modules/Lists/CategoryList';
+import SearchList from './components/SearchList';
 
 function index() {
   const dispatch = useDispatch();
+  const [curParentCategory, setCurParentCategory] = useState<
+    CategoryItemTypes[]
+  >([initialState]);
+  const [curChildCategory, setCurChildCategory] = useState<CategoryItemTypes[]>(
+    [initialState],
+  );
 
   useEffect(() => {
     dispatch(userToggle());
@@ -20,7 +23,17 @@ function index() {
 
   return (
     <Container>
-      <CategoryList />
+      <CategoryList
+        initialState={initialState}
+        curParentCategory={curParentCategory}
+        setCurParentCategory={setCurParentCategory}
+        curChildCategory={curChildCategory}
+        setCurChildCategory={setCurChildCategory}
+      />
+      <SearchInput
+        curSubCategory={curChildCategory}
+        curParentCategory={curParentCategory}
+      />
       <SearchList />
     </Container>
   );

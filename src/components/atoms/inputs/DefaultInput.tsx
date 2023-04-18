@@ -27,14 +27,14 @@ export default DefaultInput;
 
 const DefaultInputAtom = styled.input<InputStyleTypes>`
   width: 100%;
-  height: 40px;
+  height: 35px;
   box-sizing: border-box;
   border-radius: 5px;
-  border: 2px solid #070707;
+  border: 2px solid ${({ theme }) => theme.color.COLOR_GRAY};
   color: ${({ fontColor }) => fontColor};
   font-size: ${({ fontSize }) => fontSize}rem;
   font-weight: ${({ fontWeight }) => fontWeight};
-  padding: 5px 10px;
+  padding: 2px 5px;
   :focus {
     outline: none;
     border: 2px solid ${({ theme }) => theme.color.COLOR_CORAL};
