@@ -16,6 +16,10 @@ export interface BestBookCardTypes {
   count: number;
 }
 
+export interface BooksListType {
+  searchArr: string[];
+}
+
 export interface CodeErrorTypes {
   code: string;
   codeReg: boolean;
@@ -23,16 +27,14 @@ export interface CodeErrorTypes {
   codeErrorStatus: number;
 }
 
-export interface CategoryProps {
-  initialState: CategoryItemTypes;
-  curParentCategory: CategoryItemTypes[];
-  setCurParentCategory: React.Dispatch<
-    React.SetStateAction<CategoryItemTypes[]>
-  >;
-  curChildCategory: CategoryItemTypes[];
-  setCurChildCategory: React.Dispatch<
-    React.SetStateAction<CategoryItemTypes[]>
-  >;
+export interface CategoryListProps {
+  categories: CategoryItemTypes[];
+  catgoryResult: CategoryItemTypes[];
+  currentCategory: CategoryItemTypes[];
+  handleCategoryFilter: (
+    categoriesData: CategoryItemTypes[],
+    id: number,
+  ) => void;
 }
 
 export interface EmailErrorTypes {

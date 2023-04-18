@@ -1,7 +1,8 @@
 import { useLocation } from 'react-router-dom';
 import Container from 'common/Container';
 import TagLabel from 'components/modules/labels/TagLabel';
-import BooksList from '../../components/modules/lists/BooksList';
+import BooksList from 'components/modules/lists/BooksList';
+import TopButton from 'components/atoms/buttons/TopButton';
 
 function index() {
   const location = useLocation();
@@ -24,6 +25,7 @@ function index() {
     <Container>
       <TagLabel tags={tagArr} />
       <BooksList searchArr={searchArr} />
+      <TopButton />
     </Container>
   );
 }

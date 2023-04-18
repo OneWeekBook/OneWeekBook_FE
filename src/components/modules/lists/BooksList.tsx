@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import theme from 'styles/theme';
 import { BooksTypes } from 'types/book';
 import { MyLibraryAddTypes } from 'types/api';
+import { BooksListType } from 'types/module';
 import { AppStateType } from 'redux/reducers';
 import { MyLibraryAddRequest } from 'redux/reducers/MyLibrary';
 import { SearchInit, SearchRequest } from 'redux/reducers/Search';
@@ -11,14 +12,9 @@ import { Toast } from 'lib/Toast';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
 import SearchBookCard from 'components/modules/cards/SearchBookCard';
 import LoadingForm from 'components/modules/commons/LoadingForm';
-import TopButton from 'components/atoms/buttons/TopButton';
 import DefaultText from 'components/atoms/texts/DefaultText';
 
-interface PropsType {
-  searchArr: string[];
-}
-
-function BooksList({ searchArr }: PropsType) {
+function BooksList({ searchArr }: BooksListType) {
   const dispatch = useDispatch();
   const [startIdx, setStartIdx] = useState<number>(1);
   const { books, moreBooks, isLoading, isSuccess } = useSelector(
@@ -32,10 +28,6 @@ function BooksList({ searchArr }: PropsType) {
   const isAddSuccess = useSelector(
     (state: AppStateType) => state.myLibrary.isAddSuccess,
   );
-
-  const isNumeric = (val: string) => {
-    return /^-?\d+$/.test(val);
-  };
 
   const handleFetch = useCallback(() => {
     const options: {
@@ -51,7 +43,10 @@ function BooksList({ searchArr }: PropsType) {
     if (searchArr.length === 3) {
       options.d_categ = searchArr[1].toString();
       options.title = searchArr[2].toString();
-    } else if (searchArr.length === 2 && isNumeric(searchArr[1].toString())) {
+    } else if (
+      searchArr.length === 2 &&
+      /^-?\d+$/.test(searchArr[1].toString())
+    ) {
       options.d_categ = searchArr[1].toString();
       options.title = searchArr[1].toString();
     } else if (searchArr.length === 2) {
@@ -65,14 +60,8 @@ function BooksList({ searchArr }: PropsType) {
     setStartIdx(startIdx + 12);
   }, [startIdx]);
 
-  const handleAddClick = ({
-    title,
-    author,
-    publisher,
-    isbn,
-    img,
-  }: MyLibraryAddTypes) => {
-    dispatch(MyLibraryAddRequest({ title, author, publisher, isbn, img }));
+  const handleFavoriteClick = ({ ...data }: MyLibraryAddTypes) => {
+    dispatch(MyLibraryAddRequest({ ...data }));
   };
 
   const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
@@ -103,7 +92,7 @@ function BooksList({ searchArr }: PropsType) {
               key={index}
               {...item}
               userId={user.id}
-              handleAddClick={handleAddClick}
+              handleFavoriteClick={handleFavoriteClick}
             />
           ))}
       </BookListGrid>
@@ -119,7 +108,6 @@ function BooksList({ searchArr }: PropsType) {
           )
         )}
       </div>
-      <TopButton />
     </BookListContainer>
   );
 }

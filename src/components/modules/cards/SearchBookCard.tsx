@@ -16,7 +16,7 @@ function SearchBookCard({
   pubdate,
   publisher,
   description,
-  handleAddClick,
+  handleFavoriteClick,
 }: PropsWithChildren<LikeAddTypes>) {
   return (
     <SearchBookCardContainer>
@@ -27,7 +27,7 @@ function SearchBookCard({
             src={`${process.env.PUBLIC_URL}/assets/func/heart.svg`}
             imgSize={30}
             handleClick={() =>
-              handleAddClick({
+              handleFavoriteClick({
                 title,
                 isbn,
                 author,
@@ -118,6 +118,7 @@ const BookInfoDetail = styled.div`
   justify-content: flex-start;
   gap: 5px;
   box-sizing: border-box;
+  overflow: hidden;
   padding: 10px;
   .bookTitle {
     height: 50px;
@@ -147,7 +148,6 @@ const BookInfoDetail = styled.div`
     font-size: 1.6rem;
     line-height: 2rem;
     display: -webkit-box;
-    word-wrap: break-word;
     -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
     overflow: hidden;

@@ -32,22 +32,8 @@ function SearchList() {
     if (isSuccess) dispatch(searchDone());
   }, [isSuccess]);
 
-  const handleAddClick = ({
-    title,
-    author,
-    publisher,
-    isbn,
-    img,
-  }: MyLibraryAddTypes) => {
-    dispatch(
-      MyLibraryAddRequest({
-        title,
-        author,
-        publisher,
-        isbn,
-        img,
-      }),
-    );
+  const handleFavoriteClick = ({ ...data }: MyLibraryAddTypes) => {
+    dispatch(MyLibraryAddRequest({ ...data }));
   };
 
   if (isLoading) return <LoadingForm />;
@@ -69,7 +55,11 @@ function SearchList() {
   return (
     <SearchListContainer>
       {books.map((item: BooksTypes, index: number) => (
-        <SearchBookCard key={index} {...item} handleAddClick={handleAddClick} />
+        <SearchBookCard
+          key={index}
+          {...item}
+          handleFavoriteClick={handleFavoriteClick}
+        />
       ))}
     </SearchListContainer>
   );

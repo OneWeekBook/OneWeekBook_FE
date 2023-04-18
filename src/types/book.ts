@@ -33,7 +33,7 @@ export interface LikeAddTypes extends BooksTypes {
   publisher: string;
   title: string;
   userId?: number;
-  handleAddClick: ({
+  handleFavoriteClick: ({
     title,
     author,
     publisher,

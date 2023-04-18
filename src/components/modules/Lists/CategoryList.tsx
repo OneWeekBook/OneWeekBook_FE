@@ -1,144 +1,44 @@
-import { useCallback, useEffect, useState } from 'react';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { CategoryProps } from 'types/module';
 import { CategoryItemTypes } from 'types/book';
-import { CategoryRequest } from 'redux/reducers/Category';
-import { SearchInit } from 'redux/reducers/Search';
-import { searchNone } from 'redux/reducers/Func';
-import { AppStateType } from 'redux/reducers';
+import { CategoryListProps } from 'types/module';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import DefaultLabel from 'components/atoms/labels/DefaultLabel';
 
 function CategoryList({
-  initialState,
-  curParentCategory,
-  setCurParentCategory,
-  curChildCategory,
-  setCurChildCategory,
-}: CategoryProps) {
-  const dispatch = useDispatch();
-  const categories = useSelector(
-    (state: AppStateType) => state.category.categories,
-    shallowEqual,
-  );
-  const [parentCategory, setParentCategory] = useState<CategoryItemTypes[]>([]);
-  const [childCatgory, setChildCategory] = useState<CategoryItemTypes[]>([]);
-
-  const getFilterParentCategories = useCallback(
-    (categories: CategoryItemTypes[]) => {
-      const parent = categories.filter(
-        (item: CategoryItemTypes) => item.parentId === null,
-      );
-      setParentCategory(parent);
-    },
-    [categories],
-  );
-
-  const getFilterSubCategories = useCallback(
-    (categoriesData: CategoryItemTypes[], id: number) => {
-      const parent = categoriesData.filter(
-        (item: CategoryItemTypes) => item.categoryId === id,
-      );
-      const sub = categoriesData.filter(
-        (item: CategoryItemTypes) => item.parentId === id,
-      );
-      setCurParentCategory(parent);
-      setChildCategory(sub);
-      setCurChildCategory([initialState]);
-    },
-    [],
-  );
-
-  const getPeekCategory = useCallback(
-    (categoriesData: CategoryItemTypes[], id: number) => {
-      const result = categoriesData.filter(
-        (item: CategoryItemTypes) => item.categoryId === id,
-      );
-      setCurChildCategory(result);
-    },
-    [],
-  );
-
-  useEffect(() => {
-    dispatch(CategoryRequest());
-    return () => {
-      dispatch(SearchInit());
-      dispatch(searchNone());
-    };
-  }, []);
-
-  useEffect(() => {
-    getFilterParentCategories(categories);
-  }, [categories]);
-
+  categories,
+  catgoryResult,
+  currentCategory,
+  handleCategoryFilter,
+}: CategoryListProps) {
   return (
     <CategoryListContainer>
       <DefaultLabel content="전체 카테고리" align="left" fontSize={2.4} />
-      <ParentCategory>
-        {parentCategory.map((item: CategoryItemTypes) => (
+      <CategoryTagList>
+        {catgoryResult.map((item: CategoryItemTypes) => (
           <DefaultButton
             key={item.categoryId}
             className="category"
-            isBtnClick={item.categoryId === curParentCategory[0].categoryId}
+            isBtnClick={item.categoryId === currentCategory[0].categoryId}
             handleClick={() =>
-              getFilterSubCategories(categories, item.categoryId)
+              handleCategoryFilter(categories, item.categoryId)
             }
             content={item.categoryName}
           />
         ))}
-      </ParentCategory>
-      {childCatgory.length > 0 && !!childCatgory[0].categoryId && (
-        <>
-          <DefaultLabel
-            content={`${curParentCategory[0]?.categoryName} 하위 카테고리`}
-            align="left"
-            fontSize={2}
-          />
-          <ChildCategory>
-            {childCatgory.map((item: CategoryItemTypes) => (
-              <DefaultButton
-                key={item.categoryId}
-                className="category"
-                isBtnClick={item.categoryId === curChildCategory[0].categoryId}
-                handleClick={() => getPeekCategory(categories, item.categoryId)}
-                content={item.categoryName}
-              />
-            ))}
-          </ChildCategory>
-        </>
-      )}
+      </CategoryTagList>
     </CategoryListContainer>
   );
 }
 
 export default CategoryList;
 
-const CategoryListContainer = styled.div`
-  width: 100%;
-  margin: 50px auto 20px;
-  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
-    width: 95%;
-  }
-`;
+const CategoryListContainer = styled.div``;
 
-const ParentCategory = styled.div`
-  margin: 10px auto 20px;
-  min-height: 150px;
-  display: flex;
-  flex-wrap: wrap;
-  button {
-    box-sizing: border-box;
-    margin: 10px 10px 5px 0;
-    padding: 0 20px;
-    width: auto;
-  }
-`;
-
-const ChildCategory = styled.div`
+const CategoryTagList = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 20px;
+  min-height: 50px;
   button {
     box-sizing: border-box;
     margin: 10px 10px 5px 0;
