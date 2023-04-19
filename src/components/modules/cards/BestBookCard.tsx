@@ -7,6 +7,7 @@ import { getImgErr } from 'lib/ImageError';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DefaultText from 'components/atoms/texts/DefaultText';
 import theme from 'styles/theme';
+import MultiText from 'components/atoms/texts/MultiText';
 
 function BestBookCard({
   idx,
@@ -53,18 +54,14 @@ function BestBookCard({
             fontSize={1.4}
           />
         </BookDetailInfo>
-        <CommentCountInfo>
-          <DefaultImage
-            imageSrc={`${process.env.PUBLIC_URL}/assets/func/comment.png`}
-            imageAlt="comment"
-            pc={[20, 20]}
-          />
-          <DefaultText
-            content={count}
-            fontColor={theme.color.COLOR_CORAL}
-            fontSize={1.2}
-          />
-        </CommentCountInfo>
+        <MultiText
+          imageSrc={`${process.env.PUBLIC_URL}/assets/func/comment.png`}
+          imageAlt="comment"
+          imageSize={20}
+          content={count}
+          fontColor={theme.color.COLOR_CORAL}
+          fontSize={1.2}
+        />
       </BestBookInfo>
     </CardContainer>
   );
@@ -122,10 +119,4 @@ const BookDetailInfo = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
   }
-`;
-
-const CommentCountInfo = styled.div`
-  display: flex;
-  gap: 5px;
-  align-items: center;
 `;

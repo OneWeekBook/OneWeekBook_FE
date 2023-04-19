@@ -21,7 +21,4 @@ const TagLabelContainer = styled.div`
   align-items: center;
   gap: 5px;
   margin: 20px auto 0;
-  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
-    width: 95%;
-  }
 `;

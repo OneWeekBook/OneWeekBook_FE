@@ -1,4 +1,5 @@
 import { CategoryItemTypes } from './book';
+import { ReviewItemType } from './review';
 
 export interface AuthMailTypes {
   authDone: boolean;
@@ -64,6 +65,14 @@ export interface PaginationTypes {
   totalPage: number;
   idx: number;
   setIdx: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export interface ReviewListProp {
+  reviews: ReviewItemType[];
+}
+
+export interface ReviewBookCardType {
+  count: number;
 }
 
 export interface SignUpTypes {

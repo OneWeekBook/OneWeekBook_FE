@@ -32,5 +32,5 @@ const MainLabelContainer = styled.div`
 const Bar = styled.span`
   flex-grow: 2;
   height: 2px;
-  background-color: #f7b7a9;
+  background-color: ${({ theme }) => theme.color.COLOR_CORAL};
 `;
