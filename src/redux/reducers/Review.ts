@@ -18,6 +18,7 @@ const initialState = {
   isNewLoading: false,
   isNewSuccess: false,
   reviews: [],
+  userReviews: [],
   reivewsTotal: 0,
   reviewCount: 0,
   moreReviews: false,
@@ -61,7 +62,7 @@ export default function Review(state = initialState, action: ActionsTypes) {
         itemLoading: false,
         itemSuccess: true,
         bookData: action.payload.bookData[0],
-        reviews: state.reviews.concat(action.payload.reviewData),
+        userReviews: state.reviews.concat(action.payload.reviewData),
         reivewsTotal: action.payload.bookData[0].countReviews,
         moreReviews:
           action.payload.bookData[0].countReviews > state.reviewCount + 10,

@@ -81,7 +81,7 @@ function Index() {
 export default Index;
 
 const BookListContainer = styled.div`
-  margin: 50px auto;
+  margin: 50px auto 0px;
   width: 100%;
   height: auto;
   overflow: hidden;
@@ -98,6 +98,7 @@ const BestBooksGrid = styled.div<{ idx: number }>`
   transition-duration: 0.5s;
   width: 100%;
   min-height: 150px;
+  margin-bottom: 50px;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
   grid-auto-flow: column;
@@ -115,6 +116,7 @@ const NewReviewGrid = styled.div<{ idx: number }>`
   transition-duration: 0.5s;
   width: 100%;
   min-height: 150px;
+  margin-bottom: 50px;
   display: grid;
   grid-template-rows: 1fr 1fr;
   grid-auto-flow: column;

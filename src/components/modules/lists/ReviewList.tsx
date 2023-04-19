@@ -1,16 +1,14 @@
 import styled from 'styled-components';
-import { ReviewListProp } from 'types/module';
+import { ReviewListType } from 'types/module';
 import { ReviewItemType } from 'types/review';
 import ReviewBookCard from 'components/modules/cards/ReviewBookCard';
 
-function ReviewList({ reviews }: ReviewListProp) {
+function ReviewList({ reviews }: ReviewListType) {
   return (
     <ReviewListContainer>
-      {reviews.map((item: ReviewItemType) => {
-        return (
-          <ReviewBookCard key={item.id} {...item} count={item.countReviews} />
-        );
-      })}
+      {reviews.map((item: ReviewItemType) => (
+        <ReviewBookCard key={item.id} {...item} count={item.countReviews} />
+      ))}
     </ReviewListContainer>
   );
 }

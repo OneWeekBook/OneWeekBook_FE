@@ -60,7 +60,7 @@ function ReviewDetailModal({
       dispatch(
         ReviewRequest({
           isbn,
-          start: reviewCount,
+          start: 0,
           sortby: sort,
         }),
       );

@@ -63,8 +63,8 @@ function BookBannerInfo({
             reactive
           />
           <AvarageScore>
-            {RateArr.map((el) => (
-              <StarIcon key={el} score={el} imageSize={20} />
+            {RateArr.map((el, idx) => (
+              <StarIcon key={idx} score={el} imageSize={20} />
             ))}
             <DataText
               data={ratingAverage.toFixed(1)}

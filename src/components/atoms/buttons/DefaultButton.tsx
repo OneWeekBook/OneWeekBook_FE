@@ -38,7 +38,10 @@ export default DefaultButton;
 
 const DefaultButtonAtom = styled.button<ButtonStyleTypes>`
   cursor: pointer;
-  color: ${({ fontColor }) => fontColor && fontColor[0]};
+  color: ${({ fontColor, isBtnClick }) =>
+    isBtnClick
+      ? fontColor && `${fontColor[1]}`
+      : fontColor && `${fontColor[0]}`};
   font-size: ${({ fontSize }) => fontSize}rem;
   font-weight: ${({ fontWeight }) => fontWeight};
   width: ${({ width }) => (width === 'auto' ? '100%' : `${width}px`)};
@@ -56,8 +59,8 @@ const DefaultButtonAtom = styled.button<ButtonStyleTypes>`
     background-color: ${({ theme }) => theme.color.COLOR_GRAY};
   }
   &.pagination:hover {
-    height: ${({ height }) => height && height + 10}px;
-    transform: translateY(-5px);
+    height: ${({ height }) => height && height + 20}px;
+    transform: translateY(-10px);
   }
   &.category {
     box-shadow: 3px 3px 3px
