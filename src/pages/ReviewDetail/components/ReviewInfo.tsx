@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Route, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { ReviewDetailTypes } from 'types/review';
 import { AppStateType } from 'redux/reducers';
 import { ReviewInit, ReviewRequest } from 'redux/reducers/Review';
 import useToggle from 'hooks/useToggle';
-import { ReviewDetailTypes } from 'types/review';
-import PagenationForm from 'components/Form/PagenationForm';
+import Pagination from 'components/modules/pagination/Pagination';
 import ReviewDetailModal from './Modal/ReivewDetailModal';
 import ReviewItem from './_items/ReivewItem';
 
@@ -16,7 +16,7 @@ function ReviewInfo() {
   const dispatch = useDispatch();
   const isbn = Number(location.pathname.split('/')[2]);
   const sort = `${location.search.split('=')[1]}`;
-  const [curIdx, setCurIdx] = useState<number>(1);
+  const [curIdx, setCurIdx] = useState<number>(0);
   const [detailToggle, detailToggleIsOn] = useToggle(false);
   const { reviews, bookData } = useSelector(
     (state: AppStateType) => state.review,
@@ -27,7 +27,7 @@ function ReviewInfo() {
     dispatch(
       ReviewRequest({
         isbn,
-        start: (curIdx - 1) * 10,
+        start: curIdx * 10,
         sortby: sort,
       }),
     );
@@ -92,11 +92,10 @@ function ReviewInfo() {
           sort={sort}
         />
       )}
-      <PagenationForm
-        total={bookData.countReviews}
-        display={10}
-        curIdx={curIdx}
-        setCurIdx={setCurIdx}
+      <Pagination
+        totalPage={Math.ceil(bookData.countReviews / 10)}
+        idx={curIdx}
+        setIdx={setCurIdx}
       />
     </Wrapper>
   );

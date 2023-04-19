@@ -8,7 +8,7 @@ export interface BannerButtonTypes {
 
 export interface DefaultButtonTypes {
   handleClick?: () => void;
-  content?: string;
+  content?: string | number;
   disabled?: boolean;
   className?: string;
   type?: 'button' | 'submit';
@@ -154,7 +154,7 @@ export interface ErrorTypes {
 
 export interface TextStyleTypes {
   fontSize?: number;
-  fontColor?: string;
+  fontColor?: string[] | string;
   fontWeight?: number;
   padding?: number;
   align?: string;
