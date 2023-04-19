@@ -29,7 +29,7 @@ const FooterBody = styled.div`
   flex-direction: column;
   justify-content: center;
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
-    margin: auto;
     width: 95%;
+    margin: 0 auto;
   }
 `;

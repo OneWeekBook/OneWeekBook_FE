@@ -68,13 +68,12 @@ function SearchList() {
 export default SearchList;
 
 const SearchListContainer = styled.div`
-  width: 100%;
   display: grid;
-  margin: 30px auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
-  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
-    width: 95%;
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     grid-template-columns: 1fr;
   }
 `;

@@ -37,18 +37,12 @@ function HeaderTopMenu({ handleToggle, handleSignout }: HeaderTypes) {
 export default HeaderTopMenu;
 
 const HeaderTopMenuModule = styled.div`
-  width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   color: ${({ theme }) => theme.color.COLOR_CORAL};
-  margin: 10px 0;
   button {
     display: none;
-  }
-  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
-    margin: 10px auto;
-    width: 95%;
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     button {

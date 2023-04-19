@@ -41,7 +41,4 @@ const NoneBookCardContainer = styled.div`
     font-size: 1.4rem;
     color: ${({ theme }) => theme.color.COLOR_WHITE};
   }
-  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
-    width: 95%;
-  }
 `;

@@ -73,6 +73,7 @@ const LayoutWrapper = styled.section`
 const HeaderWrapper = styled.section`
   display: flex;
   justify-content: center;
+  margin-top: 10px;
 `;
 
 const FooterWrapper = styled.section`

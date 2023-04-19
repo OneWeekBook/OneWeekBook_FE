@@ -109,8 +109,5 @@ export default index;
 
 const CategoryListContainer = styled.div`
   width: 100%;
-  margin: 20px auto 20px;
-  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
-    width: 95%;
-  }
+  margin-top: 20px;
 `;

@@ -14,24 +14,22 @@ function HeaderMainCategory() {
   const { handleAuthClick } = useAuthLink();
 
   return (
-    <Container as="nav">
-      <MenuListWrapper>
-        {NavItems.map((item) => (
-          <MenuButton
-            key={item.id}
-            src={
-              item.link === `/${location.pathname.split('/')[1]}`
-                ? item.clickImg
-                : item.img
-            }
-            imgSize={30}
-            content={item.title}
-            handleClick={() =>
-              handleAuthClick(item.link, ['/my-library'], isModalToggleOn)
-            }
-          />
-        ))}
-      </MenuListWrapper>
+    <MenuListWrapper>
+      {NavItems.map((item) => (
+        <MenuButton
+          key={item.id}
+          src={
+            item.link === `/${location.pathname.split('/')[1]}`
+              ? item.clickImg
+              : item.img
+          }
+          imgSize={30}
+          content={item.title}
+          handleClick={() =>
+            handleAuthClick(item.link, ['/my-library'], isModalToggleOn)
+          }
+        />
+      ))}
       {modalToggle && (
         <NoticeModal
           title="내 서재로 가시려면 로그인을 하셔야합니다."
@@ -50,7 +48,7 @@ function HeaderMainCategory() {
           handleCanCelClick={isModalToggleOn}
         />
       )}
-    </Container>
+    </MenuListWrapper>
   );
 }
 
@@ -59,14 +57,9 @@ export default HeaderMainCategory;
 const MenuListWrapper = styled.div`
   display: flex;
   gap: 10px;
-  margin-bottom: 5px;
-  width: 100%;
+  margin-top: 10px;
   font-size: 16px;
   font-weight: 500;
-  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
-    margin: auto;
-    width: 95%;
-  }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     display: none;
   }

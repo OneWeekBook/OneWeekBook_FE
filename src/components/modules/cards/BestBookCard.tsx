@@ -96,6 +96,9 @@ const BestBookInfo = styled.div`
   justify-content: space-between;
   padding: 10px 0px;
   height: 100%;
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    display: none;
+  }
 `;
 
 const BookDetailInfo = styled.div`

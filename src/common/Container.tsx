@@ -60,4 +60,8 @@ const ContentsWrapper = styled.section`
   max-width: 1000px;
   width: 100%;
   min-width: 375px;
+  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
+    width: 95%;
+    margin: 0px auto;
+  }
 `;
