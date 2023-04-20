@@ -10,7 +10,10 @@ import useDebounce from 'hooks/useDebounce';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import DefaultInput from 'components/atoms/inputs/DefaultInput';
 
-function SearchInput({ curSubCategory, curParentCategory }: SearchInputTypes) {
+function SearchBookForm({
+  curSubCategory,
+  curParentCategory,
+}: SearchInputTypes) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
@@ -120,7 +123,7 @@ function SearchInput({ curSubCategory, curParentCategory }: SearchInputTypes) {
   );
 }
 
-export default SearchInput;
+export default SearchBookForm;
 
 const SearchInputContainer = styled.div`
   display: flex;

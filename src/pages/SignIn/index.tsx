@@ -2,10 +2,10 @@ import { useMemo } from 'react';
 import theme from 'styles/theme';
 import useRouter from 'hooks/useRouter';
 import Container from 'common/Container';
-import SignContainer from 'components/modules/signs/SignContainer';
 import DefaultLabel from 'components/atoms/labels/DefaultLabel';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
-import SignInForm from 'components/modules/signs/SignInForm';
+import SignContainer from 'components/modules/commons/SignContainer';
+import SignInForm from 'components/modules/form/SignInForm';
 
 function Index() {
   const { routeTo } = useRouter();

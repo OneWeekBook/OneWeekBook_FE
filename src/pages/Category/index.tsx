@@ -8,7 +8,7 @@ import { searchNone, userToggle } from 'redux/reducers/Func';
 import { AppStateType } from 'redux/reducers';
 import { initialState } from 'contain/category';
 import Container from 'common/Container';
-import SearchInput from 'components/modules/inputs/SearchInput';
+import SearchInput from 'components/modules/form/SearchBookForm';
 import CategoryList from 'components/modules/lists/CategoryList';
 import SearchList from 'components/modules/lists/SearchList';
 

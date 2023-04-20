@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
-function SignForm({ children }: PropsWithChildren) {
+function SignContainer({ children }: PropsWithChildren) {
   return (
     <SignFormContainer>
       <SignFormBody>{children}</SignFormBody>
@@ -9,7 +9,7 @@ function SignForm({ children }: PropsWithChildren) {
   );
 }
 
-export default SignForm;
+export default SignContainer;
 
 const SignFormContainer = styled.div`
   display: flex;
