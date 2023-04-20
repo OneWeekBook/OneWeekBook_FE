@@ -6,7 +6,6 @@ import { ReviewUserCardType } from 'types/module';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DataText from 'components/atoms/texts/DataText';
 import theme from 'styles/theme';
-import MenuButton from 'components/atoms/buttons/MenuButton';
 import MultiText from 'components/atoms/texts/MultiText';
 import DefaultText from 'components/atoms/texts/DefaultText';
 
@@ -80,7 +79,7 @@ function ReviewUserCard({
           imageSize={25}
           fontColor={theme.color.COLOR_WHITE}
           fontWeight={300}
-          content={`${zeroLikeCount} 재미있어요`}
+          content={`${oneLikeCount} 재미있어요`}
         />
       </RecommendWrapper>
     </ReviewItemWrapper>

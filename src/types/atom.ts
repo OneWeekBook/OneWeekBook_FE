@@ -21,12 +21,13 @@ export interface ImageButtonTypes {
 }
 
 export interface MenuButtonTypes extends ImageButtonTypes {
+  className?: string;
   content: string;
 }
 
 export interface ButtonStyleTypes {
   fontSize?: number;
-  fontColor?: string[];
+  fontColor?: string | string[];
   fontWeight?: number;
   bgColor?: string | string[];
   imgSize?: number;

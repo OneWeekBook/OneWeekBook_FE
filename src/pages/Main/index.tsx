@@ -10,13 +10,13 @@ import Container from 'common/Container';
 import Banner from 'components/modules/banner/Banner';
 import BestBookCard from 'components/modules/cards/BestBookCard';
 import MainLabel from 'components/modules/labels/MainLabel';
-import Pagination from 'components/modules/pagination/Pagination';
+import Pagination from 'common/Pagination';
 import NewReivewCard from 'components/modules/cards/NewReivewCard';
 
 function Index() {
   const dispatch = useDispatch();
-  const [bestIdx, setBestIdx] = useState(0);
-  const [reviewIdx, setReviewIdx] = useState(0);
+  const [bestIndex, setBestIndex] = useState(0);
+  const [reviewIndex, setReviewIndex] = useState(0);
   const reviews = useSelector(
     (state: AppStateType) => state.review.reviews,
     shallowEqual,
@@ -45,7 +45,7 @@ function Index() {
           subTitle="사람들의 관심을 한몸에 받는 책"
           fontSize={3.4}
         />
-        <BestBooksGrid idx={bestIdx}>
+        <BestBooksGrid index={bestIndex}>
           {reviews.slice(0, 12).map((item: ReviewItemType, idx: number) => (
             <BestBookCard
               key={item.id}
@@ -55,7 +55,7 @@ function Index() {
             />
           ))}
         </BestBooksGrid>
-        <Pagination totalPage={2} idx={bestIdx} setIdx={setBestIdx} />
+        <Pagination totalPage={2} index={bestIndex} setIndex={setBestIndex} />
       </BookListContainer>
       <BookListContainer>
         <MainLabel
@@ -63,15 +63,15 @@ function Index() {
           subTitle="따끈따끈한 새 리뷰"
           fontSize={3.4}
         />
-        <NewReviewGrid idx={reviewIdx}>
+        <NewReviewGrid index={reviewIndex}>
           {newReviews.map((item: NewReviewTypes) => (
             <NewReivewCard key={item.id} {...item} />
           ))}
         </NewReviewGrid>
         <Pagination
           totalPage={Math.floor(newReviews.length / 4)}
-          idx={reviewIdx}
-          setIdx={setReviewIdx}
+          index={reviewIndex}
+          setIndex={setReviewIndex}
         />
       </BookListContainer>
     </Container>
@@ -93,8 +93,8 @@ const BookListContainer = styled.div`
   }
 `;
 
-const BestBooksGrid = styled.div<{ idx: number }>`
-  transform: translateX(${({ idx }) => 0 - idx * 1010}px);
+const BestBooksGrid = styled.div<{ index: number }>`
+  transform: translateX(${({ index }) => 0 - index * 1010}px);
   transition-duration: 0.5s;
   width: 100%;
   min-height: 150px;
@@ -104,15 +104,15 @@ const BestBooksGrid = styled.div<{ idx: number }>`
   grid-auto-flow: column;
   gap: 15px 10px;
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
-    transform: translateX(${({ idx }) => 0 - idx * 710}px);
+    transform: translateX(${({ index }) => 0 - index * 710}px);
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    transform: translateX(${({ idx }) => 0 - idx * 360}px);
+    transform: translateX(${({ index }) => 0 - index * 360}px);
   }
 `;
 
-const NewReviewGrid = styled.div<{ idx: number }>`
-  transform: translateX(${({ idx }) => 0 - idx * 1010}px);
+const NewReviewGrid = styled.div<{ index: number }>`
+  transform: translateX(${({ index }) => 0 - index * 1010}px);
   transition-duration: 0.5s;
   width: 100%;
   min-height: 150px;
@@ -122,9 +122,9 @@ const NewReviewGrid = styled.div<{ idx: number }>`
   grid-auto-flow: column;
   gap: 10px;
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
-    transform: translateX(${({ idx }) => 0 - idx * 710}px);
+    transform: translateX(${({ index }) => 0 - index * 710}px);
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    transform: translateX(${({ idx }) => 0 - idx * 360}px);
+    transform: translateX(${({ index }) => 0 - index * 360}px);
   }
 `;

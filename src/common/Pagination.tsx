@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { PaginationTypes } from 'types/module';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 
-function Pagination({ totalPage, idx, setIdx }: PaginationTypes) {
+function Pagination({ totalPage, index, setIndex }: PaginationTypes) {
   const pages = Array.from({ length: totalPage }, (_, i) => i + 1 - 1);
 
   if (totalPage > 1) {
@@ -13,8 +13,8 @@ function Pagination({ totalPage, idx, setIdx }: PaginationTypes) {
             key={item}
             className="pagination"
             content={item + 1}
-            handleClick={() => setIdx(item)}
-            isBtnClick={item === idx}
+            handleClick={() => setIndex(item)}
+            isBtnClick={item === index}
             height={5}
           />
         ))}

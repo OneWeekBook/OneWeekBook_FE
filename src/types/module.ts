@@ -63,8 +63,8 @@ export interface MainLabelTypes {
 
 export interface PaginationTypes {
   totalPage: number;
-  idx: number;
-  setIdx: React.Dispatch<React.SetStateAction<number>>;
+  index: number;
+  setIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export interface ReviewListType {

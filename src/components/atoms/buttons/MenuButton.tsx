@@ -4,13 +4,19 @@ import { ButtonStyleTypes, MenuButtonTypes } from 'types/atom';
 
 function MenuButton({
   handleClick,
+  className,
   content,
   src,
   type,
   ...rest
 }: MenuButtonTypes & ButtonStyleTypes) {
   return (
-    <MenuButtonAtom type={type} onClick={handleClick} {...rest}>
+    <MenuButtonAtom
+      type={type}
+      className={className}
+      onClick={handleClick}
+      {...rest}
+    >
       <img src={src} alt="menu img" />
       <p>{content}</p>
     </MenuButtonAtom>
@@ -33,7 +39,8 @@ const MenuButtonAtom = styled.button<ButtonStyleTypes>`
   gap: 5px;
   cursor: pointer;
   border: none;
-  background-color: ${({ bgColor }) => bgColor && `${bgColor[0]}`};
+  background-color: ${({ bgColor, isBtnClick }) =>
+    isBtnClick ? bgColor && `${bgColor[1]}` : bgColor && `${bgColor[0]}`};
   &:hover {
     background-color: ${({ bgColor }) => bgColor && `${bgColor[1]}`};
   }
@@ -44,5 +51,9 @@ const MenuButtonAtom = styled.button<ButtonStyleTypes>`
     color: ${({ fontColor }) => fontColor};
     font-size: ${({ fontSize }) => fontSize}rem;
     font-weight: ${({ fontWeight }) => fontWeight};
+  }
+  &.likemenu {
+    padding: 5px 10px;
+    border-radius: 5px;
   }
 `;

@@ -7,8 +7,8 @@ import useIntersectionObserver from 'hooks/useIntersectionObserver';
 import Container from 'common/Container';
 import TopButton from 'components/atoms/buttons/TopButton';
 import DefaultLabel from 'components/atoms/labels/DefaultLabel';
-import ReviewList from 'components/modules/lists/ReviewList';
 import LoadingForm from 'components/modules/commons/LoadingForm';
+import ReviewList from 'components/modules/Lists/ReviewList';
 
 function Index() {
   const dispatch = useDispatch();

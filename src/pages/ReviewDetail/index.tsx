@@ -10,9 +10,9 @@ import { reviewInit } from 'contain/review';
 import Container from 'common/Container';
 import BookBannerInfo from 'components/modules/banner/BookBannerInfo';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
-import Pagination from 'components/modules/pagination/Pagination';
-import UserReviewList from 'components/modules/lists/UserReviewList';
-import ReviewDetailModal from './components/Modal/ReivewDetailModal';
+import Pagination from 'common/Pagination';
+import UserReviewList from 'components/modules/Lists/UserReviewList';
+import ReviewDetailModal from 'components/page/modal/ReivewDetailModal';
 
 function Index() {
   const location = useLocation();
@@ -21,7 +21,7 @@ function Index() {
   const sort = `${location.search.split('=')[1]}`;
   const isbn = Number(location.pathname.split('/')[2]);
   const [detailToggle, handleDetailToggle] = useToggle(false);
-  const [curIdx, setCurIdx] = useState<number>(0);
+  const [curIndex, setCurIndex] = useState<number>(0);
   const [curReview, setCurReview] = useState(reviewInit);
   const { bookData, userReviews } = useSelector(
     (state: AppStateType) => state.review,
@@ -30,30 +30,30 @@ function Index() {
 
   const handleNewClick = () => {
     navigate(`/review/${isbn}?sort=new`, { replace: true });
-    setCurIdx(0);
+    setCurIndex(0);
   };
 
   const handleRecommendClick = () => {
     navigate(`/review/${isbn}?sort=recommend`, { replace: true });
-    setCurIdx(0);
+    setCurIndex(0);
   };
 
   const handleFetchReivew = useCallback(() => {
     dispatch(
       ReviewRequest({
         isbn,
-        start: curIdx * 10,
+        start: curIndex * 10,
         sortby: sort,
       }),
     );
-  }, [sort, curIdx]);
+  }, [sort, curIndex]);
 
   useEffect(() => {
     handleFetchReivew();
     return () => {
       dispatch(ReviewInit());
     };
-  }, [sort, curIdx]);
+  }, [sort, curIndex]);
 
   return (
     <>
@@ -92,16 +92,16 @@ function Index() {
         />
         <Pagination
           totalPage={Math.ceil(bookData.countReviews / 10)}
-          idx={curIdx}
-          setIdx={setCurIdx}
+          index={curIndex}
+          setIndex={setCurIndex}
         />
         {detailToggle && (
           <ReviewDetailModal
-            item={curReview}
-            detailToggleIsOn={handleDetailToggle}
-            isbn={isbn}
-            reviewCount={(curIdx - 1) * 10}
-            sort={sort}
+            userReview={curReview}
+            handleDetailToggle={handleDetailToggle}
+            bookIsbn={isbn}
+            reviewIndex={curIndex * 10}
+            reviewSort={sort}
           />
         )}
       </Container>

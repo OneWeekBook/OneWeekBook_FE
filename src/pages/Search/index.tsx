@@ -1,8 +1,8 @@
 import { useLocation } from 'react-router-dom';
 import Container from 'common/Container';
-import TagLabel from 'components/modules/labels/TagLabel';
-import BooksList from 'components/modules/lists/BooksList';
 import TopButton from 'components/atoms/buttons/TopButton';
+import TagLabel from 'components/modules/labels/TagLabel';
+import BooksList from 'components/modules/Lists/BooksList';
 
 function index() {
   const location = useLocation();
