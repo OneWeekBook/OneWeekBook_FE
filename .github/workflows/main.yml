@@ -1,32 +1,24 @@
-name: S3 deploy with cloud front
+name: CI/CD
+
 on:
   push:
     branches:
-      - master
-  pull_request:
-    branches:
-      - master
+      - main
+  workflow_dispatch:
 
 jobs:
-  run:
+  cicd:
     runs-on: ubuntu-latest
-    env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Install dependencies
-        run: npm i
-
-      - name: Build
-        run: npm run build
-
-      - name: Deploy
-        uses: lbertenasco/s3-deploy@v3
+      - uses: actions/checkout@main
+      - run: npm run build
+      - name: deploy to s3
+      - uses: awact/s3-action@master
         with:
-          folder: build
-          bucket: ${{ secrets.S3_BUCKET }}
-          dist-id: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
-          invalidation: / *
+          args: --acl public-read --follow-symlinks --delete
+        env:
+          SOURCE_DIR: './build'
+          AWS_REGION: 'ap-northeast-2'
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
