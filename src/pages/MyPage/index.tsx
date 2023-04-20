@@ -1,16 +1,101 @@
-import { lazy } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
+import theme from 'styles/theme';
+import { AppStateType } from 'redux/reducers';
+import { userToggle } from 'redux/reducers/Func';
+import useToggle from 'hooks/useToggle';
 import Container from 'common/Container';
-
-const UserInfo = lazy(
-  () => import(/* webpackChunkName: "UserInfo" */ './components/UserInfo'),
-);
+import DefaultButton from 'components/atoms/buttons/DefaultButton';
+import RemoveUserModal from 'components/page/modal/RemoveUserModal';
+import NameButton from './components/_items/NameButton';
+import Rank from './components/_items/Rank';
+import UserBookInfo from './components/UserBookInfo';
 
 function Index() {
+  const dispatch = useDispatch();
+  const [rank, setRank] = useState<string>('');
+  const [remaining, setRemaining] = useState<number>(0);
+  const [limit, setLimit] = useState<number>(10);
+  const [percent, setPercent] = useState<number>(0);
+  const rankLimit = [10, 25, 50];
+  const [removeToggle, removeToggleIsOn] = useToggle(false);
+  const { user, userBooks } = useSelector(
+    (state: AppStateType) => state.authUser,
+    shallowEqual,
+  );
+
+  useEffect(() => {
+    dispatch(userToggle());
+  }, []);
+
+  useLayoutEffect(() => {
+    if (userBooks.length < rankLimit[0]) {
+      setRank('독서 입문자');
+      setLimit(rankLimit[0]);
+      setRemaining(rankLimit[0] - userBooks.length);
+      setPercent(userBooks.length / rankLimit[0]);
+    } else if (userBooks.length < rankLimit[1]) {
+      setRank('독서 중급자');
+      setLimit(rankLimit[1]);
+      setRemaining(rankLimit[1] - userBooks.length);
+      setPercent(userBooks.length / rankLimit[1]);
+    } else if (userBooks.length < rankLimit[2]) {
+      setRank('독서 천재');
+      setLimit(rankLimit[2]);
+      setRemaining(rankLimit[2] - userBooks.length);
+      setPercent(userBooks.length / rankLimit[2]);
+    }
+  }, [userBooks]);
+
+  useEffect(() => {
+    return () => {
+      setRank('');
+      setRemaining(0);
+      setPercent(0);
+    };
+  }, []);
+
   return (
     <Container>
-      <UserInfo />
+      <UserInfoContainer>
+        <NameButton nickName={user.nick} />
+        <Rank
+          rank={rank}
+          limit={limit}
+          write={userBooks.length}
+          remaining={remaining}
+          percent={percent}
+        />
+        <SignOutButton>
+          <DefaultButton
+            content="회원 탈퇴"
+            fontSize={1.8}
+            width={80}
+            height={20}
+            fontColor={theme.color.COLOR_BLACK}
+            bgColor={[theme.color.COLOR_NONE, theme.color.COLOR_NONE]}
+            handleClick={removeToggleIsOn}
+          />
+        </SignOutButton>
+      </UserInfoContainer>
+      <UserBookInfo nickName={user.nick} userBooks={userBooks} />
+      {removeToggle && <RemoveUserModal removeToggleIsOn={removeToggleIsOn} />}
     </Container>
   );
 }
 
 export default Index;
+
+const UserInfoContainer = styled.div`
+  box-sizing: border-box;
+  border: 3px solid ${({ theme }) => theme.color.COLOR_CORAL};
+  border-radius: 10px;
+  padding: 30px;
+  margin-top: 20px;
+`;
+
+const SignOutButton = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;

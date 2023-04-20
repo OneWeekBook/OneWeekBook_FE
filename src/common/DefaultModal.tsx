@@ -1,23 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { DefaultModalTypes } from 'types/page';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import ImageButton from 'components/atoms/buttons/ImageButton';
 import DefaultText from 'components/atoms/texts/DefaultText';
-
-interface DefaultModalTypes {
-  width: number;
-  height: number;
-  close: boolean;
-  content: string;
-  contentSize: number;
-  subContent?: string;
-  okButtonTitle?: string;
-  cancelButtonTitle?: string;
-  type?: string;
-  handleToggle: () => void;
-  handleOkClick?: () => void;
-  handleCanCelClick?: () => void;
-}
 
 function Index({
   width,
@@ -53,7 +39,7 @@ function Index({
             fontSize={contentSize}
             align="center"
           />
-          <div>{children}</div>
+          {children}
           <DefaultButtons>
             {okButtonTitle && (
               <DefaultButton

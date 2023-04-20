@@ -11,7 +11,7 @@ import Container from 'common/Container';
 import BookBannerInfo from 'components/modules/banner/BookBannerInfo';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import Pagination from 'common/Pagination';
-import UserReviewList from 'components/modules/Lists/UserReviewList';
+import UserReviewList from 'components/modules/lists/UserReviewList';
 import ReviewDetailModal from 'components/page/modal/ReivewDetailModal';
 
 function Index() {

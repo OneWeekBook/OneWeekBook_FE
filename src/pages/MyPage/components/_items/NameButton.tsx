@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import useToggle from 'hooks/useToggle';
 import DefaultButton from 'components/Button/DefaultButton';
-import ChangeNickModal from '../modal/ChangeNickModal';
-import ChangePassModal from '../modal/ChangePassModal';
+import ChangePassModal from 'components/page/modal/ChangePassModal';
+import ChangeNickModal from 'components/page/modal/ChangeNickModal';
 
-type PropsType = {
+interface PropsType {
   nickName: string;
-};
+}
 
 function NameButton({ nickName }: PropsType) {
   const [nickToggle, nickToggleIsOn] = useToggle(false);

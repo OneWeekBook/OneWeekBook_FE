@@ -11,8 +11,8 @@ import { useAuthErrorCheck } from 'hooks/useAuthErrorCheck';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import BorderInput from 'components/atoms/inputs/BorderInput';
 import TimerForm from '../../Form/TimerForm';
-import EmailErrorForm from '../errors/EmailErrorForm';
-import CodeErrorForm from '../errors/CodeErrorForm';
+import EmailErrorForm from '../form/EmailErrorForm';
+import CodeErrorForm from '../form/CodeErrorForm';
 
 function AuthEmailForm({
   authDone,
