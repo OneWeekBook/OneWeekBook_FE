@@ -75,8 +75,7 @@ const DefaultButtonAtom = styled.button<ButtonStyleTypes>`
       box-shadow: 3px 8px 3px rgba(0, 0, 0, 0.5);
       margin: 5px 10px 10px 0;
     }
-    @media (max-width: ${({ theme: { device } }) =>
-      device.mobile.maxWidth}px) {\
+    @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
       font-size: 1.4rem;
       height: 35px;
     }

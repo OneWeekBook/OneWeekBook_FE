@@ -6,11 +6,12 @@ import { AppStateType } from 'redux/reducers';
 import { userToggle } from 'redux/reducers/Func';
 import useToggle from 'hooks/useToggle';
 import Container from 'common/Container';
+import DataText from 'components/atoms/texts/DataText';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
+import UserSettingForm from 'components/modules/form/UserSettingForm';
+import ProgressBarForm from 'components/modules/form/ProgressBarForm';
 import RemoveUserModal from 'components/page/modal/RemoveUserModal';
-import NameButton from './components/_items/NameButton';
-import Rank from './components/_items/Rank';
-import UserBookInfo from './components/UserBookInfo';
+import UserBookInfo from 'components/modules/lists/UserBookList';
 
 function Index() {
   const dispatch = useDispatch();
@@ -59,13 +60,19 @@ function Index() {
   return (
     <Container>
       <UserInfoContainer>
-        <NameButton nickName={user.nick} />
-        <Rank
-          rank={rank}
+        <UserSettingForm nickName={user.nick} />
+        <DataText before="등급:" data={rank} fontSize={1.8} />
+        <ProgressBarForm
           limit={limit}
           write={userBooks.length}
-          remaining={remaining}
+          width={200}
           percent={percent}
+        />
+        <DataText
+          before="다음 등급까지"
+          data={remaining}
+          after="권 남았습니다."
+          fontColor={[theme.color.COLOR_BLACK, theme.color.COLOR_CORAL]}
         />
         <SignOutButton>
           <DefaultButton
@@ -79,7 +86,13 @@ function Index() {
           />
         </SignOutButton>
       </UserInfoContainer>
-      <UserBookInfo nickName={user.nick} userBooks={userBooks} />
+      <DataText
+        data={user.nick}
+        after="님이 읽으신 책"
+        fontSize={2.4}
+        fontColor={[theme.color.COLOR_BLACK, theme.color.COLOR_CORAL]}
+      />
+      <UserBookInfo userBooks={userBooks} />
       {removeToggle && <RemoveUserModal removeToggleIsOn={removeToggleIsOn} />}
     </Container>
   );
@@ -92,7 +105,7 @@ const UserInfoContainer = styled.div`
   border: 3px solid ${({ theme }) => theme.color.COLOR_CORAL};
   border-radius: 10px;
   padding: 30px;
-  margin-top: 20px;
+  margin: 30px auto 20px;
 `;
 
 const SignOutButton = styled.div`

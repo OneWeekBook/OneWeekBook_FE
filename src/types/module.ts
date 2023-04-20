@@ -1,4 +1,5 @@
 import { CategoryItemTypes } from './book';
+import { userBooksTypes } from './main';
 import { ReviewDetailTypes, ReviewItemType } from './review';
 
 export interface AuthMailTypes {
@@ -67,6 +68,13 @@ export interface PaginationTypes {
   setIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
+export interface ProgressBarTypes {
+  limit: number;
+  write: number;
+  width: number;
+  percent: number;
+}
+
 export interface ReviewListType {
   reviews: ReviewItemType[];
 }
@@ -98,4 +106,8 @@ export interface SearchInputTypes {
 
 export interface TagLabelType {
   tags: Set<string>;
+}
+
+export interface UserBookListType {
+  userBooks: userBooksTypes[];
 }

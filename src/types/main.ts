@@ -18,7 +18,7 @@ export type ReviewDetailTypes = {
   userId: number;
 };
 
-export type NewReviewTypes = {
+export interface userBooksTypes {
   id: number;
   title: string;
   author: string;
@@ -34,8 +34,11 @@ export type NewReviewTypes = {
   createdAt: string;
   updatedAt: string;
   userId: number;
+}
+
+export interface NewReviewTypes extends userBooksTypes {
   user: UserTypes;
-};
+}
 
 export type UserTypes = {
   id: number;
