@@ -22,7 +22,7 @@ type SlideItemsType = {
 function Index() {
   const itemSize = SlidePCItems.length;
   const addItemSize = 2;
-  const [windowWidth, windowHeight] = useWindowSize();
+  const [windowWidth] = useWindowSize();
   const [curIndex, setCurIndex] = useState<number>(addItemSize);
   const transitionStyle = `transform 500ms ease 0s`;
   const [transition, setTransition] = useState<string>(transitionStyle);
