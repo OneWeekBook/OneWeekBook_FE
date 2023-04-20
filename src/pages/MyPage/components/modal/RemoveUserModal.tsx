@@ -7,7 +7,7 @@ import { RemoveUserInit, RemoveUserRequest } from 'redux/reducers/RemoveUser';
 import useInput from 'hooks/useInput';
 import { Toast } from 'lib/Toast';
 import ErrorForm from 'components/Form/ErrorForm';
-import RemoveModal from 'components/Modal';
+import RemoveModal from 'common/DefaultModal';
 
 type PropsType = {
   removeToggleIsOn: () => void;
@@ -55,17 +55,15 @@ function RemoveUserModal({ removeToggleIsOn }: PropsType) {
 
   return (
     <RemoveModal
-      title="회원탈퇴"
-      titleSize={[24, 20]}
+      content="회원탈퇴"
+      contentSize={2.4}
       width={500}
       height={300}
       handleToggle={removeToggleIsOn}
       close
-      isOkBtn
-      okBtnTitle="탈퇴"
+      okButtonTitle="탈퇴"
+      cancelButtonTitle="취소"
       handleOkClick={handleRemoveClick}
-      isCancelBtn
-      cancelBtnTitle="취소"
       handleCanCelClick={removeToggleIsOn}
     >
       <Desc>회원탈퇴 하시려면 비밀번호를 입력해주세요.</Desc>

@@ -8,7 +8,7 @@ import {
 import useInput from 'hooks/useInput';
 import { passwordRegex } from 'lib/Regex';
 import { Toast } from 'lib/Toast';
-import ChangeModal from 'components/Modal';
+import ChangeModal from 'common/DefaultModal';
 import ErrorForm from 'components/Form/ErrorForm';
 import DefaultInput from 'components/Input/DefaultInput';
 
@@ -56,18 +56,16 @@ function ChangePassModal({ passToggleIsOn }: PropsType) {
 
   return (
     <ChangeModal
-      title="비밀번호 변경"
-      titleSize={[24, 20]}
+      content="비밀번호 변경"
+      contentSize={2.4}
       width={500}
       height={300}
       handleToggle={passToggleIsOn}
       close
-      isOkBtn
-      okBtnTitle="변경"
+      okButtonTitle="변경"
+      cancelButtonTitle="취소"
       handleOkClick={handleChangePassword}
-      isCancelBtn
       handleCanCelClick={passToggleIsOn}
-      cancelBtnTitle="취소"
     >
       <form>
         <DefaultInput

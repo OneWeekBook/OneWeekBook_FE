@@ -11,7 +11,7 @@ import {
 import { InfoTypes } from 'types/book';
 import { SetStartDate } from 'lib/SetDate';
 import { Toast } from 'lib/Toast';
-import WriteModal from 'components/Modal';
+import WriteModal from 'common/DefaultModal';
 import DefaultButton from 'components/Button/DefaultButton';
 
 const RecommendItem = [
@@ -96,15 +96,13 @@ function WriteReviewModal({ bookId, bookData, toggleIsOn }: PropsType) {
   return (
     <WriteModal
       type="write"
-      title="책 리뷰하기"
-      titleSize={[24, 18]}
+      content="책 리뷰하기"
+      contentSize={2.4}
       width={700}
       height={400}
       handleToggle={toggleIsOn}
       close
-      isOkBtn={false}
-      isCancelBtn
-      cancelBtnTitle="나중에..."
+      cancelButtonTitle="나중에"
       handleCanCelClick={toggleIsOn}
     >
       <BodyWrapper>

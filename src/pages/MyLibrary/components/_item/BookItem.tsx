@@ -6,7 +6,7 @@ import { MyLibraryDeleteRequest } from 'redux/reducers/MyLibrary';
 import useToggle from 'hooks/useToggle';
 import { SetStartDate } from 'lib/SetDate';
 import { LibraryItemTypes } from 'types/book';
-import MoveDeleteModal from 'components/Modal';
+import MoveDeleteModal from 'common/DefaultModal';
 import ImageButton from 'components/Button/ImageButton';
 import ButtonWrapper from './ButtonWrapper';
 
@@ -84,17 +84,15 @@ function BookItem({
       </Wrapper>
       {deleteToggle && (
         <MoveDeleteModal
-          title="정말 삭제하시겠습니까?"
-          titleSize={[24, 20]}
+          content="정말 삭제하시겠습니까?"
+          contentSize={2.4}
           width={500}
           height={250}
           handleToggle={deleteToggleIsOn}
           close
-          isOkBtn
-          okBtnTitle="삭제"
+          okButtonTitle="삭제"
+          cancelButtonTitle="나중에"
           handleOkClick={handleDeleteItem}
-          isCancelBtn
-          cancelBtnTitle="나중에..."
           handleCanCelClick={deleteToggleIsOn}
         />
       )}

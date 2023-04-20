@@ -12,7 +12,7 @@ import {
   LikeRequest,
 } from 'redux/reducers/Like';
 import { ReviewInit, ReviewRequest } from 'redux/reducers/Review';
-import DetailModal from 'components/Modal';
+import DetailModal from 'common/DefaultModal';
 import MenuButton from 'components/atoms/buttons/MenuButton';
 import DataText from 'components/atoms/texts/DataText';
 import DefaultText from 'components/atoms/texts/DefaultText';
@@ -113,16 +113,14 @@ function ReviewDetailModal({
 
   return (
     <DetailModal
-      title={`${userReview.nick}님의 리뷰 전체 보기`}
-      titleSize={[24, 20]}
+      content={`${userReview.nick}님의 리뷰 전체 보기`}
+      contentSize={2.4}
       width={700}
       height={300}
       handleToggle={handleDetailToggle}
       close
-      isOkBtn
-      okBtnTitle="다른 리뷰"
+      okButtonTitle="다른 리뷰"
       handleOkClick={handleDetailToggle}
-      isCancelBtn={false}
     >
       <UserReview>
         <DataText before="작성일자 : " data={userReview.reviewCreationTime} />

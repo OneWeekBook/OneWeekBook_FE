@@ -4,7 +4,7 @@ import { AppStateType } from 'redux/reducers';
 import { ChangeNickInit, ChangeNickRequest } from 'redux/reducers/ChangeNick';
 import { userToggle } from 'redux/reducers/Func';
 import { Toast } from 'lib/Toast';
-import ChangeModal from 'components/Modal';
+import ChangeModal from 'common/DefaultModal';
 import useInput from 'hooks/useInput';
 import DefaultInput from 'components/Input/DefaultInput';
 
@@ -40,17 +40,15 @@ function ChangeNickModal({ nickToggleIsOn }: PropsType) {
 
   return (
     <ChangeModal
-      title="닉네임 변경"
-      titleSize={[24, 20]}
+      content="닉네임 변경"
+      contentSize={2.4}
       width={500}
       height={250}
       handleToggle={nickToggleIsOn}
       close
-      isOkBtn
-      okBtnTitle="변경"
+      okButtonTitle="변경"
+      cancelButtonTitle="취소"
       handleOkClick={handleChangeClick}
-      isCancelBtn
-      cancelBtnTitle="취소"
       handleCanCelClick={nickToggleIsOn}
     >
       <DefaultInput

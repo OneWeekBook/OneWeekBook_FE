@@ -7,7 +7,7 @@ import {
 } from 'redux/reducers/Paragraph';
 import { SetStartDate } from 'lib/SetDate';
 import { InfoTypes } from 'types/book';
-import WriteModal from 'components/Modal';
+import WriteModal from 'common/DefaultModal';
 import DefaultButton from 'components/Button/DefaultButton';
 import InputWrapper from './InputWrapper';
 import ListWrapper from './ListWrapper';
@@ -40,15 +40,13 @@ function Index({
   return (
     <WriteModal
       type="write"
-      title="기록하기"
-      titleSize={[24, 18]}
+      content="기록하기"
+      contentSize={2.4}
       width={700}
       height={300}
       handleToggle={toggleIsOn}
       close
-      isOkBtn={false}
-      isCancelBtn
-      cancelBtnTitle="나중에..."
+      cancelButtonTitle="나중에"
       handleCanCelClick={toggleIsOn}
     >
       <BodyWrapper>

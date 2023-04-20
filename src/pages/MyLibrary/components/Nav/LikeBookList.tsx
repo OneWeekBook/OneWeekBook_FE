@@ -8,7 +8,7 @@ import {
 import { navRead } from 'redux/reducers/Func';
 import useToggle from 'hooks/useToggle';
 import { LibraryItemTypes } from 'types/book';
-import MoveReadModal from 'components/Modal';
+import MoveReadModal from 'common/DefaultModal';
 import BookItem from '../_item/BookItem';
 
 function LikeBookList() {
@@ -50,17 +50,15 @@ function LikeBookList() {
         ))}
       {likeToggle && (
         <MoveReadModal
-          title="시작해볼까요?"
-          titleSize={[24, 20]}
+          content="시작해볼까요?"
+          contentSize={2.4}
           width={500}
           height={250}
           handleToggle={likeToggleIsOn}
           close
-          isOkBtn
-          okBtnTitle="독서 시작"
+          okButtonTitle="독서 시작"
+          cancelButtonTitle="나중에"
           handleOkClick={moveReadClick}
-          isCancelBtn
-          cancelBtnTitle="나중에..."
           handleCanCelClick={likeToggleIsOn}
         />
       )}
