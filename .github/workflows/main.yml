@@ -12,6 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@main
       - run: npm ci
+      - name: setting .env
+        run: |
+          echo "REACT_APP_BASIC_URL=${{secrets.REACT_APP_BASIC_URL}}" >> .env
+          cat .env
       - run: npm run build
       - name: deploy to s3
         uses: awact/s3-action@master
