@@ -153,7 +153,16 @@ export interface ErrorTypes {
   align?: string;
 }
 
+export interface MultiTextTypes {
+  imageSrc: string;
+  imageAlt: string;
+  content: string | number;
+  className?: string;
+}
+
 export interface TextStyleTypes {
+  imageSize?: number;
+  flex?: string;
   fontSize?: number;
   fontColor?: string[] | string;
   fontWeight?: number;

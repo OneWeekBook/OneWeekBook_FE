@@ -1,20 +1,6 @@
 import styled from 'styled-components';
 import theme from 'styles/theme';
-
-interface MultiTextProps {
-  imageSrc: string;
-  imageAlt: string;
-  content: string | number;
-  className?: string;
-}
-
-interface StyleProps {
-  imageSize?: number;
-  fontSize?: number;
-  fontColor?: string;
-  fontWeight?: number;
-  flex?: string;
-}
+import { MultiTextTypes, TextStyleTypes } from 'types/atom';
 
 function MultiText({
   imageSrc,
@@ -22,26 +8,24 @@ function MultiText({
   content,
   className,
   ...rest
-}: MultiTextProps & StyleProps) {
+}: MultiTextTypes & TextStyleTypes) {
   return (
-    <MultiTextAtom {...rest} className={className}>
+    <MultiTextAtom className={className} {...rest}>
       <img src={imageSrc} alt={imageAlt} />
       <p>{content}</p>
     </MultiTextAtom>
   );
 }
 
-export default MultiText;
-
 MultiText.defaultProps = {
-  imageSize: 20,
   fontSize: 1.6,
   fontColor: theme.color.COLOR_BLACK,
   fontWeight: 500,
-  flex: 'row',
 };
 
-const MultiTextAtom = styled.div<StyleProps>`
+export default MultiText;
+
+const MultiTextAtom = styled.div<TextStyleTypes>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -56,14 +40,24 @@ const MultiTextAtom = styled.div<StyleProps>`
     font-size: ${({ fontSize }) => fontSize}rem;
     font-weight: ${({ fontWeight }) => fontWeight};
   }
+  &.comment {
+    justify-content: flex-start;
+  }
   &.review {
     position: absolute;
     top: 0;
     right: 0;
+    box-sizing: border-box;
     background-color: ${({ theme }) => theme.color.COLOR_CORAL};
     border-radius: 0px 0px 0px 5px;
-    text-align: center;
     padding-bottom: 2px;
     width: 60px;
+  }
+  &.reviewrole {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-color: ${({ theme }) => theme.color.COLOR_CORAL};
   }
 `;

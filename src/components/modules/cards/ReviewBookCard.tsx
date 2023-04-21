@@ -18,10 +18,10 @@ function ReivewItem({
   return (
     <ReviewBookCardContainer>
       <MultiText
+        className="review"
         imageSrc={`${process.env.PUBLIC_URL}/assets/func/review-white.png`}
         imageAlt="review count"
         imageSize={20}
-        className="review"
         content={count}
         fontColor={theme.color.COLOR_WHITE}
         fontSize={1.6}

@@ -1,11 +1,11 @@
 import { PropsWithChildren, useState, useEffect } from 'react';
 import styled from 'styled-components';
+import theme from 'styles/theme';
 import { getImgErr } from 'lib/ImageError';
 import { ReviewDetailTypes } from 'types/review';
 import { ReviewUserCardType } from 'types/module';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DataText from 'components/atoms/texts/DataText';
-import theme from 'styles/theme';
 import MultiText from 'components/atoms/texts/MultiText';
 import DefaultText from 'components/atoms/texts/DefaultText';
 
@@ -134,11 +134,4 @@ const RecommendWrapper = styled.div`
   justify-content: center;
   gap: 10px;
   padding: 0px 20px;
-  .reviewrole {
-    max-width: 190px;
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: ${({ theme }) => theme.color.COLOR_CORAL};
-  }
 `;

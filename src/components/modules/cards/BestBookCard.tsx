@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import theme from 'styles/theme';
 import { BestBookCardTypes } from 'types/module';
 import { ReviewItemType } from 'types/review';
 import { getImgErr } from 'lib/ImageError';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DefaultText from 'components/atoms/texts/DefaultText';
-import theme from 'styles/theme';
 import MultiText from 'components/atoms/texts/MultiText';
 
 function BestBookCard({
@@ -55,12 +55,14 @@ function BestBookCard({
           />
         </BookDetailInfo>
         <MultiText
+          className="comment"
           imageSrc={`${process.env.PUBLIC_URL}/assets/func/comment.png`}
           imageAlt="comment"
           imageSize={20}
           content={count}
           fontColor={theme.color.COLOR_CORAL}
           fontSize={1.2}
+          align="left"
         />
       </BestBookInfo>
     </CardContainer>
