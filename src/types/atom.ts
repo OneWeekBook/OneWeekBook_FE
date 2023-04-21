@@ -78,6 +78,7 @@ export interface BorderInputTypes {
 }
 
 export interface DefaultInputTypes {
+  type?: string;
   value: string;
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;

@@ -52,6 +52,14 @@ export interface HeaderTypes {
   handleSignout: () => void;
 }
 
+export interface InputFormTypes {
+  type?: string;
+  label: string;
+  placeholder: string;
+  value: string;
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
 export interface NoneCardTypes {
   type: string;
 }

@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppStateType } from 'redux/reducers';
+import styled from 'styled-components';
+import { ChangePassModalType } from 'types/page';
 import {
   ChangePasswordInit,
   ChangePasswordRequest,
@@ -9,14 +11,10 @@ import useInput from 'hooks/useInput';
 import { passwordRegex } from 'lib/Regex';
 import { Toast } from 'lib/Toast';
 import ChangeModal from 'common/DefaultModal';
-import ErrorForm from 'components/Form/ErrorForm';
-import DefaultInput from 'components/Input/DefaultInput';
+import ErrorText from 'components/atoms/texts/ErrorText';
+import InputForm from 'components/modules/form/InputForm';
 
-type PropsType = {
-  passToggleIsOn: () => void;
-};
-
-function ChangePassModal({ passToggleIsOn }: PropsType) {
+function ChangePassModal({ passToggleIsOn }: ChangePassModalType) {
   const dispatch = useDispatch();
   const [password, changePasswod] = useInput('');
   const [confirmPassword, changeConfirmPasswod] = useInput('');
@@ -67,25 +65,31 @@ function ChangePassModal({ passToggleIsOn }: PropsType) {
       handleOkClick={handleChangePassword}
       handleCanCelClick={passToggleIsOn}
     >
-      <form>
-        <DefaultInput
+      <PasswordInputs>
+        <InputForm
           type="password"
-          title="변경할 비밀번호 입력"
+          label="비밀번호 입력"
           placeholder="변경할 비밀번호를 입력해주세요."
           value={password}
-          onChange={changePasswod}
+          handleChange={changePasswod}
         />
-        <DefaultInput
+        <InputForm
           type="password"
-          title="변경할 비밀번호 확인"
+          label="비밀번호 확인"
           placeholder="한번더 비밀번호를 입력해주세요."
           value={confirmPassword}
-          onChange={changeConfirmPasswod}
+          handleChange={changeConfirmPasswod}
         />
-      </form>
-      {passError && <ErrorForm error={error} align="center" />}
+      </PasswordInputs>
+      {passError && <ErrorText error={error} align="center" />}
     </ChangeModal>
   );
 }
 
 export default ChangePassModal;
+
+const PasswordInputs = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;

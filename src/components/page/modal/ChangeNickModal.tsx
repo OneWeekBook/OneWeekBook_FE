@@ -1,18 +1,15 @@
 import { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppStateType } from 'redux/reducers';
+import { ChangeNickModalType } from 'types/page';
 import { ChangeNickInit, ChangeNickRequest } from 'redux/reducers/ChangeNick';
 import { userToggle } from 'redux/reducers/Func';
 import { Toast } from 'lib/Toast';
-import ChangeModal from 'common/DefaultModal';
 import useInput from 'hooks/useInput';
-import DefaultInput from 'components/Input/DefaultInput';
+import ChangeModal from 'common/DefaultModal';
+import InputForm from 'components/modules/form/InputForm';
 
-type PropsType = {
-  nickToggleIsOn: () => void;
-};
-
-function ChangeNickModal({ nickToggleIsOn }: PropsType) {
+function ChangeNickModal({ nickToggleIsOn }: ChangeNickModalType) {
   const dispatch = useDispatch();
   const [nick, changeNick] = useInput('');
   const changeErrorStatus = useSelector(
@@ -51,12 +48,11 @@ function ChangeNickModal({ nickToggleIsOn }: PropsType) {
       handleOkClick={handleChangeClick}
       handleCanCelClick={nickToggleIsOn}
     >
-      <DefaultInput
-        type="text"
-        title="닉네임"
-        placeholder="변경할 닉네임 입력해주세요."
+      <InputForm
+        label="닉네임"
+        placeholder="변경할 닉네임을 입력해주세요."
         value={nick}
-        onChange={changeNick}
+        handleChange={changeNick}
       />
     </ChangeModal>
   );

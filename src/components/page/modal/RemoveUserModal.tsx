@@ -1,19 +1,17 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
+import { RemoveUserModalType } from 'types/page';
 import { RemoveUserInit, RemoveUserRequest } from 'redux/reducers/RemoveUser';
 import useInput from 'hooks/useInput';
 import { Toast } from 'lib/Toast';
-import ErrorForm from 'components/Form/ErrorForm';
-import RemoveModal from 'common/DefaultModal';
+import DefaultModal from 'common/DefaultModal';
+import ErrorText from 'components/atoms/texts/ErrorText';
+import DefaultText from 'components/atoms/texts/DefaultText';
+import InputForm from 'components/modules/form/InputForm';
 
-type PropsType = {
-  removeToggleIsOn: () => void;
-};
-
-function RemoveUserModal({ removeToggleIsOn }: PropsType) {
+function RemoveUserModal({ removeToggleIsOn }: RemoveUserModalType) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [error, setError] = useState<string>('');
@@ -54,7 +52,7 @@ function RemoveUserModal({ removeToggleIsOn }: PropsType) {
   }, [removeErrorStatus]);
 
   return (
-    <RemoveModal
+    <DefaultModal
       content="회원탈퇴"
       contentSize={2.4}
       width={500}
@@ -66,48 +64,23 @@ function RemoveUserModal({ removeToggleIsOn }: PropsType) {
       handleOkClick={handleRemoveClick}
       handleCanCelClick={removeToggleIsOn}
     >
-      <Desc>회원탈퇴 하시려면 비밀번호를 입력해주세요.</Desc>
-      <InputWrapper>
-        <p>비밀번호</p>
-        <input
-          type="password"
-          placeholder="비밀번호를 입력해주세요."
-          defaultValue={password}
-          onBlur={changePassword}
-        />
-      </InputWrapper>
-      {isError && <ErrorForm error={error} align="center" />}
-    </RemoveModal>
+      <DefaultText
+        content="회원탈퇴 하시려면 비밀번호를 입력해주세요."
+        align="center"
+        fontWeight={300}
+        fontSize={1.8}
+        reactive
+      />
+      <InputForm
+        type="password"
+        label="비밀번호"
+        placeholder="비밀번호를 입력해주세요."
+        value={password}
+        handleChange={changePassword}
+      />
+      {isError && <ErrorText error={error} align="center" />}
+    </DefaultModal>
   );
 }
 
 export default RemoveUserModal;
-
-const Desc = styled.p`
-  text-align: center;
-  margin-bottom: 20px;
-`;
-
-const InputWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  font-weight: 500;
-  width: 100%;
-  p {
-    flex-shrink: 0;
-  }
-  input {
-    box-sizing: border-box;
-    padding-left: 10px;
-    max-width: 300px;
-    width: 100%;
-    height: 40px;
-    margin-left: 10px;
-  }
-  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    margin: 20px auto;
-    font-size: 14px;
-  }
-`;

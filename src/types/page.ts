@@ -1,5 +1,13 @@
 import { ReviewDetailTypes } from './review';
 
+export interface ChangeNickModalType {
+  nickToggleIsOn: () => void;
+}
+
+export interface ChangePassModalType {
+  passToggleIsOn: () => void;
+}
+
 export interface DefaultModalTypes {
   width: number;
   height: number;
@@ -21,4 +29,8 @@ export interface ReviewDetailModalTypes {
   reviewIndex: number;
   reviewSort: string;
   handleDetailToggle: () => void;
+}
+
+export interface RemoveUserModalType {
+  removeToggleIsOn: () => void;
 }

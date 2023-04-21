@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { DefaultInputTypes, InputStyleTypes } from 'types/atom';
 
 function DefaultInput({
+  type,
   value,
   handleChange,
   placeholder,
@@ -9,7 +10,7 @@ function DefaultInput({
 }: DefaultInputTypes & InputStyleTypes) {
   return (
     <DefaultInputAtom
-      type="text"
+      type={type}
       value={value}
       onChange={handleChange}
       placeholder={placeholder}
@@ -20,6 +21,7 @@ function DefaultInput({
 }
 
 DefaultInput.defaultProps = {
+  type: 'text',
   fontSize: 1.6,
 };
 
