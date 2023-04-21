@@ -1,28 +1,68 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { AppStateType } from 'redux/reducers';
-import { navInit, userToggle } from 'redux/reducers/Func';
-import { Toast } from 'lib/Toast';
-import Container from 'common/Container';
-import MultiText from 'components/atoms/texts/MultiText';
 import styled from 'styled-components';
-import LibraryMenuList from '../../components/modules/lists/LibraryMenuList';
-import Nav from './components/Nav';
+import { InfoTypes } from 'types/book';
+import { navDone, navInit, navRead, userToggle } from 'redux/reducers/Func';
+import {
+  MyLibraryModifyRequest,
+  MyLibraryRequest,
+} from 'redux/reducers/MyLibrary';
+import { Toast } from 'lib/Toast';
+import useToggle from 'hooks/useToggle';
+import Container from 'common/Container';
+import DefaultModal from 'common/DefaultModal';
+import { bookInit } from 'contain/book';
+import MultiText from 'components/atoms/texts/MultiText';
+import LibraryMenuList from 'components/modules/lists/LibraryMenuList';
+import LibraryBookList from 'components/modules/lists/LibraryBookList';
+import WriteReviewModal from './components/Modal/WriteReviewModal';
+import CommentModal from './components/Modal/CommentModal';
 
 function Index() {
   const dispatch = useDispatch();
+  const [likeToggle, handleLikeToggle] = useToggle(false);
+  const [commentToggle, handleCommentToggle] = useToggle(false);
+  const [reivewToggle, handleReviewToggle] = useToggle(false);
+  const [bookData, setBookData] = useState<InfoTypes>(bookInit);
   const { user } = useSelector(
     (state: AppStateType) => state.authUser,
     shallowEqual,
   );
   const navId = useSelector((state: AppStateType) => state.func.navId);
-  const isDeleteSuccess = useSelector(
-    (state: AppStateType) => state.myLibrary.isDeleteSuccess,
-  );
-  const { itemAddSuccess, itemModifySuccess, itemDeleteSuccess } = useSelector(
-    (state: AppStateType) => state.userReview,
+  const { userBookList, isDeleteSuccess } = useSelector(
+    (state: AppStateType) => state.myLibrary,
     shallowEqual,
   );
+  const {
+    itemAddSuccess,
+    itemModifySuccess,
+    itemDeleteSuccess,
+    userReviewSuccess,
+  } = useSelector((state: AppStateType) => state.userReview, shallowEqual);
+  const initSuccess = useSelector(
+    (state: AppStateType) => state.paragraph.initSuccess,
+  );
+
+  const moveReadClick = useCallback(async () => {
+    await dispatch(
+      MyLibraryModifyRequest({ progress: 1, isbn: bookData.isbn }),
+    );
+    handleLikeToggle();
+    dispatch(navRead());
+  }, [bookData]);
+
+  const moveDoneClick = useCallback(async () => {
+    await dispatch(
+      MyLibraryModifyRequest({ progress: 2, isbn: bookData.isbn }),
+    );
+    handleCommentToggle();
+    dispatch(navDone());
+  }, [bookData]);
+
+  useEffect(() => {
+    if (isDeleteSuccess) dispatch(MyLibraryRequest({ progress: navId }));
+  }, [isDeleteSuccess]);
 
   useEffect(() => {
     if (itemAddSuccess) Toast('success', '작성 완료');
@@ -51,9 +91,37 @@ function Index() {
         />
         <LibraryMenuList useId={user.id} navId={navId} />
       </MyLibraryHeader>
-      <ComponentWrapper>
-        <Nav id={navId} />
-      </ComponentWrapper>
+      <LibraryBookList
+        userBookList={userBookList}
+        handleLikeToggle={handleLikeToggle}
+        handleCommentToggle={handleCommentToggle}
+        handleReviewToggle={handleReviewToggle}
+        setBookData={setBookData}
+      />
+      {likeToggle && (
+        <DefaultModal
+          content="시작해볼까요?"
+          contentSize={2.4}
+          width={500}
+          height={250}
+          handleToggle={handleLikeToggle}
+          close
+          okButtonTitle="독서 시작"
+          cancelButtonTitle="나중에"
+          handleOkClick={moveReadClick}
+          handleCanCelClick={handleLikeToggle}
+        />
+      )}
+      {commentToggle && initSuccess && (
+        <CommentModal
+          bookData={bookData}
+          toggleIsOn={handleCommentToggle}
+          moveDoneClick={moveDoneClick}
+        />
+      )}
+      {reivewToggle && userReviewSuccess && (
+        <WriteReviewModal bookData={bookData} toggleIsOn={handleReviewToggle} />
+      )}
     </Container>
   );
 }
@@ -65,21 +133,4 @@ const MyLibraryHeader = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 20px;
-  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
-    width: 95%;
-  }
-`;
-
-const ComponentWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
-  margin: 10px auto 30px;
-  @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
-    grid-template-columns: 1fr 1fr;
-    width: 95%;
-  }
-  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    grid-template-columns: 1fr;
-  }
 `;

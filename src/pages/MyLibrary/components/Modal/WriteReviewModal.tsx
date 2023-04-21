@@ -42,12 +42,11 @@ const RecommendItem = [
 ];
 
 type PropsType = {
-  bookId: number;
   bookData: InfoTypes;
   toggleIsOn: () => void;
 };
 
-function WriteReviewModal({ bookId, bookData, toggleIsOn }: PropsType) {
+function WriteReviewModal({ bookData, toggleIsOn }: PropsType) {
   const dispatch = useDispatch();
   const { reviewItem, itemAddSuccess } = useSelector(
     (state: AppStateType) => state.userReview,
@@ -167,7 +166,7 @@ function WriteReviewModal({ bookId, bookData, toggleIsOn }: PropsType) {
             ) : (
               <DefaultButton
                 pc={[60, 30]}
-                onClick={() => addReviewClick(bookId, recommend, review)}
+                onClick={() => addReviewClick(bookData.id, recommend, review)}
                 isHover
                 hoverBgColor="#ffa07a"
                 hoverColor="white"

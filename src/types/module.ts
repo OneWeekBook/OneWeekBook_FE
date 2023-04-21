@@ -1,4 +1,4 @@
-import { CategoryItemTypes } from './book';
+import { CategoryItemTypes, InfoTypes, LibraryItemTypes } from './book';
 import { userBooksTypes } from './main';
 import { ReviewDetailTypes, ReviewItemType } from './review';
 
@@ -60,8 +60,17 @@ export interface InputFormTypes {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
+export interface LibraryBookListTypes {
+  userBookList: LibraryItemTypes[];
+  handleLikeToggle: () => void;
+  handleCommentToggle: () => void;
+  handleReviewToggle: () => void;
+  setBookData: React.Dispatch<React.SetStateAction<InfoTypes>>;
+}
+
 export interface LibraryBookCardTypes {
-  handleToggle: () => void;
+  handleLikeToggle: () => void;
+  handleCommentToggle: () => void;
   handleReviewToggle: () => void;
   onClick: (id: number) => void;
 }

@@ -24,7 +24,8 @@ function LibraryBookCard({
   publisher,
   startTime,
   endTime,
-  handleToggle,
+  handleLikeToggle,
+  handleCommentToggle,
   handleReviewToggle,
   onClick,
 }: LibraryItemTypes & LibraryBookCardTypes) {
@@ -35,7 +36,7 @@ function LibraryBookCard({
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     event.preventDefault();
-    handleToggle();
+    handleLikeToggle();
     onClick(id);
   };
 
@@ -43,7 +44,7 @@ function LibraryBookCard({
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     event.preventDefault();
-    handleToggle();
+    handleCommentToggle();
     onClick(id);
     dispatch(ParagraphInitRequest({ bookId: id }));
   };

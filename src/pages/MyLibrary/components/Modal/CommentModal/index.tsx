@@ -13,18 +13,12 @@ import InputWrapper from './InputWrapper';
 import ListWrapper from './ListWrapper';
 
 export type CommentModalTypes = {
-  bookId: number;
   bookData: InfoTypes;
   toggleIsOn: () => void;
   moveDoneClick?: () => void;
 };
 
-function Index({
-  bookId,
-  bookData,
-  toggleIsOn,
-  moveDoneClick,
-}: CommentModalTypes) {
+function Index({ bookData, toggleIsOn, moveDoneClick }: CommentModalTypes) {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -81,9 +75,9 @@ function Index({
             />
           )}
         </InfoWrapper>
-        <InputWrapper bookId={bookId} />
+        <InputWrapper bookId={bookData.id} />
         <ListWrapper
-          bookId={bookId}
+          bookId={bookData.id}
           deleteParagraphClick={deleteParagraphClick}
         />
       </BodyWrapper>

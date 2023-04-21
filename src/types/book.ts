@@ -58,6 +58,8 @@ export type LibraryItemTypes = {
 };
 
 export type InfoTypes = {
+  id: number;
+  isbn: string;
   progress: number;
   title: string;
   author: string;
