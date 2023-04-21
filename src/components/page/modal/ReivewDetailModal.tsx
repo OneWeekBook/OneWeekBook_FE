@@ -132,7 +132,7 @@ function ReviewDetailModal({
         />
         <FavoriteButtons>
           <MenuButton
-            className="likemenu"
+            className="roundborder"
             src={`${process.env.PUBLIC_URL}/assets/like/interest.png`}
             imgSize={25}
             content={`${useful} 도움이되요`}
@@ -143,7 +143,7 @@ function ReviewDetailModal({
             fontWeight={300}
           />
           <MenuButton
-            className="likemenu"
+            className="roundborder"
             src={`${process.env.PUBLIC_URL}/assets/like/fun.png`}
             imgSize={25}
             content={`${interest} 흥미로워요`}

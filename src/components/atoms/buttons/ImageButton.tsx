@@ -25,8 +25,9 @@ const ImageButtonAtom = styled.button<ButtonStyleTypes>`
   background-color: ${({ bgColor }) => bgColor};
   cursor: pointer;
   border: none;
-  border-radius: 5px;
   img {
+    border-radius: 5px;
     width: ${({ imgSize }) => imgSize}px;
+    height: ${({ imgSize }) => imgSize}px;
   }
 `;

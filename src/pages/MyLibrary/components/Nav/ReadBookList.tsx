@@ -8,7 +8,7 @@ import {
 import { navDone } from 'redux/reducers/Func';
 import useToggle from 'hooks/useToggle';
 import { InfoTypes, LibraryItemTypes } from 'types/book';
-import BookItem from '../_item/BookItem';
+import LibraryBookCard from 'components/modules/cards/LibraryBookCard';
 import WriteCommentModal from '../Modal/CommentModal';
 
 function ReadBookList() {
@@ -46,7 +46,7 @@ function ReadBookList() {
       {Array.isArray(userBookList) &&
         !!userBookList &&
         userBookList.map((item: LibraryItemTypes) => (
-          <BookItem
+          <LibraryBookCard
             key={item.id}
             {...item}
             handleToggle={readToggleIsOn}

@@ -7,7 +7,9 @@ export interface BannerButtonTypes {
 }
 
 export interface DefaultButtonTypes {
-  handleClick?: () => void;
+  handleClick?: (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => void;
   content?: string | number;
   disabled?: boolean;
   className?: string;

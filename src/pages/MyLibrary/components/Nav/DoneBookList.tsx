@@ -4,7 +4,7 @@ import { AppStateType } from 'redux/reducers';
 import { MyLibraryRequest } from 'redux/reducers/MyLibrary';
 import useToggle from 'hooks/useToggle';
 import { InfoTypes, LibraryItemTypes } from 'types/book';
-import BookItem from '../_item/BookItem';
+import LibraryBookCard from 'components/modules/cards/LibraryBookCard';
 import WriteCommentModal from '../Modal/CommentModal';
 import WriteReviewModal from '../Modal/WriteReviewModal';
 
@@ -40,7 +40,7 @@ function DoneBookList() {
       {Array.isArray(userBookList) &&
         !!userBookList &&
         userBookList.map((item: LibraryItemTypes) => (
-          <BookItem
+          <LibraryBookCard
             key={item.id}
             {...item}
             handleToggle={commentToggleIsOn}

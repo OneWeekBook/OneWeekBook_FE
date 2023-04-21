@@ -40,7 +40,7 @@ const MultiTextAtom = styled.div<TextStyleTypes>`
     font-size: ${({ fontSize }) => fontSize}rem;
     font-weight: ${({ fontWeight }) => fontWeight};
   }
-  &.comment {
+  &.flexstart {
     justify-content: flex-start;
   }
   &.review {

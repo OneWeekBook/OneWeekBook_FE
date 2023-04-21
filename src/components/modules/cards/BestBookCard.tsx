@@ -55,7 +55,7 @@ function BestBookCard({
           />
         </BookDetailInfo>
         <MultiText
-          className="comment"
+          className="flexstart"
           imageSrc={`${process.env.PUBLIC_URL}/assets/func/comment.png`}
           imageAlt="comment"
           imageSize={20}

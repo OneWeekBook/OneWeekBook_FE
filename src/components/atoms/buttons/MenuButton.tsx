@@ -52,7 +52,7 @@ const MenuButtonAtom = styled.button<ButtonStyleTypes>`
     font-size: ${({ fontSize }) => fontSize}rem;
     font-weight: ${({ fontWeight }) => fontWeight};
   }
-  &.likemenu {
+  &.roundborder {
     padding: 5px 10px;
     border-radius: 5px;
   }

@@ -60,6 +60,17 @@ export interface InputFormTypes {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
+export interface LibraryBookCardTypes {
+  handleToggle: () => void;
+  handleReviewToggle: () => void;
+  onClick: (id: number) => void;
+}
+
+export interface LibraryMenuTypes {
+  useId: number;
+  navId: number;
+}
+
 export interface NoneCardTypes {
   type: string;
 }

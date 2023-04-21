@@ -9,7 +9,7 @@ import { navRead } from 'redux/reducers/Func';
 import useToggle from 'hooks/useToggle';
 import { LibraryItemTypes } from 'types/book';
 import MoveReadModal from 'common/DefaultModal';
-import BookItem from '../_item/BookItem';
+import LibraryBookCard from 'components/modules/cards/LibraryBookCard';
 
 function LikeBookList() {
   const dispatch = useDispatch();
@@ -38,7 +38,7 @@ function LikeBookList() {
       {Array.isArray(userBookList) &&
         !!userBookList &&
         userBookList.map((item: LibraryItemTypes) => (
-          <BookItem
+          <LibraryBookCard
             key={item.id}
             {...item}
             handleToggle={likeToggleIsOn}
