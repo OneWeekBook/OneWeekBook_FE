@@ -137,6 +137,11 @@ export interface TagStyleTypes {
   imgSize?: number;
 }
 
+export interface TimerTextTypes {
+  emailDone: boolean;
+  setEmailDone: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 export interface DefaultTextTypes {
   content: string | number;
   subContent?: string | number;

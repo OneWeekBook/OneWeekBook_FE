@@ -10,7 +10,7 @@ import { useRegexCheck } from 'hooks/useRegCheck';
 import { useAuthErrorCheck } from 'hooks/useAuthErrorCheck';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import BorderInput from 'components/atoms/inputs/BorderInput';
-import TimerForm from '../../Form/TimerForm';
+import TimerText from 'components/atoms/texts/TimerText';
 import EmailErrorForm from './EmailErrorForm';
 import CodeErrorForm from './CodeErrorForm';
 
@@ -103,7 +103,7 @@ function AuthEmailForm({
       >
         {!authDone && emailDone && (
           <TimerWrapper>
-            <TimerForm emailDone={emailDone} setEmailDone={setEmailDone} />
+            <TimerText emailDone={emailDone} setEmailDone={setEmailDone} />
           </TimerWrapper>
         )}
       </BorderInput>

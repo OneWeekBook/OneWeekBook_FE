@@ -1,12 +1,8 @@
-import { useState, useEffect, Dispatch, SetStateAction } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { TimerTextTypes } from 'types/atom';
 
-type TimerTypes = {
-  emailDone: boolean;
-  setEmailDone: Dispatch<SetStateAction<boolean>>;
-};
-
-function TimerForm({ emailDone, setEmailDone }: TimerTypes) {
+function TimerText({ emailDone, setEmailDone }: TimerTextTypes) {
   const [seconds, setSeconds] = useState<number>(0);
   const [minutes, setMinutes] = useState<number>(3);
 
@@ -31,16 +27,16 @@ function TimerForm({ emailDone, setEmailDone }: TimerTypes) {
   }, [emailDone, minutes, seconds]);
 
   return (
-    <TimerWrapper>
+    <TimerTextAtom>
       {minutes} : {seconds}
-    </TimerWrapper>
+    </TimerTextAtom>
   );
 }
 
-export default TimerForm;
+export default TimerText;
 
-const TimerWrapper = styled.span`
-  color: red;
-  font-size: 12px;
+const TimerTextAtom = styled.span`
+  color: ${({ theme }) => theme.color.COLOR_RED};
+  font-size: 1.2rem;
   margin-left: 5px;
 `;
