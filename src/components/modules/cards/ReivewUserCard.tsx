@@ -8,6 +8,7 @@ import DefaultImage from 'components/atoms/images/DefaultImage';
 import DataText from 'components/atoms/texts/DataText';
 import MultiText from 'components/atoms/texts/MultiText';
 import DefaultText from 'components/atoms/texts/DefaultText';
+import ReviewText from 'components/atoms/texts/ReviewText';
 
 function ReviewUserCard({
   nick,
@@ -54,12 +55,7 @@ function ReviewUserCard({
             fontSize={1.6}
             fontWeight={700}
           />
-          <DefaultText
-            className="review"
-            content={review}
-            fontSize={1.6}
-            fontWeight={300}
-          />
+          <ReviewText className="review" content={review} />
         </ReivewInfoWrapper>
       </UserReviewInfo>
       <RecommendWrapper>
@@ -70,7 +66,7 @@ function ReviewUserCard({
           imageSize={25}
           fontColor={theme.color.COLOR_WHITE}
           fontWeight={300}
-          content={`${zeroLikeCount} 유용해요`}
+          content={`${zeroLikeCount} 도움이되요`}
         />
         <MultiText
           className="reviewrole"
@@ -79,7 +75,7 @@ function ReviewUserCard({
           imageSize={25}
           fontColor={theme.color.COLOR_WHITE}
           fontWeight={300}
-          content={`${oneLikeCount} 재미있어요`}
+          content={`${oneLikeCount} 흥미로워요`}
         />
       </RecommendWrapper>
     </ReviewItemWrapper>

@@ -15,7 +15,7 @@ import { ReviewInit, ReviewRequest } from 'redux/reducers/Review';
 import DetailModal from 'common/DefaultModal';
 import MenuButton from 'components/atoms/buttons/MenuButton';
 import DataText from 'components/atoms/texts/DataText';
-import DefaultText from 'components/atoms/texts/DefaultText';
+import ReviewText from 'components/atoms/texts/ReviewText';
 
 function ReviewDetailModal({
   userReview,
@@ -124,12 +124,7 @@ function ReviewDetailModal({
     >
       <UserReviewModalBody>
         <DataText before="작성일자 : " data={userReview.reviewCreationTime} />
-        <DefaultText
-          content={userReview.review}
-          fontSize={2}
-          fontWeight={300}
-          reactive
-        />
+        <ReviewText content={userReview.review} />
         <FavoriteButtons>
           <MenuButton
             className="roundborder"

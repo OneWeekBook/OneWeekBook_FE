@@ -5,6 +5,7 @@ import { userBooksTypes } from 'types/main';
 import StarIcon from 'components/atoms/icons/StarIcon';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DefaultText from 'components/atoms/texts/DefaultText';
+import ReviewText from 'components/atoms/texts/ReviewText';
 
 function UserBookCard({
   img,
@@ -36,12 +37,11 @@ function UserBookCard({
             <StarIcon key={el} score={el < rating ? 1 : 0} imageSize={20} />
           ))}
         </StarIcons>
-        <DefaultText
+        <ReviewText
           className="bookreview"
           content={
             review && review.replaceAll('<b>', '').replaceAll('</b>', '')
           }
-          fontWeight={300}
         />
       </UserBookInfo>
     </UserBookCardContainer>

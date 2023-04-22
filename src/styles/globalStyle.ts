@@ -24,6 +24,10 @@ const globalStyles = createGlobalStyle`
     code {
         font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
     }
+
+    pre {
+        font-family: 'Noto Sans Korean', 'sans-serif';
+    }
     
     textarea {
         font-family: 'Noto Sans Korean', 'sans-serif';

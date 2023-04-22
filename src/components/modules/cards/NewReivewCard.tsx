@@ -5,6 +5,7 @@ import { getImgErr } from 'lib/ImageError';
 import { NewReviewTypes } from 'types/main';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DefaultText from 'components/atoms/texts/DefaultText';
+import ReviewText from 'components/atoms/texts/ReviewText';
 import StarIcon from 'components/atoms/icons/StarIcon';
 
 function NewReivewCard({
@@ -42,12 +43,7 @@ function NewReivewCard({
             <StarIcon key={el} score={el < rating ? 1 : 0} imageSize={20} />
           ))}
         </CountInfoWrapper>
-        <DefaultText
-          className="review"
-          content={review}
-          fontWeight={300}
-          reactive
-        />
+        <ReviewText className="review" content={review} />
       </ReviewInfo>
     </CardContainer>
   );
