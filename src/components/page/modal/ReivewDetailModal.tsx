@@ -122,7 +122,7 @@ function ReviewDetailModal({
       okButtonTitle="다른 리뷰"
       handleOkClick={handleDetailToggle}
     >
-      <UserReview>
+      <UserReviewModalBody>
         <DataText before="작성일자 : " data={userReview.reviewCreationTime} />
         <DefaultText
           content={userReview.review}
@@ -154,14 +154,14 @@ function ReviewDetailModal({
             fontWeight={300}
           />
         </FavoriteButtons>
-      </UserReview>
+      </UserReviewModalBody>
     </DetailModal>
   );
 }
 
 export default ReviewDetailModal;
 
-const UserReview = styled.div`
+const UserReviewModalBody = styled.div`
   margin: 20px 0px;
   border: 2px solid #f07055;
   border-radius: 10px;

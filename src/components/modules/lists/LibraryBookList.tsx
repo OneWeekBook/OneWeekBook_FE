@@ -29,7 +29,7 @@ function LibraryBookList({
                 title: item.title,
                 author: item.author,
                 startTime: item.startTime,
-                endTime: null,
+                endTime: item.endTime,
               });
             }}
           />

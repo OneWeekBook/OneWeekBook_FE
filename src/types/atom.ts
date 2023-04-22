@@ -88,7 +88,7 @@ export interface DefaultInputTypes {
 
 export interface ReviewInputTypes {
   value: string;
-  handleBlur: () => void;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export interface InputStyleTypes {

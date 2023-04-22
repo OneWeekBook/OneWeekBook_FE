@@ -16,8 +16,8 @@ import { bookInit } from 'contain/book';
 import MultiText from 'components/atoms/texts/MultiText';
 import LibraryMenuList from 'components/modules/lists/LibraryMenuList';
 import LibraryBookList from 'components/modules/lists/LibraryBookList';
-import WriteReviewModal from './components/Modal/WriteReviewModal';
-import CommentModal from './components/Modal/CommentModal';
+import ParagraphModal from 'components/page/modal/ParagraphModal';
+import WriteReviewModal from 'components/page/modal/WriteReviewModal';
 
 function Index() {
   const dispatch = useDispatch();
@@ -113,7 +113,7 @@ function Index() {
         />
       )}
       {commentToggle && initSuccess && (
-        <CommentModal
+        <ParagraphModal
           bookData={bookData}
           toggleIsOn={handleCommentToggle}
           moveDoneClick={moveDoneClick}

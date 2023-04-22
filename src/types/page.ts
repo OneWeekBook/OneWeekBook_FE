@@ -1,3 +1,4 @@
+import { InfoTypes } from './book';
 import { ReviewDetailTypes } from './review';
 
 export interface ChangeNickModalType {
@@ -6,6 +7,12 @@ export interface ChangeNickModalType {
 
 export interface ChangePassModalType {
   passToggleIsOn: () => void;
+}
+
+export interface ParagraphModalTypes {
+  bookData: InfoTypes;
+  toggleIsOn: () => void;
+  moveDoneClick?: () => void;
 }
 
 export interface DefaultModalTypes {

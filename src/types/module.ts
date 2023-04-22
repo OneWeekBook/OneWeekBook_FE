@@ -103,6 +103,16 @@ export interface ProgressBarTypes {
   percent: number;
 }
 
+export interface ParagraphCardTypes {
+  id: number;
+  paragraph: string;
+  deleteParagraphClick: (id: number) => void;
+}
+
+export interface ParagraphInputFormType {
+  bookId: number;
+}
+
 export interface ReviewListType {
   reviews: ReviewItemType[];
 }
@@ -119,6 +129,11 @@ export interface ReviewInfoTypes {
   reviews: ReviewDetailTypes[];
   detailToggleIsOn: () => void;
   setCurReview: React.Dispatch<React.SetStateAction<ReviewDetailTypes>>;
+}
+
+export interface RecommendFormTypes {
+  recommend: number;
+  setRecommend: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export interface SignUpTypes {

@@ -1,17 +1,14 @@
 import { useCallback, useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { ParagraphInputFormType } from 'types/module';
 import { ParagraphAddRequest } from 'redux/reducers/Paragraph';
 import { Toast } from 'lib/Toast';
 import useInput from 'hooks/useInput';
-import ImageButton from 'components/Button/ImageButton';
-import FormInput from 'components/Input/FormInput';
+import ImageButton from 'components/atoms/buttons/ImageButton';
+import BorderInput from 'components/atoms/inputs/BorderInput';
 
-type PropsType = {
-  bookId: number;
-};
-
-function InputWrapper({ bookId }: PropsType) {
+function ParagraphInputForm({ bookId }: ParagraphInputFormType) {
   const dispatch = useDispatch();
   const paragRef = useRef<HTMLInputElement>(null);
   const [parag, changeParag, setParag] = useInput('');
@@ -30,37 +27,36 @@ function InputWrapper({ bookId }: PropsType) {
     }
   }, [parag]);
 
-  const onParagInputEnter = (event: React.KeyboardEvent<Element>) => {
+  const handleInputEnter = (event: React.KeyboardEvent<Element>) => {
     if (event.key === 'Enter') {
       addParagraphClick();
     }
   };
 
   return (
-    <Wrapper>
-      <FormInput
+    <InputForm>
+      <BorderInput
         type="text"
         placeholder="기억에 남는 문구를 입력해주세요."
-        state={parag}
+        value={parag}
         onChange={changeParag}
-        onKeyPress={onParagInputEnter}
+        onKeyPress={handleInputEnter}
         mref={paragRef}
       />
+
       <ImageButton
         type="button"
-        onClick={addParagraphClick}
+        handleClick={addParagraphClick}
         src={`${process.env.PUBLIC_URL}/assets/func/content-add.svg`}
-        alt="write"
-        pc={[30, 30]}
-        imgPC={[30, 30]}
+        imgSize={30}
       />
-    </Wrapper>
+    </InputForm>
   );
 }
 
-export default InputWrapper;
+export default ParagraphInputForm;
 
-const Wrapper = styled.div`
+const InputForm = styled.div`
   display: flex;
   position: relative;
   button {

@@ -5,7 +5,6 @@ import Theme from 'styles/theme';
 import GlobalStyles from 'styles/globalStyle';
 import RouteSet from 'RouteSet';
 import Layout from 'common';
-import 'styles/sprite.css';
 
 function App() {
   return (
