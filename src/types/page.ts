@@ -41,3 +41,8 @@ export interface ReviewDetailModalTypes {
 export interface RemoveUserModalType {
   removeToggleIsOn: () => void;
 }
+
+export interface WriteReviewTypes {
+  bookData: InfoTypes;
+  toggleIsOn: () => void;
+}

@@ -1,7 +1,8 @@
 import { useState, useLayoutEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { InfoTypes } from 'types/book';
+import theme from 'styles/theme';
+import { WriteReviewTypes } from 'types/page';
 import { AppStateType } from 'redux/reducers';
 import {
   UserReviewAddRequest,
@@ -14,16 +15,10 @@ import { Toast } from 'lib/Toast';
 import WriteModal from 'common/DefaultModal';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import DefaultText from 'components/atoms/texts/DefaultText';
-import theme from 'styles/theme';
 import RecommendForm from 'components/modules/form/RecommendForm';
 import ReviewInput from 'components/atoms/inputs/ReviewInput';
 
-export interface PropsType {
-  bookData: InfoTypes;
-  toggleIsOn: () => void;
-}
-
-function WriteReviewModal({ bookData, toggleIsOn }: PropsType) {
+function WriteReviewModal({ bookData, toggleIsOn }: WriteReviewTypes) {
   const dispatch = useDispatch();
   const { reviewItem, itemAddSuccess } = useSelector(
     (state: AppStateType) => state.userReview,
