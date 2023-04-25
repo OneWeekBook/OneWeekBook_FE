@@ -4,7 +4,7 @@ import { AppStateType } from 'redux/reducers';
 import { ChangeNickModalType } from 'types/page';
 import { ChangeNickInit, ChangeNickRequest } from 'redux/reducers/ChangeNick';
 import { userToggle } from 'redux/reducers/Func';
-import { Toast } from 'lib/Toast';
+import { Toast } from 'utils/Toast';
 import useInput from 'hooks/useInput';
 import ChangeModal from 'common/DefaultModal';
 import InputForm from 'components/modules/forms/InputForm';

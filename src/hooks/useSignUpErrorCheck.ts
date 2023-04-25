@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Toast } from 'lib/Toast';
+import { Toast } from 'utils/Toast';
 
 export function useSignUpErrorCheck(): {
   handleSignUpError: (

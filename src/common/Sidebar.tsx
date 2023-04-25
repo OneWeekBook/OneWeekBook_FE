@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { AuthInit } from 'redux/reducers/AuthUser';
-import { Toast } from 'lib/Toast';
+import { Toast } from 'utils/Toast';
 import useToggle from 'hooks/useToggle';
 import useAuthLink from 'hooks/useAuthLink';
 import NoticeModal from 'common/DefaultModal';

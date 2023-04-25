@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { getImgErr } from 'lib/ImageError';
+import { getImgErr } from 'utils/ImageError';
 import { NewReviewTypes } from 'types/main';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DefaultText from 'components/atoms/texts/DefaultText';

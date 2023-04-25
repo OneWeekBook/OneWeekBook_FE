@@ -10,7 +10,7 @@ import {
   ParagraphInit,
   ParagraphRequest,
 } from 'redux/reducers/Paragraph';
-import { SetStartDate } from 'lib/SetDate';
+import { SetStartDate } from 'utils/SetDate';
 import WriteModal from 'common/DefaultModal';
 import DefaultText from 'components/atoms/texts/DefaultText';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';

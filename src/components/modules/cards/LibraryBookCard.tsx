@@ -7,7 +7,7 @@ import { ParagraphInitRequest } from 'redux/reducers/Paragraph';
 import { UserReviewRequest } from 'redux/reducers/UserReview';
 import { MyLibraryDeleteRequest } from 'redux/reducers/MyLibrary';
 import useToggle from 'hooks/useToggle';
-import { SetStartDate } from 'lib/SetDate';
+import { SetStartDate } from 'utils/SetDate';
 import MoveDeleteModal from 'common/DefaultModal';
 import ImageButton from 'components/atoms/buttons/ImageButton';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';

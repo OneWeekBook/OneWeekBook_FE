@@ -1,20 +1,45 @@
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
-import { ThemeProvider } from 'styled-components';
-import Theme from 'styles/theme';
-import GlobalStyles from 'styles/globalStyle';
-import RouteSet from 'RouteSet';
-import Layout from 'common';
+import { Routes, Route } from 'react-router-dom';
+import {
+  MainPage,
+  CategoryPage,
+  SignInPage,
+  SignUpPage,
+  ReviewPage,
+  BookPage,
+  SearchPage,
+  UserPage,
+  LibraryPage,
+} from 'components/pages';
+import ProtectedRoute, { ProtectedRouteProps } from 'common/PrivateRoute';
+import GeneralLayout from 'common';
 
 function App() {
+  const defaultProtectedRouteProps: Omit<ProtectedRouteProps, 'outlet'> = {
+    authenticationPath: '/sign-in',
+  };
+
   return (
-    <ThemeProvider theme={Theme}>
-      <GlobalStyles />
-      <Layout>
-        <RouteSet />
-      </Layout>
-      <ToastContainer />
-    </ThemeProvider>
+    <GeneralLayout>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/sign-in" element={<SignInPage />} />
+        <Route path="/sign-up" element={<SignUpPage />} />
+        <Route path="/category" element={<CategoryPage />} />
+        <Route path="/category/result" element={<SearchPage />} />
+        <Route path="/review" element={<ReviewPage />} />
+        <Route path="/review/:id" element={<BookPage />} />
+        <Route
+          path="/mypage"
+          element={
+            <ProtectedRoute
+              {...defaultProtectedRouteProps}
+              outlet={<UserPage />}
+            />
+          }
+        />
+        <Route path="/my-library" element={<LibraryPage />} />
+      </Routes>
+    </GeneralLayout>
   );
 }
 

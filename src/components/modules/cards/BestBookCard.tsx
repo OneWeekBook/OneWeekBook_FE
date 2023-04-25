@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import theme from 'styles/theme';
 import { BestBookCardTypes } from 'types/module';
 import { ReviewItemType } from 'types/review';
-import { getImgErr } from 'lib/ImageError';
+import { getImgErr } from 'utils/ImageError';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DefaultText from 'components/atoms/texts/DefaultText';
 import MultiText from 'components/atoms/texts/MultiText';

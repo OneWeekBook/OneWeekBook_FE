@@ -7,7 +7,7 @@ import { BooksTypes } from 'types/book';
 import { AppStateType } from 'redux/reducers';
 import { MyLibraryAddRequest } from 'redux/reducers/MyLibrary';
 import { searchDone } from 'redux/reducers/Func';
-import { Toast } from 'lib/Toast';
+import { Toast } from 'utils/Toast';
 import DefaultText from 'components/atoms/texts/DefaultText';
 import LoadingForm from 'components/modules/commons/LoadingForm';
 import SearchBookCard from 'components/modules/cards/SearchBookCard';

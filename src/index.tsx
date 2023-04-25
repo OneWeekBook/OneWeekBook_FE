@@ -1,10 +1,15 @@
 import { createRoot } from 'react-dom/client';
-import './styles/font.css';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { ThemeProvider } from 'styled-components';
 import configureStore from 'redux/store';
+import Theme from 'styles/theme';
+import { ToastContainer } from 'react-toastify';
+import GlobalStyles from 'styles/globalStyle';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import 'react-toastify/dist/ReactToastify.css';
+import './styles/font.css';
 
 const store = configureStore();
 
@@ -15,7 +20,11 @@ const root = createRoot(rootElement);
 root.render(
   <BrowserRouter>
     <Provider store={store}>
-      <App />
+      <ThemeProvider theme={Theme}>
+        <GlobalStyles />
+        <App />
+        <ToastContainer />
+      </ThemeProvider>
     </Provider>
   </BrowserRouter>,
 );

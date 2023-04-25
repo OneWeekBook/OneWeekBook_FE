@@ -5,7 +5,7 @@ import { AppStateType } from 'redux/reducers';
 import { RemoveUserModalType } from 'types/page';
 import { RemoveUserInit, RemoveUserRequest } from 'redux/reducers/RemoveUser';
 import useInput from 'hooks/useInput';
-import { Toast } from 'lib/Toast';
+import { Toast } from 'utils/Toast';
 import DefaultModal from 'common/DefaultModal';
 import ErrorText from 'components/atoms/texts/ErrorText';
 import DefaultText from 'components/atoms/texts/DefaultText';

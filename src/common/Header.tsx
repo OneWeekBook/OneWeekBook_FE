@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { AuthInit } from 'redux/reducers/AuthUser';
-import { Toast } from 'lib/Toast';
+import { Toast } from 'utils/Toast';
 import HeaderTopMenu from 'components/modules/commons/HeaderTopMenu';
 import HeaderMainCategory from 'components/modules/commons/HeaderMainCategory';
 import Container from './Container';

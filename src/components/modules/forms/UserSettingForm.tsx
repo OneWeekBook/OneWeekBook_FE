@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import useToggle from 'hooks/useToggle';
 import DataText from 'components/atoms/texts/DataText';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
-import ChangePassModal from 'components/page/modal/ChangePassModal';
-import ChangeNickModal from 'components/page/modal/ChangeNickModal';
+import ChangePassModal from 'components/pages/modal/ChangePassModal';
+import ChangeNickModal from 'components/pages/modal/ChangeNickModal';
 
 interface PropsType {
   nickName: string;

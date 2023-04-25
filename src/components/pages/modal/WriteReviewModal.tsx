@@ -10,8 +10,8 @@ import {
   UserReviewInit,
   UserReviewModifyRequest,
 } from 'redux/reducers/UserReview';
-import { SetStartDate } from 'lib/SetDate';
-import { Toast } from 'lib/Toast';
+import { SetStartDate } from 'utils/SetDate';
+import { Toast } from 'utils/Toast';
 import WriteModal from 'common/DefaultModal';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import DefaultText from 'components/atoms/texts/DefaultText';

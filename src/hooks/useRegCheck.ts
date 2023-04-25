@@ -1,4 +1,4 @@
-import { codeRegex, emailRegex } from 'lib/Regex';
+import { codeRegex, emailRegex } from 'utils/Regex';
 
 type InputTypes = {
   email: string;

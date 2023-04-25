@@ -12,7 +12,7 @@ import BookBannerInfo from 'components/modules/banners/BookBannerInfo';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import Pagination from 'common/Pagination';
 import UserReviewList from 'components/modules/lists/UserReviewList';
-import ReviewDetailModal from 'components/page/modal/ReivewDetailModal';
+import ReviewDetailModal from 'components/pages/modal/ReivewDetailModal';
 
 function Index() {
   const location = useLocation();

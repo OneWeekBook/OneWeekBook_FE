@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { ParagraphInputFormType } from 'types/module';
 import { ParagraphAddRequest } from 'redux/reducers/Paragraph';
-import { Toast } from 'lib/Toast';
+import { Toast } from 'utils/Toast';
 import useInput from 'hooks/useInput';
 import ImageButton from 'components/atoms/buttons/ImageButton';
 import BorderInput from 'components/atoms/inputs/BorderInput';

@@ -8,7 +8,7 @@ import { BooksListType } from 'types/module';
 import { AppStateType } from 'redux/reducers';
 import { MyLibraryAddRequest } from 'redux/reducers/MyLibrary';
 import { SearchInit, SearchRequest } from 'redux/reducers/Search';
-import { Toast } from 'lib/Toast';
+import { Toast } from 'utils/Toast';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
 import SearchBookCard from 'components/modules/cards/SearchBookCard';
 import LoadingForm from 'components/modules/commons/LoadingForm';

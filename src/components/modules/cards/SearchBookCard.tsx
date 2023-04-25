@@ -2,8 +2,8 @@ import { PropsWithChildren } from 'react';
 import DOMPurify from 'dompurify';
 import styled from 'styled-components';
 import { LikeAddTypes } from 'types/book';
-import { getImgErr } from 'lib/ImageError';
-import { SetDate } from 'lib/SetDate';
+import { getImgErr } from 'utils/ImageError';
+import { SetDate } from 'utils/SetDate';
 import ImageButton from 'components/atoms/buttons/ImageButton';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 

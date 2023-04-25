@@ -1,4 +1,4 @@
-import { passwordRegex } from 'lib/Regex';
+import { passwordRegex } from 'utils/Regex';
 
 interface SignUpType {
   username: string;

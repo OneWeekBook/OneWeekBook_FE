@@ -8,7 +8,7 @@ import {
   MyLibraryModifyRequest,
   MyLibraryRequest,
 } from 'redux/reducers/MyLibrary';
-import { Toast } from 'lib/Toast';
+import { Toast } from 'utils/Toast';
 import useToggle from 'hooks/useToggle';
 import Container from 'common/Container';
 import DefaultModal from 'common/DefaultModal';
@@ -16,8 +16,8 @@ import { bookInit } from 'contain/book';
 import MultiText from 'components/atoms/texts/MultiText';
 import LibraryMenuList from 'components/modules/lists/LibraryMenuList';
 import LibraryBookList from 'components/modules/lists/LibraryBookList';
-import ParagraphModal from 'components/page/modal/ParagraphModal';
-import WriteReviewModal from 'components/page/modal/WriteReviewModal';
+import ParagraphModal from 'components/pages/modal/ParagraphModal';
+import WriteReviewModal from 'components/pages/modal/WriteReviewModal';
 
 function Index() {
   const dispatch = useDispatch();
