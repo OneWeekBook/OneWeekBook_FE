@@ -9,7 +9,7 @@ import { Toast } from 'lib/Toast';
 import DefaultModal from 'common/DefaultModal';
 import ErrorText from 'components/atoms/texts/ErrorText';
 import DefaultText from 'components/atoms/texts/DefaultText';
-import InputForm from 'components/modules/form/InputForm';
+import InputForm from 'components/modules/forms/InputForm';
 
 function RemoveUserModal({ removeToggleIsOn }: RemoveUserModalType) {
   const dispatch = useDispatch();

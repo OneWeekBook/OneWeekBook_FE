@@ -15,7 +15,7 @@ import { Toast } from 'lib/Toast';
 import WriteModal from 'common/DefaultModal';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import DefaultText from 'components/atoms/texts/DefaultText';
-import RecommendForm from 'components/modules/form/RecommendForm';
+import RecommendForm from 'components/modules/forms/RecommendForm';
 import ReviewInput from 'components/atoms/inputs/ReviewInput';
 
 function WriteReviewModal({ bookData, toggleIsOn }: WriteReviewTypes) {

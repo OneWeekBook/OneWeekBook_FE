@@ -12,7 +12,7 @@ import { passwordRegex } from 'lib/Regex';
 import { Toast } from 'lib/Toast';
 import ChangeModal from 'common/DefaultModal';
 import ErrorText from 'components/atoms/texts/ErrorText';
-import InputForm from 'components/modules/form/InputForm';
+import InputForm from 'components/modules/forms/InputForm';
 
 function ChangePassModal({ passToggleIsOn }: ChangePassModalType) {
   const dispatch = useDispatch();

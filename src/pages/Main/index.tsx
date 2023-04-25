@@ -7,7 +7,7 @@ import { AppStateType } from 'redux/reducers';
 import { ReviewInit, ReviewsRequest } from 'redux/reducers/Review';
 import { NewReviewInit, NewReviewsRequest } from 'redux/reducers/NewReview';
 import Container from 'common/Container';
-import Banner from 'components/modules/banner/Banner';
+import Banner from 'components/modules/banners/Banner';
 import BestBookCard from 'components/modules/cards/BestBookCard';
 import MainLabel from 'components/modules/labels/MainLabel';
 import Pagination from 'common/Pagination';

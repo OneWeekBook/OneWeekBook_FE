@@ -5,7 +5,7 @@ import Container from 'common/Container';
 import DefaultLabel from 'components/atoms/labels/DefaultLabel';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import SignContainer from 'components/modules/commons/SignContainer';
-import SignInForm from 'components/modules/form/SignInForm';
+import SignInForm from 'components/modules/forms/SignInForm';
 
 function Index() {
   const { routeTo } = useRouter();

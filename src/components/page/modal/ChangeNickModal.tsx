@@ -7,7 +7,7 @@ import { userToggle } from 'redux/reducers/Func';
 import { Toast } from 'lib/Toast';
 import useInput from 'hooks/useInput';
 import ChangeModal from 'common/DefaultModal';
-import InputForm from 'components/modules/form/InputForm';
+import InputForm from 'components/modules/forms/InputForm';
 
 function ChangeNickModal({ nickToggleIsOn }: ChangeNickModalType) {
   const dispatch = useDispatch();

@@ -15,7 +15,7 @@ import WriteModal from 'common/DefaultModal';
 import DefaultText from 'components/atoms/texts/DefaultText';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import ParagraphCard from 'components/modules/cards/ParagraphCard';
-import ParagraphInputForm from 'components/modules/form/ParagraphInputForm';
+import ParagraphInputForm from 'components/modules/forms/ParagraphInputForm';
 
 function Index({ bookData, toggleIsOn, moveDoneClick }: ParagraphModalTypes) {
   const dispatch = useDispatch();

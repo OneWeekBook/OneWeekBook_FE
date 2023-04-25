@@ -5,8 +5,8 @@ import Container from 'common/Container';
 import DefaultLabel from 'components/atoms/labels/DefaultLabel';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import SignContainer from 'components/modules/commons/SignContainer';
-import SignUpForm from 'components/modules/form/SignUpForm';
-import AuthEmailForm from 'components/modules/form/AuthEmailForm';
+import SignUpForm from 'components/modules/forms/SignUpForm';
+import AuthEmailForm from 'components/modules/forms/AuthEmailForm';
 
 function SignUpPage() {
   const { routeTo } = useRouter();

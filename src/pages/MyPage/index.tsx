@@ -8,8 +8,8 @@ import useToggle from 'hooks/useToggle';
 import Container from 'common/Container';
 import DataText from 'components/atoms/texts/DataText';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
-import UserSettingForm from 'components/modules/form/UserSettingForm';
-import ProgressBarForm from 'components/modules/form/ProgressBarForm';
+import UserSettingForm from 'components/modules/forms/UserSettingForm';
+import ProgressBarForm from 'components/modules/forms/ProgressBarForm';
 import RemoveUserModal from 'components/page/modal/RemoveUserModal';
 import UserBookInfo from 'components/modules/lists/UserBookList';
 
