@@ -3,7 +3,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import theme from 'styles/theme';
 import { BooksTypes } from 'types/book';
-import { MyLibraryAddTypes } from 'types/api';
+import { LibraryAddRequestTypes } from 'types/api';
 import { BooksListType } from 'types/module';
 import { AppStateType } from 'redux/reducers';
 import { MyLibraryAddRequest } from 'redux/reducers/MyLibrary';
@@ -60,7 +60,7 @@ function BooksList({ searchArr }: BooksListType) {
     setStartIdx(startIdx + 12);
   }, [startIdx]);
 
-  const handleFavoriteClick = ({ ...data }: MyLibraryAddTypes) => {
+  const handleFavoriteClick = ({ ...data }: LibraryAddRequestTypes) => {
     dispatch(MyLibraryAddRequest({ ...data }));
   };
 

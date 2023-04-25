@@ -1,4 +1,4 @@
-import { SignUpTypes, ActionsTypes } from 'types/api';
+import { SignUpRequestTypes, ActionsTypes } from 'types/api';
 
 export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
@@ -46,7 +46,7 @@ export default function SignUp(state = initialState, action: ActionsTypes) {
   }
 }
 
-export const SignUpRequest = (data: SignUpTypes) => {
+export const SignUpRequest = (data: SignUpRequestTypes) => {
   return {
     type: SIGN_UP_REQUEST,
     payload: data,

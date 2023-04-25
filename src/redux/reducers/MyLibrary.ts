@@ -1,4 +1,8 @@
-import { MyLibraryAddTypes, DeleteType, ActionsTypes } from 'types/api';
+import {
+  LibraryAddRequestTypes,
+  DeleteRequestType,
+  ActionsTypes,
+} from 'types/api';
 
 export const MY_LIBRARY_REQUEST = 'MY_LIBRARY_REQUEST';
 export const MY_LIBRARY_SUCCESS = 'MY_LIBRARY_SUCCESS';
@@ -136,7 +140,7 @@ export const MyLibraryFail = (error: any) => {
   };
 };
 
-export const MyLibraryAddRequest = (data: MyLibraryAddTypes) => {
+export const MyLibraryAddRequest = (data: LibraryAddRequestTypes) => {
   return {
     type: MY_LIBRARY_ADD_REQUEST,
     payload: data,
@@ -179,7 +183,7 @@ export const MyLibraryModifyFail = (error: any) => {
   };
 };
 
-export const MyLibraryDeleteRequest = (data: DeleteType) => {
+export const MyLibraryDeleteRequest = (data: DeleteRequestType) => {
   return {
     type: MY_LIBRARY_DELETE_REQUEST,
     payload: data,

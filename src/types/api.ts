@@ -1,55 +1,55 @@
-export type ActionsTypes = {
+export interface ActionsTypes {
   type: string;
   payload?: any;
   error?: any;
-};
+}
 
-export type SignInTypes = {
+export interface SignInRequestTypes {
   email: string;
   password: string;
-};
+}
 
-export type SignUpTypes = {
+export interface SignUpRequestTypes {
   email: string;
   username: string;
   password: string;
   nick: string;
-};
+}
 
-export type MyLibraryAddTypes = {
+export interface LibraryAddRequestTypes {
   isbn: string;
   title: string;
   author: string;
   publisher: string;
   img: string;
-};
+}
 
-export type ParagraphType = {
+export interface ParagraphRequestType {
   bookId: number;
-};
+}
 
-export type ParagraphAddTypes = {
+export interface ParagraphAddRequestTypes {
   bookId: number;
   paragraph: string;
-};
+}
 
-export type DeleteType = {
+export interface DeleteRequestType {
   id: number;
-};
+}
 
-export type UserReviewAddTypes = {
+export interface ReviewAddRequestTypes {
   bookId: number;
   review: string;
   rating: number;
-};
+}
 
-export type ReviewTypes = {
+export interface ReviewRequestTypes {
   start: number;
   sortby: string;
-};
+}
 
-export type ReivewDetailTypes = {
+export interface BookRequestTypes {
   isbn: number;
   start: number;
   sortby: string;
-};
+}

@@ -1,4 +1,4 @@
-import { ReivewDetailTypes, ReviewTypes, ActionsTypes } from 'types/api';
+import { BookRequestTypes, ReviewRequestTypes, ActionsTypes } from 'types/api';
 
 export const REVIEWS_REQUEST = 'REVIEWS_REQUEST';
 export const REVIEWS_SUCCESS = 'REVIEWS_SUCCESS';
@@ -81,7 +81,7 @@ export default function Review(state = initialState, action: ActionsTypes) {
   }
 }
 
-export const ReviewsRequest = (data: ReviewTypes) => {
+export const ReviewsRequest = (data: ReviewRequestTypes) => {
   return {
     type: REVIEWS_REQUEST,
     payload: data,
@@ -102,7 +102,7 @@ export const ReviewsFail = (error: any) => {
   };
 };
 
-export const ReviewRequest = (data: ReivewDetailTypes) => {
+export const ReviewRequest = (data: BookRequestTypes) => {
   return {
     type: REVIEW_REQUEST,
     payload: data,

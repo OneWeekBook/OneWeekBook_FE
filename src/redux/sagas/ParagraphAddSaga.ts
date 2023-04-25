@@ -1,13 +1,13 @@
 import instance from 'api/axios';
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { ParagraphAddTypes } from 'types/api';
+import { ParagraphAddRequestTypes } from 'types/api';
 import {
   ParagraphAddFail,
   ParagraphAddSuccess,
   PARAGRAPH_ADD_REQUEST,
 } from '../reducers/Paragraph';
 
-function ParagraphAddAPI(data: ParagraphAddTypes) {
+function ParagraphAddAPI(data: ParagraphAddRequestTypes) {
   return instance.post(
     `${process.env.REACT_APP_BASIC_URL}/book/paragraph`,
     data,

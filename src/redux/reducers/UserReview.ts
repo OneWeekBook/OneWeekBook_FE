@@ -1,4 +1,4 @@
-import { UserReviewAddTypes, ActionsTypes } from 'types/api';
+import { ReviewAddRequestTypes, ActionsTypes } from 'types/api';
 
 export const USER_REVIEW_REQUEST = 'USER_REVIEW_REQUEST';
 export const USER_REVIEW_SUCCESS = 'USER_REVIEW_SUCCESS';
@@ -133,7 +133,7 @@ export const UserReviewFail = (error: any) => {
   };
 };
 
-export const UserReviewAddRequest = (data: UserReviewAddTypes) => {
+export const UserReviewAddRequest = (data: ReviewAddRequestTypes) => {
   return {
     type: USER_REVIEW_ADD_REQUEST,
     payload: data,

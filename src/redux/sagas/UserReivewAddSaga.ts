@@ -1,13 +1,13 @@
 import instance from 'api/axios';
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { UserReviewAddTypes } from 'types/api';
+import { ReviewAddRequestTypes } from 'types/api';
 import {
   UserReviewAddFail,
   UserReviewAddSuccess,
   USER_REVIEW_ADD_REQUEST,
 } from '../reducers/UserReview';
 
-function UserReviewAddAPI(data: UserReviewAddTypes) {
+function UserReviewAddAPI(data: ReviewAddRequestTypes) {
   const { bookId, review, rating } = data;
   return instance.post(`/book/reviews/${bookId}`, { review, rating });
 }

@@ -1,4 +1,4 @@
-import { MyLibraryAddTypes } from './api';
+import { LibraryAddRequestTypes } from './api';
 
 export type CategoryItemTypes = {
   id: number;
@@ -39,7 +39,7 @@ export interface LikeAddTypes extends BooksTypes {
     publisher,
     isbn,
     img,
-  }: MyLibraryAddTypes) => void;
+  }: LibraryAddRequestTypes) => void;
 }
 
 export type LibraryItemTypes = {

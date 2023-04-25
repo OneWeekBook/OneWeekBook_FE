@@ -1,7 +1,7 @@
 import {
-  DeleteType,
-  ParagraphAddTypes,
-  ParagraphType,
+  DeleteRequestType,
+  ParagraphAddRequestTypes,
+  ParagraphRequestType,
   ActionsTypes,
 } from 'types/api';
 
@@ -121,7 +121,7 @@ export default function ChangePassword(
   }
 }
 
-export const ParagraphInitRequest = (data: ParagraphType) => {
+export const ParagraphInitRequest = (data: ParagraphRequestType) => {
   return {
     type: PARAGRAPH_INIT_REQUEST,
     payload: data,
@@ -142,7 +142,7 @@ export const ParagraphInitFail = (error: any) => {
   };
 };
 
-export const ParagraphRequest = (data: ParagraphType) => {
+export const ParagraphRequest = (data: ParagraphRequestType) => {
   return {
     type: PARAGRAPH_REQUEST,
     payload: data,
@@ -163,7 +163,7 @@ export const ParagraphFail = (error: any) => {
   };
 };
 
-export const ParagraphAddRequest = (data: ParagraphAddTypes) => {
+export const ParagraphAddRequest = (data: ParagraphAddRequestTypes) => {
   return {
     type: PARAGRAPH_ADD_REQUEST,
     payload: data,
@@ -183,7 +183,7 @@ export const ParagraphAddFail = (error: any) => {
   };
 };
 
-export const ParagraphDeleteRequest = (data: DeleteType) => {
+export const ParagraphDeleteRequest = (data: DeleteRequestType) => {
   return {
     type: PARAGRAPH_DELETE_REQUEST,
     payload: data,
