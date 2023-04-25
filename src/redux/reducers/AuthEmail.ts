@@ -1,4 +1,4 @@
-import { ActionsTypes } from 'types/api';
+import { ActionsTypes } from 'types/request';
 
 export const AUTH_EMAIL_REQUEST = 'AUTH_EMAIL_REQUEST';
 export const AUTH_EMAIL_SUCCESS = 'AUTH_EMAIL_SUCCESS';

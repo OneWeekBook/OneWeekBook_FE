@@ -1,4 +1,4 @@
-import { ActionsTypes } from 'types/api';
+import { ActionsTypes } from 'types/request';
 
 export const CATEGORY_REQUEST = 'CATEGORY_REQUEST';
 export const CATEGORY_SUCCESS = 'CATEGORY_SUCCESS';

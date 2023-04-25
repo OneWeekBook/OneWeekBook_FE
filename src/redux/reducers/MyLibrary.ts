@@ -2,7 +2,7 @@ import {
   LibraryAddRequestTypes,
   DeleteRequestType,
   ActionsTypes,
-} from 'types/api';
+} from 'types/request';
 
 export const MY_LIBRARY_REQUEST = 'MY_LIBRARY_REQUEST';
 export const MY_LIBRARY_SUCCESS = 'MY_LIBRARY_SUCCESS';

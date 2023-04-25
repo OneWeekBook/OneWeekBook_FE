@@ -1,4 +1,4 @@
-import { ActionsTypes } from 'types/api';
+import { ActionsTypes } from 'types/request';
 
 export const LIKE_REQUEST = 'LIKE_REQUEST';
 export const LIKE_SUCCESS = 'LIKE_SUCCESS';

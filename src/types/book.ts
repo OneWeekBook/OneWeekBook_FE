@@ -1,4 +1,4 @@
-import { LibraryAddRequestTypes } from './api';
+import { LibraryAddRequestTypes } from './request';
 
 export type CategoryItemTypes = {
   id: number;

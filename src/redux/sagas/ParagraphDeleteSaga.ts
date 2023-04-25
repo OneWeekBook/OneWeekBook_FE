@@ -1,6 +1,6 @@
 import instance from 'api/axios';
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { DeleteRequestType } from 'types/api';
+import { DeleteRequestType } from 'types/request';
 import {
   ParagraphDeleteFail,
   ParagraphDeleteSuccess,

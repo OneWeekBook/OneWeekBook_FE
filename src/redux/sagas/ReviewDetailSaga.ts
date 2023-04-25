@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { call, put, throttle } from 'redux-saga/effects';
-import { BookRequestTypes } from 'types/api';
+import { BookRequestTypes } from 'types/request';
 import { ReviewFail, ReviewSuccess, REVIEW_REQUEST } from '../reducers/Review';
 
 function ReviewDetailAPI(params: BookRequestTypes) {

@@ -1,4 +1,4 @@
-import { ActionsTypes } from 'types/api';
+import { ActionsTypes } from 'types/request';
 import { BooksTypes } from 'types/book';
 
 export const SEARCH_REQUEST = 'SEARCH_REQUEST';

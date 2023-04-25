@@ -3,7 +3,7 @@ import {
   ParagraphAddRequestTypes,
   ParagraphRequestType,
   ActionsTypes,
-} from 'types/api';
+} from 'types/request';
 
 export const PARAGRAPH_INIT_REQUEST = 'PARAGRAPH_INIT_REQUEST';
 export const PARAGRAPH_INIT_SUCCESS = 'PARAGRAPH_INIT_SUCCESS';

@@ -1,4 +1,4 @@
-import { ActionsTypes } from 'types/api';
+import { ActionsTypes } from 'types/request';
 
 export const NEW_REVIEWS_REQUEST = 'NEW_REVIEWS_REQUEST';
 export const NEW_REVIEWS_SUCCESS = 'NEW_REVIEWS_SUCCESS';

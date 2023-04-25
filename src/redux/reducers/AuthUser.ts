@@ -1,4 +1,4 @@
-import { ActionsTypes } from 'types/api';
+import { ActionsTypes } from 'types/request';
 
 export const AUTH_USER_REQUEST = 'AUTH_USER_REQUEST';
 export const AUTH_USER_SUCCESS = 'AUTH_USER_SUCCESS';

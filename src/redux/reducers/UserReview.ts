@@ -1,4 +1,4 @@
-import { ReviewAddRequestTypes, ActionsTypes } from 'types/api';
+import { ReviewAddRequestTypes, ActionsTypes } from 'types/request';
 
 export const USER_REVIEW_REQUEST = 'USER_REVIEW_REQUEST';
 export const USER_REVIEW_SUCCESS = 'USER_REVIEW_SUCCESS';

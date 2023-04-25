@@ -1,6 +1,6 @@
 import instance from 'api/axios';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
-import { LibraryAddRequestTypes } from 'types/api';
+import { LibraryAddRequestTypes } from 'types/request';
 import {
   MyLibraryAddFail,
   MyLibraryAddSuccess,

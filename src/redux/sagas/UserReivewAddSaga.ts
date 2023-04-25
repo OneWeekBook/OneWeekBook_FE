@@ -1,6 +1,6 @@
 import instance from 'api/axios';
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { ReviewAddRequestTypes } from 'types/api';
+import { ReviewAddRequestTypes } from 'types/request';
 import {
   UserReviewAddFail,
   UserReviewAddSuccess,

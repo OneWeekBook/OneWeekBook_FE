@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { SignInRequestTypes } from 'types/api';
+import { SignInRequestTypes } from 'types/request';
 import axios from 'axios';
 import instance from 'api/axios';
 import { SignInFail, SignInSuccess, SIGN_IN_REQUEST } from '../reducers/SignIn';

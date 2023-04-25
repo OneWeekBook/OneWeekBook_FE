@@ -1,4 +1,8 @@
-import { BookRequestTypes, ReviewRequestTypes, ActionsTypes } from 'types/api';
+import {
+  BookRequestTypes,
+  ReviewRequestTypes,
+  ActionsTypes,
+} from 'types/request';
 
 export const REVIEWS_REQUEST = 'REVIEWS_REQUEST';
 export const REVIEWS_SUCCESS = 'REVIEWS_SUCCESS';

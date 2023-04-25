@@ -1,4 +1,4 @@
-import { ActionsTypes } from 'types/api';
+import { ActionsTypes } from 'types/request';
 
 export const REMOVE_USER_REQUEST = 'REMOVE_USER_REQUEST';
 export const REMOVE_USER_SUCCESS = 'REMOVE_USER_SUCCESS';

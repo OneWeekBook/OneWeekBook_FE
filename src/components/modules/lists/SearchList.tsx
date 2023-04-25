@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import theme from 'styles/theme';
-import { LibraryAddRequestTypes } from 'types/api';
+import { LibraryAddRequestTypes } from 'types/request';
 import { BooksTypes } from 'types/book';
 import { AppStateType } from 'redux/reducers';
 import { MyLibraryAddRequest } from 'redux/reducers/MyLibrary';

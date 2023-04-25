@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
-import { SignUpRequestTypes } from 'types/api';
+import { SignUpRequestTypes } from 'types/request';
 import { SignUpFail, SignUpSuccess, SIGN_UP_REQUEST } from '../reducers/SignUp';
 
 function SignUpAPI(data: SignUpRequestTypes) {

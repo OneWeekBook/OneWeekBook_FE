@@ -1,4 +1,4 @@
-import { ActionsTypes } from 'types/api';
+import { ActionsTypes } from 'types/request';
 
 export const CHANGE_NICK_REQUEST = 'CHANGE_NICK_REQUEST';
 export const CHANGE_NICK_SUCCESS = 'CHANGE_NICK_SUCCESS';

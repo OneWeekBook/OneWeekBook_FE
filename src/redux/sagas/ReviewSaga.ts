@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { call, put, throttle } from 'redux-saga/effects';
-import { ReviewRequestTypes } from 'types/api';
+import { ReviewRequestTypes } from 'types/request';
 import {
   ReviewsFail,
   ReviewsSuccess,
