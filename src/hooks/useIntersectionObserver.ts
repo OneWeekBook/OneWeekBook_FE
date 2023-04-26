@@ -1,18 +1,12 @@
 import { useEffect, useState } from 'react';
-
-interface useIntersectionObserverProps {
-  root?: null;
-  rootMargin?: string;
-  threshold?: number;
-  onIntersect: IntersectionObserverCallback;
-}
+import { IntersectionObserverTypes } from 'types/hook';
 
 const useIntersectionObserver = ({
   root,
   rootMargin = '0px',
   threshold = 0,
   onIntersect,
-}: useIntersectionObserverProps) => {
+}: IntersectionObserverTypes) => {
   const [target, setTarget] = useState<HTMLElement | null | undefined>(null);
 
   useEffect(() => {

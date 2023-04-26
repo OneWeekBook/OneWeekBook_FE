@@ -1,14 +1,4 @@
-type EmailStatusTypes = {
-  setEmailDone: React.Dispatch<React.SetStateAction<boolean>>;
-  setToggle: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-type CodeStatusTypes = {
-  email: string;
-  setRegisterEmail: React.Dispatch<React.SetStateAction<string>>;
-  setCodeReg: React.Dispatch<React.SetStateAction<boolean>>;
-  setAuthDone: React.Dispatch<React.SetStateAction<boolean>>;
-};
+import { CodeStatusTypes, EmailStatusTypes } from 'types/hook';
 
 export function useAuthErrorCheck(): {
   handleEmailCheck: (type: number, stauts: EmailStatusTypes) => void;

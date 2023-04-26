@@ -1,23 +1,13 @@
+import { CompareErrorTypes, SignUpDataTypes } from 'types/hook';
 import { passwordRegex } from 'utils/Regex';
 
-interface SignUpType {
-  username: string;
-  nick: string;
-  password: string;
-  confirmPassword: string;
-}
-
-type ErrorType = {
-  passError: boolean;
-  setPassError: React.Dispatch<React.SetStateAction<boolean>>;
-  passCompareError: boolean;
-  setPassCompareError: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
 export function useFormErrorCheck(): {
-  handleFormError: (values: SignUpType, error: ErrorType) => void;
+  handleFormError: (values: SignUpDataTypes, error: CompareErrorTypes) => void;
 } {
-  const handleFormError = (values: SignUpType, error: ErrorType) => {
+  const handleFormError = (
+    values: SignUpDataTypes,
+    error: CompareErrorTypes,
+  ) => {
     if (values.password && !passwordRegex.test(values.password)) {
       error.setPassError(true);
     } else if (values.password && passwordRegex.test(values.password)) {
