@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { userBooksTypes } from 'types/main';
+import { UserBookResponseTypes } from 'types/response';
 import StarIcon from 'components/atoms/icons/StarIcon';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DefaultText from 'components/atoms/texts/DefaultText';
@@ -13,7 +13,7 @@ function UserBookCard({
   review,
   rating,
   isbn,
-}: React.PropsWithChildren<userBooksTypes>) {
+}: React.PropsWithChildren<UserBookResponseTypes>) {
   return (
     <UserBookCardContainer
       to={review ? `/review/${isbn}?sort=recommend` : '/myPage'}

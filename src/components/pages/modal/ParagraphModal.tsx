@@ -3,7 +3,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import theme from 'styles/theme';
 import { ParagraphModalTypes } from 'types/page';
-import { ParagraphTypes } from 'types/book';
+import { ParagraphResponseTypes } from 'types/response';
 import { AppStateType } from 'redux/reducers';
 import {
   ParagraphDeleteRequest,
@@ -90,7 +90,7 @@ function Index({ bookData, toggleIsOn, moveDoneClick }: ParagraphModalTypes) {
         </BookInfoContainer>
         <ParagraphInputForm bookId={bookData.id} />
         <ParagraphListContainer>
-          {paragraph.map((item: ParagraphTypes) => (
+          {paragraph.map((item: ParagraphResponseTypes) => (
             <ParagraphCard
               key={item.id}
               id={item.id}

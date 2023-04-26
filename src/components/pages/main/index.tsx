@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { ReviewItemType } from 'types/review';
-import { NewReviewTypes } from 'types/main';
+import { NewReviewResponseTypes, ReviewResponseTypes } from 'types/response';
 import { AppStateType } from 'redux/reducers';
 import { ReviewInit, ReviewsRequest } from 'redux/reducers/Review';
 import { NewReviewInit, NewReviewsRequest } from 'redux/reducers/NewReview';
@@ -17,13 +16,13 @@ function Index() {
   const dispatch = useDispatch();
   const [bestIndex, setBestIndex] = useState(0);
   const [reviewIndex, setReviewIndex] = useState(0);
-  const reviews = useSelector(
-    (state: AppStateType) => state.review.reviews,
+  const { reviews } = useSelector(
+    (state: AppStateType) => state.review,
     shallowEqual,
   );
 
-  const newReviews = useSelector(
-    (state: AppStateType) => state.newReview.newReviews,
+  const { newReviews } = useSelector(
+    (state: AppStateType) => state.newReview,
     shallowEqual,
   );
 
@@ -46,14 +45,16 @@ function Index() {
           fontSize={3.4}
         />
         <BestBooksGrid index={bestIndex}>
-          {reviews.slice(0, 12).map((item: ReviewItemType, idx: number) => (
-            <BestBookCard
-              key={item.id}
-              idx={idx + 1}
-              {...item}
-              count={item.countReviews}
-            />
-          ))}
+          {reviews
+            .slice(0, 12)
+            .map((item: ReviewResponseTypes, idx: number) => (
+              <BestBookCard
+                key={item.id}
+                idx={idx + 1}
+                {...item}
+                count={item.countReviews}
+              />
+            ))}
         </BestBooksGrid>
         <Pagination totalPage={2} index={bestIndex} setIndex={setBestIndex} />
       </BookListContainer>
@@ -64,7 +65,7 @@ function Index() {
           fontSize={3.4}
         />
         <NewReviewGrid index={reviewIndex}>
-          {newReviews.map((item: NewReviewTypes) => (
+          {newReviews.map((item: NewReviewResponseTypes) => (
             <NewReivewCard key={item.id} {...item} />
           ))}
         </NewReviewGrid>

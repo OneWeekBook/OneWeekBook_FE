@@ -1,5 +1,4 @@
-import { InfoTypes } from './book';
-import { ReviewDetailTypes } from './review';
+import { UserReviewResponseTypes } from './response';
 
 export interface ChangeNickModalType {
   nickToggleIsOn: () => void;
@@ -7,12 +6,6 @@ export interface ChangeNickModalType {
 
 export interface ChangePassModalType {
   passToggleIsOn: () => void;
-}
-
-export interface ParagraphModalTypes {
-  bookData: InfoTypes;
-  toggleIsOn: () => void;
-  moveDoneClick?: () => void;
 }
 
 export interface DefaultModalTypes {
@@ -30,8 +23,24 @@ export interface DefaultModalTypes {
   handleCanCelClick?: () => void;
 }
 
+export interface LibraryBookTypes {
+  id: number;
+  isbn: string;
+  title: string;
+  author: string;
+  progress: number;
+  startTime: string | null;
+  endTime: string | null;
+}
+
+export interface ParagraphModalTypes {
+  bookData: LibraryBookTypes;
+  toggleIsOn: () => void;
+  moveDoneClick?: () => void;
+}
+
 export interface ReviewDetailModalTypes {
-  userReview: ReviewDetailTypes;
+  userReview: UserReviewResponseTypes;
   bookIsbn: number;
   reviewIndex: number;
   reviewSort: string;
@@ -43,6 +52,6 @@ export interface RemoveUserModalType {
 }
 
 export interface WriteReviewTypes {
-  bookData: InfoTypes;
+  bookData: LibraryBookTypes;
   toggleIsOn: () => void;
 }

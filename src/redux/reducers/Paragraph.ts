@@ -4,6 +4,7 @@ import {
   ParagraphRequestType,
   ActionsTypes,
 } from 'types/request';
+import { ParagraphResponseTypes } from 'types/response';
 
 export const PARAGRAPH_INIT_REQUEST = 'PARAGRAPH_INIT_REQUEST';
 export const PARAGRAPH_INIT_SUCCESS = 'PARAGRAPH_INIT_SUCCESS';
@@ -32,7 +33,7 @@ const initialState = {
   isAddSuccess: false,
   isDeleteLoading: false,
   isDeleteSuccess: false,
-  paragraph: [],
+  paragraph: Array<ParagraphResponseTypes>(),
 };
 
 export default function ChangePassword(

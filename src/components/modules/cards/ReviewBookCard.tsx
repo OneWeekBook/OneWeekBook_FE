@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import theme from 'styles/theme';
-import { ReviewItemType } from 'types/review';
+import { ReviewResponseTypes } from 'types/response';
 import { ReviewBookCardType } from 'types/module';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DefaultText from 'components/atoms/texts/DefaultText';
@@ -14,7 +14,7 @@ function ReivewItem({
   author,
   isbn,
   count,
-}: React.PropsWithChildren<ReviewItemType> & ReviewBookCardType) {
+}: React.PropsWithChildren<ReviewResponseTypes> & ReviewBookCardType) {
   return (
     <ReviewBookCardContainer>
       <MultiText

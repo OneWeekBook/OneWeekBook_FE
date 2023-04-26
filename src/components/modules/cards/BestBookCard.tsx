@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import theme from 'styles/theme';
 import { BestBookCardTypes } from 'types/module';
-import { ReviewItemType } from 'types/review';
+import { ReviewResponseTypes } from 'types/response';
 import { getImgErr } from 'utils/ImageError';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DefaultText from 'components/atoms/texts/DefaultText';
@@ -17,7 +17,7 @@ function BestBookCard({
   publisher,
   title,
   count,
-}: React.PropsWithChildren<ReviewItemType> & BestBookCardTypes) {
+}: React.PropsWithChildren<ReviewResponseTypes> & BestBookCardTypes) {
   return (
     <CardContainer to={`/review/${isbn}?sort=recommend`}>
       <DefaultImage

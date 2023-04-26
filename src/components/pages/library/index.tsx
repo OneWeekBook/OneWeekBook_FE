@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { AppStateType } from 'redux/reducers';
 import styled from 'styled-components';
-import { InfoTypes } from 'types/book';
+import { LibraryBookTypes } from 'types/page';
 import { navDone, navInit, navRead, userToggle } from 'redux/reducers/Func';
 import {
   MyLibraryModifyRequest,
@@ -24,7 +24,7 @@ function Index() {
   const [likeToggle, handleLikeToggle] = useToggle(false);
   const [commentToggle, handleCommentToggle] = useToggle(false);
   const [reivewToggle, handleReviewToggle] = useToggle(false);
-  const [bookData, setBookData] = useState<InfoTypes>(bookInit);
+  const [bookData, setBookData] = useState<LibraryBookTypes>(bookInit);
   const { user } = useSelector(
     (state: AppStateType) => state.authUser,
     shallowEqual,

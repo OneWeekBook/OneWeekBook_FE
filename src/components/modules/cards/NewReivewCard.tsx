@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { NewReviewResponseTypes } from 'types/response';
 import { getImgErr } from 'utils/ImageError';
-import { NewReviewTypes } from 'types/main';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DefaultText from 'components/atoms/texts/DefaultText';
 import ReviewText from 'components/atoms/texts/ReviewText';
@@ -14,7 +14,7 @@ function NewReivewCard({
   rating,
   isbn,
   user,
-}: React.PropsWithChildren<NewReviewTypes>) {
+}: React.PropsWithChildren<NewReviewResponseTypes>) {
   return (
     <CardContainer to={`/review/${isbn}?sort=new`}>
       <ImageContainer>

@@ -2,8 +2,8 @@ import { PropsWithChildren, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import theme from 'styles/theme';
 import { getImgErr } from 'utils/ImageError';
-import { ReviewDetailTypes } from 'types/review';
 import { ReviewUserCardType } from 'types/module';
+import { UserReviewResponseTypes } from 'types/response';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DataText from 'components/atoms/texts/DataText';
 import MultiText from 'components/atoms/texts/MultiText';
@@ -18,7 +18,7 @@ function ReviewUserCard({
   reviewCreationTime,
   zeroLikeCount,
   handleClick,
-}: PropsWithChildren<ReviewDetailTypes & ReviewUserCardType>) {
+}: PropsWithChildren<UserReviewResponseTypes & ReviewUserCardType>) {
   const [isRecommend, setIsRecommend] = useState(false);
 
   useEffect(() => {

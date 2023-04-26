@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import theme from 'styles/theme';
-import { ReviewBookTypes } from 'types/review';
+import { ReviewBookResponseTypes } from 'types/response';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DefaultText from 'components/atoms/texts/DefaultText';
 import DataText from 'components/atoms/texts/DataText';
@@ -13,7 +13,7 @@ function BookBannerInfo({
   publisher,
   ratingAverage,
   title,
-}: ReviewBookTypes) {
+}: ReviewBookResponseTypes) {
   const RateArr = [0, 0, 0, 0, 0];
   for (let i = 0; i < Math.floor(ratingAverage); i += 1) {
     RateArr[i] = 1;

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { ReviewDetailTypes } from 'types/review';
 import { ReviewInfoTypes } from 'types/module';
-import ReivewUserCard from 'components/modules/cards/ReivewUserCard';
+import { UserReviewResponseTypes } from 'types/response';
+import ReviewUserCard from 'components/modules/cards/ReviewUserCard';
 
 function UserReviewList({
   reviews,
@@ -12,8 +12,8 @@ function UserReviewList({
     <ReviewListWrapper>
       {Array.isArray(reviews) &&
         !!reviews &&
-        reviews.map((item: ReviewDetailTypes) => (
-          <ReivewUserCard
+        reviews.map((item: UserReviewResponseTypes) => (
+          <ReviewUserCard
             key={item.id}
             {...item}
             handleClick={() => {

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import theme from 'styles/theme';
-import { LikeDataTypes } from 'types/review';
+import { FavoriteResponseTypes } from 'types/response';
 import { ReviewDetailModalTypes } from 'types/page';
 import { AppStateType } from 'redux/reducers';
 import {
@@ -38,7 +38,7 @@ function ReviewDetailModal({
     likeAddErrorStatus,
     likeCancelErrorStatus,
   }: {
-    likeData: LikeDataTypes[];
+    likeData: FavoriteResponseTypes[];
     likeAddErrorStatus?: number;
     likeCancelErrorStatus?: number;
   } = useSelector((state: AppStateType) => state.like, shallowEqual);
@@ -68,10 +68,12 @@ function ReviewDetailModal({
     compareFavoriteUser();
     if (Array.isArray(likeData) && !!likeData) {
       setUseful(
-        likeData.filter((item: LikeDataTypes) => item.state === 0).length,
+        likeData.filter((item: FavoriteResponseTypes) => item.state === 0)
+          .length,
       );
       setInterest(
-        likeData.filter((item: LikeDataTypes) => item.state === 1).length,
+        likeData.filter((item: FavoriteResponseTypes) => item.state === 1)
+          .length,
       );
     } else {
       setUseful(0);
@@ -80,9 +82,11 @@ function ReviewDetailModal({
   }, [likeData]);
 
   const compareFavoriteUser = () => {
-    if (likeData.find((like: LikeDataTypes) => like.user.id === user.id)) {
+    if (
+      likeData.find((like: FavoriteResponseTypes) => like.user.id === user.id)
+    ) {
       const data = likeData.find(
-        (like: LikeDataTypes) => like.user.id === user.id,
+        (like: FavoriteResponseTypes) => like.user.id === user.id,
       );
       if (data?.state === 0) {
         setInterestToggle(false);

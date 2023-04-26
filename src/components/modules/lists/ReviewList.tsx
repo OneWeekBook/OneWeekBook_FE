@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import { ReviewListType } from 'types/module';
-import { ReviewItemType } from 'types/review';
+import { ReviewResponseTypes } from 'types/response';
 import ReviewBookCard from 'components/modules/cards/ReviewBookCard';
 
 function ReviewList({ reviews }: ReviewListType) {
   return (
     <ReviewListContainer>
-      {reviews.map((item: ReviewItemType) => (
+      {reviews.map((item: ReviewResponseTypes) => (
         <ReviewBookCard key={item.id} {...item} count={item.countReviews} />
       ))}
     </ReviewListContainer>

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { CategoryItemTypes } from 'types/book';
+import { CategoryResponseTypes } from 'types/response';
 import { CategoryRequest } from 'redux/reducers/Category';
 import { SearchInit } from 'redux/reducers/Search';
 import { searchNone, userToggle } from 'redux/reducers/Func';
@@ -19,18 +19,22 @@ function index() {
     shallowEqual,
   );
   const [curParentCategory, setCurParentCategory] = useState<
-    CategoryItemTypes[]
+    CategoryResponseTypes[]
   >([initialState]);
-  const [curChildCategory, setCurChildCategory] = useState<CategoryItemTypes[]>(
-    [initialState],
+  const [curChildCategory, setCurChildCategory] = useState<
+    CategoryResponseTypes[]
+  >([initialState]);
+  const [parentCategory, setParentCategory] = useState<CategoryResponseTypes[]>(
+    [],
   );
-  const [parentCategory, setParentCategory] = useState<CategoryItemTypes[]>([]);
-  const [childCatgory, setChildCategory] = useState<CategoryItemTypes[]>([]);
+  const [childCatgory, setChildCategory] = useState<CategoryResponseTypes[]>(
+    [],
+  );
 
   const getFilterParentCategories = useCallback(
-    (categories: CategoryItemTypes[]) => {
+    (categories: CategoryResponseTypes[]) => {
       const parent = categories.filter(
-        (item: CategoryItemTypes) => item.parentId === null,
+        (item: CategoryResponseTypes) => item.parentId === null,
       );
       setParentCategory(parent);
     },
@@ -38,12 +42,12 @@ function index() {
   );
 
   const getFilterSubCategories = useCallback(
-    (categoriesData: CategoryItemTypes[], id: number) => {
+    (categoriesData: CategoryResponseTypes[], id: number) => {
       const parent = categoriesData.filter(
-        (item: CategoryItemTypes) => item.categoryId === id,
+        (item: CategoryResponseTypes) => item.categoryId === id,
       );
       const sub = categoriesData.filter(
-        (item: CategoryItemTypes) => item.parentId === id,
+        (item: CategoryResponseTypes) => item.parentId === id,
       );
       setCurParentCategory(parent);
       setChildCategory(sub);
@@ -53,9 +57,9 @@ function index() {
   );
 
   const getPeekCategory = useCallback(
-    (categoriesData: CategoryItemTypes[], id: number) => {
+    (categoriesData: CategoryResponseTypes[], id: number) => {
       const result = categoriesData.filter(
-        (item: CategoryItemTypes) => item.categoryId === id,
+        (item: CategoryResponseTypes) => item.categoryId === id,
       );
       setCurChildCategory(result);
     },

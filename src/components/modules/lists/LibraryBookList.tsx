@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { LibraryItemTypes } from 'types/book';
+import { LibraryResponseTypes } from 'types/response';
 import { LibraryBookListTypes } from 'types/module';
 import LibraryBookCard from 'components/modules/cards/LibraryBookCard';
 
@@ -14,7 +14,7 @@ function LibraryBookList({
     <LibraryBookGrid>
       {Array.isArray(userBookList) &&
         !!userBookList &&
-        userBookList.map((item: LibraryItemTypes) => (
+        userBookList.map((item: LibraryResponseTypes) => (
           <LibraryBookCard
             key={item.id}
             {...item}

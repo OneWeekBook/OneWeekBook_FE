@@ -1,5 +1,5 @@
 import { ActionsTypes } from 'types/request';
-import { BooksTypes } from 'types/book';
+import { BookResponseTypes } from 'types/response';
 
 export const SEARCH_REQUEST = 'SEARCH_REQUEST';
 export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
@@ -11,7 +11,7 @@ const initialState = {
   isLoading: false,
   isSuccess: false,
   moreBooks: false,
-  books: Array<BooksTypes>(),
+  books: Array<BookResponseTypes>(),
 };
 
 export default function SignIn(state = initialState, action: ActionsTypes) {

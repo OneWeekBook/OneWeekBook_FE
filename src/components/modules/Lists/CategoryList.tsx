@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { CategoryItemTypes } from 'types/book';
+import { CategoryResponseTypes } from 'types/response';
 import { CategoryListProps } from 'types/module';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import DefaultLabel from 'components/atoms/labels/DefaultLabel';
@@ -14,7 +14,7 @@ function CategoryList({
     <CategoryListContainer>
       <DefaultLabel content="전체 카테고리" align="left" fontSize={2.4} />
       <CategoryTagList>
-        {catgoryResult.map((item: CategoryItemTypes) => (
+        {catgoryResult.map((item: CategoryResponseTypes) => (
           <DefaultButton
             key={item.categoryId}
             className="category"

@@ -11,7 +11,7 @@ import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import UserSettingForm from 'components/modules/forms/UserSettingForm';
 import ProgressBarForm from 'components/modules/forms/ProgressBarForm';
 import RemoveUserModal from 'components/pages/modal/RemoveUserModal';
-import UserBookInfo from 'components/modules/lists/UserBookList';
+import UserBookList from 'components/modules/lists/UserBookList';
 
 function Index() {
   const dispatch = useDispatch();
@@ -92,7 +92,7 @@ function Index() {
         fontSize={2.4}
         fontColor={[theme.color.COLOR_BLACK, theme.color.COLOR_CORAL]}
       />
-      <UserBookInfo userBooks={userBooks} />
+      <UserBookList userBooks={userBooks} />
       {removeToggle && <RemoveUserModal removeToggleIsOn={removeToggleIsOn} />}
     </Container>
   );

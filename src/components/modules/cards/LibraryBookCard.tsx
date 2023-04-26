@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import theme from 'styles/theme';
-import { LibraryItemTypes } from 'types/book';
+import { LibraryResponseTypes } from 'types/response';
 import { LibraryBookCardTypes } from 'types/module';
 import { ParagraphInitRequest } from 'redux/reducers/Paragraph';
 import { UserReviewRequest } from 'redux/reducers/UserReview';
@@ -28,7 +28,7 @@ function LibraryBookCard({
   handleCommentToggle,
   handleReviewToggle,
   onClick,
-}: LibraryItemTypes & LibraryBookCardTypes) {
+}: LibraryResponseTypes & LibraryBookCardTypes) {
   const dispatch = useDispatch();
   const [deleteToggle, deleteToggleIsOn] = useToggle(false);
 

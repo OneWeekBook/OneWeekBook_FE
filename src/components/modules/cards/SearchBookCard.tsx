@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 import DOMPurify from 'dompurify';
 import styled from 'styled-components';
-import { LikeAddTypes } from 'types/book';
+import { LikeAddTypes } from 'types/module';
 import { getImgErr } from 'utils/ImageError';
 import { SetDate } from 'utils/SetDate';
 import ImageButton from 'components/atoms/buttons/ImageButton';

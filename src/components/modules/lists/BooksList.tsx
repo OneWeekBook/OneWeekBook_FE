@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import theme from 'styles/theme';
-import { BooksTypes } from 'types/book';
+import { BookResponseTypes } from 'types/response';
 import { LibraryAddRequestTypes } from 'types/request';
 import { BooksListType } from 'types/module';
 import { AppStateType } from 'redux/reducers';
@@ -87,7 +87,7 @@ function BooksList({ searchArr }: BooksListType) {
       <BookListGrid>
         {Array.isArray(books) &&
           !!books &&
-          books.map((item: BooksTypes, index: number) => (
+          books.map((item: BookResponseTypes, index: number) => (
             <SearchBookCard
               key={index}
               {...item}

@@ -1,6 +1,13 @@
-import { CategoryItemTypes, InfoTypes, LibraryItemTypes } from './book';
-import { userBooksTypes } from './main';
-import { ReviewDetailTypes, ReviewItemType } from './review';
+import {
+  BookResponseTypes,
+  CategoryResponseTypes,
+  LibraryResponseTypes,
+  ReviewResponseTypes,
+  UserReviewResponseTypes,
+  UserBookResponseTypes,
+} from './response';
+import { LibraryAddRequestTypes } from './request';
+import { LibraryBookTypes } from './page';
 
 export interface AuthMailTypes {
   authDone: boolean;
@@ -30,11 +37,11 @@ export interface CodeErrorTypes {
 }
 
 export interface CategoryListProps {
-  categories: CategoryItemTypes[];
-  catgoryResult: CategoryItemTypes[];
-  currentCategory: CategoryItemTypes[];
+  categories: CategoryResponseTypes[];
+  catgoryResult: CategoryResponseTypes[];
+  currentCategory: CategoryResponseTypes[];
   handleCategoryFilter: (
-    categoriesData: CategoryItemTypes[],
+    categoriesData: CategoryResponseTypes[],
     id: number,
   ) => void;
 }
@@ -61,11 +68,11 @@ export interface InputFormTypes {
 }
 
 export interface LibraryBookListTypes {
-  userBookList: LibraryItemTypes[];
+  userBookList: LibraryResponseTypes[];
   handleLikeToggle: () => void;
   handleCommentToggle: () => void;
   handleReviewToggle: () => void;
-  setBookData: React.Dispatch<React.SetStateAction<InfoTypes>>;
+  setBookData: React.Dispatch<React.SetStateAction<LibraryBookTypes>>;
 }
 
 export interface LibraryBookCardTypes {
@@ -78,6 +85,17 @@ export interface LibraryBookCardTypes {
 export interface LibraryMenuTypes {
   useId: number;
   navId: number;
+}
+
+export interface LikeAddTypes extends BookResponseTypes {
+  userId?: number;
+  handleFavoriteClick: ({
+    title,
+    author,
+    publisher,
+    isbn,
+    img,
+  }: LibraryAddRequestTypes) => void;
 }
 
 export interface NoneCardTypes {
@@ -114,7 +132,7 @@ export interface ParagraphInputFormType {
 }
 
 export interface ReviewListType {
-  reviews: ReviewItemType[];
+  reviews: ReviewResponseTypes[];
 }
 
 export interface ReviewUserCardType {
@@ -126,9 +144,9 @@ export interface ReviewBookCardType {
 }
 
 export interface ReviewInfoTypes {
-  reviews: ReviewDetailTypes[];
+  reviews: UserReviewResponseTypes[];
   detailToggleIsOn: () => void;
-  setCurReview: React.Dispatch<React.SetStateAction<ReviewDetailTypes>>;
+  setCurReview: React.Dispatch<React.SetStateAction<UserReviewResponseTypes>>;
 }
 
 export interface RecommendFormTypes {
@@ -143,8 +161,8 @@ export interface SignUpTypes {
 }
 
 export interface SearchInputTypes {
-  curSubCategory: CategoryItemTypes[];
-  curParentCategory: CategoryItemTypes[];
+  curSubCategory: CategoryResponseTypes[];
+  curParentCategory: CategoryResponseTypes[];
 }
 
 export interface TagLabelType {
@@ -152,5 +170,5 @@ export interface TagLabelType {
 }
 
 export interface UserBookListType {
-  userBooks: userBooksTypes[];
+  userBooks: UserBookResponseTypes[];
 }

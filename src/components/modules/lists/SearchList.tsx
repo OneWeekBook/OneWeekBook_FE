@@ -3,7 +3,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import theme from 'styles/theme';
 import { LibraryAddRequestTypes } from 'types/request';
-import { BooksTypes } from 'types/book';
+import { BookResponseTypes } from 'types/response';
 import { AppStateType } from 'redux/reducers';
 import { MyLibraryAddRequest } from 'redux/reducers/MyLibrary';
 import { searchDone } from 'redux/reducers/Func';
@@ -54,7 +54,7 @@ function SearchList() {
 
   return (
     <SearchListContainer>
-      {books.map((item: BooksTypes, index: number) => (
+      {books.map((item: BookResponseTypes, index: number) => (
         <SearchBookCard
           key={index}
           {...item}

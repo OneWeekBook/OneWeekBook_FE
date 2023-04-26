@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { userBooksTypes } from 'types/main';
 import { UserBookListType } from 'types/module';
+import { UserBookResponseTypes } from 'types/response';
 import UserBookCard from 'components/modules/cards/UserBookCard';
 
 function UserBookList({ userBooks }: UserBookListType) {
   return (
     <BookGridWrapper>
-      {userBooks.map((item: userBooksTypes) => (
+      {userBooks.map((item: UserBookResponseTypes) => (
         <UserBookCard key={item.id} {...item} />
       ))}
     </BookGridWrapper>

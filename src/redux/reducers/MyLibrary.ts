@@ -3,6 +3,7 @@ import {
   DeleteRequestType,
   ActionsTypes,
 } from 'types/request';
+import { LibraryResponseTypes } from 'types/response';
 
 export const MY_LIBRARY_REQUEST = 'MY_LIBRARY_REQUEST';
 export const MY_LIBRARY_SUCCESS = 'MY_LIBRARY_SUCCESS';
@@ -31,7 +32,7 @@ const initialState = {
   isModifySuccess: false,
   isDeleteLoading: false,
   isDeleteSuccess: false,
-  userBookList: [],
+  userBookList: Array<LibraryResponseTypes>(),
 };
 
 export default function ChangePassword(
