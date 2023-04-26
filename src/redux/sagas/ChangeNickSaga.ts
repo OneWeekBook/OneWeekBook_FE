@@ -1,3 +1,4 @@
+import axios from 'axios';
 import instance from 'api/axios';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import {
@@ -16,7 +17,7 @@ function* fetchChangeNickSaga(action: any): any {
     yield call(ChangeNickAPI, { id: user.id, ...action.payload });
     yield put(ChangeNickSuccess());
   } catch (error) {
-    yield put(ChangeNickFail(error));
+    if (axios.isAxiosError(error)) yield put(ChangeNickFail(error));
   }
 }
 

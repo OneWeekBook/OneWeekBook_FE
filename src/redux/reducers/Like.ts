@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios';
 import { ActionsTypes } from 'types/request';
 
 export const LIKE_REQUEST = 'LIKE_REQUEST';
@@ -114,7 +115,7 @@ export const LikeSuccess = (data: any) => {
   };
 };
 
-export const LikeFail = (error: any) => {
+export const LikeFail = (error: AxiosError) => {
   return {
     type: LIKE_FAIL,
     error: error.response,
@@ -134,7 +135,7 @@ export const LikeAddSuccess = () => {
   };
 };
 
-export const LikeAddFail = (error: any) => {
+export const LikeAddFail = (error: AxiosError) => {
   return {
     type: LIKE_ADD_FAIL,
     error: error.response,
@@ -154,7 +155,7 @@ export const LikeCancelSuccess = () => {
   };
 };
 
-export const LikeCancelFail = (error: any) => {
+export const LikeCancelFail = (error: AxiosError) => {
   return {
     type: LIKE_CANCEL_FAIL,
     error: error.response,

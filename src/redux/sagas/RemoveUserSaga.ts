@@ -1,3 +1,4 @@
+import axios from 'axios';
 import instance from 'api/axios';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import {
@@ -17,7 +18,7 @@ function* fetchRemoveUserSaga(action: any): any {
     yield put(RemoveUserSuccess());
     sessionStorage.removeItem('accessToken');
   } catch (error) {
-    yield put(RemoveUserFail(error));
+    if (axios.isAxiosError(error)) yield put(RemoveUserFail(error));
   }
 }
 

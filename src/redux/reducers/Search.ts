@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios';
 import { ActionsTypes } from 'types/request';
 import { BookResponseTypes } from 'types/response';
 
@@ -57,7 +58,7 @@ export const SearchSuccess = (data: any) => {
   };
 };
 
-export const SearchFail = (error: any) => {
+export const SearchFail = (error: AxiosError) => {
   return {
     type: SEARCH_FAIL,
     error: error.response,

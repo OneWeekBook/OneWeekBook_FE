@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { call, put, throttle } from 'redux-saga/effects';
 import { ReviewRequestTypes } from 'types/request';
+import { call, put, throttle } from 'redux-saga/effects';
 import {
   ReviewsFail,
   ReviewsSuccess,
@@ -18,7 +18,7 @@ function* fetchReviewSaga(action: any): any {
     const result = yield call(ReviewAPI, action.payload);
     yield put(ReviewsSuccess(result.data));
   } catch (error) {
-    yield put(ReviewsFail(error));
+    if (axios.isAxiosError(error)) yield put(ReviewsFail(error));
   }
 }
 

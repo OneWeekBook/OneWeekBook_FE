@@ -1,3 +1,4 @@
+import axios from 'axios';
 import instance from 'api/axios';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import {
@@ -17,7 +18,7 @@ function* fetchMyLibraryDeleteSaga(action: any) {
     yield call(MyLibraryDeleteAPI, action.payload);
     yield put(MyLibraryDeleteSuccess());
   } catch (error) {
-    yield put(MyLibraryDeleteFail(error));
+    if (axios.isAxiosError(error)) yield put(MyLibraryDeleteFail(error));
   }
 }
 

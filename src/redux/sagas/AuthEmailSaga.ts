@@ -1,5 +1,5 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import {
   AuthEmailFail,
   AuthEmailSuccess,
@@ -15,7 +15,7 @@ function* fetchAuthEmailSaga(action: any): any {
     yield call(AuthEmailAPI, action.payload);
     yield put(AuthEmailSuccess());
   } catch (error) {
-    yield put(AuthEmailFail(error));
+    if (axios.isAxiosError(error)) yield put(AuthEmailFail(error));
   }
 }
 

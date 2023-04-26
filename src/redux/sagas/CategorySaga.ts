@@ -1,5 +1,5 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import {
   CategoryFail,
   CategorySuccess,
@@ -15,7 +15,7 @@ function* fetchCategorySaga(): any {
     const result = yield call(CategoryAPI);
     yield put(CategorySuccess(result.data));
   } catch (error) {
-    yield put(CategoryFail(error));
+    if (axios.isAxiosError(error)) yield put(CategoryFail(error));
   }
 }
 

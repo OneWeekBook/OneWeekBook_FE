@@ -15,7 +15,7 @@ function* fetchNewReviewSaga(): any {
     const result = yield call(NewReviewAPI);
     yield put(NewReviewsSuccess(result.data));
   } catch (error) {
-    yield put(NewReviewsFail(error));
+    if (axios.isAxiosError(error)) yield put(NewReviewsFail(error));
   }
 }
 

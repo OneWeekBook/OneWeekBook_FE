@@ -1,3 +1,4 @@
+import axios from 'axios';
 import instance from 'api/axios';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import {
@@ -21,7 +22,7 @@ function* fetchUserReviewModifySaga(action: any): any {
     yield call(UserReviewModifyAPI, { id: review.id, ...action.payload });
     yield put(UserReviewModifySuccess());
   } catch (error) {
-    yield put(UserReviewModifyFail(error));
+    if (axios.isAxiosError(error)) yield put(UserReviewModifyFail(error));
   }
 }
 

@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios';
 import { ActionsTypes } from 'types/request';
 
 export const CHANGE_PASSWORD_REQUEST = 'CHANGE_PASSWORD_REQUEST';
@@ -62,7 +63,7 @@ export const ChangePasswordSuccess = () => {
   };
 };
 
-export const ChangePasswordFail = (error: any) => {
+export const ChangePasswordFail = (error: AxiosError) => {
   return {
     type: CHANGE_PASSWORD_FAIL,
     error: error.response,

@@ -1,5 +1,5 @@
-import { call, put, throttle } from 'redux-saga/effects';
 import axios from 'axios';
+import { call, put, throttle } from 'redux-saga/effects';
 import { SearchFail, SearchSuccess, SEARCH_REQUEST } from '../reducers/Search';
 
 function SearchAPI(params: any) {
@@ -20,7 +20,7 @@ function* fetchSearchSaga(action: any): any {
     const result = yield call(SearchAPI, action.payload);
     yield put(SearchSuccess(result.data));
   } catch (error) {
-    yield put(SearchFail(error));
+    if (axios.isAxiosError(error)) yield put(SearchFail(error));
   }
 }
 

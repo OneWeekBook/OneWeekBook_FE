@@ -1,6 +1,7 @@
+import axios from 'axios';
 import instance from 'api/axios';
-import { call, put, takeEvery } from 'redux-saga/effects';
 import { ParagraphRequestType } from 'types/request';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import {
   ParagraphFail,
   ParagraphInitFail,
@@ -21,7 +22,7 @@ function* fetchParagraphInitSaga(action: any): any {
     const result = yield call(ParagraphAPI, action.payload);
     yield put(ParagraphInitSuccess(result.data.paragraphs));
   } catch (error) {
-    yield put(ParagraphInitFail(error));
+    if (axios.isAxiosError(error)) yield put(ParagraphInitFail(error));
   }
 }
 
@@ -30,7 +31,7 @@ function* fetchParagraphSaga(action: any): any {
     const result = yield call(ParagraphAPI, action.payload);
     yield put(ParagraphSuccess(result.data.paragraphs));
   } catch (error) {
-    yield put(ParagraphFail(error));
+    if (axios.isAxiosError(error)) yield put(ParagraphFail(error));
   }
 }
 

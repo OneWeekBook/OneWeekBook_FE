@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios';
 import {
   LibraryAddRequestTypes,
   DeleteRequestType,
@@ -134,7 +135,7 @@ export const MyLibrarySuccess = (data: any) => {
   };
 };
 
-export const MyLibraryFail = (error: any) => {
+export const MyLibraryFail = (error: AxiosError) => {
   return {
     type: MY_LIBRARY_FAIL,
     error: error.response,
@@ -154,7 +155,7 @@ export const MyLibraryAddSuccess = () => {
   };
 };
 
-export const MyLibraryAddFail = (error: any) => {
+export const MyLibraryAddFail = (error: AxiosError) => {
   return {
     type: MY_LIBRARY_ADD_FAIL,
     error: error.response,
@@ -177,7 +178,7 @@ export const MyLibraryModifySuccess = () => {
   };
 };
 
-export const MyLibraryModifyFail = (error: any) => {
+export const MyLibraryModifyFail = (error: AxiosError) => {
   return {
     type: MY_LIBRARY_MODIFY_FAIL,
     error: error.response,
@@ -197,7 +198,7 @@ export const MyLibraryDeleteSuccess = () => {
   };
 };
 
-export const MyLibraryDeleteFail = (error: any) => {
+export const MyLibraryDeleteFail = (error: AxiosError) => {
   return {
     type: MY_LIBRARY_DELETE_FAIL,
     error: error.response,

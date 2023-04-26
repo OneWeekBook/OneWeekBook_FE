@@ -1,4 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
+import { ProtectedRouteTypes } from 'types/common';
+import GeneralLayout from 'common';
+import ProtectedRoute from 'common/PrivateRoute';
 import {
   MainPage,
   CategoryPage,
@@ -10,11 +13,9 @@ import {
   UserPage,
   LibraryPage,
 } from 'components/pages';
-import ProtectedRoute, { ProtectedRouteProps } from 'common/PrivateRoute';
-import GeneralLayout from 'common';
 
 function App() {
-  const defaultProtectedRouteProps: Omit<ProtectedRouteProps, 'outlet'> = {
+  const defaultProtectedRouteProps: Omit<ProtectedRouteTypes, 'outlet'> = {
     authenticationPath: '/sign-in',
   };
 

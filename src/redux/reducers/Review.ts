@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios';
 import {
   BookRequestTypes,
   ReviewRequestTypes,
@@ -99,7 +100,7 @@ export const ReviewsSuccess = (data: any) => {
   };
 };
 
-export const ReviewsFail = (error: any) => {
+export const ReviewsFail = (error: AxiosError) => {
   return {
     type: REVIEWS_FAIL,
     error: error.response,
@@ -120,7 +121,7 @@ export const ReviewSuccess = (data: any) => {
   };
 };
 
-export const ReviewFail = (error: any) => {
+export const ReviewFail = (error: AxiosError) => {
   return {
     type: REVIEW_FAIL,
     error: error.response,

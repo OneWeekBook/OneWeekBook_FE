@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios';
 import { ActionsTypes } from 'types/request';
 
 export const CATEGORY_REQUEST = 'CATEGORY_REQUEST';
@@ -49,7 +50,7 @@ export const CategorySuccess = (data: any) => {
   };
 };
 
-export const CategoryFail = (error: any) => {
+export const CategoryFail = (error: AxiosError) => {
   return {
     type: CATEGORY_FAIL,
     error: error.response,

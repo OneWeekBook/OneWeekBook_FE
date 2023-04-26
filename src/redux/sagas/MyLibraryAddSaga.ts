@@ -1,6 +1,7 @@
+import axios from 'axios';
 import instance from 'api/axios';
-import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { LibraryAddRequestTypes } from 'types/request';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 import {
   MyLibraryAddFail,
   MyLibraryAddSuccess,
@@ -17,7 +18,7 @@ function* fetchMyLibraryAddSaga(action: any): any {
     yield call(MyLibraryAddAPI, { userId: user.id, ...action.payload });
     yield put(MyLibraryAddSuccess());
   } catch (error) {
-    yield put(MyLibraryAddFail(error));
+    if (axios.isAxiosError(error)) yield put(MyLibraryAddFail(error));
   }
 }
 

@@ -1,5 +1,5 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import {
   AuthCodeFail,
   AuthCodeSuccess,
@@ -15,7 +15,7 @@ function* fetchAuthCodeSaga(action: any) {
     yield call(AuthCodeAPI, action.payload);
     yield put(AuthCodeSuccess());
   } catch (error) {
-    yield put(AuthCodeFail(error));
+    if (axios.isAxiosError(error)) yield put(AuthCodeFail(error));
   }
 }
 

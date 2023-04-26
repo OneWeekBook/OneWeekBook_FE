@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios';
 import { SignUpRequestTypes, ActionsTypes } from 'types/request';
 
 export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
@@ -60,7 +61,7 @@ export const SignUpSuccess = (data: any) => {
   };
 };
 
-export const SignUpFail = (error: any) => {
+export const SignUpFail = (error: AxiosError) => {
   return {
     type: SIGN_UP_FAIL,
     error: error.response,

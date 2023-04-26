@@ -1,6 +1,6 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 import { SignUpRequestTypes } from 'types/request';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import { SignUpFail, SignUpSuccess, SIGN_UP_REQUEST } from '../reducers/SignUp';
 
 function SignUpAPI(data: SignUpRequestTypes) {
@@ -12,7 +12,7 @@ function* fetchSignUpSaga(action: any): any {
     const result = yield call(SignUpAPI, action.payload);
     yield put(SignUpSuccess(result));
   } catch (error) {
-    yield put(SignUpFail(error));
+    if (axios.isAxiosError(error)) yield put(SignUpFail(error));
   }
 }
 

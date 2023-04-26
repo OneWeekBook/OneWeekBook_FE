@@ -1,3 +1,4 @@
+import axios from 'axios';
 import instance from 'api/axios';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import {
@@ -29,7 +30,7 @@ function* fetchAuthUserSaga(): any {
     };
     yield put(AuthUserSuccess(result));
   } catch (error) {
-    yield put(AuthUserFail(error));
+    if (axios.isAxiosError(error)) yield put(AuthUserFail(error));
   }
 }
 

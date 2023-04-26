@@ -1,6 +1,7 @@
+import axios from 'axios';
 import instance from 'api/axios';
-import { call, put, takeEvery } from 'redux-saga/effects';
 import { DeleteRequestType } from 'types/request';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import {
   ParagraphDeleteFail,
   ParagraphDeleteSuccess,
@@ -18,7 +19,7 @@ function* fetchParagraphDeleteSaga(action: any) {
     yield call(ParagraphDeleteAPI, action.payload);
     yield put(ParagraphDeleteSuccess());
   } catch (error) {
-    yield put(ParagraphDeleteFail(error));
+    if (axios.isAxiosError(error)) yield put(ParagraphDeleteFail(error));
   }
 }
 

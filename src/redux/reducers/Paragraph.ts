@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios';
 import {
   DeleteRequestType,
   ParagraphAddRequestTypes,
@@ -136,7 +137,7 @@ export const ParagraphInitSuccess = (data: any) => {
   };
 };
 
-export const ParagraphInitFail = (error: any) => {
+export const ParagraphInitFail = (error: AxiosError) => {
   return {
     type: PARAGRAPH_INIT_FAIL,
     error: error.response,
@@ -157,7 +158,7 @@ export const ParagraphSuccess = (data: any) => {
   };
 };
 
-export const ParagraphFail = (error: any) => {
+export const ParagraphFail = (error: AxiosError) => {
   return {
     type: PARAGRAPH_FAIL,
     error: error.response,
@@ -177,7 +178,7 @@ export const ParagraphAddSuccess = () => {
   };
 };
 
-export const ParagraphAddFail = (error: any) => {
+export const ParagraphAddFail = (error: AxiosError) => {
   return {
     type: PARAGRAPH_ADD_FAIL,
     error: error.response,
@@ -197,7 +198,7 @@ export const ParagraphDeleteSuccess = () => {
   };
 };
 
-export const ParagraphDeleteFail = (error: any) => {
+export const ParagraphDeleteFail = (error: AxiosError) => {
   return {
     type: PARAGRAPH_DELETE_FAIL,
     error: error.response,

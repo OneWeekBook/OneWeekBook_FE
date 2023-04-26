@@ -1,3 +1,4 @@
+import axios from 'axios';
 import instance from 'api/axios';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import {
@@ -16,7 +17,7 @@ function* fetchChangePasswordSaga(action: any): any {
     yield call(ChangePasswordAPI, { email: user.email, ...action.payload });
     yield put(ChangePasswordSuccess());
   } catch (error) {
-    yield put(ChangePasswordFail(error));
+    if (axios.isAxiosError(error)) yield put(ChangePasswordFail(error));
   }
 }
 

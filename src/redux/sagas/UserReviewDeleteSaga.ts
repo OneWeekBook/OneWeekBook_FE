@@ -1,6 +1,7 @@
+import axios from 'axios';
 import instance from 'api/axios';
-import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { DeleteRequestType } from 'types/request';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 import {
   UserReviewDeleteFail,
   UserReviewDeleteSuccess,
@@ -17,7 +18,7 @@ function* fetchUserReviewDeleteSaga(): any {
     yield call(UserReviewDeleteAPI, { id: review.id });
     yield put(UserReviewDeleteSuccess());
   } catch (error) {
-    yield put(UserReviewDeleteFail(error));
+    if (axios.isAxiosError(error)) yield put(UserReviewDeleteFail(error));
   }
 }
 

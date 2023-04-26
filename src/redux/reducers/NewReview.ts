@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios';
 import { ActionsTypes } from 'types/request';
 
 export const NEW_REVIEWS_REQUEST = 'NEW_REVIEWS_REQUEST';
@@ -53,7 +54,7 @@ export const NewReviewsSuccess = (data: any) => {
   };
 };
 
-export const NewReviewsFail = (error: any) => {
+export const NewReviewsFail = (error: AxiosError) => {
   return {
     type: NEW_REVIEWS_FAIL,
     error: error.response,

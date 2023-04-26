@@ -1,5 +1,6 @@
-import { call, put, select, takeEvery } from 'redux-saga/effects';
+import axios from 'axios';
 import instance from 'api/axios';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 import {
   LikeAddFail,
   LikeAddSuccess,
@@ -20,7 +21,7 @@ function* fetchLikeAddSaga(action: any): any {
     yield call(LikeAddAPI, { userId: user.id, ...action.payload });
     yield put(LikeAddSuccess());
   } catch (error) {
-    yield put(LikeAddFail(error));
+    if (axios.isAxiosError(error)) yield put(LikeAddFail(error));
   }
 }
 

@@ -1,7 +1,7 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
-import { SignInRequestTypes } from 'types/request';
 import axios from 'axios';
 import instance from 'api/axios';
+import { SignInRequestTypes } from 'types/request';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import { SignInFail, SignInSuccess, SIGN_IN_REQUEST } from '../reducers/SignIn';
 
 function SignInAPI(data: SignInRequestTypes) {
@@ -15,7 +15,7 @@ function* fetchSignInSaga(action: any): any {
     sessionStorage.setItem('accessToken', result.data.accessToken);
     instance.defaults.headers.common.Authorization = result.data.accessToken;
   } catch (error) {
-    yield put(SignInFail(error));
+    if (axios.isAxiosError(error)) yield put(SignInFail(error));
   }
 }
 

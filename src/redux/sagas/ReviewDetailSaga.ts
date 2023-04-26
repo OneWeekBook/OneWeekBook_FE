@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { call, put, throttle } from 'redux-saga/effects';
 import { BookRequestTypes } from 'types/request';
+import { call, put, throttle } from 'redux-saga/effects';
 import { ReviewFail, ReviewSuccess, REVIEW_REQUEST } from '../reducers/Review';
 
 function ReviewDetailAPI(params: BookRequestTypes) {
@@ -14,7 +14,7 @@ function* fetchReviewDetailSaga(action: any): any {
     const result = yield call(ReviewDetailAPI, action.payload);
     yield put(ReviewSuccess(result.data));
   } catch (error) {
-    yield put(ReviewFail(error));
+    if (axios.isAxiosError(error)) yield put(ReviewFail(error));
   }
 }
 

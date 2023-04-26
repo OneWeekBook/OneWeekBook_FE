@@ -1,3 +1,4 @@
+import axios from 'axios';
 import instance from 'api/axios';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import {
@@ -21,7 +22,7 @@ export function* fetchMyLibrarySaga(action: any): any {
     });
     yield put(MyLibrarySuccess(result.data.myList));
   } catch (error) {
-    yield put(MyLibraryFail(error));
+    if (axios.isAxiosError(error)) yield put(MyLibraryFail(error));
   }
 }
 

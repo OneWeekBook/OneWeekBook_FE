@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios';
 import { SignInRequestTypes, ActionsTypes } from 'types/request';
 
 export const SIGN_IN_REQUEST = 'SIGN_IN_REQUEST';
@@ -60,7 +61,7 @@ export const SignInSuccess = (data: any) => {
   };
 };
 
-export const SignInFail = (error: any) => {
+export const SignInFail = (error: AxiosError) => {
   return {
     type: SIGN_IN_FAIL,
     error: error.response,

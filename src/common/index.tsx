@@ -11,7 +11,7 @@ import Footer from './Footer';
 import Header from './Header';
 import Sidebar from './Sidebar';
 
-function Index({ children }: PropsWithChildren<any>) {
+function Index({ children }: PropsWithChildren) {
   const location = useLocation();
   const dispatch = useDispatch();
   const [toggle, handleToggle] = useToggle(false);

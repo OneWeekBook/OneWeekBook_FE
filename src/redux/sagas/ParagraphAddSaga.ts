@@ -1,6 +1,7 @@
+import axios from 'axios';
 import instance from 'api/axios';
-import { call, put, takeEvery } from 'redux-saga/effects';
 import { ParagraphAddRequestTypes } from 'types/request';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import {
   ParagraphAddFail,
   ParagraphAddSuccess,
@@ -19,7 +20,7 @@ function* fetchParagraphAddSaga(action: any) {
     yield call(ParagraphAddAPI, action.payload);
     yield put(ParagraphAddSuccess());
   } catch (error) {
-    yield put(ParagraphAddFail(error));
+    if (axios.isAxiosError(error)) yield put(ParagraphAddFail(error));
   }
 }
 
