@@ -1,21 +1,17 @@
+import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { SidebarTypes } from 'types/common';
 import { AuthInit } from 'redux/reducers/AuthUser';
 import { Toast } from 'utils/Toast';
 import useToggle from 'hooks/useToggle';
 import useAuthLink from 'hooks/useAuthLink';
 import NoticeModal from 'common/DefaultModal';
-import { useEffect } from 'react';
 import { NavItems } from 'contain/mainmenu';
 import SideBarLink from 'components/atoms/links/SideBarLink';
 
-type PropsTypes = {
-  toggle: boolean;
-  handleToggle: () => void;
-};
-
-function Sidebar({ toggle, handleToggle }: PropsTypes) {
+function Sidebar({ toggle, handleToggle }: SidebarTypes) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();

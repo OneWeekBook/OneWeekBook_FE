@@ -1,14 +1,10 @@
 import { Navigate } from 'react-router-dom';
-
-export type ProtectedRouteProps = {
-  authenticationPath: string;
-  outlet: JSX.Element;
-};
+import { ProtectedRouteTypes } from 'types/common';
 
 export default function ProtectedRoute({
   authenticationPath,
   outlet,
-}: ProtectedRouteProps) {
+}: ProtectedRouteTypes) {
   if (sessionStorage.getItem('accessToken')) {
     return outlet;
   }

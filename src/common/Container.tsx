@@ -1,16 +1,6 @@
-import {
-  ElementType,
-  HTMLAttributes,
-  PropsWithChildren,
-  Suspense,
-} from 'react';
+import { HTMLAttributes, PropsWithChildren, Suspense } from 'react';
 import styled from 'styled-components';
-
-type ContainerTypes = {
-  pc?: boolean;
-  mobile?: boolean;
-  as?: ElementType;
-};
+import { ContainerTypes } from 'types/common';
 
 function Container({
   pc,
