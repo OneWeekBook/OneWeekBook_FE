@@ -5,7 +5,7 @@ import { AppStateType } from 'redux/reducers';
 import { RemoveUserModalType } from 'types/page';
 import { RemoveUserInit, RemoveUserRequest } from 'redux/reducers/RemoveUser';
 import useInput from 'hooks/useInput';
-import { Toast } from 'utils/Toast';
+import { showToast } from 'common/Toast';
 import DefaultModal from 'common/DefaultModal';
 import ErrorText from 'components/atoms/texts/ErrorText';
 import DefaultText from 'components/atoms/texts/DefaultText';
@@ -29,7 +29,7 @@ function RemoveUserModal({ removeToggleIsOn }: RemoveUserModalType) {
     if (removeErrorStatus === 200) {
       sessionStorage.removeItem('accessToken');
       removeToggleIsOn();
-      Toast('info', '회원탈퇴가 정상적으로 처리되었습니다.');
+      showToast('info', '회원탈퇴가 정상적으로 처리되었습니다.');
       navigate('/');
     } else if (removeErrorStatus === 400) {
       setIsError(true);

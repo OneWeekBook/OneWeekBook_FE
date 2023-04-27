@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { SidebarTypes } from 'types/common';
 import { AuthInit } from 'redux/reducers/AuthUser';
-import { Toast } from 'utils/Toast';
+import { showToast } from 'common/Toast';
 import useToggle from 'hooks/useToggle';
 import useAuthLink from 'hooks/useAuthLink';
 import NoticeModal from 'common/DefaultModal';
@@ -26,7 +26,7 @@ function Sidebar({ toggle, handleToggle }: SidebarTypes) {
   const logoutClick = () => {
     sessionStorage.removeItem('accessToken');
     dispatch(AuthInit());
-    Toast('info', '로그아웃 되었습니다.');
+    showToast('info', '로그아웃 되었습니다.');
     navigate('/', { replace: true });
     handleToggle();
   };

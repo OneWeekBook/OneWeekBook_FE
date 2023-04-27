@@ -11,7 +11,7 @@ import {
   UserReviewModifyRequest,
 } from 'redux/reducers/UserReview';
 import { SetStartDate } from 'utils/SetDate';
-import { Toast } from 'utils/Toast';
+import { showToast } from 'common/Toast';
 import WriteModal from 'common/DefaultModal';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import DefaultText from 'components/atoms/texts/DefaultText';
@@ -33,7 +33,7 @@ function WriteReviewModal({ bookData, toggleIsOn }: WriteReviewTypes) {
     review: string,
   ) => {
     if (review === '') {
-      Toast('warning', '리뷰를 남겨주세요...');
+      showToast('warning', '리뷰를 남겨주세요...');
     } else {
       dispatch(UserReviewAddRequest({ bookId, review, rating: recommend }));
     }
@@ -41,7 +41,7 @@ function WriteReviewModal({ bookData, toggleIsOn }: WriteReviewTypes) {
 
   const modifyReviewClick = (recommend: number, review: string) => {
     if (review === '') {
-      Toast('warning', '리뷰를 남겨주세요...');
+      showToast('warning', '리뷰를 남겨주세요...');
     } else {
       dispatch(UserReviewModifyRequest({ review, rating: recommend }));
     }

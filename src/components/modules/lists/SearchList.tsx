@@ -7,7 +7,7 @@ import { BookResponseTypes } from 'types/response';
 import { AppStateType } from 'redux/reducers';
 import { MyLibraryAddRequest } from 'redux/reducers/MyLibrary';
 import { searchDone } from 'redux/reducers/Func';
-import { Toast } from 'utils/Toast';
+import { showToast } from 'common/Toast';
 import DefaultText from 'components/atoms/texts/DefaultText';
 import LoadingForm from 'components/modules/commons/LoadingForm';
 import SearchBookCard from 'components/modules/cards/SearchBookCard';
@@ -25,7 +25,7 @@ function SearchList() {
   );
 
   useEffect(() => {
-    if (isAddSuccess) Toast('success', '내 서재에 추가완료~');
+    if (isAddSuccess) showToast('success', '내 서재에 추가완료~');
   }, [isAddSuccess]);
 
   useEffect(() => {

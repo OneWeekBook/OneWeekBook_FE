@@ -4,8 +4,8 @@ import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import configureStore from 'redux/store';
 import Theme from 'styles/theme';
-import { ToastContainer } from 'react-toastify';
 import GlobalStyles from 'styles/globalStyle';
+import Toast from 'common/Toast';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'react-toastify/dist/ReactToastify.css';
@@ -23,7 +23,7 @@ root.render(
       <ThemeProvider theme={Theme}>
         <GlobalStyles />
         <App />
-        <ToastContainer />
+        <Toast />
       </ThemeProvider>
     </Provider>
   </BrowserRouter>,

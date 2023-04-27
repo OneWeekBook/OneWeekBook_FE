@@ -8,7 +8,7 @@ import { BooksListType } from 'types/module';
 import { AppStateType } from 'redux/reducers';
 import { MyLibraryAddRequest } from 'redux/reducers/MyLibrary';
 import { SearchInit, SearchRequest } from 'redux/reducers/Search';
-import { Toast } from 'utils/Toast';
+import { showToast } from 'common/Toast';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
 import SearchBookCard from 'components/modules/cards/SearchBookCard';
 import LoadingForm from 'components/modules/commons/LoadingForm';
@@ -73,7 +73,7 @@ function BooksList({ searchArr }: BooksListType) {
   }, []);
 
   useEffect(() => {
-    if (isAddSuccess) Toast('success', '내 서재에 추가완료~');
+    if (isAddSuccess) showToast('success', '내 서재에 추가완료~');
   }, [isAddSuccess]);
 
   return (

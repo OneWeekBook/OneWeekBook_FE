@@ -9,7 +9,7 @@ import {
 } from 'redux/reducers/ChangePassword';
 import useInput from 'hooks/useInput';
 import { passwordRegex } from 'utils/Regex';
-import { Toast } from 'utils/Toast';
+import { showToast } from 'common/Toast';
 import ChangeModal from 'common/DefaultModal';
 import ErrorText from 'components/atoms/texts/ErrorText';
 import InputForm from 'components/modules/forms/InputForm';
@@ -44,7 +44,7 @@ function ChangePassModal({ passToggleIsOn }: ChangePassModalType) {
       setError('오류 관리자에게 문의해주세요.');
     else if (changeErrorStatus === 200) {
       dispatch(ChangePasswordInit());
-      Toast('success', '비밀번호 변경 성공!');
+      showToast('success', '비밀번호 변경 성공!');
       passToggleIsOn();
     }
     return () => {

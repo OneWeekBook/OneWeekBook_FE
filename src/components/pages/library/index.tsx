@@ -8,7 +8,7 @@ import {
   MyLibraryModifyRequest,
   MyLibraryRequest,
 } from 'redux/reducers/MyLibrary';
-import { Toast } from 'utils/Toast';
+import { showToast } from 'common/Toast';
 import useToggle from 'hooks/useToggle';
 import Container from 'common/Container';
 import DefaultModal from 'common/DefaultModal';
@@ -65,10 +65,10 @@ function Index() {
   }, [isDeleteSuccess]);
 
   useEffect(() => {
-    if (itemAddSuccess) Toast('success', '작성 완료');
-    else if (itemModifySuccess) Toast('info', '수정 완료!');
-    else if (itemDeleteSuccess) Toast('info', '삭제 완료!');
-    else if (isDeleteSuccess) Toast('success', '해당 책을 삭제했습니다!');
+    if (itemAddSuccess) showToast('success', '작성 완료');
+    else if (itemModifySuccess) showToast('info', '수정 완료!');
+    else if (itemDeleteSuccess) showToast('info', '삭제 완료!');
+    else if (isDeleteSuccess) showToast('success', '해당 책을 삭제했습니다!');
   }, [itemAddSuccess, itemModifySuccess, itemDeleteSuccess, isDeleteSuccess]);
 
   useEffect(() => {

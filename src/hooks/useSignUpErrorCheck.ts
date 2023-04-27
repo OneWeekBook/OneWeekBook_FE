@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Toast } from 'utils/Toast';
+import { showToast } from 'common/Toast';
 
 export function useSignUpErrorCheck(): {
   handleSignUpError: (
@@ -15,7 +15,7 @@ export function useSignUpErrorCheck(): {
   ) => {
     switch (type) {
       case 200:
-        Toast('success', '회원가입 완료, 로그인을 진행해주세요.');
+        showToast('success', '회원가입 완료, 로그인을 진행해주세요.');
         navigate('/sign-in');
         error(false);
         break;

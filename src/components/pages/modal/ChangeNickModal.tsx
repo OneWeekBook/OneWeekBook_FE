@@ -4,7 +4,7 @@ import { AppStateType } from 'redux/reducers';
 import { ChangeNickModalType } from 'types/page';
 import { ChangeNickInit, ChangeNickRequest } from 'redux/reducers/ChangeNick';
 import { userToggle } from 'redux/reducers/Func';
-import { Toast } from 'utils/Toast';
+import { showToast } from 'common/Toast';
 import useInput from 'hooks/useInput';
 import ChangeModal from 'common/DefaultModal';
 import InputForm from 'components/modules/forms/InputForm';
@@ -23,7 +23,7 @@ function ChangeNickModal({ nickToggleIsOn }: ChangeNickModalType) {
   const handleChangeNick = useCallback(() => {
     if (changeErrorStatus === 200) {
       dispatch(userToggle());
-      Toast('success', '닉네임 변경 성공!');
+      showToast('success', '닉네임 변경 성공!');
       nickToggleIsOn();
     }
   }, [changeErrorStatus]);
