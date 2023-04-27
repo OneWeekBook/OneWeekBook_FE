@@ -13,7 +13,10 @@ export function MyLibraryAPI(params: { userId: number; progress: number }) {
   );
 }
 
-export function* fetchMyLibrarySaga(action: any): any {
+export function* fetchMyLibrarySaga(action: {
+  type: string;
+  payload: { progress: number };
+}): object {
   try {
     const user = yield select((state) => state.authUser.user);
     const result = yield call(MyLibraryAPI, {

@@ -11,7 +11,10 @@ function UserReviewAPI(data: { userId: number; bookId: number }) {
   return instance.get(`/book/reviews/${data.bookId}/${data.userId}`);
 }
 
-function* fetchUserReviewSaga(action: any): any {
+function* fetchUserReviewSaga(action: {
+  type: string;
+  payload: { bookId: number };
+}): object {
   try {
     const user = yield select((state) => state.authUser.user);
     const result = yield call(UserReviewAPI, {

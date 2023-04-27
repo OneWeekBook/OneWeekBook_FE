@@ -11,7 +11,10 @@ function ChangePasswordAPI(data: { email: string; password: string }) {
   return instance.put('/user/password', data);
 }
 
-function* fetchChangePasswordSaga(action: any): any {
+function* fetchChangePasswordSaga(action: {
+  type: string;
+  payload: { password: string };
+}): object {
   try {
     const user = yield select((state) => state.authUser.user);
     yield call(ChangePasswordAPI, { email: user.email, ...action.payload });

@@ -17,7 +17,10 @@ function ParagraphAPI(params: ParagraphRequestType) {
   );
 }
 
-function* fetchParagraphInitSaga(action: any): any {
+function* fetchParagraphInitSaga(action: {
+  type: string;
+  payload: ParagraphRequestType;
+}): object {
   try {
     const result = yield call(ParagraphAPI, action.payload);
     yield put(ParagraphInitSuccess(result.data.paragraphs));
@@ -26,7 +29,10 @@ function* fetchParagraphInitSaga(action: any): any {
   }
 }
 
-function* fetchParagraphSaga(action: any): any {
+function* fetchParagraphSaga(action: {
+  type: string;
+  payload: ParagraphRequestType;
+}): object {
   try {
     const result = yield call(ParagraphAPI, action.payload);
     yield put(ParagraphSuccess(result.data.paragraphs));

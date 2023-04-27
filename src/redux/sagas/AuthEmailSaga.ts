@@ -10,7 +10,10 @@ function AuthEmailAPI(data: { email: string }) {
   return axios.post(`${process.env.REACT_APP_BASIC_URL}/auth/code`, data);
 }
 
-function* fetchAuthEmailSaga(action: any): any {
+function* fetchAuthEmailSaga(action: {
+  type: string;
+  payload: { email: string };
+}): any {
   try {
     yield call(AuthEmailAPI, action.payload);
     yield put(AuthEmailSuccess());

@@ -13,7 +13,10 @@ function UserReviewAddAPI(data: ReviewAddRequestTypes) {
   return instance.post(`/book/reviews/${bookId}`, { review, rating });
 }
 
-function* fetchUserReviewAddSaga(action: any) {
+function* fetchUserReviewAddSaga(action: {
+  type: string;
+  payload: ReviewAddRequestTypes;
+}) {
   try {
     yield call(UserReviewAddAPI, action.payload);
     yield put(UserReviewAddSuccess());

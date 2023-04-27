@@ -15,7 +15,10 @@ function ParagraphAddAPI(data: ParagraphAddRequestTypes) {
   );
 }
 
-function* fetchParagraphAddSaga(action: any) {
+function* fetchParagraphAddSaga(action: {
+  type: string;
+  payload: ParagraphAddRequestTypes;
+}) {
   try {
     yield call(ParagraphAddAPI, action.payload);
     yield put(ParagraphAddSuccess());

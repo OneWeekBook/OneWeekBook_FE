@@ -17,7 +17,7 @@ function UserLibraryAPI(params: { userId: number; progress: number }) {
   );
 }
 
-function* fetchAuthUserSaga(): any {
+function* fetchAuthUserSaga(): object {
   try {
     const userData = yield call(AuthUserAPI);
     const bookData = yield call(UserLibraryAPI, {

@@ -11,7 +11,10 @@ function RemoveUserAPI(data: { id: number; password: string }) {
   return instance.post('/user/resign', data);
 }
 
-function* fetchRemoveUserSaga(action: any): any {
+function* fetchRemoveUserSaga(action: {
+  type: string;
+  payload: { password: string };
+}): object {
   try {
     const user = yield select((state) => state.authUser.user);
     yield call(RemoveUserAPI, { id: user.id, ...action.payload });

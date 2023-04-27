@@ -16,6 +16,13 @@ export interface SignUpRequestTypes {
   nick: string;
 }
 
+export interface SearchRequestTypes {
+  d_categ?: string;
+  title?: string;
+  start: number;
+  display: number;
+}
+
 export interface LibraryAddRequestTypes {
   isbn: string;
   title: string;

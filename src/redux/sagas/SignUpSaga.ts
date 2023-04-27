@@ -7,7 +7,10 @@ function SignUpAPI(data: SignUpRequestTypes) {
   return axios.post(`${process.env.REACT_APP_BASIC_URL}/user/register`, data);
 }
 
-function* fetchSignUpSaga(action: any): any {
+function* fetchSignUpSaga(action: {
+  type: string;
+  payload: SignUpRequestTypes;
+}): object {
   try {
     const result = yield call(SignUpAPI, action.payload);
     yield put(SignUpSuccess(result));

@@ -9,7 +9,10 @@ function LikeAPI(params: { bookId: number }) {
   );
 }
 
-function* fetchLikeSaga(action: any): any {
+function* fetchLikeSaga(action: {
+  type: string;
+  payload: { bookId: number };
+}): object {
   try {
     const result = yield call(LikeAPI, action.payload);
     yield put(LikeSuccess(result.data));

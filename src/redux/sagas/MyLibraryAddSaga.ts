@@ -12,7 +12,10 @@ function MyLibraryAddAPI(data: { userId: number & LibraryAddRequestTypes }) {
   return instance.post(`${process.env.REACT_APP_BASIC_URL}/book/mylist`, data);
 }
 
-function* fetchMyLibraryAddSaga(action: any): any {
+function* fetchMyLibraryAddSaga(action: {
+  type: string;
+  payload: LibraryAddRequestTypes;
+}): object {
   try {
     const user = yield select((state) => state.authUser.user);
     yield call(MyLibraryAddAPI, { userId: user.id, ...action.payload });

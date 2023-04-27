@@ -12,7 +12,7 @@ function UserReviewDeleteAPI(data: DeleteRequestType) {
   return instance.delete(`/book/reviews/${data.id}`);
 }
 
-function* fetchUserReviewDeleteSaga(): any {
+function* fetchUserReviewDeleteSaga(): object {
   try {
     const review = yield select((state) => state.userReview.reviewItem);
     yield call(UserReviewDeleteAPI, { id: review.id });

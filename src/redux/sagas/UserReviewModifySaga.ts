@@ -16,7 +16,10 @@ function UserReviewModifyAPI(data: {
   return instance.put(`/book/reviews/${id}`, { review, rating });
 }
 
-function* fetchUserReviewModifySaga(action: any): any {
+function* fetchUserReviewModifySaga(action: {
+  type: string;
+  payload: { review: string; rating: number };
+}): object {
   try {
     const review = yield select((state) => state.userReview.reviewItem);
     yield call(UserReviewModifyAPI, { id: review.id, ...action.payload });

@@ -10,7 +10,10 @@ function AuthCodeAPI(data: { code: string }) {
   return axios.post(`${process.env.REACT_APP_BASIC_URL}/auth/email`, data);
 }
 
-function* fetchAuthCodeSaga(action: any) {
+function* fetchAuthCodeSaga(action: {
+  type: string;
+  payload: { code: string };
+}) {
   try {
     yield call(AuthCodeAPI, action.payload);
     yield put(AuthCodeSuccess());

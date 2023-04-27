@@ -9,7 +9,10 @@ function ReviewDetailAPI(params: BookRequestTypes) {
   );
 }
 
-function* fetchReviewDetailSaga(action: any): any {
+function* fetchReviewDetailSaga(action: {
+  type: string;
+  payload: BookRequestTypes;
+}): object {
   try {
     const result = yield call(ReviewDetailAPI, action.payload);
     yield put(ReviewSuccess(result.data));

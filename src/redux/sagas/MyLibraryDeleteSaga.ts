@@ -13,7 +13,10 @@ function MyLibraryDeleteAPI(params: { id: number }) {
   );
 }
 
-function* fetchMyLibraryDeleteSaga(action: any) {
+function* fetchMyLibraryDeleteSaga(action: {
+  type: string;
+  payload: { id: number };
+}) {
   try {
     yield call(MyLibraryDeleteAPI, action.payload);
     yield put(MyLibraryDeleteSuccess());

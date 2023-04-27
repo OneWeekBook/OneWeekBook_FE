@@ -15,7 +15,10 @@ function LikeAddAPI(params: { bookId: number; state: number; userId: number }) {
   );
 }
 
-function* fetchLikeAddSaga(action: any): any {
+function* fetchLikeAddSaga(action: {
+  type: string;
+  payload: { bookId: number; state: number };
+}): object {
   try {
     const user = yield select((state) => state.authUser.user);
     yield call(LikeAddAPI, { userId: user.id, ...action.payload });

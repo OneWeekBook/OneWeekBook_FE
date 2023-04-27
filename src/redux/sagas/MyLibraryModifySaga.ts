@@ -15,7 +15,10 @@ function MyLibraryModifyAPI(data: {
   return instance.put(`${process.env.REACT_APP_BASIC_URL}/book/mylist`, data);
 }
 
-function* fetchMyLibraryModifySaga(action: any): any {
+function* fetchMyLibraryModifySaga(action: {
+  type: string;
+  payload: { progress: number; isbn: string };
+}): object {
   try {
     const user = yield select((state) => state.authUser.user);
     yield call(MyLibraryModifyAPI, { userId: user.id, ...action.payload });

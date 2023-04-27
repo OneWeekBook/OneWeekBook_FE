@@ -11,7 +11,10 @@ function ChangeNickAPI(data: { nick: string; id: number }) {
   return instance.put('/user/nick', data);
 }
 
-function* fetchChangeNickSaga(action: any): any {
+function* fetchChangeNickSaga(action: {
+  type: string;
+  payload: { nick: string };
+}): object {
   try {
     const user = yield select((state) => state.authUser.user);
     yield call(ChangeNickAPI, { id: user.id, ...action.payload });

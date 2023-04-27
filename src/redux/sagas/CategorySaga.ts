@@ -10,7 +10,7 @@ function CategoryAPI() {
   return axios.get(`${process.env.REACT_APP_BASIC_URL}/book/categories`);
 }
 
-function* fetchCategorySaga(): any {
+function* fetchCategorySaga(): object {
   try {
     const result = yield call(CategoryAPI);
     yield put(CategorySuccess(result.data));

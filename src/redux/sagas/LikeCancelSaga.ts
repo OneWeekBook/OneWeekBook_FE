@@ -15,7 +15,10 @@ function LikeCancelAPI(data: { userId: number; bookId: number }) {
   );
 }
 
-function* fetchLikeCancelSaga(action: any): any {
+function* fetchLikeCancelSaga(action: {
+  type: string;
+  payload: { bookId: number };
+}): object {
   try {
     const user = yield select((state) => state.authUser.user);
     yield call(LikeCancelAPI, { userId: user.id, ...action.payload });

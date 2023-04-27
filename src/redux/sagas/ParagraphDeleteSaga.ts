@@ -14,7 +14,10 @@ function ParagraphDeleteAPI(data: DeleteRequestType) {
   );
 }
 
-function* fetchParagraphDeleteSaga(action: any) {
+function* fetchParagraphDeleteSaga(action: {
+  type: string;
+  payload: DeleteRequestType;
+}) {
   try {
     yield call(ParagraphDeleteAPI, action.payload);
     yield put(ParagraphDeleteSuccess());

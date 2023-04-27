@@ -13,7 +13,10 @@ function ReviewAPI(params: ReviewRequestTypes) {
   );
 }
 
-function* fetchReviewSaga(action: any): any {
+function* fetchReviewSaga(action: {
+  type: string;
+  payload: ReviewRequestTypes;
+}): object {
   try {
     const result = yield call(ReviewAPI, action.payload);
     yield put(ReviewsSuccess(result.data));

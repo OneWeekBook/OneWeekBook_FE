@@ -8,7 +8,10 @@ function SignInAPI(data: SignInRequestTypes) {
   return axios.post(`${process.env.REACT_APP_BASIC_URL}/user/login`, data);
 }
 
-function* fetchSignInSaga(action: any): any {
+function* fetchSignInSaga(action: {
+  type: string;
+  payload: SignInRequestTypes;
+}): object {
   try {
     const result = yield call(SignInAPI, action.payload);
     yield put(SignInSuccess(result.data));
