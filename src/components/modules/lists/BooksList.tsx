@@ -42,16 +42,10 @@ function BooksList({ searchArr }: BooksListType) {
 
     if (searchArr.length === 3) {
       options.d_categ = searchArr[1].toString();
-      options.title = searchArr[2].toString();
-    } else if (
-      searchArr.length === 2 &&
-      /^-?\d+$/.test(searchArr[1].toString())
-    ) {
-      options.d_categ = searchArr[1].toString();
-      options.title = searchArr[1].toString();
+      options.title = searchArr[2].split('/')[0].toString();
     } else if (searchArr.length === 2) {
       options.d_categ = searchArr[0].toString();
-      options.title = searchArr[1].toString();
+      options.title = searchArr[1].split('/')[0].toString();
     } else {
       options.title = searchArr[0].toString();
     }

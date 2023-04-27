@@ -50,8 +50,10 @@ function SearchBookForm({
       } else {
         options.title = search;
       }
-      dispatch(SearchInit());
-      dispatch(SearchRequest({ ...options }));
+      if (options.d_categ || options.title) {
+        dispatch(SearchInit());
+        dispatch(SearchRequest({ ...options }));
+      }
     },
     [search, curSubCategory, curParentCategory],
   );
@@ -63,17 +65,15 @@ function SearchBookForm({
       );
     } else if (curSubCategory[0].categoryId) {
       navigate(
-        `/category/result?${curParentCategory[0].categoryName}=${
-          curParentCategory[0].categoryId
-        }&${curSubCategory[0].categoryName}=${
-          curSubCategory[0].categoryId
-        }&search=${curSubCategory[0].categoryName?.split('/')[0]}`,
+        `/category/result?${curParentCategory[0].categoryName}=${curParentCategory[0].categoryId}&${curSubCategory[0].categoryName}=${curSubCategory[0].categoryId}&search=${curSubCategory[0].categoryName}`,
+      );
+    } else if (curParentCategory[0].categoryId && search) {
+      navigate(
+        `/category/result?${curParentCategory[0].categoryName}=${curParentCategory[0].categoryId}&search=${search}`,
       );
     } else if (curParentCategory[0].categoryId) {
       navigate(
-        `/category/result?${curParentCategory[0].categoryName}=${
-          curParentCategory[0].categoryId
-        }&search=${curParentCategory[0].categoryName?.split('/')[0]}`,
+        `/category/result?${curParentCategory[0].categoryName}=${curParentCategory[0].categoryId}&search=${curParentCategory[0].categoryName}`,
       );
     } else {
       navigate(`/category/result?&search=${search}`);
