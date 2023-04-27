@@ -1,5 +1,6 @@
 import { AxiosError } from 'axios';
 import { SignInRequestTypes, ActionsTypes } from 'types/request';
+import { ResponseSignInSuccess } from 'types/response';
 
 export const SIGN_IN_REQUEST = 'SIGN_IN_REQUEST';
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
@@ -54,7 +55,7 @@ export const SignInRequest = (data: SignInRequestTypes) => {
   };
 };
 
-export const SignInSuccess = (data: any) => {
+export const SignInSuccess = (data: ResponseSignInSuccess) => {
   return {
     type: SIGN_IN_SUCCESS,
     payload: data,

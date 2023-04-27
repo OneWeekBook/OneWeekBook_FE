@@ -1,5 +1,6 @@
 import { AxiosError } from 'axios';
 import { ActionsTypes } from 'types/request';
+import { ResponseFavoriteSuccess } from 'types/response';
 
 export const LIKE_REQUEST = 'LIKE_REQUEST';
 export const LIKE_SUCCESS = 'LIKE_SUCCESS';
@@ -108,7 +109,7 @@ export const LikeRequest = (data: { bookId: number }) => {
   };
 };
 
-export const LikeSuccess = (data: any) => {
+export const LikeSuccess = (data: ResponseFavoriteSuccess) => {
   return {
     type: LIKE_SUCCESS,
     payload: data,

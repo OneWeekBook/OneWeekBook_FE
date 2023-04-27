@@ -1,5 +1,6 @@
 import { AxiosError } from 'axios';
 import { ActionsTypes } from 'types/request';
+import { ResponseCategorySuccess } from 'types/response';
 
 export const CATEGORY_REQUEST = 'CATEGORY_REQUEST';
 export const CATEGORY_SUCCESS = 'CATEGORY_SUCCESS';
@@ -43,7 +44,7 @@ export const CategoryRequest = () => {
   };
 };
 
-export const CategorySuccess = (data: any) => {
+export const CategorySuccess = (data: ResponseCategorySuccess) => {
   return {
     type: CATEGORY_SUCCESS,
     payload: data,

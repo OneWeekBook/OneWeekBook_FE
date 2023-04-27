@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios';
 import { ActionsTypes } from 'types/request';
-import { BookResponseTypes } from 'types/response';
+import { BookResponseTypes, ResponseSearchSuccess } from 'types/response';
 
 export const SEARCH_REQUEST = 'SEARCH_REQUEST';
 export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
@@ -51,7 +51,7 @@ export const SearchRequest = (params: any) => {
   };
 };
 
-export const SearchSuccess = (data: any) => {
+export const SearchSuccess = (data: ResponseSearchSuccess) => {
   return {
     type: SEARCH_SUCCESS,
     payload: data,

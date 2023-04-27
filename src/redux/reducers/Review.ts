@@ -4,6 +4,7 @@ import {
   ReviewRequestTypes,
   ActionsTypes,
 } from 'types/request';
+import { ResponseDetailSuccess, ResponseReviewSuccess } from 'types/response';
 
 export const REVIEWS_REQUEST = 'REVIEWS_REQUEST';
 export const REVIEWS_SUCCESS = 'REVIEWS_SUCCESS';
@@ -93,7 +94,7 @@ export const ReviewsRequest = (data: ReviewRequestTypes) => {
   };
 };
 
-export const ReviewsSuccess = (data: any) => {
+export const ReviewsSuccess = (data: ResponseReviewSuccess) => {
   return {
     type: REVIEWS_SUCCESS,
     payload: data,
@@ -114,7 +115,7 @@ export const ReviewRequest = (data: BookRequestTypes) => {
   };
 };
 
-export const ReviewSuccess = (data: any) => {
+export const ReviewSuccess = (data: ResponseDetailSuccess) => {
   return {
     type: REVIEW_SUCCESS,
     payload: data,

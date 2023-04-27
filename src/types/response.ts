@@ -100,3 +100,44 @@ export interface UserBookResponseTypes extends LibraryResponseTypes {
 export interface NewReviewResponseTypes extends UserBookResponseTypes {
   user: UserResponseTypes;
 }
+
+export interface SuccessResponseTypes {
+  message: string;
+  sucess: boolean;
+}
+
+export interface ResponseSignInSuccess extends SuccessResponseTypes {
+  accessToken: string;
+}
+
+export interface ResponseAuthUserSuccess {
+  bookData: UserBookResponseTypes;
+  userData: UserResponseTypes;
+}
+
+export interface ResponseCategorySuccess extends SuccessResponseTypes {
+  categories: CategoryResponseTypes[];
+}
+
+export interface ResponseFavoriteSuccess extends SuccessResponseTypes {
+  likeData: FavoriteResponseTypes[];
+}
+
+export interface ResponseNewReviewSuccess extends SuccessResponseTypes {
+  reviews: NewReviewResponseTypes[];
+}
+
+export interface ResponseReviewSuccess extends SuccessResponseTypes {
+  countAllReviewBooks: number;
+  reviews: ReviewResponseTypes[];
+}
+
+export interface ResponseDetailSuccess extends SuccessResponseTypes {
+  bookData: ReviewBookResponseTypes[];
+  countAllReviewBooks: number;
+  reviewData: UserReviewResponseTypes[];
+}
+
+export interface ResponseSearchSuccess extends SuccessResponseTypes {
+  books: BookResponseTypes[];
+}

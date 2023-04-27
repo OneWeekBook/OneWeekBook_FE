@@ -130,7 +130,7 @@ export const ParagraphInitRequest = (data: ParagraphRequestType) => {
   };
 };
 
-export const ParagraphInitSuccess = (data: any) => {
+export const ParagraphInitSuccess = (data: ParagraphResponseTypes[]) => {
   return {
     type: PARAGRAPH_INIT_SUCCESS,
     payload: data,
@@ -151,7 +151,7 @@ export const ParagraphRequest = (data: ParagraphRequestType) => {
   };
 };
 
-export const ParagraphSuccess = (data: any) => {
+export const ParagraphSuccess = (data: ParagraphResponseTypes[]) => {
   return {
     type: PARAGRAPH_SUCCESS,
     payload: data,

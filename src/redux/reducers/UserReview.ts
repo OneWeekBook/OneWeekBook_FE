@@ -1,5 +1,6 @@
 import { AxiosError } from 'axios';
 import { ReviewAddRequestTypes, ActionsTypes } from 'types/request';
+import { NewReviewResponseTypes } from 'types/response';
 
 export const USER_REVIEW_REQUEST = 'USER_REVIEW_REQUEST';
 export const USER_REVIEW_SUCCESS = 'USER_REVIEW_SUCCESS';
@@ -120,7 +121,7 @@ export const UserReviewRequest = (data: { bookId: number }) => {
   };
 };
 
-export const UserReviewSuccess = (data: any) => {
+export const UserReviewSuccess = (data: NewReviewResponseTypes) => {
   return {
     type: USER_REVIEW_SUCCESS,
     payload: data,

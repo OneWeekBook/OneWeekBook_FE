@@ -128,7 +128,7 @@ export const MyLibraryRequest = (data: { progress: number }) => {
   };
 };
 
-export const MyLibrarySuccess = (data: any) => {
+export const MyLibrarySuccess = (data: LibraryResponseTypes[]) => {
   return {
     type: MY_LIBRARY_SUCCESS,
     payload: data,

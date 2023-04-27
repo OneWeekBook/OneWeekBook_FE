@@ -1,5 +1,6 @@
 import { AxiosError } from 'axios';
 import { SignUpRequestTypes, ActionsTypes } from 'types/request';
+import { SuccessResponseTypes } from 'types/response';
 
 export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
@@ -54,7 +55,7 @@ export const SignUpRequest = (data: SignUpRequestTypes) => {
   };
 };
 
-export const SignUpSuccess = (data: any) => {
+export const SignUpSuccess = (data: SuccessResponseTypes) => {
   return {
     type: SIGN_UP_SUCCESS,
     payload: data,

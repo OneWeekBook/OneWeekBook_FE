@@ -1,5 +1,6 @@
 import { AxiosError } from 'axios';
 import { ActionsTypes } from 'types/request';
+import { ResponseAuthUserSuccess } from 'types/response';
 
 export const AUTH_USER_REQUEST = 'AUTH_USER_REQUEST';
 export const AUTH_USER_SUCCESS = 'AUTH_USER_SUCCESS';
@@ -49,7 +50,7 @@ export const AuthUserRequest = () => {
   };
 };
 
-export const AuthUserSuccess = (data: any) => {
+export const AuthUserSuccess = (data: ResponseAuthUserSuccess) => {
   return {
     type: AUTH_USER_SUCCESS,
     payload: data,
