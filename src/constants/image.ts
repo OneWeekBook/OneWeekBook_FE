@@ -27,3 +27,11 @@ export const FAVORITE_IMAGE = {
   INTEREST: `${process.env.PUBLIC_URL}/assets/favorite/interest.png`,
   USEFUL: `${process.env.PUBLIC_URL}/assets/favorite/useful.png`,
 };
+
+export const STAR_IMAGE = {
+  STAR_EMPTY: `${process.env.PUBLIC_URL}/assets/star/star_empty.png`,
+  STAR_ONE_THIRD: `${process.env.PUBLIC_URL}/assets/star/star_one_third.png`,
+  STAR_HALF: `${process.env.PUBLIC_URL}/assets/star/star_half.png`,
+  STAR_TWO_THIRD: `${process.env.PUBLIC_URL}/assets/star/star_two_third.png`,
+  STAR_FULL: `${process.env.PUBLIC_URL}/assets/star/star_full.png`,
+};

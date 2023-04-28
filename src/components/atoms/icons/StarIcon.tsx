@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 import { IconType, IconStyleType } from 'types/atom';
+import { STAR_IMAGE } from 'constants/image';
 
 function StarIcon({ score, imageSize }: IconType & IconStyleType) {
   if (score === 1) {
     return (
       <StarIconAtom
-        src={`${process.env.PUBLIC_URL}/assets/func/star-full.png`}
+        src={STAR_IMAGE.STAR_FULL}
         alt="star full"
         imageSize={imageSize}
       />
@@ -16,10 +17,10 @@ function StarIcon({ score, imageSize }: IconType & IconStyleType) {
       <StarIconAtom
         src={
           score % 1 < 0.5
-            ? `${process.env.PUBLIC_URL}/assets/func/star-one-third.png`
+            ? STAR_IMAGE.STAR_ONE_THIRD
             : score % 1 > 0.5
-            ? `${process.env.PUBLIC_URL}/assets/func/star-two-third.png`
-            : `${process.env.PUBLIC_URL}/assets/func/star-half.png`
+            ? STAR_IMAGE.STAR_TWO_THIRD
+            : STAR_IMAGE.STAR_HALF
         }
         alt="star score"
         imageSize={imageSize}
@@ -28,7 +29,7 @@ function StarIcon({ score, imageSize }: IconType & IconStyleType) {
   }
   return (
     <StarIconAtom
-      src={`${process.env.PUBLIC_URL}/assets/func/star-empty.png`}
+      src={STAR_IMAGE.STAR_EMPTY}
       alt="star empty"
       imageSize={imageSize}
     />
