@@ -2,8 +2,8 @@ import { useDispatch } from 'react-redux';
 import { HeaderType } from 'types/common';
 import { AuthInit } from 'redux/reducers/AuthUser';
 import { showToast } from 'common/Toast';
-import HeaderTopMenu from 'components/modules/commons/HeaderTopMenu';
-import HeaderMainCategory from 'components/modules/commons/HeaderMainCategory';
+import HeaderMenu from 'components/modules/commons/HeaderMenu';
+import HeaderCategory from 'components/modules/commons/HeaderCategory';
 import Container from './Container';
 
 function Header({ handleToggle }: HeaderType) {
@@ -17,8 +17,8 @@ function Header({ handleToggle }: HeaderType) {
 
   return (
     <Container as="header">
-      <HeaderTopMenu handleToggle={handleToggle} handleSignout={logoutClick} />
-      <HeaderMainCategory />
+      <HeaderMenu handleToggle={handleToggle} handleSignout={logoutClick} />
+      <HeaderCategory />
     </Container>
   );
 }

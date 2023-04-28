@@ -6,7 +6,7 @@ import DefaultText from 'components/atoms/texts/DefaultText';
 import DataText from 'components/atoms/texts/DataText';
 import StarIcon from 'components/atoms/icons/StarIcon';
 
-function BookBannerInfo({
+function BookBanner({
   author,
   countReviews,
   img,
@@ -77,7 +77,7 @@ function BookBannerInfo({
   );
 }
 
-export default BookBannerInfo;
+export default BookBanner;
 
 const BookBannerInfoContainer = styled.div`
   display: flex;

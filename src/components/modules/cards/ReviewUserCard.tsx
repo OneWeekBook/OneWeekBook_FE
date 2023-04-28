@@ -31,11 +31,12 @@ function ReviewUserCard({
         <FavoriteImage>
           <DefaultImage
             imageSrc={`${process.env.PUBLIC_URL}/${
-              isRecommend ? 'assets/like/good.svg' : 'assets/like/bad.svg'
+              isRecommend
+                ? 'assets/favorite/good.svg'
+                : 'assets/favorite/bad.svg'
             }`}
             imageAlt="icon"
             pc={[75, 75]}
-            onError={getImgErr}
           />
           <DataText
             data={rating}

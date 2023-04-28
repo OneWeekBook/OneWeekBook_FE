@@ -3,7 +3,7 @@ import { HeaderTypes } from 'types/module';
 import ImageButton from 'components/atoms/buttons/ImageButton';
 import DefaultLink from 'components/atoms/links/DefaultLink';
 
-function HeaderTopMenu({ handleToggle, handleSignout }: HeaderTypes) {
+function HeaderMenu({ handleToggle, handleSignout }: HeaderTypes) {
   return (
     <HeaderTopMenuModule>
       <DefaultLink
@@ -34,7 +34,7 @@ function HeaderTopMenu({ handleToggle, handleSignout }: HeaderTypes) {
   );
 }
 
-export default HeaderTopMenu;
+export default HeaderMenu;
 
 const HeaderTopMenuModule = styled.div`
   display: flex;
