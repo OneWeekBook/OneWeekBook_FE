@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { ParagraphCardTypes } from 'types/module';
+import { FUNC_IMAGE } from 'constants/image';
 import ImageButton from 'components/atoms/buttons/ImageButton';
 import DefaultText from 'components/atoms/texts/DefaultText';
 
@@ -14,7 +15,7 @@ function ParagraphCard({
       <ImageButton
         type="button"
         handleClick={() => deleteParagraphClick(id)}
-        src={`${process.env.PUBLIC_URL}/assets/func/content-delete.svg`}
+        src={FUNC_IMAGE.COMMENT_DELETE}
         imgSize={32}
       />
     </ParagraphCardContainer>

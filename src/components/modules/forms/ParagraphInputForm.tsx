@@ -3,8 +3,9 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { ParagraphInputFormType } from 'types/module';
 import { ParagraphAddRequest } from 'redux/reducers/Paragraph';
-import { showToast } from 'common/Toast';
 import useInput from 'hooks/useInput';
+import { showToast } from 'common/Toast';
+import { FUNC_IMAGE } from 'constants/image';
 import ImageButton from 'components/atoms/buttons/ImageButton';
 import BorderInput from 'components/atoms/inputs/BorderInput';
 
@@ -47,7 +48,7 @@ function ParagraphInputForm({ bookId }: ParagraphInputFormType) {
       <ImageButton
         type="button"
         handleClick={addParagraphClick}
-        src={`${process.env.PUBLIC_URL}/assets/func/content-add.svg`}
+        src={FUNC_IMAGE.COMMENT_ADD}
         imgSize={30}
       />
     </InputForm>

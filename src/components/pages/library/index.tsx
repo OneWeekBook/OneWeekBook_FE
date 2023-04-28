@@ -9,8 +9,9 @@ import {
   MyLibraryRequest,
 } from 'redux/reducers/MyLibrary';
 import useToggle from 'hooks/useToggle';
-import { showToast } from 'common/Toast';
 import { bookInit } from 'constants/content';
+import { FUNC_IMAGE } from 'constants/image';
+import { showToast } from 'common/Toast';
 import Container from 'common/Container';
 import DefaultModal from 'common/DefaultModal';
 import MultiText from 'components/atoms/texts/MultiText';
@@ -83,7 +84,7 @@ function Index() {
       <MyLibraryHeader>
         <MultiText
           className="flexstart"
-          imageSrc={`${process.env.PUBLIC_URL}/assets/func/my-library-icon.svg`}
+          imageSrc={FUNC_IMAGE.LIBRARY}
           imageAlt="book icon"
           imageSize={60}
           content={`${user.nick}님의 서재`}

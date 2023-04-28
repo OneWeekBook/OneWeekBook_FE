@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { DefaultModalTypes } from 'types/page';
+import { FUNC_IMAGE } from 'constants/image';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import ImageButton from 'components/atoms/buttons/ImageButton';
 import DefaultText from 'components/atoms/texts/DefaultText';
@@ -27,7 +28,7 @@ function Index({
           {close && (
             <ImageButton
               handleClick={handleToggle}
-              src={`${process.env.PUBLIC_URL}/assets/func/modal-close.svg`}
+              src={FUNC_IMAGE.CLOSE}
               imgSize={25}
             />
           )}

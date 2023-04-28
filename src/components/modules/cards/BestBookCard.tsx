@@ -5,6 +5,7 @@ import theme from 'styles/theme';
 import { BestBookCardTypes } from 'types/module';
 import { ReviewResponseTypes } from 'types/response';
 import { getImgErr } from 'utils/ImageError';
+import { FUNC_IMAGE } from 'constants/image';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DefaultText from 'components/atoms/texts/DefaultText';
 import MultiText from 'components/atoms/texts/MultiText';
@@ -56,7 +57,7 @@ function BestBookCard({
         </BookDetailInfo>
         <MultiText
           className="flexstart"
-          imageSrc={`${process.env.PUBLIC_URL}/assets/func/comment.png`}
+          imageSrc={FUNC_IMAGE.COMMENT}
           imageAlt="comment"
           imageSize={20}
           content={count}

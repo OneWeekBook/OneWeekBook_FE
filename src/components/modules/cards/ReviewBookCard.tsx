@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import theme from 'styles/theme';
 import { ReviewResponseTypes } from 'types/response';
 import { ReviewBookCardType } from 'types/module';
+import { FUNC_IMAGE } from 'constants/image';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DefaultText from 'components/atoms/texts/DefaultText';
 import MultiText from 'components/atoms/texts/MultiText';
@@ -19,7 +20,7 @@ function ReivewItem({
     <ReviewBookCardContainer>
       <MultiText
         className="review"
-        imageSrc={`${process.env.PUBLIC_URL}/assets/func/review-white.png`}
+        imageSrc={FUNC_IMAGE.REVIEW}
         imageAlt="review count"
         imageSize={20}
         content={count}

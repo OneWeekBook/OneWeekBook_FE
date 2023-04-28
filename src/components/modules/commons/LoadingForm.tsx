@@ -1,12 +1,13 @@
+import styled from 'styled-components';
+import { FUNC_IMAGE } from 'constants/image';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DefaultText from 'components/atoms/texts/DefaultText';
-import styled from 'styled-components';
 
 function LoadingForm() {
   return (
     <LoadingFormContainer>
       <DefaultImage
-        imageSrc={`${process.env.PUBLIC_URL}/assets/func/book-loading-blue.svg`}
+        imageSrc={FUNC_IMAGE.LOADING}
         imageAlt="loading"
         pc={[150, 150]}
       />

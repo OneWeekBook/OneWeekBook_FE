@@ -1,3 +1,25 @@
+export const FUNC_IMAGE = {
+  BOOK: `${process.env.PUBLIC_URL}/assets/func/book.png`,
+  CLOSE: `${process.env.PUBLIC_URL}/assets/func/close.svg`,
+  COMMENT: `${process.env.PUBLIC_URL}/assets/func/comment.png`,
+  COMMENT_ADD: `${process.env.PUBLIC_URL}/assets/func/comment_add.svg`,
+  COMMENT_DELETE: `${process.env.PUBLIC_URL}/assets/func/comment_delete.svg`,
+  HAMBURGER: `${process.env.PUBLIC_URL}/assets/func/hamburger.svg`,
+  HEART: `${process.env.PUBLIC_URL}/assets/func/heart.svg`,
+  LIBRARY: `${process.env.PUBLIC_URL}/assets/func/library.svg`,
+  LOADING: `${process.env.PUBLIC_URL}/assets/func/loading.svg`,
+  QUESTION_MARK: `${process.env.PUBLIC_URL}/assets/func/question_mark.svg`,
+  REVIEW: `${process.env.PUBLIC_URL}/assets/func/review.png`,
+  TRASH: `${process.env.PUBLIC_URL}/assets/func/trash.svg`,
+};
+
+export const FAVORITE_IMAGE = {
+  ACCESS_BAD: `${process.env.PUBLIC_URL}/assets/favorite/access_bad.svg`,
+  ACCESS_GOOD: `${process.env.PUBLIC_URL}/assets/favorite/access_good.svg`,
+  INTEREST: `${process.env.PUBLIC_URL}/assets/favorite/interest.png`,
+  USEFUL: `${process.env.PUBLIC_URL}/assets/favorite/useful.png`,
+};
+
 export const MENU_IMAGE = {
   HOME_DONE: `${process.env.PUBLIC_URL}/assets/menu/home_done.png`,
   HOME_NONE: `${process.env.PUBLIC_URL}/assets/menu/home_none.png`,
@@ -19,13 +41,6 @@ export const SLIDE_IMAGE = {
   SLIDE_MOBILE_2: `${process.env.PUBLIC_URL}/assets/slide/slide_mobile_2.png`,
   SLIDE_PC_1: `${process.env.PUBLIC_URL}/assets/slide/slide_pc_1.png`,
   SLIDE_PC_2: `${process.env.PUBLIC_URL}/assets/slide/slide_pc_2.png`,
-};
-
-export const FAVORITE_IMAGE = {
-  ACCESS_BAD: `${process.env.PUBLIC_URL}/assets/favorite/access_bad.svg`,
-  ACCESS_GOOD: `${process.env.PUBLIC_URL}/assets/favorite/access_good.svg`,
-  INTEREST: `${process.env.PUBLIC_URL}/assets/favorite/interest.png`,
-  USEFUL: `${process.env.PUBLIC_URL}/assets/favorite/useful.png`,
 };
 
 export const STAR_IMAGE = {

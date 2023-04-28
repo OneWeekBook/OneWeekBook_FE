@@ -8,6 +8,7 @@ import { UserReviewRequest } from 'redux/reducers/UserReview';
 import { MyLibraryDeleteRequest } from 'redux/reducers/MyLibrary';
 import useToggle from 'hooks/useToggle';
 import { SetStartDate } from 'utils/SetDate';
+import { FUNC_IMAGE } from 'constants/image';
 import MoveDeleteModal from 'common/DefaultModal';
 import ImageButton from 'components/atoms/buttons/ImageButton';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
@@ -67,7 +68,7 @@ function LibraryBookCard({
     <LibraryBookCardContainer>
       <BookImage>
         <ImageButton
-          src={`${process.env.PUBLIC_URL}/assets/func/trash.svg`}
+          src={FUNC_IMAGE.TRASH}
           handleClick={deleteToggleIsOn}
           imgSize={25}
         />

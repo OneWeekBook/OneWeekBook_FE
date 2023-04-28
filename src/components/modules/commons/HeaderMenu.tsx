@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { HeaderTypes } from 'types/module';
+import { FUNC_IMAGE } from 'constants/image';
 import ImageButton from 'components/atoms/buttons/ImageButton';
 import DefaultLink from 'components/atoms/links/DefaultLink';
 
@@ -26,7 +27,7 @@ function HeaderMenu({ handleToggle, handleSignout }: HeaderTypes) {
         </LinkWrapper>
       )}
       <ImageButton
-        src={`${process.env.PUBLIC_URL}/assets/func/hamburger.svg`}
+        src={FUNC_IMAGE.HAMBURGER}
         imgSize={32}
         handleClick={handleToggle}
       />

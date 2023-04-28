@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { NoneCardTypes } from 'types/module';
+import { FUNC_IMAGE } from 'constants/image';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DefaultText from 'components/atoms/texts/DefaultText';
 
@@ -7,7 +8,7 @@ function NoneBookCard({ type }: NoneCardTypes) {
   return (
     <NoneBookCardContainer>
       <DefaultImage
-        imageSrc={`${process.env.PUBLIC_URL}/assets/func/question_mark.svg`}
+        imageSrc={FUNC_IMAGE.QUESTION_MARK}
         imageAlt="search icon"
         pc={[100, 100]}
       />
