@@ -83,7 +83,7 @@ function Index() {
       <MyLibraryHeader>
         <MultiText
           className="flexstart"
-          imageSrc={`${process.env.PUBLIC_URL}/assets/myLibrary/my-library-icon.svg`}
+          imageSrc={`${process.env.PUBLIC_URL}/assets/func/my-library-icon.svg`}
           imageAlt="book icon"
           imageSize={60}
           content={`${user.nick}님의 서재`}

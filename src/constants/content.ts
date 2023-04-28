@@ -22,17 +22,17 @@ export const libraryMenu = [
   {
     id: 0,
     desc: '좋아요',
-    image: `${process.env.PUBLIC_URL}/assets/myLibrary/like.svg`,
+    image: MENU_IMAGE.LIBRARY_FAVORITE,
   },
   {
     id: 1,
     desc: '읽는중',
-    image: `${process.env.PUBLIC_URL}/assets/myLibrary/read.svg`,
+    image: MENU_IMAGE.LIBRARY_READING,
   },
   {
     id: 2,
     desc: '다읽은',
-    image: `${process.env.PUBLIC_URL}/assets/myLibrary/done.svg`,
+    image: MENU_IMAGE.LIBRARY_FINISHED,
   },
 ];
 
@@ -55,15 +55,15 @@ export const menuItems = [
     id: 3,
     title: '카테고리',
     link: '/category',
-    img: MENU_IMAGE.CATEGORY_DONE,
-    clickImg: MENU_IMAGE.CATEGORY_NONE,
+    img: MENU_IMAGE.CATEGORY_NONE,
+    clickImg: MENU_IMAGE.CATEGORY_DONE,
   },
   {
     id: 4,
     title: '리뷰',
     link: '/review',
-    img: MENU_IMAGE.REVIEW_DONE,
-    clickImg: MENU_IMAGE.REVIEW_NONE,
+    img: MENU_IMAGE.REVIEW_NONE,
+    clickImg: MENU_IMAGE.REVIEW_DONE,
   },
 ];
 

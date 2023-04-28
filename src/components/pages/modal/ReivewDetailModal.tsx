@@ -12,6 +12,7 @@ import {
   LikeRequest,
 } from 'redux/reducers/Like';
 import { ReviewInit, ReviewRequest } from 'redux/reducers/Review';
+import { FAVORITE_IMAGE } from 'constants/image';
 import DetailModal from 'common/DefaultModal';
 import MenuButton from 'components/atoms/buttons/MenuButton';
 import DataText from 'components/atoms/texts/DataText';
@@ -132,7 +133,7 @@ function ReviewDetailModal({
         <FavoriteButtons>
           <MenuButton
             className="roundborder"
-            src={`${process.env.PUBLIC_URL}/assets/like/interest.png`}
+            src={FAVORITE_IMAGE.USEFUL}
             imgSize={25}
             content={`${useful} 도움이되요`}
             handleClick={() => handleFavoriteClick(0, usefulToggle)}
@@ -143,7 +144,7 @@ function ReviewDetailModal({
           />
           <MenuButton
             className="roundborder"
-            src={`${process.env.PUBLIC_URL}/assets/like/fun.png`}
+            src={FAVORITE_IMAGE.INTEREST}
             imgSize={25}
             content={`${interest} 흥미로워요`}
             handleClick={() => handleFavoriteClick(1, interestToggle)}

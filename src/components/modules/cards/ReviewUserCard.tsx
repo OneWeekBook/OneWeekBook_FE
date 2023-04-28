@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import theme from 'styles/theme';
 import { ReviewUserCardType } from 'types/module';
 import { UserReviewResponseTypes } from 'types/response';
+import { FAVORITE_IMAGE } from 'constants/image';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DataText from 'components/atoms/texts/DataText';
 import MultiText from 'components/atoms/texts/MultiText';
@@ -29,11 +30,11 @@ function ReviewUserCard({
       <UserReviewInfo>
         <FavoriteImage>
           <DefaultImage
-            imageSrc={`${process.env.PUBLIC_URL}/${
+            imageSrc={
               isRecommend
-                ? 'assets/favorite/good.svg'
-                : 'assets/favorite/bad.svg'
-            }`}
+                ? FAVORITE_IMAGE.ACCESS_GOOD
+                : FAVORITE_IMAGE.ACCESS_BAD
+            }
             imageAlt="icon"
             pc={[75, 75]}
           />
@@ -61,7 +62,7 @@ function ReviewUserCard({
       <RecommendWrapper>
         <MultiText
           className="reviewrole"
-          imageSrc={`${process.env.PUBLIC_URL}/assets/like/interest.png`}
+          imageSrc={FAVORITE_IMAGE.USEFUL}
           imageAlt="interest"
           imageSize={25}
           fontColor={theme.color.COLOR_WHITE}
@@ -70,7 +71,7 @@ function ReviewUserCard({
         />
         <MultiText
           className="reviewrole"
-          imageSrc={`${process.env.PUBLIC_URL}/assets/like/fun.png`}
+          imageSrc={FAVORITE_IMAGE.INTEREST}
           imageAlt="interest"
           imageSize={25}
           fontColor={theme.color.COLOR_WHITE}
