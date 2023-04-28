@@ -8,3 +8,12 @@ export const MENU_IMAGE = {
   REVIEW_DONE: `${process.env.PUBLIC_URL}/assets/menu/review_done.png`,
   REVIEW_NONE: `${process.env.PUBLIC_URL}/assets/menu/review_none.png`,
 };
+
+export const SLIDE_IMAGE = {
+  SLIDE_LEFT: `${process.env.PUBLIC_URL}/assets/slide/slide_left.svg`,
+  SLIDE_RIGHT: `${process.env.PUBLIC_URL}/assets/slide/slide_right.svg`,
+  SLIDE_MOBILE_1: `${process.env.PUBLIC_URL}/assets/slide/slide_mobile_1.png`,
+  SLIDE_MOBILE_2: `${process.env.PUBLIC_URL}/assets/slide/slide_mobile_2.png`,
+  SLIDE_PC_1: `${process.env.PUBLIC_URL}/assets/slide/slide_pc_1.png`,
+  SLIDE_PC_2: `${process.env.PUBLIC_URL}/assets/slide/slide_pc_2.png`,
+};

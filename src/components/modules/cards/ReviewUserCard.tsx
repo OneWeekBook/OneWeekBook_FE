@@ -1,7 +1,6 @@
 import { PropsWithChildren, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import theme from 'styles/theme';
-import { getImgErr } from 'utils/ImageError';
 import { ReviewUserCardType } from 'types/module';
 import { UserReviewResponseTypes } from 'types/response';
 import DefaultImage from 'components/atoms/images/DefaultImage';

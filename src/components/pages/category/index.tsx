@@ -6,7 +6,7 @@ import { CategoryRequest } from 'redux/reducers/Category';
 import { SearchInit } from 'redux/reducers/Search';
 import { searchNone, userToggle } from 'redux/reducers/Func';
 import { AppStateType } from 'redux/reducers';
-import { initialState } from 'contain/category';
+import { categoryInit } from 'constants/content';
 import Container from 'common/Container';
 import SearchInput from 'components/modules/forms/SearchBookForm';
 import CategoryList from 'components/modules/lists/CategoryList';
@@ -20,10 +20,10 @@ function index() {
   );
   const [curParentCategory, setCurParentCategory] = useState<
     CategoryResponseTypes[]
-  >([initialState]);
+  >([categoryInit]);
   const [curChildCategory, setCurChildCategory] = useState<
     CategoryResponseTypes[]
-  >([initialState]);
+  >([categoryInit]);
   const [parentCategory, setParentCategory] = useState<CategoryResponseTypes[]>(
     [],
   );
@@ -51,7 +51,7 @@ function index() {
       );
       setCurParentCategory(parent);
       setChildCategory(sub);
-      setCurChildCategory([initialState]);
+      setCurChildCategory([categoryInit]);
     },
     [],
   );

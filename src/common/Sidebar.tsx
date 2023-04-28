@@ -7,8 +7,8 @@ import { AuthInit } from 'redux/reducers/AuthUser';
 import { showToast } from 'common/Toast';
 import useToggle from 'hooks/useToggle';
 import useAuthLink from 'hooks/useAuthLink';
+import { menuItems } from 'constants/content';
 import NoticeModal from 'common/DefaultModal';
-import { NavItems } from 'contain/mainmenu';
 import SideBarLink from 'components/atoms/links/SideBarLink';
 
 function Sidebar({ toggle, handleToggle }: SidebarTypes) {
@@ -61,7 +61,7 @@ function Sidebar({ toggle, handleToggle }: SidebarTypes) {
           />
         </>
       )}
-      {NavItems.map((item) => (
+      {menuItems.map((item) => (
         <SideBarLink
           key={item.id}
           handleClick={() =>

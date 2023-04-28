@@ -6,7 +6,7 @@ import theme from 'styles/theme';
 import { AppStateType } from 'redux/reducers';
 import { ReviewInit, ReviewRequest } from 'redux/reducers/Review';
 import useToggle from 'hooks/useToggle';
-import { reviewInit } from 'contain/review';
+import { reviewInit } from 'constants/content';
 import Container from 'common/Container';
 import BookBannerInfo from 'components/modules/banners/BookBanner';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';

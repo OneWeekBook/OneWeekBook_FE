@@ -2,9 +2,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import useToggle from 'hooks/useToggle';
 import useAuthLink from 'hooks/useAuthLink';
+import { menuItems } from 'constants/content';
 import NoticeModal from 'common/DefaultModal';
 import MenuButton from 'components/atoms/buttons/MenuButton';
-import { NavItems } from 'contain/mainmenu';
 
 function HeaderMainCategory() {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ function HeaderMainCategory() {
 
   return (
     <MenuListWrapper>
-      {NavItems.map((item) => (
+      {menuItems.map((item) => (
         <MenuButton
           key={item.id}
           src={

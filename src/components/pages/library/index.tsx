@@ -8,11 +8,11 @@ import {
   MyLibraryModifyRequest,
   MyLibraryRequest,
 } from 'redux/reducers/MyLibrary';
-import { showToast } from 'common/Toast';
 import useToggle from 'hooks/useToggle';
+import { showToast } from 'common/Toast';
+import { bookInit } from 'constants/content';
 import Container from 'common/Container';
 import DefaultModal from 'common/DefaultModal';
-import { bookInit } from 'contain/book';
 import MultiText from 'components/atoms/texts/MultiText';
 import LibraryMenuList from 'components/modules/lists/LibraryMenuList';
 import LibraryBookList from 'components/modules/lists/LibraryBookList';

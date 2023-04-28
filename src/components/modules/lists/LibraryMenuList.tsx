@@ -5,7 +5,7 @@ import theme from 'styles/theme';
 import { LibraryMenuTypes } from 'types/module';
 import { navDone, navLike, navRead } from 'redux/reducers/Func';
 import { MyLibraryInit, MyLibraryRequest } from 'redux/reducers/MyLibrary';
-import { LibraryMenu } from 'contain/librarymenu';
+import { libraryMenu } from 'constants/content';
 import MenuButton from 'components/atoms/buttons/MenuButton';
 
 function LibraryMenuList({ useId, navId }: LibraryMenuTypes) {
@@ -18,9 +18,9 @@ function LibraryMenuList({ useId, navId }: LibraryMenuTypes) {
   }, [useId, navId]);
 
   const navMoveClick = (curId: number) => {
-    if (LibraryMenu[0].id === curId) {
+    if (libraryMenu[0].id === curId) {
       dispatch(navLike());
-    } else if (LibraryMenu[1].id === curId) {
+    } else if (libraryMenu[1].id === curId) {
       dispatch(navRead());
     } else {
       dispatch(navDone());
@@ -29,7 +29,7 @@ function LibraryMenuList({ useId, navId }: LibraryMenuTypes) {
 
   return (
     <MyLibraryMenuContainer>
-      {LibraryMenu.map((item) => (
+      {libraryMenu.map((item) => (
         <MenuButton
           className="roundborder"
           key={item.id}

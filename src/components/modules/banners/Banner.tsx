@@ -3,12 +3,13 @@ import styled from 'styled-components';
 import { BannerTypes } from 'types/module';
 import useInterval from 'hooks/useInterval';
 import useWindowSize from 'hooks/useWindowSize';
+import { SLIDE_IMAGE } from 'constants/image';
+import { slideMobileItems, slidePCItems } from 'constants/content';
 import BannerButton from 'components/atoms/buttons/BannerButton';
 import BannerImage from 'components/atoms/images/BannerImage';
-import { SlideMobileItems, SlidePCItems } from 'contain/banner';
 
 function Banner() {
-  const itemSize = SlidePCItems.length;
+  const itemSize = slidePCItems.length;
   const addItemSize = 2;
   const [windowWidth] = useWindowSize();
   const [curIndex, setCurIndex] = useState<number>(addItemSize);
@@ -22,11 +23,11 @@ function Banner() {
     const addedEnd = [];
     let index = 0;
     while (index < addItemSize) {
-      addedEnd.push(SlidePCItems[index % itemSize]);
-      addedStart.unshift(SlidePCItems[itemSize - 1 - (index % itemSize)]);
+      addedEnd.push(slidePCItems[index % itemSize]);
+      addedStart.unshift(slidePCItems[itemSize - 1 - (index % itemSize)]);
       index += 1;
     }
-    return [...addedStart, ...SlidePCItems, ...addedEnd];
+    return [...addedStart, ...slidePCItems, ...addedEnd];
   };
 
   const setMobileSlides = () => {
@@ -34,11 +35,11 @@ function Banner() {
     const addedEnd = [];
     let index = 0;
     while (index < addItemSize) {
-      addedEnd.push(SlideMobileItems[index % itemSize]);
-      addedStart.unshift(SlideMobileItems[itemSize - 1 - (index % itemSize)]);
+      addedEnd.push(slideMobileItems[index % itemSize]);
+      addedStart.unshift(slideMobileItems[itemSize - 1 - (index % itemSize)]);
       index += 1;
     }
-    return [...addedStart, ...SlideMobileItems, ...addedEnd];
+    return [...addedStart, ...slideMobileItems, ...addedEnd];
   };
 
   const pcSlides = setPCSlides();
@@ -103,12 +104,12 @@ function Banner() {
       <BannerButton
         handleClick={() => handleSwipe(-1)}
         direct="prev"
-        imageSrc={`${process.env.PUBLIC_URL}/assets/arrow/slide-left-arrow.svg`}
+        imageSrc={SLIDE_IMAGE.SLIDE_LEFT}
       />
       <BannerButton
         handleClick={() => handleSwipe(1)}
         direct="next"
-        imageSrc={`${process.env.PUBLIC_URL}/assets/arrow/slide-right-arrow.svg`}
+        imageSrc={SLIDE_IMAGE.SLIDE_RIGHT}
       />
       <BannerSlider
         index={curIndex}
