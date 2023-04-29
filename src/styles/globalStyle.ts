@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import { MOBILE_MIN_WIDTH } from './devices';
+import { MOBILE_MIN_WIDTH } from './theme';
 
 const globalStyles = createGlobalStyle`
     * {
