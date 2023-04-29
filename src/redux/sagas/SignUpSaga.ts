@@ -1,10 +1,14 @@
 import axios from 'axios';
 import { SignUpRequestTypes } from 'types/request';
+import { API_URL } from 'constants/path';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { SignUpFail, SignUpSuccess, SIGN_UP_REQUEST } from '../reducers/SignUp';
 
 function SignUpAPI(data: SignUpRequestTypes) {
-  return axios.post(`${process.env.REACT_APP_BASIC_URL}/user/register`, data);
+  return axios.post(
+    `${process.env.REACT_APP_BASIC_URL}${API_URL.USER_REGISTER}`,
+    data,
+  );
 }
 
 function* fetchSignUpSaga(action: {

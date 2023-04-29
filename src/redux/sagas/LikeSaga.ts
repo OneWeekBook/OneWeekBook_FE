@@ -1,11 +1,12 @@
 import axios from 'axios';
 import instance from 'api/axios';
 import { call, put, takeEvery } from 'redux-saga/effects';
+import { API_URL } from 'constants/path';
 import { LikeFail, LikeSuccess, LIKE_REQUEST } from '../reducers/Like';
 
 function LikeAPI(params: { bookId: number }) {
   return instance.get(
-    `${process.env.REACT_APP_BASIC_URL}/book/reviews/like/${params.bookId}`,
+    `${process.env.REACT_APP_BASIC_URL}${API_URL.FAVORITE_USER}/${params.bookId}`,
   );
 }
 

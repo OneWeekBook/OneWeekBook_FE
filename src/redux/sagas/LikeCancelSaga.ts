@@ -1,6 +1,7 @@
 import axios from 'axios';
 import instance from 'api/axios';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { API_URL } from 'constants/path';
 import {
   LikeCancelFail,
   LikeCancelSuccess,
@@ -10,7 +11,7 @@ import {
 function LikeCancelAPI(data: { userId: number; bookId: number }) {
   const { userId, bookId } = data;
   return instance.post(
-    `${process.env.REACT_APP_BASIC_URL}/book/reviews/${bookId}/like/cancel`,
+    `${process.env.REACT_APP_BASIC_URL}${API_URL.BOOK_REVIEWS}/${bookId}${API_URL.LIKE_CANCEL}`,
     { userId },
   );
 }

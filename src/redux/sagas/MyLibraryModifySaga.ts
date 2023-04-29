@@ -1,6 +1,7 @@
 import axios from 'axios';
 import instance from 'api/axios';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { API_URL } from 'constants/path';
 import {
   MyLibraryModifyFail,
   MyLibraryModifySuccess,
@@ -12,7 +13,10 @@ function MyLibraryModifyAPI(data: {
   progress: number;
   isbn: string;
 }) {
-  return instance.put(`${process.env.REACT_APP_BASIC_URL}/book/mylist`, data);
+  return instance.put(
+    `${process.env.REACT_APP_BASIC_URL}${API_URL.LIBRARY}`,
+    data,
+  );
 }
 
 function* fetchMyLibraryModifySaga(action: {

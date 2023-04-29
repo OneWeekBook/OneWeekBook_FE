@@ -1,6 +1,7 @@
 import axios from 'axios';
 import instance from 'api/axios';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { API_URL } from 'constants/path';
 import {
   ChangePasswordFail,
   ChangePasswordSuccess,
@@ -8,7 +9,7 @@ import {
 } from '../reducers/ChangePassword';
 
 function ChangePasswordAPI(data: { email: string; password: string }) {
-  return instance.put('/user/password', data);
+  return instance.put(API_URL.USER_CHANGE_PASSWORD, data);
 }
 
 function* fetchChangePasswordSaga(action: {

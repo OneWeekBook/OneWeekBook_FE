@@ -1,7 +1,8 @@
 import axios from 'axios';
 import instance from 'api/axios';
-import { LibraryAddRequestTypes } from 'types/request';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { LibraryAddRequestTypes } from 'types/request';
+import { API_URL } from 'constants/path';
 import {
   MyLibraryAddFail,
   MyLibraryAddSuccess,
@@ -9,7 +10,10 @@ import {
 } from '../reducers/MyLibrary';
 
 function MyLibraryAddAPI(data: { userId: number & LibraryAddRequestTypes }) {
-  return instance.post(`${process.env.REACT_APP_BASIC_URL}/book/mylist`, data);
+  return instance.post(
+    `${process.env.REACT_APP_BASIC_URL}${API_URL.LIBRARY}`,
+    data,
+  );
 }
 
 function* fetchMyLibraryAddSaga(action: {

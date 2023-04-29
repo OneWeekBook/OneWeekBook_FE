@@ -1,6 +1,7 @@
 import axios from 'axios';
 import instance from 'api/axios';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { API_URL } from 'constants/path';
 import {
   RemoveUserFail,
   RemoveUserSuccess,
@@ -8,7 +9,7 @@ import {
 } from '../reducers/RemoveUser';
 
 function RemoveUserAPI(data: { id: number; password: string }) {
-  return instance.post('/user/resign', data);
+  return instance.post(API_URL.USER_DELETE, data);
 }
 
 function* fetchRemoveUserSaga(action: {

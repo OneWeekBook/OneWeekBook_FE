@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { ReviewRequestTypes } from 'types/request';
 import { call, put, throttle } from 'redux-saga/effects';
+import { API_URL } from 'constants/path';
 import {
   ReviewsFail,
   ReviewsSuccess,
@@ -9,7 +10,7 @@ import {
 
 function ReviewAPI(params: ReviewRequestTypes) {
   return axios.get(
-    `${process.env.REACT_APP_BASIC_URL}/book/reviews?start=${params.start}&display=15&sortby=${params.sortby}`,
+    `${process.env.REACT_APP_BASIC_URL}${API_URL.BOOK_REVIEWS}?start=${params.start}&display=15&sortby=${params.sortby}`,
   );
 }
 

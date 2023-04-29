@@ -2,6 +2,7 @@ import axios from 'axios';
 import instance from 'api/axios';
 import { ReviewAddRequestTypes } from 'types/request';
 import { call, put, takeEvery } from 'redux-saga/effects';
+import { API_URL } from 'constants/path';
 import {
   UserReviewAddFail,
   UserReviewAddSuccess,
@@ -10,7 +11,7 @@ import {
 
 function UserReviewAddAPI(data: ReviewAddRequestTypes) {
   const { bookId, review, rating } = data;
-  return instance.post(`/book/reviews/${bookId}`, { review, rating });
+  return instance.post(`${API_URL.BOOK_REVIEWS}/${bookId}`, { review, rating });
 }
 
 function* fetchUserReviewAddSaga(action: {

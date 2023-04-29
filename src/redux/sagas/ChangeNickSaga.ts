@@ -1,6 +1,7 @@
 import axios from 'axios';
 import instance from 'api/axios';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { API_URL } from 'constants/path';
 import {
   ChangeNickFail,
   ChangeNickSuccess,
@@ -8,7 +9,7 @@ import {
 } from '../reducers/ChangeNick';
 
 function ChangeNickAPI(data: { nick: string; id: number }) {
-  return instance.put('/user/nick', data);
+  return instance.put(API_URL.USER_CHANGE_NICK, data);
 }
 
 function* fetchChangeNickSaga(action: {
