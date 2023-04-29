@@ -1,7 +1,8 @@
 import axios from 'axios';
 import instance from 'api/axios';
-import { ParagraphRequestType } from 'types/request';
 import { call, put, takeEvery } from 'redux-saga/effects';
+import { ParagraphRequestType } from 'types/request';
+import { API_URL } from 'constants/path';
 import {
   ParagraphFail,
   ParagraphInitFail,
@@ -13,7 +14,7 @@ import {
 
 function ParagraphAPI(params: ParagraphRequestType) {
   return instance.get(
-    `${process.env.REACT_APP_BASIC_URL}/book/paragraph?bookId=${params.bookId}`,
+    `${process.env.REACT_APP_BASIC_URL}${API_URL.PARAGRAPH}?bookId=${params.bookId}`,
   );
 }
 

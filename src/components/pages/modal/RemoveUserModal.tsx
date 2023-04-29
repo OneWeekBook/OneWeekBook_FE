@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
 import { AppStateType } from 'redux/reducers';
 import { RemoveUserModalType } from 'types/page';
 import { RemoveUserInit, RemoveUserRequest } from 'redux/reducers/RemoveUser';
 import useInput from 'hooks/useInput';
+import useRouter from 'hooks/useRouter';
+import { PATH_URL } from 'constants/path';
 import { showToast } from 'common/Toast';
 import DefaultModal from 'common/DefaultModal';
 import ErrorText from 'components/atoms/texts/ErrorText';
@@ -13,7 +14,7 @@ import InputForm from 'components/modules/forms/InputForm';
 
 function RemoveUserModal({ removeToggleIsOn }: RemoveUserModalType) {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const { routeTo } = useRouter();
   const [error, setError] = useState<string>('');
   const [isError, setIsError] = useState<boolean>(false);
   const [password, changePassword] = useInput('');
@@ -30,7 +31,7 @@ function RemoveUserModal({ removeToggleIsOn }: RemoveUserModalType) {
       sessionStorage.removeItem('accessToken');
       removeToggleIsOn();
       showToast('info', '회원탈퇴가 정상적으로 처리되었습니다.');
-      navigate('/');
+      routeTo(PATH_URL.MAIN);
     } else if (removeErrorStatus === 400) {
       setIsError(true);
       setError('비밀번호가 올바르지 않습니다.');

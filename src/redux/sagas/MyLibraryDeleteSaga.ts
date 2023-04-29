@@ -1,6 +1,7 @@
 import axios from 'axios';
 import instance from 'api/axios';
 import { call, put, takeEvery } from 'redux-saga/effects';
+import { API_URL } from 'constants/path';
 import {
   MyLibraryDeleteFail,
   MyLibraryDeleteSuccess,
@@ -9,7 +10,7 @@ import {
 
 function MyLibraryDeleteAPI(params: { id: number }) {
   return instance.delete(
-    `${process.env.REACT_APP_BASIC_URL}/book/mylist?id=${params.id}`,
+    `${process.env.REACT_APP_BASIC_URL}${API_URL.LIBRARY}?id=${params.id}`,
   );
 }
 

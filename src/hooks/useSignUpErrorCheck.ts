@@ -1,5 +1,6 @@
-import { useNavigate } from 'react-router-dom';
 import { showToast } from 'common/Toast';
+import { PATH_URL } from 'constants/path';
+import useRouter from './useRouter';
 
 export function useSignUpErrorCheck(): {
   handleSignUpError: (
@@ -7,7 +8,7 @@ export function useSignUpErrorCheck(): {
     error: React.Dispatch<React.SetStateAction<boolean>>,
   ) => void;
 } {
-  const navigate = useNavigate();
+  const { routeTo } = useRouter();
 
   const handleSignUpError = (
     type: number,
@@ -16,7 +17,7 @@ export function useSignUpErrorCheck(): {
     switch (type) {
       case 200:
         showToast('success', '회원가입 완료, 로그인을 진행해주세요.');
-        navigate('/sign-in');
+        routeTo(PATH_URL.SIGN_IN);
         error(false);
         break;
       case 400:

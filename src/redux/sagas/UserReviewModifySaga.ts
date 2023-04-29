@@ -1,6 +1,7 @@
 import axios from 'axios';
 import instance from 'api/axios';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { API_URL } from 'constants/path';
 import {
   UserReviewModifyFail,
   UserReviewModifySuccess,
@@ -13,7 +14,7 @@ function UserReviewModifyAPI(data: {
   rating: number;
 }) {
   const { id, review, rating } = data;
-  return instance.put(`/book/reviews/${id}`, { review, rating });
+  return instance.put(`${API_URL.BOOK_REVIEWS}/${id}`, { review, rating });
 }
 
 function* fetchUserReviewModifySaga(action: {

@@ -1,23 +1,25 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import theme from 'styles/theme';
 import { AppStateType } from 'redux/reducers';
 import { ReviewInit, ReviewRequest } from 'redux/reducers/Review';
 import useToggle from 'hooks/useToggle';
+import useRouter from 'hooks/useRouter';
 import { reviewInit } from 'constants/content';
+import { PATH_URL } from 'constants/path';
 import Container from 'common/Container';
+import Pagination from 'common/Pagination';
 import BookBannerInfo from 'components/modules/banners/BookBanner';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
-import Pagination from 'common/Pagination';
 import UserReviewList from 'components/modules/lists/UserReviewList';
 import ReviewDetailModal from 'components/pages/modal/ReivewDetailModal';
 
 function Index() {
   const location = useLocation();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const { routeTo } = useRouter();
   const sort = `${location.search.split('=')[1]}`;
   const isbn = Number(location.pathname.split('/')[2]);
   const [detailToggle, handleDetailToggle] = useToggle(false);
@@ -29,12 +31,12 @@ function Index() {
   );
 
   const handleNewClick = () => {
-    navigate(`/review/${isbn}?sort=new`, { replace: true });
+    routeTo(`${PATH_URL.REVIEW}/${isbn}?sort=new`, true);
     setCurIndex(0);
   };
 
   const handleRecommendClick = () => {
-    navigate(`/review/${isbn}?sort=recommend`, { replace: true });
+    routeTo(`${PATH_URL.REVIEW}/${isbn}?sort=recommend`, true);
     setCurIndex(0);
   };
 

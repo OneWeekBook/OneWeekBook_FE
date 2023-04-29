@@ -23,7 +23,7 @@ function SignUpPage() {
         <DefaultLabel
           content="이메일로 회원가입"
           fontSize={2.4}
-          fontColor={theme.color.COLOR_FONT_ONE}
+          fontColor={theme.color.COLOR_SIENNA}
         />
         <AuthEmailForm
           authDone={authDone}

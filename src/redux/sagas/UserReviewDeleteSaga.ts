@@ -2,6 +2,7 @@ import axios from 'axios';
 import instance from 'api/axios';
 import { DeleteRequestType } from 'types/request';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { API_URL } from 'constants/path';
 import {
   UserReviewDeleteFail,
   UserReviewDeleteSuccess,
@@ -9,7 +10,7 @@ import {
 } from '../reducers/UserReview';
 
 function UserReviewDeleteAPI(data: DeleteRequestType) {
-  return instance.delete(`/book/reviews/${data.id}`);
+  return instance.delete(`${API_URL.BOOK_REVIEWS}/${data.id}`);
 }
 
 function* fetchUserReviewDeleteSaga(): object {

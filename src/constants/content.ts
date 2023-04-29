@@ -1,4 +1,5 @@
 import { SLIDE_IMAGE, MENU_IMAGE } from 'constants/image';
+import { PATH_URL } from './path';
 
 export const bookInit = {
   id: -1,
@@ -40,28 +41,28 @@ export const menuItems = [
   {
     id: 1,
     title: '홈',
-    link: '/',
+    link: PATH_URL.MAIN,
     img: MENU_IMAGE.HOME_NONE,
     clickImg: MENU_IMAGE.HOME_DONE,
   },
   {
     id: 2,
     title: '내 서재',
-    link: '/my-library',
+    link: PATH_URL.LIBRARY,
     img: MENU_IMAGE.LIBRARY_NONE,
     clickImg: MENU_IMAGE.LIBRARY_DONE,
   },
   {
     id: 3,
     title: '카테고리',
-    link: '/category',
+    link: PATH_URL.CATEGORY,
     img: MENU_IMAGE.CATEGORY_NONE,
     clickImg: MENU_IMAGE.CATEGORY_DONE,
   },
   {
     id: 4,
     title: '리뷰',
-    link: '/review',
+    link: PATH_URL.REVIEW,
     img: MENU_IMAGE.REVIEW_NONE,
     clickImg: MENU_IMAGE.REVIEW_DONE,
   },

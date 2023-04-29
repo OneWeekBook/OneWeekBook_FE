@@ -1,6 +1,7 @@
 import axios from 'axios';
 import instance from 'api/axios';
 import { call, put, takeLatest } from 'redux-saga/effects';
+import { API_URL } from 'constants/path';
 import {
   AuthUserFail,
   AuthUserSuccess,
@@ -8,12 +9,12 @@ import {
 } from '../reducers/AuthUser';
 
 function AuthUserAPI() {
-  return instance.get('/user');
+  return instance.get(API_URL.USER);
 }
 
 function UserLibraryAPI(params: { userId: number; progress: number }) {
   return instance.get(
-    `${process.env.REACT_APP_BASIC_URL}/book/mylist?userId=${params.userId}&progress=${params.progress}`,
+    `${process.env.REACT_APP_BASIC_URL}${API_URL.LIBRARY}?userId=${params.userId}&progress=${params.progress}`,
   );
 }
 

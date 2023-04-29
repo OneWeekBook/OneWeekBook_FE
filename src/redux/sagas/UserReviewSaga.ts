@@ -1,6 +1,7 @@
 import axios from 'axios';
 import instance from 'api/axios';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { API_URL } from 'constants/path';
 import {
   UserReviewFail,
   UserReviewSuccess,
@@ -8,7 +9,7 @@ import {
 } from '../reducers/UserReview';
 
 function UserReviewAPI(data: { userId: number; bookId: number }) {
-  return instance.get(`/book/reviews/${data.bookId}/${data.userId}`);
+  return instance.get(`${API_URL.BOOK_REVIEWS}/${data.bookId}/${data.userId}`);
 }
 
 function* fetchUserReviewSaga(action: {

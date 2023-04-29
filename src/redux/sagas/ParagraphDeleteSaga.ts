@@ -1,7 +1,8 @@
 import axios from 'axios';
 import instance from 'api/axios';
-import { DeleteRequestType } from 'types/request';
 import { call, put, takeEvery } from 'redux-saga/effects';
+import { DeleteRequestType } from 'types/request';
+import { API_URL } from 'constants/path';
 import {
   ParagraphDeleteFail,
   ParagraphDeleteSuccess,
@@ -10,7 +11,7 @@ import {
 
 function ParagraphDeleteAPI(data: DeleteRequestType) {
   return instance.delete(
-    `${process.env.REACT_APP_BASIC_URL}/book/paragraph?id=${data.id}`,
+    `${process.env.REACT_APP_BASIC_URL}${API_URL.PARAGRAPH}?id=${data.id}`,
   );
 }
 

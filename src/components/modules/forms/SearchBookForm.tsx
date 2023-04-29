@@ -1,21 +1,22 @@
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { SearchInputTypes } from 'types/module';
 import { AppStateType } from 'redux/reducers';
 import { SearchInit, SearchRequest } from 'redux/reducers/Search';
 import { searchNone } from 'redux/reducers/Func';
 import useDebounce from 'hooks/useDebounce';
+import useRouter from 'hooks/useRouter';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import DefaultInput from 'components/atoms/inputs/DefaultInput';
+import { PATH_URL } from 'constants/path';
 
 function SearchBookForm({
   curSubCategory,
   curParentCategory,
 }: SearchInputTypes) {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const { routeTo } = useRouter();
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebounce(search, 500);
   const books = useSelector(
@@ -60,23 +61,23 @@ function SearchBookForm({
 
   const handleClick = () => {
     if (curSubCategory[0].categoryId && search) {
-      navigate(
-        `/category/result?${curParentCategory[0].categoryName}=${curParentCategory[0].categoryId}&${curSubCategory[0].categoryName}=${curSubCategory[0].categoryId}&search=${search}`,
+      routeTo(
+        `${PATH_URL.SEARCH}?${curParentCategory[0].categoryName}=${curParentCategory[0].categoryId}&${curSubCategory[0].categoryName}=${curSubCategory[0].categoryId}&search=${search}`,
       );
     } else if (curSubCategory[0].categoryId) {
-      navigate(
-        `/category/result?${curParentCategory[0].categoryName}=${curParentCategory[0].categoryId}&${curSubCategory[0].categoryName}=${curSubCategory[0].categoryId}&search=${curSubCategory[0].categoryName}`,
+      routeTo(
+        `${PATH_URL.SEARCH}?${curParentCategory[0].categoryName}=${curParentCategory[0].categoryId}&${curSubCategory[0].categoryName}=${curSubCategory[0].categoryId}&search=${curSubCategory[0].categoryName}`,
       );
     } else if (curParentCategory[0].categoryId && search) {
-      navigate(
-        `/category/result?${curParentCategory[0].categoryName}=${curParentCategory[0].categoryId}&search=${search}`,
+      routeTo(
+        `${PATH_URL.SEARCH}?${curParentCategory[0].categoryName}=${curParentCategory[0].categoryId}&search=${search}`,
       );
     } else if (curParentCategory[0].categoryId) {
-      navigate(
-        `/category/result?${curParentCategory[0].categoryName}=${curParentCategory[0].categoryId}&search=${curParentCategory[0].categoryName}`,
+      routeTo(
+        `${PATH_URL.SEARCH}?${curParentCategory[0].categoryName}=${curParentCategory[0].categoryId}&search=${curParentCategory[0].categoryName}`,
       );
     } else {
-      navigate(`/category/result?&search=${search}`);
+      routeTo(`${PATH_URL.SEARCH}?&search=${search}`);
     }
   };
 

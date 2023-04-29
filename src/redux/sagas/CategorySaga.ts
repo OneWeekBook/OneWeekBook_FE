@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { call, put, takeEvery } from 'redux-saga/effects';
+import { API_URL } from 'constants/path';
 import {
   CategoryFail,
   CategorySuccess,
@@ -7,7 +8,7 @@ import {
 } from '../reducers/Category';
 
 function CategoryAPI() {
-  return axios.get(`${process.env.REACT_APP_BASIC_URL}/book/categories`);
+  return axios.get(`${process.env.REACT_APP_BASIC_URL}${API_URL.CATEGORY}`);
 }
 
 function* fetchCategorySaga(): object {

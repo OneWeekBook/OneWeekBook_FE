@@ -5,6 +5,7 @@ import theme from 'styles/theme';
 import { ReviewResponseTypes } from 'types/response';
 import { ReviewBookCardType } from 'types/module';
 import { FUNC_IMAGE } from 'constants/image';
+import { PATH_URL } from 'constants/path';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DefaultText from 'components/atoms/texts/DefaultText';
 import MultiText from 'components/atoms/texts/MultiText';
@@ -27,7 +28,7 @@ function ReivewItem({
         fontColor={theme.color.COLOR_WHITE}
         fontSize={1.6}
       />
-      <BookInfo to={`/review/${isbn}?sort=recommend`}>
+      <BookInfo to={`${PATH_URL.REVIEW}/${isbn}?sort=recommend`}>
         <DefaultImage imageSrc={img} imageAlt="book img" pc={[140, 200]} />
         <DefaultText
           className="booktitle"

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import instance from 'api/axios';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { API_URL } from 'constants/path';
 import {
   LikeAddFail,
   LikeAddSuccess,
@@ -10,7 +11,7 @@ import {
 function LikeAddAPI(params: { bookId: number; state: number; userId: number }) {
   const { bookId, state, userId } = params;
   return instance.post(
-    `${process.env.REACT_APP_BASIC_URL}/book/reviews/${bookId}/like`,
+    `${process.env.REACT_APP_BASIC_URL}${API_URL.BOOK_REVIEWS}/${bookId}${API_URL.LIKE}`,
     { state, userId },
   );
 }

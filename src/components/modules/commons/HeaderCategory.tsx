@@ -1,14 +1,14 @@
-import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import useToggle from 'hooks/useToggle';
+import useRouter from 'hooks/useRouter';
 import useAuthLink from 'hooks/useAuthLink';
 import { menuItems } from 'constants/content';
+import { PATH_URL } from 'constants/path';
 import NoticeModal from 'common/DefaultModal';
 import MenuButton from 'components/atoms/buttons/MenuButton';
 
 function HeaderMainCategory() {
-  const navigate = useNavigate();
-  const location = useLocation();
+  const { routeTo, currentPath } = useRouter();
   const [modalToggle, isModalToggleOn] = useToggle(false);
   const { handleAuthClick } = useAuthLink();
 
@@ -18,14 +18,14 @@ function HeaderMainCategory() {
         <MenuButton
           key={item.id}
           src={
-            item.link === `/${location.pathname.split('/')[1]}`
+            item.link === `/${currentPath.split('/')[1]}`
               ? item.clickImg
               : item.img
           }
           imgSize={30}
           content={item.title}
           handleClick={() =>
-            handleAuthClick(item.link, ['/my-library'], isModalToggleOn)
+            handleAuthClick(item.link, [PATH_URL.LIBRARY], isModalToggleOn)
           }
         />
       ))}
@@ -40,7 +40,7 @@ function HeaderMainCategory() {
           close
           okButtonTitle="로그인"
           cancelButtonTitle="나중에"
-          handleOkClick={() => navigate('/sign-in')}
+          handleOkClick={() => routeTo(PATH_URL.SIGN_IN)}
           handleCanCelClick={isModalToggleOn}
         />
       )}
