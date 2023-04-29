@@ -6,6 +6,7 @@ import { BestBookCardTypes } from 'types/module';
 import { ReviewResponseTypes } from 'types/response';
 import { getImgErr } from 'utils/ImageError';
 import { FUNC_IMAGE } from 'constants/image';
+import { PATH_URL } from 'constants/path';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DefaultText from 'components/atoms/texts/DefaultText';
 import MultiText from 'components/atoms/texts/MultiText';
@@ -20,7 +21,7 @@ function BestBookCard({
   count,
 }: React.PropsWithChildren<ReviewResponseTypes> & BestBookCardTypes) {
   return (
-    <CardContainer to={`/review/${isbn}?sort=recommend`}>
+    <CardContainer to={`${PATH_URL.REVIEW}/${isbn}?sort=recommend`}>
       <DefaultImage
         imageSrc={img}
         imageAlt="book"

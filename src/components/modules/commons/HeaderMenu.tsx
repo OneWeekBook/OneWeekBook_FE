@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { HeaderTypes } from 'types/module';
 import { FUNC_IMAGE } from 'constants/image';
+import { PATH_URL } from 'constants/path';
 import ImageButton from 'components/atoms/buttons/ImageButton';
 import DefaultLink from 'components/atoms/links/DefaultLink';
 
@@ -8,22 +9,26 @@ function HeaderMenu({ handleToggle, handleSignout }: HeaderTypes) {
   return (
     <HeaderTopMenuModule>
       <DefaultLink
-        to="/"
+        to={PATH_URL.MAIN}
         content="ONEWEEKBOOK"
         fontSize={3.2}
         fontWeight={700}
       />
       {sessionStorage.getItem('accessToken') ? (
         <LinkWrapper>
-          <DefaultLink to="/myPage" content="마이페이지" />
+          <DefaultLink to={PATH_URL.USER} content="마이페이지" />
           <span>&nbsp;&nbsp;·&nbsp;&nbsp;</span>
-          <DefaultLink to="/" content="로그아웃" handleClick={handleSignout} />
+          <DefaultLink
+            to={PATH_URL.MAIN}
+            content="로그아웃"
+            handleClick={handleSignout}
+          />
         </LinkWrapper>
       ) : (
         <LinkWrapper>
-          <DefaultLink to="/sign-up" content="회원가입" />
+          <DefaultLink to={PATH_URL.SIGN_UP} content="회원가입" />
           <span>&nbsp;&nbsp;·&nbsp;&nbsp;</span>
-          <DefaultLink to="/sign-in" content="로그인" />
+          <DefaultLink to={PATH_URL.SIGN_IN} content="로그인" />
         </LinkWrapper>
       )}
       <ImageButton

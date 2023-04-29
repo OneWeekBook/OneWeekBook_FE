@@ -6,6 +6,7 @@ import { AppStateType } from 'redux/reducers';
 import { AuthUserRequest } from 'redux/reducers/AuthUser';
 import useToggle from 'hooks/useToggle';
 import TopScroll from 'utils/TopScroll';
+import { PATH_URL } from 'constants/path';
 import DefaultLink from 'components/atoms/links/DefaultLink';
 import Footer from './Footer';
 import Header from './Header';
@@ -33,10 +34,11 @@ function Index({ children }: PropsWithChildren) {
   return (
     <LayoutWrapper>
       <TopScroll />
-      {location.pathname === '/sign-up' || location.pathname === '/sign-in' ? (
+      {location.pathname === PATH_URL.SIGN_UP ||
+      location.pathname === PATH_URL.SIGN_IN ? (
         <HeaderWrapper>
           <DefaultLink
-            to="/"
+            to={PATH_URL.MAIN}
             content="ONEWEEKBOOK"
             fontSize={3.2}
             fontWeight={700}

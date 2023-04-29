@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { UserBookResponseTypes } from 'types/response';
+import { PATH_URL } from 'constants/path';
 import StarIcon from 'components/atoms/icons/StarIcon';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DefaultText from 'components/atoms/texts/DefaultText';
@@ -16,7 +17,7 @@ function UserBookCard({
 }: React.PropsWithChildren<UserBookResponseTypes>) {
   return (
     <UserBookCardContainer
-      to={review ? `/review/${isbn}?sort=recommend` : '/myPage'}
+      to={review ? `${PATH_URL.REVIEW}/${isbn}?sort=recommend` : PATH_URL.USER}
     >
       <UserBookImage>
         <DefaultImage
@@ -72,7 +73,7 @@ const UserBookInfo = styled.div`
   box-sizing: border-box;
   padding: 10px;
   .booktitle {
-    height: 48px;
+    height: 44px;
     line-height: 21px;
     display: -webkit-box;
     word-wrap: break-word;

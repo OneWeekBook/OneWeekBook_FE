@@ -1,25 +1,26 @@
 import { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { SidebarTypes } from 'types/common';
 import { AuthInit } from 'redux/reducers/AuthUser';
-import { showToast } from 'common/Toast';
 import useToggle from 'hooks/useToggle';
+import useRouter from 'hooks/useRouter';
 import useAuthLink from 'hooks/useAuthLink';
+import { PATH_URL } from 'constants/path';
 import { menuItems } from 'constants/content';
+import { showToast } from 'common/Toast';
 import NoticeModal from 'common/DefaultModal';
 import SideBarLink from 'components/atoms/links/SideBarLink';
 
 function Sidebar({ toggle, handleToggle }: SidebarTypes) {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
+  const { routeTo, currentPath } = useRouter();
+
   const [modalToggle, handleModalToggle] = useToggle(false);
   const { handleAuthClick } = useAuthLink();
 
   const handleMoveLink = (link: string) => {
-    navigate(link, { replace: link === location.pathname });
+    routeTo(link, link === currentPath);
     handleToggle();
   };
 
@@ -27,7 +28,7 @@ function Sidebar({ toggle, handleToggle }: SidebarTypes) {
     sessionStorage.removeItem('accessToken');
     dispatch(AuthInit());
     showToast('info', '로그아웃 되었습니다.');
-    navigate('/', { replace: true });
+    routeTo(PATH_URL.MAIN, true);
     handleToggle();
   };
 
@@ -45,18 +46,18 @@ function Sidebar({ toggle, handleToggle }: SidebarTypes) {
         <>
           <SideBarLink handleClick={logoutClick} content="로그아웃" />
           <SideBarLink
-            handleClick={() => handleMoveLink('/myPage')}
+            handleClick={() => handleMoveLink(PATH_URL.USER)}
             content="마이페이지"
           />
         </>
       ) : (
         <>
           <SideBarLink
-            handleClick={() => handleMoveLink('/sign-in')}
+            handleClick={() => handleMoveLink(PATH_URL.SIGN_IN)}
             content="로그인"
           />
           <SideBarLink
-            handleClick={() => handleMoveLink('/sign-up')}
+            handleClick={() => handleMoveLink(PATH_URL.SIGN_UP)}
             content="회원가입"
           />
         </>
@@ -67,7 +68,7 @@ function Sidebar({ toggle, handleToggle }: SidebarTypes) {
           handleClick={() =>
             handleAuthClick(
               item.link,
-              ['/my-library'],
+              [PATH_URL.LIBRARY],
               handleModalToggle,
               handleToggle,
             )
@@ -86,7 +87,7 @@ function Sidebar({ toggle, handleToggle }: SidebarTypes) {
           close
           okButtonTitle="로그인"
           cancelButtonTitle="나중에..."
-          handleOkClick={() => handleMoveLink('/sign-in')}
+          handleOkClick={() => handleMoveLink(PATH_URL.SIGN_IN)}
           handleCanCelClick={handleModalToggle}
         />
       )}

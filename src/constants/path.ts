@@ -17,3 +17,14 @@ export const API_URL = {
   LIBRARY: '/book/mylist',
   PARAGRAPH: '/book/paragraph',
 };
+
+export const PATH_URL = {
+  MAIN: '/',
+  SIGN_IN: '/sign-in',
+  SIGN_UP: '/sign-up',
+  CATEGORY: '/category',
+  SEARCH: '/category/result',
+  REVIEW: '/review',
+  USER: '/user',
+  LIBRARY: '/library',
+};
