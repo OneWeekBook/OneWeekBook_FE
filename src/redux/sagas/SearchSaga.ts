@@ -3,7 +3,11 @@ import instance from 'api/axios';
 import { call, put, throttle } from 'redux-saga/effects';
 import { API_URL } from 'constants/path';
 import { SearchRequestTypes } from 'types/request';
-import { SearchFail, SearchSuccess, SEARCH_REQUEST } from '../reducers/Search';
+import {
+  SearchFail,
+  SearchSuccess,
+  SEARCH_REQUEST,
+} from 'redux/reducers/Search';
 
 function SearchAPI(params: SearchRequestTypes) {
   if (params.d_categ) {

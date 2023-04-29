@@ -4,7 +4,11 @@ import { SignInRequestTypes } from 'types/request';
 import { API_URL } from 'constants/path';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { saveAccessTokenToSessionStorage } from 'utils/accessTokenHandler';
-import { SignInFail, SignInSuccess, SIGN_IN_REQUEST } from '../reducers/SignIn';
+import {
+  SignInFail,
+  SignInSuccess,
+  SIGN_IN_REQUEST,
+} from 'redux/reducers/SignIn';
 
 function SignInAPI(data: SignInRequestTypes) {
   return instance.post(

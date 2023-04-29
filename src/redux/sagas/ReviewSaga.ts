@@ -7,7 +7,7 @@ import {
   ReviewsFail,
   ReviewsSuccess,
   REVIEWS_REQUEST,
-} from '../reducers/Review';
+} from 'redux/reducers/Review';
 
 function ReviewAPI(params: ReviewRequestTypes) {
   return instance.get(
