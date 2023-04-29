@@ -7,7 +7,7 @@ import {
   MyLibraryAddFail,
   MyLibraryAddSuccess,
   MY_LIBRARY_ADD_REQUEST,
-} from '../reducers/MyLibrary';
+} from 'redux/reducers/MyLibrary';
 
 function MyLibraryAddAPI(data: { userId: number & LibraryAddRequestTypes }) {
   return instance.post(

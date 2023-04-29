@@ -7,7 +7,7 @@ import {
   UserReviewAddFail,
   UserReviewAddSuccess,
   USER_REVIEW_ADD_REQUEST,
-} from '../reducers/UserReview';
+} from 'redux/reducers/UserReview';
 
 function UserReviewAddAPI(data: ReviewAddRequestTypes) {
   const { bookId, review, rating } = data;

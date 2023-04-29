@@ -5,6 +5,7 @@ import { RemoveUserModalType } from 'types/page';
 import { RemoveUserInit, RemoveUserRequest } from 'redux/reducers/RemoveUser';
 import useInput from 'hooks/useInput';
 import useRouter from 'hooks/useRouter';
+import { removeAccessTokenFromSessionStorage } from 'utils/accessTokenHandler';
 import { PATH_URL } from 'constants/path';
 import { showToast } from 'common/Toast';
 import DefaultModal from 'common/DefaultModal';
@@ -28,7 +29,7 @@ function RemoveUserModal({ removeToggleIsOn }: RemoveUserModalType) {
 
   const handleRemoveUser = useCallback(() => {
     if (removeErrorStatus === 200) {
-      sessionStorage.removeItem('accessToken');
+      removeAccessTokenFromSessionStorage();
       removeToggleIsOn();
       showToast('info', '회원탈퇴가 정상적으로 처리되었습니다.');
       routeTo(PATH_URL.MAIN);

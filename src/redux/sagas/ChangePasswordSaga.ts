@@ -6,7 +6,7 @@ import {
   ChangePasswordFail,
   ChangePasswordSuccess,
   CHANGE_PASSWORD_REQUEST,
-} from '../reducers/ChangePassword';
+} from 'redux/reducers/ChangePassword';
 
 function ChangePasswordAPI(data: { email: string; password: string }) {
   return instance.put(API_URL.USER_CHANGE_PASSWORD, data);

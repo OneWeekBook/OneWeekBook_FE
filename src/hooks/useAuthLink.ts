@@ -1,3 +1,4 @@
+import { getAccessTokenFromSessionStorage } from 'utils/accessTokenHandler';
 import useRouter from './useRouter';
 
 function useAuthLink(): {
@@ -19,19 +20,13 @@ function useAuthLink(): {
     if (
       toggle &&
       compLink.includes(link) &&
-      sessionStorage.getItem('accessToken')
+      getAccessTokenFromSessionStorage()
     ) {
       routeTo(link, link === currentPath);
       toggle();
-    } else if (
-      compLink.includes(link) &&
-      sessionStorage.getItem('accessToken')
-    ) {
+    } else if (compLink.includes(link) && getAccessTokenFromSessionStorage()) {
       routeTo(link, link === currentPath);
-    } else if (
-      compLink.includes(link) &&
-      !sessionStorage.getItem('accessToken')
-    ) {
+    } else if (compLink.includes(link) && !getAccessTokenFromSessionStorage()) {
       Modaltoggle();
     } else if (toggle) {
       routeTo(link, link === currentPath);

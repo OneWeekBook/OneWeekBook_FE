@@ -6,7 +6,7 @@ import {
   MyLibraryDeleteFail,
   MyLibraryDeleteSuccess,
   MY_LIBRARY_DELETE_REQUEST,
-} from '../reducers/MyLibrary';
+} from 'redux/reducers/MyLibrary';
 
 function MyLibraryDeleteAPI(params: { id: number }) {
   return instance.delete(

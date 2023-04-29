@@ -6,7 +6,7 @@ import {
   LikeAddFail,
   LikeAddSuccess,
   LIKE_ADD_REQUEST,
-} from '../reducers/Like';
+} from 'redux/reducers/Like';
 
 function LikeAddAPI(params: { bookId: number; state: number; userId: number }) {
   const { bookId, state, userId } = params;

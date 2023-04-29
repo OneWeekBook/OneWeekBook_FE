@@ -10,7 +10,7 @@ import {
   ParagraphSuccess,
   PARAGRAPH_INIT_REQUEST,
   PARAGRAPH_REQUEST,
-} from '../reducers/Paragraph';
+} from 'redux/reducers/Paragraph';
 
 function ParagraphAPI(params: ParagraphRequestType) {
   return instance.get(

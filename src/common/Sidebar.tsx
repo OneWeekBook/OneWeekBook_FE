@@ -6,6 +6,10 @@ import { AuthInit } from 'redux/reducers/AuthUser';
 import useToggle from 'hooks/useToggle';
 import useRouter from 'hooks/useRouter';
 import useAuthLink from 'hooks/useAuthLink';
+import {
+  getAccessTokenFromSessionStorage,
+  removeAccessTokenFromSessionStorage,
+} from 'utils/accessTokenHandler';
 import { PATH_URL } from 'constants/path';
 import { menuItems } from 'constants/content';
 import { showToast } from 'common/Toast';
@@ -25,7 +29,7 @@ function Sidebar({ toggle, handleToggle }: SidebarTypes) {
   };
 
   const logoutClick = () => {
-    sessionStorage.removeItem('accessToken');
+    removeAccessTokenFromSessionStorage();
     dispatch(AuthInit());
     showToast('info', '로그아웃 되었습니다.');
     routeTo(PATH_URL.MAIN, true);
@@ -42,7 +46,7 @@ function Sidebar({ toggle, handleToggle }: SidebarTypes) {
 
   return (
     <SideBarBody isToggle={toggle}>
-      {sessionStorage.getItem('accessToken') ? (
+      {getAccessTokenFromSessionStorage() ? (
         <>
           <SideBarLink handleClick={logoutClick} content="로그아웃" />
           <SideBarLink

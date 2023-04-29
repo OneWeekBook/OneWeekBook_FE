@@ -6,7 +6,7 @@ import {
   AuthUserFail,
   AuthUserSuccess,
   AUTH_USER_REQUEST,
-} from '../reducers/AuthUser';
+} from 'redux/reducers/AuthUser';
 
 function AuthUserAPI() {
   return instance.get(API_URL.USER);

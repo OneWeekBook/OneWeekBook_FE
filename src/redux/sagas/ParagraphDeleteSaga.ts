@@ -7,7 +7,7 @@ import {
   ParagraphDeleteFail,
   ParagraphDeleteSuccess,
   PARAGRAPH_DELETE_REQUEST,
-} from '../reducers/Paragraph';
+} from 'redux/reducers/Paragraph';
 
 function ParagraphDeleteAPI(data: DeleteRequestType) {
   return instance.delete(

@@ -6,7 +6,7 @@ import {
   UserReviewFail,
   UserReviewSuccess,
   USER_REVIEW_REQUEST,
-} from '../reducers/UserReview';
+} from 'redux/reducers/UserReview';
 
 function UserReviewAPI(data: { userId: number; bookId: number }) {
   return instance.get(`${API_URL.BOOK_REVIEWS}/${data.bookId}/${data.userId}`);

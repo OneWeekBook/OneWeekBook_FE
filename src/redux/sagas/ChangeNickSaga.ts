@@ -6,7 +6,7 @@ import {
   ChangeNickFail,
   ChangeNickSuccess,
   CHANGE_NICK_REQUEST,
-} from '../reducers/ChangeNick';
+} from 'redux/reducers/ChangeNick';
 
 function ChangeNickAPI(data: { nick: string; id: number }) {
   return instance.put(API_URL.USER_CHANGE_NICK, data);

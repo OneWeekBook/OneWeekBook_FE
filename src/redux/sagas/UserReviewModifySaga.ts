@@ -6,7 +6,7 @@ import {
   UserReviewModifyFail,
   UserReviewModifySuccess,
   USER_REVIEW_MODIFY_REQUEST,
-} from '../reducers/UserReview';
+} from 'redux/reducers/UserReview';
 
 function UserReviewModifyAPI(data: {
   id: number;

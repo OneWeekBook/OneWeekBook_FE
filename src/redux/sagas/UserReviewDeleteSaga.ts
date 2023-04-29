@@ -7,7 +7,7 @@ import {
   UserReviewDeleteFail,
   UserReviewDeleteSuccess,
   USER_REVIEW_DELETE_REQUEST,
-} from '../reducers/UserReview';
+} from 'redux/reducers/UserReview';
 
 function UserReviewDeleteAPI(data: DeleteRequestType) {
   return instance.delete(`${API_URL.BOOK_REVIEWS}/${data.id}`);
