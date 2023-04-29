@@ -1,6 +1,8 @@
 import { SLIDE_IMAGE, MENU_IMAGE } from 'constants/image';
 import { PATH_URL } from './path';
 
+export const LOCALSTORAGE_TOKEN_KEY = 'accesstoken';
+
 export const bookInit = {
   id: -1,
   isbn: '',
