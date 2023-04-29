@@ -20,7 +20,7 @@ function Index() {
         <DefaultLabel
           content="로그인"
           fontSize={2.4}
-          fontColor={theme.color.COLOR_FONT_ONE}
+          fontColor={theme.color.COLOR_SIENNA}
         />
         <SignInForm />
         <DefaultButton
