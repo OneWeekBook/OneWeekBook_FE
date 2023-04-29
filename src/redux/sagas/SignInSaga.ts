@@ -6,7 +6,7 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { SignInFail, SignInSuccess, SIGN_IN_REQUEST } from '../reducers/SignIn';
 
 function SignInAPI(data: SignInRequestTypes) {
-  return axios.post(
+  return instance.post(
     `${process.env.REACT_APP_BASIC_URL}${API_URL.USER_LOGIN}`,
     data,
   );

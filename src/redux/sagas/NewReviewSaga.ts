@@ -1,14 +1,15 @@
 import axios from 'axios';
+import instance from 'api/axios';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { API_URL } from 'constants/path';
 import {
   NewReviewsFail,
   NewReviewsSuccess,
   NEW_REVIEWS_REQUEST,
-} from '../reducers/NewReview';
+} from 'redux/reducers/NewReview';
 
 function NewReviewAPI() {
-  return axios.get(
+  return instance.get(
     `${process.env.REACT_APP_BASIC_URL}${API_URL.LATEST_REVIEW}`,
   );
 }

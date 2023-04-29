@@ -1,14 +1,15 @@
 import axios from 'axios';
+import instance from 'api/axios';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { API_URL } from 'constants/path';
 import {
   AuthEmailFail,
   AuthEmailSuccess,
   AUTH_EMAIL_REQUEST,
-} from '../reducers/AuthEmail';
+} from 'redux/reducers/AuthEmail';
 
 function AuthEmailAPI(data: { email: string }) {
-  return axios.post(
+  return instance.post(
     `${process.env.REACT_APP_BASIC_URL}${API_URL.AUTH_CODE}`,
     data,
   );

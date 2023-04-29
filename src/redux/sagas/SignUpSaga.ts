@@ -1,11 +1,16 @@
 import axios from 'axios';
+import instance from 'api/axios';
 import { SignUpRequestTypes } from 'types/request';
 import { API_URL } from 'constants/path';
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { SignUpFail, SignUpSuccess, SIGN_UP_REQUEST } from '../reducers/SignUp';
+import {
+  SignUpFail,
+  SignUpSuccess,
+  SIGN_UP_REQUEST,
+} from 'redux/reducers/SignUp';
 
 function SignUpAPI(data: SignUpRequestTypes) {
-  return axios.post(
+  return instance.post(
     `${process.env.REACT_APP_BASIC_URL}${API_URL.USER_REGISTER}`,
     data,
   );

@@ -6,7 +6,7 @@ import {
   MyLibraryModifyFail,
   MyLibraryModifySuccess,
   MY_LIBRARY_MODIFY_REQUEST,
-} from '../reducers/MyLibrary';
+} from 'redux/reducers/MyLibrary';
 
 function MyLibraryModifyAPI(data: {
   userId: number;

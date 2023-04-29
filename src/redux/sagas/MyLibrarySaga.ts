@@ -6,7 +6,7 @@ import {
   MyLibraryFail,
   MyLibrarySuccess,
   MY_LIBRARY_REQUEST,
-} from '../reducers/MyLibrary';
+} from 'redux/reducers/MyLibrary';
 
 export function MyLibraryAPI(params: { userId: number; progress: number }) {
   return instance.get(

@@ -6,7 +6,7 @@ import {
   LikeCancelFail,
   LikeCancelSuccess,
   LIKE_CANCEL_REQUEST,
-} from '../reducers/Like';
+} from 'redux/reducers/Like';
 
 function LikeCancelAPI(data: { userId: number; bookId: number }) {
   const { userId, bookId } = data;

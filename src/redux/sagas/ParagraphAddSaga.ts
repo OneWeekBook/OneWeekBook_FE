@@ -7,7 +7,7 @@ import {
   ParagraphAddFail,
   ParagraphAddSuccess,
   PARAGRAPH_ADD_REQUEST,
-} from '../reducers/Paragraph';
+} from 'redux/reducers/Paragraph';
 
 function ParagraphAddAPI(data: ParagraphAddRequestTypes) {
   return instance.post(

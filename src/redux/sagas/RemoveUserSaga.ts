@@ -6,7 +6,7 @@ import {
   RemoveUserFail,
   RemoveUserSuccess,
   REMOVE_USER_REQUEST,
-} from '../reducers/RemoveUser';
+} from 'redux/reducers/RemoveUser';
 
 function RemoveUserAPI(data: { id: number; password: string }) {
   return instance.post(API_URL.USER_DELETE, data);

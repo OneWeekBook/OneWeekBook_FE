@@ -1,4 +1,5 @@
 import axios from 'axios';
+import instance from 'api/axios';
 import { call, put, throttle } from 'redux-saga/effects';
 import { API_URL } from 'constants/path';
 import { SearchRequestTypes } from 'types/request';
@@ -6,12 +7,12 @@ import { SearchFail, SearchSuccess, SEARCH_REQUEST } from '../reducers/Search';
 
 function SearchAPI(params: SearchRequestTypes) {
   if (params.d_categ) {
-    return axios.get(
+    return instance.get(
       `${process.env.REACT_APP_BASIC_URL}${API_URL.SEARCH}?d_catg=${params.d_categ}&d_titl=${params.title}&start=${params.start}&display=${params.display}`,
     );
   }
   if (params.title) {
-    return axios.get(
+    return instance.get(
       `${process.env.REACT_APP_BASIC_URL}${API_URL.SEARCH}?query=${params.title}&start=${params.start}&diplay=${params.display}`,
     );
   }
