@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { HeaderTypes } from 'types/module';
 import { FUNC_IMAGE } from 'constants/image';
 import { PATH_URL } from 'constants/path';
+import { getAccessTokenFromSessionStorage } from 'utils/accessTokenHandler';
 import ImageButton from 'components/atoms/buttons/ImageButton';
 import DefaultLink from 'components/atoms/links/DefaultLink';
 
@@ -14,7 +15,7 @@ function HeaderMenu({ handleToggle, handleSignout }: HeaderTypes) {
         fontSize={3.2}
         fontWeight={700}
       />
-      {sessionStorage.getItem('accessToken') ? (
+      {getAccessTokenFromSessionStorage() ? (
         <LinkWrapper>
           <DefaultLink to={PATH_URL.USER} content="마이페이지" />
           <span>&nbsp;&nbsp;·&nbsp;&nbsp;</span>

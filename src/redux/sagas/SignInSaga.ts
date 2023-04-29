@@ -3,6 +3,7 @@ import instance from 'api/axios';
 import { SignInRequestTypes } from 'types/request';
 import { API_URL } from 'constants/path';
 import { call, put, takeEvery } from 'redux-saga/effects';
+import { saveAccessTokenToSessionStorage } from 'utils/accessTokenHandler';
 import { SignInFail, SignInSuccess, SIGN_IN_REQUEST } from '../reducers/SignIn';
 
 function SignInAPI(data: SignInRequestTypes) {
@@ -19,7 +20,7 @@ function* fetchSignInSaga(action: {
   try {
     const result = yield call(SignInAPI, action.payload);
     yield put(SignInSuccess(result.data));
-    sessionStorage.setItem('accessToken', result.data.accessToken);
+    saveAccessTokenToSessionStorage(result.data.accessToken);
     instance.defaults.headers.common.Authorization = result.data.accessToken;
   } catch (error) {
     if (axios.isAxiosError(error)) yield put(SignInFail(error));

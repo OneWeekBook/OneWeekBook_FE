@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { LikeAddTypes } from 'types/module';
 import { getImgErr } from 'utils/ImageError';
 import { SetDate } from 'utils/SetDate';
+import { getAccessTokenFromSessionStorage } from 'utils/accessTokenHandler';
 import { FUNC_IMAGE } from 'constants/image';
 import ImageButton from 'components/atoms/buttons/ImageButton';
 import DefaultImage from 'components/atoms/images/DefaultImage';
@@ -22,7 +23,7 @@ function SearchBookCard({
   return (
     <SearchBookCardContainer>
       <BookCover>
-        {sessionStorage.getItem('accessToken') && (
+        {getAccessTokenFromSessionStorage() && (
           <ImageButton
             type="button"
             src={FUNC_IMAGE.HEART}
