@@ -15,7 +15,7 @@ import paragraph from './Paragraph';
 import review from './Review';
 import newReview from './NewReview';
 import userReview from './UserReview';
-import like from './Like';
+import favorite from './Favorite';
 
 const rootReducer = combineReducers({
   authEmail,
@@ -34,7 +34,7 @@ const rootReducer = combineReducers({
   review,
   newReview,
   userReview,
-  like,
+  favorite,
 });
 
 export default rootReducer;

@@ -120,7 +120,7 @@ export interface ResponseCategorySuccess extends SuccessResponseTypes {
 }
 
 export interface ResponseFavoriteSuccess extends SuccessResponseTypes {
-  likeData: FavoriteResponseTypes[];
+  favoriteData: FavoriteResponseTypes[];
 }
 
 export interface ResponseNewReviewSuccess extends SuccessResponseTypes {

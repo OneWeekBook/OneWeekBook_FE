@@ -6,11 +6,11 @@ import { FavoriteResponseTypes } from 'types/response';
 import { ReviewDetailModalTypes } from 'types/page';
 import { AppStateType } from 'redux/reducers';
 import {
-  LikeAddRequest,
-  LikeCancelRequest,
-  LikeInit,
-  LikeRequest,
-} from 'redux/reducers/Like';
+  FavoriteAddRequest,
+  FavoriteCancelRequest,
+  FavoriteInit,
+  FavoriteRequest,
+} from 'redux/reducers/Favorite';
 import { ReviewInit, ReviewRequest } from 'redux/reducers/Review';
 import { FAVORITE_IMAGE } from 'constants/image';
 import DetailModal from 'common/DefaultModal';
@@ -35,25 +35,25 @@ function ReviewDetailModal({
     shallowEqual,
   );
   const {
-    likeData,
-    likeAddErrorStatus,
-    likeCancelErrorStatus,
+    favoriteData,
+    favoriteAddErrorStatus,
+    favoriteCancelErrorStatus,
   }: {
-    likeData: FavoriteResponseTypes[];
-    likeAddErrorStatus?: number;
-    likeCancelErrorStatus?: number;
-  } = useSelector((state: AppStateType) => state.like, shallowEqual);
+    favoriteData: FavoriteResponseTypes[];
+    favoriteAddErrorStatus?: number;
+    favoriteCancelErrorStatus?: number;
+  } = useSelector((state: AppStateType) => state.favorite, shallowEqual);
 
   useEffect(() => {
-    dispatch(LikeRequest({ bookId: userReview.id }));
+    dispatch(FavoriteRequest({ bookId: userReview.id }));
     return () => {
-      dispatch(LikeInit());
+      dispatch(FavoriteInit());
     };
   }, []);
 
   useEffect(() => {
-    if (likeAddErrorStatus === 200 || likeCancelErrorStatus === 200) {
-      dispatch(LikeRequest({ bookId: userReview.id }));
+    if (favoriteAddErrorStatus === 200 || favoriteCancelErrorStatus === 200) {
+      dispatch(FavoriteRequest({ bookId: userReview.id }));
       dispatch(ReviewInit());
       dispatch(
         ReviewRequest({
@@ -63,30 +63,32 @@ function ReviewDetailModal({
         }),
       );
     }
-  }, [likeAddErrorStatus, likeCancelErrorStatus]);
+  }, [favoriteAddErrorStatus, favoriteCancelErrorStatus]);
 
   useEffect(() => {
     compareFavoriteUser();
-    if (Array.isArray(likeData) && !!likeData) {
+    if (Array.isArray(favoriteData) && !!favoriteData) {
       setUseful(
-        likeData.filter((item: FavoriteResponseTypes) => item.state === 0)
+        favoriteData.filter((item: FavoriteResponseTypes) => item.state === 0)
           .length,
       );
       setInterest(
-        likeData.filter((item: FavoriteResponseTypes) => item.state === 1)
+        favoriteData.filter((item: FavoriteResponseTypes) => item.state === 1)
           .length,
       );
     } else {
       setUseful(0);
       setInterest(0);
     }
-  }, [likeData]);
+  }, [favoriteData]);
 
   const compareFavoriteUser = () => {
     if (
-      likeData.find((like: FavoriteResponseTypes) => like.user.id === user.id)
+      favoriteData.find(
+        (like: FavoriteResponseTypes) => like.user.id === user.id,
+      )
     ) {
-      const data = likeData.find(
+      const data = favoriteData.find(
         (like: FavoriteResponseTypes) => like.user.id === user.id,
       );
       if (data?.state === 0) {
@@ -103,16 +105,16 @@ function ReviewDetailModal({
 
   const handleFavoriteClick = (state: number, isSelected: boolean) => {
     if (compareFavoriteUser() && !isSelected) {
-      dispatch(LikeCancelRequest({ bookId: userReview.id }));
+      dispatch(FavoriteCancelRequest({ bookId: userReview.id }));
       setTimeout(() => {
-        dispatch(LikeAddRequest({ bookId: userReview.id, state }));
+        dispatch(FavoriteAddRequest({ bookId: userReview.id, state }));
       }, 10);
     } else if (compareFavoriteUser() && isSelected) {
       if (state === 0) setUsefulToggle(false);
       else if (state === 1) setInterestToggle(false);
-      dispatch(LikeCancelRequest({ bookId: userReview.id }));
+      dispatch(FavoriteCancelRequest({ bookId: userReview.id }));
     } else if (!compareFavoriteUser()) {
-      dispatch(LikeAddRequest({ bookId: userReview.id, state }));
+      dispatch(FavoriteAddRequest({ bookId: userReview.id, state }));
     }
   };
 
