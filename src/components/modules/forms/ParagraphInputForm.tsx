@@ -49,7 +49,7 @@ function ParagraphInputForm({ bookId }: ParagraphInputFormType) {
         type="button"
         handleClick={addParagraphClick}
         src={FUNC_IMAGE.COMMENT_ADD}
-        imgSize={30}
+        imageSize={30}
       />
     </InputForm>
   );

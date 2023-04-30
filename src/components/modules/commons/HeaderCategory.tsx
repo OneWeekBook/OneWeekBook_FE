@@ -22,7 +22,7 @@ function HeaderMainCategory() {
               ? item.clickImg
               : item.img
           }
-          imgSize={30}
+          imageSize={30}
           content={item.title}
           handleClick={() =>
             handleAuthClick(item.link, [PATH_URL.LIBRARY], handleModalToggle)

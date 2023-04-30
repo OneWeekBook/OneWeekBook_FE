@@ -34,7 +34,7 @@ function LibraryMenuList({ useId, navId }: LibraryMenuTypes) {
           className="roundborder"
           key={item.id}
           src={item.image}
-          imgSize={18}
+          imageSize={18}
           content={item.desc}
           handleClick={() => navMoveClick(item.id)}
           isBtnClick={navId === item.id}

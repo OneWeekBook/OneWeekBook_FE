@@ -70,7 +70,7 @@ function LibraryBookCard({
         <ImageButton
           src={FUNC_IMAGE.TRASH}
           handleClick={handleDeleteToggle}
-          imgSize={25}
+          imageSize={25}
         />
         <DefaultImage
           className="bookimage"

@@ -136,7 +136,7 @@ function ReviewDetailModal({
           <MenuButton
             className="roundborder"
             src={FAVORITE_IMAGE.USEFUL}
-            imgSize={25}
+            imageSize={25}
             content={`${useful} 도움이되요`}
             handleClick={() => handleFavoriteClick(0, usefulToggle)}
             isBtnClick={usefulToggle}
@@ -147,7 +147,7 @@ function ReviewDetailModal({
           <MenuButton
             className="roundborder"
             src={FAVORITE_IMAGE.INTEREST}
-            imgSize={25}
+            imageSize={25}
             content={`${interest} 흥미로워요`}
             handleClick={() => handleFavoriteClick(1, interestToggle)}
             isBtnClick={interestToggle}

@@ -45,7 +45,7 @@ const MenuButtonAtom = styled.button<ButtonStyleTypes>`
     background-color: ${({ bgColor }) => bgColor && `${bgColor[1]}`};
   }
   img {
-    width: ${({ imgSize }) => imgSize}px;
+    width: ${({ imageSize }) => imageSize}px;
   }
   p {
     color: ${({ fontColor }) => fontColor};

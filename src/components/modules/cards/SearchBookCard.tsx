@@ -27,7 +27,7 @@ function SearchBookCard({
           <ImageButton
             type="button"
             src={FUNC_IMAGE.HEART}
-            imgSize={30}
+            imageSize={30}
             handleClick={() =>
               handleFavoriteClick({
                 title,
