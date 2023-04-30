@@ -122,7 +122,7 @@ function LibraryBookCard({
               width="auto"
             />
           )}
-          {(progress === 1 || progress === 2) && (
+          {[1, 2].some((num) => [progress].includes(num)) && (
             <DefaultButton
               handleClick={handleParagraphClick}
               fontSize={1.4}
