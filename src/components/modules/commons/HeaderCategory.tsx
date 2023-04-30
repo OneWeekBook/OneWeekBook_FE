@@ -13,7 +13,7 @@ function HeaderMainCategory() {
   const { handleAuthClick } = useAuthLink();
 
   return (
-    <MenuListWrapper>
+    <HeaderCategoryModule>
       {menuItems.map((item) => (
         <MenuButton
           key={item.id}
@@ -44,13 +44,13 @@ function HeaderMainCategory() {
           handleCanCelClick={isModalToggleOn}
         />
       )}
-    </MenuListWrapper>
+    </HeaderCategoryModule>
   );
 }
 
 export default HeaderMainCategory;
 
-const MenuListWrapper = styled.div`
+const HeaderCategoryModule = styled.div`
   display: flex;
   gap: 10px;
   margin-top: 10px;

@@ -56,7 +56,7 @@ export interface EmailErrorTypes {
 
 export interface HeaderTypes {
   handleToggle: () => void;
-  handleSignout: () => void;
+  handleSignOut: () => void;
 }
 
 export interface InputFormTypes {
