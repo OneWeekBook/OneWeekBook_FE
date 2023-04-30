@@ -9,10 +9,7 @@ import {
 } from 'redux/reducers/AuthEmail';
 
 function AuthEmailAPI(data: { email: string }) {
-  return instance.post(
-    `${process.env.REACT_APP_BASIC_URL}${API_URL.AUTH_CODE}`,
-    data,
-  );
+  return instance.post(API_URL.AUTH_CODE, data);
 }
 
 function* fetchAuthEmailSaga(action: {

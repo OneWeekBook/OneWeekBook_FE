@@ -10,10 +10,7 @@ import {
 } from 'redux/reducers/MyLibrary';
 
 function MyLibraryAddAPI(data: { userId: number & LibraryAddRequestTypes }) {
-  return instance.post(
-    `${process.env.REACT_APP_BASIC_URL}${API_URL.LIBRARY}`,
-    data,
-  );
+  return instance.post(API_URL.LIBRARY, data);
 }
 
 function* fetchMyLibraryAddSaga(action: {

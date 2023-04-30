@@ -11,7 +11,7 @@ import {
 
 function ReviewDetailAPI(params: BookRequestTypes) {
   return instance.get(
-    `${process.env.REACT_APP_BASIC_URL}${API_URL.BOOK_REVIEWS}/${params.isbn}?start=${params.start}&display=10&sortby=${params.sortby}`,
+    `${API_URL.BOOK_REVIEWS}/${params.isbn}?start=${params.start}&display=10&sortby=${params.sortby}`,
   );
 }
 

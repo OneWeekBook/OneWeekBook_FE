@@ -13,10 +13,7 @@ function MyLibraryModifyAPI(data: {
   progress: number;
   isbn: string;
 }) {
-  return instance.put(
-    `${process.env.REACT_APP_BASIC_URL}${API_URL.LIBRARY}`,
-    data,
-  );
+  return instance.put(API_URL.LIBRARY, data);
 }
 
 function* fetchMyLibraryModifySaga(action: {

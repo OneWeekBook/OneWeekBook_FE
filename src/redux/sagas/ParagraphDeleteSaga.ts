@@ -10,9 +10,7 @@ import {
 } from 'redux/reducers/Paragraph';
 
 function ParagraphDeleteAPI(data: DeleteRequestType) {
-  return instance.delete(
-    `${process.env.REACT_APP_BASIC_URL}${API_URL.PARAGRAPH}?id=${data.id}`,
-  );
+  return instance.delete(`${API_URL.PARAGRAPH}?id=${data.id}`);
 }
 
 function* fetchParagraphDeleteSaga(action: {

@@ -10,10 +10,7 @@ import {
 } from 'redux/reducers/SignUp';
 
 function SignUpAPI(data: SignUpRequestTypes) {
-  return instance.post(
-    `${process.env.REACT_APP_BASIC_URL}${API_URL.USER_REGISTER}`,
-    data,
-  );
+  return instance.post(API_URL.USER_REGISTER, data);
 }
 
 function* fetchSignUpSaga(action: {

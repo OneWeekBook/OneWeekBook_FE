@@ -12,7 +12,7 @@ import {
 function SearchAPI(params: SearchRequestTypes) {
   if (params.d_categ) {
     return instance.get(
-      `${process.env.REACT_APP_BASIC_URL}${API_URL.SEARCH}?d_catg=${params.d_categ}&d_titl=${params.title}&start=${params.start}&display=${params.display}`,
+      `${API_URL.SEARCH}?d_catg=${params.d_categ}&d_titl=${params.title}&start=${params.start}&display=${params.display}`,
     );
   }
   if (params.title) {

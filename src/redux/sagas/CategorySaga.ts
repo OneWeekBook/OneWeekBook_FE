@@ -9,7 +9,7 @@ import {
 } from 'redux/reducers/Category';
 
 function CategoryAPI() {
-  return instance.get(`${process.env.REACT_APP_BASIC_URL}${API_URL.CATEGORY}`);
+  return instance.get(API_URL.CATEGORY);
 }
 
 function* fetchCategorySaga(): object {

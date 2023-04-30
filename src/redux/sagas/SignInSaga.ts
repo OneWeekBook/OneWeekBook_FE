@@ -11,10 +11,7 @@ import {
 } from 'redux/reducers/SignIn';
 
 function SignInAPI(data: SignInRequestTypes) {
-  return instance.post(
-    `${process.env.REACT_APP_BASIC_URL}${API_URL.USER_LOGIN}`,
-    data,
-  );
+  return instance.post(API_URL.USER_LOGIN, data);
 }
 
 function* fetchSignInSaga(action: {

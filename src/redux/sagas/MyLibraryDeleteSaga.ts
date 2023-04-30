@@ -9,9 +9,7 @@ import {
 } from 'redux/reducers/MyLibrary';
 
 function MyLibraryDeleteAPI(params: { id: number }) {
-  return instance.delete(
-    `${process.env.REACT_APP_BASIC_URL}${API_URL.LIBRARY}?id=${params.id}`,
-  );
+  return instance.delete(`${API_URL.LIBRARY}?id=${params.id}`);
 }
 
 function* fetchMyLibraryDeleteSaga(action: {
