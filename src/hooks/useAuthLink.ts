@@ -5,8 +5,8 @@ function useAuthLink(): {
   handleAuthClick: (
     link: string,
     compLink: string[],
-    Modaltoggle: () => void,
-    toggle?: () => void,
+    handleModaltoggle: () => void,
+    handletoggle?: () => void,
   ) => void;
 } {
   const { routeTo, currentPath } = useRouter();
@@ -14,23 +14,23 @@ function useAuthLink(): {
   const handleAuthClick = (
     link: string,
     compLink: string[],
-    Modaltoggle: () => void,
-    toggle?: () => void,
+    handleModaltoggle: () => void,
+    handletoggle?: () => void,
   ) => {
     if (
-      toggle &&
+      handletoggle &&
       compLink.includes(link) &&
       getAccessTokenFromSessionStorage()
     ) {
       routeTo(link, link === currentPath);
-      toggle();
+      handletoggle();
     } else if (compLink.includes(link) && getAccessTokenFromSessionStorage()) {
       routeTo(link, link === currentPath);
     } else if (compLink.includes(link) && !getAccessTokenFromSessionStorage()) {
-      Modaltoggle();
-    } else if (toggle) {
+      handleModaltoggle();
+    } else if (handletoggle) {
       routeTo(link, link === currentPath);
-      toggle();
+      handletoggle();
     } else {
       routeTo(link, link === currentPath);
     }
