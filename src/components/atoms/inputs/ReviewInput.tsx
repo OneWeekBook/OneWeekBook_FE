@@ -19,7 +19,7 @@ const ReviewInputAtom = styled.textarea`
   min-height: 150px;
   padding: 5px;
   border: none;
-  font-size: 16px;
+  font-size: 1.6rem;
   font-weight: 700;
   outline: none;
   resize: vertical;

@@ -47,7 +47,7 @@ const BorderInputAtom = styled.div`
     ::placeholder {
       color: ${({ theme }) => theme.color.COLOR_SIENNA};
     }
-    font-size: 16px;
+    font-size: 1.6rem;
     padding: 5px;
     width: 100%;
     height: 34px;
@@ -70,6 +70,6 @@ const BorderInputAtom = styled.div`
     left: 0;
   }
   input:disabled {
-    background-color: white;
+    background-color: ${({ theme }) => theme.color.COLOR_WHITE};
   }
 `;
