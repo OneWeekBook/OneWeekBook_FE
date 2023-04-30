@@ -14,8 +14,8 @@ import SearchList from 'components/modules/lists/SearchList';
 
 function index() {
   const dispatch = useDispatch();
-  const categories = useSelector(
-    (state: AppStateType) => state.category.categories,
+  const { categories } = useSelector(
+    (state: AppStateType) => state.category,
     shallowEqual,
   );
   const [curParentCategory, setCurParentCategory] = useState<
@@ -41,22 +41,22 @@ function index() {
     [categories],
   );
 
-  const getFilterSubCategories = useCallback(
+  const getFilterChildCategories = useCallback(
     (categoriesData: CategoryResponseTypes[], id: number) => {
       const parent = categoriesData.filter(
         (item: CategoryResponseTypes) => item.categoryId === id,
       );
-      const sub = categoriesData.filter(
+      const child = categoriesData.filter(
         (item: CategoryResponseTypes) => item.parentId === id,
       );
       setCurParentCategory(parent);
-      setChildCategory(sub);
+      setChildCategory(child);
       setCurChildCategory([categoryInit]);
     },
     [],
   );
 
-  const getPeekCategory = useCallback(
+  const handleCategoryPeek = useCallback(
     (categoriesData: CategoryResponseTypes[], id: number) => {
       const result = categoriesData.filter(
         (item: CategoryResponseTypes) => item.categoryId === id,
@@ -89,14 +89,14 @@ function index() {
           categories={categories}
           catgoryResult={parentCategory}
           currentCategory={curParentCategory}
-          handleCategoryFilter={getFilterSubCategories}
+          handleCategoryFilter={getFilterChildCategories}
         />
         {childCatgory.length > 0 && !!childCatgory[0].categoryId && (
           <CategoryList
             categories={categories}
             catgoryResult={childCatgory}
             currentCategory={curChildCategory}
-            handleCategoryFilter={getPeekCategory}
+            handleCategoryFilter={handleCategoryPeek}
           />
         )}
       </CategoryListContainer>

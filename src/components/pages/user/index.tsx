@@ -93,9 +93,7 @@ function Index() {
         fontColor={[theme.color.COLOR_BLACK, theme.color.COLOR_CORAL]}
       />
       <UserBookList userBooks={userBooks} />
-      {removeToggle && (
-        <RemoveUserModal removeToggleIsOn={handleRemoveToggle} />
-      )}
+      {removeToggle && <RemoveUserModal handleToggle={handleRemoveToggle} />}
     </Container>
   );
 }

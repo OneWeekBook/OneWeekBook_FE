@@ -13,14 +13,14 @@ import ErrorText from 'components/atoms/texts/ErrorText';
 import DefaultText from 'components/atoms/texts/DefaultText';
 import InputForm from 'components/modules/forms/InputForm';
 
-function RemoveUserModal({ removeToggleIsOn }: RemoveUserModalType) {
+function RemoveUserModal({ handleToggle }: RemoveUserModalType) {
   const dispatch = useDispatch();
   const { routeTo } = useRouter();
   const [error, setError] = useState<string>('');
   const [isError, setIsError] = useState<boolean>(false);
   const [password, changePassword] = useInput('');
-  const removeErrorStatus = useSelector(
-    (state: AppStateType) => state.removeUser.removeErrorStatus,
+  const { removeErrorStatus } = useSelector(
+    (state: AppStateType) => state.removeUser,
   );
 
   const handleRemoveClick = () => {
@@ -30,7 +30,7 @@ function RemoveUserModal({ removeToggleIsOn }: RemoveUserModalType) {
   const handleRemoveUser = useCallback(() => {
     if (removeErrorStatus === 200) {
       removeAccessTokenFromSessionStorage();
-      removeToggleIsOn();
+      handleToggle();
       showToast('info', '회원탈퇴가 정상적으로 처리되었습니다.');
       routeTo(PATH_URL.MAIN);
     } else if (removeErrorStatus === 400) {
@@ -59,12 +59,12 @@ function RemoveUserModal({ removeToggleIsOn }: RemoveUserModalType) {
       contentSize={2.4}
       width={500}
       height={300}
-      handleToggle={removeToggleIsOn}
+      handleToggle={handleToggle}
       close
       okButtonTitle="탈퇴"
       cancelButtonTitle="취소"
       handleOkClick={handleRemoveClick}
-      handleCancelClick={removeToggleIsOn}
+      handleCancelClick={handleToggle}
     >
       <DefaultText
         content="회원탈퇴 하시려면 비밀번호를 입력해주세요."

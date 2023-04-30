@@ -1,11 +1,11 @@
 import { UserReviewResponseTypes } from './response';
 
 export interface ChangeNickModalType {
-  nickToggleIsOn: () => void;
+  handleNickToggle: () => void;
 }
 
 export interface ChangePassModalType {
-  passToggleIsOn: () => void;
+  handlePassToggle: () => void;
 }
 
 export interface DefaultModalTypes {
@@ -35,7 +35,7 @@ export interface LibraryBookTypes {
 
 export interface ParagraphModalTypes {
   bookData: LibraryBookTypes;
-  toggleIsOn: () => void;
+  handleToggle: () => void;
   moveDoneClick?: () => void;
 }
 
@@ -48,10 +48,10 @@ export interface ReviewDetailModalTypes {
 }
 
 export interface RemoveUserModalType {
-  removeToggleIsOn: () => void;
+  handleToggle: () => void;
 }
 
 export interface WriteReviewTypes {
   bookData: LibraryBookTypes;
-  toggleIsOn: () => void;
+  handleToggle: () => void;
 }

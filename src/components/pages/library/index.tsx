@@ -19,7 +19,7 @@ import WriteReviewModal from 'components/pages/modal/WriteReviewModal';
 
 function Index() {
   const dispatch = useDispatch();
-  const [likeToggle, handleLikeToggle] = useToggle(false);
+  const [favoriteToggle, handleFavoriteToggle] = useToggle(false);
   const [commentToggle, handleCommentToggle] = useToggle(false);
   const [reivewToggle, handleReviewToggle] = useToggle(false);
   const [bookData, setBookData] = useState<LibraryBookTypes>(bookInit);
@@ -27,7 +27,7 @@ function Index() {
     (state: AppStateType) => state.authUser,
     shallowEqual,
   );
-  const navId = useSelector((state: AppStateType) => state.func.navId);
+  const { navId } = useSelector((state: AppStateType) => state.func);
   const { libraryBookList, isDeleteSuccess } = useSelector(
     (state: AppStateType) => state.library,
     shallowEqual,
@@ -38,17 +38,15 @@ function Index() {
     itemDeleteSuccess,
     userReviewSuccess,
   } = useSelector((state: AppStateType) => state.userReview, shallowEqual);
-  const initSuccess = useSelector(
-    (state: AppStateType) => state.paragraph.initSuccess,
-  );
+  const { initSuccess } = useSelector((state: AppStateType) => state.paragraph);
 
-  const moveReadClick = useCallback(async () => {
+  const handleMoveReadClick = useCallback(async () => {
     await dispatch(LibraryModifyRequest({ progress: 1, isbn: bookData.isbn }));
-    handleLikeToggle();
+    handleFavoriteToggle();
     dispatch(navRead());
   }, [bookData]);
 
-  const moveDoneClick = useCallback(async () => {
+  const handleMoveDoneClick = useCallback(async () => {
     await dispatch(LibraryModifyRequest({ progress: 2, isbn: bookData.isbn }));
     handleCommentToggle();
     dispatch(navDone());
@@ -87,34 +85,37 @@ function Index() {
       </MyLibraryHeader>
       <LibraryBookList
         libraryBookList={libraryBookList}
-        handleLikeToggle={handleLikeToggle}
+        handleLikeToggle={handleFavoriteToggle}
         handleCommentToggle={handleCommentToggle}
         handleReviewToggle={handleReviewToggle}
         setBookData={setBookData}
       />
-      {likeToggle && (
+      {favoriteToggle && (
         <DefaultModal
           content="시작해볼까요?"
           contentSize={2.4}
           width={500}
           height={250}
-          handleToggle={handleLikeToggle}
+          handleToggle={handleFavoriteToggle}
           close
           okButtonTitle="독서 시작"
           cancelButtonTitle="나중에"
-          handleOkClick={moveReadClick}
-          handleCancelClick={handleLikeToggle}
+          handleOkClick={handleMoveReadClick}
+          handleCancelClick={handleFavoriteToggle}
         />
       )}
       {commentToggle && initSuccess && (
         <ParagraphModal
           bookData={bookData}
-          toggleIsOn={handleCommentToggle}
-          moveDoneClick={moveDoneClick}
+          handleToggle={handleCommentToggle}
+          moveDoneClick={handleMoveDoneClick}
         />
       )}
       {reivewToggle && userReviewSuccess && (
-        <WriteReviewModal bookData={bookData} toggleIsOn={handleReviewToggle} />
+        <WriteReviewModal
+          bookData={bookData}
+          handleToggle={handleReviewToggle}
+        />
       )}
     </Container>
   );

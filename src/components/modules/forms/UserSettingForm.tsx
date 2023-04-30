@@ -30,8 +30,8 @@ function UserSettingForm({ nickName }: UserSettingFormType) {
           height={35}
         />
       </SettingButtons>
-      {nickToggle && <ChangeNickModal nickToggleIsOn={handleNickToggle} />}
-      {passToggle && <ChangePassModal passToggleIsOn={handlePassToggle} />}
+      {nickToggle && <ChangeNickModal handleNickToggle={handleNickToggle} />}
+      {passToggle && <ChangePassModal handlePassToggle={handlePassToggle} />}
     </UserSettingFormModule>
   );
 }
