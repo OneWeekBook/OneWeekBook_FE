@@ -41,7 +41,7 @@ function HeaderMainCategory() {
           okButtonTitle="로그인"
           cancelButtonTitle="나중에"
           handleOkClick={() => routeTo(PATH_URL.SIGN_IN)}
-          handleCanCelClick={handleModalToggle}
+          handleCancelClick={handleModalToggle}
         />
       )}
     </HeaderCategoryModule>

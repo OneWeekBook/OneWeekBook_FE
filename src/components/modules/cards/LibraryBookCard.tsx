@@ -151,7 +151,7 @@ function LibraryBookCard({
           okButtonTitle="삭제"
           cancelButtonTitle="나중에"
           handleOkClick={handleDeleteItem}
-          handleCanCelClick={handleDeleteToggle}
+          handleCancelClick={handleDeleteToggle}
         />
       )}
     </LibraryBookCardContainer>

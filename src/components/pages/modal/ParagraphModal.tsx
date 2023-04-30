@@ -50,7 +50,7 @@ function Index({ bookData, toggleIsOn, moveDoneClick }: ParagraphModalTypes) {
       handleToggle={toggleIsOn}
       close
       cancelButtonTitle="나중에"
-      handleCanCelClick={toggleIsOn}
+      handleCancelClick={toggleIsOn}
     >
       <ParagraphModalBody>
         <DefaultText

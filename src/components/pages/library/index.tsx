@@ -103,7 +103,7 @@ function Index() {
           okButtonTitle="독서 시작"
           cancelButtonTitle="나중에"
           handleOkClick={moveReadClick}
-          handleCanCelClick={handleLikeToggle}
+          handleCancelClick={handleLikeToggle}
         />
       )}
       {commentToggle && initSuccess && (

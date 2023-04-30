@@ -64,7 +64,7 @@ function RemoveUserModal({ removeToggleIsOn }: RemoveUserModalType) {
       okButtonTitle="탈퇴"
       cancelButtonTitle="취소"
       handleOkClick={handleRemoveClick}
-      handleCanCelClick={removeToggleIsOn}
+      handleCancelClick={removeToggleIsOn}
     >
       <DefaultText
         content="회원탈퇴 하시려면 비밀번호를 입력해주세요."

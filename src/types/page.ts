@@ -20,7 +20,7 @@ export interface DefaultModalTypes {
   type?: string;
   handleToggle: () => void;
   handleOkClick?: () => void;
-  handleCanCelClick?: () => void;
+  handleCancelClick?: () => void;
 }
 
 export interface LibraryBookTypes {

@@ -63,7 +63,7 @@ function ChangePassModal({ passToggleIsOn }: ChangePassModalType) {
       okButtonTitle="변경"
       cancelButtonTitle="취소"
       handleOkClick={handleChangePassword}
-      handleCanCelClick={passToggleIsOn}
+      handleCancelClick={passToggleIsOn}
     >
       <PasswordInputs>
         <InputForm

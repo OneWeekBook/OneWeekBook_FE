@@ -46,7 +46,7 @@ function ChangeNickModal({ nickToggleIsOn }: ChangeNickModalType) {
       okButtonTitle="변경"
       cancelButtonTitle="취소"
       handleOkClick={handleChangeClick}
-      handleCanCelClick={nickToggleIsOn}
+      handleCancelClick={nickToggleIsOn}
     >
       <InputForm
         label="닉네임"

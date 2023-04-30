@@ -18,7 +18,7 @@ function Index({
   type,
   handleToggle,
   handleOkClick,
-  handleCanCelClick,
+  handleCancelClick,
   children,
 }: React.PropsWithChildren<DefaultModalTypes>) {
   return (
@@ -51,7 +51,7 @@ function Index({
             )}
             {cancelButtonTitle && (
               <DefaultButton
-                handleClick={handleCanCelClick}
+                handleClick={handleCancelClick}
                 fontSize={1.8}
                 content={cancelButtonTitle}
               />

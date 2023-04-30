@@ -74,7 +74,7 @@ function WriteReviewModal({ bookData, toggleIsOn }: WriteReviewTypes) {
       handleToggle={toggleIsOn}
       close
       cancelButtonTitle="나중에"
-      handleCanCelClick={toggleIsOn}
+      handleCancelClick={toggleIsOn}
     >
       <ReviewModalBody>
         <BookInfo>
