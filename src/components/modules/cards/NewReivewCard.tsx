@@ -17,7 +17,7 @@ function NewReivewCard({
   user,
 }: React.PropsWithChildren<NewReviewResponseTypes>) {
   return (
-    <CardContainer to={`${PATH_URL.REVIEW}/${isbn}?sort=new`}>
+    <NewReviewCardModule to={`${PATH_URL.REVIEW}/${isbn}?sort=new`}>
       <ImageContainer>
         <DefaultImage
           imageSrc={img}
@@ -39,20 +39,20 @@ function NewReivewCard({
           align="center"
           reactive
         />
-        <CountInfoWrapper>
+        <StarIcons>
           {[0, 1, 2, 3, 4].map((el) => (
             <StarIcon key={el} score={el < rating ? 1 : 0} imageSize={20} />
           ))}
-        </CountInfoWrapper>
+        </StarIcons>
         <ReviewText className="review" content={review} />
       </ReviewInfo>
-    </CardContainer>
+    </NewReviewCardModule>
   );
 }
 
 export default NewReivewCard;
 
-const CardContainer = styled(Link)`
+const NewReviewCardModule = styled(Link)`
   width: 495px;
   display: flex;
   gap: 15px;
@@ -117,7 +117,7 @@ const ReviewInfo = styled.div`
   }
 `;
 
-const CountInfoWrapper = styled.div`
+const StarIcons = styled.div`
   display: flex;
   gap: 5px;
   justify-content: center;

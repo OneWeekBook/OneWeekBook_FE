@@ -9,7 +9,7 @@ function UserReviewList({
   setCurReview,
 }: ReviewInfoTypes) {
   return (
-    <ReviewListWrapper>
+    <UserReviewListModule>
       {Array.isArray(reviews) &&
         !!reviews &&
         reviews.map((item: UserReviewResponseTypes) => (
@@ -22,13 +22,13 @@ function UserReviewList({
             }}
           />
         ))}
-    </ReviewListWrapper>
+    </UserReviewListModule>
   );
 }
 
 export default UserReviewList;
 
-const ReviewListWrapper = styled.div`
+const UserReviewListModule = styled.div`
   max-width: 1000px;
   min-height: 600px;
   display: grid;

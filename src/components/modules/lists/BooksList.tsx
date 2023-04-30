@@ -25,9 +25,7 @@ function BooksList({ searchArr }: BooksListType) {
     (state: AppStateType) => state.authUser,
     shallowEqual,
   );
-  const isAddSuccess = useSelector(
-    (state: AppStateType) => state.library.isAddSuccess,
-  );
+  const { isAddSuccess } = useSelector((state: AppStateType) => state.library);
 
   const handleFetch = useCallback(() => {
     const options: {
@@ -77,7 +75,7 @@ function BooksList({ searchArr }: BooksListType) {
   }, [isAddSuccess]);
 
   return (
-    <BookListContainer>
+    <BookListModule>
       <BookListGrid>
         {Array.isArray(books) &&
           !!books &&
@@ -102,13 +100,13 @@ function BooksList({ searchArr }: BooksListType) {
           )
         )}
       </div>
-    </BookListContainer>
+    </BookListModule>
   );
 }
 
 export default BooksList;
 
-const BookListContainer = styled.div`
+const BookListModule = styled.div`
   margin: 30px auto 50px;
 `;
 

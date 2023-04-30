@@ -100,7 +100,7 @@ function Banner() {
   };
 
   return (
-    <BannerContainer>
+    <BannerModule>
       <BannerButton
         handleClick={() => handleSwipe(-1)}
         direct="prev"
@@ -140,13 +140,13 @@ function Banner() {
           </>
         )}
       </BannerSlider>
-    </BannerContainer>
+    </BannerModule>
   );
 }
 
 export default Banner;
 
-const BannerContainer = styled.div`
+const BannerModule = styled.div`
   position: relative;
   overflow: hidden;
   height: auto;

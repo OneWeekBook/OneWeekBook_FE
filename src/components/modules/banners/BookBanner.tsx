@@ -22,7 +22,7 @@ function BookBanner({
     ratingAverage - Math.floor(ratingAverage);
 
   return (
-    <BookBannerInfoContainer>
+    <BookBannerModule>
       <DefaultImage
         imageSrc={img}
         imageAlt="book img"
@@ -73,13 +73,13 @@ function BookBanner({
           </AvarageScore>
         </ReviewWrapper>
       </InfoWrapper>
-    </BookBannerInfoContainer>
+    </BookBannerModule>
   );
 }
 
 export default BookBanner;
 
-const BookBannerInfoContainer = styled.div`
+const BookBannerModule = styled.div`
   display: flex;
   gap: 15px;
   justify-content: center;

@@ -21,7 +21,7 @@ function SearchBookCard({
   handleFavoriteClick,
 }: PropsWithChildren<LikeAddTypes>) {
   return (
-    <SearchBookCardContainer>
+    <SearchBookCardModule>
       <BookCover>
         {getAccessTokenFromSessionStorage() && (
           <ImageButton
@@ -74,13 +74,13 @@ function SearchBookCard({
           dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(description) }}
         />
       </BookInfoDetail>
-    </SearchBookCardContainer>
+    </SearchBookCardModule>
   );
 }
 
 export default SearchBookCard;
 
-const SearchBookCardContainer = styled.div`
+const SearchBookCardModule = styled.div`
   display: flex;
   height: 245px;
   border: 2px solid ${({ theme }) => theme.color.COLOR_CORAL};

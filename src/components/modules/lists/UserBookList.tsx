@@ -5,17 +5,17 @@ import UserBookCard from 'components/modules/cards/UserBookCard';
 
 function UserBookList({ userBooks }: UserBookListType) {
   return (
-    <BookGridWrapper>
+    <UserBookListModule>
       {userBooks.map((item: UserBookResponseTypes) => (
         <UserBookCard key={item.id} {...item} />
       ))}
-    </BookGridWrapper>
+    </UserBookListModule>
   );
 }
 
 export default UserBookList;
 
-const BookGridWrapper = styled.div`
+const UserBookListModule = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;

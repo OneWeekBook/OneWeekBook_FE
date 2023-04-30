@@ -77,7 +77,7 @@ function SignUpForm({ email, authDone, setAuthDone }: SignUpTypes) {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <SignUpFormModule onSubmit={handleSubmit}>
       <BorderInput
         type="password"
         placeholder="비밀번호"
@@ -128,13 +128,13 @@ function SignUpForm({ email, authDone, setAuthDone }: SignUpTypes) {
         disabled={registerDone}
         fontSize={2}
       />
-    </Form>
+    </SignUpFormModule>
   );
 }
 
 export default SignUpForm;
 
-const Form = styled.form`
+const SignUpFormModule = styled.form`
   display: flex;
   flex-direction: column;
 `;

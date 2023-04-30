@@ -172,3 +172,7 @@ export interface TagLabelType {
 export interface UserBookListType {
   userBooks: UserBookResponseTypes[];
 }
+
+export interface UserSettingFormType {
+  nickName: string;
+}

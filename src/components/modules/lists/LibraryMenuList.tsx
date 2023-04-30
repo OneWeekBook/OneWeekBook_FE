@@ -10,14 +10,8 @@ import MenuButton from 'components/atoms/buttons/MenuButton';
 
 function LibraryMenuList({ useId, navId }: LibraryMenuTypes) {
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (useId) dispatch(LibraryRequest({ progress: navId }));
-    return () => {
-      dispatch(LibraryInit());
-    };
-  }, [useId, navId]);
 
-  const navMoveClick = (curId: number) => {
+  const handleMenuClick = (curId: number) => {
     if (libraryMenu[0].id === curId) {
       dispatch(navLike());
     } else if (libraryMenu[1].id === curId) {
@@ -27,8 +21,15 @@ function LibraryMenuList({ useId, navId }: LibraryMenuTypes) {
     }
   };
 
+  useEffect(() => {
+    if (useId) dispatch(LibraryRequest({ progress: navId }));
+    return () => {
+      dispatch(LibraryInit());
+    };
+  }, [useId, navId]);
+
   return (
-    <MyLibraryMenuContainer>
+    <LibraryMenuListModule>
       {libraryMenu.map((item) => (
         <MenuButton
           className="roundborder"
@@ -36,7 +37,7 @@ function LibraryMenuList({ useId, navId }: LibraryMenuTypes) {
           src={item.image}
           imageSize={18}
           content={item.desc}
-          handleClick={() => navMoveClick(item.id)}
+          handleClick={() => handleMenuClick(item.id)}
           isBtnClick={navId === item.id}
           bgColor={[theme.color.COLOR_CORAL, theme.color.COLOR_ORANGE_RED]}
           fontColor={theme.color.COLOR_WHITE}
@@ -45,13 +46,13 @@ function LibraryMenuList({ useId, navId }: LibraryMenuTypes) {
           height={20}
         />
       ))}
-    </MyLibraryMenuContainer>
+    </LibraryMenuListModule>
   );
 }
 
 export default LibraryMenuList;
 
-const MyLibraryMenuContainer = styled.div`
+const LibraryMenuListModule = styled.div`
   display: flex;
   gap: 5px;
   button {

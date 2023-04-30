@@ -16,7 +16,7 @@ function UserBookCard({
   isbn,
 }: React.PropsWithChildren<UserBookResponseTypes>) {
   return (
-    <UserBookCardContainer
+    <UserBookCardModule
       to={review ? `${PATH_URL.REVIEW}/${isbn}?sort=recommend` : PATH_URL.USER}
     >
       <UserBookImage>
@@ -45,13 +45,13 @@ function UserBookCard({
           }
         />
       </UserBookInfo>
-    </UserBookCardContainer>
+    </UserBookCardModule>
   );
 }
 
 export default UserBookCard;
 
-const UserBookCardContainer = styled(Link)`
+const UserBookCardModule = styled(Link)`
   cursor: pointer;
   position: relative;
   border: 3px solid ${({ theme }) => theme.color.COLOR_CORAL};

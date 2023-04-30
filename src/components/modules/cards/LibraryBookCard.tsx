@@ -65,7 +65,7 @@ function LibraryBookCard({
   };
 
   return (
-    <LibraryBookCardContainer>
+    <LibraryBookCardModule>
       <BookImage>
         <ImageButton
           src={FUNC_IMAGE.TRASH}
@@ -154,13 +154,13 @@ function LibraryBookCard({
           handleCancelClick={handleDeleteToggle}
         />
       )}
-    </LibraryBookCardContainer>
+    </LibraryBookCardModule>
   );
 }
 
 export default LibraryBookCard;
 
-const LibraryBookCardContainer = styled.div`
+const LibraryBookCardModule = styled.div`
   margin-top: 10px;
   display: flex;
   border: 2px solid ${({ theme }) => theme.color.COLOR_CORAL};

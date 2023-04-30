@@ -5,17 +5,17 @@ import ReviewBookCard from 'components/modules/cards/ReviewBookCard';
 
 function ReviewList({ reviews }: ReviewListType) {
   return (
-    <ReviewListContainer>
+    <ReviewListModule>
       {reviews.map((item: ReviewResponseTypes) => (
         <ReviewBookCard key={item.id} {...item} count={item.countReviews} />
       ))}
-    </ReviewListContainer>
+    </ReviewListModule>
   );
 }
 
 export default ReviewList;
 
-const ReviewListContainer = styled.div`
+const ReviewListModule = styled.div`
   display: grid;
   justify-items: center;
   gap: 20px 10px;

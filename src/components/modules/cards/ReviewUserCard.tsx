@@ -26,7 +26,7 @@ function ReviewUserCard({
   }, [rating]);
 
   return (
-    <ReviewItemWrapper onClick={handleClick}>
+    <ReviewUserCardModule onClick={handleClick}>
       <UserReviewInfo>
         <FavoriteImage>
           <DefaultImage
@@ -59,7 +59,7 @@ function ReviewUserCard({
           <ReviewText className="review" content={review} />
         </ReivewInfoWrapper>
       </UserReviewInfo>
-      <RecommendWrapper>
+      <Recommends>
         <MultiText
           className="reviewrole"
           imageSrc={FAVORITE_IMAGE.USEFUL}
@@ -78,14 +78,14 @@ function ReviewUserCard({
           fontWeight={300}
           content={`${oneLikeCount} 흥미로워요`}
         />
-      </RecommendWrapper>
-    </ReviewItemWrapper>
+      </Recommends>
+    </ReviewUserCardModule>
   );
 }
 
 export default ReviewUserCard;
 
-const ReviewItemWrapper = styled.div`
+const ReviewUserCardModule = styled.div`
   height: 250px;
   border-radius: 10px;
   border: 3px solid ${({ theme }) => theme.color.COLOR_CORAL};
@@ -126,7 +126,7 @@ const ReivewInfoWrapper = styled.div`
   }
 `;
 
-const RecommendWrapper = styled.div`
+const Recommends = styled.div`
   display: flex;
   justify-content: center;
   gap: 10px;

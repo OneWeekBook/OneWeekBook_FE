@@ -11,7 +11,7 @@ function LibraryBookList({
   setBookData,
 }: LibraryBookListTypes) {
   return (
-    <LibraryBookGrid>
+    <LibraryBookListModule>
       {Array.isArray(libraryBookList) &&
         !!libraryBookList &&
         libraryBookList.map((item: LibraryResponseTypes) => (
@@ -34,13 +34,13 @@ function LibraryBookList({
             }}
           />
         ))}
-    </LibraryBookGrid>
+    </LibraryBookListModule>
   );
 }
 
 export default LibraryBookList;
 
-const LibraryBookGrid = styled.div`
+const LibraryBookListModule = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;

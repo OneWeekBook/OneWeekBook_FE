@@ -6,7 +6,7 @@ import DefaultText from 'components/atoms/texts/DefaultText';
 
 function NoneBookCard({ type }: NoneCardTypes) {
   return (
-    <NoneBookCardContainer>
+    <NoneBookCardModule>
       <DefaultImage
         imageSrc={FUNC_IMAGE.QUESTION_MARK}
         imageAlt="search icon"
@@ -20,13 +20,13 @@ function NoneBookCard({ type }: NoneCardTypes) {
       ) : (
         <DefaultText content="검색 결과가 존재하지 않습니다." />
       )}
-    </NoneBookCardContainer>
+    </NoneBookCardModule>
   );
 }
 
 export default NoneBookCard;
 
-const NoneBookCardContainer = styled.div`
+const NoneBookCardModule = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

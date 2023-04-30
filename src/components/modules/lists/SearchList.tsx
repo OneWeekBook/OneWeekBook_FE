@@ -19,10 +19,8 @@ function SearchList() {
     (state: AppStateType) => state.search,
     shallowEqual,
   );
-  const search = useSelector((state: AppStateType) => state.func.search);
-  const isAddSuccess = useSelector(
-    (state: AppStateType) => state.library.isAddSuccess,
-  );
+  const { search } = useSelector((state: AppStateType) => state.func);
+  const { isAddSuccess } = useSelector((state: AppStateType) => state.library);
 
   useEffect(() => {
     if (isAddSuccess) showToast('success', '내 서재에 추가완료~');
@@ -53,7 +51,7 @@ function SearchList() {
     );
 
   return (
-    <SearchListContainer>
+    <SearchListModule>
       {books.map((item: BookResponseTypes, index: number) => (
         <SearchBookCard
           key={index}
@@ -61,13 +59,13 @@ function SearchList() {
           handleFavoriteClick={handleFavoriteClick}
         />
       ))}
-    </SearchListContainer>
+    </SearchListModule>
   );
 }
 
 export default SearchList;
 
-const SearchListContainer = styled.div`
+const SearchListModule = styled.div`
   display: grid;
   margin-top: 30px;
   margin-bottom: 30px;
