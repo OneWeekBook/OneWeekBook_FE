@@ -21,7 +21,7 @@ function BestBookCard({
   count,
 }: React.PropsWithChildren<ReviewResponseTypes> & BestBookCardTypes) {
   return (
-    <CardContainer to={`${PATH_URL.REVIEW}/${isbn}?sort=recommend`}>
+    <BestBookCardModule to={`${PATH_URL.REVIEW}/${isbn}?sort=recommend`}>
       <DefaultImage
         imageSrc={img}
         imageAlt="book"
@@ -67,13 +67,13 @@ function BestBookCard({
           align="left"
         />
       </BestBookInfo>
-    </CardContainer>
+    </BestBookCardModule>
   );
 }
 
 export default BestBookCard;
 
-const CardContainer = styled(Link)`
+const BestBookCardModule = styled(Link)`
   width: 495px;
   display: flex;
   align-items: center;

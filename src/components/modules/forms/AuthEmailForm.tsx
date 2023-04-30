@@ -78,26 +78,26 @@ function AuthEmailForm({
     dispatch(AuthCodeRequest({ code }));
   };
 
-  const onEmailCheckEnter = (event: React.KeyboardEvent<Element>) => {
+  const handleEmailCheckEnter = (event: React.KeyboardEvent<Element>) => {
     if (event.key === 'Enter') {
       authEmailClick();
     }
   };
 
-  const onCodeCheckEnter = (event: React.KeyboardEvent<Element>) => {
+  const handleCodeCheckEnter = (event: React.KeyboardEvent<Element>) => {
     if (event.key === 'Enter') {
       codeInputClick();
     }
   };
 
   return (
-    <AuthEmailWrapper>
+    <AuthEmailFormModule>
       <BorderInput
         type="email"
         placeholder="이메일"
         value={email}
         onChange={changeEmail}
-        onKeyPress={onEmailCheckEnter}
+        onKeyPress={handleEmailCheckEnter}
         disabled={emailDone}
         mref={emailRef}
       >
@@ -142,7 +142,7 @@ function AuthEmailForm({
                 value={code}
                 pattern="[0-9]+"
                 onChange={changeCode}
-                onKeyPress={onCodeCheckEnter}
+                onKeyPress={handleCodeCheckEnter}
                 mref={codeRef}
               />
               <CodeErrorForm
@@ -162,13 +162,13 @@ function AuthEmailForm({
           )}
         </>
       )}
-    </AuthEmailWrapper>
+    </AuthEmailFormModule>
   );
 }
 
 export default AuthEmailForm;
 
-const AuthEmailWrapper = styled.div`
+const AuthEmailFormModule = styled.div`
   margin-top: 20px;
   button {
     margin-top: 10px;

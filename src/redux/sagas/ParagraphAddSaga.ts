@@ -10,10 +10,7 @@ import {
 } from 'redux/reducers/Paragraph';
 
 function ParagraphAddAPI(data: ParagraphAddRequestTypes) {
-  return instance.post(
-    `${process.env.REACT_APP_BASIC_URL}${API_URL.PARAGRAPH}`,
-    data,
-  );
+  return instance.post(API_URL.PARAGRAPH, data);
 }
 
 function* fetchParagraphAddSaga(action: {

@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { SearchInputTypes } from 'types/module';
@@ -7,6 +7,7 @@ import { SearchInit, SearchRequest } from 'redux/reducers/Search';
 import { searchNone } from 'redux/reducers/Func';
 import useDebounce from 'hooks/useDebounce';
 import useRouter from 'hooks/useRouter';
+import useInput from 'hooks/useInput';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import DefaultInput from 'components/atoms/inputs/DefaultInput';
 import { PATH_URL } from 'constants/path';
@@ -17,10 +18,10 @@ function SearchBookForm({
 }: SearchInputTypes) {
   const dispatch = useDispatch();
   const { routeTo } = useRouter();
-  const [search, setSearch] = useState('');
+  const [search, changeSearch] = useInput('');
   const debouncedSearch = useDebounce(search, 500);
-  const books = useSelector(
-    (state: AppStateType) => state.search.books,
+  const { books } = useSelector(
+    (state: AppStateType) => state.search,
     shallowEqual,
   );
 
@@ -59,7 +60,7 @@ function SearchBookForm({
     [search, curSubCategory, curParentCategory],
   );
 
-  const handleClick = () => {
+  const handleRouteClick = () => {
     if (curSubCategory[0].categoryId && search) {
       routeTo(
         `${PATH_URL.SEARCH}?${curParentCategory[0].categoryName}=${curParentCategory[0].categoryId}&${curSubCategory[0].categoryName}=${curSubCategory[0].categoryId}&search=${search}`,
@@ -81,10 +82,6 @@ function SearchBookForm({
     }
   };
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearch(event.target.value);
-  };
-
   useEffect(() => {
     handleFetch(search);
   }, [curSubCategory, curParentCategory]);
@@ -103,11 +100,11 @@ function SearchBookForm({
   }, [debouncedSearch]);
 
   return (
-    <SearchInputContainer>
+    <SearchBookModule>
       <SearchInputWrapper>
         <DefaultInput
           value={search}
-          handleChange={handleChange}
+          handleChange={changeSearch}
           placeholder="검색어를 입력해주세요."
           fontSize={1.4}
         />
@@ -116,17 +113,17 @@ function SearchBookForm({
         <DefaultButton
           fontSize={1.6}
           content="모두보기"
-          handleClick={handleClick}
+          handleClick={handleRouteClick}
           height={35}
         />
       )}
-    </SearchInputContainer>
+    </SearchBookModule>
   );
 }
 
 export default SearchBookForm;
 
-const SearchInputContainer = styled.div`
+const SearchBookModule = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;

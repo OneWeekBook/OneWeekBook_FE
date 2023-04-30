@@ -92,7 +92,7 @@ function Sidebar({ toggle, handleToggle }: SidebarTypes) {
           okButtonTitle="로그인"
           cancelButtonTitle="나중에..."
           handleOkClick={() => handleMoveLink(PATH_URL.SIGN_IN)}
-          handleCanCelClick={handleModalToggle}
+          handleCancelClick={handleModalToggle}
         />
       )}
     </SideBarBody>

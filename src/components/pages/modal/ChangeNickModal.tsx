@@ -9,11 +9,11 @@ import useInput from 'hooks/useInput';
 import ChangeModal from 'common/DefaultModal';
 import InputForm from 'components/modules/forms/InputForm';
 
-function ChangeNickModal({ nickToggleIsOn }: ChangeNickModalType) {
+function ChangeNickModal({ handleNickToggle }: ChangeNickModalType) {
   const dispatch = useDispatch();
   const [nick, changeNick] = useInput('');
-  const changeErrorStatus = useSelector(
-    (state: AppStateType) => state.changeNick.changeErrorStatus,
+  const { changeErrorStatus } = useSelector(
+    (state: AppStateType) => state.changeNick,
   );
 
   const handleChangeClick = () => {
@@ -24,7 +24,7 @@ function ChangeNickModal({ nickToggleIsOn }: ChangeNickModalType) {
     if (changeErrorStatus === 200) {
       dispatch(userToggle());
       showToast('success', '닉네임 변경 성공!');
-      nickToggleIsOn();
+      handleNickToggle();
     }
   }, [changeErrorStatus]);
 
@@ -41,12 +41,12 @@ function ChangeNickModal({ nickToggleIsOn }: ChangeNickModalType) {
       contentSize={2.4}
       width={500}
       height={250}
-      handleToggle={nickToggleIsOn}
+      handleToggle={handleNickToggle}
       close
       okButtonTitle="변경"
       cancelButtonTitle="취소"
       handleOkClick={handleChangeClick}
-      handleCanCelClick={nickToggleIsOn}
+      handleCancelClick={handleNickToggle}
     >
       <InputForm
         label="닉네임"

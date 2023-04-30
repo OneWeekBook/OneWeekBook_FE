@@ -5,7 +5,7 @@ import { LibraryResponseTypes } from 'types/response';
 import { LibraryBookCardTypes } from 'types/module';
 import { ParagraphInitRequest } from 'redux/reducers/Paragraph';
 import { UserReviewRequest } from 'redux/reducers/UserReview';
-import { MyLibraryDeleteRequest } from 'redux/reducers/MyLibrary';
+import { LibraryDeleteRequest } from 'redux/reducers/Library';
 import useToggle from 'hooks/useToggle';
 import { SetStartDate } from 'utils/SetDate';
 import { FUNC_IMAGE } from 'constants/image';
@@ -31,7 +31,7 @@ function LibraryBookCard({
   onClick,
 }: LibraryResponseTypes & LibraryBookCardTypes) {
   const dispatch = useDispatch();
-  const [deleteToggle, deleteToggleIsOn] = useToggle(false);
+  const [deleteToggle, handleDeleteToggle] = useToggle(false);
 
   const handleStartClick = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -60,17 +60,17 @@ function LibraryBookCard({
   };
 
   const handleDeleteItem = () => {
-    dispatch(MyLibraryDeleteRequest({ id }));
-    deleteToggleIsOn();
+    dispatch(LibraryDeleteRequest({ id }));
+    handleDeleteToggle();
   };
 
   return (
-    <LibraryBookCardContainer>
+    <LibraryBookCardModule>
       <BookImage>
         <ImageButton
           src={FUNC_IMAGE.TRASH}
-          handleClick={deleteToggleIsOn}
-          imgSize={25}
+          handleClick={handleDeleteToggle}
+          imageSize={25}
         />
         <DefaultImage
           className="bookimage"
@@ -122,7 +122,7 @@ function LibraryBookCard({
               width="auto"
             />
           )}
-          {(progress === 1 || progress === 2) && (
+          {[1, 2].some((num) => [progress].includes(num)) && (
             <DefaultButton
               handleClick={handleParagraphClick}
               fontSize={1.4}
@@ -146,21 +146,21 @@ function LibraryBookCard({
           contentSize={2.4}
           width={500}
           height={250}
-          handleToggle={deleteToggleIsOn}
+          handleToggle={handleDeleteToggle}
           close
           okButtonTitle="삭제"
           cancelButtonTitle="나중에"
           handleOkClick={handleDeleteItem}
-          handleCanCelClick={deleteToggleIsOn}
+          handleCancelClick={handleDeleteToggle}
         />
       )}
-    </LibraryBookCardContainer>
+    </LibraryBookCardModule>
   );
 }
 
 export default LibraryBookCard;
 
-const LibraryBookCardContainer = styled.div`
+const LibraryBookCardModule = styled.div`
   margin-top: 10px;
   display: flex;
   border: 2px solid ${({ theme }) => theme.color.COLOR_CORAL};

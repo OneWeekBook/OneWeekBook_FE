@@ -6,7 +6,7 @@ import { BookResponseTypes } from 'types/response';
 import { LibraryAddRequestTypes } from 'types/request';
 import { BooksListType } from 'types/module';
 import { AppStateType } from 'redux/reducers';
-import { MyLibraryAddRequest } from 'redux/reducers/MyLibrary';
+import { LibraryAddRequest } from 'redux/reducers/Library';
 import { SearchInit, SearchRequest } from 'redux/reducers/Search';
 import { showToast } from 'common/Toast';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
@@ -25,9 +25,7 @@ function BooksList({ searchArr }: BooksListType) {
     (state: AppStateType) => state.authUser,
     shallowEqual,
   );
-  const isAddSuccess = useSelector(
-    (state: AppStateType) => state.myLibrary.isAddSuccess,
-  );
+  const { isAddSuccess } = useSelector((state: AppStateType) => state.library);
 
   const handleFetch = useCallback(() => {
     const options: {
@@ -55,7 +53,7 @@ function BooksList({ searchArr }: BooksListType) {
   }, [startIdx]);
 
   const handleFavoriteClick = ({ ...data }: LibraryAddRequestTypes) => {
-    dispatch(MyLibraryAddRequest({ ...data }));
+    dispatch(LibraryAddRequest({ ...data }));
   };
 
   const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
@@ -77,7 +75,7 @@ function BooksList({ searchArr }: BooksListType) {
   }, [isAddSuccess]);
 
   return (
-    <BookListContainer>
+    <BookListModule>
       <BookListGrid>
         {Array.isArray(books) &&
           !!books &&
@@ -102,13 +100,13 @@ function BooksList({ searchArr }: BooksListType) {
           )
         )}
       </div>
-    </BookListContainer>
+    </BookListModule>
   );
 }
 
 export default BooksList;
 
-const BookListContainer = styled.div`
+const BookListModule = styled.div`
   margin: 30px auto 50px;
 `;
 

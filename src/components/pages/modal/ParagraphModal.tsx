@@ -17,7 +17,11 @@ import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import ParagraphCard from 'components/modules/cards/ParagraphCard';
 import ParagraphInputForm from 'components/modules/forms/ParagraphInputForm';
 
-function Index({ bookData, toggleIsOn, moveDoneClick }: ParagraphModalTypes) {
+function ParagraphModal({
+  bookData,
+  handleToggle,
+  moveDoneClick,
+}: ParagraphModalTypes) {
   const dispatch = useDispatch();
   const { paragraph, isAddSuccess, isDeleteSuccess } = useSelector(
     (state: AppStateType) => state.paragraph,
@@ -36,7 +40,7 @@ function Index({ bookData, toggleIsOn, moveDoneClick }: ParagraphModalTypes) {
     };
   }, []);
 
-  const deleteParagraphClick = useCallback((id: number) => {
+  const handleParagraphDelete = useCallback((id: number) => {
     dispatch(ParagraphDeleteRequest({ id }));
   }, []);
 
@@ -47,10 +51,10 @@ function Index({ bookData, toggleIsOn, moveDoneClick }: ParagraphModalTypes) {
       contentSize={2.4}
       width={700}
       height={300}
-      handleToggle={toggleIsOn}
+      handleToggle={handleToggle}
       close
       cancelButtonTitle="나중에"
-      handleCanCelClick={toggleIsOn}
+      handleCancelClick={handleToggle}
     >
       <ParagraphModalBody>
         <DefaultText
@@ -95,7 +99,7 @@ function Index({ bookData, toggleIsOn, moveDoneClick }: ParagraphModalTypes) {
               key={item.id}
               id={item.id}
               paragraph={item.paragraph}
-              deleteParagraphClick={deleteParagraphClick}
+              deleteParagraphClick={handleParagraphDelete}
             />
           ))}
         </ParagraphListContainer>
@@ -104,7 +108,7 @@ function Index({ bookData, toggleIsOn, moveDoneClick }: ParagraphModalTypes) {
   );
 }
 
-export default Index;
+export default ParagraphModal;
 
 const ParagraphModalBody = styled.div`
   margin: 10px 40px 0px;

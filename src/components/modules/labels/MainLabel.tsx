@@ -4,7 +4,7 @@ import DefaultLabel from 'components/atoms/labels/DefaultLabel';
 
 function MainLabel({ title, subTitle, fontSize }: MainLabelTypes) {
   return (
-    <MainLabelContainer>
+    <MainLabelModule>
       <Bar />
       <DefaultLabel
         content={title}
@@ -13,13 +13,13 @@ function MainLabel({ title, subTitle, fontSize }: MainLabelTypes) {
         reactive
       />
       <Bar />
-    </MainLabelContainer>
+    </MainLabelModule>
   );
 }
 
 export default MainLabel;
 
-const MainLabelContainer = styled.div`
+const MainLabelModule = styled.div`
   margin-bottom: 50px;
   display: flex;
   align-items: center;

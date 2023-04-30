@@ -10,12 +10,12 @@ import changeNick from './ChangeNick';
 import changePassword from './ChangePassword';
 import func from './Func';
 import removeUser from './RemoveUser';
-import myLibrary from './MyLibrary';
+import library from './Library';
 import paragraph from './Paragraph';
 import review from './Review';
 import newReview from './NewReview';
 import userReview from './UserReview';
-import like from './Like';
+import favorite from './Favorite';
 
 const rootReducer = combineReducers({
   authEmail,
@@ -29,12 +29,12 @@ const rootReducer = combineReducers({
   changePassword,
   func,
   removeUser,
-  myLibrary,
+  library,
   paragraph,
   review,
   newReview,
   userReview,
-  like,
+  favorite,
 });
 
 export default rootReducer;

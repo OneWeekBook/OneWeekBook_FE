@@ -11,7 +11,7 @@ function InputForm({
   handleChange,
 }: InputFormTypes) {
   return (
-    <InputFormContainer>
+    <InputFormModule>
       <DefaultText content={label} fontSize={1.6} />
       <DefaultInput
         type={type}
@@ -20,13 +20,13 @@ function InputForm({
         handleChange={handleChange}
         fontSize={1.4}
       />
-    </InputFormContainer>
+    </InputFormModule>
   );
 }
 
 export default InputForm;
 
-const InputFormContainer = styled.div`
+const InputFormModule = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;

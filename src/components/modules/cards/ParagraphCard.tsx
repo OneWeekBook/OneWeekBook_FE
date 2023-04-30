@@ -10,21 +10,21 @@ function ParagraphCard({
   deleteParagraphClick,
 }: ParagraphCardTypes) {
   return (
-    <ParagraphCardContainer>
+    <ParagraphCardModule>
       <DefaultText content={paragraph} />
       <ImageButton
         type="button"
         handleClick={() => deleteParagraphClick(id)}
         src={FUNC_IMAGE.COMMENT_DELETE}
-        imgSize={32}
+        imageSize={32}
       />
-    </ParagraphCardContainer>
+    </ParagraphCardModule>
   );
 }
 
 export default ParagraphCard;
 
-const ParagraphCardContainer = styled.div`
+const ParagraphCardModule = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;

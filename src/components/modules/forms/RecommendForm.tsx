@@ -5,7 +5,7 @@ import StarIcon from 'components/atoms/icons/StarIcon';
 
 function RecommendForm({ recommend, setRecommend }: RecommendFormTypes) {
   return (
-    <RecommendWrapper>
+    <RecommendFormModule>
       <DefaultText content="별점 :" />
       <ImageButtonWrapper>
         {[1, 2, 3, 4, 5].map((item) => (
@@ -14,13 +14,13 @@ function RecommendForm({ recommend, setRecommend }: RecommendFormTypes) {
           </button>
         ))}
       </ImageButtonWrapper>
-    </RecommendWrapper>
+    </RecommendFormModule>
   );
 }
 
 export default RecommendForm;
 
-const RecommendWrapper = styled.div`
+const RecommendFormModule = styled.div`
   display: flex;
   align-items: center;
   p {

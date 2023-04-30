@@ -16,12 +16,8 @@ function Index({ children }: PropsWithChildren) {
   const location = useLocation();
   const dispatch = useDispatch();
   const [toggle, handleToggle] = useToggle(false);
-  const userToggle = useSelector(
-    (state: AppStateType) => state.func.userToggle,
-  );
-  const isSuccess = useSelector(
-    (state: AppStateType) => state.signIn.isSuccess,
-  );
+  const { userToggle } = useSelector((state: AppStateType) => state.func);
+  const { isSuccess } = useSelector((state: AppStateType) => state.signIn);
 
   useEffect(() => {
     dispatch(AuthUserRequest());
@@ -32,10 +28,11 @@ function Index({ children }: PropsWithChildren) {
   }, [isSuccess]);
 
   return (
-    <LayoutWrapper>
+    <GeneralLayout>
       <TopScroll />
-      {location.pathname === PATH_URL.SIGN_UP ||
-      location.pathname === PATH_URL.SIGN_IN ? (
+      {[PATH_URL.SIGN_UP, PATH_URL.SIGN_IN].some((path) =>
+        location.pathname.includes(path),
+      ) ? (
         <HeaderWrapper>
           <DefaultLink
             to={PATH_URL.MAIN}
@@ -54,13 +51,13 @@ function Index({ children }: PropsWithChildren) {
       <FooterWrapper>
         <Footer />
       </FooterWrapper>
-    </LayoutWrapper>
+    </GeneralLayout>
   );
 }
 
 export default Index;
 
-const LayoutWrapper = styled.section`
+const GeneralLayout = styled.section`
   min-width: 375px;
   display: flex;
   height: 100vh;

@@ -4,17 +4,17 @@ import { LibraryBookListTypes } from 'types/module';
 import LibraryBookCard from 'components/modules/cards/LibraryBookCard';
 
 function LibraryBookList({
-  userBookList,
+  libraryBookList,
   handleLikeToggle,
   handleCommentToggle,
   handleReviewToggle,
   setBookData,
 }: LibraryBookListTypes) {
   return (
-    <LibraryBookGrid>
-      {Array.isArray(userBookList) &&
-        !!userBookList &&
-        userBookList.map((item: LibraryResponseTypes) => (
+    <LibraryBookListModule>
+      {Array.isArray(libraryBookList) &&
+        !!libraryBookList &&
+        libraryBookList.map((item: LibraryResponseTypes) => (
           <LibraryBookCard
             key={item.id}
             {...item}
@@ -34,13 +34,13 @@ function LibraryBookList({
             }}
           />
         ))}
-    </LibraryBookGrid>
+    </LibraryBookListModule>
   );
 }
 
 export default LibraryBookList;
 
-const LibraryBookGrid = styled.div`
+const LibraryBookListModule = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;

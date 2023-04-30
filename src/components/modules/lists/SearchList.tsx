@@ -5,7 +5,7 @@ import theme from 'styles/theme';
 import { LibraryAddRequestTypes } from 'types/request';
 import { BookResponseTypes } from 'types/response';
 import { AppStateType } from 'redux/reducers';
-import { MyLibraryAddRequest } from 'redux/reducers/MyLibrary';
+import { LibraryAddRequest } from 'redux/reducers/Library';
 import { searchDone } from 'redux/reducers/Func';
 import { showToast } from 'common/Toast';
 import DefaultText from 'components/atoms/texts/DefaultText';
@@ -19,10 +19,8 @@ function SearchList() {
     (state: AppStateType) => state.search,
     shallowEqual,
   );
-  const search = useSelector((state: AppStateType) => state.func.search);
-  const isAddSuccess = useSelector(
-    (state: AppStateType) => state.myLibrary.isAddSuccess,
-  );
+  const { search } = useSelector((state: AppStateType) => state.func);
+  const { isAddSuccess } = useSelector((state: AppStateType) => state.library);
 
   useEffect(() => {
     if (isAddSuccess) showToast('success', '내 서재에 추가완료~');
@@ -33,7 +31,7 @@ function SearchList() {
   }, [isSuccess]);
 
   const handleFavoriteClick = ({ ...data }: LibraryAddRequestTypes) => {
-    dispatch(MyLibraryAddRequest({ ...data }));
+    dispatch(LibraryAddRequest({ ...data }));
   };
 
   if (isLoading) return <LoadingForm />;
@@ -53,7 +51,7 @@ function SearchList() {
     );
 
   return (
-    <SearchListContainer>
+    <SearchListModule>
       {books.map((item: BookResponseTypes, index: number) => (
         <SearchBookCard
           key={index}
@@ -61,13 +59,13 @@ function SearchList() {
           handleFavoriteClick={handleFavoriteClick}
         />
       ))}
-    </SearchListContainer>
+    </SearchListModule>
   );
 }
 
 export default SearchList;
 
-const SearchListContainer = styled.div`
+const SearchListModule = styled.div`
   display: grid;
   margin-top: 30px;
   margin-bottom: 30px;

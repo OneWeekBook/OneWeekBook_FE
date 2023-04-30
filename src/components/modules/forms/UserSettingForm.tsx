@@ -1,26 +1,23 @@
 import styled from 'styled-components';
+import { UserSettingFormType } from 'types/module';
 import useToggle from 'hooks/useToggle';
 import DataText from 'components/atoms/texts/DataText';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import ChangePassModal from 'components/pages/modal/ChangePassModal';
 import ChangeNickModal from 'components/pages/modal/ChangeNickModal';
 
-interface PropsType {
-  nickName: string;
-}
-
-function UserSettingForm({ nickName }: PropsType) {
-  const [nickToggle, nickToggleIsOn] = useToggle(false);
-  const [passToggle, passToggleIsOn] = useToggle(false);
+function UserSettingForm({ nickName }: UserSettingFormType) {
+  const [nickToggle, handleNickToggle] = useToggle(false);
+  const [passToggle, handlePassToggle] = useToggle(false);
   return (
-    <UserSettingContainer>
+    <UserSettingFormModule>
       <DataText before="닉네임:" data={nickName} fontSize={2} />
       <SettingButtons>
         <DefaultButton
           content="닉네임 변경"
           fontSize={1.4}
           fontWeight={300}
-          handleClick={nickToggleIsOn}
+          handleClick={handleNickToggle}
           width={90}
           height={35}
         />
@@ -28,20 +25,20 @@ function UserSettingForm({ nickName }: PropsType) {
           content="비밀번호 변경"
           fontSize={1.4}
           fontWeight={300}
-          handleClick={passToggleIsOn}
+          handleClick={handlePassToggle}
           width={90}
           height={35}
         />
       </SettingButtons>
-      {nickToggle && <ChangeNickModal nickToggleIsOn={nickToggleIsOn} />}
-      {passToggle && <ChangePassModal passToggleIsOn={passToggleIsOn} />}
-    </UserSettingContainer>
+      {nickToggle && <ChangeNickModal handleNickToggle={handleNickToggle} />}
+      {passToggle && <ChangePassModal handlePassToggle={handlePassToggle} />}
+    </UserSettingFormModule>
   );
 }
 
 export default UserSettingForm;
 
-const UserSettingContainer = styled.div`
+const UserSettingFormModule = styled.div`
   display: flex;
   justify-content: space-between;
   @media (max-width: 425px) {

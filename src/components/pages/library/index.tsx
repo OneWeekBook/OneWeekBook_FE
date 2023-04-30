@@ -4,10 +4,7 @@ import { AppStateType } from 'redux/reducers';
 import styled from 'styled-components';
 import { LibraryBookTypes } from 'types/page';
 import { navDone, navInit, navRead, userToggle } from 'redux/reducers/Func';
-import {
-  MyLibraryModifyRequest,
-  MyLibraryRequest,
-} from 'redux/reducers/MyLibrary';
+import { LibraryModifyRequest, LibraryRequest } from 'redux/reducers/Library';
 import useToggle from 'hooks/useToggle';
 import { bookInit } from 'constants/content';
 import { FUNC_IMAGE } from 'constants/image';
@@ -22,7 +19,7 @@ import WriteReviewModal from 'components/pages/modal/WriteReviewModal';
 
 function Index() {
   const dispatch = useDispatch();
-  const [likeToggle, handleLikeToggle] = useToggle(false);
+  const [favoriteToggle, handleFavoriteToggle] = useToggle(false);
   const [commentToggle, handleCommentToggle] = useToggle(false);
   const [reivewToggle, handleReviewToggle] = useToggle(false);
   const [bookData, setBookData] = useState<LibraryBookTypes>(bookInit);
@@ -30,9 +27,9 @@ function Index() {
     (state: AppStateType) => state.authUser,
     shallowEqual,
   );
-  const navId = useSelector((state: AppStateType) => state.func.navId);
-  const { userBookList, isDeleteSuccess } = useSelector(
-    (state: AppStateType) => state.myLibrary,
+  const { navId } = useSelector((state: AppStateType) => state.func);
+  const { libraryBookList, isDeleteSuccess } = useSelector(
+    (state: AppStateType) => state.library,
     shallowEqual,
   );
   const {
@@ -41,28 +38,22 @@ function Index() {
     itemDeleteSuccess,
     userReviewSuccess,
   } = useSelector((state: AppStateType) => state.userReview, shallowEqual);
-  const initSuccess = useSelector(
-    (state: AppStateType) => state.paragraph.initSuccess,
-  );
+  const { initSuccess } = useSelector((state: AppStateType) => state.paragraph);
 
-  const moveReadClick = useCallback(async () => {
-    await dispatch(
-      MyLibraryModifyRequest({ progress: 1, isbn: bookData.isbn }),
-    );
-    handleLikeToggle();
+  const handleMoveReadClick = useCallback(async () => {
+    await dispatch(LibraryModifyRequest({ progress: 1, isbn: bookData.isbn }));
+    handleFavoriteToggle();
     dispatch(navRead());
   }, [bookData]);
 
-  const moveDoneClick = useCallback(async () => {
-    await dispatch(
-      MyLibraryModifyRequest({ progress: 2, isbn: bookData.isbn }),
-    );
+  const handleMoveDoneClick = useCallback(async () => {
+    await dispatch(LibraryModifyRequest({ progress: 2, isbn: bookData.isbn }));
     handleCommentToggle();
     dispatch(navDone());
   }, [bookData]);
 
   useEffect(() => {
-    if (isDeleteSuccess) dispatch(MyLibraryRequest({ progress: navId }));
+    if (isDeleteSuccess) dispatch(LibraryRequest({ progress: navId }));
   }, [isDeleteSuccess]);
 
   useEffect(() => {
@@ -93,35 +84,38 @@ function Index() {
         <LibraryMenuList useId={user.id} navId={navId} />
       </MyLibraryHeader>
       <LibraryBookList
-        userBookList={userBookList}
-        handleLikeToggle={handleLikeToggle}
+        libraryBookList={libraryBookList}
+        handleLikeToggle={handleFavoriteToggle}
         handleCommentToggle={handleCommentToggle}
         handleReviewToggle={handleReviewToggle}
         setBookData={setBookData}
       />
-      {likeToggle && (
+      {favoriteToggle && (
         <DefaultModal
           content="시작해볼까요?"
           contentSize={2.4}
           width={500}
           height={250}
-          handleToggle={handleLikeToggle}
+          handleToggle={handleFavoriteToggle}
           close
           okButtonTitle="독서 시작"
           cancelButtonTitle="나중에"
-          handleOkClick={moveReadClick}
-          handleCanCelClick={handleLikeToggle}
+          handleOkClick={handleMoveReadClick}
+          handleCancelClick={handleFavoriteToggle}
         />
       )}
       {commentToggle && initSuccess && (
         <ParagraphModal
           bookData={bookData}
-          toggleIsOn={handleCommentToggle}
-          moveDoneClick={moveDoneClick}
+          handleToggle={handleCommentToggle}
+          moveDoneClick={handleMoveDoneClick}
         />
       )}
       {reivewToggle && userReviewSuccess && (
-        <WriteReviewModal bookData={bookData} toggleIsOn={handleReviewToggle} />
+        <WriteReviewModal
+          bookData={bookData}
+          handleToggle={handleReviewToggle}
+        />
       )}
     </Container>
   );

@@ -11,7 +11,7 @@ function CategoryList({
   handleCategoryFilter,
 }: CategoryListProps) {
   return (
-    <CategoryListContainer>
+    <CategoryListModule>
       <DefaultLabel content="전체 카테고리" align="left" fontSize={2.4} />
       <CategoryTagList>
         {catgoryResult.map((item: CategoryResponseTypes) => (
@@ -26,13 +26,13 @@ function CategoryList({
           />
         ))}
       </CategoryTagList>
-    </CategoryListContainer>
+    </CategoryListModule>
   );
 }
 
 export default CategoryList;
 
-const CategoryListContainer = styled.div``;
+const CategoryListModule = styled.div``;
 
 const CategoryTagList = styled.div`
   display: flex;

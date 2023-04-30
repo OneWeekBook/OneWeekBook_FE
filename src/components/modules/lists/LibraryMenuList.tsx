@@ -4,20 +4,14 @@ import styled from 'styled-components';
 import theme from 'styles/theme';
 import { LibraryMenuTypes } from 'types/module';
 import { navDone, navLike, navRead } from 'redux/reducers/Func';
-import { MyLibraryInit, MyLibraryRequest } from 'redux/reducers/MyLibrary';
+import { LibraryInit, LibraryRequest } from 'redux/reducers/Library';
 import { libraryMenu } from 'constants/content';
 import MenuButton from 'components/atoms/buttons/MenuButton';
 
 function LibraryMenuList({ useId, navId }: LibraryMenuTypes) {
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (useId) dispatch(MyLibraryRequest({ progress: navId }));
-    return () => {
-      dispatch(MyLibraryInit());
-    };
-  }, [useId, navId]);
 
-  const navMoveClick = (curId: number) => {
+  const handleMenuClick = (curId: number) => {
     if (libraryMenu[0].id === curId) {
       dispatch(navLike());
     } else if (libraryMenu[1].id === curId) {
@@ -27,16 +21,23 @@ function LibraryMenuList({ useId, navId }: LibraryMenuTypes) {
     }
   };
 
+  useEffect(() => {
+    if (useId) dispatch(LibraryRequest({ progress: navId }));
+    return () => {
+      dispatch(LibraryInit());
+    };
+  }, [useId, navId]);
+
   return (
-    <MyLibraryMenuContainer>
+    <LibraryMenuListModule>
       {libraryMenu.map((item) => (
         <MenuButton
           className="roundborder"
           key={item.id}
           src={item.image}
-          imgSize={18}
+          imageSize={18}
           content={item.desc}
-          handleClick={() => navMoveClick(item.id)}
+          handleClick={() => handleMenuClick(item.id)}
           isBtnClick={navId === item.id}
           bgColor={[theme.color.COLOR_CORAL, theme.color.COLOR_ORANGE_RED]}
           fontColor={theme.color.COLOR_WHITE}
@@ -45,13 +46,13 @@ function LibraryMenuList({ useId, navId }: LibraryMenuTypes) {
           height={20}
         />
       ))}
-    </MyLibraryMenuContainer>
+    </LibraryMenuListModule>
   );
 }
 
 export default LibraryMenuList;
 
-const MyLibraryMenuContainer = styled.div`
+const LibraryMenuListModule = styled.div`
   display: flex;
   gap: 5px;
   button {

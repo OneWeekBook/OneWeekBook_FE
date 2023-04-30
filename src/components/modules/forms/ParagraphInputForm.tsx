@@ -12,52 +12,52 @@ import BorderInput from 'components/atoms/inputs/BorderInput';
 function ParagraphInputForm({ bookId }: ParagraphInputFormType) {
   const dispatch = useDispatch();
   const paragRef = useRef<HTMLInputElement>(null);
-  const [parag, changeParag, setParag] = useInput('');
+  const [paragraph, handleChangeParagraph, setParagraph] = useInput('');
 
   useEffect(() => {
     paragRef.current?.focus();
   }, []);
 
-  const addParagraphClick = useCallback(() => {
-    if (parag) {
-      const data = { bookId, paragraph: parag };
+  const handleParagraphAdd = useCallback(() => {
+    if (paragraph) {
+      const data = { bookId, paragraph };
       dispatch(ParagraphAddRequest(data));
-      setParag('');
+      setParagraph('');
     } else {
       showToast('warning', '문구를 입력해주세요');
     }
-  }, [parag]);
+  }, [paragraph]);
 
   const handleInputEnter = (event: React.KeyboardEvent<Element>) => {
     if (event.key === 'Enter') {
-      addParagraphClick();
+      handleParagraphAdd();
     }
   };
 
   return (
-    <InputForm>
+    <ParagraphInputFormModule>
       <BorderInput
         type="text"
         placeholder="기억에 남는 문구를 입력해주세요."
-        value={parag}
-        onChange={changeParag}
+        value={paragraph}
+        onChange={handleChangeParagraph}
         onKeyPress={handleInputEnter}
         mref={paragRef}
       />
 
       <ImageButton
         type="button"
-        handleClick={addParagraphClick}
+        handleClick={handleParagraphAdd}
         src={FUNC_IMAGE.COMMENT_ADD}
-        imgSize={30}
+        imageSize={30}
       />
-    </InputForm>
+    </ParagraphInputFormModule>
   );
 }
 
 export default ParagraphInputForm;
 
-const InputForm = styled.div`
+const ParagraphInputFormModule = styled.div`
   display: flex;
   position: relative;
   button {

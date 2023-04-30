@@ -56,7 +56,7 @@ export interface EmailErrorTypes {
 
 export interface HeaderTypes {
   handleToggle: () => void;
-  handleSignout: () => void;
+  handleSignOut: () => void;
 }
 
 export interface InputFormTypes {
@@ -68,7 +68,7 @@ export interface InputFormTypes {
 }
 
 export interface LibraryBookListTypes {
-  userBookList: LibraryResponseTypes[];
+  libraryBookList: LibraryResponseTypes[];
   handleLikeToggle: () => void;
   handleCommentToggle: () => void;
   handleReviewToggle: () => void;
@@ -171,4 +171,8 @@ export interface TagLabelType {
 
 export interface UserBookListType {
   userBooks: UserBookResponseTypes[];
+}
+
+export interface UserSettingFormType {
+  nickName: string;
 }

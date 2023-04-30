@@ -10,7 +10,7 @@ import Container from './Container';
 function Header({ handleToggle }: HeaderType) {
   const dispatch = useDispatch();
 
-  const logoutClick = () => {
+  const signOutClick = () => {
     removeAccessTokenFromSessionStorage();
     dispatch(AuthInit());
     showToast('info', '로그아웃 되었습니다.');
@@ -18,7 +18,7 @@ function Header({ handleToggle }: HeaderType) {
 
   return (
     <Container as="header">
-      <HeaderMenu handleToggle={handleToggle} handleSignout={logoutClick} />
+      <HeaderMenu handleToggle={handleToggle} handleSignOut={signOutClick} />
       <HeaderCategory />
     </Container>
   );

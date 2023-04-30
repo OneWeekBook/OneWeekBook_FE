@@ -11,18 +11,18 @@ function ProgressBarForm({ limit, write, width, percent }: ProgressBarTypes) {
   }, [percent]);
 
   return (
-    <ProgressBarFormContainer>
+    <ProgressBarFormModule>
       <ProgressBar width={width}>
         {percent && <Progress value={value}>{write}</Progress>}
       </ProgressBar>
       <DefaultText content={limit} fontSize={1.8} />
-    </ProgressBarFormContainer>
+    </ProgressBarFormModule>
   );
 }
 
 export default ProgressBarForm;
 
-const ProgressBarFormContainer = styled.div`
+const ProgressBarFormModule = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;

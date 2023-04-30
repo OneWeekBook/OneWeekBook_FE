@@ -18,7 +18,7 @@ function ReivewItem({
   count,
 }: React.PropsWithChildren<ReviewResponseTypes> & ReviewBookCardType) {
   return (
-    <ReviewBookCardContainer>
+    <ReviewBookCardModule>
       <MultiText
         className="review"
         imageSrc={FUNC_IMAGE.REVIEW}
@@ -45,13 +45,13 @@ function ReivewItem({
           fontWeight={300}
         />
       </BookInfo>
-    </ReviewBookCardContainer>
+    </ReviewBookCardModule>
   );
 }
 
 export default ReivewItem;
 
-const ReviewBookCardContainer = styled.div`
+const ReviewBookCardModule = styled.div`
   display: flex;
   flex-direction: column;
   cursor: pointer;

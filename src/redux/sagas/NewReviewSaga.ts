@@ -9,9 +9,7 @@ import {
 } from 'redux/reducers/NewReview';
 
 function NewReviewAPI() {
-  return instance.get(
-    `${process.env.REACT_APP_BASIC_URL}${API_URL.LATEST_REVIEW}`,
-  );
+  return instance.get(API_URL.LATEST_REVIEW);
 }
 
 function* fetchNewReviewSaga(): any {

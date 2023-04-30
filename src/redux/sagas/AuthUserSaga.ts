@@ -14,7 +14,7 @@ function AuthUserAPI() {
 
 function UserLibraryAPI(params: { userId: number; progress: number }) {
   return instance.get(
-    `${process.env.REACT_APP_BASIC_URL}${API_URL.LIBRARY}?userId=${params.userId}&progress=${params.progress}`,
+    `${API_URL.LIBRARY}?userId=${params.userId}&progress=${params.progress}`,
   );
 }
 

@@ -5,18 +5,18 @@ import DefaultText from 'components/atoms/texts/DefaultText';
 
 function TagLabel({ tags }: TagLabelType) {
   return (
-    <TagLabelContainer>
+    <TagLabelModule>
       <DefaultText content="전체 검색 결과" fontSize={2.2} reactive />
       {Array.from(tags).map((item, index) => (
         <TagText key={index} content={item} />
       ))}
-    </TagLabelContainer>
+    </TagLabelModule>
   );
 }
 
 export default TagLabel;
 
-const TagLabelContainer = styled.div`
+const TagLabelModule = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;

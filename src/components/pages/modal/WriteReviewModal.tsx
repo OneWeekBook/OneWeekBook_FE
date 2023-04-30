@@ -18,7 +18,7 @@ import DefaultText from 'components/atoms/texts/DefaultText';
 import RecommendForm from 'components/modules/forms/RecommendForm';
 import ReviewInput from 'components/atoms/inputs/ReviewInput';
 
-function WriteReviewModal({ bookData, toggleIsOn }: WriteReviewTypes) {
+function WriteReviewModal({ bookData, handleToggle }: WriteReviewTypes) {
   const dispatch = useDispatch();
   const { reviewItem, itemAddSuccess } = useSelector(
     (state: AppStateType) => state.userReview,
@@ -49,7 +49,7 @@ function WriteReviewModal({ bookData, toggleIsOn }: WriteReviewTypes) {
 
   const deleteReviewClick = () => {
     dispatch(UserReviewDeleteRequest());
-    toggleIsOn();
+    handleToggle();
   };
 
   useLayoutEffect(() => {
@@ -71,10 +71,10 @@ function WriteReviewModal({ bookData, toggleIsOn }: WriteReviewTypes) {
       contentSize={2.4}
       width={700}
       height={400}
-      handleToggle={toggleIsOn}
+      handleToggle={handleToggle}
       close
       cancelButtonTitle="나중에"
-      handleCanCelClick={toggleIsOn}
+      handleCancelClick={handleToggle}
     >
       <ReviewModalBody>
         <BookInfo>

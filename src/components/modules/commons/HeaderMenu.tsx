@@ -6,9 +6,9 @@ import { getAccessTokenFromSessionStorage } from 'utils/accessTokenHandler';
 import ImageButton from 'components/atoms/buttons/ImageButton';
 import DefaultLink from 'components/atoms/links/DefaultLink';
 
-function HeaderMenu({ handleToggle, handleSignout }: HeaderTypes) {
+function HeaderMenu({ handleToggle, handleSignOut }: HeaderTypes) {
   return (
-    <HeaderTopMenuModule>
+    <HeaderMenuModule>
       <DefaultLink
         to={PATH_URL.MAIN}
         content="ONEWEEKBOOK"
@@ -16,34 +16,34 @@ function HeaderMenu({ handleToggle, handleSignout }: HeaderTypes) {
         fontWeight={700}
       />
       {getAccessTokenFromSessionStorage() ? (
-        <LinkWrapper>
+        <DefaultLinks>
           <DefaultLink to={PATH_URL.USER} content="마이페이지" />
           <span>&nbsp;&nbsp;·&nbsp;&nbsp;</span>
           <DefaultLink
             to={PATH_URL.MAIN}
             content="로그아웃"
-            handleClick={handleSignout}
+            handleClick={handleSignOut}
           />
-        </LinkWrapper>
+        </DefaultLinks>
       ) : (
-        <LinkWrapper>
+        <DefaultLinks>
           <DefaultLink to={PATH_URL.SIGN_UP} content="회원가입" />
           <span>&nbsp;&nbsp;·&nbsp;&nbsp;</span>
           <DefaultLink to={PATH_URL.SIGN_IN} content="로그인" />
-        </LinkWrapper>
+        </DefaultLinks>
       )}
       <ImageButton
         src={FUNC_IMAGE.HAMBURGER}
-        imgSize={32}
+        imageSize={32}
         handleClick={handleToggle}
       />
-    </HeaderTopMenuModule>
+    </HeaderMenuModule>
   );
 }
 
 export default HeaderMenu;
 
-const HeaderTopMenuModule = styled.div`
+const HeaderMenuModule = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -58,7 +58,7 @@ const HeaderTopMenuModule = styled.div`
   }
 `;
 
-const LinkWrapper = styled.div`
+const DefaultLinks = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;

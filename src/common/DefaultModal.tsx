@@ -18,7 +18,7 @@ function Index({
   type,
   handleToggle,
   handleOkClick,
-  handleCanCelClick,
+  handleCancelClick,
   children,
 }: React.PropsWithChildren<DefaultModalTypes>) {
   return (
@@ -29,7 +29,7 @@ function Index({
             <ImageButton
               handleClick={handleToggle}
               src={FUNC_IMAGE.CLOSE}
-              imgSize={25}
+              imageSize={25}
             />
           )}
         </CloseButton>
@@ -51,7 +51,7 @@ function Index({
             )}
             {cancelButtonTitle && (
               <DefaultButton
-                handleClick={handleCanCelClick}
+                handleClick={handleCancelClick}
                 fontSize={1.8}
                 content={cancelButtonTitle}
               />

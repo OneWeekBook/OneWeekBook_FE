@@ -48,7 +48,7 @@ function SignInForm() {
   }, [signInErrorStatus]);
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <SignInFormModule onSubmit={handleSubmit}>
       <BorderInput
         type="email"
         placeholder="이메일"
@@ -66,13 +66,13 @@ function SignInForm() {
       />
       {signInError && <ErrorText error={signInErrorMsg} align="left" />}
       <DefaultButton type="submit" content="로그인" width="auto" fontSize={2} />
-    </Form>
+    </SignInFormModule>
   );
 }
 
 export default SignInForm;
 
-const Form = styled.form`
+const SignInFormModule = styled.form`
   display: flex;
   flex-direction: column;
   button {

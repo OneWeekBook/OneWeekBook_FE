@@ -14,14 +14,14 @@ import ChangeModal from 'common/DefaultModal';
 import ErrorText from 'components/atoms/texts/ErrorText';
 import InputForm from 'components/modules/forms/InputForm';
 
-function ChangePassModal({ passToggleIsOn }: ChangePassModalType) {
+function ChangePassModal({ handlePassToggle }: ChangePassModalType) {
   const dispatch = useDispatch();
   const [password, changePasswod] = useInput('');
   const [confirmPassword, changeConfirmPasswod] = useInput('');
   const [passError, setPassError] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
-  const changeErrorStatus = useSelector(
-    (state: AppStateType) => state.changePassword.changeErrorStatus,
+  const { changeErrorStatus } = useSelector(
+    (state: AppStateType) => state.changePassword,
   );
 
   const handleChangePassword = () => {
@@ -45,7 +45,7 @@ function ChangePassModal({ passToggleIsOn }: ChangePassModalType) {
     else if (changeErrorStatus === 200) {
       dispatch(ChangePasswordInit());
       showToast('success', '비밀번호 변경 성공!');
-      passToggleIsOn();
+      handlePassToggle();
     }
     return () => {
       setPassError(false);
@@ -58,12 +58,12 @@ function ChangePassModal({ passToggleIsOn }: ChangePassModalType) {
       contentSize={2.4}
       width={500}
       height={300}
-      handleToggle={passToggleIsOn}
+      handleToggle={handlePassToggle}
       close
       okButtonTitle="변경"
       cancelButtonTitle="취소"
       handleOkClick={handleChangePassword}
-      handleCanCelClick={passToggleIsOn}
+      handleCancelClick={handlePassToggle}
     >
       <PasswordInputs>
         <InputForm

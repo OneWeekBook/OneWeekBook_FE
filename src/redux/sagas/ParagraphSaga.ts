@@ -13,9 +13,7 @@ import {
 } from 'redux/reducers/Paragraph';
 
 function ParagraphAPI(params: ParagraphRequestType) {
-  return instance.get(
-    `${process.env.REACT_APP_BASIC_URL}${API_URL.PARAGRAPH}?bookId=${params.bookId}`,
-  );
+  return instance.get(`${API_URL.PARAGRAPH}?bookId=${params.bookId}`);
 }
 
 function* fetchParagraphInitSaga(action: {
