@@ -9,10 +9,10 @@ import watchSearch from './SearchSaga';
 import watchChangeNick from './ChangeNickSaga';
 import watchChangePassword from './ChangePasswordSaga';
 import watchRemoveUser from './RemoveUserSaga';
-import watchMyLibrary from './MyLibrarySaga';
-import watchMyLibraryAdd from './MyLibraryAddSaga';
-import watchMyLibraryModify from './MyLibraryModifySaga';
-import watchMyLibraryDelete from './MyLibraryDeleteSaga';
+import watchLibrary from './LibrarySaga';
+import watchLibraryAdd from './LibraryAddSaga';
+import watchLibraryModify from './LibraryModifySaga';
+import watchLibraryDelete from './LibraryDeleteSaga';
 import watchParagraph from './ParagraphSaga';
 import watchParagraphAdd from './ParagraphAddSaga';
 import watchParagraphDelete from './ParagraphDeleteSaga';
@@ -39,10 +39,10 @@ export default function* rootSaga() {
     call(watchChangeNick),
     call(watchChangePassword),
     call(watchRemoveUser),
-    call(watchMyLibrary),
-    call(watchMyLibraryAdd),
-    call(watchMyLibraryModify),
-    call(watchMyLibraryDelete),
+    call(watchLibrary),
+    call(watchLibraryAdd),
+    call(watchLibraryModify),
+    call(watchLibraryDelete),
     call(watchParagraph),
     call(watchParagraphAdd),
     call(watchParagraphDelete),

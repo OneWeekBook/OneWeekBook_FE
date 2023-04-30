@@ -5,7 +5,7 @@ import { LibraryResponseTypes } from 'types/response';
 import { LibraryBookCardTypes } from 'types/module';
 import { ParagraphInitRequest } from 'redux/reducers/Paragraph';
 import { UserReviewRequest } from 'redux/reducers/UserReview';
-import { MyLibraryDeleteRequest } from 'redux/reducers/MyLibrary';
+import { LibraryDeleteRequest } from 'redux/reducers/Library';
 import useToggle from 'hooks/useToggle';
 import { SetStartDate } from 'utils/SetDate';
 import { FUNC_IMAGE } from 'constants/image';
@@ -60,7 +60,7 @@ function LibraryBookCard({
   };
 
   const handleDeleteItem = () => {
-    dispatch(MyLibraryDeleteRequest({ id }));
+    dispatch(LibraryDeleteRequest({ id }));
     deleteToggleIsOn();
   };
 

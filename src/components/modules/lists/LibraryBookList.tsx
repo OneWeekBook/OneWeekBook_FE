@@ -4,7 +4,7 @@ import { LibraryBookListTypes } from 'types/module';
 import LibraryBookCard from 'components/modules/cards/LibraryBookCard';
 
 function LibraryBookList({
-  userBookList,
+  libraryBookList,
   handleLikeToggle,
   handleCommentToggle,
   handleReviewToggle,
@@ -12,9 +12,9 @@ function LibraryBookList({
 }: LibraryBookListTypes) {
   return (
     <LibraryBookGrid>
-      {Array.isArray(userBookList) &&
-        !!userBookList &&
-        userBookList.map((item: LibraryResponseTypes) => (
+      {Array.isArray(libraryBookList) &&
+        !!libraryBookList &&
+        libraryBookList.map((item: LibraryResponseTypes) => (
           <LibraryBookCard
             key={item.id}
             {...item}

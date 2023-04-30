@@ -6,7 +6,7 @@ import { BookResponseTypes } from 'types/response';
 import { LibraryAddRequestTypes } from 'types/request';
 import { BooksListType } from 'types/module';
 import { AppStateType } from 'redux/reducers';
-import { MyLibraryAddRequest } from 'redux/reducers/MyLibrary';
+import { LibraryAddRequest } from 'redux/reducers/Library';
 import { SearchInit, SearchRequest } from 'redux/reducers/Search';
 import { showToast } from 'common/Toast';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
@@ -26,7 +26,7 @@ function BooksList({ searchArr }: BooksListType) {
     shallowEqual,
   );
   const isAddSuccess = useSelector(
-    (state: AppStateType) => state.myLibrary.isAddSuccess,
+    (state: AppStateType) => state.library.isAddSuccess,
   );
 
   const handleFetch = useCallback(() => {
@@ -55,7 +55,7 @@ function BooksList({ searchArr }: BooksListType) {
   }, [startIdx]);
 
   const handleFavoriteClick = ({ ...data }: LibraryAddRequestTypes) => {
-    dispatch(MyLibraryAddRequest({ ...data }));
+    dispatch(LibraryAddRequest({ ...data }));
   };
 
   const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {

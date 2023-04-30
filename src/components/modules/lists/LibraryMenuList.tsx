@@ -4,16 +4,16 @@ import styled from 'styled-components';
 import theme from 'styles/theme';
 import { LibraryMenuTypes } from 'types/module';
 import { navDone, navLike, navRead } from 'redux/reducers/Func';
-import { MyLibraryInit, MyLibraryRequest } from 'redux/reducers/MyLibrary';
+import { LibraryInit, LibraryRequest } from 'redux/reducers/Library';
 import { libraryMenu } from 'constants/content';
 import MenuButton from 'components/atoms/buttons/MenuButton';
 
 function LibraryMenuList({ useId, navId }: LibraryMenuTypes) {
   const dispatch = useDispatch();
   useEffect(() => {
-    if (useId) dispatch(MyLibraryRequest({ progress: navId }));
+    if (useId) dispatch(LibraryRequest({ progress: navId }));
     return () => {
-      dispatch(MyLibraryInit());
+      dispatch(LibraryInit());
     };
   }, [useId, navId]);
 

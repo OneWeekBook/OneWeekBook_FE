@@ -10,7 +10,7 @@ import changeNick from './ChangeNick';
 import changePassword from './ChangePassword';
 import func from './Func';
 import removeUser from './RemoveUser';
-import myLibrary from './MyLibrary';
+import library from './Library';
 import paragraph from './Paragraph';
 import review from './Review';
 import newReview from './NewReview';
@@ -29,7 +29,7 @@ const rootReducer = combineReducers({
   changePassword,
   func,
   removeUser,
-  myLibrary,
+  library,
   paragraph,
   review,
   newReview,

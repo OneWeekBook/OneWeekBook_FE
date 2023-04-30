@@ -5,7 +5,7 @@ import theme from 'styles/theme';
 import { LibraryAddRequestTypes } from 'types/request';
 import { BookResponseTypes } from 'types/response';
 import { AppStateType } from 'redux/reducers';
-import { MyLibraryAddRequest } from 'redux/reducers/MyLibrary';
+import { LibraryAddRequest } from 'redux/reducers/Library';
 import { searchDone } from 'redux/reducers/Func';
 import { showToast } from 'common/Toast';
 import DefaultText from 'components/atoms/texts/DefaultText';
@@ -21,7 +21,7 @@ function SearchList() {
   );
   const search = useSelector((state: AppStateType) => state.func.search);
   const isAddSuccess = useSelector(
-    (state: AppStateType) => state.myLibrary.isAddSuccess,
+    (state: AppStateType) => state.library.isAddSuccess,
   );
 
   useEffect(() => {
@@ -33,7 +33,7 @@ function SearchList() {
   }, [isSuccess]);
 
   const handleFavoriteClick = ({ ...data }: LibraryAddRequestTypes) => {
-    dispatch(MyLibraryAddRequest({ ...data }));
+    dispatch(LibraryAddRequest({ ...data }));
   };
 
   if (isLoading) return <LoadingForm />;

@@ -4,10 +4,7 @@ import { AppStateType } from 'redux/reducers';
 import styled from 'styled-components';
 import { LibraryBookTypes } from 'types/page';
 import { navDone, navInit, navRead, userToggle } from 'redux/reducers/Func';
-import {
-  MyLibraryModifyRequest,
-  MyLibraryRequest,
-} from 'redux/reducers/MyLibrary';
+import { LibraryModifyRequest, LibraryRequest } from 'redux/reducers/Library';
 import useToggle from 'hooks/useToggle';
 import { bookInit } from 'constants/content';
 import { FUNC_IMAGE } from 'constants/image';
@@ -31,8 +28,8 @@ function Index() {
     shallowEqual,
   );
   const navId = useSelector((state: AppStateType) => state.func.navId);
-  const { userBookList, isDeleteSuccess } = useSelector(
-    (state: AppStateType) => state.myLibrary,
+  const { libraryBookList, isDeleteSuccess } = useSelector(
+    (state: AppStateType) => state.library,
     shallowEqual,
   );
   const {
@@ -46,23 +43,19 @@ function Index() {
   );
 
   const moveReadClick = useCallback(async () => {
-    await dispatch(
-      MyLibraryModifyRequest({ progress: 1, isbn: bookData.isbn }),
-    );
+    await dispatch(LibraryModifyRequest({ progress: 1, isbn: bookData.isbn }));
     handleLikeToggle();
     dispatch(navRead());
   }, [bookData]);
 
   const moveDoneClick = useCallback(async () => {
-    await dispatch(
-      MyLibraryModifyRequest({ progress: 2, isbn: bookData.isbn }),
-    );
+    await dispatch(LibraryModifyRequest({ progress: 2, isbn: bookData.isbn }));
     handleCommentToggle();
     dispatch(navDone());
   }, [bookData]);
 
   useEffect(() => {
-    if (isDeleteSuccess) dispatch(MyLibraryRequest({ progress: navId }));
+    if (isDeleteSuccess) dispatch(LibraryRequest({ progress: navId }));
   }, [isDeleteSuccess]);
 
   useEffect(() => {
@@ -93,7 +86,7 @@ function Index() {
         <LibraryMenuList useId={user.id} navId={navId} />
       </MyLibraryHeader>
       <LibraryBookList
-        userBookList={userBookList}
+        libraryBookList={libraryBookList}
         handleLikeToggle={handleLikeToggle}
         handleCommentToggle={handleCommentToggle}
         handleReviewToggle={handleReviewToggle}

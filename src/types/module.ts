@@ -68,7 +68,7 @@ export interface InputFormTypes {
 }
 
 export interface LibraryBookListTypes {
-  userBookList: LibraryResponseTypes[];
+  libraryBookList: LibraryResponseTypes[];
   handleLikeToggle: () => void;
   handleCommentToggle: () => void;
   handleReviewToggle: () => void;
