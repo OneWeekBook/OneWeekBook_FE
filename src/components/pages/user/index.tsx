@@ -20,7 +20,7 @@ function Index() {
   const [limit, setLimit] = useState<number>(10);
   const [percent, setPercent] = useState<number>(0);
   const rankLimit = [10, 25, 50];
-  const [removeToggle, removeToggleIsOn] = useToggle(false);
+  const [removeToggle, handleRemoveToggle] = useToggle(false);
   const { user, userBooks } = useSelector(
     (state: AppStateType) => state.authUser,
     shallowEqual,
@@ -82,7 +82,7 @@ function Index() {
             height={20}
             fontColor={theme.color.COLOR_BLACK}
             bgColor={[theme.color.COLOR_NONE, theme.color.COLOR_NONE]}
-            handleClick={removeToggleIsOn}
+            handleClick={handleRemoveToggle}
           />
         </SignOutButton>
       </UserInfoContainer>
@@ -93,7 +93,9 @@ function Index() {
         fontColor={[theme.color.COLOR_BLACK, theme.color.COLOR_CORAL]}
       />
       <UserBookList userBooks={userBooks} />
-      {removeToggle && <RemoveUserModal removeToggleIsOn={removeToggleIsOn} />}
+      {removeToggle && (
+        <RemoveUserModal removeToggleIsOn={handleRemoveToggle} />
+      )}
     </Container>
   );
 }

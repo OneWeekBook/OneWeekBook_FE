@@ -10,8 +10,8 @@ interface PropsType {
 }
 
 function UserSettingForm({ nickName }: PropsType) {
-  const [nickToggle, nickToggleIsOn] = useToggle(false);
-  const [passToggle, passToggleIsOn] = useToggle(false);
+  const [nickToggle, handleNickToggle] = useToggle(false);
+  const [passToggle, handlePassToggle] = useToggle(false);
   return (
     <UserSettingContainer>
       <DataText before="닉네임:" data={nickName} fontSize={2} />
@@ -20,7 +20,7 @@ function UserSettingForm({ nickName }: PropsType) {
           content="닉네임 변경"
           fontSize={1.4}
           fontWeight={300}
-          handleClick={nickToggleIsOn}
+          handleClick={handleNickToggle}
           width={90}
           height={35}
         />
@@ -28,13 +28,13 @@ function UserSettingForm({ nickName }: PropsType) {
           content="비밀번호 변경"
           fontSize={1.4}
           fontWeight={300}
-          handleClick={passToggleIsOn}
+          handleClick={handlePassToggle}
           width={90}
           height={35}
         />
       </SettingButtons>
-      {nickToggle && <ChangeNickModal nickToggleIsOn={nickToggleIsOn} />}
-      {passToggle && <ChangePassModal passToggleIsOn={passToggleIsOn} />}
+      {nickToggle && <ChangeNickModal nickToggleIsOn={handleNickToggle} />}
+      {passToggle && <ChangePassModal passToggleIsOn={handlePassToggle} />}
     </UserSettingContainer>
   );
 }

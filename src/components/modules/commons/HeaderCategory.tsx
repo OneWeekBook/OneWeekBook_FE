@@ -9,7 +9,7 @@ import MenuButton from 'components/atoms/buttons/MenuButton';
 
 function HeaderMainCategory() {
   const { routeTo, currentPath } = useRouter();
-  const [modalToggle, isModalToggleOn] = useToggle(false);
+  const [modalToggle, handleModalToggle] = useToggle(false);
   const { handleAuthClick } = useAuthLink();
 
   return (
@@ -25,7 +25,7 @@ function HeaderMainCategory() {
           imgSize={30}
           content={item.title}
           handleClick={() =>
-            handleAuthClick(item.link, [PATH_URL.LIBRARY], isModalToggleOn)
+            handleAuthClick(item.link, [PATH_URL.LIBRARY], handleModalToggle)
           }
         />
       ))}
@@ -36,12 +36,12 @@ function HeaderMainCategory() {
           subContent="로그인 하시겠습니까?"
           width={500}
           height={250}
-          handleToggle={isModalToggleOn}
+          handleToggle={handleModalToggle}
           close
           okButtonTitle="로그인"
           cancelButtonTitle="나중에"
           handleOkClick={() => routeTo(PATH_URL.SIGN_IN)}
-          handleCanCelClick={isModalToggleOn}
+          handleCanCelClick={handleModalToggle}
         />
       )}
     </HeaderCategoryModule>

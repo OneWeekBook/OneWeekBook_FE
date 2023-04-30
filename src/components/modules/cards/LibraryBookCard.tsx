@@ -31,7 +31,7 @@ function LibraryBookCard({
   onClick,
 }: LibraryResponseTypes & LibraryBookCardTypes) {
   const dispatch = useDispatch();
-  const [deleteToggle, deleteToggleIsOn] = useToggle(false);
+  const [deleteToggle, handleDeleteToggle] = useToggle(false);
 
   const handleStartClick = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -61,7 +61,7 @@ function LibraryBookCard({
 
   const handleDeleteItem = () => {
     dispatch(LibraryDeleteRequest({ id }));
-    deleteToggleIsOn();
+    handleDeleteToggle();
   };
 
   return (
@@ -69,7 +69,7 @@ function LibraryBookCard({
       <BookImage>
         <ImageButton
           src={FUNC_IMAGE.TRASH}
-          handleClick={deleteToggleIsOn}
+          handleClick={handleDeleteToggle}
           imgSize={25}
         />
         <DefaultImage
@@ -146,12 +146,12 @@ function LibraryBookCard({
           contentSize={2.4}
           width={500}
           height={250}
-          handleToggle={deleteToggleIsOn}
+          handleToggle={handleDeleteToggle}
           close
           okButtonTitle="삭제"
           cancelButtonTitle="나중에"
           handleOkClick={handleDeleteItem}
-          handleCanCelClick={deleteToggleIsOn}
+          handleCanCelClick={handleDeleteToggle}
         />
       )}
     </LibraryBookCardContainer>
