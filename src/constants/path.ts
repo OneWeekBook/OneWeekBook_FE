@@ -1,0 +1,30 @@
+export const API_URL = {
+  USER: '/user',
+  USER_LOGIN: '/user/login',
+  USER_REGISTER: '/user/register',
+  USER_CHANGE_PASSWORD: '/user/password',
+  USER_CHANGE_NICK: '/user/nick',
+  USER_DELETE: '/user/resign',
+  CATEGORY: '/book/categories',
+  SEARCH: '/search',
+  BOOK_REVIEWS: '/book/reviews',
+  LIKE: '/like',
+  LIKE_CANCEL: '/like/cancel',
+  LATEST_REVIEW: '/book/reviews/latest',
+  FAVORITE_USER: '/book/reviews/like',
+  AUTH_CODE: '/auth/code',
+  AUTH_EMAIL: '/auth/email',
+  LIBRARY: '/book/mylist',
+  PARAGRAPH: '/book/paragraph',
+};
+
+export const PATH_URL = {
+  MAIN: '/',
+  SIGN_IN: '/sign-in',
+  SIGN_UP: '/sign-up',
+  CATEGORY: '/category',
+  SEARCH: '/category/result',
+  REVIEW: '/review',
+  USER: '/user',
+  LIBRARY: '/library',
+};

@@ -1,4 +1,5 @@
-import { ActionsTypes } from 'types/api';
+import { AxiosError } from 'axios';
+import { ActionsTypes } from 'types/request';
 
 export const AUTH_CODE_REQUEST = 'AUTH_CODE_REQUEST';
 export const AUTH_CODE_SUCCESS = 'AUTH_CODE_SUCCESS';
@@ -59,7 +60,7 @@ export const AuthCodeSuccess = () => {
   };
 };
 
-export const AuthCodeFail = (error: any) => {
+export const AuthCodeFail = (error: AxiosError) => {
   return {
     type: AUTH_CODE_FAIL,
     error: error.response,

@@ -1,4 +1,5 @@
-import { ActionsTypes } from 'types/api';
+import { AxiosError } from 'axios';
+import { ActionsTypes } from 'types/request';
 
 export const AUTH_EMAIL_REQUEST = 'AUTH_EMAIL_REQUEST';
 export const AUTH_EMAIL_SUCCESS = 'AUTH_EMAIL_SUCCESS';
@@ -59,7 +60,7 @@ export const AuthEmailSuccess = () => {
   };
 };
 
-export const AuthEmailFail = (error: any) => {
+export const AuthEmailFail = (error: AxiosError) => {
   return {
     type: AUTH_EMAIL_FAIL,
     error: error.response,

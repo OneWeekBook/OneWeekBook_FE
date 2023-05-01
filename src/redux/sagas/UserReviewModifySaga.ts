@@ -1,10 +1,12 @@
+import axios from 'axios';
 import instance from 'api/axios';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { API_URL } from 'constants/path';
 import {
   UserReviewModifyFail,
   UserReviewModifySuccess,
   USER_REVIEW_MODIFY_REQUEST,
-} from '../reducers/UserReview';
+} from 'redux/reducers/UserReview';
 
 function UserReviewModifyAPI(data: {
   id: number;
@@ -12,16 +14,19 @@ function UserReviewModifyAPI(data: {
   rating: number;
 }) {
   const { id, review, rating } = data;
-  return instance.put(`/book/reviews/${id}`, { review, rating });
+  return instance.put(`${API_URL.BOOK_REVIEWS}/${id}`, { review, rating });
 }
 
-function* fetchUserReviewModifySaga(action: any): any {
+function* fetchUserReviewModifySaga(action: {
+  type: string;
+  payload: { review: string; rating: number };
+}): object {
   try {
     const review = yield select((state) => state.userReview.reviewItem);
     yield call(UserReviewModifyAPI, { id: review.id, ...action.payload });
     yield put(UserReviewModifySuccess());
   } catch (error) {
-    yield put(UserReviewModifyFail(error));
+    if (axios.isAxiosError(error)) yield put(UserReviewModifyFail(error));
   }
 }
 

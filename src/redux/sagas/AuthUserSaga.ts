@@ -1,22 +1,24 @@
+import axios from 'axios';
 import instance from 'api/axios';
 import { call, put, takeLatest } from 'redux-saga/effects';
+import { API_URL } from 'constants/path';
 import {
   AuthUserFail,
   AuthUserSuccess,
   AUTH_USER_REQUEST,
-} from '../reducers/AuthUser';
+} from 'redux/reducers/AuthUser';
 
 function AuthUserAPI() {
-  return instance.get('/user');
+  return instance.get(API_URL.USER);
 }
 
 function UserLibraryAPI(params: { userId: number; progress: number }) {
   return instance.get(
-    `${process.env.REACT_APP_BASIC_URL}/book/mylist?userId=${params.userId}&progress=${params.progress}`,
+    `${API_URL.LIBRARY}?userId=${params.userId}&progress=${params.progress}`,
   );
 }
 
-function* fetchAuthUserSaga(): any {
+function* fetchAuthUserSaga(): object {
   try {
     const userData = yield call(AuthUserAPI);
     const bookData = yield call(UserLibraryAPI, {
@@ -29,7 +31,7 @@ function* fetchAuthUserSaga(): any {
     };
     yield put(AuthUserSuccess(result));
   } catch (error) {
-    yield put(AuthUserFail(error));
+    if (axios.isAxiosError(error)) yield put(AuthUserFail(error));
   }
 }
 

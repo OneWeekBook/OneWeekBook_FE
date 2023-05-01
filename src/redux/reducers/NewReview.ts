@@ -1,4 +1,6 @@
-import { ActionsTypes } from 'types/api';
+import { AxiosError } from 'axios';
+import { ActionsTypes } from 'types/request';
+import { ResponseNewReviewSuccess } from 'types/response';
 
 export const NEW_REVIEWS_REQUEST = 'NEW_REVIEWS_REQUEST';
 export const NEW_REVIEWS_SUCCESS = 'NEW_REVIEWS_SUCCESS';
@@ -46,14 +48,14 @@ export const NewReviewsRequest = () => {
   };
 };
 
-export const NewReviewsSuccess = (data: any) => {
+export const NewReviewsSuccess = (data: ResponseNewReviewSuccess) => {
   return {
     type: NEW_REVIEWS_SUCCESS,
     payload: data,
   };
 };
 
-export const NewReviewsFail = (error: any) => {
+export const NewReviewsFail = (error: AxiosError) => {
   return {
     type: NEW_REVIEWS_FAIL,
     error: error.response,

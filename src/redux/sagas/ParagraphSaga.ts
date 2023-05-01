@@ -1,6 +1,8 @@
+import axios from 'axios';
 import instance from 'api/axios';
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { ParagraphType } from 'types/api';
+import { ParagraphRequestType } from 'types/request';
+import { API_URL } from 'constants/path';
 import {
   ParagraphFail,
   ParagraphInitFail,
@@ -8,29 +10,33 @@ import {
   ParagraphSuccess,
   PARAGRAPH_INIT_REQUEST,
   PARAGRAPH_REQUEST,
-} from '../reducers/Paragraph';
+} from 'redux/reducers/Paragraph';
 
-function ParagraphAPI(params: ParagraphType) {
-  return instance.get(
-    `${process.env.REACT_APP_BASIC_URL}/book/paragraph?bookId=${params.bookId}`,
-  );
+function ParagraphAPI(params: ParagraphRequestType) {
+  return instance.get(`${API_URL.PARAGRAPH}?bookId=${params.bookId}`);
 }
 
-function* fetchParagraphInitSaga(action: any): any {
+function* fetchParagraphInitSaga(action: {
+  type: string;
+  payload: ParagraphRequestType;
+}): object {
   try {
     const result = yield call(ParagraphAPI, action.payload);
     yield put(ParagraphInitSuccess(result.data.paragraphs));
   } catch (error) {
-    yield put(ParagraphInitFail(error));
+    if (axios.isAxiosError(error)) yield put(ParagraphInitFail(error));
   }
 }
 
-function* fetchParagraphSaga(action: any): any {
+function* fetchParagraphSaga(action: {
+  type: string;
+  payload: ParagraphRequestType;
+}): object {
   try {
     const result = yield call(ParagraphAPI, action.payload);
     yield put(ParagraphSuccess(result.data.paragraphs));
   } catch (error) {
-    yield put(ParagraphFail(error));
+    if (axios.isAxiosError(error)) yield put(ParagraphFail(error));
   }
 }
 

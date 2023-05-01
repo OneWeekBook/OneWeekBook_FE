@@ -1,4 +1,10 @@
-import { ReivewDetailTypes, ReviewTypes, ActionsTypes } from 'types/api';
+import { AxiosError } from 'axios';
+import {
+  BookRequestTypes,
+  ReviewRequestTypes,
+  ActionsTypes,
+} from 'types/request';
+import { ResponseDetailSuccess, ResponseReviewSuccess } from 'types/response';
 
 export const REVIEWS_REQUEST = 'REVIEWS_REQUEST';
 export const REVIEWS_SUCCESS = 'REVIEWS_SUCCESS';
@@ -18,6 +24,7 @@ const initialState = {
   isNewLoading: false,
   isNewSuccess: false,
   reviews: [],
+  userReviews: [],
   reivewsTotal: 0,
   reviewCount: 0,
   moreReviews: false,
@@ -61,7 +68,7 @@ export default function Review(state = initialState, action: ActionsTypes) {
         itemLoading: false,
         itemSuccess: true,
         bookData: action.payload.bookData[0],
-        reviews: state.reviews.concat(action.payload.reviewData),
+        userReviews: state.reviews.concat(action.payload.reviewData),
         reivewsTotal: action.payload.bookData[0].countReviews,
         moreReviews:
           action.payload.bookData[0].countReviews > state.reviewCount + 10,
@@ -80,42 +87,42 @@ export default function Review(state = initialState, action: ActionsTypes) {
   }
 }
 
-export const ReviewsRequest = (data: ReviewTypes) => {
+export const ReviewsRequest = (data: ReviewRequestTypes) => {
   return {
     type: REVIEWS_REQUEST,
     payload: data,
   };
 };
 
-export const ReviewsSuccess = (data: any) => {
+export const ReviewsSuccess = (data: ResponseReviewSuccess) => {
   return {
     type: REVIEWS_SUCCESS,
     payload: data,
   };
 };
 
-export const ReviewsFail = (error: any) => {
+export const ReviewsFail = (error: AxiosError) => {
   return {
     type: REVIEWS_FAIL,
     error: error.response,
   };
 };
 
-export const ReviewRequest = (data: ReivewDetailTypes) => {
+export const ReviewRequest = (data: BookRequestTypes) => {
   return {
     type: REVIEW_REQUEST,
     payload: data,
   };
 };
 
-export const ReviewSuccess = (data: any) => {
+export const ReviewSuccess = (data: ResponseDetailSuccess) => {
   return {
     type: REVIEW_SUCCESS,
     payload: data,
   };
 };
 
-export const ReviewFail = (error: any) => {
+export const ReviewFail = (error: AxiosError) => {
   return {
     type: REVIEW_FAIL,
     error: error.response,

@@ -1,3 +1,5 @@
+import { ActionsTypes } from 'types/request';
+
 export const USER_TOGGLE = 'USER_TOGGLE';
 export const NAV_LIKE = 'NAV_LIKE';
 export const NAV_READ = 'NAV_READ';
@@ -12,7 +14,7 @@ const initialState = {
   search: false,
 };
 
-export default function FuncToggle(state = initialState, action: any) {
+export default function FuncToggle(state = initialState, action: ActionsTypes) {
   switch (action.type) {
     case USER_TOGGLE:
       return {

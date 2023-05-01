@@ -1,21 +1,23 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
+import instance from 'api/axios';
+import { call, put, takeEvery } from 'redux-saga/effects';
+import { API_URL } from 'constants/path';
 import {
   CategoryFail,
   CategorySuccess,
   CATEGORY_REQUEST,
-} from '../reducers/Category';
+} from 'redux/reducers/Category';
 
 function CategoryAPI() {
-  return axios.get(`${process.env.REACT_APP_BASIC_URL}/book/categories`);
+  return instance.get(API_URL.CATEGORY);
 }
 
-function* fetchCategorySaga(): any {
+function* fetchCategorySaga(): object {
   try {
     const result = yield call(CategoryAPI);
     yield put(CategorySuccess(result.data));
   } catch (error) {
-    yield put(CategoryFail(error));
+    if (axios.isAxiosError(error)) yield put(CategoryFail(error));
   }
 }
 

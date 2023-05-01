@@ -1,35 +1,41 @@
 @font-face {
-    font-family: 'Spoqa Han Sans';
+    font-family: 'Noto Sans Korean';
+    font-weight: 900;
+    src: local('Noto Sans Korean Black'),
+    url('./font/NotoSansKR-Black.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Noto Sans Korean';
     font-weight: 700;
-    src: local('Spoqa Han Sans Bold'),
-    url('./font/SpoqaHanSansNeo-Bold.woff2') format('woff2'),
-    url('./font/SpoqaHanSansNeo-Bold.woff') format('woff'),
-    url('./font/SpoqaHanSansNeo-Bold.otf') format('truetype');
+    src: local('Noto Sans Korean Bold'),
+    url('./font/NotoSansKR-Bold.otf') format('opentype');
 }
 
 @font-face {
-    font-family: 'Spoqa Han Sans';
+    font-family: 'Noto Sans Korean';
+    font-weight: 500;
+    src: local('Noto Sans Korean Medium'),
+    url('./font/NotoSansKR-Medium.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Noto Sans Korean';
     font-weight: 400;
-    src: local('Spoqa Han Sans Regular'),
-    url('./font/SpoqaHanSansNeo-Regular.woff2') format('woff2'),
-    url('./font/SpoqaHanSansNeo-Regular.woff') format('woff'),
-    url('./font/SpoqaHanSansNeo-Regular.otf') format('truetype');
+    src: local('Noto Sans Korean Regular'),
+    url('./font/NotoSansKR-Regular.otf') format('opentype');
 }
 
 @font-face {
-    font-family: 'Spoqa Han Sans';
+    font-family: 'Noto Sans Korean';
     font-weight: 300;
-    src: local('Spoqa Han Sans Light'),
-    url('./font/SpoqaHanSansNeo-Light.woff2') format('woff2'),
-    url('./font/SpoqaHanSansNeo-Light.woff') format('woff'),
-    url('./font/SpoqaHanSansNeo-Light.otf') format('truetype');
+    src: local('Noto Sans Korean Light'),
+    url('./font/NotoSansKR-Light.otf') format('opentype');
 }
 
 @font-face {
-    font-family: 'Spoqa Han Sans';
+    font-family: 'Noto Sans Korean';
     font-weight: 100;
-    src: local('Spoqa Han Sans Thin'),
-    url('./font/SpoqaHanSansNeo-Thin.woff2') format('woff2'),
-    url('./font/SpoqaHanSansNeo-Thin.woff') format('woff'),
-    url('./font/SpoqaHanSansNeo-Thin.otf') format('truetype');
+    src: local('Noto Sans Korean Thin'),
+    url('./font/NotoSansKR-Thin.otf') format('opentype');
 }

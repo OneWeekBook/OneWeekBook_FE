@@ -1,23 +1,28 @@
+import axios from 'axios';
 import instance from 'api/axios';
+import { ReviewAddRequestTypes } from 'types/request';
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { UserReviewAddTypes } from 'types/api';
+import { API_URL } from 'constants/path';
 import {
   UserReviewAddFail,
   UserReviewAddSuccess,
   USER_REVIEW_ADD_REQUEST,
-} from '../reducers/UserReview';
+} from 'redux/reducers/UserReview';
 
-function UserReviewAddAPI(data: UserReviewAddTypes) {
+function UserReviewAddAPI(data: ReviewAddRequestTypes) {
   const { bookId, review, rating } = data;
-  return instance.post(`/book/reviews/${bookId}`, { review, rating });
+  return instance.post(`${API_URL.BOOK_REVIEWS}/${bookId}`, { review, rating });
 }
 
-function* fetchUserReviewAddSaga(action: any) {
+function* fetchUserReviewAddSaga(action: {
+  type: string;
+  payload: ReviewAddRequestTypes;
+}) {
   try {
     yield call(UserReviewAddAPI, action.payload);
     yield put(UserReviewAddSuccess());
   } catch (error) {
-    yield put(UserReviewAddFail(error));
+    if (axios.isAxiosError(error)) yield put(UserReviewAddFail(error));
   }
 }
 

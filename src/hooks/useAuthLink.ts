@@ -1,43 +1,38 @@
-import { useNavigate } from 'react-router-dom';
+import { getAccessTokenFromSessionStorage } from 'utils/accessTokenHandler';
+import useRouter from './useRouter';
 
 function useAuthLink(): {
   handleAuthClick: (
     link: string,
     compLink: string[],
-    Modaltoggle: () => void,
-    toggle?: () => void,
+    handleModaltoggle: () => void,
+    handletoggle?: () => void,
   ) => void;
 } {
-  const navigate = useNavigate();
+  const { routeTo, currentPath } = useRouter();
 
   const handleAuthClick = (
     link: string,
     compLink: string[],
-    Modaltoggle: () => void,
-    toggle?: () => void,
+    handleModaltoggle: () => void,
+    handletoggle?: () => void,
   ) => {
     if (
-      toggle &&
+      handletoggle &&
       compLink.includes(link) &&
-      sessionStorage.getItem('accessToken')
+      getAccessTokenFromSessionStorage()
     ) {
-      navigate(link);
-      toggle();
-    } else if (
-      compLink.includes(link) &&
-      sessionStorage.getItem('accessToken')
-    ) {
-      navigate(link);
-    } else if (
-      compLink.includes(link) &&
-      !sessionStorage.getItem('accessToken')
-    ) {
-      Modaltoggle();
-    } else if (toggle) {
-      navigate(link);
-      toggle();
+      routeTo(link, link === currentPath);
+      handletoggle();
+    } else if (compLink.includes(link) && getAccessTokenFromSessionStorage()) {
+      routeTo(link, link === currentPath);
+    } else if (compLink.includes(link) && !getAccessTokenFromSessionStorage()) {
+      handleModaltoggle();
+    } else if (handletoggle) {
+      routeTo(link, link === currentPath);
+      handletoggle();
     } else {
-      navigate(link);
+      routeTo(link, link === currentPath);
     }
   };
 

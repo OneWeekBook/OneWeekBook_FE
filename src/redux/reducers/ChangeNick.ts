@@ -1,4 +1,5 @@
-import { ActionsTypes } from 'types/api';
+import { AxiosError } from 'axios';
+import { ActionsTypes } from 'types/request';
 
 export const CHANGE_NICK_REQUEST = 'CHANGE_NICK_REQUEST';
 export const CHANGE_NICK_SUCCESS = 'CHANGE_NICK_SUCCESS';
@@ -59,7 +60,7 @@ export const ChangeNickSuccess = () => {
   };
 };
 
-export const ChangeNickFail = (error: any) => {
+export const ChangeNickFail = (error: AxiosError) => {
   return {
     type: CHANGE_NICK_FAIL,
     error: error.response,

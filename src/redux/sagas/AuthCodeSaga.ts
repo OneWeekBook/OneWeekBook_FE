@@ -1,21 +1,26 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
+import instance from 'api/axios';
+import { call, put, takeEvery } from 'redux-saga/effects';
+import { API_URL } from 'constants/path';
 import {
   AuthCodeFail,
   AuthCodeSuccess,
   AUTH_CODE_REQUEST,
-} from '../reducers/AuthCode';
+} from 'redux/reducers/AuthCode';
 
 function AuthCodeAPI(data: { code: string }) {
-  return axios.post(`${process.env.REACT_APP_BASIC_URL}/auth/email`, data);
+  return instance.post(API_URL.AUTH_EMAIL, data);
 }
 
-function* fetchAuthCodeSaga(action: any) {
+function* fetchAuthCodeSaga(action: {
+  type: string;
+  payload: { code: string };
+}) {
   try {
     yield call(AuthCodeAPI, action.payload);
     yield put(AuthCodeSuccess());
   } catch (error) {
-    yield put(AuthCodeFail(error));
+    if (axios.isAxiosError(error)) yield put(AuthCodeFail(error));
   }
 }
 

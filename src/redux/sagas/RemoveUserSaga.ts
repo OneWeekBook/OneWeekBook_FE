@@ -1,23 +1,29 @@
+import axios from 'axios';
 import instance from 'api/axios';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { API_URL } from 'constants/path';
 import {
   RemoveUserFail,
   RemoveUserSuccess,
   REMOVE_USER_REQUEST,
-} from '../reducers/RemoveUser';
+} from 'redux/reducers/RemoveUser';
+import { removeAccessTokenFromSessionStorage } from 'utils/accessTokenHandler';
 
 function RemoveUserAPI(data: { id: number; password: string }) {
-  return instance.post('/user/resign', data);
+  return instance.post(API_URL.USER_DELETE, data);
 }
 
-function* fetchRemoveUserSaga(action: any): any {
+function* fetchRemoveUserSaga(action: {
+  type: string;
+  payload: { password: string };
+}): object {
   try {
     const user = yield select((state) => state.authUser.user);
     yield call(RemoveUserAPI, { id: user.id, ...action.payload });
     yield put(RemoveUserSuccess());
-    sessionStorage.removeItem('accessToken');
+    removeAccessTokenFromSessionStorage();
   } catch (error) {
-    yield put(RemoveUserFail(error));
+    if (axios.isAxiosError(error)) yield put(RemoveUserFail(error));
   }
 }
 
