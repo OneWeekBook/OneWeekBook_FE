@@ -122,3 +122,5 @@
 7. react-toastify를 이용하여 토스트 메시지 기능 추가
 8. media-query를 이용하여 반응형 디자인 구현
 9. AWS S3를 이용하여 정적 웹사이트 호스팅, AWS EC2에 있는 서버에서 데이터를 받아옴
+
+### [더 자세한 내용을 보고싶다면? - 개발 위키](https://github.com/OneWeekBook/OneWeekBook_FE/wiki)
