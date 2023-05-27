@@ -10,7 +10,7 @@ import {
   ParagraphInit,
   ParagraphRequest,
 } from 'redux/reducers/Paragraph';
-import { SetStartDate } from 'utils/SetDate';
+import { setReadDateFormat } from 'utils/dateFormatHandler';
 import WriteModal from 'common/DefaultModal';
 import DefaultText from 'components/atoms/texts/DefaultText';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
@@ -75,9 +75,9 @@ function ParagraphModal({
               reactive
             />
             <DefaultText
-              content={`${SetStartDate(bookData.startTime)} ~ ${
+              content={`${setReadDateFormat(bookData.startTime)} ~ ${
                 bookData.progress === 2
-                  ? SetStartDate(bookData.endTime)
+                  ? setReadDateFormat(bookData.endTime)
                   : '독서중'
               }`}
               fontSize={1.4}

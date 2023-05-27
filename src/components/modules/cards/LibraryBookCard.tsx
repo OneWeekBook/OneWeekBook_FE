@@ -7,7 +7,7 @@ import { ParagraphInitRequest } from 'redux/reducers/Paragraph';
 import { UserReviewRequest } from 'redux/reducers/UserReview';
 import { LibraryDeleteRequest } from 'redux/reducers/Library';
 import useToggle from 'hooks/useToggle';
-import { SetStartDate } from 'utils/SetDate';
+import { setReadDateFormat } from 'utils/dateFormatHandler';
 import { FUNC_IMAGE } from 'constants/image';
 import MoveDeleteModal from 'common/DefaultModal';
 import ImageButton from 'components/atoms/buttons/ImageButton';
@@ -101,14 +101,14 @@ function LibraryBookCard({
           {startTime && (
             <DataText
               before="독서 시작:"
-              data={SetStartDate(startTime)}
+              data={setReadDateFormat(startTime)}
               fontSize={1.2}
             />
           )}
           {endTime && (
             <DataText
               before="독서 완료:"
-              data={SetStartDate(endTime)}
+              data={setReadDateFormat(endTime)}
               fontSize={1.2}
             />
           )}

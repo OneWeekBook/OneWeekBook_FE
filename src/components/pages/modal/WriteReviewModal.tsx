@@ -10,7 +10,7 @@ import {
   UserReviewInit,
   UserReviewModifyRequest,
 } from 'redux/reducers/UserReview';
-import { SetStartDate } from 'utils/SetDate';
+import { setReadDateFormat } from 'utils/dateFormatHandler';
 import { showToast } from 'common/Toast';
 import WriteModal from 'common/DefaultModal';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
@@ -96,9 +96,9 @@ function WriteReviewModal({ bookData, handleToggle }: WriteReviewTypes) {
             reactive
           />
           <DefaultText
-            content={`${SetStartDate(bookData.startTime)} ~ ${SetStartDate(
-              bookData.endTime,
-            )}`}
+            content={`${setReadDateFormat(
+              bookData.startTime,
+            )} ~ ${setReadDateFormat(bookData.endTime)}`}
             fontSize={1.4}
           />
         </BookInfo>

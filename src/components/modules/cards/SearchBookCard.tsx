@@ -3,7 +3,7 @@ import DOMPurify from 'dompurify';
 import styled from 'styled-components';
 import { LikeAddTypes } from 'types/module';
 import { imageErrorHandler } from 'utils/imageErrorHandler';
-import { SetDate } from 'utils/SetDate';
+import { setDateFormat } from 'utils/dateFormatHandler';
 import { getAccessTokenFromSessionStorage } from 'utils/accessTokenHandler';
 import { FUNC_IMAGE } from 'constants/image';
 import ImageButton from 'components/atoms/buttons/ImageButton';
@@ -65,7 +65,7 @@ function SearchBookCard({
           className="bookAuth"
           dangerouslySetInnerHTML={{
             __html: DOMPurify.sanitize(
-              `${publisher}&nbsp;&nbsp;${SetDate(pubdate)}`,
+              `${publisher}&nbsp;&nbsp;${setDateFormat(pubdate)}`,
             ),
           }}
         />
