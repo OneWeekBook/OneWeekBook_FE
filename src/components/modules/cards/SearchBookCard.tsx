@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react';
 import DOMPurify from 'dompurify';
 import styled from 'styled-components';
 import { LikeAddTypes } from 'types/module';
-import { getImgErr } from 'utils/ImageError';
+import { imageErrorHandler } from 'utils/imageErrorHandler';
 import { SetDate } from 'utils/SetDate';
 import { getAccessTokenFromSessionStorage } from 'utils/accessTokenHandler';
 import { FUNC_IMAGE } from 'constants/image';
@@ -43,7 +43,7 @@ function SearchBookCard({
           className="bookimage"
           imageSrc={image}
           imageAlt="book cover"
-          onError={getImgErr}
+          onError={imageErrorHandler}
           pc={[120, 180]}
           mobile={[80, 120]}
         />
