@@ -20,7 +20,7 @@ function DefaultButton({
       {...rest}
     >
       {imageSrc && <img src={imageSrc} alt="button img" />}
-      <p>{content}</p>
+      {content && <p>{content}</p>}
     </DefaultButtonAtom>
   );
 }
@@ -94,5 +94,8 @@ const DefaultButtonAtom = styled.button<ButtonStyleTypes>`
       font-size: 1.4rem;
       height: 35px;
     }
+  }
+  &.image {
+    background-color: ${({ theme }) => theme.color.COLOR_NONE};
   }
 `;

@@ -10,7 +10,6 @@ import useToggle from 'hooks/useToggle';
 import { setReadDateFormat } from 'utils/dateFormatHandler';
 import { FUNC_IMAGE } from 'constants/image';
 import MoveDeleteModal from 'common/DefaultModal';
-import ImageButton from 'components/atoms/buttons/ImageButton';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DefaultText from 'components/atoms/texts/DefaultText';
@@ -67,7 +66,10 @@ function LibraryBookCard({
   return (
     <LibraryBookCardModule>
       <BookImage>
-        <ImageButton
+        <DefaultButton
+          className="image"
+          width="auto"
+          height={25}
           imageSrc={FUNC_IMAGE.TRASH}
           handleClick={handleDeleteToggle}
           imageSize={25}

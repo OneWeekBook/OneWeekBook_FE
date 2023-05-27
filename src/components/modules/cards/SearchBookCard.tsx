@@ -6,7 +6,7 @@ import { imageErrorHandler } from 'utils/imageErrorHandler';
 import { setDateFormat } from 'utils/dateFormatHandler';
 import { getAccessTokenFromSessionStorage } from 'utils/accessTokenHandler';
 import { FUNC_IMAGE } from 'constants/image';
-import ImageButton from 'components/atoms/buttons/ImageButton';
+import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 
 function SearchBookCard({
@@ -24,7 +24,10 @@ function SearchBookCard({
     <SearchBookCardModule>
       <BookCover>
         {getAccessTokenFromSessionStorage() && (
-          <ImageButton
+          <DefaultButton
+            className="image"
+            width="auto"
+            height={30}
             type="button"
             imageSrc={FUNC_IMAGE.HEART}
             imageSize={30}

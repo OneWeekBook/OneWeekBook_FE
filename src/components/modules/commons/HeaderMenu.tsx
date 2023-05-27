@@ -3,7 +3,7 @@ import { HeaderTypes } from 'types/module';
 import { FUNC_IMAGE } from 'constants/image';
 import { PATH_URL } from 'constants/path';
 import { getAccessTokenFromSessionStorage } from 'utils/accessTokenHandler';
-import ImageButton from 'components/atoms/buttons/ImageButton';
+import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import DefaultLink from 'components/atoms/links/DefaultLink';
 
 function HeaderMenu({ handleToggle, handleSignOut }: HeaderTypes) {
@@ -32,7 +32,10 @@ function HeaderMenu({ handleToggle, handleSignOut }: HeaderTypes) {
           <DefaultLink to={PATH_URL.SIGN_IN} content="로그인" />
         </DefaultLinks>
       )}
-      <ImageButton
+      <DefaultButton
+        className="image"
+        width="auto"
+        height={32}
         imageSrc={FUNC_IMAGE.HAMBURGER}
         imageSize={32}
         handleClick={handleToggle}

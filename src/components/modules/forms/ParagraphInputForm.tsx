@@ -6,7 +6,7 @@ import { ParagraphAddRequest } from 'redux/reducers/Paragraph';
 import useInput from 'hooks/useInput';
 import { showToast } from 'common/Toast';
 import { FUNC_IMAGE } from 'constants/image';
-import ImageButton from 'components/atoms/buttons/ImageButton';
+import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import BorderInput from 'components/atoms/inputs/BorderInput';
 
 function ParagraphInputForm({ bookId }: ParagraphInputFormType) {
@@ -45,7 +45,10 @@ function ParagraphInputForm({ bookId }: ParagraphInputFormType) {
         mref={paragRef}
       />
 
-      <ImageButton
+      <DefaultButton
+        className="image"
+        width="auto"
+        height={30}
         type="button"
         handleClick={handleParagraphAdd}
         imageSrc={FUNC_IMAGE.COMMENT_ADD}

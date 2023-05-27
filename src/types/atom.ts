@@ -15,12 +15,6 @@ export interface DefaultButtonTypes {
   imageSrc?: string;
 }
 
-export interface ImageButtonTypes {
-  handleClick: () => void;
-  type?: 'button' | 'submit';
-  imageSrc: string;
-}
-
 export interface IconType {
   score: number;
 }
@@ -109,11 +103,6 @@ export interface MultiTextTypes {
 }
 
 /* Style Types */
-
-export interface ImageButtonStyleTypes {
-  backgroundColor?: string;
-  imageSize?: number;
-}
 
 export interface ButtonStyleTypes {
   fontSize: number;

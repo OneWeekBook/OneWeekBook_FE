@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { ParagraphCardTypes } from 'types/module';
 import { FUNC_IMAGE } from 'constants/image';
-import ImageButton from 'components/atoms/buttons/ImageButton';
+import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import DefaultText from 'components/atoms/texts/DefaultText';
 
 function ParagraphCard({
@@ -12,7 +12,10 @@ function ParagraphCard({
   return (
     <ParagraphCardModule>
       <DefaultText content={paragraph} />
-      <ImageButton
+      <DefaultButton
+        className="image"
+        width="auto"
+        height={32}
         type="button"
         handleClick={() => deleteParagraphClick(id)}
         imageSrc={FUNC_IMAGE.COMMENT_DELETE}
