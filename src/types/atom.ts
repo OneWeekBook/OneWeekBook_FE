@@ -15,7 +15,7 @@ export interface DefaultButtonTypes {
   imageSrc?: string;
 }
 
-export interface IconType {
+export interface StarImageType {
   score: number;
 }
 
@@ -113,10 +113,6 @@ export interface ButtonStyleTypes {
   isBtnClick: boolean;
   width: number | string;
   height: number;
-}
-
-export interface IconStyleType {
-  imageSize: number;
 }
 
 export interface InputStyleTypes {

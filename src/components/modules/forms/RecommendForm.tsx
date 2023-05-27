@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { RecommendFormTypes } from 'types/module';
 import DefaultText from 'components/atoms/texts/DefaultText';
-import StarIcon from 'components/atoms/icons/StarIcon';
+import StarImage from 'components/atoms/images/StarImage';
 
 function RecommendForm({ recommend, setRecommend }: RecommendFormTypes) {
   return (
@@ -10,7 +10,7 @@ function RecommendForm({ recommend, setRecommend }: RecommendFormTypes) {
       <ImageButtonWrapper>
         {[1, 2, 3, 4, 5].map((item) => (
           <button type="button" key={item} onClick={() => setRecommend(item)}>
-            <StarIcon score={recommend >= item ? 1 : 0} imageSize={20} />
+            <StarImage score={recommend >= item ? 1 : 0} pc={[20, 20]} />
           </button>
         ))}
       </ImageButtonWrapper>

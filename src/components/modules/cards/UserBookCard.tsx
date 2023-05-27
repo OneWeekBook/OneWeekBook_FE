@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { UserBookResponseTypes } from 'types/response';
 import { PATH_URL } from 'constants/path';
-import StarIcon from 'components/atoms/icons/StarIcon';
+import StarImage from 'components/atoms/images/StarImage';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DefaultText from 'components/atoms/texts/DefaultText';
 import ReviewText from 'components/atoms/texts/ReviewText';
@@ -35,7 +35,7 @@ function UserBookCard({
         />
         <StarIcons>
           {[0, 1, 2, 3, 4].map((el) => (
-            <StarIcon key={el} score={el < rating ? 1 : 0} imageSize={20} />
+            <StarImage key={el} score={el < rating ? 1 : 0} pc={[20, 20]} />
           ))}
         </StarIcons>
         <ReviewText

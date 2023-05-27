@@ -7,7 +7,7 @@ import { PATH_URL } from 'constants/path';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DefaultText from 'components/atoms/texts/DefaultText';
 import ReviewText from 'components/atoms/texts/ReviewText';
-import StarIcon from 'components/atoms/icons/StarIcon';
+import StarImage from 'components/atoms/images/StarImage';
 
 function NewReivewCard({
   img,
@@ -41,7 +41,7 @@ function NewReivewCard({
         />
         <StarIcons>
           {[0, 1, 2, 3, 4].map((el) => (
-            <StarIcon key={el} score={el < rating ? 1 : 0} imageSize={20} />
+            <StarImage key={el} score={el < rating ? 1 : 0} pc={[20, 20]} />
           ))}
         </StarIcons>
         <ReviewText className="review" content={review} />

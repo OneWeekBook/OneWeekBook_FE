@@ -4,7 +4,7 @@ import { ReviewBookResponseTypes } from 'types/response';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DefaultText from 'components/atoms/texts/DefaultText';
 import DataText from 'components/atoms/texts/DataText';
-import StarIcon from 'components/atoms/icons/StarIcon';
+import StarImage from 'components/atoms/images/StarImage';
 
 function BookBanner({
   author,
@@ -64,7 +64,7 @@ function BookBanner({
           />
           <AvarageScore>
             {RateArr.map((el, idx) => (
-              <StarIcon key={idx} score={el} imageSize={20} />
+              <StarImage key={idx} score={el} pc={[20, 20]} />
             ))}
             <DataText
               data={ratingAverage.toFixed(1)}
