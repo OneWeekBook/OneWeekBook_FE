@@ -26,7 +26,7 @@ function SearchBookCard({
         {getAccessTokenFromSessionStorage() && (
           <ImageButton
             type="button"
-            src={FUNC_IMAGE.HEART}
+            imageSrc={FUNC_IMAGE.HEART}
             imageSize={30}
             handleClick={() =>
               handleFavoriteClick({

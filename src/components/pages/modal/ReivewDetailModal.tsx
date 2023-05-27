@@ -14,7 +14,7 @@ import {
 import { ReviewInit, ReviewRequest } from 'redux/reducers/Review';
 import { FAVORITE_IMAGE } from 'constants/image';
 import DetailModal from 'common/DefaultModal';
-import MenuButton from 'components/atoms/buttons/MenuButton';
+import Button from 'components/atoms/buttons/Button';
 import DataText from 'components/atoms/texts/DataText';
 import ReviewText from 'components/atoms/texts/ReviewText';
 
@@ -133,25 +133,31 @@ function ReviewDetailModal({
         <DataText before="작성일자 : " data={userReview.reviewCreationTime} />
         <ReviewText content={userReview.review} />
         <FavoriteButtons>
-          <MenuButton
+          <Button
             className="roundborder"
-            src={FAVORITE_IMAGE.USEFUL}
+            imageSrc={FAVORITE_IMAGE.USEFUL}
             imageSize={25}
             content={`${useful} 도움이되요`}
             handleClick={() => handleFavoriteClick(0, usefulToggle)}
             isBtnClick={usefulToggle}
-            bgColor={[theme.color.COLOR_CORAL, theme.color.COLOR_ORANGE_RED]}
+            backgroundColor={[
+              theme.color.COLOR_CORAL,
+              theme.color.COLOR_ORANGE_RED,
+            ]}
             fontColor={theme.color.COLOR_WHITE}
             fontWeight={300}
           />
-          <MenuButton
+          <Button
             className="roundborder"
-            src={FAVORITE_IMAGE.INTEREST}
+            imageSrc={FAVORITE_IMAGE.INTEREST}
             imageSize={25}
             content={`${interest} 흥미로워요`}
             handleClick={() => handleFavoriteClick(1, interestToggle)}
             isBtnClick={interestToggle}
-            bgColor={[theme.color.COLOR_CORAL, theme.color.COLOR_ORANGE_RED]}
+            backgroundColor={[
+              theme.color.COLOR_CORAL,
+              theme.color.COLOR_ORANGE_RED,
+            ]}
             fontColor={theme.color.COLOR_WHITE}
             fontWeight={300}
           />

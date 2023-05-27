@@ -7,6 +7,7 @@ function DefaultButton({
   content,
   disabled,
   className,
+  imageSrc,
   type,
   ...rest
 }: DefaultButtonTypes & ButtonStyleTypes) {
@@ -18,7 +19,8 @@ function DefaultButton({
       className={className}
       {...rest}
     >
-      {content}
+      <img src={imageSrc} alt="button img" />
+      <p>{content}</p>
     </DefaultButtonAtom>
   );
 }
@@ -37,32 +39,38 @@ DefaultButton.defaultProps = {
 export default DefaultButton;
 
 const DefaultButtonAtom = styled.button<ButtonStyleTypes>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
   cursor: pointer;
-  color: ${({ fontColor, isBtnClick }) =>
-    isBtnClick
-      ? fontColor && `${fontColor[1]}`
-      : fontColor && `${fontColor[0]}`};
-  font-size: ${({ fontSize }) => fontSize}rem;
-  font-weight: ${({ fontWeight }) => fontWeight};
-  width: ${({ width }) => (width === 'auto' ? '100%' : `${width}px`)};
+  width: ${({ width }) =>
+    width === 'auto' ? 'auto' : width === 'full' ? '100%' : `${width}px`};
   height: ${({ height }) => height}px;
   border: none;
   border-radius: 5px;
   background-color: ${({ backgroundColor, isBtnClick }) =>
-    isBtnClick
-      ? backgroundColor && `${backgroundColor[1]}`
-      : backgroundColor && `${backgroundColor[0]}`};
+    isBtnClick ? `${backgroundColor[1]}` : `${backgroundColor[0]}`};
   transition: 0.5s;
+  p {
+    color: ${({ fontColor, isBtnClick }) =>
+      isBtnClick ? `${fontColor[1]}` : `${fontColor[0]}`};
+    font-size: ${({ fontSize }) => fontSize}rem;
+    font-weight: ${({ fontWeight }) => fontWeight};
+  }
+  img {
+    width: ${({ imageSize }) => imageSize}px;
+    height: ${({ imageSize }) => imageSize}px;
+  }
   &:hover {
-    color: ${({ fontColor }) => fontColor && fontColor[1]};
-    background-color: ${({ backgroundColor }) =>
-      backgroundColor && `${backgroundColor[1]}`};
+    color: ${({ fontColor }) => fontColor[1]};
+    background-color: ${({ backgroundColor }) => `${backgroundColor[1]}`};
   }
   &:disabled {
     background-color: ${({ theme }) => theme.color.COLOR_GRAY};
   }
   &.pagination:hover {
-    height: ${({ height }) => height && height + 20}px;
+    height: ${({ height }) => height + 20}px;
     transform: translateY(-10px);
   }
   &.category {

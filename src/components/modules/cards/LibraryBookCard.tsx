@@ -68,7 +68,7 @@ function LibraryBookCard({
     <LibraryBookCardModule>
       <BookImage>
         <ImageButton
-          src={FUNC_IMAGE.TRASH}
+          imageSrc={FUNC_IMAGE.TRASH}
           handleClick={handleDeleteToggle}
           imageSize={25}
         />

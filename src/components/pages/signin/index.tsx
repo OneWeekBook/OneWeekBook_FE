@@ -24,7 +24,10 @@ function Index() {
         />
         <SignInForm />
         <DefaultButton
-          bgColor={[theme.color.COLOR_LEMON_CHIFFON, theme.color.COLOR_GOLD]}
+          backgroundColor={[
+            theme.color.COLOR_LEMON_CHIFFON,
+            theme.color.COLOR_GOLD,
+          ]}
           content="회원가입"
           width="auto"
           fontColor={[theme.color.COLOR_BLACK, theme.color.COLOR_BLACK]}

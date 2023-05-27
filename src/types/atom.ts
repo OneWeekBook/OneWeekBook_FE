@@ -12,12 +12,13 @@ export interface DefaultButtonTypes {
   disabled?: boolean;
   className?: string;
   type?: 'button' | 'submit';
+  imageSrc?: string;
 }
 
 export interface ImageButtonTypes {
   handleClick: () => void;
   type?: 'button' | 'submit';
-  src: string;
+  imageSrc: string;
 }
 
 export interface MenuButtonTypes extends ImageButtonTypes {
@@ -114,15 +115,20 @@ export interface MultiTextTypes {
 
 /* Style Types */
 
-export interface ButtonStyleTypes {
-  fontSize?: number;
-  fontColor?: string | string[];
-  fontWeight?: number;
-  bgColor?: string | string[];
+export interface ImageButtonStyleTypes {
+  backgroundColor?: string;
   imageSize?: number;
-  isBtnClick?: boolean;
-  width?: number | string;
-  height?: number;
+}
+
+export interface ButtonStyleTypes {
+  fontSize: number;
+  fontColor: string | string[];
+  fontWeight: number;
+  backgroundColor: string | string[];
+  imageSize?: number;
+  isBtnClick: boolean;
+  width: number | string;
+  height: number;
 }
 
 export interface IconStyleType {

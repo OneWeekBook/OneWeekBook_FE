@@ -1,15 +1,15 @@
 import styled from 'styled-components';
-import { ButtonStyleTypes, ImageButtonTypes } from 'types/atom';
+import { ImageButtonStyleTypes, ImageButtonTypes } from 'types/atom';
 
 function ImageButton({
   type,
   handleClick,
-  src,
+  imageSrc,
   ...rest
-}: ImageButtonTypes & ButtonStyleTypes) {
+}: ImageButtonTypes & ImageButtonStyleTypes) {
   return (
     <ImageButtonAtom type={type} onClick={handleClick} {...rest}>
-      <img src={src} alt="img button" />
+      <img src={imageSrc} alt="img button" />
     </ImageButtonAtom>
   );
 }
@@ -20,9 +20,9 @@ ImageButton.defaultProps = {
 
 export default ImageButton;
 
-const ImageButtonAtom = styled.button<ButtonStyleTypes>`
+const ImageButtonAtom = styled.button<ImageButtonStyleTypes>`
   border: none;
-  background-color: ${({ bgColor }) => bgColor};
+  background-color: ${({ backgroundColor }) => backgroundColor};
   cursor: pointer;
   border: none;
   img {

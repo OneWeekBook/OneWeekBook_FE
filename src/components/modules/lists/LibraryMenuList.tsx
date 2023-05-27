@@ -6,7 +6,7 @@ import { LibraryMenuTypes } from 'types/module';
 import { navDone, navLike, navRead } from 'redux/reducers/Func';
 import { LibraryInit, LibraryRequest } from 'redux/reducers/Library';
 import { libraryMenu } from 'constants/content';
-import MenuButton from 'components/atoms/buttons/MenuButton';
+import Button from 'components/atoms/buttons/Button';
 
 function LibraryMenuList({ useId, navId }: LibraryMenuTypes) {
   const dispatch = useDispatch();
@@ -31,19 +31,22 @@ function LibraryMenuList({ useId, navId }: LibraryMenuTypes) {
   return (
     <LibraryMenuListModule>
       {libraryMenu.map((item) => (
-        <MenuButton
-          className="roundborder"
+        <Button
           key={item.id}
-          src={item.image}
+          imageSrc={item.image}
           imageSize={18}
           content={item.desc}
           handleClick={() => handleMenuClick(item.id)}
           isBtnClick={navId === item.id}
-          bgColor={[theme.color.COLOR_CORAL, theme.color.COLOR_ORANGE_RED]}
-          fontColor={theme.color.COLOR_WHITE}
+          backgroundColor={[
+            theme.color.COLOR_CORAL,
+            theme.color.COLOR_ORANGE_RED,
+          ]}
+          fontColor={[theme.color.COLOR_WHITE, theme.color.COLOR_WHITE]}
           fontSize={1.4}
           fontWeight={300}
-          height={20}
+          width={80}
+          height={40}
         />
       ))}
     </LibraryMenuListModule>
@@ -55,7 +58,4 @@ export default LibraryMenuList;
 const LibraryMenuListModule = styled.div`
   display: flex;
   gap: 5px;
-  button {
-    height: 40px;
-  }
 `;

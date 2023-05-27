@@ -81,7 +81,7 @@ function Index() {
             width={80}
             height={20}
             fontColor={theme.color.COLOR_BLACK}
-            bgColor={[theme.color.COLOR_NONE, theme.color.COLOR_NONE]}
+            backgroundColor={[theme.color.COLOR_NONE, theme.color.COLOR_NONE]}
             handleClick={handleRemoveToggle}
           />
         </SignOutButton>

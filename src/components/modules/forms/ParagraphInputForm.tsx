@@ -48,7 +48,7 @@ function ParagraphInputForm({ bookId }: ParagraphInputFormType) {
       <ImageButton
         type="button"
         handleClick={handleParagraphAdd}
-        src={FUNC_IMAGE.COMMENT_ADD}
+        imageSrc={FUNC_IMAGE.COMMENT_ADD}
         imageSize={30}
       />
     </ParagraphInputFormModule>

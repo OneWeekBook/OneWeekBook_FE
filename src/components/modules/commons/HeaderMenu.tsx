@@ -33,7 +33,7 @@ function HeaderMenu({ handleToggle, handleSignOut }: HeaderTypes) {
         </DefaultLinks>
       )}
       <ImageButton
-        src={FUNC_IMAGE.HAMBURGER}
+        imageSrc={FUNC_IMAGE.HAMBURGER}
         imageSize={32}
         handleClick={handleToggle}
       />

@@ -28,7 +28,7 @@ function Index({
           {close && (
             <ImageButton
               handleClick={handleToggle}
-              src={FUNC_IMAGE.CLOSE}
+              imageSrc={FUNC_IMAGE.CLOSE}
               imageSize={25}
             />
           )}

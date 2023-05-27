@@ -15,7 +15,7 @@ function ParagraphCard({
       <ImageButton
         type="button"
         handleClick={() => deleteParagraphClick(id)}
-        src={FUNC_IMAGE.COMMENT_DELETE}
+        imageSrc={FUNC_IMAGE.COMMENT_DELETE}
         imageSize={32}
       />
     </ParagraphCardModule>
