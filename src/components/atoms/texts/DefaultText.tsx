@@ -30,6 +30,10 @@ const DefaultTextAtom = styled.p<TextStyleTypes>`
   font-weight: ${({ fontWeight }) => fontWeight};
   font-size: ${({ fontSize }) => fontSize}rem;
   text-align: ${({ align }) => align};
+  &.review {
+    font-weight: 300;
+    white-space: pre-wrap;
+  }
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
     font-size: ${({ fontSize, reactive }) =>
       reactive && fontSize && fontSize - 0.2}rem;

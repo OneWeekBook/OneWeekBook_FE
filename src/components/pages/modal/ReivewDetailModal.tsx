@@ -16,7 +16,6 @@ import { FAVORITE_IMAGE } from 'constants/image';
 import DetailModal from 'common/DefaultModal';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import DefaultText from 'components/atoms/texts/DefaultText';
-import ReviewText from 'components/atoms/texts/ReviewText';
 
 function ReviewDetailModal({
   userReview,
@@ -134,7 +133,7 @@ function ReviewDetailModal({
           <DefaultText content="작성일자 : " />
           <DefaultText content={userReview.reviewCreationTime} />
         </DefaultTexts>
-        <ReviewText content={userReview.review} />
+        <DefaultText className="review" content={userReview.review} />
         <FavoriteButtons>
           <DefaultButton
             className="roundborder"

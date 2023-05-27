@@ -6,7 +6,6 @@ import { imageErrorHandler } from 'utils/imageErrorHandler';
 import { PATH_URL } from 'constants/path';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DefaultText from 'components/atoms/texts/DefaultText';
-import ReviewText from 'components/atoms/texts/ReviewText';
 import StarImage from 'components/atoms/images/StarImage';
 
 function NewReivewCard({
@@ -44,7 +43,7 @@ function NewReivewCard({
             <StarImage key={el} score={el < rating ? 1 : 0} pc={[20, 20]} />
           ))}
         </StarIcons>
-        <ReviewText className="review" content={review} />
+        <DefaultText className="review" content={review} />
       </ReviewInfo>
     </NewReviewCardModule>
   );

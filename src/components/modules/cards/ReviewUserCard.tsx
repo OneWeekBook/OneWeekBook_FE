@@ -7,7 +7,6 @@ import { FAVORITE_IMAGE } from 'constants/image';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import MultiText from 'components/atoms/texts/MultiText';
 import DefaultText from 'components/atoms/texts/DefaultText';
-import ReviewText from 'components/atoms/texts/ReviewText';
 
 function ReviewUserCard({
   nick,
@@ -61,7 +60,7 @@ function ReviewUserCard({
               fontWeight={700}
             />
           </DefaultTexts>
-          <ReviewText className="review" content={review} />
+          <DefaultText className="review" content={review} />
         </ReivewInfoWrapper>
       </UserReviewInfo>
       <Recommends>

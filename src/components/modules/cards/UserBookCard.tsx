@@ -6,7 +6,6 @@ import { PATH_URL } from 'constants/path';
 import StarImage from 'components/atoms/images/StarImage';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DefaultText from 'components/atoms/texts/DefaultText';
-import ReviewText from 'components/atoms/texts/ReviewText';
 
 function UserBookCard({
   img,
@@ -38,8 +37,8 @@ function UserBookCard({
             <StarImage key={el} score={el < rating ? 1 : 0} pc={[20, 20]} />
           ))}
         </StarIcons>
-        <ReviewText
-          className="bookreview"
+        <DefaultText
+          className="review"
           content={
             review && review.replaceAll('<b>', '').replaceAll('</b>', '')
           }
@@ -82,7 +81,7 @@ const UserBookInfo = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .bookreview {
+  .review {
     display: -webkit-box;
     word-wrap: break-word;
     -webkit-line-clamp: 4;
