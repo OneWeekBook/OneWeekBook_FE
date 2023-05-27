@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from 'styles/theme';
 import { PaginationTypes } from 'types/module';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 
@@ -15,6 +16,7 @@ function Pagination({ totalPage, index, setIndex }: PaginationTypes) {
             content={item + 1}
             handleClick={() => setIndex(item)}
             isBtnClick={item === index}
+            fontColor={[theme.color.COLOR_NONE, theme.color.COLOR_NONE]}
             height={5}
           />
         ))}

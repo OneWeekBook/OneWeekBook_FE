@@ -5,7 +5,7 @@ import useAuthLink from 'hooks/useAuthLink';
 import { menuItems } from 'constants/content';
 import { PATH_URL } from 'constants/path';
 import NoticeModal from 'common/DefaultModal';
-import Button from 'components/atoms/buttons/Button';
+import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import theme from 'styles/theme';
 
 function HeaderMainCategory() {
@@ -16,7 +16,7 @@ function HeaderMainCategory() {
   return (
     <HeaderCategoryModule>
       {menuItems.map((item) => (
-        <Button
+        <DefaultButton
           key={item.id}
           imageSrc={
             item.link === `/${currentPath.split('/')[1]}`

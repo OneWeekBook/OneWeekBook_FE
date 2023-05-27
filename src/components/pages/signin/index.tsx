@@ -29,7 +29,7 @@ function Index() {
             theme.color.COLOR_GOLD,
           ]}
           content="회원가입"
-          width="auto"
+          width="full"
           fontColor={[theme.color.COLOR_BLACK, theme.color.COLOR_BLACK]}
           fontSize={2}
           handleClick={() => routeTo('/sign-up')}

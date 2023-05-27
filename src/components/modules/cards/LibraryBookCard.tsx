@@ -119,7 +119,7 @@ function LibraryBookCard({
               handleClick={handleStartClick}
               fontSize={1.4}
               content="시작하기"
-              width="auto"
+              width="full"
             />
           )}
           {[1, 2].some((num) => [progress].includes(num)) && (
@@ -127,7 +127,7 @@ function LibraryBookCard({
               handleClick={handleParagraphClick}
               fontSize={1.4}
               content="기록하기"
-              width="auto"
+              width="full"
             />
           )}
           {progress === 2 && (
@@ -135,7 +135,7 @@ function LibraryBookCard({
               handleClick={handleReviewClick}
               fontSize={1.4}
               content="리뷰하기"
-              width="auto"
+              width="full"
             />
           )}
         </LibraryCardButtons>

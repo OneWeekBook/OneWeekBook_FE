@@ -77,7 +77,7 @@ function Index() {
         <SignOutButton>
           <DefaultButton
             content="회원 탈퇴"
-            fontSize={1.8}
+            fontSize={1.6}
             width={80}
             height={20}
             fontColor={theme.color.COLOR_BLACK}

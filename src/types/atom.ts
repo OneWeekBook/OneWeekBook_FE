@@ -21,11 +21,6 @@ export interface ImageButtonTypes {
   imageSrc: string;
 }
 
-export interface MenuButtonTypes extends ImageButtonTypes {
-  className?: string;
-  content: string;
-}
-
 export interface IconType {
   score: number;
 }

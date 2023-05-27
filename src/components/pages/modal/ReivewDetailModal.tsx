@@ -14,7 +14,7 @@ import {
 import { ReviewInit, ReviewRequest } from 'redux/reducers/Review';
 import { FAVORITE_IMAGE } from 'constants/image';
 import DetailModal from 'common/DefaultModal';
-import Button from 'components/atoms/buttons/Button';
+import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import DataText from 'components/atoms/texts/DataText';
 import ReviewText from 'components/atoms/texts/ReviewText';
 
@@ -133,7 +133,7 @@ function ReviewDetailModal({
         <DataText before="작성일자 : " data={userReview.reviewCreationTime} />
         <ReviewText content={userReview.review} />
         <FavoriteButtons>
-          <Button
+          <DefaultButton
             className="roundborder"
             imageSrc={FAVORITE_IMAGE.USEFUL}
             imageSize={25}
@@ -144,10 +144,10 @@ function ReviewDetailModal({
               theme.color.COLOR_CORAL,
               theme.color.COLOR_ORANGE_RED,
             ]}
-            fontColor={theme.color.COLOR_WHITE}
+            fontColor={[theme.color.COLOR_WHITE, theme.color.COLOR_WHITE]}
             fontWeight={300}
           />
-          <Button
+          <DefaultButton
             className="roundborder"
             imageSrc={FAVORITE_IMAGE.INTEREST}
             imageSize={25}
@@ -158,7 +158,7 @@ function ReviewDetailModal({
               theme.color.COLOR_CORAL,
               theme.color.COLOR_ORANGE_RED,
             ]}
-            fontColor={theme.color.COLOR_WHITE}
+            fontColor={[theme.color.COLOR_WHITE, theme.color.COLOR_WHITE]}
             fontWeight={300}
           />
         </FavoriteButtons>

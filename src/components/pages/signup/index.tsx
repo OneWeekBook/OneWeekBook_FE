@@ -39,7 +39,7 @@ function SignUpPage() {
             theme.color.COLOR_GOLD,
           ]}
           content="로그인"
-          width="auto"
+          width="full"
           fontColor={[theme.color.COLOR_BLACK, theme.color.COLOR_BLACK]}
           fontSize={2}
           handleClick={() => routeTo('/sign-in')}

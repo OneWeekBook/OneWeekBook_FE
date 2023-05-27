@@ -6,7 +6,7 @@ import { LibraryMenuTypes } from 'types/module';
 import { navDone, navLike, navRead } from 'redux/reducers/Func';
 import { LibraryInit, LibraryRequest } from 'redux/reducers/Library';
 import { libraryMenu } from 'constants/content';
-import Button from 'components/atoms/buttons/Button';
+import DefaultButton from 'components/atoms/buttons/DefaultButton';
 
 function LibraryMenuList({ useId, navId }: LibraryMenuTypes) {
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ function LibraryMenuList({ useId, navId }: LibraryMenuTypes) {
   return (
     <LibraryMenuListModule>
       {libraryMenu.map((item) => (
-        <Button
+        <DefaultButton
           key={item.id}
           imageSrc={item.image}
           imageSize={18}

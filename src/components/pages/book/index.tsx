@@ -67,26 +67,28 @@ function Index() {
         </BannerBlind>
       </BookBanner>
       <Container>
-        <DefaultButton
-          type="button"
-          content="추천 순"
-          fontSize={2}
-          fontColor={[theme.color.COLOR_CORAL, theme.color.COLOR_ORANGE_RED]}
-          backgroundColor={[theme.color.COLOR_NONE, theme.color.COLOR_NONE]}
-          isBtnClick={sort === 'recommend'}
-          width={60}
-          handleClick={handleRecommendClick}
-        />
-        <DefaultButton
-          type="button"
-          content="최신 순"
-          fontSize={2}
-          fontColor={[theme.color.COLOR_CORAL, theme.color.COLOR_ORANGE_RED]}
-          backgroundColor={[theme.color.COLOR_NONE, theme.color.COLOR_NONE]}
-          isBtnClick={sort === 'new'}
-          width={80}
-          handleClick={handleNewClick}
-        />
+        <DefaultButtons>
+          <DefaultButton
+            type="button"
+            content="추천 순"
+            fontSize={2}
+            fontColor={[theme.color.COLOR_CORAL, theme.color.COLOR_ORANGE_RED]}
+            backgroundColor={[theme.color.COLOR_NONE, theme.color.COLOR_NONE]}
+            isBtnClick={sort === 'recommend'}
+            width={60}
+            handleClick={handleRecommendClick}
+          />
+          <DefaultButton
+            type="button"
+            content="최신 순"
+            fontSize={2}
+            fontColor={[theme.color.COLOR_CORAL, theme.color.COLOR_ORANGE_RED]}
+            backgroundColor={[theme.color.COLOR_NONE, theme.color.COLOR_NONE]}
+            isBtnClick={sort === 'new'}
+            width={80}
+            handleClick={handleNewClick}
+          />
+        </DefaultButtons>
         <UserReviewList
           reviews={userReviews}
           detailToggleIsOn={handleDetailToggle}
@@ -130,4 +132,8 @@ const BannerBlind = styled.div`
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     height: 200px;
   }
+`;
+
+const DefaultButtons = styled.div`
+  display: flex;
 `;

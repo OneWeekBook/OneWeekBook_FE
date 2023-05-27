@@ -121,7 +121,7 @@ function AuthEmailForm({
               handleClick={authEmailClick}
               disabled={!emailReg}
               fontSize={1.8}
-              width="auto"
+              width="full"
               content="이메일 인증하기"
             />
           ) : (
@@ -129,7 +129,7 @@ function AuthEmailForm({
               handleClick={authEmailClick}
               disabled={!emailReg}
               fontSize={1.8}
-              width="auto"
+              width="full"
               content="재발송"
             />
           )}
@@ -155,7 +155,7 @@ function AuthEmailForm({
                 handleClick={codeInputClick}
                 disabled={!codeReg}
                 fontSize={1.8}
-                width="auto"
+                width="full"
                 content="인증번호 확인"
               />
             </>
