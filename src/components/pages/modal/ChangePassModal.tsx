@@ -8,7 +8,7 @@ import {
   ChangePasswordRequest,
 } from 'redux/reducers/ChangePassword';
 import useInput from 'hooks/useInput';
-import { passwordRegex } from 'utils/Regex';
+import { passwordRegex } from 'constants/regex';
 import { showToast } from 'common/Toast';
 import ChangeModal from 'common/DefaultModal';
 import ErrorText from 'components/atoms/texts/ErrorText';

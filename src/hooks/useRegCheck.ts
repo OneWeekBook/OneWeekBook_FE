@@ -1,5 +1,5 @@
 import { InputDataTypes, RegCheckTypes } from 'types/hook';
-import { codeRegex, emailRegex } from 'utils/Regex';
+import { codeRegex, emailRegex } from 'constants/regex';
 
 export function useRegexCheck(): {
   handleRegex: (values: InputDataTypes, regCheck: RegCheckTypes) => void;
