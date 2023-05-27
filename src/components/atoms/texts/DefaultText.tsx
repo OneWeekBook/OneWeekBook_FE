@@ -34,6 +34,12 @@ const DefaultTextAtom = styled.p<TextStyleTypes>`
     font-weight: 300;
     white-space: pre-wrap;
   }
+  &.tagbox {
+    padding: 2px 10px;
+    font-weight: 500;
+    border-radius: 10px;
+    background-color: ${({ theme }) => theme.color.COLOR_CORAL};
+  }
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
     font-size: ${({ fontSize, reactive }) =>
       reactive && fontSize && fontSize - 0.2}rem;
