@@ -1,14 +1,15 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import theme from 'styles/theme';
 import { AppStateType } from 'redux/reducers';
 import { SignInInit, SignInRequest } from 'redux/reducers/SignIn';
 import useInput from 'hooks/useInput';
 import useInputEnter from 'hooks/useInputEnter';
 import { signInErrorHandler } from 'utils/signInErrorHandler';
-import ErrorText from 'components/atoms/texts/ErrorText';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import BorderInput from 'components/atoms/inputs/BorderInput';
+import DefaultText from 'components/atoms/texts/DefaultText';
 
 function SignInForm() {
   const dispatch = useDispatch();
@@ -64,7 +65,14 @@ function SignInForm() {
         onChange={changePassword}
         mref={passRef}
       />
-      {signInError && <ErrorText error={signInErrorMsg} align="left" />}
+      {signInError && (
+        <DefaultText
+          content={signInErrorMsg}
+          align="left"
+          fontSize={1.2}
+          fontColor={theme.color.COLOR_RED}
+        />
+      )}
       <DefaultButton type="submit" content="로그인" width="auto" fontSize={2} />
     </SignInFormModule>
   );

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppStateType } from 'redux/reducers';
 import styled from 'styled-components';
+import theme from 'styles/theme';
 import { ChangePassModalType } from 'types/page';
 import {
   ChangePasswordInit,
@@ -11,7 +12,7 @@ import useInput from 'hooks/useInput';
 import { passwordRegex } from 'constants/regex';
 import { showToast } from 'common/Toast';
 import ChangeModal from 'common/DefaultModal';
-import ErrorText from 'components/atoms/texts/ErrorText';
+import DefaultText from 'components/atoms/texts/DefaultText';
 import InputForm from 'components/modules/forms/InputForm';
 
 function ChangePassModal({ handlePassToggle }: ChangePassModalType) {
@@ -81,7 +82,14 @@ function ChangePassModal({ handlePassToggle }: ChangePassModalType) {
           handleChange={changeConfirmPasswod}
         />
       </PasswordInputs>
-      {passError && <ErrorText error={error} align="center" />}
+      {passError && (
+        <DefaultText
+          content={error}
+          align="center"
+          fontSize={1.2}
+          fontColor={theme.color.COLOR_RED}
+        />
+      )}
     </ChangeModal>
   );
 }

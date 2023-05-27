@@ -36,12 +36,20 @@ function Index({
           )}
         </CloseButton>
         <DefaultModalBody height={height}>
-          <DefaultText
-            content={content}
-            subContent={subContent}
-            fontSize={contentSize}
-            align="center"
-          />
+          <div>
+            <DefaultText
+              content={content}
+              align="center"
+              fontSize={contentSize}
+            />
+            {subContent && (
+              <DefaultText
+                content={subContent}
+                fontSize={contentSize}
+                align="center"
+              />
+            )}
+          </div>
           {children}
           <DefaultButtons>
             {okButtonTitle && (

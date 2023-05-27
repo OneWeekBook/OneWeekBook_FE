@@ -80,14 +80,7 @@ export interface TimerTextTypes {
 
 export interface DefaultTextTypes {
   content: string | number;
-  subContent?: string | number;
   className?: string;
-}
-
-export interface DataTextTypes {
-  before?: string;
-  data: string | number;
-  after?: string;
 }
 
 export interface ErrorTypes {

@@ -4,19 +4,12 @@ import { DefaultTextTypes, TextStyleTypes } from 'types/atom';
 
 function DefaultText({
   content,
-  subContent,
   className,
   ...rest
 }: DefaultTextTypes & TextStyleTypes) {
   return (
     <DefaultTextAtom className={className} {...rest}>
       {content}
-      {subContent && (
-        <>
-          <br />
-          {subContent}
-        </>
-      )}
     </DefaultTextAtom>
   );
 }

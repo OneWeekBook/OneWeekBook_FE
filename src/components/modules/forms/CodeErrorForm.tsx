@@ -1,5 +1,5 @@
+import theme from 'styles/theme';
 import { CodeErrorTypes } from 'types/module';
-import ErrorText from 'components/atoms/texts/ErrorText';
 import DefaultText from 'components/atoms/texts/DefaultText';
 
 function CodeErrorForm({
@@ -16,9 +16,21 @@ function CodeErrorForm({
           fontSize={1.2}
         />
       ) : !codeReg && !codeErrorStatus ? (
-        <ErrorText error="인증번호는 6자리 입니다." align="left" />
+        <DefaultText
+          content="인증번호는 6자리 입니다."
+          align="left"
+          fontSize={1.2}
+          fontColor={theme.color.COLOR_RED}
+        />
       ) : (
-        codeErrorStatus && <ErrorText error={codeErrorMsg} align="left" />
+        codeErrorStatus && (
+          <DefaultText
+            content={codeErrorMsg}
+            align="left"
+            fontSize={1.2}
+            fontColor={theme.color.COLOR_RED}
+          />
+        )
       )}
     </>
   );

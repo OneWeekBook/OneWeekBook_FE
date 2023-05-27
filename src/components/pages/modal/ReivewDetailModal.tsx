@@ -15,7 +15,7 @@ import { ReviewInit, ReviewRequest } from 'redux/reducers/Review';
 import { FAVORITE_IMAGE } from 'constants/image';
 import DetailModal from 'common/DefaultModal';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
-import DataText from 'components/atoms/texts/DataText';
+import DefaultText from 'components/atoms/texts/DefaultText';
 import ReviewText from 'components/atoms/texts/ReviewText';
 
 function ReviewDetailModal({
@@ -130,7 +130,10 @@ function ReviewDetailModal({
       handleOkClick={handleDetailToggle}
     >
       <UserReviewModalBody>
-        <DataText before="작성일자 : " data={userReview.reviewCreationTime} />
+        <DefaultTexts>
+          <DefaultText content="작성일자 : " />
+          <DefaultText content={userReview.reviewCreationTime} />
+        </DefaultTexts>
         <ReviewText content={userReview.review} />
         <FavoriteButtons>
           <DefaultButton
@@ -177,6 +180,10 @@ const UserReviewModalBody = styled.div`
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     padding: 10px;
   }
+`;
+
+const DefaultTexts = styled.div`
+  display: flex;
 `;
 
 const FavoriteButtons = styled.div`

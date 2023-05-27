@@ -13,7 +13,6 @@ import MoveDeleteModal from 'common/DefaultModal';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DefaultText from 'components/atoms/texts/DefaultText';
-import DataText from 'components/atoms/texts/DataText';
 
 function LibraryBookCard({
   id,
@@ -101,18 +100,22 @@ function LibraryBookCard({
             fontSize={1.4}
           />
           {startTime && (
-            <DataText
-              before="독서 시작:"
-              data={setReadDateFormat(startTime)}
-              fontSize={1.2}
-            />
+            <DefaultTexts>
+              <DefaultText content="독서 시작 :&nbsp;" fontSize={1.2} />
+              <DefaultText
+                content={setReadDateFormat(startTime)}
+                fontSize={1.2}
+              />
+            </DefaultTexts>
           )}
           {endTime && (
-            <DataText
-              before="독서 완료:"
-              data={setReadDateFormat(endTime)}
-              fontSize={1.2}
-            />
+            <DefaultTexts>
+              <DefaultText content="독서 완료 :&nbsp;" fontSize={1.2} />
+              <DefaultText
+                content={setReadDateFormat(endTime)}
+                fontSize={1.2}
+              />
+            </DefaultTexts>
           )}
         </BookInfo>
         <LibraryCardButtons>
@@ -213,6 +216,10 @@ const BookInfo = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
   }
+`;
+
+const DefaultTexts = styled.div`
+  display: flex;
 `;
 
 const LibraryCardButtons = styled.div`

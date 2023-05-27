@@ -2,9 +2,8 @@ import styled from 'styled-components';
 import theme from 'styles/theme';
 import { ReviewBookResponseTypes } from 'types/response';
 import DefaultImage from 'components/atoms/images/DefaultImage';
-import DefaultText from 'components/atoms/texts/DefaultText';
-import DataText from 'components/atoms/texts/DataText';
 import StarImage from 'components/atoms/images/StarImage';
+import DefaultText from 'components/atoms/texts/DefaultText';
 
 function BookBanner({
   author,
@@ -55,20 +54,27 @@ function BookBanner({
           />
         </div>
         <ReviewWrapper>
-          <DataText
-            before="전체 리뷰:"
-            fontSize={2}
-            data={countReviews}
-            fontColor={[theme.color.COLOR_WHITE, theme.color.COLOR_CORAL]}
-            reactive
-          />
+          <DefaultTexts>
+            <DefaultText
+              content="전체 리뷰 :&nbsp;"
+              fontSize={2}
+              fontColor={theme.color.COLOR_WHITE}
+              reactive
+            />
+            <DefaultText
+              content={countReviews}
+              fontSize={2}
+              fontColor={theme.color.COLOR_CORAL}
+              reactive
+            />
+          </DefaultTexts>
           <AvarageScore>
             {RateArr.map((el, idx) => (
               <StarImage key={idx} score={el} pc={[20, 20]} />
             ))}
-            <DataText
-              data={ratingAverage.toFixed(1)}
-              fontColor={[theme.color.COLOR_WHITE, theme.color.COLOR_CORAL]}
+            <DefaultText
+              content={ratingAverage.toFixed(1)}
+              fontColor={theme.color.COLOR_CORAL}
             />
           </AvarageScore>
         </ReviewWrapper>
@@ -108,6 +114,10 @@ const InfoWrapper = styled.div`
 const ReviewWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+`;
+
+const DefaultTexts = styled.div`
+  display: flex;
 `;
 
 const AvarageScore = styled.div`

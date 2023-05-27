@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { UserSettingFormType } from 'types/module';
 import useToggle from 'hooks/useToggle';
-import DataText from 'components/atoms/texts/DataText';
+import DefaultText from 'components/atoms/texts/DefaultText';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import ChangePassModal from 'components/pages/modal/ChangePassModal';
 import ChangeNickModal from 'components/pages/modal/ChangeNickModal';
@@ -11,7 +11,10 @@ function UserSettingForm({ nickName }: UserSettingFormType) {
   const [passToggle, handlePassToggle] = useToggle(false);
   return (
     <UserSettingFormModule>
-      <DataText before="닉네임:" data={nickName} fontSize={2} />
+      <DefaultTexts>
+        <DefaultText content="닉네임 :&nbsp;" fontSize={2} />
+        <DefaultText content={nickName} fontSize={2} />
+      </DefaultTexts>
       <SettingButtons>
         <DefaultButton
           content="닉네임 변경"
@@ -44,6 +47,10 @@ const UserSettingFormModule = styled.div`
   @media (max-width: 425px) {
     display: block;
   }
+`;
+
+const DefaultTexts = styled.div`
+  display: flex;
 `;
 
 const SettingButtons = styled.div`

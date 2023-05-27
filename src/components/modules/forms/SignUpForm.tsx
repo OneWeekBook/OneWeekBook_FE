@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import theme from 'styles/theme';
 import { AppStateType } from 'redux/reducers';
 import { SignUpInit, SignUpRequest } from 'redux/reducers/SignUp';
 import { SignUpTypes } from 'types/module';
@@ -8,9 +9,9 @@ import useInput from 'hooks/useInput';
 import useInputEnter from 'hooks/useInputEnter';
 import { formErrorHandler } from 'utils/formErrorHandler';
 import { signUpErrorHandler } from 'utils/signUpErrorHandler';
-import ErrorText from 'components/atoms/texts/ErrorText';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import BorderInput from 'components/atoms/inputs/BorderInput';
+import DefaultText from 'components/atoms/texts/DefaultText';
 
 function SignUpForm({ email, authDone, setAuthDone }: SignUpTypes) {
   const dispatch = useDispatch();
@@ -87,7 +88,12 @@ function SignUpForm({ email, authDone, setAuthDone }: SignUpTypes) {
         mref={passRef}
       />
       {passError && (
-        <ErrorText error="비밀번호 형식이 올바르지 않습니다." align="left" />
+        <DefaultText
+          content="비밀번호 형식이 올바르지 않습니다."
+          align="left"
+          fontSize={1.2}
+          fontColor={theme.color.COLOR_RED}
+        />
       )}
       <BorderInput
         type="password"
@@ -98,7 +104,12 @@ function SignUpForm({ email, authDone, setAuthDone }: SignUpTypes) {
         mref={passConfRef}
       />
       {passCompareError && (
-        <ErrorText error="비밀번호가 같지 않습니다." align="left" />
+        <DefaultText
+          content="비밀번호가 같지 않습니다."
+          align="left"
+          fontSize={1.2}
+          fontColor={theme.color.COLOR_RED}
+        />
       )}
       <BorderInput
         type="text"
@@ -116,9 +127,11 @@ function SignUpForm({ email, authDone, setAuthDone }: SignUpTypes) {
         mref={nickRef}
       />
       {signUpError && (
-        <ErrorText
-          error="회원가입 실패, 이미 존재하는 이메일 입니다."
+        <DefaultText
+          content="회원가입 실패, 이미 존재하는 이메일 입니다."
           align="left"
+          fontSize={1.2}
+          fontColor={theme.color.COLOR_RED}
         />
       )}
       <DefaultButton
