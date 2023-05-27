@@ -1,9 +1,9 @@
 import React from 'react';
 import { PATH_URL } from 'constants/path';
 import { showToast } from 'common/Toast';
-import useRouter from './useRouter';
+import useRouter from 'hooks/useRouter';
 
-export function useSignInErrorCheck(): {
+export function signInErrorHandler(): {
   handleSignInError: (
     type: number,
     error: React.Dispatch<React.SetStateAction<boolean>>,

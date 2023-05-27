@@ -1,7 +1,7 @@
 import { CompareErrorTypes, SignUpDataTypes } from 'types/hook';
 import { passwordRegex } from 'utils/Regex';
 
-export function useFormErrorCheck(): {
+export function formErrorHandler(): {
   handleFormError: (values: SignUpDataTypes, error: CompareErrorTypes) => void;
 } {
   const handleFormError = (

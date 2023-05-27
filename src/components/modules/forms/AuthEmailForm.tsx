@@ -7,7 +7,7 @@ import { AuthCodeInit, AuthCodeRequest } from 'redux/reducers/AuthCode';
 import { AuthMailTypes } from 'types/module';
 import useInput from 'hooks/useInput';
 import { useRegexCheck } from 'hooks/useRegCheck';
-import { useAuthErrorCheck } from 'hooks/useAuthErrorCheck';
+import { authErrorHandler } from 'utils/authErrorHandler';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import BorderInput from 'components/atoms/inputs/BorderInput';
 import TimerText from 'components/atoms/texts/TimerText';
@@ -32,7 +32,7 @@ function AuthEmailForm({
   const [toggle, setToggle] = useState<boolean>(false);
 
   const { handleRegex } = useRegexCheck();
-  const { handleEmailCheck, handleCodeCheck } = useAuthErrorCheck();
+  const { handleEmailCheck, handleCodeCheck } = authErrorHandler();
 
   const { emailErrorStatus, emailErrorMsg } = useSelector(
     (state: AppStateType) => state.authEmail,

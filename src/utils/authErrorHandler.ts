@@ -1,6 +1,6 @@
 import { CodeStatusTypes, EmailStatusTypes } from 'types/hook';
 
-export function useAuthErrorCheck(): {
+export function authErrorHandler(): {
   handleEmailCheck: (type: number, stauts: EmailStatusTypes) => void;
   handleCodeCheck: (type: number, status: CodeStatusTypes) => void;
 } {

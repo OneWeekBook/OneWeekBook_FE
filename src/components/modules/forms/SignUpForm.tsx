@@ -6,8 +6,8 @@ import { SignUpInit, SignUpRequest } from 'redux/reducers/SignUp';
 import { SignUpTypes } from 'types/module';
 import useInput from 'hooks/useInput';
 import useInputEnter from 'hooks/useInputEnter';
-import { useFormErrorCheck } from 'hooks/useFormErrorCheck';
-import { useSignUpErrorCheck } from 'hooks/useSignUpErrorCheck';
+import { formErrorHandler } from 'utils/formErrorHandler';
+import { signUpErrorHandler } from 'utils/signUpErrorHandler';
 import ErrorText from 'components/atoms/texts/ErrorText';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import BorderInput from 'components/atoms/inputs/BorderInput';
@@ -26,8 +26,8 @@ function SignUpForm({ email, authDone, setAuthDone }: SignUpTypes) {
   const [passCompareError, setPassCompareError] = useState<boolean>(false);
   const [signUpError, setSignUpError] = useState<boolean>(false);
   const [registerDone, setRegisterDone] = useState<boolean>(true);
-  const { handleFormError } = useFormErrorCheck();
-  const { handleSignUpError } = useSignUpErrorCheck();
+  const { handleFormError } = formErrorHandler();
+  const { handleSignUpError } = signUpErrorHandler();
   const { handleInputEnter } = useInputEnter();
   const signUpErrorStatus = useSelector(
     (state: AppStateType) => state.signUp.signUpErrorStatus,

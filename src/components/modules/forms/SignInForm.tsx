@@ -5,7 +5,7 @@ import { AppStateType } from 'redux/reducers';
 import { SignInInit, SignInRequest } from 'redux/reducers/SignIn';
 import useInput from 'hooks/useInput';
 import useInputEnter from 'hooks/useInputEnter';
-import { useSignInErrorCheck } from 'hooks/useSignInErrorCheck';
+import { signInErrorHandler } from 'utils/signInErrorHandler';
 import ErrorText from 'components/atoms/texts/ErrorText';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import BorderInput from 'components/atoms/inputs/BorderInput';
@@ -18,7 +18,7 @@ function SignInForm() {
   const [password, changePassword] = useInput('');
   const [signInError, setSignInError] = useState<boolean>(false);
   const { handleInputEnter } = useInputEnter();
-  const { handleSignInError } = useSignInErrorCheck();
+  const { handleSignInError } = signInErrorHandler();
   const { signInErrorStatus, signInErrorMsg } = useSelector(
     (state: AppStateType) => state.signIn,
     shallowEqual,
