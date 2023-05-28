@@ -15,7 +15,10 @@ const initialState = {
   signInErrorMsg: '',
 };
 
-export default function SignIn(state = initialState, action: ActionsTypes) {
+export default function signInReducer(
+  state = initialState,
+  action: ActionsTypes,
+) {
   switch (action.type) {
     case SIGN_IN_REQUEST:
       return {
@@ -48,28 +51,28 @@ export default function SignIn(state = initialState, action: ActionsTypes) {
   }
 }
 
-export const SignInRequest = (data: SignInRequestTypes) => {
+export const signInRequest = (data: SignInRequestTypes) => {
   return {
     type: SIGN_IN_REQUEST,
     payload: data,
   };
 };
 
-export const SignInSuccess = (data: ResponseSignInSuccess) => {
+export const signInSuccess = (data: ResponseSignInSuccess) => {
   return {
     type: SIGN_IN_SUCCESS,
     payload: data,
   };
 };
 
-export const SignInFail = (error: AxiosError) => {
+export const signInFail = (error: AxiosError) => {
   return {
     type: SIGN_IN_FAIL,
     error: error.response,
   };
 };
 
-export const SignInInit = () => {
+export const signInInit = () => {
   return {
     type: SIGN_IN_INIT,
   };

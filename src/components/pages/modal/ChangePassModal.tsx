@@ -5,9 +5,9 @@ import styled from 'styled-components';
 import theme from 'styles/theme';
 import { ChangePassModalType } from 'types/page';
 import {
-  ChangePasswordInit,
-  ChangePasswordRequest,
-} from 'redux/reducers/ChangePassword';
+  changePasswordInit,
+  changePasswordRequest,
+} from 'redux/reducers/changePasswordReducer';
 import useInput from 'hooks/useInput';
 import { passwordRegex } from 'constants/regex';
 import { showToast } from 'common/Toast';
@@ -37,14 +37,14 @@ function ChangePassModal({ handlePassToggle }: ChangePassModalType) {
       return;
     }
     setPassError(false);
-    dispatch(ChangePasswordRequest({ password }));
+    dispatch(changePasswordRequest({ password }));
   };
 
   useEffect(() => {
     if (changeErrorStatus !== null && changeErrorStatus !== 200)
       setError('오류 관리자에게 문의해주세요.');
     else if (changeErrorStatus === 200) {
-      dispatch(ChangePasswordInit());
+      dispatch(changePasswordInit());
       showToast('success', '비밀번호 변경 성공!');
       handlePassToggle();
     }

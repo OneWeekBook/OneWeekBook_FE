@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
-import { ReviewInit, ReviewsRequest } from 'redux/reducers/Review';
+import { reviewInit, reviewsRequest } from 'redux/reducers/reviewReducer';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
 import Container from 'common/Container';
 import TopButton from 'components/atoms/buttons/TopButton';
@@ -15,15 +15,15 @@ function Index() {
   const { reviews, reivewsTotal, reviewCount, moreReviews, isLoading } =
     useSelector((state: AppStateType) => state.review, shallowEqual);
   useEffect(() => {
-    dispatch(ReviewsRequest({ start: 0, sortby: 'new' }));
+    dispatch(reviewsRequest({ start: 0, sortby: 'new' }));
     return () => {
-      dispatch(ReviewInit());
+      dispatch(reviewInit());
     };
   }, []);
 
   const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
     if (isIntersecting && moreReviews && !isLoading) {
-      dispatch(ReviewsRequest({ start: reviewCount, sortby: 'new' }));
+      dispatch(reviewsRequest({ start: reviewCount, sortby: 'new' }));
     }
   };
   const { setTarget } = useIntersectionObserver({ onIntersect });

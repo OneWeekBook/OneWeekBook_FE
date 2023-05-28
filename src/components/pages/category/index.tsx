@@ -2,9 +2,9 @@ import { useCallback, useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { CategoryResponseTypes } from 'types/response';
-import { CategoryRequest } from 'redux/reducers/Category';
-import { SearchInit } from 'redux/reducers/Search';
-import { searchNone, userToggle } from 'redux/reducers/Func';
+import { categoryRequest } from 'redux/reducers/categoryReducer';
+import { searchInit } from 'redux/reducers/searchReducer';
+import { searchNone, userToggle } from 'redux/reducers/funcReducer';
 import { AppStateType } from 'redux/reducers';
 import { categoryInit } from 'constants/content';
 import Container from 'common/Container';
@@ -67,9 +67,9 @@ function index() {
   );
 
   useEffect(() => {
-    dispatch(CategoryRequest());
+    dispatch(categoryRequest());
     return () => {
-      dispatch(SearchInit());
+      dispatch(searchInit());
       dispatch(searchNone());
     };
   }, []);

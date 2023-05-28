@@ -14,7 +14,10 @@ const initialState = {
   newReviews: [],
 };
 
-export default function Review(state = initialState, action: ActionsTypes) {
+export default function newReviewReducer(
+  state = initialState,
+  action: ActionsTypes,
+) {
   switch (action.type) {
     case NEW_REVIEWS_REQUEST:
       return {
@@ -42,27 +45,27 @@ export default function Review(state = initialState, action: ActionsTypes) {
   }
 }
 
-export const NewReviewsRequest = () => {
+export const newReviewsRequest = () => {
   return {
     type: NEW_REVIEWS_REQUEST,
   };
 };
 
-export const NewReviewsSuccess = (data: ResponseNewReviewSuccess) => {
+export const newReviewsSuccess = (data: ResponseNewReviewSuccess) => {
   return {
     type: NEW_REVIEWS_SUCCESS,
     payload: data,
   };
 };
 
-export const NewReviewsFail = (error: AxiosError) => {
+export const newReviewsFail = (error: AxiosError) => {
   return {
     type: NEW_REVIEWS_FAIL,
     error: error.response,
   };
 };
 
-export const NewReviewInit = () => {
+export const newReviewInit = () => {
   return {
     type: NEW_REVIEW_INIT,
   };

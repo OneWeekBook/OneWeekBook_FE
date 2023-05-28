@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
-import { AuthUserRequest } from 'redux/reducers/AuthUser';
+import { authUserRequest } from 'redux/reducers/authUserReducer';
 import useToggle from 'hooks/useToggle';
 import { PATH_URL } from 'constants/path';
 import DefaultLink from 'components/atoms/links/DefaultLink';
@@ -19,11 +19,11 @@ function Index({ children }: PropsWithChildren) {
   const { isSuccess } = useSelector((state: AppStateType) => state.signIn);
 
   useEffect(() => {
-    dispatch(AuthUserRequest());
+    dispatch(authUserRequest());
   }, [userToggle]);
 
   useEffect(() => {
-    if (isSuccess) dispatch(AuthUserRequest());
+    if (isSuccess) dispatch(authUserRequest());
   }, [isSuccess]);
 
   useEffect(() => {

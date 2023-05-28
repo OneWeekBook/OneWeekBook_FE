@@ -37,7 +37,7 @@ const initialState = {
   paragraph: Array<ParagraphResponseTypes>(),
 };
 
-export default function ChangePassword(
+export default function paragraphReducer(
   state = initialState,
   action: ActionsTypes,
 ) {
@@ -123,89 +123,89 @@ export default function ChangePassword(
   }
 }
 
-export const ParagraphInitRequest = (data: ParagraphRequestType) => {
+export const paragraphInitRequest = (data: ParagraphRequestType) => {
   return {
     type: PARAGRAPH_INIT_REQUEST,
     payload: data,
   };
 };
 
-export const ParagraphInitSuccess = (data: ParagraphResponseTypes[]) => {
+export const paragraphInitSuccess = (data: ParagraphResponseTypes[]) => {
   return {
     type: PARAGRAPH_INIT_SUCCESS,
     payload: data,
   };
 };
 
-export const ParagraphInitFail = (error: AxiosError) => {
+export const paragraphInitFail = (error: AxiosError) => {
   return {
     type: PARAGRAPH_INIT_FAIL,
     error: error.response,
   };
 };
 
-export const ParagraphRequest = (data: ParagraphRequestType) => {
+export const paragraphRequest = (data: ParagraphRequestType) => {
   return {
     type: PARAGRAPH_REQUEST,
     payload: data,
   };
 };
 
-export const ParagraphSuccess = (data: ParagraphResponseTypes[]) => {
+export const paragraphSuccess = (data: ParagraphResponseTypes[]) => {
   return {
     type: PARAGRAPH_SUCCESS,
     payload: data,
   };
 };
 
-export const ParagraphFail = (error: AxiosError) => {
+export const paragraphFail = (error: AxiosError) => {
   return {
     type: PARAGRAPH_FAIL,
     error: error.response,
   };
 };
 
-export const ParagraphAddRequest = (data: ParagraphAddRequestTypes) => {
+export const paragraphAddRequest = (data: ParagraphAddRequestTypes) => {
   return {
     type: PARAGRAPH_ADD_REQUEST,
     payload: data,
   };
 };
 
-export const ParagraphAddSuccess = () => {
+export const paragraphAddSuccess = () => {
   return {
     type: PARAGRAPH_ADD_SUCCESS,
   };
 };
 
-export const ParagraphAddFail = (error: AxiosError) => {
+export const paragraphAddFail = (error: AxiosError) => {
   return {
     type: PARAGRAPH_ADD_FAIL,
     error: error.response,
   };
 };
 
-export const ParagraphDeleteRequest = (data: DeleteRequestType) => {
+export const paragraphDeleteRequest = (data: DeleteRequestType) => {
   return {
     type: PARAGRAPH_DELETE_REQUEST,
     payload: data,
   };
 };
 
-export const ParagraphDeleteSuccess = () => {
+export const paragraphDeleteSuccess = () => {
   return {
     type: PARAGRAPH_DELETE_SUCCESS,
   };
 };
 
-export const ParagraphDeleteFail = (error: AxiosError) => {
+export const paragraphDeleteFail = (error: AxiosError) => {
   return {
     type: PARAGRAPH_DELETE_FAIL,
     error: error.response,
   };
 };
 
-export const ParagraphInit = () => {
+export const paragraphInit = () => {
   return {
     type: PARAGRAPH_INIT,
   };

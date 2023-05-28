@@ -3,10 +3,10 @@ import instance from 'api/axios';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { API_URL } from 'constants/path';
 import {
-  UserReviewFail,
-  UserReviewSuccess,
+  userReviewFail,
+  userReviewSuccess,
   USER_REVIEW_REQUEST,
-} from 'redux/reducers/UserReview';
+} from 'redux/reducers/userReviewReducer';
 
 function UserReviewAPI(data: { userId: number; bookId: number }) {
   return instance.get(`${API_URL.BOOK_REVIEWS}/${data.bookId}/${data.userId}`);
@@ -22,9 +22,9 @@ function* fetchUserReviewSaga(action: {
       userId: user.id,
       ...action.payload,
     });
-    yield put(UserReviewSuccess(result.data.review));
+    yield put(userReviewSuccess(result.data.review));
   } catch (error) {
-    if (axios.isAxiosError(error)) yield put(UserReviewFail(error));
+    if (axios.isAxiosError(error)) yield put(userReviewFail(error));
   }
 }
 

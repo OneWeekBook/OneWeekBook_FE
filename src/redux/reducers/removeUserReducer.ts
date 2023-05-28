@@ -14,7 +14,7 @@ const initialState = {
   removeErrorMsg: '',
 };
 
-export default function RemoveError(
+export default function removeUserReducer(
   state = initialState,
   action: ActionsTypes,
 ) {
@@ -50,27 +50,27 @@ export default function RemoveError(
   }
 }
 
-export const RemoveUserRequest = (data: { password: string }) => {
+export const removeUserRequest = (data: { password: string }) => {
   return {
     type: REMOVE_USER_REQUEST,
     payload: data,
   };
 };
 
-export const RemoveUserSuccess = () => {
+export const removeUserSuccess = () => {
   return {
     type: REMOVE_USER_SUCCESS,
   };
 };
 
-export const RemoveUserFail = (error: AxiosError) => {
+export const removeUserFail = (error: AxiosError) => {
   return {
     type: REMOVE_USER_FAIL,
     error: error.response,
   };
 };
 
-export const RemoveUserInit = () => {
+export const removeUserInit = () => {
   return {
     type: REMOVE_USER_INIT,
   };

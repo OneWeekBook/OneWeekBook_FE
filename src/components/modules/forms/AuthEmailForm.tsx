@@ -3,8 +3,11 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import theme from 'styles/theme';
 import { AppStateType } from 'redux/reducers';
-import { AuthEmailInit, AuthEmailRequest } from 'redux/reducers/AuthEmail';
-import { AuthCodeInit, AuthCodeRequest } from 'redux/reducers/AuthCode';
+import {
+  authEmailInit,
+  authEmailRequest,
+} from 'redux/reducers/authEmailReducer';
+import { authCodeInit, authCodeRequest } from 'redux/reducers/authCodeReducer';
 import { AuthMailTypes } from 'types/module';
 import useInput from 'hooks/useInput';
 import useAuthTimer from 'hooks/useAuthTimer';
@@ -44,8 +47,8 @@ function AuthEmailForm({
   useEffect(() => {
     emailRef.current?.focus();
     return () => {
-      dispatch(AuthCodeInit());
-      dispatch(AuthEmailInit());
+      dispatch(authCodeInit());
+      dispatch(authEmailInit());
     };
   }, []);
 
@@ -71,11 +74,11 @@ function AuthEmailForm({
   }, [authCodeToggle]);
 
   const authEmailClick = () => {
-    dispatch(AuthEmailRequest({ email }));
+    dispatch(authEmailRequest({ email }));
   };
 
   const codeInputClick = () => {
-    dispatch(AuthCodeRequest({ code }));
+    dispatch(authCodeRequest({ code }));
   };
 
   const handleEmailCheckEnter = (event: React.KeyboardEvent<Element>) => {

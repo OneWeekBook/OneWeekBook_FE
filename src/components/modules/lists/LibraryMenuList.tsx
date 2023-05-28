@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import theme from 'styles/theme';
 import { LibraryMenuTypes } from 'types/module';
-import { navDone, navLike, navRead } from 'redux/reducers/Func';
-import { LibraryInit, LibraryRequest } from 'redux/reducers/Library';
+import { navDone, navLike, navRead } from 'redux/reducers/funcReducer';
+import { libraryInit, libraryRequest } from 'redux/reducers/libraryReducer';
 import { libraryMenu } from 'constants/content';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 
@@ -22,9 +22,9 @@ function LibraryMenuList({ useId, navId }: LibraryMenuTypes) {
   };
 
   useEffect(() => {
-    if (useId) dispatch(LibraryRequest({ progress: navId }));
+    if (useId) dispatch(libraryRequest({ progress: navId }));
     return () => {
-      dispatch(LibraryInit());
+      dispatch(libraryInit());
     };
   }, [useId, navId]);
 

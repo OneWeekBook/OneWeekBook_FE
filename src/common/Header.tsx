@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { HeaderType } from 'types/common';
-import { AuthInit } from 'redux/reducers/AuthUser';
+import { authInit } from 'redux/reducers/authUserReducer';
 import { removeAccessTokenFromSessionStorage } from 'utils/accessTokenHandler';
 import { showToast } from 'common/Toast';
 import HeaderMenu from 'components/modules/commons/HeaderMenu';
@@ -12,7 +12,7 @@ function Header({ handleToggle }: HeaderType) {
 
   const signOutClick = () => {
     removeAccessTokenFromSessionStorage();
-    dispatch(AuthInit());
+    dispatch(authInit());
     showToast('info', '로그아웃 되었습니다.');
   };
 

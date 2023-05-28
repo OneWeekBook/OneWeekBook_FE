@@ -15,7 +15,10 @@ const initialState = {
   userBooks: [],
 };
 
-export default function AuthEmail(state = initialState, action: ActionsTypes) {
+export default function authUserReducer(
+  state = initialState,
+  action: ActionsTypes,
+) {
   switch (action.type) {
     case AUTH_USER_REQUEST:
       return {
@@ -44,27 +47,27 @@ export default function AuthEmail(state = initialState, action: ActionsTypes) {
   }
 }
 
-export const AuthUserRequest = () => {
+export const authUserRequest = () => {
   return {
     type: AUTH_USER_REQUEST,
   };
 };
 
-export const AuthUserSuccess = (data: ResponseAuthUserSuccess) => {
+export const authUserSuccess = (data: ResponseAuthUserSuccess) => {
   return {
     type: AUTH_USER_SUCCESS,
     payload: data,
   };
 };
 
-export const AuthUserFail = (error: AxiosError) => {
+export const authUserFail = (error: AxiosError) => {
   return {
     type: AUTH_USER_FAIL,
     error: error.response,
   };
 };
 
-export const AuthInit = () => {
+export const authInit = () => {
   return {
     type: AUTH_USER_INIT,
   };

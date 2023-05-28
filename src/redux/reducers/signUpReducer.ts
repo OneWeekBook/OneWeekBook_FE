@@ -15,7 +15,10 @@ const initialState = {
   signUpErrorMsg: '',
 };
 
-export default function SignUp(state = initialState, action: ActionsTypes) {
+export default function signUpReducer(
+  state = initialState,
+  action: ActionsTypes,
+) {
   switch (action.type) {
     case SIGN_UP_REQUEST:
       return {
@@ -48,28 +51,28 @@ export default function SignUp(state = initialState, action: ActionsTypes) {
   }
 }
 
-export const SignUpRequest = (data: SignUpRequestTypes) => {
+export const signUpRequest = (data: SignUpRequestTypes) => {
   return {
     type: SIGN_UP_REQUEST,
     payload: data,
   };
 };
 
-export const SignUpSuccess = (data: SuccessResponseTypes) => {
+export const signUpSuccess = (data: SuccessResponseTypes) => {
   return {
     type: SIGN_UP_SUCCESS,
     payload: data,
   };
 };
 
-export const SignUpFail = (error: AxiosError) => {
+export const signUpFail = (error: AxiosError) => {
   return {
     type: SIGN_UP_FAIL,
     error: error.response,
   };
 };
 
-export const SignUpInit = () => {
+export const signUpInit = () => {
   return {
     type: SIGN_UP_INIT,
   };

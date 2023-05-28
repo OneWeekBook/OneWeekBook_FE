@@ -3,10 +3,10 @@ import instance from 'api/axios';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { API_URL } from 'constants/path';
 import {
-  LibraryDeleteFail,
-  LibraryDeleteSuccess,
+  libraryDeleteFail,
+  libraryDeleteSuccess,
   LIBRARY_DELETE_REQUEST,
-} from 'redux/reducers/Library';
+} from 'redux/reducers/libraryReducer';
 
 function LibraryDeleteAPI(params: { id: number }) {
   return instance.delete(`${API_URL.LIBRARY}?id=${params.id}`);
@@ -18,9 +18,9 @@ function* fetchLibraryDeleteSaga(action: {
 }) {
   try {
     yield call(LibraryDeleteAPI, action.payload);
-    yield put(LibraryDeleteSuccess());
+    yield put(libraryDeleteSuccess());
   } catch (error) {
-    if (axios.isAxiosError(error)) yield put(LibraryDeleteFail(error));
+    if (axios.isAxiosError(error)) yield put(libraryDeleteFail(error));
   }
 }
 

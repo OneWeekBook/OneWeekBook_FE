@@ -15,7 +15,10 @@ const initialState = {
   books: Array<BookResponseTypes>(),
 };
 
-export default function SignIn(state = initialState, action: ActionsTypes) {
+export default function searchReducer(
+  state = initialState,
+  action: ActionsTypes,
+) {
   switch (action.type) {
     case SEARCH_REQUEST:
       return {
@@ -44,28 +47,28 @@ export default function SignIn(state = initialState, action: ActionsTypes) {
   }
 }
 
-export const SearchRequest = (params: any) => {
+export const searchRequest = (params: any) => {
   return {
     type: SEARCH_REQUEST,
     payload: params,
   };
 };
 
-export const SearchSuccess = (data: ResponseSearchSuccess) => {
+export const searchSuccess = (data: ResponseSearchSuccess) => {
   return {
     type: SEARCH_SUCCESS,
     payload: data,
   };
 };
 
-export const SearchFail = (error: AxiosError) => {
+export const searchFail = (error: AxiosError) => {
   return {
     type: SEARCH_FAIL,
     error: error.response,
   };
 };
 
-export const SearchInit = () => {
+export const searchInit = () => {
   return {
     type: SEARCH_INIT,
   };

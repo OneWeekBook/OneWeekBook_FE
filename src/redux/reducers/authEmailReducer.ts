@@ -14,7 +14,10 @@ const initialState = {
   emailErrorMsg: '',
 };
 
-export default function AuthEmail(state = initialState, action: ActionsTypes) {
+export default function authEmailReducer(
+  state = initialState,
+  action: ActionsTypes,
+) {
   switch (action.type) {
     case AUTH_EMAIL_REQUEST:
       return {
@@ -47,27 +50,27 @@ export default function AuthEmail(state = initialState, action: ActionsTypes) {
   }
 }
 
-export const AuthEmailRequest = (data: { email: string }) => {
+export const authEmailRequest = (data: { email: string }) => {
   return {
     type: AUTH_EMAIL_REQUEST,
     payload: data,
   };
 };
 
-export const AuthEmailSuccess = () => {
+export const authEmailSuccess = () => {
   return {
     type: AUTH_EMAIL_SUCCESS,
   };
 };
 
-export const AuthEmailFail = (error: AxiosError) => {
+export const authEmailFail = (error: AxiosError) => {
   return {
     type: AUTH_EMAIL_FAIL,
     error: error.response,
   };
 };
 
-export const AuthEmailInit = () => {
+export const authEmailInit = () => {
   return {
     type: AUTH_EMAIL_INIT,
   };

@@ -12,7 +12,10 @@ const initialState = {
   categories: [],
 };
 
-export default function SignIn(state = initialState, action: ActionsTypes) {
+export default function categoryReducer(
+  state = initialState,
+  action: ActionsTypes,
+) {
   switch (action.type) {
     case CATEGORY_REQUEST:
       return {
@@ -38,20 +41,20 @@ export default function SignIn(state = initialState, action: ActionsTypes) {
   }
 }
 
-export const CategoryRequest = () => {
+export const categoryRequest = () => {
   return {
     type: CATEGORY_REQUEST,
   };
 };
 
-export const CategorySuccess = (data: ResponseCategorySuccess) => {
+export const categorySuccess = (data: ResponseCategorySuccess) => {
   return {
     type: CATEGORY_SUCCESS,
     payload: data,
   };
 };
 
-export const CategoryFail = (error: AxiosError) => {
+export const categoryFail = (error: AxiosError) => {
   return {
     type: CATEGORY_FAIL,
     error: error.response,

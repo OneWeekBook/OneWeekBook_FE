@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import theme from 'styles/theme';
-import { SignInInit, SignInRequest } from 'redux/reducers/SignIn';
+import { signInInit, signInRequest } from 'redux/reducers/signInReducer';
 import useInput from 'hooks/useInput';
 import useSignValidate from 'hooks/useSignValidate';
 import { inputFocusHandler } from 'utils/InputFocusHandler';
@@ -24,7 +24,7 @@ function SignInForm() {
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       const user = { email, password };
-      dispatch(SignInRequest(user));
+      dispatch(signInRequest(user));
     },
     [email, password],
   );
@@ -33,7 +33,7 @@ function SignInForm() {
     emailRef.current?.focus();
     return () => {
       setSignInError(false);
-      dispatch(SignInInit());
+      dispatch(signInInit());
     };
   }, []);
 

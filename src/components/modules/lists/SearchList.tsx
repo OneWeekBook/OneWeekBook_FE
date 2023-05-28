@@ -5,8 +5,8 @@ import theme from 'styles/theme';
 import { LibraryAddRequestTypes } from 'types/request';
 import { BookResponseTypes } from 'types/response';
 import { AppStateType } from 'redux/reducers';
-import { LibraryAddRequest } from 'redux/reducers/Library';
-import { searchDone } from 'redux/reducers/Func';
+import { libraryAddRequest } from 'redux/reducers/libraryReducer';
+import { searchDone } from 'redux/reducers/funcReducer';
 import { showToast } from 'common/Toast';
 import DefaultText from 'components/atoms/texts/DefaultText';
 import LoadingForm from 'components/modules/commons/LoadingForm';
@@ -31,7 +31,7 @@ function SearchList() {
   }, [isSuccess]);
 
   const handleFavoriteClick = ({ ...data }: LibraryAddRequestTypes) => {
-    dispatch(LibraryAddRequest({ ...data }));
+    dispatch(libraryAddRequest({ ...data }));
   };
 
   if (isLoading) return <LoadingForm />;

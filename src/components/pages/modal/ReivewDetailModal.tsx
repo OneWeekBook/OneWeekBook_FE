@@ -6,12 +6,12 @@ import { FavoriteResponseTypes } from 'types/response';
 import { ReviewDetailModalTypes } from 'types/page';
 import { AppStateType } from 'redux/reducers';
 import {
-  FavoriteAddRequest,
-  FavoriteCancelRequest,
-  FavoriteInit,
-  FavoriteRequest,
-} from 'redux/reducers/Favorite';
-import { ReviewInit, ReviewRequest } from 'redux/reducers/Review';
+  favoriteAddRequest,
+  favoriteCancelRequest,
+  favoriteInit,
+  favoriteRequest,
+} from 'redux/reducers/favoriteReducer';
+import { reviewInit, reviewRequest } from 'redux/reducers/reviewReducer';
 import { FAVORITE_IMAGE } from 'constants/image';
 import DetailModal from 'common/DefaultModal';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
@@ -44,18 +44,18 @@ function ReviewDetailModal({
   } = useSelector((state: AppStateType) => state.favorite, shallowEqual);
 
   useEffect(() => {
-    dispatch(FavoriteRequest({ bookId: userReview.id }));
+    dispatch(favoriteRequest({ bookId: userReview.id }));
     return () => {
-      dispatch(FavoriteInit());
+      dispatch(favoriteInit());
     };
   }, []);
 
   useEffect(() => {
     if (favoriteAddErrorStatus === 200 || favoriteCancelErrorStatus === 200) {
-      dispatch(FavoriteRequest({ bookId: userReview.id }));
-      dispatch(ReviewInit());
+      dispatch(favoriteRequest({ bookId: userReview.id }));
+      dispatch(reviewInit());
       dispatch(
-        ReviewRequest({
+        reviewRequest({
           isbn: bookIsbn,
           start: reviewIndex,
           sortby: reviewSort,
@@ -104,16 +104,16 @@ function ReviewDetailModal({
 
   const handleFavoriteClick = (state: number, isSelected: boolean) => {
     if (compareFavoriteUser() && !isSelected) {
-      dispatch(FavoriteCancelRequest({ bookId: userReview.id }));
+      dispatch(favoriteCancelRequest({ bookId: userReview.id }));
       setTimeout(() => {
-        dispatch(FavoriteAddRequest({ bookId: userReview.id, state }));
+        dispatch(favoriteAddRequest({ bookId: userReview.id, state }));
       }, 10);
     } else if (compareFavoriteUser() && isSelected) {
       if (state === 0) setUsefulToggle(false);
       else if (state === 1) setInterestToggle(false);
-      dispatch(FavoriteCancelRequest({ bookId: userReview.id }));
+      dispatch(favoriteCancelRequest({ bookId: userReview.id }));
     } else if (!compareFavoriteUser()) {
-      dispatch(FavoriteAddRequest({ bookId: userReview.id, state }));
+      dispatch(favoriteAddRequest({ bookId: userReview.id, state }));
     }
   };
 

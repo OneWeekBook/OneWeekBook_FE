@@ -2,7 +2,7 @@ import { useCallback, useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { ParagraphInputFormType } from 'types/module';
-import { ParagraphAddRequest } from 'redux/reducers/Paragraph';
+import { paragraphAddRequest } from 'redux/reducers/paragraphReducer';
 import useInput from 'hooks/useInput';
 import { showToast } from 'common/Toast';
 import { FUNC_IMAGE } from 'constants/image';
@@ -21,7 +21,7 @@ function ParagraphInputForm({ bookId }: ParagraphInputFormType) {
   const handleParagraphAdd = useCallback(() => {
     if (paragraph) {
       const data = { bookId, paragraph };
-      dispatch(ParagraphAddRequest(data));
+      dispatch(paragraphAddRequest(data));
       setParagraph('');
     } else {
       showToast('warning', '문구를 입력해주세요');

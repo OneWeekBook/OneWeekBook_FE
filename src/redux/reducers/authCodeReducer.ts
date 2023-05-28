@@ -14,7 +14,10 @@ const initialState = {
   codeErrorMsg: '',
 };
 
-export default function AuthCode(state = initialState, action: ActionsTypes) {
+export default function authCodeReducer(
+  state = initialState,
+  action: ActionsTypes,
+) {
   switch (action.type) {
     case AUTH_CODE_REQUEST:
       return {
@@ -47,27 +50,27 @@ export default function AuthCode(state = initialState, action: ActionsTypes) {
   }
 }
 
-export const AuthCodeRequest = (data: { code: string }) => {
+export const authCodeRequest = (data: { code: string }) => {
   return {
     type: AUTH_CODE_REQUEST,
     payload: data,
   };
 };
 
-export const AuthCodeSuccess = () => {
+export const authCodeSuccess = () => {
   return {
     type: AUTH_CODE_SUCCESS,
   };
 };
 
-export const AuthCodeFail = (error: AxiosError) => {
+export const authCodeFail = (error: AxiosError) => {
   return {
     type: AUTH_CODE_FAIL,
     error: error.response,
   };
 };
 
-export const AuthCodeInit = () => {
+export const authCodeInit = () => {
   return {
     type: AUTH_CODE_INIT,
   };

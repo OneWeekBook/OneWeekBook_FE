@@ -5,11 +5,11 @@ import theme from 'styles/theme';
 import { WriteReviewTypes } from 'types/page';
 import { AppStateType } from 'redux/reducers';
 import {
-  UserReviewAddRequest,
-  UserReviewDeleteRequest,
-  UserReviewInit,
-  UserReviewModifyRequest,
-} from 'redux/reducers/UserReview';
+  userReviewAddRequest,
+  userReviewDeleteRequest,
+  userReviewInit,
+  userReviewModifyRequest,
+} from 'redux/reducers/userReviewReducer';
 import { setReadDateFormat } from 'utils/dateFormatHandler';
 import { showToast } from 'common/Toast';
 import WriteModal from 'common/DefaultModal';
@@ -35,7 +35,7 @@ function WriteReviewModal({ bookData, handleToggle }: WriteReviewTypes) {
     if (review === '') {
       showToast('warning', '리뷰를 남겨주세요...');
     } else {
-      dispatch(UserReviewAddRequest({ bookId, review, rating: recommend }));
+      dispatch(userReviewAddRequest({ bookId, review, rating: recommend }));
     }
   };
 
@@ -43,12 +43,12 @@ function WriteReviewModal({ bookData, handleToggle }: WriteReviewTypes) {
     if (review === '') {
       showToast('warning', '리뷰를 남겨주세요...');
     } else {
-      dispatch(UserReviewModifyRequest({ review, rating: recommend }));
+      dispatch(userReviewModifyRequest({ review, rating: recommend }));
     }
   };
 
   const deleteReviewClick = () => {
-    dispatch(UserReviewDeleteRequest());
+    dispatch(userReviewDeleteRequest());
     handleToggle();
   };
 
@@ -60,7 +60,7 @@ function WriteReviewModal({ bookData, handleToggle }: WriteReviewTypes) {
     return () => {
       setRecommend(5);
       setReview('');
-      dispatch(UserReviewInit());
+      dispatch(userReviewInit());
     };
   }, [reviewItem]);
 

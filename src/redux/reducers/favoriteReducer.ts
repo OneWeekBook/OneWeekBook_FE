@@ -29,7 +29,10 @@ const initialState = {
   favoriteData: [],
 };
 
-export default function SignIn(state = initialState, action: ActionsTypes) {
+export default function favoriteReducer(
+  state = initialState,
+  action: ActionsTypes,
+) {
   switch (action.type) {
     case FAVORITE_REQUEST:
       return {
@@ -102,68 +105,68 @@ export default function SignIn(state = initialState, action: ActionsTypes) {
   }
 }
 
-export const FavoriteRequest = (data: { bookId: number }) => {
+export const favoriteRequest = (data: { bookId: number }) => {
   return {
     type: FAVORITE_REQUEST,
     payload: data,
   };
 };
 
-export const FavoriteSuccess = (data: ResponseFavoriteSuccess) => {
+export const favoriteSuccess = (data: ResponseFavoriteSuccess) => {
   return {
     type: FAVORITE_SUCCESS,
     payload: data,
   };
 };
 
-export const FavoriteFail = (error: AxiosError) => {
+export const favoriteFail = (error: AxiosError) => {
   return {
     type: FAVORITE_FAIL,
     error: error.response,
   };
 };
 
-export const FavoriteAddRequest = (data: { bookId: number; state: number }) => {
+export const favoriteAddRequest = (data: { bookId: number; state: number }) => {
   return {
     type: FAVORITE_ADD_REQUEST,
     payload: data,
   };
 };
 
-export const FavoriteAddSuccess = () => {
+export const favoriteAddSuccess = () => {
   return {
     type: FAVORITE_ADD_SUCCESS,
   };
 };
 
-export const FavoriteAddFail = (error: AxiosError) => {
+export const favoriteAddFail = (error: AxiosError) => {
   return {
     type: FAVORITE_ADD_FAIL,
     error: error.response,
   };
 };
 
-export const FavoriteCancelRequest = (data: { bookId: number }) => {
+export const favoriteCancelRequest = (data: { bookId: number }) => {
   return {
     type: FAVORITE_CANCEL_REQUEST,
     payload: data,
   };
 };
 
-export const FavoriteCancelSuccess = () => {
+export const favoriteCancelSuccess = () => {
   return {
     type: FAVORITE_CANCEL_SUCCESS,
   };
 };
 
-export const FavoriteCancelFail = (error: AxiosError) => {
+export const favoriteCancelFail = (error: AxiosError) => {
   return {
     type: FAVORITE_CANCEL_FAIL,
     error: error.response,
   };
 };
 
-export const FavoriteInit = () => {
+export const favoriteInit = () => {
   return {
     type: FAVORITE_INIT,
   };

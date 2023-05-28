@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import theme from 'styles/theme';
 import { LibraryResponseTypes } from 'types/response';
 import { LibraryBookCardTypes } from 'types/module';
-import { ParagraphInitRequest } from 'redux/reducers/Paragraph';
-import { UserReviewRequest } from 'redux/reducers/UserReview';
-import { LibraryDeleteRequest } from 'redux/reducers/Library';
+import { paragraphInitRequest } from 'redux/reducers/paragraphReducer';
+import { userReviewRequest } from 'redux/reducers/userReviewReducer';
+import { libraryDeleteRequest } from 'redux/reducers/libraryReducer';
 import useToggle from 'hooks/useToggle';
 import { setReadDateFormat } from 'utils/dateFormatHandler';
 import { FUNC_IMAGE } from 'constants/image';
@@ -45,7 +45,7 @@ function LibraryBookCard({
     event.preventDefault();
     handleCommentToggle();
     onClick(id);
-    dispatch(ParagraphInitRequest({ bookId: id }));
+    dispatch(paragraphInitRequest({ bookId: id }));
   };
 
   const handleReviewClick = (
@@ -54,11 +54,11 @@ function LibraryBookCard({
     event.preventDefault();
     handleReviewToggle();
     onClick(id);
-    dispatch(UserReviewRequest({ bookId: id }));
+    dispatch(userReviewRequest({ bookId: id }));
   };
 
   const handleDeleteItem = () => {
-    dispatch(LibraryDeleteRequest({ id }));
+    dispatch(libraryDeleteRequest({ id }));
     handleDeleteToggle();
   };
 

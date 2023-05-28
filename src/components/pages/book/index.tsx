@@ -4,10 +4,10 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import theme from 'styles/theme';
 import { AppStateType } from 'redux/reducers';
-import { ReviewInit, ReviewRequest } from 'redux/reducers/Review';
+import { reviewInit, reviewRequest } from 'redux/reducers/reviewReducer';
 import useToggle from 'hooks/useToggle';
 import useRouter from 'hooks/useRouter';
-import { reviewInit } from 'constants/content';
+import { reviewItemInit } from 'constants/content';
 import { PATH_URL } from 'constants/path';
 import Container from 'common/Container';
 import Pagination from 'common/Pagination';
@@ -24,7 +24,7 @@ function Index() {
   const isbn = Number(location.pathname.split('/')[2]);
   const [detailToggle, handleDetailToggle] = useToggle(false);
   const [curIndex, setCurIndex] = useState<number>(0);
-  const [curReview, setCurReview] = useState(reviewInit);
+  const [curReview, setCurReview] = useState(reviewItemInit);
   const { bookData, userReviews } = useSelector(
     (state: AppStateType) => state.review,
     shallowEqual,
@@ -42,7 +42,7 @@ function Index() {
 
   const handleFetchReivew = useCallback(() => {
     dispatch(
-      ReviewRequest({
+      reviewRequest({
         isbn,
         start: curIndex * 10,
         sortby: sort,
@@ -53,7 +53,7 @@ function Index() {
   useEffect(() => {
     handleFetchReivew();
     return () => {
-      dispatch(ReviewInit());
+      dispatch(reviewInit());
     };
   }, [sort, curIndex]);
 

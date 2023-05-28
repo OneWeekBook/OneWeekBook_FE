@@ -3,10 +3,10 @@ import instance from 'api/axios';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { API_URL } from 'constants/path';
 import {
-  FavoriteAddFail,
-  FavoriteAddSuccess,
+  favoriteAddFail,
+  favoriteAddSuccess,
   FAVORITE_ADD_REQUEST,
-} from 'redux/reducers/Favorite';
+} from 'redux/reducers/favoriteReducer';
 
 function FavoriteAddAPI(params: {
   bookId: number;
@@ -27,9 +27,9 @@ function* fetchFavoiteAddSaga(action: {
   try {
     const user = yield select((state) => state.authUser.user);
     yield call(FavoriteAddAPI, { userId: user.id, ...action.payload });
-    yield put(FavoriteAddSuccess());
+    yield put(favoriteAddSuccess());
   } catch (error) {
-    if (axios.isAxiosError(error)) yield put(FavoriteAddFail(error));
+    if (axios.isAxiosError(error)) yield put(favoriteAddFail(error));
   }
 }
 

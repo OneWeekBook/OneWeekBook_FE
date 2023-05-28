@@ -1,11 +1,11 @@
 import { AxiosError } from 'axios';
 import { ActionsTypes } from 'types/request';
 
-export const CHANGE_NICK_REQUEST = 'CHANGE_NICK_REQUEST';
-export const CHANGE_NICK_SUCCESS = 'CHANGE_NICK_SUCCESS';
-export const CHANGE_NICK_FAIL = 'CHANGE_NICK_FAIL';
+export const CHANGE_PASSWORD_REQUEST = 'CHANGE_PASSWORD_REQUEST';
+export const CHANGE_PASSWORD_SUCCESS = 'CHANGE_PASSWORD_SUCCESS';
+export const CHANGE_PASSWORD_FAIL = 'CHANGE_PASSWORD_FAIL';
 
-export const CHANGE_NICK_INIT = 'CHANGE_NICK_INIT';
+export const CHANGE_PASSWORD_INIT = 'CHANGE_PASSWORD_INIT';
 
 const initialState = {
   isLoading: false,
@@ -14,9 +14,12 @@ const initialState = {
   changeErrorMsg: '',
 };
 
-export default function SignIn(state = initialState, action: ActionsTypes) {
+export default function changePasswordReducer(
+  state = initialState,
+  action: ActionsTypes,
+) {
   switch (action.type) {
-    case CHANGE_NICK_REQUEST:
+    case CHANGE_PASSWORD_REQUEST:
       return {
         ...state,
         isLoading: true,
@@ -24,7 +27,7 @@ export default function SignIn(state = initialState, action: ActionsTypes) {
         changeErrorStatus: null,
         changeErrorMsg: '',
       };
-    case CHANGE_NICK_SUCCESS:
+    case CHANGE_PASSWORD_SUCCESS:
       return {
         ...state,
         isLoading: false,
@@ -32,7 +35,7 @@ export default function SignIn(state = initialState, action: ActionsTypes) {
         changeErrorStatus: 200,
         changeErrorMsg: '',
       };
-    case CHANGE_NICK_FAIL:
+    case CHANGE_PASSWORD_FAIL:
       return {
         ...state,
         isLoading: false,
@@ -40,35 +43,35 @@ export default function SignIn(state = initialState, action: ActionsTypes) {
         changeErrorStatus: action.error.status,
         changeErrorMsg: action.error.data.message,
       };
-    case CHANGE_NICK_INIT:
+    case CHANGE_PASSWORD_INIT:
       return initialState;
     default:
       return state;
   }
 }
 
-export const ChangeNickRequest = (data: { nick: string }) => {
+export const changePasswordRequest = (data: { password: string }) => {
   return {
-    type: CHANGE_NICK_REQUEST,
+    type: CHANGE_PASSWORD_REQUEST,
     payload: data,
   };
 };
 
-export const ChangeNickSuccess = () => {
+export const changePasswordSuccess = () => {
   return {
-    type: CHANGE_NICK_SUCCESS,
+    type: CHANGE_PASSWORD_SUCCESS,
   };
 };
 
-export const ChangeNickFail = (error: AxiosError) => {
+export const changePasswordFail = (error: AxiosError) => {
   return {
-    type: CHANGE_NICK_FAIL,
+    type: CHANGE_PASSWORD_FAIL,
     error: error.response,
   };
 };
 
-export const ChangeNickInit = () => {
+export const changePasswordInit = () => {
   return {
-    type: CHANGE_NICK_INIT,
+    type: CHANGE_PASSWORD_INIT,
   };
 };

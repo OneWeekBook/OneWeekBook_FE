@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { SidebarTypes } from 'types/common';
-import { AuthInit } from 'redux/reducers/AuthUser';
+import { authInit } from 'redux/reducers/authUserReducer';
 import useToggle from 'hooks/useToggle';
 import useRouter from 'hooks/useRouter';
 import useAuthLink from 'hooks/useAuthLink';
@@ -30,7 +30,7 @@ function Sidebar({ toggle, handleToggle }: SidebarTypes) {
 
   const logoutClick = () => {
     removeAccessTokenFromSessionStorage();
-    dispatch(AuthInit());
+    dispatch(authInit());
     showToast('info', '로그아웃 되었습니다.');
     routeTo(PATH_URL.MAIN, true);
     handleToggle();

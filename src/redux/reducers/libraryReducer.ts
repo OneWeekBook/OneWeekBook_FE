@@ -36,7 +36,7 @@ const initialState = {
   libraryBookList: Array<LibraryResponseTypes>(),
 };
 
-export default function ChangePassword(
+export default function libraryReducer(
   state = initialState,
   action: ActionsTypes,
 ) {
@@ -121,48 +121,48 @@ export default function ChangePassword(
   }
 }
 
-export const LibraryRequest = (data: { progress: number }) => {
+export const libraryRequest = (data: { progress: number }) => {
   return {
     type: LIBRARY_REQUEST,
     payload: data,
   };
 };
 
-export const LibrarySuccess = (data: LibraryResponseTypes[]) => {
+export const librarySuccess = (data: LibraryResponseTypes[]) => {
   return {
     type: LIBRARY_SUCCESS,
     payload: data,
   };
 };
 
-export const LibraryFail = (error: AxiosError) => {
+export const libraryFail = (error: AxiosError) => {
   return {
     type: LIBRARY_FAIL,
     error: error.response,
   };
 };
 
-export const LibraryAddRequest = (data: LibraryAddRequestTypes) => {
+export const libraryAddRequest = (data: LibraryAddRequestTypes) => {
   return {
     type: LIBRARY_ADD_REQUEST,
     payload: data,
   };
 };
 
-export const LibraryAddSuccess = () => {
+export const libraryAddSuccess = () => {
   return {
     type: LIBRARY_ADD_SUCCESS,
   };
 };
 
-export const LibraryAddFail = (error: AxiosError) => {
+export const libraryAddFail = (error: AxiosError) => {
   return {
     type: LIBRARY_ADD_FAIL,
     error: error.response,
   };
 };
 
-export const LibraryModifyRequest = (data: {
+export const libraryModifyRequest = (data: {
   progress: number;
   isbn: string;
 }) => {
@@ -172,40 +172,40 @@ export const LibraryModifyRequest = (data: {
   };
 };
 
-export const LibraryModifySuccess = () => {
+export const libraryModifySuccess = () => {
   return {
     type: LIBRARY_MODIFY_SUCCESS,
   };
 };
 
-export const LibraryModifyFail = (error: AxiosError) => {
+export const libraryModifyFail = (error: AxiosError) => {
   return {
     type: LIBRARY_MODIFY_FAIL,
     error: error.response,
   };
 };
 
-export const LibraryDeleteRequest = (data: DeleteRequestType) => {
+export const libraryDeleteRequest = (data: DeleteRequestType) => {
   return {
     type: LIBRARY_DELETE_REQUEST,
     payload: data,
   };
 };
 
-export const LibraryDeleteSuccess = () => {
+export const libraryDeleteSuccess = () => {
   return {
     type: LIBRARY_DELETE_SUCCESS,
   };
 };
 
-export const LibraryDeleteFail = (error: AxiosError) => {
+export const libraryDeleteFail = (error: AxiosError) => {
   return {
     type: LIBRARY_DELETE_FAIL,
     error: error.response,
   };
 };
 
-export const LibraryInit = () => {
+export const libraryInit = () => {
   return {
     type: LIBRARY_INIT,
   };

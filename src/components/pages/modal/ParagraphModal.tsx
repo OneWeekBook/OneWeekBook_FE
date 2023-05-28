@@ -6,10 +6,10 @@ import { ParagraphModalTypes } from 'types/page';
 import { ParagraphResponseTypes } from 'types/response';
 import { AppStateType } from 'redux/reducers';
 import {
-  ParagraphDeleteRequest,
-  ParagraphInit,
-  ParagraphRequest,
-} from 'redux/reducers/Paragraph';
+  paragraphDeleteRequest,
+  paragraphInit,
+  paragraphRequest,
+} from 'redux/reducers/paragraphReducer';
 import { setReadDateFormat } from 'utils/dateFormatHandler';
 import WriteModal from 'common/DefaultModal';
 import DefaultText from 'components/atoms/texts/DefaultText';
@@ -30,18 +30,18 @@ function ParagraphModal({
 
   useEffect(() => {
     if (isAddSuccess || isDeleteSuccess) {
-      dispatch(ParagraphRequest({ bookId: bookData.id }));
+      dispatch(paragraphRequest({ bookId: bookData.id }));
     }
   }, [isAddSuccess, isDeleteSuccess]);
 
   useEffect(() => {
     return () => {
-      dispatch(ParagraphInit());
+      dispatch(paragraphInit());
     };
   }, []);
 
   const handleParagraphDelete = useCallback((id: number) => {
-    dispatch(ParagraphDeleteRequest({ id }));
+    dispatch(paragraphDeleteRequest({ id }));
   }, []);
 
   return (

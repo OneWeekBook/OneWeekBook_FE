@@ -3,8 +3,16 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { AppStateType } from 'redux/reducers';
 import styled from 'styled-components';
 import { LibraryBookTypes } from 'types/page';
-import { navDone, navInit, navRead, userToggle } from 'redux/reducers/Func';
-import { LibraryModifyRequest, LibraryRequest } from 'redux/reducers/Library';
+import {
+  navDone,
+  navInit,
+  navRead,
+  userToggle,
+} from 'redux/reducers/funcReducer';
+import {
+  libraryModifyRequest,
+  libraryRequest,
+} from 'redux/reducers/libraryReducer';
 import useToggle from 'hooks/useToggle';
 import { bookInit } from 'constants/content';
 import { FUNC_IMAGE } from 'constants/image';
@@ -41,19 +49,19 @@ function Index() {
   const { initSuccess } = useSelector((state: AppStateType) => state.paragraph);
 
   const handleMoveReadClick = useCallback(async () => {
-    await dispatch(LibraryModifyRequest({ progress: 1, isbn: bookData.isbn }));
+    await dispatch(libraryModifyRequest({ progress: 1, isbn: bookData.isbn }));
     handleFavoriteToggle();
     dispatch(navRead());
   }, [bookData]);
 
   const handleMoveDoneClick = useCallback(async () => {
-    await dispatch(LibraryModifyRequest({ progress: 2, isbn: bookData.isbn }));
+    await dispatch(libraryModifyRequest({ progress: 2, isbn: bookData.isbn }));
     handleCommentToggle();
     dispatch(navDone());
   }, [bookData]);
 
   useEffect(() => {
-    if (isDeleteSuccess) dispatch(LibraryRequest({ progress: navId }));
+    if (isDeleteSuccess) dispatch(libraryRequest({ progress: navId }));
   }, [isDeleteSuccess]);
 
   useEffect(() => {

@@ -3,10 +3,10 @@ import instance from 'api/axios';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { API_URL } from 'constants/path';
 import {
-  ChangePasswordFail,
-  ChangePasswordSuccess,
+  changePasswordFail,
+  changePasswordSuccess,
   CHANGE_PASSWORD_REQUEST,
-} from 'redux/reducers/ChangePassword';
+} from 'redux/reducers/changePasswordReducer';
 
 function ChangePasswordAPI(data: { email: string; password: string }) {
   return instance.put(API_URL.USER_CHANGE_PASSWORD, data);
@@ -19,9 +19,9 @@ function* fetchChangePasswordSaga(action: {
   try {
     const user = yield select((state) => state.authUser.user);
     yield call(ChangePasswordAPI, { email: user.email, ...action.payload });
-    yield put(ChangePasswordSuccess());
+    yield put(changePasswordSuccess());
   } catch (error) {
-    if (axios.isAxiosError(error)) yield put(ChangePasswordFail(error));
+    if (axios.isAxiosError(error)) yield put(changePasswordFail(error));
   }
 }
 

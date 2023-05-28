@@ -3,10 +3,10 @@ import instance from 'api/axios';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { API_URL } from 'constants/path';
 import {
-  LibraryFail,
-  LibrarySuccess,
+  libraryFail,
+  librarySuccess,
   LIBRARY_REQUEST,
-} from 'redux/reducers/Library';
+} from 'redux/reducers/libraryReducer';
 
 export function LibraryAPI(params: { userId: number; progress: number }) {
   return instance.get(
@@ -24,9 +24,9 @@ export function* fetchLibrarySaga(action: {
       userId: user.id,
       ...action.payload,
     });
-    yield put(LibrarySuccess(result.data.myList));
+    yield put(librarySuccess(result.data.myList));
   } catch (error) {
-    if (axios.isAxiosError(error)) yield put(LibraryFail(error));
+    if (axios.isAxiosError(error)) yield put(libraryFail(error));
   }
 }
 

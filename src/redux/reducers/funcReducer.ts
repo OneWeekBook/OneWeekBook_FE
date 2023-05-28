@@ -14,7 +14,10 @@ const initialState = {
   search: false,
 };
 
-export default function FuncToggle(state = initialState, action: ActionsTypes) {
+export default function funcReducer(
+  state = initialState,
+  action: ActionsTypes,
+) {
   switch (action.type) {
     case USER_TOGGLE:
       return {

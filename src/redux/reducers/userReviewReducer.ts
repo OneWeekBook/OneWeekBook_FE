@@ -32,7 +32,10 @@ const initialState = {
   reviewItem: {},
 };
 
-export default function Review(state = initialState, action: ActionsTypes) {
+export default function userReviewReducer(
+  state = initialState,
+  action: ActionsTypes,
+) {
   switch (action.type) {
     case USER_REVIEW_REQUEST:
       return {
@@ -114,48 +117,48 @@ export default function Review(state = initialState, action: ActionsTypes) {
   }
 }
 
-export const UserReviewRequest = (data: { bookId: number }) => {
+export const userReviewRequest = (data: { bookId: number }) => {
   return {
     type: USER_REVIEW_REQUEST,
     payload: data,
   };
 };
 
-export const UserReviewSuccess = (data: NewReviewResponseTypes) => {
+export const userReviewSuccess = (data: NewReviewResponseTypes) => {
   return {
     type: USER_REVIEW_SUCCESS,
     payload: data,
   };
 };
 
-export const UserReviewFail = (error: AxiosError) => {
+export const userReviewFail = (error: AxiosError) => {
   return {
     type: USER_REVIEW_FAIL,
     error: error.response,
   };
 };
 
-export const UserReviewAddRequest = (data: ReviewAddRequestTypes) => {
+export const userReviewAddRequest = (data: ReviewAddRequestTypes) => {
   return {
     type: USER_REVIEW_ADD_REQUEST,
     payload: data,
   };
 };
 
-export const UserReviewAddSuccess = () => {
+export const userReviewAddSuccess = () => {
   return {
     type: USER_REVIEW_ADD_SUCCESS,
   };
 };
 
-export const UserReviewAddFail = (error: AxiosError) => {
+export const userReviewAddFail = (error: AxiosError) => {
   return {
     type: USER_REVIEW_ADD_FAIL,
     error: error.response,
   };
 };
 
-export const UserReviewModifyRequest = (data: {
+export const userReviewModifyRequest = (data: {
   review: string;
   rating: number;
 }) => {
@@ -165,39 +168,39 @@ export const UserReviewModifyRequest = (data: {
   };
 };
 
-export const UserReviewModifySuccess = () => {
+export const userReviewModifySuccess = () => {
   return {
     type: USER_REVIEW_MODIFY_SUCCESS,
   };
 };
 
-export const UserReviewModifyFail = (error: AxiosError) => {
+export const userReviewModifyFail = (error: AxiosError) => {
   return {
     type: USER_REVIEW_MODIFY_FAIL,
     error: error.response,
   };
 };
 
-export const UserReviewDeleteRequest = () => {
+export const userReviewDeleteRequest = () => {
   return {
     type: USER_REVIEW_DELETE_REQUEST,
   };
 };
 
-export const UserReviewDeleteSuccess = () => {
+export const userReviewDeleteSuccess = () => {
   return {
     type: USER_REVIEW_DELETE_SUCCESS,
   };
 };
 
-export const UserReviewDeleteFail = (error: AxiosError) => {
+export const userReviewDeleteFail = (error: AxiosError) => {
   return {
     type: USER_REVIEW_DELETE_FAIL,
     error: error.response,
   };
 };
 
-export const UserReviewInit = () => {
+export const userReviewInit = () => {
   return {
     type: USER_REVIEW_INIT,
   };

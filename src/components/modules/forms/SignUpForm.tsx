@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import theme from 'styles/theme';
-import { SignUpInit, SignUpRequest } from 'redux/reducers/SignUp';
+import { signUpInit, signUpRequest } from 'redux/reducers/signUpReducer';
 import { SignUpTypes } from 'types/module';
 import useInput from 'hooks/useInput';
 import { inputFocusHandler } from 'utils/InputFocusHandler';
@@ -61,14 +61,14 @@ function SignUpForm({ email, authDone, setAuthDone }: SignUpTypes) {
       setSignUpError(false);
       setAuthDone(false);
       setRegisterDone(true);
-      dispatch(SignUpInit());
+      dispatch(signUpInit());
     };
   }, []);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = { email, username, nick, password, confirmPassword };
-    dispatch(SignUpRequest(formData));
+    dispatch(signUpRequest(formData));
   };
 
   return (

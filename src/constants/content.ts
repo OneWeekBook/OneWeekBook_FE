@@ -70,7 +70,7 @@ export const menuItems = [
   },
 ];
 
-export const reviewInit = {
+export const reviewItemInit = {
   id: -1,
   likeCount: 0,
   nick: '',

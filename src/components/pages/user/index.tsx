@@ -3,7 +3,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import theme from 'styles/theme';
 import { AppStateType } from 'redux/reducers';
-import { userToggle } from 'redux/reducers/Func';
+import { userToggle } from 'redux/reducers/funcReducer';
 import useToggle from 'hooks/useToggle';
 import Container from 'common/Container';
 import DefaultText from 'components/atoms/texts/DefaultText';

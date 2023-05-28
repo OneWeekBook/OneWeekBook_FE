@@ -6,8 +6,8 @@ import { BookResponseTypes } from 'types/response';
 import { LibraryAddRequestTypes } from 'types/request';
 import { BooksListType } from 'types/module';
 import { AppStateType } from 'redux/reducers';
-import { LibraryAddRequest } from 'redux/reducers/Library';
-import { SearchInit, SearchRequest } from 'redux/reducers/Search';
+import { libraryAddRequest } from 'redux/reducers/libraryReducer';
+import { searchInit, searchRequest } from 'redux/reducers/searchReducer';
 import { showToast } from 'common/Toast';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
 import SearchBookCard from 'components/modules/cards/SearchBookCard';
@@ -48,12 +48,12 @@ function BooksList({ searchArr }: BooksListType) {
       options.title = searchArr[0].toString();
     }
 
-    dispatch(SearchRequest({ ...options }));
+    dispatch(searchRequest({ ...options }));
     setStartIdx(startIdx + 12);
   }, [startIdx]);
 
   const handleFavoriteClick = ({ ...data }: LibraryAddRequestTypes) => {
-    dispatch(LibraryAddRequest({ ...data }));
+    dispatch(libraryAddRequest({ ...data }));
   };
 
   const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
@@ -66,7 +66,7 @@ function BooksList({ searchArr }: BooksListType) {
   useEffect(() => {
     if (!isLoading) handleFetch();
     return () => {
-      dispatch(SearchInit());
+      dispatch(searchInit());
     };
   }, []);
 

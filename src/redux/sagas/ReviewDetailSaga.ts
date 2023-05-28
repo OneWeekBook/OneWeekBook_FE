@@ -4,10 +4,10 @@ import { BookRequestTypes } from 'types/request';
 import { call, put, throttle } from 'redux-saga/effects';
 import { API_URL } from 'constants/path';
 import {
-  ReviewFail,
-  ReviewSuccess,
+  reviewFail,
+  reviewSuccess,
   REVIEW_REQUEST,
-} from 'redux/reducers/Review';
+} from 'redux/reducers/reviewReducer';
 
 function ReviewDetailAPI(params: BookRequestTypes) {
   return instance.get(
@@ -21,9 +21,9 @@ function* fetchReviewDetailSaga(action: {
 }): object {
   try {
     const result = yield call(ReviewDetailAPI, action.payload);
-    yield put(ReviewSuccess(result.data));
+    yield put(reviewSuccess(result.data));
   } catch (error) {
-    if (axios.isAxiosError(error)) yield put(ReviewFail(error));
+    if (axios.isAxiosError(error)) yield put(reviewFail(error));
   }
 }
 

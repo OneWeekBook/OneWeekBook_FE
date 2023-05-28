@@ -31,7 +31,10 @@ const initialState = {
   bookData: {},
 };
 
-export default function Review(state = initialState, action: ActionsTypes) {
+export default function reviewReducer(
+  state = initialState,
+  action: ActionsTypes,
+) {
   switch (action.type) {
     case REVIEWS_REQUEST:
       return {
@@ -87,49 +90,49 @@ export default function Review(state = initialState, action: ActionsTypes) {
   }
 }
 
-export const ReviewsRequest = (data: ReviewRequestTypes) => {
+export const reviewsRequest = (data: ReviewRequestTypes) => {
   return {
     type: REVIEWS_REQUEST,
     payload: data,
   };
 };
 
-export const ReviewsSuccess = (data: ResponseReviewSuccess) => {
+export const reviewsSuccess = (data: ResponseReviewSuccess) => {
   return {
     type: REVIEWS_SUCCESS,
     payload: data,
   };
 };
 
-export const ReviewsFail = (error: AxiosError) => {
+export const reviewsFail = (error: AxiosError) => {
   return {
     type: REVIEWS_FAIL,
     error: error.response,
   };
 };
 
-export const ReviewRequest = (data: BookRequestTypes) => {
+export const reviewRequest = (data: BookRequestTypes) => {
   return {
     type: REVIEW_REQUEST,
     payload: data,
   };
 };
 
-export const ReviewSuccess = (data: ResponseDetailSuccess) => {
+export const reviewSuccess = (data: ResponseDetailSuccess) => {
   return {
     type: REVIEW_SUCCESS,
     payload: data,
   };
 };
 
-export const ReviewFail = (error: AxiosError) => {
+export const reviewFail = (error: AxiosError) => {
   return {
     type: REVIEW_FAIL,
     error: error.response,
   };
 };
 
-export const ReviewInit = () => {
+export const reviewInit = () => {
   return {
     type: REVIEW_INIT,
   };
