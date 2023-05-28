@@ -19,3 +19,17 @@ export interface CodeStatusTypes {
   setCodeValidate: React.Dispatch<React.SetStateAction<boolean>>;
   setAuthDone: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
+export interface CompareErrorTypes {
+  passError: boolean;
+  setPassError: React.Dispatch<React.SetStateAction<boolean>>;
+  passCompareError: boolean;
+  setPassCompareError: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface SignUpDataTypes {
+  username: string;
+  nick: string;
+  password: string;
+  confirmPassword: string;
+}
