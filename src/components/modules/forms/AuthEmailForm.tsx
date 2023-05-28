@@ -8,8 +8,8 @@ import { AuthCodeInit, AuthCodeRequest } from 'redux/reducers/AuthCode';
 import { AuthMailTypes } from 'types/module';
 import useInput from 'hooks/useInput';
 import useAuthTimer from 'hooks/useAuthTimer';
+import { codeErrorHandler, emailErrorHandler } from 'utils/authErrorHandler';
 import { validateCheckHandler } from 'utils/validateCheckHandler';
-import { authErrorHandler } from 'utils/authErrorHandler';
 import DefaultText from 'components/atoms/texts/DefaultText';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import BorderInput from 'components/atoms/inputs/BorderInput';
@@ -30,7 +30,6 @@ function AuthEmailForm({
   const [codeValidate, setCodeValidate] = useState<boolean>(false);
   const [toggle, setToggle] = useState<boolean>(false);
   const { emailDone, setEmailDone, minutes, seconds } = useAuthTimer();
-  const { handleEmailCheck, handleCodeCheck } = authErrorHandler();
 
   const { emailErrorStatus, emailErrorMsg } = useSelector(
     (state: AppStateType) => state.authEmail,
@@ -58,8 +57,8 @@ function AuthEmailForm({
   }, [email, code]);
 
   useEffect(() => {
-    handleEmailCheck(emailErrorStatus, { setEmailDone, setToggle });
-    handleCodeCheck(codeErrorStatus, {
+    emailErrorHandler(emailErrorStatus, { setEmailDone, setToggle });
+    codeErrorHandler(codeErrorStatus, {
       email,
       setRegisterEmail,
       setCodeValidate,
