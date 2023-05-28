@@ -1,23 +1,14 @@
-import { useEffect, useState } from 'react';
+import useTopScroll from 'hooks/useTopScroll';
 import styled from 'styled-components';
 
 function TopButton() {
-  const [scrollHeight, setScrollHeight] = useState(0);
-  const onScrollTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  useEffect(() => {
-    window.addEventListener('scroll', () => {
-      setScrollHeight(window.scrollY);
-    });
-  }, [scrollHeight]);
+  const { isShowButton, handleTopScroll } = useTopScroll();
 
   return (
     <TopButtonAtom
       type="button"
-      onClick={onScrollTop}
-      scroll={scrollHeight > 500}
+      onClick={handleTopScroll}
+      scroll={isShowButton}
     >
       TOP
     </TopButtonAtom>

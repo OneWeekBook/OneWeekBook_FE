@@ -1,12 +1,25 @@
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 export default function useTopScroll() {
-  const { pathname } = useLocation();
+  const [isShowButton, setIsShowButton] = useState(false);
+
+  const handleTopScroll = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    const handleShowButton = () => {
+      if (window.scrollY > 500) {
+        setIsShowButton(true);
+        return;
+      }
+      setIsShowButton(false);
+    };
+    window.addEventListener('scroll', handleShowButton);
+    return () => {
+      window.removeEventListener('scroll', handleShowButton);
+    };
+  }, []);
 
-  return null;
+  return { isShowButton, handleTopScroll };
 }

@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
 import { AuthUserRequest } from 'redux/reducers/AuthUser';
 import useToggle from 'hooks/useToggle';
-import TopScroll from 'hooks/useTopScroll';
 import { PATH_URL } from 'constants/path';
 import DefaultLink from 'components/atoms/links/DefaultLink';
 import Footer from './Footer';
@@ -13,7 +12,7 @@ import Header from './Header';
 import Sidebar from './Sidebar';
 
 function Index({ children }: PropsWithChildren) {
-  const location = useLocation();
+  const { pathname } = useLocation();
   const dispatch = useDispatch();
   const [toggle, handleToggle] = useToggle(false);
   const { userToggle } = useSelector((state: AppStateType) => state.func);
@@ -27,11 +26,14 @@ function Index({ children }: PropsWithChildren) {
     if (isSuccess) dispatch(AuthUserRequest());
   }, [isSuccess]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   return (
     <GeneralLayout>
-      <TopScroll />
       {[PATH_URL.SIGN_UP, PATH_URL.SIGN_IN].some((path) =>
-        location.pathname.includes(path),
+        pathname.includes(path),
       ) ? (
         <HeaderWrapper>
           <DefaultLink
