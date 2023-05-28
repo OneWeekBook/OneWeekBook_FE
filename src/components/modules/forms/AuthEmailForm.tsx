@@ -9,7 +9,7 @@ import { AuthMailTypes } from 'types/module';
 import useInput from 'hooks/useInput';
 import useAuthTimer from 'hooks/useAuthTimer';
 import { codeErrorHandler, emailErrorHandler } from 'utils/authErrorHandler';
-import { validateCheckHandler } from 'utils/validateCheckHandler';
+import { authEmailValidateHandler } from 'utils/validateCheckHandler';
 import DefaultText from 'components/atoms/texts/DefaultText';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import BorderInput from 'components/atoms/inputs/BorderInput';
@@ -50,7 +50,7 @@ function AuthEmailForm({
   }, []);
 
   useEffect(() => {
-    validateCheckHandler(
+    authEmailValidateHandler(
       { email, code },
       { setEmailValidate, setCodeValidate },
     );

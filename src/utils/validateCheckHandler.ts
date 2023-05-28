@@ -6,7 +6,7 @@ import {
 } from 'types/util';
 import { codeRegex, emailRegex, passwordRegex } from 'constants/regex';
 
-export const validateCheckHandler = (
+export const authEmailValidateHandler = (
   values: InputDataTypes,
   validateCheck: ValidateCheckTypes,
 ) => {
