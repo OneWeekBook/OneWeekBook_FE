@@ -20,12 +20,12 @@ export function authErrorHandler(): {
     switch (type) {
       case 200:
         status.setRegisterEmail(status.email);
-        status.setCodeReg(false);
+        status.setCodeValidate(false);
         status.setAuthDone(true);
         break;
       case 400:
       case 408:
-        status.setCodeReg(true);
+        status.setCodeValidate(true);
         status.setAuthDone(false);
         break;
       default:

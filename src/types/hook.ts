@@ -8,7 +8,7 @@ export interface CompareErrorTypes {
 export interface CodeStatusTypes {
   email: string;
   setRegisterEmail: React.Dispatch<React.SetStateAction<string>>;
-  setCodeReg: React.Dispatch<React.SetStateAction<boolean>>;
+  setCodeValidate: React.Dispatch<React.SetStateAction<boolean>>;
   setAuthDone: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -22,16 +22,6 @@ export interface IntersectionObserverTypes {
   rootMargin?: string;
   threshold?: number;
   onIntersect: IntersectionObserverCallback;
-}
-
-export interface InputDataTypes {
-  email: string;
-  code: string;
-}
-
-export interface RegCheckTypes {
-  setEmailReg: React.Dispatch<React.SetStateAction<boolean>>;
-  setCodeReg: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface SignUpDataTypes {

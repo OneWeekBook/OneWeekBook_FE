@@ -8,7 +8,7 @@ import { AuthCodeInit, AuthCodeRequest } from 'redux/reducers/AuthCode';
 import { AuthMailTypes } from 'types/module';
 import useInput from 'hooks/useInput';
 import useAuthTimer from 'hooks/useAuthTimer';
-import { useRegexCheck } from 'hooks/useRegCheck';
+import { validateCheckHandler } from 'utils/validateCheckHandler';
 import { authErrorHandler } from 'utils/authErrorHandler';
 import DefaultText from 'components/atoms/texts/DefaultText';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
@@ -26,11 +26,10 @@ function AuthEmailForm({
   const codeRef = useRef<HTMLInputElement>(null);
   const [email, changeEmail] = useInput('');
   const [code, changeCode] = useInput('');
-  const [emailReg, setEmailReg] = useState<boolean>(false);
-  const [codeReg, setCodeReg] = useState<boolean>(false);
+  const [emailValidate, setEmailValidate] = useState<boolean>(false);
+  const [codeValidate, setCodeValidate] = useState<boolean>(false);
   const [toggle, setToggle] = useState<boolean>(false);
   const { emailDone, setEmailDone, minutes, seconds } = useAuthTimer();
-  const { handleRegex } = useRegexCheck();
   const { handleEmailCheck, handleCodeCheck } = authErrorHandler();
 
   const { emailErrorStatus, emailErrorMsg } = useSelector(
@@ -52,7 +51,10 @@ function AuthEmailForm({
   }, []);
 
   useEffect(() => {
-    handleRegex({ email, code }, { setEmailReg, setCodeReg });
+    validateCheckHandler(
+      { email, code },
+      { setEmailValidate, setCodeValidate },
+    );
   }, [email, code]);
 
   useEffect(() => {
@@ -60,7 +62,7 @@ function AuthEmailForm({
     handleCodeCheck(codeErrorStatus, {
       email,
       setRegisterEmail,
-      setCodeReg,
+      setCodeValidate,
       setAuthDone,
     });
   }, [emailErrorStatus, codeErrorStatus]);
@@ -120,7 +122,7 @@ function AuthEmailForm({
         <>
           <EmailErrorForm
             email={email}
-            emailReg={emailReg}
+            emailReg={emailValidate}
             emailDone={emailDone}
             emailErrorMsg={emailErrorMsg}
             emailErrorStatus={emailErrorStatus}
@@ -128,7 +130,7 @@ function AuthEmailForm({
           {!emailDone ? (
             <DefaultButton
               handleClick={authEmailClick}
-              disabled={!emailReg}
+              disabled={!emailValidate}
               fontSize={1.8}
               width="full"
               content="이메일 인증하기"
@@ -136,7 +138,7 @@ function AuthEmailForm({
           ) : (
             <DefaultButton
               handleClick={authEmailClick}
-              disabled={!emailReg}
+              disabled={!emailValidate}
               fontSize={1.8}
               width="full"
               content="재발송"
@@ -156,13 +158,13 @@ function AuthEmailForm({
               />
               <CodeErrorForm
                 code={code}
-                codeReg={codeReg}
+                codeReg={codeValidate}
                 codeErrorMsg={codeErrorMsg}
                 codeErrorStatus={codeErrorStatus}
               />
               <DefaultButton
                 handleClick={codeInputClick}
-                disabled={!codeReg}
+                disabled={!codeValidate}
                 fontSize={1.8}
                 width="full"
                 content="인증번호 확인"
