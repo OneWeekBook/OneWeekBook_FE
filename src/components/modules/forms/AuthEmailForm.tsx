@@ -1,16 +1,18 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import theme from 'styles/theme';
 import { AppStateType } from 'redux/reducers';
 import { AuthEmailInit, AuthEmailRequest } from 'redux/reducers/AuthEmail';
 import { AuthCodeInit, AuthCodeRequest } from 'redux/reducers/AuthCode';
 import { AuthMailTypes } from 'types/module';
 import useInput from 'hooks/useInput';
+import useAuthTimer from 'hooks/useAuthTimer';
 import { useRegexCheck } from 'hooks/useRegCheck';
 import { authErrorHandler } from 'utils/authErrorHandler';
+import DefaultText from 'components/atoms/texts/DefaultText';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import BorderInput from 'components/atoms/inputs/BorderInput';
-import TimerText from 'components/atoms/texts/TimerText';
 import EmailErrorForm from './EmailErrorForm';
 import CodeErrorForm from './CodeErrorForm';
 
@@ -24,13 +26,10 @@ function AuthEmailForm({
   const codeRef = useRef<HTMLInputElement>(null);
   const [email, changeEmail] = useInput('');
   const [code, changeCode] = useInput('');
-
   const [emailReg, setEmailReg] = useState<boolean>(false);
   const [codeReg, setCodeReg] = useState<boolean>(false);
-
-  const [emailDone, setEmailDone] = useState<boolean>(false);
   const [toggle, setToggle] = useState<boolean>(false);
-
+  const { emailDone, setEmailDone, minutes, seconds } = useAuthTimer();
   const { handleRegex } = useRegexCheck();
   const { handleEmailCheck, handleCodeCheck } = authErrorHandler();
 
@@ -103,7 +102,17 @@ function AuthEmailForm({
       >
         {!authDone && emailDone && (
           <TimerWrapper>
-            <TimerText emailDone={emailDone} setEmailDone={setEmailDone} />
+            <DefaultText
+              content={`${minutes} :`}
+              fontSize={1.2}
+              fontColor={theme.color.COLOR_RED}
+            />
+            &nbsp;
+            <DefaultText
+              content={String(seconds).padStart(2, '0')}
+              fontSize={1.2}
+              fontColor={theme.color.COLOR_RED}
+            />
           </TimerWrapper>
         )}
       </BorderInput>
@@ -176,7 +185,8 @@ const AuthEmailFormModule = styled.div`
 `;
 
 const TimerWrapper = styled.div`
+  display: flex;
   position: absolute;
-  top: 0;
+  top: 5px;
   right: 0;
 `;

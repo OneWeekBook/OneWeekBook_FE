@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { TimerTextTypes } from 'types/atom';
+import { useEffect, useState } from 'react';
 
-function TimerText({ emailDone, setEmailDone }: TimerTextTypes) {
+function useAuthTimer() {
+  const [emailDone, setEmailDone] = useState<boolean>(false);
   const [seconds, setSeconds] = useState<number>(0);
   const [minutes, setMinutes] = useState<number>(3);
 
@@ -25,18 +24,7 @@ function TimerText({ emailDone, setEmailDone }: TimerTextTypes) {
       return () => clearInterval(countdown);
     }
   }, [emailDone, minutes, seconds]);
-
-  return (
-    <TimerTextAtom>
-      {minutes} : {seconds}
-    </TimerTextAtom>
-  );
+  return { emailDone, setEmailDone, seconds, minutes };
 }
 
-export default TimerText;
-
-const TimerTextAtom = styled.span`
-  color: ${({ theme }) => theme.color.COLOR_RED};
-  font-size: 1.2rem;
-  margin-left: 5px;
-`;
+export default useAuthTimer;
