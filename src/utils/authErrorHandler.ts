@@ -4,7 +4,7 @@ export const emailErrorHandler = (type: number, status: EmailStatusTypes) => {
   switch (type) {
     case 200:
       status.setEmailDone(true);
-      status.setToggle(true);
+      status.setAuthCodeToggle(true);
       break;
     case 400:
     default:

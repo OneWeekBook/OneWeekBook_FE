@@ -28,7 +28,7 @@ function AuthEmailForm({
   const [code, changeCode] = useInput('');
   const [emailValidate, setEmailValidate] = useState<boolean>(false);
   const [codeValidate, setCodeValidate] = useState<boolean>(false);
-  const [toggle, setToggle] = useState<boolean>(false);
+  const [authCodeToggle, setAuthCodeToggle] = useState<boolean>(false);
   const { emailDone, setEmailDone, minutes, seconds } = useAuthTimer();
 
   const { emailErrorStatus, emailErrorMsg } = useSelector(
@@ -57,7 +57,7 @@ function AuthEmailForm({
   }, [email, code]);
 
   useEffect(() => {
-    emailErrorHandler(emailErrorStatus, { setEmailDone, setToggle });
+    emailErrorHandler(emailErrorStatus, { setEmailDone, setAuthCodeToggle });
     codeErrorHandler(codeErrorStatus, {
       email,
       setRegisterEmail,
@@ -67,8 +67,8 @@ function AuthEmailForm({
   }, [emailErrorStatus, codeErrorStatus]);
 
   useEffect(() => {
-    if (toggle) codeRef.current?.focus();
-  }, [toggle]);
+    if (authCodeToggle) codeRef.current?.focus();
+  }, [authCodeToggle]);
 
   const authEmailClick = () => {
     dispatch(AuthEmailRequest({ email }));
@@ -143,7 +143,7 @@ function AuthEmailForm({
               content="재발송"
             />
           )}
-          {toggle && (
+          {authCodeToggle && (
             <>
               <BorderInput
                 type="text"

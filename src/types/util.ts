@@ -10,7 +10,7 @@ export interface ValidateCheckTypes {
 
 export interface EmailStatusTypes {
   setEmailDone: React.Dispatch<React.SetStateAction<boolean>>;
-  setToggle: React.Dispatch<React.SetStateAction<boolean>>;
+  setAuthCodeToggle: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface CodeStatusTypes {
