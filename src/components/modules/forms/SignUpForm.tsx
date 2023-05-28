@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import theme from 'styles/theme';
-import { AppStateType } from 'redux/reducers';
 import { SignUpInit, SignUpRequest } from 'redux/reducers/SignUp';
 import { SignUpTypes } from 'types/module';
 import useInput from 'hooks/useInput';
 import useInputEnter from 'hooks/useInputEnter';
+import useSignValidate from 'hooks/useSignValidate';
 import { passwordValidateHandler } from 'utils/validateCheckHandler';
-import { signUpErrorHandler } from 'utils/signUpErrorHandler';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import BorderInput from 'components/atoms/inputs/BorderInput';
 import DefaultText from 'components/atoms/texts/DefaultText';
@@ -27,11 +26,8 @@ function SignUpForm({ email, authDone, setAuthDone }: SignUpTypes) {
   const [passCompareError, setPassCompareError] = useState<boolean>(false);
   const [signUpError, setSignUpError] = useState<boolean>(false);
   const [registerDone, setRegisterDone] = useState<boolean>(true);
-  const { handleSignUpError } = signUpErrorHandler();
   const { handleInputEnter } = useInputEnter();
-  const signUpErrorStatus = useSelector(
-    (state: AppStateType) => state.signUp.signUpErrorStatus,
-  );
+  const { signUpErrorStatus, signUpErrorHandler } = useSignValidate();
 
   useEffect(() => {
     passwordValidateHandler(
@@ -52,7 +48,7 @@ function SignUpForm({ email, authDone, setAuthDone }: SignUpTypes) {
   }, [username, nick, passError, passCompareError]);
 
   useEffect(() => {
-    handleSignUpError(signUpErrorStatus, setSignUpError);
+    signUpErrorHandler(setSignUpError);
   }, [signUpErrorStatus]);
 
   useEffect(() => {

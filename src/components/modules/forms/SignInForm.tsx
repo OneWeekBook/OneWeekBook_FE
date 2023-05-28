@@ -1,12 +1,11 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import theme from 'styles/theme';
-import { AppStateType } from 'redux/reducers';
 import { SignInInit, SignInRequest } from 'redux/reducers/SignIn';
 import useInput from 'hooks/useInput';
 import useInputEnter from 'hooks/useInputEnter';
-import { signInErrorHandler } from 'utils/signInErrorHandler';
+import useSignValidate from 'hooks/useSignValidate';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import BorderInput from 'components/atoms/inputs/BorderInput';
 import DefaultText from 'components/atoms/texts/DefaultText';
@@ -19,11 +18,8 @@ function SignInForm() {
   const [password, changePassword] = useInput('');
   const [signInError, setSignInError] = useState<boolean>(false);
   const { handleInputEnter } = useInputEnter();
-  const { handleSignInError } = signInErrorHandler();
-  const { signInErrorStatus, signInErrorMsg } = useSelector(
-    (state: AppStateType) => state.signIn,
-    shallowEqual,
-  );
+  const { signInErrorMsg, signInErrorStatus, signInErrorHandler } =
+    useSignValidate();
 
   const handleSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
@@ -44,7 +40,7 @@ function SignInForm() {
 
   useEffect(() => {
     if (email && password) {
-      handleSignInError(signInErrorStatus, setSignInError);
+      signInErrorHandler(setSignInError);
     }
   }, [signInErrorStatus]);
 
