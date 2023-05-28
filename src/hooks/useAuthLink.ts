@@ -1,14 +1,7 @@
 import { getAccessTokenFromSessionStorage } from 'utils/accessTokenHandler';
 import useRouter from './useRouter';
 
-function useAuthLink(): {
-  handleAuthClick: (
-    link: string,
-    compLink: string[],
-    handleModaltoggle: () => void,
-    handletoggle?: () => void,
-  ) => void;
-} {
+function useAuthLink() {
   const { routeTo, currentPath } = useRouter();
 
   const handleAuthClick = (

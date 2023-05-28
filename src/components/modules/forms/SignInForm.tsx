@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import theme from 'styles/theme';
 import { SignInInit, SignInRequest } from 'redux/reducers/SignIn';
 import useInput from 'hooks/useInput';
-import useInputEnter from 'hooks/useInputEnter';
 import useSignValidate from 'hooks/useSignValidate';
+import { inputFocusHandler } from 'utils/InputFocusHandler';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import BorderInput from 'components/atoms/inputs/BorderInput';
 import DefaultText from 'components/atoms/texts/DefaultText';
@@ -17,7 +17,6 @@ function SignInForm() {
   const [email, changeEmail] = useInput('');
   const [password, changePassword] = useInput('');
   const [signInError, setSignInError] = useState<boolean>(false);
-  const { handleInputEnter } = useInputEnter();
   const { signInErrorMsg, signInErrorStatus, signInErrorHandler } =
     useSignValidate();
 
@@ -51,7 +50,7 @@ function SignInForm() {
         placeholder="이메일"
         value={email}
         onChange={changeEmail}
-        onKeyPress={(event) => handleInputEnter(event, passRef)}
+        onKeyPress={(event) => inputFocusHandler(event, passRef)}
         mref={emailRef}
       />
       <BorderInput

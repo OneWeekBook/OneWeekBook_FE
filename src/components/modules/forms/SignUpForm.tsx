@@ -5,7 +5,7 @@ import theme from 'styles/theme';
 import { SignUpInit, SignUpRequest } from 'redux/reducers/SignUp';
 import { SignUpTypes } from 'types/module';
 import useInput from 'hooks/useInput';
-import useInputEnter from 'hooks/useInputEnter';
+import { inputFocusHandler } from 'utils/InputFocusHandler';
 import useSignValidate from 'hooks/useSignValidate';
 import { passwordValidateHandler } from 'utils/validateCheckHandler';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
@@ -26,7 +26,6 @@ function SignUpForm({ email, authDone, setAuthDone }: SignUpTypes) {
   const [passCompareError, setPassCompareError] = useState<boolean>(false);
   const [signUpError, setSignUpError] = useState<boolean>(false);
   const [registerDone, setRegisterDone] = useState<boolean>(true);
-  const { handleInputEnter } = useInputEnter();
   const { signUpErrorStatus, signUpErrorHandler } = useSignValidate();
 
   useEffect(() => {
@@ -79,7 +78,7 @@ function SignUpForm({ email, authDone, setAuthDone }: SignUpTypes) {
         placeholder="비밀번호"
         value={password}
         onChange={changePassword}
-        onKeyPress={(event) => handleInputEnter(event, passConfRef)}
+        onKeyPress={(event) => inputFocusHandler(event, passConfRef)}
         mref={passRef}
       />
       {passError && (
@@ -95,7 +94,7 @@ function SignUpForm({ email, authDone, setAuthDone }: SignUpTypes) {
         placeholder="비밀번호 확인"
         value={confirmPassword}
         onChange={changeConfirmPassword}
-        onKeyPress={(event) => handleInputEnter(event, nameRef)}
+        onKeyPress={(event) => inputFocusHandler(event, nameRef)}
         mref={passConfRef}
       />
       {passCompareError && (
@@ -111,7 +110,7 @@ function SignUpForm({ email, authDone, setAuthDone }: SignUpTypes) {
         placeholder="이름"
         value={username}
         onChange={changeUserName}
-        onKeyPress={(event) => handleInputEnter(event, nickRef)}
+        onKeyPress={(event) => inputFocusHandler(event, nickRef)}
         mref={nameRef}
       />
       <BorderInput
