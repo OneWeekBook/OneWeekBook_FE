@@ -8,7 +8,7 @@ import {
   USER_REVIEW_MODIFY_REQUEST,
 } from 'redux/reducers/UserReview';
 
-function UserReviewModifyAPI(data: {
+function userReviewModifyAPI(data: {
   id: number;
   review: string;
   rating: number;
@@ -23,7 +23,7 @@ function* fetchUserReviewModifySaga(action: {
 }): object {
   try {
     const review = yield select((state) => state.userReview.reviewItem);
-    yield call(UserReviewModifyAPI, { id: review.id, ...action.payload });
+    yield call(userReviewModifyAPI, { id: review.id, ...action.payload });
     yield put(UserReviewModifySuccess());
   } catch (error) {
     if (axios.isAxiosError(error)) yield put(UserReviewModifyFail(error));

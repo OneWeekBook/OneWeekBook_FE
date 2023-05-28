@@ -9,7 +9,7 @@ import {
   PARAGRAPH_DELETE_REQUEST,
 } from 'redux/reducers/Paragraph';
 
-function ParagraphDeleteAPI(data: DeleteRequestType) {
+function paragraphDeleteAPI(data: DeleteRequestType) {
   return instance.delete(`${API_URL.PARAGRAPH}?id=${data.id}`);
 }
 
@@ -18,7 +18,7 @@ function* fetchParagraphDeleteSaga(action: {
   payload: DeleteRequestType;
 }) {
   try {
-    yield call(ParagraphDeleteAPI, action.payload);
+    yield call(paragraphDeleteAPI, action.payload);
     yield put(ParagraphDeleteSuccess());
   } catch (error) {
     if (axios.isAxiosError(error)) yield put(ParagraphDeleteFail(error));

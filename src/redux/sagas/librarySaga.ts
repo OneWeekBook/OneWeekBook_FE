@@ -8,7 +8,7 @@ import {
   LIBRARY_REQUEST,
 } from 'redux/reducers/Library';
 
-export function LibraryAPI(params: { userId: number; progress: number }) {
+export function libraryAPI(params: { userId: number; progress: number }) {
   return instance.get(
     `${API_URL.LIBRARY}?userId=${params.userId}&progress=${params.progress}`,
   );
@@ -20,7 +20,7 @@ export function* fetchLibrarySaga(action: {
 }): object {
   try {
     const user = yield select((state) => state.authUser.user);
-    const result = yield call(LibraryAPI, {
+    const result = yield call(libraryAPI, {
       userId: user.id,
       ...action.payload,
     });

@@ -8,7 +8,7 @@ import {
   LIBRARY_MODIFY_REQUEST,
 } from 'redux/reducers/Library';
 
-function LibraryModifyAPI(data: {
+function libraryModifyAPI(data: {
   userId: number;
   progress: number;
   isbn: string;
@@ -22,7 +22,7 @@ function* fetchLibraryModifySaga(action: {
 }): object {
   try {
     const user = yield select((state) => state.authUser.user);
-    yield call(LibraryModifyAPI, { userId: user.id, ...action.payload });
+    yield call(libraryModifyAPI, { userId: user.id, ...action.payload });
     yield put(LibraryModifySuccess());
   } catch (error) {
     if (axios.isAxiosError(error)) yield put(LibraryModifyFail(error));

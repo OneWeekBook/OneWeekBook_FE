@@ -8,7 +8,7 @@ import {
   AUTH_EMAIL_REQUEST,
 } from 'redux/reducers/AuthEmail';
 
-function AuthEmailAPI(data: { email: string }) {
+function authEmailAPI(data: { email: string }) {
   return instance.post(API_URL.AUTH_CODE, data);
 }
 
@@ -17,7 +17,7 @@ function* fetchAuthEmailSaga(action: {
   payload: { email: string };
 }): any {
   try {
-    yield call(AuthEmailAPI, action.payload);
+    yield call(authEmailAPI, action.payload);
     yield put(AuthEmailSuccess());
   } catch (error) {
     if (axios.isAxiosError(error)) yield put(AuthEmailFail(error));

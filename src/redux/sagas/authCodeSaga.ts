@@ -8,7 +8,7 @@ import {
   AUTH_CODE_REQUEST,
 } from 'redux/reducers/AuthCode';
 
-function AuthCodeAPI(data: { code: string }) {
+function authCodeAPI(data: { code: string }) {
   return instance.post(API_URL.AUTH_EMAIL, data);
 }
 
@@ -17,7 +17,7 @@ function* fetchAuthCodeSaga(action: {
   payload: { code: string };
 }) {
   try {
-    yield call(AuthCodeAPI, action.payload);
+    yield call(authCodeAPI, action.payload);
     yield put(AuthCodeSuccess());
   } catch (error) {
     if (axios.isAxiosError(error)) yield put(AuthCodeFail(error));

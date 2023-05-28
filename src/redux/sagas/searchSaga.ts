@@ -9,7 +9,7 @@ import {
   SEARCH_REQUEST,
 } from 'redux/reducers/Search';
 
-function SearchAPI(params: SearchRequestTypes) {
+function searchAPI(params: SearchRequestTypes) {
   if (params.d_categ) {
     return instance.get(
       `${API_URL.SEARCH}?d_catg=${params.d_categ}&d_titl=${params.title}&start=${params.start}&display=${params.display}`,
@@ -27,7 +27,7 @@ function* fetchSearchSaga(action: {
   payload: SearchRequestTypes;
 }): object {
   try {
-    const result = yield call(SearchAPI, action.payload);
+    const result = yield call(searchAPI, action.payload);
     yield put(SearchSuccess(result.data));
   } catch (error) {
     if (axios.isAxiosError(error)) yield put(SearchFail(error));

@@ -8,7 +8,7 @@ import {
   CHANGE_PASSWORD_REQUEST,
 } from 'redux/reducers/ChangePassword';
 
-function ChangePasswordAPI(data: { email: string; password: string }) {
+function changePasswordAPI(data: { email: string; password: string }) {
   return instance.put(API_URL.USER_CHANGE_PASSWORD, data);
 }
 
@@ -18,7 +18,7 @@ function* fetchChangePasswordSaga(action: {
 }): object {
   try {
     const user = yield select((state) => state.authUser.user);
-    yield call(ChangePasswordAPI, { email: user.email, ...action.payload });
+    yield call(changePasswordAPI, { email: user.email, ...action.payload });
     yield put(ChangePasswordSuccess());
   } catch (error) {
     if (axios.isAxiosError(error)) yield put(ChangePasswordFail(error));

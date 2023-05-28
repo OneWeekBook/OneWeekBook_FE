@@ -9,7 +9,7 @@ import {
   LIBRARY_ADD_REQUEST,
 } from 'redux/reducers/Library';
 
-function LibraryAddAPI(data: { userId: number & LibraryAddRequestTypes }) {
+function libraryAddAPI(data: { userId: number & LibraryAddRequestTypes }) {
   return instance.post(API_URL.LIBRARY, data);
 }
 
@@ -19,7 +19,7 @@ function* fetchLibraryAddSaga(action: {
 }): object {
   try {
     const user = yield select((state) => state.authUser.user);
-    yield call(LibraryAddAPI, { userId: user.id, ...action.payload });
+    yield call(libraryAddAPI, { userId: user.id, ...action.payload });
     yield put(LibraryAddSuccess());
   } catch (error) {
     if (axios.isAxiosError(error)) yield put(LibraryAddFail(error));

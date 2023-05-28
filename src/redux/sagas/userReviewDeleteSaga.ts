@@ -9,14 +9,14 @@ import {
   USER_REVIEW_DELETE_REQUEST,
 } from 'redux/reducers/UserReview';
 
-function UserReviewDeleteAPI(data: DeleteRequestType) {
+function userReviewDeleteAPI(data: DeleteRequestType) {
   return instance.delete(`${API_URL.BOOK_REVIEWS}/${data.id}`);
 }
 
 function* fetchUserReviewDeleteSaga(): object {
   try {
     const review = yield select((state) => state.userReview.reviewItem);
-    yield call(UserReviewDeleteAPI, { id: review.id });
+    yield call(userReviewDeleteAPI, { id: review.id });
     yield put(UserReviewDeleteSuccess());
   } catch (error) {
     if (axios.isAxiosError(error)) yield put(UserReviewDeleteFail(error));

@@ -12,7 +12,7 @@ import {
   PARAGRAPH_REQUEST,
 } from 'redux/reducers/Paragraph';
 
-function ParagraphAPI(params: ParagraphRequestType) {
+function paragraphAPI(params: ParagraphRequestType) {
   return instance.get(`${API_URL.PARAGRAPH}?bookId=${params.bookId}`);
 }
 
@@ -21,7 +21,7 @@ function* fetchParagraphInitSaga(action: {
   payload: ParagraphRequestType;
 }): object {
   try {
-    const result = yield call(ParagraphAPI, action.payload);
+    const result = yield call(paragraphAPI, action.payload);
     yield put(ParagraphInitSuccess(result.data.paragraphs));
   } catch (error) {
     if (axios.isAxiosError(error)) yield put(ParagraphInitFail(error));
@@ -33,7 +33,7 @@ function* fetchParagraphSaga(action: {
   payload: ParagraphRequestType;
 }): object {
   try {
-    const result = yield call(ParagraphAPI, action.payload);
+    const result = yield call(paragraphAPI, action.payload);
     yield put(ParagraphSuccess(result.data.paragraphs));
   } catch (error) {
     if (axios.isAxiosError(error)) yield put(ParagraphFail(error));

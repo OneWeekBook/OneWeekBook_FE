@@ -8,7 +8,7 @@ import {
   LIBRARY_DELETE_REQUEST,
 } from 'redux/reducers/Library';
 
-function LibraryDeleteAPI(params: { id: number }) {
+function libraryDeleteAPI(params: { id: number }) {
   return instance.delete(`${API_URL.LIBRARY}?id=${params.id}`);
 }
 
@@ -17,7 +17,7 @@ function* fetchLibraryDeleteSaga(action: {
   payload: { id: number };
 }) {
   try {
-    yield call(LibraryDeleteAPI, action.payload);
+    yield call(libraryDeleteAPI, action.payload);
     yield put(LibraryDeleteSuccess());
   } catch (error) {
     if (axios.isAxiosError(error)) yield put(LibraryDeleteFail(error));

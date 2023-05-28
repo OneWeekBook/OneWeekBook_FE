@@ -9,7 +9,7 @@ import {
 } from 'redux/reducers/RemoveUser';
 import { removeAccessTokenFromSessionStorage } from 'utils/accessTokenHandler';
 
-function RemoveUserAPI(data: { id: number; password: string }) {
+function removeUserAPI(data: { id: number; password: string }) {
   return instance.post(API_URL.USER_DELETE, data);
 }
 
@@ -19,7 +19,7 @@ function* fetchRemoveUserSaga(action: {
 }): object {
   try {
     const user = yield select((state) => state.authUser.user);
-    yield call(RemoveUserAPI, { id: user.id, ...action.payload });
+    yield call(removeUserAPI, { id: user.id, ...action.payload });
     yield put(RemoveUserSuccess());
     removeAccessTokenFromSessionStorage();
   } catch (error) {

@@ -8,13 +8,13 @@ import {
   NEW_REVIEWS_REQUEST,
 } from 'redux/reducers/NewReview';
 
-function NewReviewAPI() {
+function newReviewAPI() {
   return instance.get(API_URL.LATEST_REVIEW);
 }
 
 function* fetchNewReviewSaga(): any {
   try {
-    const result = yield call(NewReviewAPI);
+    const result = yield call(newReviewAPI);
     yield put(NewReviewsSuccess(result.data));
   } catch (error) {
     if (axios.isAxiosError(error)) yield put(NewReviewsFail(error));

@@ -9,7 +9,7 @@ import {
   SIGN_UP_REQUEST,
 } from 'redux/reducers/SignUp';
 
-function SignUpAPI(data: SignUpRequestTypes) {
+function signUpAPI(data: SignUpRequestTypes) {
   return instance.post(API_URL.USER_REGISTER, data);
 }
 
@@ -18,7 +18,7 @@ function* fetchSignUpSaga(action: {
   payload: SignUpRequestTypes;
 }): object {
   try {
-    const result = yield call(SignUpAPI, action.payload);
+    const result = yield call(signUpAPI, action.payload);
     yield put(SignUpSuccess(result));
   } catch (error) {
     if (axios.isAxiosError(error)) yield put(SignUpFail(error));

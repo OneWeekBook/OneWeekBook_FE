@@ -8,7 +8,7 @@ import {
   CHANGE_NICK_REQUEST,
 } from 'redux/reducers/ChangeNick';
 
-function ChangeNickAPI(data: { nick: string; id: number }) {
+function changeNickAPI(data: { nick: string; id: number }) {
   return instance.put(API_URL.USER_CHANGE_NICK, data);
 }
 
@@ -18,7 +18,7 @@ function* fetchChangeNickSaga(action: {
 }): object {
   try {
     const user = yield select((state) => state.authUser.user);
-    yield call(ChangeNickAPI, { id: user.id, ...action.payload });
+    yield call(changeNickAPI, { id: user.id, ...action.payload });
     yield put(ChangeNickSuccess());
   } catch (error) {
     if (axios.isAxiosError(error)) yield put(ChangeNickFail(error));

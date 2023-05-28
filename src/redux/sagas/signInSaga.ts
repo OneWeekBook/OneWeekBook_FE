@@ -10,7 +10,7 @@ import {
   SIGN_IN_REQUEST,
 } from 'redux/reducers/SignIn';
 
-function SignInAPI(data: SignInRequestTypes) {
+function signInAPI(data: SignInRequestTypes) {
   return instance.post(API_URL.USER_LOGIN, data);
 }
 
@@ -19,7 +19,7 @@ function* fetchSignInSaga(action: {
   payload: SignInRequestTypes;
 }): object {
   try {
-    const result = yield call(SignInAPI, action.payload);
+    const result = yield call(signInAPI, action.payload);
     yield put(SignInSuccess(result.data));
     saveAccessTokenToSessionStorage(result.data.accessToken);
     instance.defaults.headers.common.Authorization = result.data.accessToken;

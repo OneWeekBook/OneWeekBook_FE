@@ -9,7 +9,7 @@ import {
   REVIEW_REQUEST,
 } from 'redux/reducers/Review';
 
-function ReviewDetailAPI(params: BookRequestTypes) {
+function reviewDetailAPI(params: BookRequestTypes) {
   return instance.get(
     `${API_URL.BOOK_REVIEWS}/${params.isbn}?start=${params.start}&display=10&sortby=${params.sortby}`,
   );
@@ -20,7 +20,7 @@ function* fetchReviewDetailSaga(action: {
   payload: BookRequestTypes;
 }): object {
   try {
-    const result = yield call(ReviewDetailAPI, action.payload);
+    const result = yield call(reviewDetailAPI, action.payload);
     yield put(ReviewSuccess(result.data));
   } catch (error) {
     if (axios.isAxiosError(error)) yield put(ReviewFail(error));

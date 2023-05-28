@@ -8,11 +8,11 @@ import {
   AUTH_USER_REQUEST,
 } from 'redux/reducers/AuthUser';
 
-function AuthUserAPI() {
+function authUserAPI() {
   return instance.get(API_URL.USER);
 }
 
-function UserLibraryAPI(params: { userId: number; progress: number }) {
+function userLibraryAPI(params: { userId: number; progress: number }) {
   return instance.get(
     `${API_URL.LIBRARY}?userId=${params.userId}&progress=${params.progress}`,
   );
@@ -20,8 +20,8 @@ function UserLibraryAPI(params: { userId: number; progress: number }) {
 
 function* fetchAuthUserSaga(): object {
   try {
-    const userData = yield call(AuthUserAPI);
-    const bookData = yield call(UserLibraryAPI, {
+    const userData = yield call(authUserAPI);
+    const bookData = yield call(userLibraryAPI, {
       userId: userData.data.user.id,
       progress: 2,
     });

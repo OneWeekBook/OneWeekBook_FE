@@ -8,7 +8,7 @@ import {
   FAVORITE_ADD_REQUEST,
 } from 'redux/reducers/Favorite';
 
-function FavoriteAddAPI(params: {
+function favoriteAddAPI(params: {
   bookId: number;
   state: number;
   userId: number;
@@ -26,7 +26,7 @@ function* fetchFavoiteAddSaga(action: {
 }): object {
   try {
     const user = yield select((state) => state.authUser.user);
-    yield call(FavoriteAddAPI, { userId: user.id, ...action.payload });
+    yield call(favoriteAddAPI, { userId: user.id, ...action.payload });
     yield put(FavoriteAddSuccess());
   } catch (error) {
     if (axios.isAxiosError(error)) yield put(FavoriteAddFail(error));

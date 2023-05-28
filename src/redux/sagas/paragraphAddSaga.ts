@@ -9,7 +9,7 @@ import {
   PARAGRAPH_ADD_REQUEST,
 } from 'redux/reducers/Paragraph';
 
-function ParagraphAddAPI(data: ParagraphAddRequestTypes) {
+function paragraphAddAPI(data: ParagraphAddRequestTypes) {
   return instance.post(API_URL.PARAGRAPH, data);
 }
 
@@ -18,7 +18,7 @@ function* fetchParagraphAddSaga(action: {
   payload: ParagraphAddRequestTypes;
 }) {
   try {
-    yield call(ParagraphAddAPI, action.payload);
+    yield call(paragraphAddAPI, action.payload);
     yield put(ParagraphAddSuccess());
   } catch (error) {
     if (axios.isAxiosError(error)) yield put(ParagraphAddFail(error));

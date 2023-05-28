@@ -8,7 +8,7 @@ import {
   USER_REVIEW_REQUEST,
 } from 'redux/reducers/UserReview';
 
-function UserReviewAPI(data: { userId: number; bookId: number }) {
+function userReviewAPI(data: { userId: number; bookId: number }) {
   return instance.get(`${API_URL.BOOK_REVIEWS}/${data.bookId}/${data.userId}`);
 }
 
@@ -18,7 +18,7 @@ function* fetchUserReviewSaga(action: {
 }): object {
   try {
     const user = yield select((state) => state.authUser.user);
-    const result = yield call(UserReviewAPI, {
+    const result = yield call(userReviewAPI, {
       userId: user.id,
       ...action.payload,
     });

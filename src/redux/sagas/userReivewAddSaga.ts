@@ -9,7 +9,7 @@ import {
   USER_REVIEW_ADD_REQUEST,
 } from 'redux/reducers/UserReview';
 
-function UserReviewAddAPI(data: ReviewAddRequestTypes) {
+function userReviewAddAPI(data: ReviewAddRequestTypes) {
   const { bookId, review, rating } = data;
   return instance.post(`${API_URL.BOOK_REVIEWS}/${bookId}`, { review, rating });
 }
@@ -19,7 +19,7 @@ function* fetchUserReviewAddSaga(action: {
   payload: ReviewAddRequestTypes;
 }) {
   try {
-    yield call(UserReviewAddAPI, action.payload);
+    yield call(userReviewAddAPI, action.payload);
     yield put(UserReviewAddSuccess());
   } catch (error) {
     if (axios.isAxiosError(error)) yield put(UserReviewAddFail(error));

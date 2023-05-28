@@ -8,7 +8,7 @@ import {
   FAVORITE_CANCEL_REQUEST,
 } from 'redux/reducers/Favorite';
 
-function FavoriteCancelAPI(data: { userId: number; bookId: number }) {
+function favoriteCancelAPI(data: { userId: number; bookId: number }) {
   const { userId, bookId } = data;
   return instance.post(
     `${API_URL.BOOK_REVIEWS}/${bookId}${API_URL.LIKE_CANCEL}`,
@@ -22,7 +22,7 @@ function* fetchFavoriteCancelSaga(action: {
 }): object {
   try {
     const user = yield select((state) => state.authUser.user);
-    yield call(FavoriteCancelAPI, { userId: user.id, ...action.payload });
+    yield call(favoriteCancelAPI, { userId: user.id, ...action.payload });
     yield put(FavoriteCancelSuccess());
   } catch (error) {
     if (axios.isAxiosError(error)) yield put(FavoriteCancelFail(error));
