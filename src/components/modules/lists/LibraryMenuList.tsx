@@ -3,21 +3,23 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import theme from 'styles/theme';
 import { LibraryMenuTypes } from 'types/module';
-import { navDone, navLike, navRead } from 'redux/reducers/funcReducer';
 import { libraryInit, libraryRequest } from 'redux/reducers/libraryReducer';
+import { PATH_URL } from 'constants/path';
 import { libraryMenu } from 'constants/content';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
+import useRouter from 'hooks/useRouter';
 
 function LibraryMenuList({ useId, navId }: LibraryMenuTypes) {
   const dispatch = useDispatch();
+  const { routeTo } = useRouter();
 
   const handleMenuClick = (curId: number) => {
     if (libraryMenu[0].id === curId) {
-      dispatch(navLike());
+      routeTo(`${PATH_URL.LIBRARY}?id=0`, true);
     } else if (libraryMenu[1].id === curId) {
-      dispatch(navRead());
+      routeTo(`${PATH_URL.LIBRARY}?id=1`, true);
     } else {
-      dispatch(navDone());
+      routeTo(`${PATH_URL.LIBRARY}?id=2`, true);
     }
   };
 
