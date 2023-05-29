@@ -158,6 +158,9 @@ const ReviewModalBody = styled.div`
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     margin: 10px 20px 0px;
   }
+  @media (max-width: 425px) {
+    margin: 10px 10px 0px;
+  }
 `;
 
 const BookInfo = styled.div`

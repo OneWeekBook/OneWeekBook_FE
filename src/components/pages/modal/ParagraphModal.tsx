@@ -129,6 +129,9 @@ const ParagraphModalBody = styled.div`
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     margin: 10px 20px 0px;
   }
+  @media (max-width: 425px) {
+    margin: 10px 10px 0px;
+  }
 `;
 
 const BookInfoContainer = styled.div`
@@ -150,4 +153,6 @@ const ParagraphListContainer = styled.div`
   flex-direction: column;
   gap: 5px;
   margin: 10px auto 20px;
+  max-height: 250px;
+  overflow: scroll;
 `;
