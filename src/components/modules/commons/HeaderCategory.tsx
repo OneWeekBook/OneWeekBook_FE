@@ -26,7 +26,11 @@ function HeaderMainCategory() {
           imageSize={30}
           content={item.title}
           handleClick={() =>
-            handleAuthClick(item.link, [PATH_URL.LIBRARY], handleModalToggle)
+            handleAuthClick(
+              item.link.split('?')[0],
+              [PATH_URL.LIBRARY],
+              handleModalToggle,
+            )
           }
           backgroundColor={[theme.color.COLOR_NONE, theme.color.COLOR_NONE]}
           fontColor={[theme.color.COLOR_CORAL, theme.color.COLOR_CORAL]}
