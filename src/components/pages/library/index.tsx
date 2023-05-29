@@ -136,4 +136,8 @@ const MyLibraryHeader = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 20px;
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;

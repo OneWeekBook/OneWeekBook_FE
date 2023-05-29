@@ -98,6 +98,7 @@ const BookBannerModule = styled.div`
     border-radius: 0px 5px 5px 0px;
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    gap: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
     height: 200px;

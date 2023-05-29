@@ -79,5 +79,5 @@ const HeaderWrapper = styled.section`
 
 const FooterWrapper = styled.section`
   background-color: ${({ theme }) => theme.color.COLOR_DIM_GRAY};
-  min-height: 200px;
+  min-height: 160px;
 `;

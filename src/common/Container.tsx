@@ -49,7 +49,7 @@ const Component = styled.section`
 const ContentsWrapper = styled.section`
   max-width: 1000px;
   width: 100%;
-  min-width: 375px;
+  min-width: 350px;
   @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
     width: 95%;
     margin: 0px auto;
