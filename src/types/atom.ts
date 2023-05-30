@@ -64,6 +64,7 @@ export interface DefaultLabelTypes {
 }
 
 export interface LinkTypes {
+  imageSrc?: string;
   content: string;
   handleClick?: () => void;
 }

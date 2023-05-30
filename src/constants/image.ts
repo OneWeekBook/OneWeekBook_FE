@@ -21,8 +21,13 @@ export const FAVORITE_IMAGE = {
 };
 
 export const MENU_IMAGE = {
-  HOME_DONE: `${process.env.PUBLIC_URL}/assets/menu/home_done.png`,
-  HOME_NONE: `${process.env.PUBLIC_URL}/assets/menu/home_none.png`,
+  BACK: `${process.env.PUBLIC_URL}/assets/menu/back.png`,
+  SIGN_IN: `${process.env.PUBLIC_URL}/assets/menu/sign_in.png`,
+  SIGN_UP: `${process.env.PUBLIC_URL}/assets/menu/sign_up.png`,
+  SIGN_OUT: `${process.env.PUBLIC_URL}/assets/menu/sign_out.png`,
+  MY_PAGE: `${process.env.PUBLIC_URL}/assets/menu/my_page.png`,
+  HOME_DONE: `${process.env.PUBLIC_URL}/assets/menu/home_done.svg`,
+  HOME_NONE: `${process.env.PUBLIC_URL}/assets/menu/home_none.svg`,
   LIBRARY_DONE: `${process.env.PUBLIC_URL}/assets/menu/library_done.png`,
   LIBRARY_NONE: `${process.env.PUBLIC_URL}/assets/menu/library_none.png`,
   CATEGORY_DONE: `${process.env.PUBLIC_URL}/assets/menu/category_done.png`,
