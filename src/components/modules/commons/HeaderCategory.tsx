@@ -19,7 +19,7 @@ function HeaderMainCategory() {
         <DefaultButton
           key={item.id}
           imageSrc={
-            item.link === `/${currentPath.split('/')[1]}`
+            item.link.split('?')[0] === `/${currentPath.split('/')[1]}`
               ? item.clickImg
               : item.img
           }
@@ -27,8 +27,8 @@ function HeaderMainCategory() {
           content={item.title}
           handleClick={() =>
             handleAuthClick(
-              item.link.split('?')[0],
-              [PATH_URL.LIBRARY],
+              item.link,
+              [`${PATH_URL.LIBRARY}?id=0`],
               handleModalToggle,
             )
           }
