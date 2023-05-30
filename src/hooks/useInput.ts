@@ -7,10 +7,13 @@ type onChangeType = (
 const useInput = (initValue = '') => {
   const [value, setValue] = useState(initValue);
 
-  const handler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = e.target.value;
-    setValue(val);
-  }, []);
+  const handler = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const val = e.target.value;
+      setValue(val);
+    },
+    [],
+  );
 
   return [value, handler, setValue] as [string, onChangeType, typeof setValue];
 };

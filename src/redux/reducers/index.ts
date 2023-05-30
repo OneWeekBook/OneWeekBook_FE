@@ -1,21 +1,21 @@
 import { combineReducers } from 'redux';
-import authEmail from './AuthEmail';
-import authCode from './AuthCode';
-import authUser from './AuthUser';
-import signUp from './SignUp';
-import signIn from './SignIn';
-import category from './Category';
-import search from './Search';
-import changeNick from './ChangeNick';
-import changePassword from './ChangePassword';
-import func from './Func';
-import removeUser from './RemoveUser';
-import myLibrary from './MyLibrary';
-import paragraph from './Paragraph';
-import review from './Review';
-import newReview from './NewReview';
-import userReview from './UserReview';
-import like from './Like';
+import authEmail from './authEmailReducer';
+import authCode from './authCodeReducer';
+import authUser from './authUserReducer';
+import signUp from './signUpReducer';
+import signIn from './signInReducer';
+import category from './categoryReducer';
+import search from './searchReducer';
+import changeNick from './changeNickReducer';
+import changePassword from './changePasswordReducer';
+import func from './funcReducer';
+import removeUser from './removeUserReducer';
+import library from './libraryReducer';
+import paragraph from './paragraphReducer';
+import review from './reviewReducer';
+import newReview from './newReviewReducer';
+import userReview from './userReviewReducer';
+import favorite from './favoriteReducer';
 
 const rootReducer = combineReducers({
   authEmail,
@@ -29,12 +29,12 @@ const rootReducer = combineReducers({
   changePassword,
   func,
   removeUser,
-  myLibrary,
+  library,
   paragraph,
   review,
   newReview,
   userReview,
-  like,
+  favorite,
 });
 
 export default rootReducer;
