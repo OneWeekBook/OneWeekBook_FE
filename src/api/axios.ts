@@ -2,14 +2,8 @@ import axios from 'axios';
 import { getAccessTokenFromSessionStorage } from 'utils/accessTokenHandler';
 
 const accessToken = getAccessTokenFromSessionStorage();
-
-const host =
-  window.location.hostname === 'localhost'
-    ? process.env.REACT_APP_BASIC_URL
-    : 'api';
-
 const instance = axios.create({
-  baseURL: host,
+  baseURL: `${process.env.REACT_APP_BASIC_URL}`,
 });
 
 if (accessToken) {

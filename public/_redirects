@@ -1,3 +1,0 @@
-/api/* ${process.env.REACT_APP_BASIC_URL}/:splat 200
-
-/* /index.html 200
