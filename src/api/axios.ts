@@ -5,7 +5,7 @@ const accessToken = getAccessTokenFromSessionStorage();
 
 const host =
   window.location.hostname === 'localhost'
-    ? process.env.REACT_APP_SERVER_URL
+    ? process.env.REACT_APP_BASIC_URL
     : 'api';
 
 const instance = axios.create({
