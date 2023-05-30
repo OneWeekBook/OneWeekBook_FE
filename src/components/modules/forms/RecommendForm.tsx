@@ -37,7 +37,6 @@ const ImageButtonWrapper = styled.div`
   display: flex;
   gap: 2px;
   button {
-    cursor: pointer;
     background: ${({ theme }) => theme.color.COLOR_WHITE};
     border: none;
     height: 20px;

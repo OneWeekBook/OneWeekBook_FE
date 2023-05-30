@@ -29,7 +29,6 @@ const TopButtonAtom = styled.button<{ scroll: boolean }>`
   border: none;
   background-color: ${({ theme }) => theme.color.COLOR_CORAL};
   color: ${({ theme }) => theme.color.COLOR_WHITE};
-  cursor: pointer;
   font-size: 24px;
   font-weight: 700;
 `;

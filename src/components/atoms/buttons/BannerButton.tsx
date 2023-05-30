@@ -19,7 +19,6 @@ const BannerButtonAtom = styled.button<{ direct: string; url: string }>`
   box-shadow: 0px 0px 5px #000;
   border-radius: 25px;
   border: none;
-  cursor: pointer;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
