@@ -11,6 +11,7 @@ export const AUTH_USER_INIT = 'AUTH_USER_INIT';
 const initialState = {
   isLoading: false,
   isSuccess: false,
+  isAuth: false,
   user: {},
   userBooks: [],
 };
@@ -31,6 +32,7 @@ export default function authUserReducer(
         ...state,
         isLoading: false,
         isSuccess: true,
+        isAuth: true,
         user: action.payload.userData,
         userBooks: action.payload.bookData,
       };

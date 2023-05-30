@@ -1,9 +1,8 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import theme from 'styles/theme';
 import { AppStateType } from 'redux/reducers';
-import { userToggle } from 'redux/reducers/funcReducer';
 import useToggle from 'hooks/useToggle';
 import Container from 'common/Container';
 import DefaultText from 'components/atoms/texts/DefaultText';
@@ -14,7 +13,6 @@ import RemoveUserModal from 'components/pages/modal/RemoveUserModal';
 import UserBookList from 'components/modules/lists/UserBookList';
 
 function Index() {
-  const dispatch = useDispatch();
   const [rank, setRank] = useState<string>('');
   const [remaining, setRemaining] = useState<number>(0);
   const [limit, setLimit] = useState<number>(10);
@@ -25,10 +23,6 @@ function Index() {
     (state: AppStateType) => state.authUser,
     shallowEqual,
   );
-
-  useEffect(() => {
-    dispatch(userToggle());
-  }, []);
 
   useLayoutEffect(() => {
     if (userBooks.length < rankLimit[0]) {

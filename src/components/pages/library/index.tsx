@@ -3,7 +3,6 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { AppStateType } from 'redux/reducers';
 import styled from 'styled-components';
 import { LibraryBookTypes } from 'types/page';
-import { userToggle } from 'redux/reducers/funcReducer';
 import {
   libraryModifyRequest,
   libraryRequest,
@@ -67,10 +66,6 @@ function Index() {
     else if (itemDeleteSuccess) showToast('info', '삭제 완료!');
     else if (isDeleteSuccess) showToast('success', '해당 책을 삭제했습니다!');
   }, [itemAddSuccess, itemModifySuccess, itemDeleteSuccess, isDeleteSuccess]);
-
-  useEffect(() => {
-    dispatch(userToggle());
-  }, []);
 
   return (
     <Container>

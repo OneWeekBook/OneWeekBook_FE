@@ -21,7 +21,7 @@ function BooksList({ searchArr }: BooksListType) {
     (state: AppStateType) => state.search,
     shallowEqual,
   );
-  const { user } = useSelector(
+  const { user, isAuth } = useSelector(
     (state: AppStateType) => state.authUser,
     shallowEqual,
   );
@@ -84,6 +84,7 @@ function BooksList({ searchArr }: BooksListType) {
               key={index}
               {...item}
               userId={user.id}
+              isAuth={isAuth}
               handleFavoriteClick={handleFavoriteClick}
             />
           ))}

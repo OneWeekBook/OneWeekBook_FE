@@ -5,7 +5,6 @@ export const SEARCH_NONE = 'SEARCH_NONE';
 export const SEARCH_DONE = 'SEARCH_DONE';
 
 const initialState = {
-  userToggle: false,
   search: false,
 };
 
@@ -14,11 +13,6 @@ export default function funcReducer(
   action: ActionsTypes,
 ) {
   switch (action.type) {
-    case USER_TOGGLE:
-      return {
-        ...state,
-        userToggle: !state.userToggle,
-      };
     case SEARCH_NONE:
       return {
         ...state,
@@ -33,12 +27,6 @@ export default function funcReducer(
       return state;
   }
 }
-
-export const userToggle = () => {
-  return {
-    type: USER_TOGGLE,
-  };
-};
 
 export const searchDone = () => {
   return {

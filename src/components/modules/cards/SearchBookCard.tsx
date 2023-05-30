@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { LikeAddTypes } from 'types/module';
 import { imageErrorHandler } from 'utils/imageErrorHandler';
 import { setDateFormat } from 'utils/dateFormatHandler';
-import { getAccessTokenFromSessionStorage } from 'utils/accessTokenHandler';
 import { FUNC_IMAGE } from 'constants/image';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import DefaultImage from 'components/atoms/images/DefaultImage';
@@ -18,12 +17,13 @@ function SearchBookCard({
   pubdate,
   publisher,
   description,
+  isAuth,
   handleFavoriteClick,
 }: PropsWithChildren<LikeAddTypes>) {
   return (
     <SearchBookCardModule>
       <BookCover>
-        {getAccessTokenFromSessionStorage() && (
+        {isAuth && (
           <DefaultButton
             className="image"
             width="auto"

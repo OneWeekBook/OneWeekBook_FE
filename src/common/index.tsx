@@ -7,6 +7,7 @@ import { authUserRequest } from 'redux/reducers/authUserReducer';
 import useToggle from 'hooks/useToggle';
 import { PATH_URL } from 'constants/path';
 import DefaultLink from 'components/atoms/links/DefaultLink';
+import { getAccessTokenFromSessionStorage } from 'utils/accessTokenHandler';
 import Footer from './Footer';
 import Header from './Header';
 import Sidebar from './Sidebar';
@@ -15,16 +16,21 @@ function Index({ children }: PropsWithChildren) {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const [toggle, handleToggle] = useToggle(false);
-  const { userToggle } = useSelector((state: AppStateType) => state.func);
-  const { isSuccess } = useSelector((state: AppStateType) => state.signIn);
+  const { isSuccess: signInSuccess } = useSelector(
+    (state: AppStateType) => state.signIn,
+  );
+  const { isSuccess: changeNickSuccess } = useSelector(
+    (state: AppStateType) => state.changeNick,
+  );
 
   useEffect(() => {
-    dispatch(authUserRequest());
-  }, [userToggle]);
-
-  useEffect(() => {
-    if (isSuccess) dispatch(authUserRequest());
-  }, [isSuccess]);
+    if (
+      signInSuccess ||
+      changeNickSuccess ||
+      getAccessTokenFromSessionStorage()
+    )
+      dispatch(authUserRequest());
+  }, [signInSuccess, changeNickSuccess]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -79,5 +85,8 @@ const HeaderWrapper = styled.section`
 
 const FooterWrapper = styled.section`
   background-color: ${({ theme }) => theme.color.COLOR_DIM_GRAY};
-  min-height: 160px;
+  height: 200px;
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    height: 160px;
+  }
 `;

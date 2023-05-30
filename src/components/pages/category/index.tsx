@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { CategoryResponseTypes } from 'types/response';
 import { categoryRequest } from 'redux/reducers/categoryReducer';
 import { searchInit } from 'redux/reducers/searchReducer';
-import { searchNone, userToggle } from 'redux/reducers/funcReducer';
+import { searchNone } from 'redux/reducers/funcReducer';
 import { AppStateType } from 'redux/reducers';
 import { categoryInit } from 'constants/content';
 import Container from 'common/Container';
@@ -77,10 +77,6 @@ function index() {
   useEffect(() => {
     getFilterParentCategories(categories);
   }, [categories]);
-
-  useEffect(() => {
-    dispatch(userToggle());
-  }, []);
 
   return (
     <Container>

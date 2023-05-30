@@ -1,15 +1,13 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { SidebarTypes } from 'types/common';
+import { AppStateType } from 'redux/reducers';
 import { authInit } from 'redux/reducers/authUserReducer';
 import useToggle from 'hooks/useToggle';
 import useRouter from 'hooks/useRouter';
 import useAuthLink from 'hooks/useAuthLink';
-import {
-  getAccessTokenFromSessionStorage,
-  removeAccessTokenFromSessionStorage,
-} from 'utils/accessTokenHandler';
+import { removeAccessTokenFromSessionStorage } from 'utils/accessTokenHandler';
 import { PATH_URL } from 'constants/path';
 import { menuItems } from 'constants/content';
 import { showToast } from 'common/Toast';
@@ -19,20 +17,28 @@ import SideBarLink from 'components/atoms/links/SideBarLink';
 function Sidebar({ toggle, handleToggle }: SidebarTypes) {
   const dispatch = useDispatch();
   const { routeTo, currentPath } = useRouter();
-
   const [modalToggle, handleModalToggle] = useToggle(false);
   const { handleAuthClick } = useAuthLink();
+  const { isAuth } = useSelector(
+    (state: AppStateType) => state.authUser,
+    shallowEqual,
+  );
+
+  const handleAuthPathCheck = () => {
+    const link = [PATH_URL.LIBRARY, PATH_URL.USER];
+    return link.includes(window.location.pathname);
+  };
 
   const handleMoveLink = (link: string) => {
     routeTo(link, link === currentPath);
     handleToggle();
   };
 
-  const logoutClick = () => {
+  const handleSignOut = () => {
     removeAccessTokenFromSessionStorage();
     dispatch(authInit());
     showToast('info', '로그아웃 되었습니다.');
-    routeTo(PATH_URL.MAIN, true);
+    if (handleAuthPathCheck()) routeTo(PATH_URL.MAIN, true);
     handleToggle();
   };
 
@@ -46,9 +52,9 @@ function Sidebar({ toggle, handleToggle }: SidebarTypes) {
 
   return (
     <SideBarBody isToggle={toggle}>
-      {getAccessTokenFromSessionStorage() ? (
+      {isAuth ? (
         <>
-          <SideBarLink handleClick={logoutClick} content="로그아웃" />
+          <SideBarLink handleClick={handleSignOut} content="로그아웃" />
           <SideBarLink
             handleClick={() => handleMoveLink(PATH_URL.USER)}
             content="마이페이지"

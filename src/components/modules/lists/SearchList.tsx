@@ -21,6 +21,10 @@ function SearchList() {
   );
   const { search } = useSelector((state: AppStateType) => state.func);
   const { isAddSuccess } = useSelector((state: AppStateType) => state.library);
+  const { isAuth } = useSelector(
+    (state: AppStateType) => state.authUser,
+    shallowEqual,
+  );
 
   useEffect(() => {
     if (isAddSuccess) showToast('success', '내 서재에 추가완료~');
@@ -55,6 +59,7 @@ function SearchList() {
       {books.map((item: BookResponseTypes, index: number) => (
         <SearchBookCard
           key={index}
+          isAuth={isAuth}
           {...item}
           handleFavoriteClick={handleFavoriteClick}
         />
