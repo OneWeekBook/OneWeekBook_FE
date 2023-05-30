@@ -26,8 +26,8 @@ function Header({ handleToggle }: HeaderType) {
   const handleSignOut = () => {
     removeAccessTokenFromSessionStorage();
     dispatch(authInit());
-    if (handleAuthPathCheck()) routeTo(PATH_URL.MAIN, true);
     showToast('info', '로그아웃 되었습니다.');
+    if (handleAuthPathCheck()) routeTo(PATH_URL.MAIN, true);
   };
 
   return (

@@ -51,7 +51,6 @@ function UserBookCard({
 export default UserBookCard;
 
 const UserBookCardModule = styled(Link)`
-  cursor: pointer;
   position: relative;
   border: 3px solid ${({ theme }) => theme.color.COLOR_CORAL};
   border-radius: 5px;

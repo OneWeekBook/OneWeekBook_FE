@@ -16,7 +16,6 @@ const SideBarLinkAtom = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-  cursor: pointer;
   box-sizing: border-box;
   transition: 0.5s;
   text-align: right;

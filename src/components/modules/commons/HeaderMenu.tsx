@@ -18,11 +18,7 @@ function HeaderMenu({ handleToggle, handleSignOut, isAuth }: HeaderTypes) {
         <DefaultLinks>
           <DefaultLink to={PATH_URL.USER} content="마이페이지" />
           <span>&nbsp;&nbsp;·&nbsp;&nbsp;</span>
-          <DefaultLink
-            to={window.location.pathname + window.location.search}
-            content="로그아웃"
-            handleClick={handleSignOut}
-          />
+          <SignOutButton onClick={handleSignOut}>로그아웃</SignOutButton>
         </DefaultLinks>
       ) : (
         <DefaultLinks>
@@ -50,11 +46,11 @@ const HeaderMenuModule = styled.div`
   align-items: center;
   justify-content: space-between;
   color: ${({ theme }) => theme.color.COLOR_CORAL};
-  button {
+  .image {
     display: none;
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
-    button {
+    .image {
       display: inline-block;
     }
   }
@@ -67,4 +63,12 @@ const DefaultLinks = styled.div`
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     display: none;
   }
+`;
+
+const SignOutButton = styled.button`
+  color: ${({ theme }) => theme.color.COLOR_CORAL};
+  font-size: 1.6rem;
+  font-weight: 300;
+  border: none;
+  background-color: ${({ theme }) => theme.color.COLOR_NONE};
 `;

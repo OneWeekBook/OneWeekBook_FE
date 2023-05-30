@@ -43,7 +43,6 @@ const DefaultButtonAtom = styled.button<ButtonStyleTypes>`
   justify-content: center;
   align-items: center;
   gap: 5px;
-  cursor: pointer;
   width: ${({ width }) =>
     width === 'auto' ? 'auto' : width === 'full' ? '100%' : `${width}px`};
   height: ${({ height }) => height}px;

@@ -49,6 +49,7 @@ const globalStyles = createGlobalStyle`
 
     button {
         font-family: 'Noto Sans Korean', 'sans-serif';
+        cursor: pointer;
     }
 `;
 

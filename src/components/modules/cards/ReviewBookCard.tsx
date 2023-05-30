@@ -54,7 +54,6 @@ export default ReivewItem;
 const ReviewBookCardModule = styled.div`
   display: flex;
   flex-direction: column;
-  cursor: pointer;
   position: relative;
   max-width: 190px;
   width: 100%;
