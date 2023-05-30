@@ -3,47 +3,52 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import theme from 'styles/theme';
 import { LibraryMenuTypes } from 'types/module';
-import { navDone, navLike, navRead } from 'redux/reducers/Func';
-import { LibraryInit, LibraryRequest } from 'redux/reducers/Library';
+import { libraryInit, libraryRequest } from 'redux/reducers/libraryReducer';
+import { PATH_URL } from 'constants/path';
 import { libraryMenu } from 'constants/content';
-import MenuButton from 'components/atoms/buttons/MenuButton';
+import DefaultButton from 'components/atoms/buttons/DefaultButton';
+import useRouter from 'hooks/useRouter';
 
 function LibraryMenuList({ useId, navId }: LibraryMenuTypes) {
   const dispatch = useDispatch();
+  const { routeTo } = useRouter();
 
   const handleMenuClick = (curId: number) => {
     if (libraryMenu[0].id === curId) {
-      dispatch(navLike());
+      routeTo(`${PATH_URL.LIBRARY}?id=0`, true);
     } else if (libraryMenu[1].id === curId) {
-      dispatch(navRead());
+      routeTo(`${PATH_URL.LIBRARY}?id=1`, true);
     } else {
-      dispatch(navDone());
+      routeTo(`${PATH_URL.LIBRARY}?id=2`, true);
     }
   };
 
   useEffect(() => {
-    if (useId) dispatch(LibraryRequest({ progress: navId }));
+    if (useId) dispatch(libraryRequest({ progress: navId }));
     return () => {
-      dispatch(LibraryInit());
+      dispatch(libraryInit());
     };
   }, [useId, navId]);
 
   return (
     <LibraryMenuListModule>
       {libraryMenu.map((item) => (
-        <MenuButton
-          className="roundborder"
+        <DefaultButton
           key={item.id}
-          src={item.image}
+          imageSrc={item.image}
           imageSize={18}
           content={item.desc}
           handleClick={() => handleMenuClick(item.id)}
           isBtnClick={navId === item.id}
-          bgColor={[theme.color.COLOR_CORAL, theme.color.COLOR_ORANGE_RED]}
-          fontColor={theme.color.COLOR_WHITE}
+          backgroundColor={[
+            theme.color.COLOR_CORAL,
+            theme.color.COLOR_ORANGE_RED,
+          ]}
+          fontColor={[theme.color.COLOR_WHITE, theme.color.COLOR_WHITE]}
           fontSize={1.4}
           fontWeight={300}
-          height={20}
+          width={80}
+          height={40}
         />
       ))}
     </LibraryMenuListModule>
@@ -55,7 +60,4 @@ export default LibraryMenuList;
 const LibraryMenuListModule = styled.div`
   display: flex;
   gap: 5px;
-  button {
-    height: 40px;
-  }
 `;

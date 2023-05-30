@@ -12,20 +12,10 @@ export interface DefaultButtonTypes {
   disabled?: boolean;
   className?: string;
   type?: 'button' | 'submit';
+  imageSrc?: string;
 }
 
-export interface ImageButtonTypes {
-  handleClick: () => void;
-  type?: 'button' | 'submit';
-  src: string;
-}
-
-export interface MenuButtonTypes extends ImageButtonTypes {
-  className?: string;
-  content: string;
-}
-
-export interface IconType {
+export interface StarImageType {
   score: number;
 }
 
@@ -74,6 +64,7 @@ export interface DefaultLabelTypes {
 }
 
 export interface LinkTypes {
+  imageSrc?: string;
   content: string;
   handleClick?: () => void;
 }
@@ -90,14 +81,7 @@ export interface TimerTextTypes {
 
 export interface DefaultTextTypes {
   content: string | number;
-  subContent?: string | number;
   className?: string;
-}
-
-export interface DataTextTypes {
-  before?: string;
-  data: string | number;
-  after?: string;
 }
 
 export interface ErrorTypes {
@@ -115,18 +99,14 @@ export interface MultiTextTypes {
 /* Style Types */
 
 export interface ButtonStyleTypes {
-  fontSize?: number;
-  fontColor?: string | string[];
-  fontWeight?: number;
-  bgColor?: string | string[];
+  fontSize: number;
+  fontColor: string | string[];
+  fontWeight: number;
+  backgroundColor: string | string[];
   imageSize?: number;
-  isBtnClick?: boolean;
-  width?: number | string;
-  height?: number;
-}
-
-export interface IconStyleType {
-  imageSize: number;
+  isBtnClick: boolean;
+  width: number | string;
+  height: number;
 }
 
 export interface InputStyleTypes {

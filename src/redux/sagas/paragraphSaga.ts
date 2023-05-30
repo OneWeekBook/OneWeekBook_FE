@@ -4,13 +4,13 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { ParagraphRequestType } from 'types/request';
 import { API_URL } from 'constants/path';
 import {
-  ParagraphFail,
-  ParagraphInitFail,
-  ParagraphInitSuccess,
-  ParagraphSuccess,
+  paragraphFail,
+  paragraphInitFail,
+  paragraphInitSuccess,
+  paragraphSuccess,
   PARAGRAPH_INIT_REQUEST,
   PARAGRAPH_REQUEST,
-} from 'redux/reducers/Paragraph';
+} from 'redux/reducers/paragraphReducer';
 
 function paragraphAPI(params: ParagraphRequestType) {
   return instance.get(`${API_URL.PARAGRAPH}?bookId=${params.bookId}`);
@@ -22,9 +22,9 @@ function* fetchParagraphInitSaga(action: {
 }): object {
   try {
     const result = yield call(paragraphAPI, action.payload);
-    yield put(ParagraphInitSuccess(result.data.paragraphs));
+    yield put(paragraphInitSuccess(result.data.paragraphs));
   } catch (error) {
-    if (axios.isAxiosError(error)) yield put(ParagraphInitFail(error));
+    if (axios.isAxiosError(error)) yield put(paragraphInitFail(error));
   }
 }
 
@@ -34,9 +34,9 @@ function* fetchParagraphSaga(action: {
 }): object {
   try {
     const result = yield call(paragraphAPI, action.payload);
-    yield put(ParagraphSuccess(result.data.paragraphs));
+    yield put(paragraphSuccess(result.data.paragraphs));
   } catch (error) {
-    if (axios.isAxiosError(error)) yield put(ParagraphFail(error));
+    if (axios.isAxiosError(error)) yield put(paragraphFail(error));
   }
 }
 

@@ -6,17 +6,16 @@ import { FavoriteResponseTypes } from 'types/response';
 import { ReviewDetailModalTypes } from 'types/page';
 import { AppStateType } from 'redux/reducers';
 import {
-  FavoriteAddRequest,
-  FavoriteCancelRequest,
-  FavoriteInit,
-  FavoriteRequest,
-} from 'redux/reducers/Favorite';
-import { ReviewInit, ReviewRequest } from 'redux/reducers/Review';
+  favoriteAddRequest,
+  favoriteCancelRequest,
+  favoriteInit,
+  favoriteRequest,
+} from 'redux/reducers/favoriteReducer';
+import { reviewInit, reviewRequest } from 'redux/reducers/reviewReducer';
 import { FAVORITE_IMAGE } from 'constants/image';
 import DetailModal from 'common/DefaultModal';
-import MenuButton from 'components/atoms/buttons/MenuButton';
-import DataText from 'components/atoms/texts/DataText';
-import ReviewText from 'components/atoms/texts/ReviewText';
+import DefaultButton from 'components/atoms/buttons/DefaultButton';
+import DefaultText from 'components/atoms/texts/DefaultText';
 
 function ReviewDetailModal({
   userReview,
@@ -45,18 +44,18 @@ function ReviewDetailModal({
   } = useSelector((state: AppStateType) => state.favorite, shallowEqual);
 
   useEffect(() => {
-    dispatch(FavoriteRequest({ bookId: userReview.id }));
+    dispatch(favoriteRequest({ bookId: userReview.id }));
     return () => {
-      dispatch(FavoriteInit());
+      dispatch(favoriteInit());
     };
   }, []);
 
   useEffect(() => {
     if (favoriteAddErrorStatus === 200 || favoriteCancelErrorStatus === 200) {
-      dispatch(FavoriteRequest({ bookId: userReview.id }));
-      dispatch(ReviewInit());
+      dispatch(favoriteRequest({ bookId: userReview.id }));
+      dispatch(reviewInit());
       dispatch(
-        ReviewRequest({
+        reviewRequest({
           isbn: bookIsbn,
           start: reviewIndex,
           sortby: reviewSort,
@@ -105,16 +104,16 @@ function ReviewDetailModal({
 
   const handleFavoriteClick = (state: number, isSelected: boolean) => {
     if (compareFavoriteUser() && !isSelected) {
-      dispatch(FavoriteCancelRequest({ bookId: userReview.id }));
+      dispatch(favoriteCancelRequest({ bookId: userReview.id }));
       setTimeout(() => {
-        dispatch(FavoriteAddRequest({ bookId: userReview.id, state }));
+        dispatch(favoriteAddRequest({ bookId: userReview.id, state }));
       }, 10);
     } else if (compareFavoriteUser() && isSelected) {
       if (state === 0) setUsefulToggle(false);
       else if (state === 1) setInterestToggle(false);
-      dispatch(FavoriteCancelRequest({ bookId: userReview.id }));
+      dispatch(favoriteCancelRequest({ bookId: userReview.id }));
     } else if (!compareFavoriteUser()) {
-      dispatch(FavoriteAddRequest({ bookId: userReview.id, state }));
+      dispatch(favoriteAddRequest({ bookId: userReview.id, state }));
     }
   };
 
@@ -130,29 +129,38 @@ function ReviewDetailModal({
       handleOkClick={handleDetailToggle}
     >
       <UserReviewModalBody>
-        <DataText before="작성일자 : " data={userReview.reviewCreationTime} />
-        <ReviewText content={userReview.review} />
+        <DefaultTexts>
+          <DefaultText content="작성일자 : " />
+          <DefaultText content={userReview.reviewCreationTime} />
+        </DefaultTexts>
+        <DefaultText className="review" content={userReview.review} />
         <FavoriteButtons>
-          <MenuButton
+          <DefaultButton
             className="roundborder"
-            src={FAVORITE_IMAGE.USEFUL}
+            imageSrc={FAVORITE_IMAGE.USEFUL}
             imageSize={25}
             content={`${useful} 도움이되요`}
             handleClick={() => handleFavoriteClick(0, usefulToggle)}
             isBtnClick={usefulToggle}
-            bgColor={[theme.color.COLOR_CORAL, theme.color.COLOR_ORANGE_RED]}
-            fontColor={theme.color.COLOR_WHITE}
+            backgroundColor={[
+              theme.color.COLOR_CORAL,
+              theme.color.COLOR_ORANGE_RED,
+            ]}
+            fontColor={[theme.color.COLOR_WHITE, theme.color.COLOR_WHITE]}
             fontWeight={300}
           />
-          <MenuButton
+          <DefaultButton
             className="roundborder"
-            src={FAVORITE_IMAGE.INTEREST}
+            imageSrc={FAVORITE_IMAGE.INTEREST}
             imageSize={25}
             content={`${interest} 흥미로워요`}
             handleClick={() => handleFavoriteClick(1, interestToggle)}
             isBtnClick={interestToggle}
-            bgColor={[theme.color.COLOR_CORAL, theme.color.COLOR_ORANGE_RED]}
-            fontColor={theme.color.COLOR_WHITE}
+            backgroundColor={[
+              theme.color.COLOR_CORAL,
+              theme.color.COLOR_ORANGE_RED,
+            ]}
+            fontColor={[theme.color.COLOR_WHITE, theme.color.COLOR_WHITE]}
             fontWeight={300}
           />
         </FavoriteButtons>
@@ -171,6 +179,10 @@ const UserReviewModalBody = styled.div`
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     padding: 10px;
   }
+`;
+
+const DefaultTexts = styled.div`
+  display: flex;
 `;
 
 const FavoriteButtons = styled.div`

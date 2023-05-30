@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { DefaultModalTypes } from 'types/page';
 import { FUNC_IMAGE } from 'constants/image';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
-import ImageButton from 'components/atoms/buttons/ImageButton';
 import DefaultText from 'components/atoms/texts/DefaultText';
 
 function Index({
@@ -26,20 +25,31 @@ function Index({
       <DefaultModalContainer width={width} height={height} type={type}>
         <CloseButton>
           {close && (
-            <ImageButton
+            <DefaultButton
+              className="image"
+              width="auto"
+              height={25}
               handleClick={handleToggle}
-              src={FUNC_IMAGE.CLOSE}
+              imageSrc={FUNC_IMAGE.CLOSE}
               imageSize={25}
             />
           )}
         </CloseButton>
         <DefaultModalBody height={height}>
-          <DefaultText
-            content={content}
-            subContent={subContent}
-            fontSize={contentSize}
-            align="center"
-          />
+          <div>
+            <DefaultText
+              content={content}
+              align="center"
+              fontSize={contentSize}
+            />
+            {subContent && (
+              <DefaultText
+                content={subContent}
+                fontSize={contentSize}
+                align="center"
+              />
+            )}
+          </div>
           {children}
           <DefaultButtons>
             {okButtonTitle && (
@@ -101,7 +111,8 @@ const DefaultModalContainer = styled.div<{
 const CloseButton = styled.div`
   width: 100%;
   height: 25px;
-  text-align: right;
+  display: flex;
+  justify-content: flex-end;
 `;
 
 const DefaultModalBody = styled.div<{ height: number }>`

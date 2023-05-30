@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { PATH_URL } from 'constants/path';
 import { ProtectedRouteTypes } from 'types/common';
 import GeneralLayout from 'common';
@@ -39,7 +39,16 @@ function App() {
             />
           }
         />
-        <Route path={PATH_URL.LIBRARY} element={<LibraryPage />} />
+        <Route
+          path={PATH_URL.LIBRARY}
+          element={
+            <ProtectedRoute
+              {...defaultProtectedRouteProps}
+              outlet={<LibraryPage />}
+            />
+          }
+        />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </GeneralLayout>
   );

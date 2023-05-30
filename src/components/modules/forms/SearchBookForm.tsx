@@ -3,8 +3,8 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { SearchInputTypes } from 'types/module';
 import { AppStateType } from 'redux/reducers';
-import { SearchInit, SearchRequest } from 'redux/reducers/Search';
-import { searchNone } from 'redux/reducers/Func';
+import { searchInit, searchRequest } from 'redux/reducers/searchReducer';
+import { searchNone } from 'redux/reducers/funcReducer';
 import useDebounce from 'hooks/useDebounce';
 import useRouter from 'hooks/useRouter';
 import useInput from 'hooks/useInput';
@@ -53,8 +53,8 @@ function SearchBookForm({
         options.title = search;
       }
       if (options.d_categ || options.title) {
-        dispatch(SearchInit());
-        dispatch(SearchRequest({ ...options }));
+        dispatch(searchInit());
+        dispatch(searchRequest({ ...options }));
       }
     },
     [search, curSubCategory, curParentCategory],

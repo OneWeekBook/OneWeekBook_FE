@@ -2,11 +2,10 @@ import styled from 'styled-components';
 import { HeaderTypes } from 'types/module';
 import { FUNC_IMAGE } from 'constants/image';
 import { PATH_URL } from 'constants/path';
-import { getAccessTokenFromSessionStorage } from 'utils/accessTokenHandler';
-import ImageButton from 'components/atoms/buttons/ImageButton';
+import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import DefaultLink from 'components/atoms/links/DefaultLink';
 
-function HeaderMenu({ handleToggle, handleSignOut }: HeaderTypes) {
+function HeaderMenu({ handleToggle, handleSignOut, isAuth }: HeaderTypes) {
   return (
     <HeaderMenuModule>
       <DefaultLink
@@ -15,12 +14,12 @@ function HeaderMenu({ handleToggle, handleSignOut }: HeaderTypes) {
         fontSize={3.2}
         fontWeight={700}
       />
-      {getAccessTokenFromSessionStorage() ? (
+      {isAuth ? (
         <DefaultLinks>
           <DefaultLink to={PATH_URL.USER} content="마이페이지" />
           <span>&nbsp;&nbsp;·&nbsp;&nbsp;</span>
           <DefaultLink
-            to={PATH_URL.MAIN}
+            to={window.location.pathname + window.location.search}
             content="로그아웃"
             handleClick={handleSignOut}
           />
@@ -32,8 +31,11 @@ function HeaderMenu({ handleToggle, handleSignOut }: HeaderTypes) {
           <DefaultLink to={PATH_URL.SIGN_IN} content="로그인" />
         </DefaultLinks>
       )}
-      <ImageButton
-        src={FUNC_IMAGE.HAMBURGER}
+      <DefaultButton
+        className="image"
+        width="auto"
+        height={32}
+        imageSrc={FUNC_IMAGE.HAMBURGER}
         imageSize={32}
         handleClick={handleToggle}
       />

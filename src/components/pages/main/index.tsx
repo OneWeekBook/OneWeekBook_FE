@@ -3,8 +3,11 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { NewReviewResponseTypes, ReviewResponseTypes } from 'types/response';
 import { AppStateType } from 'redux/reducers';
-import { ReviewInit, ReviewsRequest } from 'redux/reducers/Review';
-import { NewReviewInit, NewReviewsRequest } from 'redux/reducers/NewReview';
+import { reviewInit, reviewsRequest } from 'redux/reducers/reviewReducer';
+import {
+  newReviewInit,
+  newReviewsRequest,
+} from 'redux/reducers/newReviewReducer';
 import Container from 'common/Container';
 import Banner from 'components/modules/banners/Banner';
 import BestBookCard from 'components/modules/cards/BestBookCard';
@@ -27,11 +30,11 @@ function Index() {
   );
 
   useEffect(() => {
-    dispatch(ReviewsRequest({ start: 0, sortby: 'totalReviews' }));
-    dispatch(NewReviewsRequest());
+    dispatch(reviewsRequest({ start: 0, sortby: 'totalReviews' }));
+    dispatch(newReviewsRequest());
     return () => {
-      dispatch(ReviewInit());
-      dispatch(NewReviewInit());
+      dispatch(reviewInit());
+      dispatch(newReviewInit());
     };
   }, []);
 

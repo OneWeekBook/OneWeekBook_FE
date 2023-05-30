@@ -2,8 +2,10 @@ import { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppStateType } from 'redux/reducers';
 import { ChangeNickModalType } from 'types/page';
-import { ChangeNickInit, ChangeNickRequest } from 'redux/reducers/ChangeNick';
-import { userToggle } from 'redux/reducers/Func';
+import {
+  changeNickInit,
+  changeNickRequest,
+} from 'redux/reducers/changeNickReducer';
 import { showToast } from 'common/Toast';
 import useInput from 'hooks/useInput';
 import ChangeModal from 'common/DefaultModal';
@@ -17,12 +19,11 @@ function ChangeNickModal({ handleNickToggle }: ChangeNickModalType) {
   );
 
   const handleChangeClick = () => {
-    dispatch(ChangeNickRequest({ nick }));
+    dispatch(changeNickRequest({ nick }));
   };
 
   const handleChangeNick = useCallback(() => {
     if (changeErrorStatus === 200) {
-      dispatch(userToggle());
       showToast('success', '닉네임 변경 성공!');
       handleNickToggle();
     }
@@ -31,7 +32,7 @@ function ChangeNickModal({ handleNickToggle }: ChangeNickModalType) {
   useEffect(() => {
     handleChangeNick();
     return () => {
-      dispatch(ChangeNickInit());
+      dispatch(changeNickInit());
     };
   }, [changeErrorStatus]);
 

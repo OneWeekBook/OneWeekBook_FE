@@ -3,10 +3,10 @@ import instance from 'api/axios';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { API_URL } from 'constants/path';
 import {
-  LibraryModifyFail,
-  LibraryModifySuccess,
+  libraryModifyFail,
+  libraryModifySuccess,
   LIBRARY_MODIFY_REQUEST,
-} from 'redux/reducers/Library';
+} from 'redux/reducers/libraryReducer';
 
 function libraryModifyAPI(data: {
   userId: number;
@@ -23,9 +23,9 @@ function* fetchLibraryModifySaga(action: {
   try {
     const user = yield select((state) => state.authUser.user);
     yield call(libraryModifyAPI, { userId: user.id, ...action.payload });
-    yield put(LibraryModifySuccess());
+    yield put(libraryModifySuccess());
   } catch (error) {
-    if (axios.isAxiosError(error)) yield put(LibraryModifyFail(error));
+    if (axios.isAxiosError(error)) yield put(libraryModifyFail(error));
   }
 }
 

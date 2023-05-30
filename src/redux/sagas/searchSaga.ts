@@ -4,10 +4,10 @@ import { call, put, throttle } from 'redux-saga/effects';
 import { API_URL } from 'constants/path';
 import { SearchRequestTypes } from 'types/request';
 import {
-  SearchFail,
-  SearchSuccess,
+  searchFail,
+  searchSuccess,
   SEARCH_REQUEST,
-} from 'redux/reducers/Search';
+} from 'redux/reducers/searchReducer';
 
 function searchAPI(params: SearchRequestTypes) {
   if (params.d_categ) {
@@ -28,9 +28,9 @@ function* fetchSearchSaga(action: {
 }): object {
   try {
     const result = yield call(searchAPI, action.payload);
-    yield put(SearchSuccess(result.data));
+    yield put(searchSuccess(result.data));
   } catch (error) {
-    if (axios.isAxiosError(error)) yield put(SearchFail(error));
+    if (axios.isAxiosError(error)) yield put(searchFail(error));
   }
 }
 

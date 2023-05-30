@@ -57,6 +57,7 @@ export interface EmailErrorTypes {
 export interface HeaderTypes {
   handleToggle: () => void;
   handleSignOut: () => void;
+  isAuth: boolean;
 }
 
 export interface InputFormTypes {
@@ -89,6 +90,7 @@ export interface LibraryMenuTypes {
 
 export interface LikeAddTypes extends BookResponseTypes {
   userId?: number;
+  isAuth: boolean;
   handleFavoriteClick: ({
     title,
     author,

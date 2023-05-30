@@ -4,10 +4,10 @@ import { SignUpRequestTypes } from 'types/request';
 import { API_URL } from 'constants/path';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import {
-  SignUpFail,
-  SignUpSuccess,
+  signUpFail,
+  signUpSuccess,
   SIGN_UP_REQUEST,
-} from 'redux/reducers/SignUp';
+} from 'redux/reducers/signUpReducer';
 
 function signUpAPI(data: SignUpRequestTypes) {
   return instance.post(API_URL.USER_REGISTER, data);
@@ -19,9 +19,9 @@ function* fetchSignUpSaga(action: {
 }): object {
   try {
     const result = yield call(signUpAPI, action.payload);
-    yield put(SignUpSuccess(result));
+    yield put(signUpSuccess(result));
   } catch (error) {
-    if (axios.isAxiosError(error)) yield put(SignUpFail(error));
+    if (axios.isAxiosError(error)) yield put(signUpFail(error));
   }
 }
 

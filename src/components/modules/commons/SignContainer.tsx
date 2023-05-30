@@ -20,7 +20,7 @@ const SignFormContainer = styled.div`
   border-radius: 5px;
   border: solid 1px ${({ theme }) => theme.color.COLOR_MAIN};
   width: 375px;
-  margin: 0 auto;
+  margin: 10px auto;
   padding: 0px 50px;
   height: 500px;
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {

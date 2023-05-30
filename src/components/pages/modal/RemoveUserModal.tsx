@@ -1,15 +1,18 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppStateType } from 'redux/reducers';
+import theme from 'styles/theme';
 import { RemoveUserModalType } from 'types/page';
-import { RemoveUserInit, RemoveUserRequest } from 'redux/reducers/RemoveUser';
+import {
+  removeUserInit,
+  removeUserRequest,
+} from 'redux/reducers/removeUserReducer';
 import useInput from 'hooks/useInput';
 import useRouter from 'hooks/useRouter';
 import { removeAccessTokenFromSessionStorage } from 'utils/accessTokenHandler';
 import { PATH_URL } from 'constants/path';
 import { showToast } from 'common/Toast';
 import DefaultModal from 'common/DefaultModal';
-import ErrorText from 'components/atoms/texts/ErrorText';
 import DefaultText from 'components/atoms/texts/DefaultText';
 import InputForm from 'components/modules/forms/InputForm';
 
@@ -24,7 +27,7 @@ function RemoveUserModal({ handleToggle }: RemoveUserModalType) {
   );
 
   const handleRemoveClick = () => {
-    dispatch(RemoveUserRequest({ password }));
+    dispatch(removeUserRequest({ password }));
   };
 
   const handleRemoveUser = useCallback(() => {
@@ -44,7 +47,7 @@ function RemoveUserModal({ handleToggle }: RemoveUserModalType) {
 
   useEffect(() => {
     return () => {
-      dispatch(RemoveUserInit());
+      dispatch(removeUserInit());
       setIsError(false);
     };
   }, []);
@@ -80,7 +83,14 @@ function RemoveUserModal({ handleToggle }: RemoveUserModalType) {
         value={password}
         handleChange={changePassword}
       />
-      {isError && <ErrorText error={error} align="center" />}
+      {isError && (
+        <DefaultText
+          content={error}
+          align="center"
+          fontSize={1.2}
+          fontColor={theme.color.COLOR_RED}
+        />
+      )}
     </DefaultModal>
   );
 }

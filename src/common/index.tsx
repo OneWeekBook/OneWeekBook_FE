@@ -3,35 +3,43 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
-import { AuthUserRequest } from 'redux/reducers/AuthUser';
+import { authUserRequest } from 'redux/reducers/authUserReducer';
 import useToggle from 'hooks/useToggle';
-import TopScroll from 'utils/TopScroll';
 import { PATH_URL } from 'constants/path';
 import DefaultLink from 'components/atoms/links/DefaultLink';
+import { getAccessTokenFromSessionStorage } from 'utils/accessTokenHandler';
 import Footer from './Footer';
 import Header from './Header';
 import Sidebar from './Sidebar';
 
 function Index({ children }: PropsWithChildren) {
-  const location = useLocation();
+  const { pathname } = useLocation();
   const dispatch = useDispatch();
   const [toggle, handleToggle] = useToggle(false);
-  const { userToggle } = useSelector((state: AppStateType) => state.func);
-  const { isSuccess } = useSelector((state: AppStateType) => state.signIn);
+  const { isSuccess: signInSuccess } = useSelector(
+    (state: AppStateType) => state.signIn,
+  );
+  const { isSuccess: changeNickSuccess } = useSelector(
+    (state: AppStateType) => state.changeNick,
+  );
 
   useEffect(() => {
-    dispatch(AuthUserRequest());
-  }, [userToggle]);
+    if (
+      signInSuccess ||
+      changeNickSuccess ||
+      getAccessTokenFromSessionStorage()
+    )
+      dispatch(authUserRequest());
+  }, [signInSuccess, changeNickSuccess]);
 
   useEffect(() => {
-    if (isSuccess) dispatch(AuthUserRequest());
-  }, [isSuccess]);
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <GeneralLayout>
-      <TopScroll />
       {[PATH_URL.SIGN_UP, PATH_URL.SIGN_IN].some((path) =>
-        location.pathname.includes(path),
+        pathname.includes(path),
       ) ? (
         <HeaderWrapper>
           <DefaultLink
@@ -76,6 +84,9 @@ const HeaderWrapper = styled.section`
 `;
 
 const FooterWrapper = styled.section`
-  background-color: ${({ theme }) => theme.color.COLOR_LAYOUT_ONE};
-  min-height: 200px;
+  background-color: ${({ theme }) => theme.color.COLOR_DIM_GRAY};
+  height: 200px;
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    height: 160px;
+  }
 `;

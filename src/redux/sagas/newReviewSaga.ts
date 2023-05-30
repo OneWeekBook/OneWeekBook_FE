@@ -3,10 +3,10 @@ import instance from 'api/axios';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { API_URL } from 'constants/path';
 import {
-  NewReviewsFail,
-  NewReviewsSuccess,
+  newReviewsFail,
+  newReviewsSuccess,
   NEW_REVIEWS_REQUEST,
-} from 'redux/reducers/NewReview';
+} from 'redux/reducers/newReviewReducer';
 
 function newReviewAPI() {
   return instance.get(API_URL.LATEST_REVIEW);
@@ -15,9 +15,9 @@ function newReviewAPI() {
 function* fetchNewReviewSaga(): any {
   try {
     const result = yield call(newReviewAPI);
-    yield put(NewReviewsSuccess(result.data));
+    yield put(newReviewsSuccess(result.data));
   } catch (error) {
-    if (axios.isAxiosError(error)) yield put(NewReviewsFail(error));
+    if (axios.isAxiosError(error)) yield put(newReviewsFail(error));
   }
 }
 

@@ -28,8 +28,7 @@ const FooterBody = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
-    width: 95%;
-    margin: 0 auto;
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    height: 160px;
   }
 `;

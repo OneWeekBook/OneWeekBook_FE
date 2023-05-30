@@ -2,16 +2,17 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppStateType } from 'redux/reducers';
 import styled from 'styled-components';
+import theme from 'styles/theme';
 import { ChangePassModalType } from 'types/page';
 import {
-  ChangePasswordInit,
-  ChangePasswordRequest,
-} from 'redux/reducers/ChangePassword';
+  changePasswordInit,
+  changePasswordRequest,
+} from 'redux/reducers/changePasswordReducer';
 import useInput from 'hooks/useInput';
-import { passwordRegex } from 'utils/Regex';
+import { passwordRegex } from 'constants/regex';
 import { showToast } from 'common/Toast';
 import ChangeModal from 'common/DefaultModal';
-import ErrorText from 'components/atoms/texts/ErrorText';
+import DefaultText from 'components/atoms/texts/DefaultText';
 import InputForm from 'components/modules/forms/InputForm';
 
 function ChangePassModal({ handlePassToggle }: ChangePassModalType) {
@@ -36,14 +37,14 @@ function ChangePassModal({ handlePassToggle }: ChangePassModalType) {
       return;
     }
     setPassError(false);
-    dispatch(ChangePasswordRequest({ password }));
+    dispatch(changePasswordRequest({ password }));
   };
 
   useEffect(() => {
     if (changeErrorStatus !== null && changeErrorStatus !== 200)
       setError('오류 관리자에게 문의해주세요.');
     else if (changeErrorStatus === 200) {
-      dispatch(ChangePasswordInit());
+      dispatch(changePasswordInit());
       showToast('success', '비밀번호 변경 성공!');
       handlePassToggle();
     }
@@ -81,7 +82,14 @@ function ChangePassModal({ handlePassToggle }: ChangePassModalType) {
           handleChange={changeConfirmPasswod}
         />
       </PasswordInputs>
-      {passError && <ErrorText error={error} align="center" />}
+      {passError && (
+        <DefaultText
+          content={error}
+          align="center"
+          fontSize={1.2}
+          fontColor={theme.color.COLOR_RED}
+        />
+      )}
     </ChangeModal>
   );
 }

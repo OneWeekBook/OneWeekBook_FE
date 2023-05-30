@@ -2,11 +2,11 @@ import { useCallback, useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { ParagraphInputFormType } from 'types/module';
-import { ParagraphAddRequest } from 'redux/reducers/Paragraph';
+import { paragraphAddRequest } from 'redux/reducers/paragraphReducer';
 import useInput from 'hooks/useInput';
 import { showToast } from 'common/Toast';
 import { FUNC_IMAGE } from 'constants/image';
-import ImageButton from 'components/atoms/buttons/ImageButton';
+import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import BorderInput from 'components/atoms/inputs/BorderInput';
 
 function ParagraphInputForm({ bookId }: ParagraphInputFormType) {
@@ -21,7 +21,7 @@ function ParagraphInputForm({ bookId }: ParagraphInputFormType) {
   const handleParagraphAdd = useCallback(() => {
     if (paragraph) {
       const data = { bookId, paragraph };
-      dispatch(ParagraphAddRequest(data));
+      dispatch(paragraphAddRequest(data));
       setParagraph('');
     } else {
       showToast('warning', '문구를 입력해주세요');
@@ -45,10 +45,13 @@ function ParagraphInputForm({ bookId }: ParagraphInputFormType) {
         mref={paragRef}
       />
 
-      <ImageButton
+      <DefaultButton
+        className="image"
+        width="auto"
+        height={30}
         type="button"
         handleClick={handleParagraphAdd}
-        src={FUNC_IMAGE.COMMENT_ADD}
+        imageSrc={FUNC_IMAGE.COMMENT_ADD}
         imageSize={30}
       />
     </ParagraphInputFormModule>

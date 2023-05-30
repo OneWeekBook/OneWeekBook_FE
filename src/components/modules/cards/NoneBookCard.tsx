@@ -13,10 +13,10 @@ function NoneBookCard({ type }: NoneCardTypes) {
         pc={[100, 100]}
       />
       {type === 'init' ? (
-        <DefaultText
-          content="원하는 검색어를 입력하세요!"
-          subContent="카테고리를 선택하지 않아도 통합 검색으로만 검색이 가능합니다."
-        />
+        <>
+          <DefaultText content="원하는 검색어를 입력하세요!" />
+          <DefaultText content="카테고리를 선택하지 않아도 통합 검색으로만 검색이 가능합니다." />
+        </>
       ) : (
         <DefaultText content="검색 결과가 존재하지 않습니다." />
       )}

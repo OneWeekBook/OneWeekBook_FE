@@ -5,10 +5,10 @@ import { API_URL } from 'constants/path';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { saveAccessTokenToSessionStorage } from 'utils/accessTokenHandler';
 import {
-  SignInFail,
-  SignInSuccess,
+  signInFail,
+  signInSuccess,
   SIGN_IN_REQUEST,
-} from 'redux/reducers/SignIn';
+} from 'redux/reducers/signInReducer';
 
 function signInAPI(data: SignInRequestTypes) {
   return instance.post(API_URL.USER_LOGIN, data);
@@ -20,11 +20,11 @@ function* fetchSignInSaga(action: {
 }): object {
   try {
     const result = yield call(signInAPI, action.payload);
-    yield put(SignInSuccess(result.data));
+    yield put(signInSuccess(result.data));
     saveAccessTokenToSessionStorage(result.data.accessToken);
     instance.defaults.headers.common.Authorization = result.data.accessToken;
   } catch (error) {
-    if (axios.isAxiosError(error)) yield put(SignInFail(error));
+    if (axios.isAxiosError(error)) yield put(signInFail(error));
   }
 }
 

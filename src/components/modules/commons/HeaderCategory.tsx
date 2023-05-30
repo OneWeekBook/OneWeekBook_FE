@@ -5,7 +5,8 @@ import useAuthLink from 'hooks/useAuthLink';
 import { menuItems } from 'constants/content';
 import { PATH_URL } from 'constants/path';
 import NoticeModal from 'common/DefaultModal';
-import MenuButton from 'components/atoms/buttons/MenuButton';
+import DefaultButton from 'components/atoms/buttons/DefaultButton';
+import theme from 'styles/theme';
 
 function HeaderMainCategory() {
   const { routeTo, currentPath } = useRouter();
@@ -15,9 +16,9 @@ function HeaderMainCategory() {
   return (
     <HeaderCategoryModule>
       {menuItems.map((item) => (
-        <MenuButton
+        <DefaultButton
           key={item.id}
-          src={
+          imageSrc={
             item.link === `/${currentPath.split('/')[1]}`
               ? item.clickImg
               : item.img
@@ -25,8 +26,16 @@ function HeaderMainCategory() {
           imageSize={30}
           content={item.title}
           handleClick={() =>
-            handleAuthClick(item.link, [PATH_URL.LIBRARY], handleModalToggle)
+            handleAuthClick(
+              item.link.split('?')[0],
+              [PATH_URL.LIBRARY],
+              handleModalToggle,
+            )
           }
+          backgroundColor={[theme.color.COLOR_NONE, theme.color.COLOR_NONE]}
+          fontColor={[theme.color.COLOR_CORAL, theme.color.COLOR_CORAL]}
+          width="auto"
+          height={20}
         />
       ))}
       {modalToggle && (

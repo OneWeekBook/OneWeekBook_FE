@@ -1,14 +1,14 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { AppStateType } from 'redux/reducers';
-import { SignInInit, SignInRequest } from 'redux/reducers/SignIn';
+import theme from 'styles/theme';
+import { signInInit, signInRequest } from 'redux/reducers/signInReducer';
 import useInput from 'hooks/useInput';
-import useInputEnter from 'hooks/useInputEnter';
-import { useSignInErrorCheck } from 'hooks/useSignInErrorCheck';
-import ErrorText from 'components/atoms/texts/ErrorText';
+import useSignValidate from 'hooks/useSignValidate';
+import { inputFocusHandler } from 'utils/InputFocusHandler';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import BorderInput from 'components/atoms/inputs/BorderInput';
+import DefaultText from 'components/atoms/texts/DefaultText';
 
 function SignInForm() {
   const dispatch = useDispatch();
@@ -17,18 +17,14 @@ function SignInForm() {
   const [email, changeEmail] = useInput('');
   const [password, changePassword] = useInput('');
   const [signInError, setSignInError] = useState<boolean>(false);
-  const { handleInputEnter } = useInputEnter();
-  const { handleSignInError } = useSignInErrorCheck();
-  const { signInErrorStatus, signInErrorMsg } = useSelector(
-    (state: AppStateType) => state.signIn,
-    shallowEqual,
-  );
+  const { signInErrorMsg, signInErrorStatus, signInErrorHandler } =
+    useSignValidate();
 
   const handleSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       const user = { email, password };
-      dispatch(SignInRequest(user));
+      dispatch(signInRequest(user));
     },
     [email, password],
   );
@@ -37,13 +33,13 @@ function SignInForm() {
     emailRef.current?.focus();
     return () => {
       setSignInError(false);
-      dispatch(SignInInit());
+      dispatch(signInInit());
     };
   }, []);
 
   useEffect(() => {
     if (email && password) {
-      handleSignInError(signInErrorStatus, setSignInError);
+      signInErrorHandler(setSignInError);
     }
   }, [signInErrorStatus]);
 
@@ -54,7 +50,7 @@ function SignInForm() {
         placeholder="이메일"
         value={email}
         onChange={changeEmail}
-        onKeyPress={(event) => handleInputEnter(event, passRef)}
+        onKeyPress={(event) => inputFocusHandler(event, passRef)}
         mref={emailRef}
       />
       <BorderInput
@@ -64,7 +60,14 @@ function SignInForm() {
         onChange={changePassword}
         mref={passRef}
       />
-      {signInError && <ErrorText error={signInErrorMsg} align="left" />}
+      {signInError && (
+        <DefaultText
+          content={signInErrorMsg}
+          align="left"
+          fontSize={1.2}
+          fontColor={theme.color.COLOR_RED}
+        />
+      )}
       <DefaultButton type="submit" content="로그인" width="auto" fontSize={2} />
     </SignInFormModule>
   );

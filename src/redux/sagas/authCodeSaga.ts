@@ -3,10 +3,10 @@ import instance from 'api/axios';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { API_URL } from 'constants/path';
 import {
-  AuthCodeFail,
-  AuthCodeSuccess,
+  authCodeFail,
+  authCodeSuccess,
   AUTH_CODE_REQUEST,
-} from 'redux/reducers/AuthCode';
+} from 'redux/reducers/authCodeReducer';
 
 function authCodeAPI(data: { code: string }) {
   return instance.post(API_URL.AUTH_EMAIL, data);
@@ -18,9 +18,9 @@ function* fetchAuthCodeSaga(action: {
 }) {
   try {
     yield call(authCodeAPI, action.payload);
-    yield put(AuthCodeSuccess());
+    yield put(authCodeSuccess());
   } catch (error) {
-    if (axios.isAxiosError(error)) yield put(AuthCodeFail(error));
+    if (axios.isAxiosError(error)) yield put(authCodeFail(error));
   }
 }
 

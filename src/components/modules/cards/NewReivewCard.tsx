@@ -2,12 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { NewReviewResponseTypes } from 'types/response';
-import { getImgErr } from 'utils/ImageError';
+import { imageErrorHandler } from 'utils/imageErrorHandler';
 import { PATH_URL } from 'constants/path';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DefaultText from 'components/atoms/texts/DefaultText';
-import ReviewText from 'components/atoms/texts/ReviewText';
-import StarIcon from 'components/atoms/icons/StarIcon';
+import StarImage from 'components/atoms/images/StarImage';
 
 function NewReivewCard({
   img,
@@ -26,7 +25,7 @@ function NewReivewCard({
           pc={[180, 270]}
           tablet={[120, 180]}
           mobile={[130, 195]}
-          onError={getImgErr}
+          onError={imageErrorHandler}
         />
       </ImageContainer>
       <ReviewInfo>
@@ -41,10 +40,10 @@ function NewReivewCard({
         />
         <StarIcons>
           {[0, 1, 2, 3, 4].map((el) => (
-            <StarIcon key={el} score={el < rating ? 1 : 0} imageSize={20} />
+            <StarImage key={el} score={el < rating ? 1 : 0} pc={[20, 20]} />
           ))}
         </StarIcons>
-        <ReviewText className="review" content={review} />
+        <DefaultText className="review" content={review} />
       </ReviewInfo>
     </NewReviewCardModule>
   );

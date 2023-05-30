@@ -5,10 +5,8 @@ import { ReviewUserCardType } from 'types/module';
 import { UserReviewResponseTypes } from 'types/response';
 import { FAVORITE_IMAGE } from 'constants/image';
 import DefaultImage from 'components/atoms/images/DefaultImage';
-import DataText from 'components/atoms/texts/DataText';
 import MultiText from 'components/atoms/texts/MultiText';
 import DefaultText from 'components/atoms/texts/DefaultText';
-import ReviewText from 'components/atoms/texts/ReviewText';
 
 function ReviewUserCard({
   nick,
@@ -38,8 +36,8 @@ function ReviewUserCard({
             imageAlt="icon"
             pc={[75, 75]}
           />
-          <DataText
-            data={rating}
+          <DefaultText
+            content={rating}
             fontColor={[theme.color.COLOR_CORAL, theme.color.COLOR_CORAL]}
             fontSize={2}
           />
@@ -50,13 +48,19 @@ function ReviewUserCard({
             fontSize={1.8}
             fontWeight={700}
           />
-          <DataText
-            before="작성일 : "
-            data={reviewCreationTime}
-            fontSize={1.6}
-            fontWeight={700}
-          />
-          <ReviewText className="review" content={review} />
+          <DefaultTexts>
+            <DefaultText
+              content="작성일 :&nbsp;"
+              fontSize={1.6}
+              fontWeight={700}
+            />
+            <DefaultText
+              content={reviewCreationTime}
+              fontSize={1.6}
+              fontWeight={700}
+            />
+          </DefaultTexts>
+          <DefaultText className="review" content={review} />
         </ReivewInfoWrapper>
       </UserReviewInfo>
       <Recommends>
@@ -124,6 +128,10 @@ const ReivewInfoWrapper = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
   }
+`;
+
+const DefaultTexts = styled.div`
+  display: flex;
 `;
 
 const Recommends = styled.div`

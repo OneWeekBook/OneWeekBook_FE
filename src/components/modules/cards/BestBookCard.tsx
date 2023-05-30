@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import theme from 'styles/theme';
 import { BestBookCardTypes } from 'types/module';
 import { ReviewResponseTypes } from 'types/response';
-import { getImgErr } from 'utils/ImageError';
+import { imageErrorHandler } from 'utils/imageErrorHandler';
 import { FUNC_IMAGE } from 'constants/image';
 import { PATH_URL } from 'constants/path';
 import DefaultImage from 'components/atoms/images/DefaultImage';
@@ -28,7 +28,7 @@ function BestBookCard({
         className="bookimage"
         pc={[90, 135]}
         mobile={[150, 225]}
-        onError={getImgErr}
+        onError={imageErrorHandler}
       />
       <DefaultText className="card-id" content={idx} fontSize={2} />
       <BestBookInfo>

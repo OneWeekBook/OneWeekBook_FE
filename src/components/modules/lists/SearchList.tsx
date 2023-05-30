@@ -5,8 +5,8 @@ import theme from 'styles/theme';
 import { LibraryAddRequestTypes } from 'types/request';
 import { BookResponseTypes } from 'types/response';
 import { AppStateType } from 'redux/reducers';
-import { LibraryAddRequest } from 'redux/reducers/Library';
-import { searchDone } from 'redux/reducers/Func';
+import { libraryAddRequest } from 'redux/reducers/libraryReducer';
+import { searchDone } from 'redux/reducers/funcReducer';
 import { showToast } from 'common/Toast';
 import DefaultText from 'components/atoms/texts/DefaultText';
 import LoadingForm from 'components/modules/commons/LoadingForm';
@@ -21,6 +21,10 @@ function SearchList() {
   );
   const { search } = useSelector((state: AppStateType) => state.func);
   const { isAddSuccess } = useSelector((state: AppStateType) => state.library);
+  const { isAuth } = useSelector(
+    (state: AppStateType) => state.authUser,
+    shallowEqual,
+  );
 
   useEffect(() => {
     if (isAddSuccess) showToast('success', '내 서재에 추가완료~');
@@ -31,7 +35,7 @@ function SearchList() {
   }, [isSuccess]);
 
   const handleFavoriteClick = ({ ...data }: LibraryAddRequestTypes) => {
-    dispatch(LibraryAddRequest({ ...data }));
+    dispatch(libraryAddRequest({ ...data }));
   };
 
   if (isLoading) return <LoadingForm />;
@@ -55,6 +59,7 @@ function SearchList() {
       {books.map((item: BookResponseTypes, index: number) => (
         <SearchBookCard
           key={index}
+          isAuth={isAuth}
           {...item}
           handleFavoriteClick={handleFavoriteClick}
         />

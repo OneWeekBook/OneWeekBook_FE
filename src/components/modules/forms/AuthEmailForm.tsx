@@ -1,16 +1,21 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import theme from 'styles/theme';
 import { AppStateType } from 'redux/reducers';
-import { AuthEmailInit, AuthEmailRequest } from 'redux/reducers/AuthEmail';
-import { AuthCodeInit, AuthCodeRequest } from 'redux/reducers/AuthCode';
+import {
+  authEmailInit,
+  authEmailRequest,
+} from 'redux/reducers/authEmailReducer';
+import { authCodeInit, authCodeRequest } from 'redux/reducers/authCodeReducer';
 import { AuthMailTypes } from 'types/module';
 import useInput from 'hooks/useInput';
-import { useRegexCheck } from 'hooks/useRegCheck';
-import { useAuthErrorCheck } from 'hooks/useAuthErrorCheck';
+import useAuthTimer from 'hooks/useAuthTimer';
+import { codeErrorHandler, emailErrorHandler } from 'utils/authErrorHandler';
+import { authEmailValidateHandler } from 'utils/validateCheckHandler';
+import DefaultText from 'components/atoms/texts/DefaultText';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import BorderInput from 'components/atoms/inputs/BorderInput';
-import TimerText from 'components/atoms/texts/TimerText';
 import EmailErrorForm from './EmailErrorForm';
 import CodeErrorForm from './CodeErrorForm';
 
@@ -24,15 +29,10 @@ function AuthEmailForm({
   const codeRef = useRef<HTMLInputElement>(null);
   const [email, changeEmail] = useInput('');
   const [code, changeCode] = useInput('');
-
-  const [emailReg, setEmailReg] = useState<boolean>(false);
-  const [codeReg, setCodeReg] = useState<boolean>(false);
-
-  const [emailDone, setEmailDone] = useState<boolean>(false);
-  const [toggle, setToggle] = useState<boolean>(false);
-
-  const { handleRegex } = useRegexCheck();
-  const { handleEmailCheck, handleCodeCheck } = useAuthErrorCheck();
+  const [emailValidate, setEmailValidate] = useState<boolean>(false);
+  const [codeValidate, setCodeValidate] = useState<boolean>(false);
+  const [authCodeToggle, setAuthCodeToggle] = useState<boolean>(false);
+  const { emailDone, setEmailDone, minutes, seconds } = useAuthTimer();
 
   const { emailErrorStatus, emailErrorMsg } = useSelector(
     (state: AppStateType) => state.authEmail,
@@ -47,35 +47,38 @@ function AuthEmailForm({
   useEffect(() => {
     emailRef.current?.focus();
     return () => {
-      dispatch(AuthCodeInit());
-      dispatch(AuthEmailInit());
+      dispatch(authCodeInit());
+      dispatch(authEmailInit());
     };
   }, []);
 
   useEffect(() => {
-    handleRegex({ email, code }, { setEmailReg, setCodeReg });
+    authEmailValidateHandler(
+      { email, code },
+      { setEmailValidate, setCodeValidate },
+    );
   }, [email, code]);
 
   useEffect(() => {
-    handleEmailCheck(emailErrorStatus, { setEmailDone, setToggle });
-    handleCodeCheck(codeErrorStatus, {
+    emailErrorHandler(emailErrorStatus, { setEmailDone, setAuthCodeToggle });
+    codeErrorHandler(codeErrorStatus, {
       email,
       setRegisterEmail,
-      setCodeReg,
+      setCodeValidate,
       setAuthDone,
     });
   }, [emailErrorStatus, codeErrorStatus]);
 
   useEffect(() => {
-    if (toggle) codeRef.current?.focus();
-  }, [toggle]);
+    if (authCodeToggle) codeRef.current?.focus();
+  }, [authCodeToggle]);
 
   const authEmailClick = () => {
-    dispatch(AuthEmailRequest({ email }));
+    dispatch(authEmailRequest({ email }));
   };
 
   const codeInputClick = () => {
-    dispatch(AuthCodeRequest({ code }));
+    dispatch(authCodeRequest({ code }));
   };
 
   const handleEmailCheckEnter = (event: React.KeyboardEvent<Element>) => {
@@ -103,7 +106,17 @@ function AuthEmailForm({
       >
         {!authDone && emailDone && (
           <TimerWrapper>
-            <TimerText emailDone={emailDone} setEmailDone={setEmailDone} />
+            <DefaultText
+              content={`${minutes} :`}
+              fontSize={1.2}
+              fontColor={theme.color.COLOR_RED}
+            />
+            &nbsp;
+            <DefaultText
+              content={String(seconds).padStart(2, '0')}
+              fontSize={1.2}
+              fontColor={theme.color.COLOR_RED}
+            />
           </TimerWrapper>
         )}
       </BorderInput>
@@ -111,7 +124,7 @@ function AuthEmailForm({
         <>
           <EmailErrorForm
             email={email}
-            emailReg={emailReg}
+            emailReg={emailValidate}
             emailDone={emailDone}
             emailErrorMsg={emailErrorMsg}
             emailErrorStatus={emailErrorStatus}
@@ -119,21 +132,21 @@ function AuthEmailForm({
           {!emailDone ? (
             <DefaultButton
               handleClick={authEmailClick}
-              disabled={!emailReg}
+              disabled={!emailValidate}
               fontSize={1.8}
-              width="auto"
+              width="full"
               content="이메일 인증하기"
             />
           ) : (
             <DefaultButton
               handleClick={authEmailClick}
-              disabled={!emailReg}
+              disabled={!emailValidate}
               fontSize={1.8}
-              width="auto"
+              width="full"
               content="재발송"
             />
           )}
-          {toggle && (
+          {authCodeToggle && (
             <>
               <BorderInput
                 type="text"
@@ -147,15 +160,15 @@ function AuthEmailForm({
               />
               <CodeErrorForm
                 code={code}
-                codeReg={codeReg}
+                codeReg={codeValidate}
                 codeErrorMsg={codeErrorMsg}
                 codeErrorStatus={codeErrorStatus}
               />
               <DefaultButton
                 handleClick={codeInputClick}
-                disabled={!codeReg}
+                disabled={!codeValidate}
                 fontSize={1.8}
-                width="auto"
+                width="full"
                 content="인증번호 확인"
               />
             </>
@@ -176,7 +189,8 @@ const AuthEmailFormModule = styled.div`
 `;
 
 const TimerWrapper = styled.div`
+  display: flex;
   position: absolute;
-  top: 0;
+  top: 5px;
   right: 0;
 `;

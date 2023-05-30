@@ -3,10 +3,10 @@ import instance from 'api/axios';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { API_URL } from 'constants/path';
 import {
-  RemoveUserFail,
-  RemoveUserSuccess,
+  removeUserFail,
+  removeUserSuccess,
   REMOVE_USER_REQUEST,
-} from 'redux/reducers/RemoveUser';
+} from 'redux/reducers/removeUserReducer';
 import { removeAccessTokenFromSessionStorage } from 'utils/accessTokenHandler';
 
 function removeUserAPI(data: { id: number; password: string }) {
@@ -20,10 +20,10 @@ function* fetchRemoveUserSaga(action: {
   try {
     const user = yield select((state) => state.authUser.user);
     yield call(removeUserAPI, { id: user.id, ...action.payload });
-    yield put(RemoveUserSuccess());
+    yield put(removeUserSuccess());
     removeAccessTokenFromSessionStorage();
   } catch (error) {
-    if (axios.isAxiosError(error)) yield put(RemoveUserFail(error));
+    if (axios.isAxiosError(error)) yield put(removeUserFail(error));
   }
 }
 

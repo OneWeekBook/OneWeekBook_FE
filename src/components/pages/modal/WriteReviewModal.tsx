@@ -5,12 +5,12 @@ import theme from 'styles/theme';
 import { WriteReviewTypes } from 'types/page';
 import { AppStateType } from 'redux/reducers';
 import {
-  UserReviewAddRequest,
-  UserReviewDeleteRequest,
-  UserReviewInit,
-  UserReviewModifyRequest,
-} from 'redux/reducers/UserReview';
-import { SetStartDate } from 'utils/SetDate';
+  userReviewAddRequest,
+  userReviewDeleteRequest,
+  userReviewInit,
+  userReviewModifyRequest,
+} from 'redux/reducers/userReviewReducer';
+import { setReadDateFormat } from 'utils/dateFormatHandler';
 import { showToast } from 'common/Toast';
 import WriteModal from 'common/DefaultModal';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
@@ -35,7 +35,7 @@ function WriteReviewModal({ bookData, handleToggle }: WriteReviewTypes) {
     if (review === '') {
       showToast('warning', '리뷰를 남겨주세요...');
     } else {
-      dispatch(UserReviewAddRequest({ bookId, review, rating: recommend }));
+      dispatch(userReviewAddRequest({ bookId, review, rating: recommend }));
     }
   };
 
@@ -43,12 +43,12 @@ function WriteReviewModal({ bookData, handleToggle }: WriteReviewTypes) {
     if (review === '') {
       showToast('warning', '리뷰를 남겨주세요...');
     } else {
-      dispatch(UserReviewModifyRequest({ review, rating: recommend }));
+      dispatch(userReviewModifyRequest({ review, rating: recommend }));
     }
   };
 
   const deleteReviewClick = () => {
-    dispatch(UserReviewDeleteRequest());
+    dispatch(userReviewDeleteRequest());
     handleToggle();
   };
 
@@ -60,7 +60,7 @@ function WriteReviewModal({ bookData, handleToggle }: WriteReviewTypes) {
     return () => {
       setRecommend(5);
       setReview('');
-      dispatch(UserReviewInit());
+      dispatch(userReviewInit());
     };
   }, [reviewItem]);
 
@@ -96,9 +96,9 @@ function WriteReviewModal({ bookData, handleToggle }: WriteReviewTypes) {
             reactive
           />
           <DefaultText
-            content={`${SetStartDate(bookData.startTime)} ~ ${SetStartDate(
-              bookData.endTime,
-            )}`}
+            content={`${setReadDateFormat(
+              bookData.startTime,
+            )} ~ ${setReadDateFormat(bookData.endTime)}`}
             fontSize={1.4}
           />
         </BookInfo>
@@ -157,6 +157,9 @@ const ReviewModalBody = styled.div`
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     margin: 10px 20px 0px;
+  }
+  @media (max-width: 425px) {
+    margin: 10px 10px 0px;
   }
 `;
 

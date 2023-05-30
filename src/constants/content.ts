@@ -50,7 +50,7 @@ export const menuItems = [
   {
     id: 2,
     title: '내 서재',
-    link: PATH_URL.LIBRARY,
+    link: `${PATH_URL.LIBRARY}?id=0`,
     img: MENU_IMAGE.LIBRARY_NONE,
     clickImg: MENU_IMAGE.LIBRARY_DONE,
   },
@@ -70,7 +70,7 @@ export const menuItems = [
   },
 ];
 
-export const reviewInit = {
+export const reviewItemInit = {
   id: -1,
   likeCount: 0,
   nick: '',

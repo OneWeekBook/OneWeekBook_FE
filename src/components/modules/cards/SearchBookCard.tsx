@@ -2,11 +2,10 @@ import { PropsWithChildren } from 'react';
 import DOMPurify from 'dompurify';
 import styled from 'styled-components';
 import { LikeAddTypes } from 'types/module';
-import { getImgErr } from 'utils/ImageError';
-import { SetDate } from 'utils/SetDate';
-import { getAccessTokenFromSessionStorage } from 'utils/accessTokenHandler';
+import { imageErrorHandler } from 'utils/imageErrorHandler';
+import { setDateFormat } from 'utils/dateFormatHandler';
 import { FUNC_IMAGE } from 'constants/image';
-import ImageButton from 'components/atoms/buttons/ImageButton';
+import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 
 function SearchBookCard({
@@ -18,15 +17,19 @@ function SearchBookCard({
   pubdate,
   publisher,
   description,
+  isAuth,
   handleFavoriteClick,
 }: PropsWithChildren<LikeAddTypes>) {
   return (
     <SearchBookCardModule>
       <BookCover>
-        {getAccessTokenFromSessionStorage() && (
-          <ImageButton
+        {isAuth && (
+          <DefaultButton
+            className="image"
+            width="auto"
+            height={30}
             type="button"
-            src={FUNC_IMAGE.HEART}
+            imageSrc={FUNC_IMAGE.HEART}
             imageSize={30}
             handleClick={() =>
               handleFavoriteClick({
@@ -43,7 +46,7 @@ function SearchBookCard({
           className="bookimage"
           imageSrc={image}
           imageAlt="book cover"
-          onError={getImgErr}
+          onError={imageErrorHandler}
           pc={[120, 180]}
           mobile={[80, 120]}
         />
@@ -65,7 +68,7 @@ function SearchBookCard({
           className="bookAuth"
           dangerouslySetInnerHTML={{
             __html: DOMPurify.sanitize(
-              `${publisher}&nbsp;&nbsp;${SetDate(pubdate)}`,
+              `${publisher}&nbsp;&nbsp;${setDateFormat(pubdate)}`,
             ),
           }}
         />

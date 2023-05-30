@@ -6,11 +6,11 @@ import { ParagraphModalTypes } from 'types/page';
 import { ParagraphResponseTypes } from 'types/response';
 import { AppStateType } from 'redux/reducers';
 import {
-  ParagraphDeleteRequest,
-  ParagraphInit,
-  ParagraphRequest,
-} from 'redux/reducers/Paragraph';
-import { SetStartDate } from 'utils/SetDate';
+  paragraphDeleteRequest,
+  paragraphInit,
+  paragraphRequest,
+} from 'redux/reducers/paragraphReducer';
+import { setReadDateFormat } from 'utils/dateFormatHandler';
 import WriteModal from 'common/DefaultModal';
 import DefaultText from 'components/atoms/texts/DefaultText';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
@@ -30,18 +30,18 @@ function ParagraphModal({
 
   useEffect(() => {
     if (isAddSuccess || isDeleteSuccess) {
-      dispatch(ParagraphRequest({ bookId: bookData.id }));
+      dispatch(paragraphRequest({ bookId: bookData.id }));
     }
   }, [isAddSuccess, isDeleteSuccess]);
 
   useEffect(() => {
     return () => {
-      dispatch(ParagraphInit());
+      dispatch(paragraphInit());
     };
   }, []);
 
   const handleParagraphDelete = useCallback((id: number) => {
-    dispatch(ParagraphDeleteRequest({ id }));
+    dispatch(paragraphDeleteRequest({ id }));
   }, []);
 
   return (
@@ -75,9 +75,9 @@ function ParagraphModal({
               reactive
             />
             <DefaultText
-              content={`${SetStartDate(bookData.startTime)} ~ ${
+              content={`${setReadDateFormat(bookData.startTime)} ~ ${
                 bookData.progress === 2
-                  ? SetStartDate(bookData.endTime)
+                  ? setReadDateFormat(bookData.endTime)
                   : '독서중'
               }`}
               fontSize={1.4}
@@ -129,6 +129,9 @@ const ParagraphModalBody = styled.div`
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     margin: 10px 20px 0px;
   }
+  @media (max-width: 425px) {
+    margin: 10px 10px 0px;
+  }
 `;
 
 const BookInfoContainer = styled.div`
@@ -150,4 +153,6 @@ const ParagraphListContainer = styled.div`
   flex-direction: column;
   gap: 5px;
   margin: 10px auto 20px;
+  max-height: 250px;
+  overflow: scroll;
 `;

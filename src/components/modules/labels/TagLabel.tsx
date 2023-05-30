@@ -1,6 +1,6 @@
 import styled from 'styled-components';
+import theme from 'styles/theme';
 import { TagLabelType } from 'types/module';
-import TagText from 'components/atoms/texts/TagText';
 import DefaultText from 'components/atoms/texts/DefaultText';
 
 function TagLabel({ tags }: TagLabelType) {
@@ -8,7 +8,12 @@ function TagLabel({ tags }: TagLabelType) {
     <TagLabelModule>
       <DefaultText content="전체 검색 결과" fontSize={2.2} reactive />
       {Array.from(tags).map((item, index) => (
-        <TagText key={index} content={item} />
+        <DefaultText
+          key={index}
+          className="tagbox"
+          content={item}
+          fontColor={theme.color.COLOR_WHITE}
+        />
       ))}
     </TagLabelModule>
   );

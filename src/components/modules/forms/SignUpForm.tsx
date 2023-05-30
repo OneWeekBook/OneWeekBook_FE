@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { AppStateType } from 'redux/reducers';
-import { SignUpInit, SignUpRequest } from 'redux/reducers/SignUp';
+import theme from 'styles/theme';
+import { signUpInit, signUpRequest } from 'redux/reducers/signUpReducer';
 import { SignUpTypes } from 'types/module';
 import useInput from 'hooks/useInput';
-import useInputEnter from 'hooks/useInputEnter';
-import { useFormErrorCheck } from 'hooks/useFormErrorCheck';
-import { useSignUpErrorCheck } from 'hooks/useSignUpErrorCheck';
-import ErrorText from 'components/atoms/texts/ErrorText';
+import { inputFocusHandler } from 'utils/InputFocusHandler';
+import useSignValidate from 'hooks/useSignValidate';
+import { passwordValidateHandler } from 'utils/validateCheckHandler';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import BorderInput from 'components/atoms/inputs/BorderInput';
+import DefaultText from 'components/atoms/texts/DefaultText';
 
 function SignUpForm({ email, authDone, setAuthDone }: SignUpTypes) {
   const dispatch = useDispatch();
@@ -26,15 +26,10 @@ function SignUpForm({ email, authDone, setAuthDone }: SignUpTypes) {
   const [passCompareError, setPassCompareError] = useState<boolean>(false);
   const [signUpError, setSignUpError] = useState<boolean>(false);
   const [registerDone, setRegisterDone] = useState<boolean>(true);
-  const { handleFormError } = useFormErrorCheck();
-  const { handleSignUpError } = useSignUpErrorCheck();
-  const { handleInputEnter } = useInputEnter();
-  const signUpErrorStatus = useSelector(
-    (state: AppStateType) => state.signUp.signUpErrorStatus,
-  );
+  const { signUpErrorStatus, signUpErrorHandler } = useSignValidate();
 
   useEffect(() => {
-    handleFormError(
+    passwordValidateHandler(
       { username, nick, password, confirmPassword },
       {
         passError,
@@ -52,7 +47,7 @@ function SignUpForm({ email, authDone, setAuthDone }: SignUpTypes) {
   }, [username, nick, passError, passCompareError]);
 
   useEffect(() => {
-    handleSignUpError(signUpErrorStatus, setSignUpError);
+    signUpErrorHandler(setSignUpError);
   }, [signUpErrorStatus]);
 
   useEffect(() => {
@@ -66,14 +61,14 @@ function SignUpForm({ email, authDone, setAuthDone }: SignUpTypes) {
       setSignUpError(false);
       setAuthDone(false);
       setRegisterDone(true);
-      dispatch(SignUpInit());
+      dispatch(signUpInit());
     };
   }, []);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = { email, username, nick, password, confirmPassword };
-    dispatch(SignUpRequest(formData));
+    dispatch(signUpRequest(formData));
   };
 
   return (
@@ -83,29 +78,39 @@ function SignUpForm({ email, authDone, setAuthDone }: SignUpTypes) {
         placeholder="비밀번호"
         value={password}
         onChange={changePassword}
-        onKeyPress={(event) => handleInputEnter(event, passConfRef)}
+        onKeyPress={(event) => inputFocusHandler(event, passConfRef)}
         mref={passRef}
       />
       {passError && (
-        <ErrorText error="비밀번호 형식이 올바르지 않습니다." align="left" />
+        <DefaultText
+          content="비밀번호 형식이 올바르지 않습니다."
+          align="left"
+          fontSize={1.2}
+          fontColor={theme.color.COLOR_RED}
+        />
       )}
       <BorderInput
         type="password"
         placeholder="비밀번호 확인"
         value={confirmPassword}
         onChange={changeConfirmPassword}
-        onKeyPress={(event) => handleInputEnter(event, nameRef)}
+        onKeyPress={(event) => inputFocusHandler(event, nameRef)}
         mref={passConfRef}
       />
       {passCompareError && (
-        <ErrorText error="비밀번호가 같지 않습니다." align="left" />
+        <DefaultText
+          content="비밀번호가 같지 않습니다."
+          align="left"
+          fontSize={1.2}
+          fontColor={theme.color.COLOR_RED}
+        />
       )}
       <BorderInput
         type="text"
         placeholder="이름"
         value={username}
         onChange={changeUserName}
-        onKeyPress={(event) => handleInputEnter(event, nickRef)}
+        onKeyPress={(event) => inputFocusHandler(event, nickRef)}
         mref={nameRef}
       />
       <BorderInput
@@ -116,9 +121,11 @@ function SignUpForm({ email, authDone, setAuthDone }: SignUpTypes) {
         mref={nickRef}
       />
       {signUpError && (
-        <ErrorText
-          error="회원가입 실패, 이미 존재하는 이메일 입니다."
+        <DefaultText
+          content="회원가입 실패, 이미 존재하는 이메일 입니다."
           align="left"
+          fontSize={1.2}
+          fontColor={theme.color.COLOR_RED}
         />
       )}
       <DefaultButton

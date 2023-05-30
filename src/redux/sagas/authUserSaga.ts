@@ -3,10 +3,10 @@ import instance from 'api/axios';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { API_URL } from 'constants/path';
 import {
-  AuthUserFail,
-  AuthUserSuccess,
+  authUserFail,
+  authUserSuccess,
   AUTH_USER_REQUEST,
-} from 'redux/reducers/AuthUser';
+} from 'redux/reducers/authUserReducer';
 
 function authUserAPI() {
   return instance.get(API_URL.USER);
@@ -29,9 +29,9 @@ function* fetchAuthUserSaga(): object {
       userData: userData.data.user,
       bookData: bookData.data.myList,
     };
-    yield put(AuthUserSuccess(result));
+    yield put(authUserSuccess(result));
   } catch (error) {
-    if (axios.isAxiosError(error)) yield put(AuthUserFail(error));
+    if (axios.isAxiosError(error)) yield put(authUserFail(error));
   }
 }
 

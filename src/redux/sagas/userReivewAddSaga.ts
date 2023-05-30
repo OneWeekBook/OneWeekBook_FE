@@ -4,10 +4,10 @@ import { ReviewAddRequestTypes } from 'types/request';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { API_URL } from 'constants/path';
 import {
-  UserReviewAddFail,
-  UserReviewAddSuccess,
+  userReviewAddFail,
+  userReviewAddSuccess,
   USER_REVIEW_ADD_REQUEST,
-} from 'redux/reducers/UserReview';
+} from 'redux/reducers/userReviewReducer';
 
 function userReviewAddAPI(data: ReviewAddRequestTypes) {
   const { bookId, review, rating } = data;
@@ -20,9 +20,9 @@ function* fetchUserReviewAddSaga(action: {
 }) {
   try {
     yield call(userReviewAddAPI, action.payload);
-    yield put(UserReviewAddSuccess());
+    yield put(userReviewAddSuccess());
   } catch (error) {
-    if (axios.isAxiosError(error)) yield put(UserReviewAddFail(error));
+    if (axios.isAxiosError(error)) yield put(userReviewAddFail(error));
   }
 }
 

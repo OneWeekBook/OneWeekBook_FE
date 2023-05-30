@@ -4,10 +4,10 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import theme from 'styles/theme';
 import { AppStateType } from 'redux/reducers';
-import { ReviewInit, ReviewRequest } from 'redux/reducers/Review';
+import { reviewInit, reviewRequest } from 'redux/reducers/reviewReducer';
 import useToggle from 'hooks/useToggle';
 import useRouter from 'hooks/useRouter';
-import { reviewInit } from 'constants/content';
+import { reviewItemInit } from 'constants/content';
 import { PATH_URL } from 'constants/path';
 import Container from 'common/Container';
 import Pagination from 'common/Pagination';
@@ -24,7 +24,7 @@ function Index() {
   const isbn = Number(location.pathname.split('/')[2]);
   const [detailToggle, handleDetailToggle] = useToggle(false);
   const [curIndex, setCurIndex] = useState<number>(0);
-  const [curReview, setCurReview] = useState(reviewInit);
+  const [curReview, setCurReview] = useState(reviewItemInit);
   const { bookData, userReviews } = useSelector(
     (state: AppStateType) => state.review,
     shallowEqual,
@@ -42,7 +42,7 @@ function Index() {
 
   const handleFetchReivew = useCallback(() => {
     dispatch(
-      ReviewRequest({
+      reviewRequest({
         isbn,
         start: curIndex * 10,
         sortby: sort,
@@ -53,7 +53,7 @@ function Index() {
   useEffect(() => {
     handleFetchReivew();
     return () => {
-      dispatch(ReviewInit());
+      dispatch(reviewInit());
     };
   }, [sort, curIndex]);
 
@@ -67,26 +67,28 @@ function Index() {
         </BannerBlind>
       </BookBanner>
       <Container>
-        <DefaultButton
-          type="button"
-          content="추천 순"
-          fontSize={2}
-          fontColor={[theme.color.COLOR_CORAL, theme.color.COLOR_ORANGE_RED]}
-          bgColor={[theme.color.COLOR_NONE, theme.color.COLOR_NONE]}
-          isBtnClick={sort === 'recommend'}
-          width={60}
-          handleClick={handleRecommendClick}
-        />
-        <DefaultButton
-          type="button"
-          content="최신 순"
-          fontSize={2}
-          fontColor={[theme.color.COLOR_CORAL, theme.color.COLOR_ORANGE_RED]}
-          bgColor={[theme.color.COLOR_NONE, theme.color.COLOR_NONE]}
-          isBtnClick={sort === 'new'}
-          width={80}
-          handleClick={handleNewClick}
-        />
+        <DefaultButtons>
+          <DefaultButton
+            type="button"
+            content="추천 순"
+            fontSize={2}
+            fontColor={[theme.color.COLOR_CORAL, theme.color.COLOR_ORANGE_RED]}
+            backgroundColor={[theme.color.COLOR_NONE, theme.color.COLOR_NONE]}
+            isBtnClick={sort === 'recommend'}
+            width={60}
+            handleClick={handleRecommendClick}
+          />
+          <DefaultButton
+            type="button"
+            content="최신 순"
+            fontSize={2}
+            fontColor={[theme.color.COLOR_CORAL, theme.color.COLOR_ORANGE_RED]}
+            backgroundColor={[theme.color.COLOR_NONE, theme.color.COLOR_NONE]}
+            isBtnClick={sort === 'new'}
+            width={80}
+            handleClick={handleNewClick}
+          />
+        </DefaultButtons>
         <UserReviewList
           reviews={userReviews}
           detailToggleIsOn={handleDetailToggle}
@@ -130,4 +132,8 @@ const BannerBlind = styled.div`
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
     height: 200px;
   }
+`;
+
+const DefaultButtons = styled.div`
+  display: flex;
 `;

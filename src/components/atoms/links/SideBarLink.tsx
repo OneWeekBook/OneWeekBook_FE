@@ -1,24 +1,32 @@
 import styled from 'styled-components';
 import { LinkTypes } from 'types/atom';
 
-function SideBarLink({ content, handleClick }: LinkTypes) {
-  return <SideBarLinkAtom onClick={handleClick}>{content}</SideBarLinkAtom>;
+function SideBarLink({ imageSrc, content, handleClick }: LinkTypes) {
+  return (
+    <SideBarLinkAtom onClick={handleClick}>
+      <img src={imageSrc} alt="menu" width={32} height={32} />
+      <p>{content}</p>
+    </SideBarLinkAtom>
+  );
 }
 
 export default SideBarLink;
 
-const SideBarLinkAtom = styled.p`
-  display: block;
-  color: ${({ theme }) => theme.color.COLOR_BLACK};
+const SideBarLinkAtom = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
   cursor: pointer;
   box-sizing: border-box;
-  border-bottom: 1px solid ${({ theme }) => theme.color.COLOR_GRAY};
   transition: 0.5s;
   text-align: right;
-  font-size: 2.4rem;
-  font-weight: 500;
   padding: 10px 20px;
-  &:hover {
+  p {
+    font-size: 2.4rem;
+    font-weight: 500;
     color: ${({ theme }) => theme.color.COLOR_CORAL};
+  }
+  &:hover {
+    background-color: ${({ theme }) => theme.color.COLOR_LEMON_CHIFFON};
   }
 `;

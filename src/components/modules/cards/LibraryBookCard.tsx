@@ -3,18 +3,16 @@ import styled from 'styled-components';
 import theme from 'styles/theme';
 import { LibraryResponseTypes } from 'types/response';
 import { LibraryBookCardTypes } from 'types/module';
-import { ParagraphInitRequest } from 'redux/reducers/Paragraph';
-import { UserReviewRequest } from 'redux/reducers/UserReview';
-import { LibraryDeleteRequest } from 'redux/reducers/Library';
+import { paragraphInitRequest } from 'redux/reducers/paragraphReducer';
+import { userReviewRequest } from 'redux/reducers/userReviewReducer';
+import { libraryDeleteRequest } from 'redux/reducers/libraryReducer';
 import useToggle from 'hooks/useToggle';
-import { SetStartDate } from 'utils/SetDate';
+import { setReadDateFormat } from 'utils/dateFormatHandler';
 import { FUNC_IMAGE } from 'constants/image';
 import MoveDeleteModal from 'common/DefaultModal';
-import ImageButton from 'components/atoms/buttons/ImageButton';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import DefaultImage from 'components/atoms/images/DefaultImage';
 import DefaultText from 'components/atoms/texts/DefaultText';
-import DataText from 'components/atoms/texts/DataText';
 
 function LibraryBookCard({
   id,
@@ -47,7 +45,7 @@ function LibraryBookCard({
     event.preventDefault();
     handleCommentToggle();
     onClick(id);
-    dispatch(ParagraphInitRequest({ bookId: id }));
+    dispatch(paragraphInitRequest({ bookId: id }));
   };
 
   const handleReviewClick = (
@@ -56,19 +54,22 @@ function LibraryBookCard({
     event.preventDefault();
     handleReviewToggle();
     onClick(id);
-    dispatch(UserReviewRequest({ bookId: id }));
+    dispatch(userReviewRequest({ bookId: id }));
   };
 
   const handleDeleteItem = () => {
-    dispatch(LibraryDeleteRequest({ id }));
+    dispatch(libraryDeleteRequest({ id }));
     handleDeleteToggle();
   };
 
   return (
     <LibraryBookCardModule>
       <BookImage>
-        <ImageButton
-          src={FUNC_IMAGE.TRASH}
+        <DefaultButton
+          className="image"
+          width="auto"
+          height={25}
+          imageSrc={FUNC_IMAGE.TRASH}
           handleClick={handleDeleteToggle}
           imageSize={25}
         />
@@ -99,18 +100,22 @@ function LibraryBookCard({
             fontSize={1.4}
           />
           {startTime && (
-            <DataText
-              before="독서 시작:"
-              data={SetStartDate(startTime)}
-              fontSize={1.2}
-            />
+            <DefaultTexts>
+              <DefaultText content="독서 시작 :&nbsp;" fontSize={1.2} />
+              <DefaultText
+                content={setReadDateFormat(startTime)}
+                fontSize={1.2}
+              />
+            </DefaultTexts>
           )}
           {endTime && (
-            <DataText
-              before="독서 완료:"
-              data={SetStartDate(endTime)}
-              fontSize={1.2}
-            />
+            <DefaultTexts>
+              <DefaultText content="독서 완료 :&nbsp;" fontSize={1.2} />
+              <DefaultText
+                content={setReadDateFormat(endTime)}
+                fontSize={1.2}
+              />
+            </DefaultTexts>
           )}
         </BookInfo>
         <LibraryCardButtons>
@@ -119,7 +124,7 @@ function LibraryBookCard({
               handleClick={handleStartClick}
               fontSize={1.4}
               content="시작하기"
-              width="auto"
+              width="full"
             />
           )}
           {[1, 2].some((num) => [progress].includes(num)) && (
@@ -127,7 +132,7 @@ function LibraryBookCard({
               handleClick={handleParagraphClick}
               fontSize={1.4}
               content="기록하기"
-              width="auto"
+              width="full"
             />
           )}
           {progress === 2 && (
@@ -135,7 +140,7 @@ function LibraryBookCard({
               handleClick={handleReviewClick}
               fontSize={1.4}
               content="리뷰하기"
-              width="auto"
+              width="full"
             />
           )}
         </LibraryCardButtons>
@@ -211,6 +216,10 @@ const BookInfo = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
   }
+`;
+
+const DefaultTexts = styled.div`
+  display: flex;
 `;
 
 const LibraryCardButtons = styled.div`
