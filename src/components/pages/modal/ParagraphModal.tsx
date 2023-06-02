@@ -153,6 +153,13 @@ const ParagraphListContainer = styled.div`
   flex-direction: column;
   gap: 5px;
   margin: 10px auto 20px;
-  max-height: 250px;
-  overflow: scroll;
+  max-height: 200px;
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.color.COLOR_CORAL};
+    border-radius: 10px;
+  }
 `;
