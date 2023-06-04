@@ -72,7 +72,7 @@
 ### User
 |<p align="center">마이 페이지</p>|<p align="center">닉네임 & 비밀번호 변경 기능</p>|
 |------|------|
-|<p align="center"><img src="https://github.com/OneWeekBook/OneWeekBook_FE/assets/49552804/173b24ed-c66d-4c3c-bc2c-8377c259c754.gif" width=60%/></p> |<p align="center"><img src="https://github.com/OneWeekBook/OneWeekBook_FE/assets/49552804/d7002130-79eb-4a63-bd00-939cb682faf6.gif" width=60%/></p> |
+|<p align="center"><img src="https://github.com/OneWeekBook/OneWeekBook_FE/assets/49552804/173b24ed-c66d-4c3c-bc2c-8377c259c754.gif" width=60%/></p> |<p align="center"><img src="https://github.com/OneWeekBook/OneWeekBook_FE/assets/49552804/c55db0a3-8566-45b5-88be-918cae2ac18e.gif" width=60%/></p> |
   
 - 유저의 정보 및 등급을 확인할 수 있음
 - 닉네임 변경, 비밀번호 변경, 회원 가입 탈퇴 기능 구현
