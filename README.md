@@ -63,7 +63,7 @@
 ### Library
 |<p align="center">내서재 페이지</p>|<p align="center">구문 & 리뷰 기능</p>|
 |------|------|
-|<p align="center"><img src="https://github.com/OneWeekBook/OneWeekBook_FE/assets/49552804/d0edbf2a-d333-4d89-9042-a570bd1c6d72.gif" width=60%/></p> |<p align="center"><img src="https://github.com/OneWeekBook/OneWeekBook_FE/assets/49552804/a5af71cf-9260-4574-a0e3-4ac6ee33575b.gif" width=60%/></p> |
+|<p align="center"><img src="https://github.com/OneWeekBook/OneWeekBook_FE/assets/49552804/d0edbf2a-d333-4d89-9042-a570bd1c6d72.gif" width=60%/></p> |<p align="center"><img src="https://github.com/OneWeekBook/OneWeekBook_FE/assets/49552804/c55db0a3-8566-45b5-88be-918cae2ac18e.gif" width=60%/></p> |
   
 - 내서재의 책들은 좋아요/읽는중/다읽은 세 가지 상태로 구분하며 내서재에 등록된 책 삭제 가능
 - 읽는중 책에서 기억에 남는 책 구절을 입력 및 삭제하는 모달 구현, 독서 완료 누르면 다읽은 책으로 이동
@@ -72,7 +72,7 @@
 ### User
 |<p align="center">마이 페이지</p>|<p align="center">닉네임 & 비밀번호 변경 기능</p>|
 |------|------|
-|<p align="center"><img src="https://github.com/OneWeekBook/OneWeekBook_FE/assets/49552804/173b24ed-c66d-4c3c-bc2c-8377c259c754.gif" width=60%/></p> |<p align="center"><img src="https://github.com/OneWeekBook/OneWeekBook_FE/assets/49552804/c55db0a3-8566-45b5-88be-918cae2ac18e.gif" width=60%/></p> |
+|<p align="center"><img src="https://github.com/OneWeekBook/OneWeekBook_FE/assets/49552804/173b24ed-c66d-4c3c-bc2c-8377c259c754.gif" width=60%/></p> |<p align="center"><img src="https://github.com/OneWeekBook/OneWeekBook_FE/assets/49552804/d7002130-79eb-4a63-bd00-939cb682faf6.gif" width=60%/></p> |
   
 - 유저의 정보 및 등급을 확인할 수 있음
 - 닉네임 변경, 비밀번호 변경, 회원 가입 탈퇴 기능 구현
