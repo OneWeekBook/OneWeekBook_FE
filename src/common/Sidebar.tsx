@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { SidebarTypes } from 'types/common';
 import { AppStateType } from 'redux/reducers';

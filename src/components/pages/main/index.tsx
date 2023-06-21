@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { NewReviewResponseTypes, ReviewResponseTypes } from 'types/response';
 import { AppStateType } from 'redux/reducers';

@@ -1,17 +1,21 @@
 import { useLayoutEffect, useState } from 'react';
 
 function useWindowSize() {
-  const [size, setSize] = useState<number[]>([0, 0]);
+  const [windowWidth, setWindowWidth] = useState<number>(0);
+  const [itemWidth, setItemWidth] = useState<number>(850);
 
   useLayoutEffect(() => {
     const updateSize = () => {
-      setSize([window.innerWidth, window.innerHeight]);
+      const bannerWidth = window.innerWidth * 0.9 - 10 * 2;
+      setWindowWidth(window.innerWidth);
+      setItemWidth(bannerWidth > 850 ? 850 : bannerWidth);
     };
     window.addEventListener('resize', updateSize);
     updateSize();
     return () => window.removeEventListener('resize', updateSize);
   }, []);
-  return size;
+
+  return [windowWidth, itemWidth];
 }
 
 export default useWindowSize;
