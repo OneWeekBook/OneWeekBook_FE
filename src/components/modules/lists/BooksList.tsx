@@ -25,7 +25,9 @@ function BooksList({ searchArr }: BooksListType) {
     (state: AppStateType) => state.authUser,
     shallowEqual,
   );
-  const { isAddSuccess } = useSelector((state: AppStateType) => state.library);
+  const isAddSuccess = useSelector(
+    (state: AppStateType) => state.library.isAddSuccess,
+  );
 
   const handleFetch = useCallback(() => {
     const options: {

@@ -20,10 +20,7 @@ function SearchBookForm({
   const { routeTo } = useRouter();
   const [search, changeSearch] = useInput('');
   const debouncedSearch = useDebounce(search, 500);
-  const { books } = useSelector(
-    (state: AppStateType) => state.search,
-    shallowEqual,
-  );
+  const books = useSelector((state: AppStateType) => state.search.books);
 
   const handleFetch = useCallback(
     (search: string) => {

@@ -20,10 +20,7 @@ function Sidebar({ toggle, handleToggle }: SidebarTypes) {
   const { routeTo, currentPath } = useRouter();
   const [modalToggle, handleModalToggle] = useToggle(false);
   const { handleAuthClick } = useAuthLink();
-  const { isAuth } = useSelector(
-    (state: AppStateType) => state.authUser,
-    shallowEqual,
-  );
+  const isAuth = useSelector((state: AppStateType) => state.authUser.isAuth);
 
   const handleAuthPathCheck = () => {
     const link = [PATH_URL.LIBRARY, PATH_URL.USER];

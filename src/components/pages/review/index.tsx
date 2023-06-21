@@ -14,6 +14,7 @@ function Index() {
   const dispatch = useDispatch();
   const { reviews, reivewsTotal, reviewCount, moreReviews, isLoading } =
     useSelector((state: AppStateType) => state.review, shallowEqual);
+
   useEffect(() => {
     dispatch(reviewsRequest({ start: 0, sortby: 'new' }));
     return () => {

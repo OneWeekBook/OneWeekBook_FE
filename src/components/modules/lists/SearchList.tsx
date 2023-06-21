@@ -19,12 +19,11 @@ function SearchList() {
     (state: AppStateType) => state.search,
     shallowEqual,
   );
-  const { search } = useSelector((state: AppStateType) => state.func);
-  const { isAddSuccess } = useSelector((state: AppStateType) => state.library);
-  const { isAuth } = useSelector(
-    (state: AppStateType) => state.authUser,
-    shallowEqual,
+  const search = useSelector((state: AppStateType) => state.func.search);
+  const isAddSuccess = useSelector(
+    (state: AppStateType) => state.library.isAddSuccess,
   );
+  const isAuth = useSelector((state: AppStateType) => state.authUser.isAuth);
 
   useEffect(() => {
     if (isAddSuccess) showToast('success', '내 서재에 추가완료~');

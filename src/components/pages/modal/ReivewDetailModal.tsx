@@ -29,10 +29,7 @@ function ReviewDetailModal({
   const [interest, setInterest] = useState(userReview.oneLikeCount);
   const [usefulToggle, setUsefulToggle] = useState(false);
   const [interestToggle, setInterestToggle] = useState(false);
-  const { user } = useSelector(
-    (state: AppStateType) => state.authUser,
-    shallowEqual,
-  );
+  const user = useSelector((state: AppStateType) => state.authUser.user);
   const {
     favoriteData,
     favoriteAddErrorStatus,

@@ -19,14 +19,9 @@ function Index() {
   const dispatch = useDispatch();
   const [bestIndex, setBestIndex] = useState(0);
   const [reviewIndex, setReviewIndex] = useState(0);
-  const { reviews } = useSelector(
-    (state: AppStateType) => state.review,
-    shallowEqual,
-  );
-
-  const { newReviews } = useSelector(
-    (state: AppStateType) => state.newReview,
-    shallowEqual,
+  const reviews = useSelector((state: AppStateType) => state.review.reviews);
+  const newReviews = useSelector(
+    (state: AppStateType) => state.newReview.newReviews,
   );
 
   useEffect(() => {

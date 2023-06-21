@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { CategoryResponseTypes } from 'types/response';
 import { categoryRequest } from 'redux/reducers/categoryReducer';
@@ -8,15 +8,14 @@ import { searchNone } from 'redux/reducers/funcReducer';
 import { AppStateType } from 'redux/reducers';
 import { categoryInit } from 'constants/content';
 import Container from 'common/Container';
-import SearchInput from 'components/modules/forms/SearchBookForm';
+import SearchBookForm from 'components/modules/forms/SearchBookForm';
 import CategoryList from 'components/modules/lists/CategoryList';
 import SearchList from 'components/modules/lists/SearchList';
 
 function index() {
   const dispatch = useDispatch();
-  const { categories } = useSelector(
-    (state: AppStateType) => state.category,
-    shallowEqual,
+  const categories = useSelector(
+    (state: AppStateType) => state.category.categories,
   );
   const [curParentCategory, setCurParentCategory] = useState<
     CategoryResponseTypes[]
@@ -98,7 +97,7 @@ function index() {
           />
         )}
       </CategoryListContainer>
-      <SearchInput
+      <SearchBookForm
         curSubCategory={curChildCategory}
         curParentCategory={curParentCategory}
       />
