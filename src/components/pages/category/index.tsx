@@ -82,6 +82,7 @@ function index() {
     <Container>
       <CategoryListContainer>
         <CategoryList
+          categoryTitle="전체 카테고리"
           categories={categories}
           catgoryResult={parentCategory}
           currentCategory={curParentCategory}
@@ -89,6 +90,7 @@ function index() {
         />
         {childCatgory.length > 0 && !!childCatgory[0].categoryId && (
           <CategoryList
+            categoryTitle="서브 카테고리"
             categories={categories}
             catgoryResult={childCatgory}
             currentCategory={curChildCategory}
