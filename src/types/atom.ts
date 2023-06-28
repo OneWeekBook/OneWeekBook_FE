@@ -39,7 +39,7 @@ export interface BorderInputTypes {
   pattern?: string;
   disabled?: boolean;
   mref?: React.RefObject<HTMLInputElement>;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onKeyPress?: (
     event: React.KeyboardEvent<Element>,
     ref?: React.RefObject<HTMLInputElement>,

@@ -30,12 +30,12 @@ function Index() {
     shallowEqual,
   );
 
-  const handleNewClick = () => {
+  const handleSortNew = () => {
     routeTo(`${PATH_URL.REVIEW}/${isbn}?sort=new`, true);
     setCurIndex(0);
   };
 
-  const handleRecommendClick = () => {
+  const handleSortRecommend = () => {
     routeTo(`${PATH_URL.REVIEW}/${isbn}?sort=recommend`, true);
     setCurIndex(0);
   };
@@ -76,7 +76,7 @@ function Index() {
             backgroundColor={[theme.color.COLOR_NONE, theme.color.COLOR_NONE]}
             isBtnClick={sort === 'recommend'}
             width={60}
-            handleClick={handleRecommendClick}
+            handleClick={handleSortRecommend}
           />
           <DefaultButton
             type="button"
@@ -86,7 +86,7 @@ function Index() {
             backgroundColor={[theme.color.COLOR_NONE, theme.color.COLOR_NONE]}
             isBtnClick={sort === 'new'}
             width={80}
-            handleClick={handleNewClick}
+            handleClick={handleSortNew}
           />
         </DefaultButtons>
         <UserReviewList
