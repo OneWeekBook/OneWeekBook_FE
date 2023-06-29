@@ -14,7 +14,8 @@ export const REVIEW_REQUEST = 'REVIEW_REQUEST';
 export const REVIEW_SUCCESS = 'REVIEW_SUCCESS';
 export const REVIEW_FAIL = 'REVIEW_FAIL';
 
-export const REVIEW_INIT = 'REVIEW_INIT';
+export const REVIEWS_INIT = 'REVIEWS_INIT';
+export const USER_REVIEWS_INIT = 'USER_REVIEWS_INIT';
 
 const initialState = {
   isLoading: false,
@@ -59,6 +60,8 @@ export default function reviewReducer(
         isLoading: false,
         isSuccess: false,
       };
+    case REVIEWS_INIT:
+      return initialState;
     case REVIEW_REQUEST:
       return {
         ...state,
@@ -79,8 +82,12 @@ export default function reviewReducer(
         itemLoading: false,
         itemSuccess: false,
       };
-    case REVIEW_INIT:
-      return initialState;
+    case USER_REVIEWS_INIT:
+      return {
+        ...state,
+        itemSuccess: false,
+        userReviews: [],
+      };
     default:
       return state;
   }
@@ -107,6 +114,12 @@ export const reviewsFail = (error: AxiosError) => {
   };
 };
 
+export const reviewsInit = () => {
+  return {
+    type: REVIEWS_INIT,
+  };
+};
+
 export const reviewRequest = (data: BookRequestTypes) => {
   return {
     type: REVIEW_REQUEST,
@@ -128,8 +141,8 @@ export const reviewFail = (error: AxiosError) => {
   };
 };
 
-export const reviewInit = () => {
+export const userReviewsInit = () => {
   return {
-    type: REVIEW_INIT,
+    type: USER_REVIEWS_INIT,
   };
 };

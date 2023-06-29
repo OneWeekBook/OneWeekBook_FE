@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { NewReviewResponseTypes, ReviewResponseTypes } from 'types/response';
 import { AppStateType } from 'redux/reducers';
-import { reviewInit, reviewsRequest } from 'redux/reducers/reviewReducer';
+import { reviewsInit, reviewsRequest } from 'redux/reducers/reviewReducer';
 import {
   newReviewInit,
   newReviewsRequest,
@@ -28,7 +28,7 @@ function Index() {
     dispatch(reviewsRequest({ start: 0, sortby: 'totalReviews' }));
     dispatch(newReviewsRequest());
     return () => {
-      dispatch(reviewInit());
+      dispatch(reviewsInit());
       dispatch(newReviewInit());
     };
   }, []);

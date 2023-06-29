@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
-import { reviewInit, reviewsRequest } from 'redux/reducers/reviewReducer';
+import { reviewsInit, reviewsRequest } from 'redux/reducers/reviewReducer';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
 import Container from 'common/Container';
 import TopButton from 'components/atoms/buttons/TopButton';
@@ -18,7 +18,7 @@ function Index() {
   useEffect(() => {
     dispatch(reviewsRequest({ start: 0, sortby: 'new' }));
     return () => {
-      dispatch(reviewInit());
+      dispatch(reviewsInit());
     };
   }, []);
 

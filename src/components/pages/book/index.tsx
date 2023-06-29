@@ -4,7 +4,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import theme from 'styles/theme';
 import { AppStateType } from 'redux/reducers';
-import { reviewInit, reviewRequest } from 'redux/reducers/reviewReducer';
+import { reviewsInit, reviewRequest } from 'redux/reducers/reviewReducer';
 import useToggle from 'hooks/useToggle';
 import useRouter from 'hooks/useRouter';
 import { reviewItemInit } from 'constants/content';
@@ -56,7 +56,7 @@ function Index() {
 
   useEffect(() => {
     return () => {
-      dispatch(reviewInit());
+      dispatch(reviewsInit());
     };
   }, []);
 
