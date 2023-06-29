@@ -120,7 +120,7 @@ const ReivewInfoWrapper = styled.div`
   justify-content: flex-start;
   margin: 20px 20px 20px 10px;
   .review {
-    height: 100px;
+    height: 95px;
     display: -webkit-box;
     word-wrap: break-word;
     -webkit-line-clamp: 4;
