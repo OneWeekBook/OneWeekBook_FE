@@ -71,11 +71,7 @@ export default function reviewReducer(
         itemLoading: false,
         itemSuccess: true,
         bookData: action.payload.bookData[0],
-        userReviews: state.reviews.concat(action.payload.reviewData),
-        reivewsTotal: action.payload.bookData[0].countReviews,
-        moreReviews:
-          action.payload.bookData[0].countReviews > state.reviewCount + 10,
-        reviewCount: state.reviewCount + 10,
+        userReviews: action.payload.reviewData,
       };
     case REVIEW_FAIL:
       return {

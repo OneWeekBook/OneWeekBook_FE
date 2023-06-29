@@ -52,10 +52,13 @@ function Index() {
 
   useEffect(() => {
     handleFetchReivew();
+  }, [sort, curIndex]);
+
+  useEffect(() => {
     return () => {
       dispatch(reviewInit());
     };
-  }, [sort, curIndex]);
+  }, []);
 
   return (
     <>
