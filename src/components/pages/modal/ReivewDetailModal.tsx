@@ -124,7 +124,9 @@ function ReviewDetailModal({
           <DefaultText content="작성일자 : " />
           <DefaultText content={userReview.reviewCreationTime} />
         </DefaultTexts>
-        <DefaultText className="review" content={userReview.review} />
+        <ReviewScrollView>
+          <DefaultText className="review" content={userReview.review} />
+        </ReviewScrollView>
         <FavoriteButtons>
           <DefaultButton
             className="roundborder"
@@ -186,4 +188,16 @@ const FavoriteButtons = styled.div`
   display: flex;
   gap: 10px;
   margin-top: 15px;
+`;
+
+const ReviewScrollView = styled.div`
+  max-height: 500px;
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.color.COLOR_CORAL};
+    border-radius: 10px;
+  }
 `;
