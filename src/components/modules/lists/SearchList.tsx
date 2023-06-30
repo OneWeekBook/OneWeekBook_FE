@@ -25,17 +25,14 @@ function SearchList() {
   );
   const isAuth = useSelector((state: AppStateType) => state.authUser.isAuth);
 
-  useEffect(() => {
-    if (isAddSuccess) showToast('success', '내 서재에 추가완료~');
-  }, [isAddSuccess]);
-
-  useEffect(() => {
-    if (isSuccess) dispatch(searchDone());
-  }, [isSuccess]);
-
   const handleFavoriteClick = ({ ...data }: LibraryAddRequestTypes) => {
     dispatch(libraryAddRequest({ ...data }));
   };
+
+  useEffect(() => {
+    if (isAddSuccess) showToast('success', '내 서재에 추가완료~');
+    else if (isSuccess) dispatch(searchDone());
+  }, [isAddSuccess, isSuccess]);
 
   if (isLoading) return <LoadingForm />;
 

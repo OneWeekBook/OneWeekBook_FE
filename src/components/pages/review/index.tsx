@@ -39,9 +39,7 @@ function Index() {
           align="left"
         />
         <Bar />
-        {Array.isArray(reviews) && !!reviews && (
-          <ReviewList reviews={reviews} />
-        )}
+        <ReviewList reviews={reviews} />
         <div ref={setTarget}>{isLoading && <LoadingForm />}</div>
         <TopButton />
       </TotalReviewContainer>
@@ -54,7 +52,7 @@ export default Index;
 const TotalReviewContainer = styled.div`
   margin: 20px auto 50px;
   width: 100%;
-  height: auto;
+  min-height: 600px;
   @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
     width: 700px;
   }

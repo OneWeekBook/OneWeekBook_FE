@@ -1,6 +1,7 @@
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { SearchRequestTypes } from 'types/request';
 import { SearchInputTypes } from 'types/module';
 import { AppStateType } from 'redux/reducers';
 import { searchInit, searchRequest } from 'redux/reducers/searchReducer';
@@ -8,9 +9,9 @@ import { searchNone } from 'redux/reducers/funcReducer';
 import useDebounce from 'hooks/useDebounce';
 import useRouter from 'hooks/useRouter';
 import useInput from 'hooks/useInput';
+import { PATH_URL } from 'constants/path';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import DefaultInput from 'components/atoms/inputs/DefaultInput';
-import { PATH_URL } from 'constants/path';
 
 function SearchBookForm({
   curSubCategory,
@@ -24,27 +25,22 @@ function SearchBookForm({
 
   const handleFetch = useCallback(
     (search: string) => {
-      const options: {
-        start: number;
-        display: number;
-        d_categ?: string | number;
-        title?: string;
-      } = {
+      const options: SearchRequestTypes = {
         start: 1,
-        display: 8,
+        display: 10,
       };
 
       if (!!curSubCategory[0].categoryId && search) {
-        options.d_categ = curSubCategory[0].categoryId;
+        options.d_categ = curSubCategory[0].categoryId.toString();
         options.title = search;
       } else if (!!curParentCategory[0].categoryId && search) {
-        options.d_categ = curParentCategory[0].categoryId;
+        options.d_categ = curParentCategory[0].categoryId.toString();
         options.title = search;
       } else if (!!curSubCategory[0].categoryId && !search) {
-        options.d_categ = curSubCategory[0].categoryId;
+        options.d_categ = curSubCategory[0].categoryId.toString();
         options.title = curSubCategory[0].categoryName?.split('/')[0];
       } else if (!!curParentCategory[0].categoryId && !search) {
-        options.d_categ = curParentCategory[0].categoryId;
+        options.d_categ = curParentCategory[0].categoryId.toString();
         options.title = curParentCategory[0].categoryName?.split('/')[0];
       } else {
         options.title = search;

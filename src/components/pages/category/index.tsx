@@ -66,9 +66,9 @@ function index() {
   );
 
   useEffect(() => {
+    dispatch(searchInit());
     dispatch(categoryRequest());
     return () => {
-      dispatch(searchInit());
       dispatch(searchNone());
     };
   }, []);
