@@ -6,9 +6,11 @@ import ReviewBookCard from 'components/modules/cards/ReviewBookCard';
 function ReviewList({ reviews }: ReviewListType) {
   return (
     <ReviewListModule>
-      {reviews.map((item: ReviewResponseTypes) => (
-        <ReviewBookCard key={item.id} {...item} count={item.countReviews} />
-      ))}
+      {Array.isArray(reviews) &&
+        !!reviews &&
+        reviews.map((item: ReviewResponseTypes) => (
+          <ReviewBookCard key={item.id} {...item} count={item.countReviews} />
+        ))}
     </ReviewListModule>
   );
 }
@@ -19,7 +21,6 @@ const ReviewListModule = styled.div`
   display: grid;
   justify-items: center;
   gap: 20px 10px;
-  min-height: 600px;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
     grid-template-columns: 1fr 1fr 1fr 1fr;

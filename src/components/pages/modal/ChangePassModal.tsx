@@ -21,8 +21,8 @@ function ChangePassModal({ handlePassToggle }: ChangePassModalType) {
   const [confirmPassword, changeConfirmPasswod] = useInput('');
   const [passError, setPassError] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
-  const { changeErrorStatus } = useSelector(
-    (state: AppStateType) => state.changePassword,
+  const changeErrorStatus = useSelector(
+    (state: AppStateType) => state.changePassword.changeErrorStatus,
   );
 
   const handleChangePassword = () => {

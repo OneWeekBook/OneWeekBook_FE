@@ -19,24 +19,20 @@ function SearchList() {
     (state: AppStateType) => state.search,
     shallowEqual,
   );
-  const { search } = useSelector((state: AppStateType) => state.func);
-  const { isAddSuccess } = useSelector((state: AppStateType) => state.library);
-  const { isAuth } = useSelector(
-    (state: AppStateType) => state.authUser,
-    shallowEqual,
+  const search = useSelector((state: AppStateType) => state.func.search);
+  const isAddSuccess = useSelector(
+    (state: AppStateType) => state.library.isAddSuccess,
   );
-
-  useEffect(() => {
-    if (isAddSuccess) showToast('success', '내 서재에 추가완료~');
-  }, [isAddSuccess]);
-
-  useEffect(() => {
-    if (isSuccess) dispatch(searchDone());
-  }, [isSuccess]);
+  const isAuth = useSelector((state: AppStateType) => state.authUser.isAuth);
 
   const handleFavoriteClick = ({ ...data }: LibraryAddRequestTypes) => {
     dispatch(libraryAddRequest({ ...data }));
   };
+
+  useEffect(() => {
+    if (isAddSuccess) showToast('success', '내 서재에 추가완료~');
+    else if (isSuccess) dispatch(searchDone());
+  }, [isAddSuccess, isSuccess]);
 
   if (isLoading) return <LoadingForm />;
 

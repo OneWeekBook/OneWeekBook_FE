@@ -39,7 +39,7 @@ export const MENU_IMAGE = {
   LIBRARY_FINISHED: `${process.env.PUBLIC_URL}/assets/menu/finished.svg`,
 };
 
-export const SLIDE_IMAGE = {
+export const BANNER_IMAGE = {
   SLIDE_LEFT: `${process.env.PUBLIC_URL}/assets/slide/slide_left.svg`,
   SLIDE_RIGHT: `${process.env.PUBLIC_URL}/assets/slide/slide_right.svg`,
   SLIDE_MOBILE_1: `${process.env.PUBLIC_URL}/assets/slide/slide_mobile_1.png`,

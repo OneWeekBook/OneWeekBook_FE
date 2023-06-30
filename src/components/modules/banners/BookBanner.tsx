@@ -17,9 +17,10 @@ function BookBanner({
   for (let i = 0; i < Math.floor(ratingAverage); i += 1) {
     RateArr[i] = 1;
   }
-  RateArr[Math.floor(ratingAverage)] =
-    ratingAverage - Math.floor(ratingAverage);
-
+  if (RateArr.includes(0)) {
+    RateArr[Math.floor(ratingAverage)] =
+      ratingAverage - Math.floor(ratingAverage);
+  }
   return (
     <BookBannerModule>
       <DefaultImage

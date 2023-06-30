@@ -108,7 +108,7 @@ const ReviewInfo = styled.div`
     height: 210px;
     padding: 15px 10px;
     .review {
-      -webkit-line-clamp: 5;
+      -webkit-line-clamp: 4;
     }
   }
   @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {

@@ -23,9 +23,12 @@ function StarImage({ score, ...rest }: StarImageType & ImageStyleTypes) {
       />
     );
   }
-  return (
-    <StarImageAtom src={STAR_IMAGE.STAR_EMPTY} alt="star empty" {...rest} />
-  );
+  if (score === 0) {
+    return (
+      <StarImageAtom src={STAR_IMAGE.STAR_EMPTY} alt="star empty" {...rest} />
+    );
+  }
+  return null;
 }
 
 export default StarImage;

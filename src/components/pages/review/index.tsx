@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { AppStateType } from 'redux/reducers';
-import { reviewInit, reviewsRequest } from 'redux/reducers/reviewReducer';
+import { reviewsInit, reviewsRequest } from 'redux/reducers/reviewReducer';
 import useIntersectionObserver from 'hooks/useIntersectionObserver';
 import Container from 'common/Container';
 import TopButton from 'components/atoms/buttons/TopButton';
@@ -14,10 +14,11 @@ function Index() {
   const dispatch = useDispatch();
   const { reviews, reivewsTotal, reviewCount, moreReviews, isLoading } =
     useSelector((state: AppStateType) => state.review, shallowEqual);
+
   useEffect(() => {
     dispatch(reviewsRequest({ start: 0, sortby: 'new' }));
     return () => {
-      dispatch(reviewInit());
+      dispatch(reviewsInit());
     };
   }, []);
 
@@ -38,9 +39,7 @@ function Index() {
           align="left"
         />
         <Bar />
-        {Array.isArray(reviews) && !!reviews && (
-          <ReviewList reviews={reviews} />
-        )}
+        <ReviewList reviews={reviews} />
         <div ref={setTarget}>{isLoading && <LoadingForm />}</div>
         <TopButton />
       </TotalReviewContainer>
@@ -53,7 +52,7 @@ export default Index;
 const TotalReviewContainer = styled.div`
   margin: 20px auto 50px;
   width: 100%;
-  height: auto;
+  min-height: 600px;
   @media (max-width: ${({ theme: { device } }) => device.pc.minWidth}px) {
     width: 700px;
   }

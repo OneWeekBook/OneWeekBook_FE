@@ -49,7 +49,7 @@ function SignInForm() {
         type="email"
         placeholder="이메일"
         value={email}
-        onChange={changeEmail}
+        handleChange={changeEmail}
         onKeyPress={(event) => inputFocusHandler(event, passRef)}
         mref={emailRef}
       />
@@ -57,7 +57,7 @@ function SignInForm() {
         type="password"
         placeholder="비밀번호"
         value={password}
-        onChange={changePassword}
+        handleChange={changePassword}
         mref={passRef}
       />
       {signInError && (

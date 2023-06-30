@@ -168,7 +168,7 @@ const BookInfoDetail = styled.div`
     }
     .bookDesc {
       font-size: 1.4rem;
-      line-height: 1.8rem;
+      line-height: 1.7rem;
       -webkit-line-clamp: 3;
     }
   }

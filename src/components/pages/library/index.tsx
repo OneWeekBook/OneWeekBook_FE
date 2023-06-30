@@ -28,10 +28,7 @@ function Index() {
   const [commentToggle, handleCommentToggle] = useToggle(false);
   const [reivewToggle, handleReviewToggle] = useToggle(false);
   const [bookData, setBookData] = useState<LibraryBookTypes>(bookInit);
-  const { user } = useSelector(
-    (state: AppStateType) => state.authUser,
-    shallowEqual,
-  );
+  const user = useSelector((state: AppStateType) => state.authUser.user);
   const { libraryBookList, isDeleteSuccess } = useSelector(
     (state: AppStateType) => state.library,
     shallowEqual,
@@ -42,7 +39,10 @@ function Index() {
     itemDeleteSuccess,
     userReviewSuccess,
   } = useSelector((state: AppStateType) => state.userReview, shallowEqual);
-  const { initSuccess } = useSelector((state: AppStateType) => state.paragraph);
+  const initSuccess = useSelector(
+    (state: AppStateType) => state.paragraph.initSuccess,
+  );
+
   const handleMoveReadClick = useCallback(async () => {
     await dispatch(libraryModifyRequest({ progress: 1, isbn: bookData.isbn }));
     handleFavoriteToggle();

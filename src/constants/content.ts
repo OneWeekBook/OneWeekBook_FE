@@ -1,4 +1,4 @@
-import { SLIDE_IMAGE, MENU_IMAGE } from 'constants/image';
+import { BANNER_IMAGE, MENU_IMAGE } from 'constants/image';
 import { PATH_URL } from './path';
 
 export const LOCALSTORAGE_TOKEN_KEY = 'accesstoken';
@@ -83,12 +83,15 @@ export const reviewItemInit = {
   userId: -1,
 };
 
-export const slidePCItems = [
-  { id: 1, img: SLIDE_IMAGE.SLIDE_PC_1 },
-  { id: 2, img: SLIDE_IMAGE.SLIDE_PC_2 },
+// banner 아이템 갯수 변경 시 수정
+export const BANNER_ITEM_SIZE = 2;
+
+export const pcBannerItems = [
+  { id: 1, img: BANNER_IMAGE.SLIDE_PC_1 },
+  { id: 2, img: BANNER_IMAGE.SLIDE_PC_2 },
 ];
 
-export const slideMobileItems = [
-  { id: 1, img: SLIDE_IMAGE.SLIDE_MOBILE_1 },
-  { id: 2, img: SLIDE_IMAGE.SLIDE_MOBILE_2 },
+export const mobileBannerItems = [
+  { id: 1, img: BANNER_IMAGE.SLIDE_MOBILE_1 },
+  { id: 2, img: BANNER_IMAGE.SLIDE_MOBILE_2 },
 ];

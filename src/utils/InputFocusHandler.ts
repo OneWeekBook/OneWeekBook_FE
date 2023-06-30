@@ -3,6 +3,7 @@ export const inputFocusHandler = (
   ref: React.RefObject<HTMLInputElement>,
 ) => {
   if (event.key === 'Enter') {
+    event.preventDefault();
     ref.current?.focus();
   }
 };

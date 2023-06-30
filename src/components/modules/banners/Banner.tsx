@@ -3,56 +3,21 @@ import styled from 'styled-components';
 import { BannerTypes } from 'types/module';
 import useInterval from 'hooks/useInterval';
 import useWindowSize from 'hooks/useWindowSize';
-import { SLIDE_IMAGE } from 'constants/image';
-import { slideMobileItems, slidePCItems } from 'constants/content';
+import { BANNER_IMAGE } from 'constants/image';
+import { BANNER_ITEM_SIZE } from 'constants/content';
+import { setMobileSlides, setPCSlides } from 'utils/screenSildeHandler';
 import BannerButton from 'components/atoms/buttons/BannerButton';
 import BannerImage from 'components/atoms/images/BannerImage';
 
 function Banner() {
-  const itemSize = slidePCItems.length;
-  const addItemSize = 2;
-  const [windowWidth] = useWindowSize();
-  const [curIndex, setCurIndex] = useState<number>(addItemSize);
+  const [windowWidth, itemWidth] = useWindowSize();
+  const [curIndex, setCurIndex] = useState<number>(BANNER_ITEM_SIZE);
   const transitionStyle = `transform 500ms ease 0s`;
   const [transition, setTransition] = useState<string>(transitionStyle);
   const [isSwiping, setIsSwiping] = useState<boolean>(false);
   const isResizing = useRef<boolean>(false);
-
-  const setPCSlides = () => {
-    const addedStart = [];
-    const addedEnd = [];
-    let index = 0;
-    while (index < addItemSize) {
-      addedEnd.push(slidePCItems[index % itemSize]);
-      addedStart.unshift(slidePCItems[itemSize - 1 - (index % itemSize)]);
-      index += 1;
-    }
-    return [...addedStart, ...slidePCItems, ...addedEnd];
-  };
-
-  const setMobileSlides = () => {
-    const addedStart = [];
-    const addedEnd = [];
-    let index = 0;
-    while (index < addItemSize) {
-      addedEnd.push(slideMobileItems[index % itemSize]);
-      addedStart.unshift(slideMobileItems[itemSize - 1 - (index % itemSize)]);
-      index += 1;
-    }
-    return [...addedStart, ...slideMobileItems, ...addedEnd];
-  };
-
   const pcSlides = setPCSlides();
-
   const mobileSlides = setMobileSlides();
-
-  const getNewItemWidth = () => {
-    let itemWidth = windowWidth * 0.9 - 10 * 2;
-    itemWidth = itemWidth > 850 ? 850 : itemWidth;
-    return itemWidth;
-  };
-
-  const newItemWidth = getNewItemWidth();
 
   useEffect(() => {
     isResizing.current = true;
@@ -84,11 +49,11 @@ function Banner() {
   const handleSlide = async (idx: number) => {
     let index = idx;
     setCurIndex(index);
-    if (index - addItemSize < 0) {
-      index += itemSize;
+    if (index - BANNER_ITEM_SIZE < 0) {
+      index += BANNER_ITEM_SIZE;
       replaceSlide(index);
-    } else if (index - addItemSize >= itemSize) {
-      index -= itemSize;
+    } else if (index - BANNER_ITEM_SIZE >= BANNER_ITEM_SIZE) {
+      index -= BANNER_ITEM_SIZE;
       replaceSlide(index);
     }
     setTransition(transitionStyle);
@@ -104,12 +69,12 @@ function Banner() {
       <BannerButton
         handleClick={() => handleSwipe(-1)}
         direct="prev"
-        imageSrc={SLIDE_IMAGE.SLIDE_LEFT}
+        imageSrc={BANNER_IMAGE.SLIDE_LEFT}
       />
       <BannerButton
         handleClick={() => handleSwipe(1)}
         direct="next"
-        imageSrc={SLIDE_IMAGE.SLIDE_RIGHT}
+        imageSrc={BANNER_IMAGE.SLIDE_RIGHT}
       />
       <BannerSlider
         index={curIndex}
@@ -118,13 +83,13 @@ function Banner() {
         onMouseOver={() => setIsSwiping(true)}
         onMouseOut={() => setIsSwiping(false)}
       >
-        {newItemWidth > 849 ? (
+        {itemWidth > 849 ? (
           <>
             {pcSlides.map((item: BannerTypes, index: number) => (
               <BannerImage
                 key={index}
                 imageSrc={item.img}
-                newItemWidth={newItemWidth}
+                newItemWidth={itemWidth}
               />
             ))}
           </>
@@ -134,7 +99,7 @@ function Banner() {
               <BannerImage
                 key={index}
                 imageSrc={item.img}
-                newItemWidth={newItemWidth}
+                newItemWidth={itemWidth}
               />
             ))}
           </>
@@ -162,9 +127,6 @@ const BannerModule = styled.div`
   -ms-touch-action: pan-y;
   touch-action: pan-y;
   -webkit-tap-highlight-color: transparent;
-  @media (max-width: ${({ theme: { device } }) => device.pc.maxWidth}px) {
-    width: 95%;
-  }
 `;
 
 const BannerSlider = styled.div<{

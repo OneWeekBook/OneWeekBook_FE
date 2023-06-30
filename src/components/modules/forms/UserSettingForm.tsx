@@ -9,6 +9,7 @@ import ChangeNickModal from 'components/pages/modal/ChangeNickModal';
 function UserSettingForm({ nickName }: UserSettingFormType) {
   const [nickToggle, handleNickToggle] = useToggle(false);
   const [passToggle, handlePassToggle] = useToggle(false);
+
   return (
     <UserSettingFormModule>
       <DefaultTexts>

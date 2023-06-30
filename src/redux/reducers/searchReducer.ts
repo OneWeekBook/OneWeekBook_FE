@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import { ActionsTypes } from 'types/request';
+import { ActionsTypes, SearchRequestTypes } from 'types/request';
 import { BookResponseTypes, ResponseSearchSuccess } from 'types/response';
 
 export const SEARCH_REQUEST = 'SEARCH_REQUEST';
@@ -31,7 +31,7 @@ export default function searchReducer(
         ...state,
         isLoading: false,
         isSuccess: true,
-        moreBooks: action.payload.books.length === 12,
+        moreBooks: action.payload.books.length === 10,
         books: state.books.concat(action.payload.books),
       };
     case SEARCH_FAIL:
@@ -47,7 +47,7 @@ export default function searchReducer(
   }
 }
 
-export const searchRequest = (params: any) => {
+export const searchRequest = (params: SearchRequestTypes) => {
   return {
     type: SEARCH_REQUEST,
     payload: params,

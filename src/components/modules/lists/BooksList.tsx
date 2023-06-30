@@ -3,7 +3,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import theme from 'styles/theme';
 import { BookResponseTypes } from 'types/response';
-import { LibraryAddRequestTypes } from 'types/request';
+import { LibraryAddRequestTypes, SearchRequestTypes } from 'types/request';
 import { BooksListType } from 'types/module';
 import { AppStateType } from 'redux/reducers';
 import { libraryAddRequest } from 'redux/reducers/libraryReducer';
@@ -25,17 +25,14 @@ function BooksList({ searchArr }: BooksListType) {
     (state: AppStateType) => state.authUser,
     shallowEqual,
   );
-  const { isAddSuccess } = useSelector((state: AppStateType) => state.library);
+  const isAddSuccess = useSelector(
+    (state: AppStateType) => state.library.isAddSuccess,
+  );
 
   const handleFetch = useCallback(() => {
-    const options: {
-      start: number;
-      display: number;
-      d_categ?: string | number;
-      title?: string;
-    } = {
+    const options: SearchRequestTypes = {
       start: startIdx,
-      display: 12,
+      display: 10,
     };
 
     if (searchArr.length === 3) {
@@ -49,7 +46,7 @@ function BooksList({ searchArr }: BooksListType) {
     }
 
     dispatch(searchRequest({ ...options }));
-    setStartIdx(startIdx + 12);
+    setStartIdx(startIdx + 10);
   }, [startIdx]);
 
   const handleFavoriteClick = ({ ...data }: LibraryAddRequestTypes) => {
@@ -64,7 +61,6 @@ function BooksList({ searchArr }: BooksListType) {
   const { setTarget } = useIntersectionObserver({ onIntersect });
 
   useEffect(() => {
-    if (!isLoading) handleFetch();
     return () => {
       dispatch(searchInit());
     };

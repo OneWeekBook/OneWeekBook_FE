@@ -5,6 +5,7 @@ import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import DefaultLabel from 'components/atoms/labels/DefaultLabel';
 
 function CategoryList({
+  categoryTitle,
   categories,
   catgoryResult,
   currentCategory,
@@ -12,7 +13,7 @@ function CategoryList({
 }: CategoryListProps) {
   return (
     <CategoryListModule>
-      <DefaultLabel content="전체 카테고리" align="left" fontSize={2.4} />
+      <DefaultLabel content={categoryTitle} align="left" fontSize={2.4} />
       <CategoryTagList>
         {catgoryResult.map((item: CategoryResponseTypes) => (
           <DefaultButton
