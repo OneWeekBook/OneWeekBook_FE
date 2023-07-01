@@ -40,7 +40,7 @@ function ParagraphInputForm({ bookId }: ParagraphInputFormType) {
         type="text"
         placeholder="기억에 남는 문구를 입력해주세요."
         value={paragraph}
-        onChange={handleChangeParagraph}
+        handleChange={handleChangeParagraph}
         onKeyPress={handleInputEnter}
         mref={paragRef}
       />

@@ -14,8 +14,8 @@ import InputForm from 'components/modules/forms/InputForm';
 function ChangeNickModal({ handleNickToggle }: ChangeNickModalType) {
   const dispatch = useDispatch();
   const [nick, changeNick] = useInput('');
-  const { changeErrorStatus } = useSelector(
-    (state: AppStateType) => state.changeNick,
+  const changeErrorStatus = useSelector(
+    (state: AppStateType) => state.changeNick.changeErrorStatus,
   );
 
   const handleChangeClick = () => {

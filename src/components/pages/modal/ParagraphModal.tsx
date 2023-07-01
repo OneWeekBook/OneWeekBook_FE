@@ -93,7 +93,7 @@ function ParagraphModal({
           )}
         </BookInfoContainer>
         <ParagraphInputForm bookId={bookData.id} />
-        <ParagraphListContainer>
+        <ParagraphScrollView>
           {paragraph.map((item: ParagraphResponseTypes) => (
             <ParagraphCard
               key={item.id}
@@ -102,7 +102,7 @@ function ParagraphModal({
               deleteParagraphClick={handleParagraphDelete}
             />
           ))}
-        </ParagraphListContainer>
+        </ParagraphScrollView>
       </ParagraphModalBody>
     </WriteModal>
   );
@@ -148,7 +148,7 @@ const BookInfo = styled.div`
   width: 100%;
 `;
 
-const ParagraphListContainer = styled.div`
+const ParagraphScrollView = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;

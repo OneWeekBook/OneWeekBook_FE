@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { NewReviewResponseTypes, ReviewResponseTypes } from 'types/response';
 import { AppStateType } from 'redux/reducers';
-import { reviewInit, reviewsRequest } from 'redux/reducers/reviewReducer';
+import { reviewsInit, reviewsRequest } from 'redux/reducers/reviewReducer';
 import {
   newReviewInit,
   newReviewsRequest,
@@ -19,21 +19,16 @@ function Index() {
   const dispatch = useDispatch();
   const [bestIndex, setBestIndex] = useState(0);
   const [reviewIndex, setReviewIndex] = useState(0);
-  const { reviews } = useSelector(
-    (state: AppStateType) => state.review,
-    shallowEqual,
-  );
-
-  const { newReviews } = useSelector(
-    (state: AppStateType) => state.newReview,
-    shallowEqual,
+  const reviews = useSelector((state: AppStateType) => state.review.reviews);
+  const newReviews = useSelector(
+    (state: AppStateType) => state.newReview.newReviews,
   );
 
   useEffect(() => {
     dispatch(reviewsRequest({ start: 0, sortby: 'totalReviews' }));
     dispatch(newReviewsRequest());
     return () => {
-      dispatch(reviewInit());
+      dispatch(reviewsInit());
       dispatch(newReviewInit());
     };
   }, []);

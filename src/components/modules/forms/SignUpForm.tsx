@@ -77,7 +77,7 @@ function SignUpForm({ email, authDone, setAuthDone }: SignUpTypes) {
         type="password"
         placeholder="비밀번호"
         value={password}
-        onChange={changePassword}
+        handleChange={changePassword}
         onKeyPress={(event) => inputFocusHandler(event, passConfRef)}
         mref={passRef}
       />
@@ -93,7 +93,7 @@ function SignUpForm({ email, authDone, setAuthDone }: SignUpTypes) {
         type="password"
         placeholder="비밀번호 확인"
         value={confirmPassword}
-        onChange={changeConfirmPassword}
+        handleChange={changeConfirmPassword}
         onKeyPress={(event) => inputFocusHandler(event, nameRef)}
         mref={passConfRef}
       />
@@ -109,7 +109,7 @@ function SignUpForm({ email, authDone, setAuthDone }: SignUpTypes) {
         type="text"
         placeholder="이름"
         value={username}
-        onChange={changeUserName}
+        handleChange={changeUserName}
         onKeyPress={(event) => inputFocusHandler(event, nickRef)}
         mref={nameRef}
       />
@@ -117,7 +117,7 @@ function SignUpForm({ email, authDone, setAuthDone }: SignUpTypes) {
         type="text"
         placeholder="닉네임"
         value={nick}
-        onChange={changeNick}
+        handleChange={changeNick}
         mref={nickRef}
       />
       {signUpError && (

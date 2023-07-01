@@ -99,7 +99,7 @@ function AuthEmailForm({
         type="email"
         placeholder="이메일"
         value={email}
-        onChange={changeEmail}
+        handleChange={changeEmail}
         onKeyPress={handleEmailCheckEnter}
         disabled={emailDone}
         mref={emailRef}
@@ -154,7 +154,7 @@ function AuthEmailForm({
                 placeholder="인증번호"
                 value={code}
                 pattern="[0-9]+"
-                onChange={changeCode}
+                handleChange={changeCode}
                 onKeyPress={handleCodeCheckEnter}
                 mref={codeRef}
               />

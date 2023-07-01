@@ -37,6 +37,7 @@ export interface CodeErrorTypes {
 }
 
 export interface CategoryListProps {
+  categoryTitle: string;
   categories: CategoryResponseTypes[];
   catgoryResult: CategoryResponseTypes[];
   currentCategory: CategoryResponseTypes[];

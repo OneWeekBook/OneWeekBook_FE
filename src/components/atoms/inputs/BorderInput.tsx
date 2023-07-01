@@ -10,7 +10,7 @@ function BorderInput({
   pattern,
   disabled,
   mref,
-  onChange,
+  handleChange,
   onKeyPress,
   children,
 }: React.PropsWithChildren<BorderInputTypes>) {
@@ -22,8 +22,8 @@ function BorderInput({
         placeholder={placeholder}
         value={value}
         pattern={pattern}
-        onChange={onChange}
-        onKeyPress={onKeyPress}
+        onChange={handleChange}
+        onKeyDown={onKeyPress}
         disabled={disabled}
         ref={mref}
         autoComplete="off"

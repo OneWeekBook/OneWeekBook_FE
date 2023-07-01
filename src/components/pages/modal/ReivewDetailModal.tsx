@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import theme from 'styles/theme';
@@ -11,7 +11,7 @@ import {
   favoriteInit,
   favoriteRequest,
 } from 'redux/reducers/favoriteReducer';
-import { reviewInit, reviewRequest } from 'redux/reducers/reviewReducer';
+import { userReviewsInit, reviewRequest } from 'redux/reducers/reviewReducer';
 import { FAVORITE_IMAGE } from 'constants/image';
 import DetailModal from 'common/DefaultModal';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
@@ -29,9 +29,8 @@ function ReviewDetailModal({
   const [interest, setInterest] = useState(userReview.oneLikeCount);
   const [usefulToggle, setUsefulToggle] = useState(false);
   const [interestToggle, setInterestToggle] = useState(false);
-  const { user } = useSelector(
-    (state: AppStateType) => state.authUser,
-    shallowEqual,
+  const userId: number = useSelector(
+    (state: AppStateType) => state.authUser.user.id,
   );
   const {
     favoriteData,
@@ -43,38 +42,10 @@ function ReviewDetailModal({
     favoriteCancelErrorStatus?: number;
   } = useSelector((state: AppStateType) => state.favorite, shallowEqual);
 
-  useEffect(() => {
-    dispatch(favoriteRequest({ bookId: userReview.id }));
-    return () => {
-      dispatch(favoriteInit());
-    };
-  }, []);
-
-  useEffect(() => {
-    if (favoriteAddErrorStatus === 200 || favoriteCancelErrorStatus === 200) {
-      dispatch(favoriteRequest({ bookId: userReview.id }));
-      dispatch(reviewInit());
-      dispatch(
-        reviewRequest({
-          isbn: bookIsbn,
-          start: reviewIndex,
-          sortby: reviewSort,
-        }),
-      );
-    }
-  }, [favoriteAddErrorStatus, favoriteCancelErrorStatus]);
-
-  useEffect(() => {
-    compareFavoriteUser();
+  const setFavoriteCount = useCallback(() => {
     if (Array.isArray(favoriteData) && !!favoriteData) {
-      setUseful(
-        favoriteData.filter((item: FavoriteResponseTypes) => item.state === 0)
-          .length,
-      );
-      setInterest(
-        favoriteData.filter((item: FavoriteResponseTypes) => item.state === 1)
-          .length,
-      );
+      setUseful(favoriteData.filter((item) => item.state === 0).length);
+      setInterest(favoriteData.filter((item) => item.state === 1).length);
     } else {
       setUseful(0);
       setInterest(0);
@@ -82,14 +53,8 @@ function ReviewDetailModal({
   }, [favoriteData]);
 
   const compareFavoriteUser = () => {
-    if (
-      favoriteData.find(
-        (like: FavoriteResponseTypes) => like.user.id === user.id,
-      )
-    ) {
-      const data = favoriteData.find(
-        (like: FavoriteResponseTypes) => like.user.id === user.id,
-      );
+    if (favoriteData.find((like) => like.user.id === userId)) {
+      const data = favoriteData.find((like) => like.user.id === userId);
       if (data?.state === 0) {
         setInterestToggle(false);
         setUsefulToggle(true);
@@ -117,6 +82,32 @@ function ReviewDetailModal({
     }
   };
 
+  useEffect(() => {
+    dispatch(favoriteRequest({ bookId: userReview.id }));
+    return () => {
+      dispatch(favoriteInit());
+    };
+  }, []);
+
+  useEffect(() => {
+    compareFavoriteUser();
+    setFavoriteCount();
+  }, [favoriteData]);
+
+  useEffect(() => {
+    if (favoriteAddErrorStatus === 200 || favoriteCancelErrorStatus === 200) {
+      dispatch(favoriteRequest({ bookId: userReview.id }));
+      dispatch(userReviewsInit());
+      dispatch(
+        reviewRequest({
+          isbn: bookIsbn,
+          start: reviewIndex,
+          sortby: reviewSort,
+        }),
+      );
+    }
+  }, [favoriteAddErrorStatus, favoriteCancelErrorStatus]);
+
   return (
     <DetailModal
       content={`${userReview.nick}님의 리뷰 전체 보기`}
@@ -133,7 +124,9 @@ function ReviewDetailModal({
           <DefaultText content="작성일자 : " />
           <DefaultText content={userReview.reviewCreationTime} />
         </DefaultTexts>
-        <DefaultText className="review" content={userReview.review} />
+        <ReviewScrollView>
+          <DefaultText className="review" content={userReview.review} />
+        </ReviewScrollView>
         <FavoriteButtons>
           <DefaultButton
             className="roundborder"
@@ -164,6 +157,12 @@ function ReviewDetailModal({
             fontWeight={300}
           />
         </FavoriteButtons>
+        {userId === undefined && (
+          <DefaultText
+            content="추천 버튼을 누르시려면 로그인 하세요."
+            fontSize={1.2}
+          />
+        )}
       </UserReviewModalBody>
     </DetailModal>
   );
@@ -189,4 +188,16 @@ const FavoriteButtons = styled.div`
   display: flex;
   gap: 10px;
   margin-top: 15px;
+`;
+
+const ReviewScrollView = styled.div`
+  max-height: 500px;
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.color.COLOR_CORAL};
+    border-radius: 10px;
+  }
 `;
