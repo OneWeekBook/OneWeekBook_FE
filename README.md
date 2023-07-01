@@ -16,8 +16,7 @@
 개발 기간 : 2023.03.02 ~ 2023.06.28  
 **version 2.0**  
 디자인 수정 : 2023.02.03 ~ 2023.02.15  
-1차 리팩토링 : 2023.04.14 ~ 2023.04.30  
-2차 리팩토링 : 2023.05.27 ~ 2023.05.30  
+리팩토링 : 2023.04.14 ~ 2023.05.30  
 
 ### [OneWeekBook 서비스 바로가기](http://oneweekbook.s3-website.ap-northeast-2.amazonaws.com/)
 
@@ -35,13 +34,13 @@
   
 ### Search
   
-|<p align="center">검색 페이지</p>|<p align="center">전체 검색 결과 페이지</p>|
+|<p align="center">검색 및 모두보기 페이지</p>|<p align="center">책 찜 버튼으로 내 서재 추가</p>|
 |------|------|
-|<p align="center"><img src="https://github.com/OneWeekBook/OneWeekBook_FE/assets/49552804/dd00aefb-26a4-48d8-9c71-3f4adb05409a.gif" width=60%/></p> |<p align="center"><img src="https://github.com/OneWeekBook/OneWeekBook_FE/assets/49552804/82d84c5c-c7d1-4b66-ba46-a89b9ae34ba8.gif" width=60%/></p> |
+|<p align="center"><img src="https://github.com/OneWeekBook/OneWeekBook_FE/assets/49552804/e55eb2ae-28fd-47e6-a977-2359f74a8775.gif" width=60%/></p> |<p align="center"><img src="https://github.com/OneWeekBook/OneWeekBook_FE/assets/49552804/e1f74762-512d-4e13-8a65-4156fef16f15.gif" width=60%/></p> |
   
 - 1차, 2차 카테고리 검색 및 검색어 입력 시 책 검색 기능 구현
-- 모두보기 클릭 시 해당 검색 정보에 대한 전체 책 검색 결과를 보여주며 더보기 버튼을 누르면 다음 검색 결과를 출력
-- 찜 버튼을 눌러 내 서재에 책 소장 가능
+- 모두보기 클릭 시 해당 검색 정보에 대한 전체 책 검색 결과를 보여주며 무한 스크롤을 통해 다음 검색 결과를 출력
+- 책 이미지 왼쪽 상단의 하트모양 찜 버튼을 눌러 내 서재에 책 추가 기능 구현
   
 ### Review
 |<p align="center">전체 리뷰 페이지</p>|<p align="center">책 상세 페이지</p>|
@@ -74,7 +73,7 @@
 |------|------|
 |<p align="center"><img src="https://github.com/OneWeekBook/OneWeekBook_FE/assets/49552804/173b24ed-c66d-4c3c-bc2c-8377c259c754.gif" width=60%/></p> |<p align="center"><img src="https://github.com/OneWeekBook/OneWeekBook_FE/assets/49552804/d7002130-79eb-4a63-bd00-939cb682faf6.gif" width=60%/></p> |
   
-- 유저의 정보 및 등급을 확인할 수 있음
+- 유저의 정보 및 등급을 확인할 수 있는 페이지
 - 닉네임 변경, 비밀번호 변경, 회원 가입 탈퇴 기능 구현
 - 유저가 지금까지 다읽은 책들을 리스트 형태로 볼 수 있음
   
@@ -83,8 +82,8 @@
 - React + TypeScript를 이용하여 서비스를 구현했습니다.
 - 전역 상태 관리 및 미들웨어를 구현하기 위해 Redux, Redux-Saga를 이용했습니다.  
 - Atomic 디자인 패턴을 이용하여 컴포넌트 구조화했습니다. (atom, module, page)  
-- 자주 사용하는 컴포넌트(Button, Input, Items 등)들을 모듈화하여 재사용성 높였습니다.
-- 자주 사용하는 기능(ErrorCheck, Auth, Debounce, Toggle, Input 등)들을 Custom Hooks를 이용하여 재사용성 높였습니다.
+- 자주 사용하는 컴포넌트(Button, Input, Items 등)들을 모듈화하여 재사용성을 높였습니다.
+- 자주 사용하는 기능(Auth, Debounce, Toggle, Input 등)들을 Custom Hooks를 이용하여 재사용성을 높였습니다.
 - CSS in JS 라이브러리인 styled-components를 이용하여 React 컴포넌트를 스타일링 했습니다.
 - react-toastify를 이용하여 토스트 메시지 기능을 추가했습니다. 
 - media-query를 이용하여 반응형 디자인을 구현했습니다.
