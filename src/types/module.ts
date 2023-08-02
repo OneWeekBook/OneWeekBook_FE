@@ -47,6 +47,12 @@ export interface CategoryListProps {
   ) => void;
 }
 
+export interface CategoryFormProps extends CategoryListProps {
+  handleToggleActionSheet: (
+    event: React.MouseEvent<HTMLDivElement | HTMLButtonElement, MouseEvent>,
+  ) => void;
+}
+
 export interface EmailErrorTypes {
   email: string;
   emailReg: boolean;

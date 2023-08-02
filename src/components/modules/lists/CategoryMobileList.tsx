@@ -1,8 +1,10 @@
-import DefaultButton from 'components/atoms/buttons/DefaultButton';
-import DefaultLabel from 'components/atoms/labels/DefaultLabel';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { CategoryListProps } from 'types/module';
+import { CategoryResponseTypes } from 'types/response';
+import DefaultButton from 'components/atoms/buttons/DefaultButton';
+import DefaultLabel from 'components/atoms/labels/DefaultLabel';
+import CategoryForm from '../forms/CategoryForm';
 
 function CategoryMobileList({
   categoryTitle,
@@ -13,9 +15,21 @@ function CategoryMobileList({
 }: CategoryListProps) {
   const [isActionSheet, setIsActionSheet] = useState(false);
 
-  const handleToggleActionSheet = () => {
+  const handleToggleActionSheet = (
+    event: React.MouseEvent<HTMLDivElement | HTMLButtonElement, MouseEvent>,
+  ) => {
+    event.stopPropagation();
     setIsActionSheet(!isActionSheet);
   };
+
+  const handleFilteredMobile = (
+    categories: CategoryResponseTypes[],
+    categoryId: number,
+  ) => {
+    handleCategoryFilter(categories, categoryId);
+    setIsActionSheet(!isActionSheet);
+  };
+
   return (
     <CategoryMobileListModule>
       <DefaultLabel content={categoryTitle} align="left" fontSize={2.4} />
@@ -29,6 +43,16 @@ function CategoryMobileList({
             : currentCategory[0].categoryName
         }
       />
+      {isActionSheet && (
+        <CategoryForm
+          categories={categories}
+          catgoryResult={catgoryResult}
+          categoryTitle={categoryTitle}
+          currentCategory={currentCategory}
+          handleCategoryFilter={handleFilteredMobile}
+          handleToggleActionSheet={handleToggleActionSheet}
+        />
+      )}
     </CategoryMobileListModule>
   );
 }
