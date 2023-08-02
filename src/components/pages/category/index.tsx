@@ -11,6 +11,7 @@ import Container from 'common/Container';
 import SearchBookForm from 'components/modules/forms/SearchBookForm';
 import CategoryList from 'components/modules/lists/CategoryList';
 import SearchList from 'components/modules/lists/SearchList';
+import CategoryMobileList from 'components/modules/lists/CategoryMobileList';
 
 function index() {
   const dispatch = useDispatch();
@@ -97,6 +98,24 @@ function index() {
           />
         )}
       </CategoryListContainer>
+      <CategoryListMobileContainer>
+        <CategoryMobileList
+          categoryTitle="전체 카테고리"
+          categories={categories}
+          catgoryResult={parentCategory}
+          currentCategory={curParentCategory}
+          handleCategoryFilter={getFilterChildCategories}
+        />
+        {childCatgory.length > 0 && !!childCatgory[0].categoryId && (
+          <CategoryMobileList
+            categoryTitle="서브 카테고리"
+            categories={categories}
+            catgoryResult={childCatgory}
+            currentCategory={curChildCategory}
+            handleCategoryFilter={handleCategoryPeek}
+          />
+        )}
+      </CategoryListMobileContainer>
       <SearchBookForm
         curSubCategory={curChildCategory}
         curParentCategory={curParentCategory}
@@ -111,4 +130,14 @@ export default index;
 const CategoryListContainer = styled.div`
   width: 100%;
   margin-top: 20px;
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    display: none;
+  }
+`;
+
+const CategoryListMobileContainer = styled.div`
+  display: none;
+  @media (max-width: ${({ theme: { device } }) => device.mobile.maxWidth}px) {
+    display: block;
+  }
 `;
