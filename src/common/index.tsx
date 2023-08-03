@@ -1,8 +1,7 @@
 import { PropsWithChildren, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import { AppStateType } from 'redux/reducers';
 import { authUserRequest } from 'redux/reducers/authUserReducer';
 import useToggle from 'hooks/useToggle';
 import { PATH_URL } from 'constants/path';
@@ -16,21 +15,10 @@ function Index({ children }: PropsWithChildren) {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const [toggle, handleToggle] = useToggle(false);
-  const { isSuccess: signInSuccess } = useSelector(
-    (state: AppStateType) => state.signIn,
-  );
-  const { isSuccess: changeNickSuccess } = useSelector(
-    (state: AppStateType) => state.changeNick,
-  );
 
   useEffect(() => {
-    if (
-      signInSuccess ||
-      changeNickSuccess ||
-      getAccessTokenFromSessionStorage()
-    )
-      dispatch(authUserRequest());
-  }, [signInSuccess, changeNickSuccess]);
+    if (getAccessTokenFromSessionStorage()) dispatch(authUserRequest());
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
