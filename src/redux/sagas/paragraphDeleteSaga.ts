@@ -7,7 +7,8 @@ import {
   paragraphDeleteFail,
   paragraphDeleteSuccess,
   PARAGRAPH_DELETE_REQUEST,
-  paragraphInitSuccess,
+  paragraphSuccess,
+  paragraphFail,
 } from 'redux/reducers/paragraphReducer';
 import { paragraphAPI } from './paragraphSaga';
 
@@ -23,9 +24,12 @@ function* fetchParagraphDeleteSaga(action: {
     yield call(paragraphDeleteAPI, action.payload);
     yield put(paragraphDeleteSuccess());
     const result = yield call(paragraphAPI, action.payload);
-    yield put(paragraphInitSuccess(result.data.paragraphs));
+    yield put(paragraphSuccess(result.data.paragraphs));
   } catch (error) {
-    if (axios.isAxiosError(error)) yield put(paragraphDeleteFail(error));
+    if (axios.isAxiosError(error)) {
+      yield put(paragraphDeleteFail(error));
+      yield put(paragraphFail(error));
+    }
   }
 }
 
