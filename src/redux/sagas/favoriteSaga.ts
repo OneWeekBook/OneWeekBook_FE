@@ -8,7 +8,7 @@ import {
   FAVORITE_REQUEST,
 } from 'redux/reducers/favoriteReducer';
 
-function favoriteAPI(params: { bookId: number }) {
+export function favoriteAPI(params: { bookId: number }) {
   return instance.get(`${API_URL.FAVORITE_USER}/${params.bookId}`);
 }
 
