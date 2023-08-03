@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios';
 import {
-  DeleteRequestType,
+  ParagraphDeleteRequestTypes,
   ParagraphAddRequestTypes,
   ParagraphRequestType,
   ActionsTypes,
@@ -185,7 +185,7 @@ export const paragraphAddFail = (error: AxiosError) => {
   };
 };
 
-export const paragraphDeleteRequest = (data: DeleteRequestType) => {
+export const paragraphDeleteRequest = (data: ParagraphDeleteRequestTypes) => {
   return {
     type: PARAGRAPH_DELETE_REQUEST,
     payload: data,

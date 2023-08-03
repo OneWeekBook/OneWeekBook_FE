@@ -1,25 +1,29 @@
 import axios from 'axios';
 import instance from 'api/axios';
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { DeleteRequestType } from 'types/request';
+import { ParagraphDeleteRequestTypes } from 'types/request';
 import { API_URL } from 'constants/path';
 import {
   paragraphDeleteFail,
   paragraphDeleteSuccess,
   PARAGRAPH_DELETE_REQUEST,
+  paragraphInitSuccess,
 } from 'redux/reducers/paragraphReducer';
+import { paragraphAPI } from './paragraphSaga';
 
-function paragraphDeleteAPI(data: DeleteRequestType) {
+function paragraphDeleteAPI(data: ParagraphDeleteRequestTypes) {
   return instance.delete(`${API_URL.PARAGRAPH}?id=${data.id}`);
 }
 
 function* fetchParagraphDeleteSaga(action: {
   type: string;
-  payload: DeleteRequestType;
-}) {
+  payload: ParagraphDeleteRequestTypes;
+}): object {
   try {
     yield call(paragraphDeleteAPI, action.payload);
     yield put(paragraphDeleteSuccess());
+    const result = yield call(paragraphAPI, action.payload);
+    yield put(paragraphInitSuccess(result.data.paragraphs));
   } catch (error) {
     if (axios.isAxiosError(error)) yield put(paragraphDeleteFail(error));
   }

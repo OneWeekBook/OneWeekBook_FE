@@ -29,10 +29,10 @@ function ParagraphModal({
   );
 
   useEffect(() => {
-    if (isAddSuccess || isDeleteSuccess) {
+    if (isAddSuccess) {
       dispatch(paragraphRequest({ bookId: bookData.id }));
     }
-  }, [isAddSuccess, isDeleteSuccess]);
+  }, [isAddSuccess]);
 
   useEffect(() => {
     return () => {
@@ -41,7 +41,7 @@ function ParagraphModal({
   }, []);
 
   const handleParagraphDelete = useCallback((id: number) => {
-    dispatch(paragraphDeleteRequest({ id }));
+    dispatch(paragraphDeleteRequest({ id, bookId: bookData.id }));
   }, []);
 
   return (
