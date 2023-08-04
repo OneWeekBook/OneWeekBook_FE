@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { CategoryResponseTypes } from 'types/response';
 import { categoryRequest } from 'redux/reducers/categoryReducer';
+import { libraryInit } from 'redux/reducers/libraryReducer';
 import { searchInit } from 'redux/reducers/searchReducer';
 import { searchNone } from 'redux/reducers/funcReducer';
 import { AppStateType } from 'redux/reducers';
@@ -70,6 +71,7 @@ function index() {
     dispatch(searchInit());
     dispatch(categoryRequest());
     return () => {
+      dispatch(libraryInit());
       dispatch(searchNone());
     };
   }, []);

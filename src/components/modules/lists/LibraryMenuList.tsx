@@ -1,34 +1,31 @@
-import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import theme from 'styles/theme';
 import { LibraryMenuTypes } from 'types/module';
-import { libraryInit, libraryRequest } from 'redux/reducers/libraryReducer';
+import { libraryRequest } from 'redux/reducers/libraryReducer';
 import { PATH_URL } from 'constants/path';
 import { libraryMenu } from 'constants/content';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import useRouter from 'hooks/useRouter';
 
-function LibraryMenuList({ useId, navId }: LibraryMenuTypes) {
+function LibraryMenuList({ navId }: LibraryMenuTypes) {
   const dispatch = useDispatch();
   const { routeTo } = useRouter();
 
   const handleMenuClick = (curId: number) => {
+    let nextMenuId;
     if (libraryMenu[0].id === curId) {
       routeTo(`${PATH_URL.LIBRARY}?id=0`, true);
+      nextMenuId = 0;
     } else if (libraryMenu[1].id === curId) {
       routeTo(`${PATH_URL.LIBRARY}?id=1`, true);
+      nextMenuId = 1;
     } else if (libraryMenu[2].id === curId) {
       routeTo(`${PATH_URL.LIBRARY}?id=2`, true);
+      nextMenuId = 2;
     }
+    dispatch(libraryRequest({ progress: nextMenuId as number }));
   };
-
-  useEffect(() => {
-    if (useId) dispatch(libraryRequest({ progress: navId }));
-    return () => {
-      dispatch(libraryInit());
-    };
-  }, [useId, navId]);
 
   return (
     <LibraryMenuListModule>

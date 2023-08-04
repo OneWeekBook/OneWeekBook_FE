@@ -91,7 +91,6 @@ export interface LibraryBookCardTypes {
 }
 
 export interface LibraryMenuTypes {
-  useId: number;
   navId: number;
 }
 

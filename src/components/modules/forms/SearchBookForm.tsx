@@ -12,6 +12,7 @@ import useInput from 'hooks/useInput';
 import { PATH_URL } from 'constants/path';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
 import DefaultInput from 'components/atoms/inputs/DefaultInput';
+import { libraryInit } from 'redux/reducers/libraryReducer';
 
 function SearchBookForm({
   curSubCategory,
@@ -29,7 +30,6 @@ function SearchBookForm({
         start: 1,
         display: 10,
       };
-
       if (!!curSubCategory[0].categoryId && search) {
         options.d_categ = curSubCategory[0].categoryId.toString();
         options.title = search;
@@ -46,6 +46,7 @@ function SearchBookForm({
         options.title = search;
       }
       if (options.d_categ || options.title) {
+        dispatch(libraryInit());
         dispatch(searchInit());
         dispatch(searchRequest({ ...options }));
       }
