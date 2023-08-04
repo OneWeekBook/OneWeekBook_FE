@@ -3,10 +3,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { AppStateType } from 'redux/reducers';
 import styled from 'styled-components';
 import { LibraryBookTypes } from 'types/page';
-import {
-  libraryModifyRequest,
-  libraryRequest,
-} from 'redux/reducers/libraryReducer';
+import { libraryModifyRequest } from 'redux/reducers/libraryReducer';
 import useToggle from 'hooks/useToggle';
 import { bookInit } from 'constants/content';
 import { FUNC_IMAGE } from 'constants/image';
@@ -54,11 +51,6 @@ function Index() {
     handleCommentToggle();
     routeTo(`${PATH_URL.LIBRARY}?id=2`, true);
   }, [bookData]);
-
-  useEffect(() => {
-    if (isDeleteSuccess)
-      dispatch(libraryRequest({ progress: Number(currentSearch.get('id')) }));
-  }, [isDeleteSuccess]);
 
   useEffect(() => {
     if (itemAddSuccess) showToast('success', '작성 완료');

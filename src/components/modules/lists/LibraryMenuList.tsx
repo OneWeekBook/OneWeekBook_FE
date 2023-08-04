@@ -18,7 +18,7 @@ function LibraryMenuList({ useId, navId }: LibraryMenuTypes) {
       routeTo(`${PATH_URL.LIBRARY}?id=0`, true);
     } else if (libraryMenu[1].id === curId) {
       routeTo(`${PATH_URL.LIBRARY}?id=1`, true);
-    } else {
+    } else if (libraryMenu[2].id === curId) {
       routeTo(`${PATH_URL.LIBRARY}?id=2`, true);
     }
   };
