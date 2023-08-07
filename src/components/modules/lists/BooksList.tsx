@@ -61,6 +61,7 @@ function BooksList({ searchArr }: BooksListType) {
   const { setTarget } = useIntersectionObserver({ onIntersect });
 
   useEffect(() => {
+    handleFetch();
     return () => {
       dispatch(searchInit());
     };

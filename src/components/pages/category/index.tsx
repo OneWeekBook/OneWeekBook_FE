@@ -72,6 +72,7 @@ function index() {
     dispatch(categoryRequest());
     return () => {
       dispatch(libraryInit());
+      dispatch(searchInit());
       dispatch(searchNone());
     };
   }, []);
