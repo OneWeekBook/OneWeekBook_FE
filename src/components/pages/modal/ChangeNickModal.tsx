@@ -1,7 +1,7 @@
 import { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppStateType } from 'redux/reducers';
 import { ChangeNickModalType } from 'types/page';
+import { AppStateType } from 'redux/reducers';
 import {
   changeNickInit,
   changeNickRequest,
@@ -31,10 +31,13 @@ function ChangeNickModal({ handleNickToggle }: ChangeNickModalType) {
 
   useEffect(() => {
     handleChangeNick();
+  }, [changeErrorStatus]);
+
+  useEffect(() => {
     return () => {
       dispatch(changeNickInit());
     };
-  }, [changeErrorStatus]);
+  }, []);
 
   return (
     <ChangeModal

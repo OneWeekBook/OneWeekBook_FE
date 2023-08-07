@@ -9,7 +9,7 @@ import {
   REVIEW_REQUEST,
 } from 'redux/reducers/reviewReducer';
 
-function reviewDetailAPI(params: BookRequestTypes) {
+export function reviewDetailAPI(params: BookRequestTypes) {
   return instance.get(
     `${API_URL.BOOK_REVIEWS}/${params.isbn}?start=${params.start}&display=10&sortby=${params.sortby}`,
   );

@@ -8,6 +8,7 @@ import {
   libraryRequest,
 } from 'redux/reducers/libraryReducer';
 import useToggle from 'hooks/useToggle';
+import useRouter from 'hooks/useRouter';
 import { bookInit } from 'constants/content';
 import { FUNC_IMAGE } from 'constants/image';
 import { PATH_URL } from 'constants/path';
@@ -19,7 +20,6 @@ import LibraryMenuList from 'components/modules/lists/LibraryMenuList';
 import LibraryBookList from 'components/modules/lists/LibraryBookList';
 import ParagraphModal from 'components/pages/modal/ParagraphModal';
 import WriteReviewModal from 'components/pages/modal/WriteReviewModal';
-import useRouter from 'hooks/useRouter';
 
 function Index() {
   const dispatch = useDispatch();
@@ -56,16 +56,16 @@ function Index() {
   }, [bookData]);
 
   useEffect(() => {
-    if (isDeleteSuccess)
-      dispatch(libraryRequest({ progress: Number(currentSearch.get('id')) }));
-  }, [isDeleteSuccess]);
-
-  useEffect(() => {
     if (itemAddSuccess) showToast('success', '작성 완료');
     else if (itemModifySuccess) showToast('info', '수정 완료!');
     else if (itemDeleteSuccess) showToast('info', '삭제 완료!');
     else if (isDeleteSuccess) showToast('success', '해당 책을 삭제했습니다!');
   }, [itemAddSuccess, itemModifySuccess, itemDeleteSuccess, isDeleteSuccess]);
+
+  useEffect(() => {
+    if (user.id)
+      dispatch(libraryRequest({ progress: Number(currentSearch.get('id')) }));
+  }, [user.id]);
 
   return (
     <Container>
@@ -78,10 +78,7 @@ function Index() {
           content={`${user.nick}님의 서재`}
           fontSize={2.4}
         />
-        <LibraryMenuList
-          useId={user.id}
-          navId={Number(currentSearch.get('id'))}
-        />
+        <LibraryMenuList navId={Number(currentSearch.get('id'))} />
       </MyLibraryHeader>
       <LibraryBookList
         libraryBookList={libraryBookList}

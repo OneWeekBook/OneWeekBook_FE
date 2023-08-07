@@ -12,7 +12,7 @@ import {
   PARAGRAPH_REQUEST,
 } from 'redux/reducers/paragraphReducer';
 
-function paragraphAPI(params: ParagraphRequestType) {
+export function paragraphAPI(params: ParagraphRequestType) {
   return instance.get(`${API_URL.PARAGRAPH}?bookId=${params.bookId}`);
 }
 
