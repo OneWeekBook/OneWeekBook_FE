@@ -8,7 +8,6 @@ import {
   LIBRARY_MODIFY_REQUEST,
   librarySuccess,
   libraryFail,
-  libraryInit,
 } from 'redux/reducers/libraryReducer';
 import { libraryAPI } from './librarySaga';
 
