@@ -1,5 +1,5 @@
 import { useEffect, useCallback } from 'react';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import theme from 'styles/theme';
 import { ParagraphModalTypes } from 'types/page';
@@ -8,7 +8,6 @@ import { AppStateType } from 'redux/reducers';
 import {
   paragraphDeleteRequest,
   paragraphInit,
-  paragraphRequest,
 } from 'redux/reducers/paragraphReducer';
 import { setReadDateFormat } from 'utils/dateFormatHandler';
 import WriteModal from 'common/DefaultModal';
@@ -23,16 +22,9 @@ function ParagraphModal({
   moveDoneClick,
 }: ParagraphModalTypes) {
   const dispatch = useDispatch();
-  const { paragraph, isAddSuccess, isDeleteSuccess } = useSelector(
-    (state: AppStateType) => state.paragraph,
-    shallowEqual,
+  const paragraphs = useSelector(
+    (state: AppStateType) => state.paragraph.paragraph,
   );
-
-  useEffect(() => {
-    if (isAddSuccess || isDeleteSuccess) {
-      dispatch(paragraphRequest({ bookId: bookData.id }));
-    }
-  }, [isAddSuccess, isDeleteSuccess]);
 
   useEffect(() => {
     return () => {
@@ -41,7 +33,7 @@ function ParagraphModal({
   }, []);
 
   const handleParagraphDelete = useCallback((id: number) => {
-    dispatch(paragraphDeleteRequest({ id }));
+    dispatch(paragraphDeleteRequest({ id, bookId: bookData.id }));
   }, []);
 
   return (
@@ -94,7 +86,7 @@ function ParagraphModal({
         </BookInfoContainer>
         <ParagraphInputForm bookId={bookData.id} />
         <ParagraphScrollView>
-          {paragraph.map((item: ParagraphResponseTypes) => (
+          {paragraphs.map((item: ParagraphResponseTypes) => (
             <ParagraphCard
               key={item.id}
               id={item.id}

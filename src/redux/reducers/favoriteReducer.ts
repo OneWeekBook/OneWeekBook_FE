@@ -126,7 +126,13 @@ export const favoriteFail = (error: AxiosError) => {
   };
 };
 
-export const favoriteAddRequest = (data: { bookId: number; state: number }) => {
+export const favoriteAddRequest = (data: {
+  bookId: number;
+  state: number;
+  isbn: number;
+  start: number;
+  sortby: string;
+}) => {
   return {
     type: FAVORITE_ADD_REQUEST,
     payload: data,
@@ -146,7 +152,12 @@ export const favoriteAddFail = (error: AxiosError) => {
   };
 };
 
-export const favoriteCancelRequest = (data: { bookId: number }) => {
+export const favoriteCancelRequest = (data: {
+  bookId: number;
+  isbn: number;
+  start: number;
+  sortby: string;
+}) => {
   return {
     type: FAVORITE_CANCEL_REQUEST,
     payload: data,

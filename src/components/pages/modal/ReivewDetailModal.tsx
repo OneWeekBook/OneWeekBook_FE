@@ -11,7 +11,6 @@ import {
   favoriteInit,
   favoriteRequest,
 } from 'redux/reducers/favoriteReducer';
-import { userReviewsInit, reviewRequest } from 'redux/reducers/reviewReducer';
 import { FAVORITE_IMAGE } from 'constants/image';
 import DetailModal from 'common/DefaultModal';
 import DefaultButton from 'components/atoms/buttons/DefaultButton';
@@ -32,15 +31,8 @@ function ReviewDetailModal({
   const userId: number = useSelector(
     (state: AppStateType) => state.authUser.user.id,
   );
-  const {
-    favoriteData,
-    favoriteAddErrorStatus,
-    favoriteCancelErrorStatus,
-  }: {
-    favoriteData: FavoriteResponseTypes[];
-    favoriteAddErrorStatus?: number;
-    favoriteCancelErrorStatus?: number;
-  } = useSelector((state: AppStateType) => state.favorite, shallowEqual);
+  const { favoriteData }: { favoriteData: FavoriteResponseTypes[] } =
+    useSelector((state: AppStateType) => state.favorite, shallowEqual);
 
   const setFavoriteCount = useCallback(() => {
     if (Array.isArray(favoriteData) && !!favoriteData) {
@@ -69,16 +61,46 @@ function ReviewDetailModal({
 
   const handleFavoriteClick = (state: number, isSelected: boolean) => {
     if (compareFavoriteUser() && !isSelected) {
-      dispatch(favoriteCancelRequest({ bookId: userReview.id }));
+      dispatch(
+        favoriteCancelRequest({
+          bookId: userReview.id,
+          isbn: bookIsbn,
+          start: reviewIndex,
+          sortby: reviewSort,
+        }),
+      );
       setTimeout(() => {
-        dispatch(favoriteAddRequest({ bookId: userReview.id, state }));
+        dispatch(
+          favoriteAddRequest({
+            bookId: userReview.id,
+            state,
+            isbn: bookIsbn,
+            start: reviewIndex,
+            sortby: reviewSort,
+          }),
+        );
       }, 10);
     } else if (compareFavoriteUser() && isSelected) {
       if (state === 0) setUsefulToggle(false);
       else if (state === 1) setInterestToggle(false);
-      dispatch(favoriteCancelRequest({ bookId: userReview.id }));
+      dispatch(
+        favoriteCancelRequest({
+          bookId: userReview.id,
+          isbn: bookIsbn,
+          start: reviewIndex,
+          sortby: reviewSort,
+        }),
+      );
     } else if (!compareFavoriteUser()) {
-      dispatch(favoriteAddRequest({ bookId: userReview.id, state }));
+      dispatch(
+        favoriteAddRequest({
+          bookId: userReview.id,
+          state,
+          isbn: bookIsbn,
+          start: reviewIndex,
+          sortby: reviewSort,
+        }),
+      );
     }
   };
 
@@ -93,20 +115,6 @@ function ReviewDetailModal({
     compareFavoriteUser();
     setFavoriteCount();
   }, [favoriteData]);
-
-  useEffect(() => {
-    if (favoriteAddErrorStatus === 200 || favoriteCancelErrorStatus === 200) {
-      dispatch(favoriteRequest({ bookId: userReview.id }));
-      dispatch(userReviewsInit());
-      dispatch(
-        reviewRequest({
-          isbn: bookIsbn,
-          start: reviewIndex,
-          sortby: reviewSort,
-        }),
-      );
-    }
-  }, [favoriteAddErrorStatus, favoriteCancelErrorStatus]);
 
   return (
     <DetailModal

@@ -34,17 +34,17 @@ function WriteReviewModal({ bookData, handleToggle }: WriteReviewTypes) {
   ) => {
     if (review === '') {
       showToast('warning', '리뷰를 남겨주세요...');
-    } else {
-      dispatch(userReviewAddRequest({ bookId, review, rating: recommend }));
+      return;
     }
+    dispatch(userReviewAddRequest({ bookId, review, rating: recommend }));
   };
 
   const modifyReviewClick = (recommend: number, review: string) => {
     if (review === '') {
       showToast('warning', '리뷰를 남겨주세요...');
-    } else {
-      dispatch(userReviewModifyRequest({ review, rating: recommend }));
+      return;
     }
+    dispatch(userReviewModifyRequest({ review, rating: recommend }));
   };
 
   const deleteReviewClick = () => {

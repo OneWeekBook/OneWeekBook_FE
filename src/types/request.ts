@@ -40,6 +40,10 @@ export interface ParagraphAddRequestTypes {
   paragraph: string;
 }
 
+export interface ParagraphDeleteRequestTypes extends ParagraphRequestType {
+  id: number;
+}
+
 export interface DeleteRequestType {
   id: number;
 }

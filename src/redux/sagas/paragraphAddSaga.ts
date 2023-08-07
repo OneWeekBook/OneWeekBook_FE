@@ -7,7 +7,10 @@ import {
   paragraphAddFail,
   paragraphAddSuccess,
   PARAGRAPH_ADD_REQUEST,
+  paragraphSuccess,
+  paragraphFail,
 } from 'redux/reducers/paragraphReducer';
+import { paragraphAPI } from './paragraphSaga';
 
 function paragraphAddAPI(data: ParagraphAddRequestTypes) {
   return instance.post(API_URL.PARAGRAPH, data);
@@ -16,12 +19,17 @@ function paragraphAddAPI(data: ParagraphAddRequestTypes) {
 function* fetchParagraphAddSaga(action: {
   type: string;
   payload: ParagraphAddRequestTypes;
-}) {
+}): object {
   try {
     yield call(paragraphAddAPI, action.payload);
     yield put(paragraphAddSuccess());
+    const result = yield call(paragraphAPI, action.payload);
+    yield put(paragraphSuccess(result.data.paragraphs));
   } catch (error) {
-    if (axios.isAxiosError(error)) yield put(paragraphAddFail(error));
+    if (axios.isAxiosError(error)) {
+      yield put(paragraphAddFail(error));
+      yield put(paragraphFail(error));
+    }
   }
 }
 

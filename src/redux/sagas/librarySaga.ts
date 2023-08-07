@@ -6,6 +6,7 @@ import {
   libraryFail,
   librarySuccess,
   LIBRARY_REQUEST,
+  libraryInit,
 } from 'redux/reducers/libraryReducer';
 
 export function libraryAPI(params: { userId: number; progress: number }) {
@@ -19,6 +20,7 @@ export function* fetchLibrarySaga(action: {
   payload: { progress: number };
 }): object {
   try {
+    yield put(libraryInit());
     const user = yield select((state) => state.authUser.user);
     const result = yield call(libraryAPI, {
       userId: user.id,

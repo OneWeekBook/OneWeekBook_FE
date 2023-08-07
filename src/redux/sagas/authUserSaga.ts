@@ -8,11 +8,11 @@ import {
   AUTH_USER_REQUEST,
 } from 'redux/reducers/authUserReducer';
 
-function authUserAPI() {
+export function authUserAPI() {
   return instance.get(API_URL.USER);
 }
 
-function userLibraryAPI(params: { userId: number; progress: number }) {
+export function userLibraryAPI(params: { userId: number; progress: number }) {
   return instance.get(
     `${API_URL.LIBRARY}?userId=${params.userId}&progress=${params.progress}`,
   );
